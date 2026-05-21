@@ -53,18 +53,18 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 Ambas as demandas completaram o Intake Layer e estão aprovadas para handoff ao PM.
 
 ```text
-[INT-2024-001] Queue Voting (RP v2 — rejeitado uma vez, resubmetido)
+[INT-2026-001] Queue Voting (RP v2 — rejeitado uma vez, resubmetido)
   Intake → Triagem → Racionalização → RP v1 rejeitado → RP v2 aprovado
     → Plano de Execução ✓ → Breakdown Package ✓ → Em desenvolvimento (Sprint 1–2)
-    → Previsão de release: 2024-04-26
+    → Previsão de release: 2026-04-26
 
-[INT-2024-002] Room Access Control (RP v1 — aprovado diretamente após Discovery)
+[INT-2026-002] Room Access Control (RP v1 — aprovado diretamente após Discovery)
   Intake → Triagem → Discovery [7 dias] → Avaliação CTO → Racionalização → RP v1 aprovado
     → Plano de Execução ✓ → Breakdown Package ✓ → Em desenvolvimento (Sprint 1–5)
-    → Previsão de release: 2024-06-05 (revisada de 2024-05-30 após refinamento do Tech Lead)
+    → Previsão de release: 2026-06-05 (revisada de 2026-05-30 após refinamento do Tech Lead)
 ```
 
-**INT-2024-002 passou por Discovery** antes de poder ser racionalizada. Três incógnitas de integração foram identificadas no intake e precisaram ser resolvidas antes que o escopo pudesse ser definido:
+**INT-2026-002 passou por Discovery** antes de poder ser racionalizada. Três incógnitas de integração foram identificadas no intake e precisaram ser resolvidas antes que o escopo pudesse ser definido:
 
 | Incógnita | Resolvida por | Resultado |
 |---|---|---|

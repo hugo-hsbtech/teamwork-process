@@ -4,20 +4,20 @@
 
 | Campo | Valor |
 |---|---|
-| **ID do Pacote** | RP-2024-001 |
+| **ID do Pacote** | RP-2026-001 |
 | **Versão** | v2 |
-| **Intake vinculado** | INT-2024-001 |
+| **Intake vinculado** | INT-2026-001 |
 | **Responsável** | Lucas Mendes (PO) |
 | **Contribuição do CTO** | Não necessária — sem escalada arquitetural |
 | **Status** | Aprovado — aguardando planejamento de execução pelo PM |
-| **Data de aprovação da versão atual** | 2024-03-28 |
+| **Data de aprovação da versão atual** | 2026-03-28 |
 
 ## Histórico de Revisão
 
 | Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
-| v1 | 2024-03-20 | Lucas Mendes (PO) | Rejeitado pelo PM | Submissão inicial. PM devolveu o pacote citando falta de estratégia de rollout e critérios de aceite indefinidos para edge cases de ocultação de votos. |
-| v2 | 2024-03-28 | Lucas Mendes (PO) | Aprovado | Adicionada estratégia de rollout, definidos critérios de aceite para todos os edge cases (desconexão do facilitador, votos parciais no momento do reveal, reconexão de participante durante item). PM aprovou. |
+| v1 | 2026-03-20 | Lucas Mendes (PO) | Rejeitado pelo PM | Submissão inicial. PM devolveu o pacote citando falta de estratégia de rollout e critérios de aceite indefinidos para edge cases de ocultação de votos. |
+| v2 | 2026-03-28 | Lucas Mendes (PO) | Aprovado | Adicionada estratégia de rollout, definidos critérios de aceite para todos os edge cases (desconexão do facilitador, votos parciais no momento do reveal, reconexão de participante durante item). PM aprovou. |
 
 ---
 

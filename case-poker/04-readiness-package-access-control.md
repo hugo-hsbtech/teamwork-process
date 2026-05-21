@@ -4,19 +4,19 @@
 
 | Campo | Valor |
 |---|---|
-| **ID do Pacote** | RP-2024-002 |
+| **ID do Pacote** | RP-2026-002 |
 | **Versão** | v1 |
-| **Intake vinculado** | INT-2024-002 |
+| **Intake vinculado** | INT-2026-002 |
 | **Responsável** | Lucas Mendes (PO) |
 | **Contribuição do CTO** | Sim — avaliação arquitetural sobre o modelo de dados de participantes e membership de sessão em tempo real |
 | **Status** | Aprovado — aguardando planejamento de execução pelo PM |
-| **Data de aprovação da versão atual** | 2024-03-27 |
+| **Data de aprovação da versão atual** | 2026-03-27 |
 
 ## Histórico de Revisão
 
 | Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
-| v1 | 2024-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Aprovado | Submissão inicial. Pacote incluiu findings completos do Discovery (Azure AD OIDC, LGPD Opção C). PM aprovou na primeira revisão. |
+| v1 | 2026-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Aprovado | Submissão inicial. Pacote incluiu findings completos do Discovery (Azure AD OIDC, LGPD Opção C). PM aprovou na primeira revisão. |
 
 ---
 
@@ -172,7 +172,7 @@ Dono da sala recebe notificação
 
 ## Seção 8 — Impacto Técnico
 
-*Avaliação arquitetural do CTO concluída em 2024-03-25. Notas abaixo são da revisão do CTO.*
+*Avaliação arquitetural do CTO concluída em 2026-03-25. Notas abaixo são da revisão do CTO.*
 
 | Área | Impacto | Nota do CTO |
 |---|---|---|

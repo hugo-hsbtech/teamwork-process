@@ -4,24 +4,24 @@
 
 | Campo | Valor |
 |---|---|
-| **ID do Registro** | INT-2024-001 |
+| **ID do Registro** | INT-2026-001 |
 | **Versão** | v2 |
 | **Registrado por** | Ana Costa (Customer Success) |
-| **Data de registro** | 2024-03-12 |
+| **Data de registro** | 2026-03-12 |
 | **Status** | Aprovado — em planejamento de execução |
-| **Data de triagem** | 2024-03-13 |
+| **Data de triagem** | 2026-03-13 |
 | **Triado por** | Lucas Mendes (PO) |
-| **Readiness Package vinculado** | RP-2024-001 v2 |
+| **Readiness Package vinculado** | RP-2026-001 v2 |
 
 ## Histórico de Revisão
 
 | Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | 2024-03-12 | Intake registrado | CS registrou demanda a partir de chamada trimestral de revisão com Banco Meridional. |
-| v1 | 2024-03-13 | Triagem concluída | PO triou como Product Ready. Readiness Package iniciado. |
-| v1 | 2024-03-20 | RP-2024-001 v1 submetido | PO submeteu o primeiro Readiness Package ao PM. |
-| v1 | 2024-03-22 | RP rejeitado pelo PM | PM devolveu o pacote: faltava estratégia de rollout e critérios de aceite incompletos para edge cases. |
-| v2 | 2024-03-28 | RP-2024-001 v2 aprovado | PO resubmeteu com correções. PM aprovou. Demanda avança para planejamento de execução. |
+| v1 | 2026-03-12 | Intake registrado | CS registrou demanda a partir de chamada trimestral de revisão com Banco Meridional. |
+| v1 | 2026-03-13 | Triagem concluída | PO triou como Product Ready. Readiness Package iniciado. |
+| v1 | 2026-03-20 | RP-2026-001 v1 submetido | PO submeteu o primeiro Readiness Package ao PM. |
+| v1 | 2026-03-22 | RP rejeitado pelo PM | PM devolveu o pacote: faltava estratégia de rollout e critérios de aceite incompletos para edge cases. |
+| v2 | 2026-03-28 | RP-2026-001 v2 aprovado | PO resubmeteu com correções. PM aprovou. Demanda avança para planejamento de execução. |
 
 ---
 

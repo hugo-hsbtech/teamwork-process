@@ -4,24 +4,24 @@
 
 | Campo | Valor |
 |---|---|
-| **ID do Registro** | INT-2024-002 |
+| **ID do Registro** | INT-2026-002 |
 | **Versão** | v1 |
 | **Registrado por** | Rafael Souza (Vendas) |
-| **Data de registro** | 2024-03-15 |
+| **Data de registro** | 2026-03-15 |
 | **Status** | Aprovado — em planejamento de execução |
-| **Data de triagem** | 2024-03-17 |
+| **Data de triagem** | 2026-03-17 |
 | **Triado por** | Lucas Mendes (PO) |
-| **Readiness Package vinculado** | RP-2024-002 v1 |
+| **Readiness Package vinculado** | RP-2026-002 v1 |
 
 ## Histórico de Revisão
 
 | Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | 2024-03-15 | Intake registrado | Vendas registrou demanda a partir de chamada pré-fechamento com Construtora Ágil. |
-| v1 | 2024-03-17 | Triagem concluída | PO triou. Três incógnitas de integração identificadas. Demanda enviada para Discovery. |
-| v1 | 2024-03-18 | Discovery aberto | PO abriu Discovery para incógnitas de Azure AD, Jira e LGPD. CTO notificado. |
-| v1 | 2024-03-25 | Discovery encerrado | Todas as incógnitas resolvidas dentro do time-box. Demanda retriada como Product Ready. |
-| v1 | 2024-03-27 | RP-2024-002 v1 aprovado | PO + CTO submeteram Readiness Package. PM aprovou na primeira revisão. Demanda avança para planejamento de execução. |
+| v1 | 2026-03-15 | Intake registrado | Vendas registrou demanda a partir de chamada pré-fechamento com Construtora Ágil. |
+| v1 | 2026-03-17 | Triagem concluída | PO triou. Três incógnitas de integração identificadas. Demanda enviada para Discovery. |
+| v1 | 2026-03-18 | Discovery aberto | PO abriu Discovery para incógnitas de Azure AD, Jira e LGPD. CTO notificado. |
+| v1 | 2026-03-25 | Discovery encerrado | Todas as incógnitas resolvidas dentro do time-box. Demanda retriada como Product Ready. |
+| v1 | 2026-03-27 | RP-2026-002 v1 aprovado | PO + CTO submeteram Readiness Package. PM aprovou na primeira revisão. Demanda avança para planejamento de execução. |
 
 ---
 
@@ -201,7 +201,7 @@ Esta demanda está estrategicamente alinhada — a plataforma precisa amadurecer
 
 **Escalada arquitetural ao CTO:** Sim — ampliada. Originalmente sinalizada para o modelo de dados de participantes. Agora também requer input do CTO em: (1) viabilidade OIDC Azure AD, (2) escopo de integração Jira API, (3) postura de residência de dados para conformidade LGPD.
 
-**Time-box do Discovery:** 2 semanas (2024-03-18 → 2024-04-01)
+**Time-box do Discovery:** 2 semanas (2026-03-18 → 2026-04-01)
 
 **Sinalização de risco:** Vendas fez um compromisso informal de prazo ao cliente. Nenhuma data externa pode ser confirmada até que o Discovery conclua e o PM execute uma avaliação de capacidade.
 
@@ -221,13 +221,13 @@ Esta demanda está estrategicamente alinhada — a plataforma precisa amadurecer
 
 ### Log do Discovery
 
-#### 2024-03-18 — PO abre o Discovery
+#### 2026-03-18 — PO abre o Discovery
 
 Demanda movida para Discovery. Três incógnitas registradas acima. PO notificou Vendas (Rafael Souza) para agendar chamada de acompanhamento com a equipe de TI da Construtora Ágil para esclarecer o requisito Jira. CTO (Rodrigo Lima) notificado para spike técnico sobre Azure AD e residência de dados.
 
 ---
 
-#### 2024-03-20 — Spike Técnico do CTO: Azure AD
+#### 2026-03-20 — Spike Técnico do CTO: Azure AD
 
 **Finding:** Integração Azure AD via OIDC é viável usando a camada de auth existente (que já suporta OAuth2). Uma implementação SSO completa não é necessária. A plataforma pode solicitar o claim `groups` no login e mapear grupos AD para papéis da plataforma no momento de entrada na sessão.
 
@@ -239,7 +239,7 @@ Demanda movida para Discovery. Três incógnitas registradas acima. PO notificou
 
 ---
 
-#### 2024-03-21 — Revisão de Infraestrutura do CTO: Residência de Dados
+#### 2026-03-21 — Revisão de Infraestrutura do CTO: Residência de Dados
 
 **Finding:** A plataforma atual usa um cluster de banco de dados primário em `us-east-1` (AWS). Registros de participantes de sessão — incluindo nomes, emails e metadados de sessão — estão armazenados neste cluster. Não há replicação para região do Brasil (sa-east-1) para estes dados.
 
@@ -259,13 +259,13 @@ Demanda movida para Discovery. Três incógnitas registradas acima. PO notificou
 
 ---
 
-#### 2024-03-22 — Chamada com o Cliente: Requisito de Integração Jira
+#### 2026-03-22 — Chamada com o Cliente: Requisito de Integração Jira
 
 **Participantes:** Rafael Souza (Vendas), Ana Costa (CS), TI Lead da Construtora Ágil (Fernanda Ramos)
 
 **Finding:** A integração Jira **não é um requisito obrigatório** para o deal fechar. Fernanda confirmou que atribuir votantes e observadores manualmente via mapeamento de grupos Azure AD é aceitável para a Fase 1. Pré-população de sala baseada em Jira é um desejo futuro, não um bloqueador.
 
-**Impacto no escopo:** Integração Jira é removida desta demanda. É registrada como item de backlog separado: `BACKLOG-2024-007 — Integração Jira Sprint para Pré-população de Sala`.
+**Impacto no escopo:** Integração Jira é removida desta demanda. É registrada como item de backlog separado: `BACKLOG-2026-007 — Integração Jira Sprint para Pré-população de Sala`.
 
 ---
 
@@ -283,4 +283,4 @@ Demanda movida para Discovery. Três incógnitas registradas acima. PO notificou
 
 **Complexidade revisada da demanda:** Significativamente maior do que estimado originalmente. O Readiness Package deve ser atualizado para refletir o trabalho de integração Azure AD e residência de dados LGPD.
 
-**Discovery encerrado:** 2024-03-25 (7 dias — dentro do time-box de 2 semanas ✓)
+**Discovery encerrado:** 2026-03-25 (7 dias — dentro do time-box de 2 semanas ✓)
