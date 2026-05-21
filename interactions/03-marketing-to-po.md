@@ -1,78 +1,78 @@
-# Interaction 03 — Marketing → PO
+# Interação 03 — Marketing → PO
 
-**Direction:** Marketing initiates. PO receives.
-**Layer:** Upstream → Intake Layer
-
----
-
-## Trigger
-
-Market intelligence identifies a relevant gap, competitive signal, or segment-level pattern.
+**Direção:** Marketing inicia. PO recebe.
+**Camada:** Upstream → Camada de Intake
 
 ---
 
-## What Marketing Must Provide
+## Gatilho
 
-- Structured intake record with: origin (Market), type, problem statement at segment level
-- Market evidence: competitive analysis, industry data, campaign insights
-- Differentiation from individual client requests — this is a pattern, not a single account
+Inteligência de mercado identifica uma lacuna relevante, sinal competitivo ou padrão a nível de segmento.
 
 ---
 
-## What PO Does With It
+## O que Marketing Deve Fornecer
 
-- Evaluates strategic alignment and whether the signal is differentiated from existing demand
-- May merge with existing intake if the same pattern has already been captured
-- Responds with triage outcome
+- Registro de intake estruturado com: origem (Mercado), tipo, descrição do problema a nível de segmento
+- Evidência de mercado: análise competitiva, dados do setor, insights de campanhas
+- Diferenciação de pedidos individuais de clientes — isso é um padrão, não uma conta única
 
 ---
 
-## Ownership Transferred
+## O que o PO Faz Com Isso
 
-**From Marketing:** Accountability for the market signal ends here. Marketing does not define solutions or follow up with Engineering directly.
-**To PO:** Owns the intake record and the triage decision. Responsible for communicating the outcome back to Marketing.
-**Artifact handed over:** Intake record + market evidence.
+- Avalia alinhamento estratégico e se o sinal é diferenciado da demanda existente
+- Pode mesclar com um intake existente se o mesmo padrão já tiver sido capturado
+- Responde com o resultado da triagem
+
+---
+
+## Transferência de Ownership
+
+**De Marketing:** A responsabilidade pelo sinal de mercado termina aqui. Marketing não define soluções nem faz follow-up com Engenharia diretamente.
+**Para o PO:** Detém o registro de intake e a decisão de triagem. Responsável por comunicar o resultado de volta ao Marketing.
+**Artefato transferido:** Registro de intake + evidência de mercado.
 
 ---
 
 ## Gate
 
-Marketing intake must describe a segment-level pattern. A single account's request submitted as a "market signal" is redirected to Sales or CS as the appropriate channel.
+O intake de Marketing deve descrever um padrão a nível de segmento. O pedido de uma conta única submetido como "sinal de mercado" é redirecionado para Vendas ou CS como canal apropriado.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If Marketing cannot substantiate the pattern with data, PO opens Discovery or moves to Opportunity Backlog pending more evidence.
-
----
-
-## What Marketing Must NOT Do
-
-- Submit individual client requests as market signals
-- Define the solution or desired feature
-- Represent a single account's preference as a segment trend without data
+Se Marketing não conseguir substanciar o padrão com dados, o PO abre Discovery ou move para Opportunity Backlog aguardando mais evidências.
 
 ---
 
-## Sequence
+## O que Marketing NÃO Deve Fazer
+
+- Submeter pedidos de clientes individuais como sinais de mercado
+- Definir a solução ou funcionalidade desejada
+- Representar a preferência de uma conta única como tendência de segmento sem dados
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor MKT as Marketing
     actor PO as PO
 
-    MKT->>PO: Intake record + market evidence
-    PO->>PO: Check pattern validity and strategic alignment
+    MKT->>PO: Registro de intake + evidência de mercado
+    PO->>PO: Verifica validade do padrão e alinhamento estratégico
 
-    alt Single account disguised as market signal
-        PO-->>MKT: Redirects to Sales or CS channel
+    alt Conta única disfarçada de sinal de mercado
+        PO-->>MKT: Redireciona para canal de Vendas ou CS
     end
 
-    alt Insufficient data to substantiate pattern
-        PO-->>MKT: Opens Discovery or moves to Opportunity Backlog
+    alt Dados insuficientes para substanciar o padrão
+        PO-->>MKT: Abre Discovery ou move para Opportunity Backlog
     end
 
-    PO->>PO: Triage
-    PO-->>MKT: Triage outcome
+    PO->>PO: Triagem
+    PO-->>MKT: Resultado da triagem
 ```

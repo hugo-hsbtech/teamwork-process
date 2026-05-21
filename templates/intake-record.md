@@ -1,138 +1,138 @@
-# Intake Record — [Nome da Demanda]
+# Registro de Intake — [Nome da Demanda]
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Record ID** | INT-YYYY-NNN |
-| **Version** | v1 |
-| **Registered by** | [Nome] ([Papel]) |
-| **Registration date** | YYYY-MM-DD |
-| **Status** | New |
-| **Triage date** | — |
-| **Triaged by** | — |
-| **Linked Readiness Package** | — |
+| **ID do Registro** | INT-AAAA-NNN |
+| **Versão** | v1 |
+| **Registrado por** | [Nome] ([Papel]) |
+| **Data de registro** | AAAA-MM-DD |
+| **Status** | Novo |
+| **Data de triagem** | — |
+| **Triado por** | — |
+| **Readiness Package vinculado** | — |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Event | Summary |
+| Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | YYYY-MM-DD | Intake registered | [Breve descrição] |
+| v1 | AAAA-MM-DD | Intake registrado | [Breve descrição] |
 
 ---
 
-## Origin
+## Origem
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Source** | Client / Internal / Market / Support |
-| **Client / Requester** | [Nome] |
-| **Reported via** | [Canal — call, email, support ticket, etc.] |
+| **Fonte** | Cliente / Interno / Mercado / Suporte |
+| **Cliente / Solicitante** | [Nome] |
+| **Reportado via** | [Canal — chamada, email, ticket de suporte, etc.] |
 
 ---
 
-## Demand Type
+## Tipo de Demanda
 
-- [ ] Feature
+- [ ] Funcionalidade
 - [ ] Bug
-- [ ] Improvement
+- [ ] Melhoria
 - [ ] Compliance
-- [ ] Integration
-- [ ] Operational
+- [ ] Integração
+- [ ] Operacional
 
 ---
 
-## Problem Statement
+## Enunciado do Problema
 
-> What pain, friction, or gap exists? Describe the problem, not the solution.
+> Qual é a dor, o atrito ou a lacuna existente? Descreva o problema, não a solução.
 
 [Descreva o problema aqui]
 
 ---
 
-## Business Impact
+## Impacto de Negócio
 
-| Dimension | Description |
+| Dimensão | Descrição |
 |---|---|
-| **Impact type** | Revenue / Retention / Operational / Efficiency / Competitive |
-| **Affected parties** | [Quem é impactado] |
-| **Estimated impact** | [Quantifique se possível] |
-| **If not addressed** | [O que acontece se não agirmos] |
+| **Tipo de impacto** | Receita / Retenção / Operacional / Eficiência / Competitivo |
+| **Partes afetadas** | [Quem é impactado] |
+| **Impacto estimado** | [Quantifique se possível] |
+| **Se não tratado** | [O que acontece se não agirmos] |
 
 ---
 
-## Priority
+## Prioridade
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Level** | Critical / High / Medium / Low |
-| **Justification** | [Por que esse nível] |
-| **Time sensitivity** | [Há prazo ou janela específica?] |
+| **Nível** | Crítico / Alto / Médio / Baixo |
+| **Justificativa** | [Por que esse nível] |
+| **Sensibilidade ao tempo** | [Há prazo ou janela específica?] |
 
 ---
 
 ## Stakeholders
 
-| Role | Name | Interest |
+| Papel | Nome | Interesse |
 |---|---|---|
 | Sponsor | — | — |
-| End Users | — | — |
-| Impacted Teams | — | — |
-| Decision Makers | — | — |
+| Usuários Finais | — | — |
+| Times Impactados | — | — |
+| Tomadores de Decisão | — | — |
 
 ---
 
-## Assumptions
+## Premissas
 
-> Conditions believed to be true at intake time. If any assumption is false, the demand must be re-triaged.
+> Condições tidas como verdadeiras no momento do intake. Se alguma premissa for falsa, a demanda deve ser retriada.
 
-- [ ] [Assunção 1]
-- [ ] [Assunção 2]
+- [ ] [Premissa 1]
+- [ ] [Premissa 2]
 
 ---
 
 ## Constraints
 
-> Fixed limits that cannot be negotiated — time, budget, legal, technical, scope.
+> Limites fixos que não podem ser negociados — tempo, orçamento, legal, técnico, escopo.
 
 - [ ] [Constraint 1]
 - [ ] [Constraint 2]
 
 ---
 
-## Preliminary Risks
+## Riscos Preliminares
 
-> Risks visible at intake, before technical assessment. Not a full risk register.
+> Riscos visíveis no intake, antes da avaliação técnica. Não é um registro completo de riscos.
 
-| Risk | Type | Initial Assessment |
+| Risco | Tipo | Avaliação Inicial |
 |---|---|---|
-| [Risco 1] | Technical / Business / External | High / Medium / Low |
+| [Risco 1] | Técnico / Negócio / Externo | Alto / Médio / Baixo |
 
 ---
 
-## High-Level Scope Boundary
+## Limite de Escopo de Alto Nível
 
-| Category | Items |
+| Categoria | Itens |
 |---|---|
-| **In scope** | [O que claramente está dentro] |
-| **Out of scope** | [O que claramente está fora] |
-| **Deferred** | [O que pode ser futuro] |
+| **Dentro do escopo** | [O que claramente está dentro] |
+| **Fora do escopo** | [O que claramente está fora] |
+| **Adiado** | [O que pode ser futuro] |
 
 ---
 
-## Success Criteria
+## Critérios de Sucesso
 
-> High-level indicators that the demand delivered value. Detailed targets are formalized in the Readiness Package.
+> Indicadores de alto nível de que a demanda entregou valor. Metas detalhadas são formalizadas no Readiness Package.
 
 - [ ] [Critério 1]
 - [ ] [Critério 2]
 
 ---
 
-## PO Triage Notes
+## Notas de Triagem do PO
 
-**Triage decision:** Rejected / Opportunity Backlog / Discovery / Product Ready
+**Decisão de triagem:** Rejeitado / Backlog de Oportunidades / Discovery / Product Ready
 
-**Reasoning:**
+**Justificativa:**
 
 [Notas do PO aqui]

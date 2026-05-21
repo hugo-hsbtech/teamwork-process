@@ -1,61 +1,61 @@
-# Interaction 08 — PM → PO (Capacity Escalation)
+# Interação 08 — PM → PO (Escalada de Capacidade)
 
-**Direction:** PM initiates. PO receives.
-**Layer:** Within Downstream
-
----
-
-## Trigger
-
-PM's capacity assessment reveals that the team cannot absorb the approved demand without impacting existing commitments.
+**Direção:** PM inicia. PO recebe.
+**Camada:** Dentro do Downstream
 
 ---
 
-## What PM Must Provide
+## Gatilho
 
-- Written capacity assessment: current load per engineer, skill gaps, conflict map
-- Specific trade-off options: descope option A vs. delay existing commitment B vs. phase the delivery
-- Estimated impact of each option on current commitments
+A avaliação de capacidade do PM revela que o time não consegue absorver a demanda aprovada sem impactar compromissos existentes.
 
 ---
 
-## What PO Does With It
+## O que o PM Deve Fornecer
 
-- Reviews the trade-offs
-- Makes a prioritization decision in consultation with the CEO if executive commitments are involved
-- Communicates the decision back to PM in writing
+- Avaliação de capacidade escrita: carga atual por engenheiro, gaps de competência, mapa de conflitos
+- Opções específicas de trade-off: opção de redução de escopo A vs. atraso do compromisso B vs. entrega faseada
+- Impacto estimado de cada opção sobre os compromissos atuais
 
 ---
 
-## Ownership Transferred
+## O que o PO Faz Com Isso
 
-**From PM:** The capacity conflict is surfaced and handed to PO for a trade-off decision. PM cannot resolve this unilaterally — it requires a prioritization authority.
-**To PO:** Owns the trade-off decision. PO must return a written decision to PM before execution planning can continue. If the decision requires CEO input, PO is accountable for that escalation.
-**Artifact handed over:** Capacity assessment + written trade-off options.
+- Revisa os trade-offs
+- Toma uma decisão de priorização em consulta com o CEO se compromissos executivos estiverem envolvidos
+- Comunica a decisão de volta ao PM por escrito
+
+---
+
+## Transferência de Ownership
+
+**Do PM:** O conflito de capacidade é apresentado e transferido ao PO para uma decisão de trade-off. O PM não pode resolver isso unilateralmente — requer uma autoridade de priorização.
+**Para o PO:** Detém a decisão de trade-off. O PO deve retornar uma decisão escrita ao PM antes que o planejamento de execução possa continuar. Se a decisão requerer input do CEO, o PO é responsável por essa escalada.
+**Artefato transferido:** Avaliação de capacidade + opções escritas de trade-off.
 
 ---
 
 ## Gate
 
-PM does not absorb capacity problems silently. If execution requires compromising an existing commitment, the PO must approve the trade-off explicitly. No silent overcommitment.
+O PM não absorve problemas de capacidade silenciosamente. Se a execução exige comprometer um compromisso existente, o PO deve aprovar o trade-off explicitamente. Sem supercomprometimento silencioso.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If PO cannot make the decision alone (e.g., impacts a CEO-level commitment), PO escalates to CEO with the PM's assessment and returns with a decision.
-
----
-
-## What PM Must NOT Do
-
-- Start planning under capacity pressure without surfacing the conflict
-- Make a trade-off decision unilaterally without PO approval
-- Communicate a timeline to the client before the trade-off is resolved
+Se o PO não puder tomar a decisão sozinho (ex.: impacta um compromisso a nível de CEO), o PO escala ao CEO com a avaliação do PM e retorna com uma decisão.
 
 ---
 
-## Sequence
+## O que o PM NÃO Deve Fazer
+
+- Começar o planejamento sob pressão de capacidade sem apresentar o conflito
+- Tomar uma decisão de trade-off unilateralmente sem aprovação do PO
+- Comunicar um prazo ao cliente antes que o trade-off seja resolvido
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
@@ -63,14 +63,14 @@ sequenceDiagram
     actor PO as PO
     actor CEO as CEO
 
-    PM->>PO: Capacity assessment + trade-off options
-    PO->>PO: Reviews trade-offs
+    PM->>PO: Avaliação de capacidade + opções de trade-off
+    PO->>PO: Revisa trade-offs
 
-    alt Impacts CEO-level commitment
-        PO->>CEO: Assessment + decision required
-        CEO-->>PO: Decision
+    alt Impacta compromisso a nível de CEO
+        PO->>CEO: Avaliação + decisão necessária
+        CEO-->>PO: Decisão
     end
 
-    PO-->>PM: Trade-off decision in writing
-    PM->>PM: Adjusts Execution Plan accordingly
+    PO-->>PM: Decisão de trade-off por escrito
+    PM->>PM: Ajusta Plano de Execução conforme necessário
 ```

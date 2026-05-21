@@ -1,256 +1,256 @@
-# Readiness Package — Queue Voting
+# Readiness Package — Queue Voting (Fila de Votação)
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Package ID** | RP-2024-001 |
-| **Version** | v2 |
-| **Linked Intake** | INT-2024-001 |
-| **Owned by** | Lucas Mendes (PO) |
-| **CTO contribution** | Not required — no architectural escalation |
-| **Status** | Approved — pending PM execution planning |
-| **Current version approval date** | 2024-03-28 |
+| **ID do Pacote** | RP-2024-001 |
+| **Versão** | v2 |
+| **Intake vinculado** | INT-2024-001 |
+| **Responsável** | Lucas Mendes (PO) |
+| **Contribuição do CTO** | Não necessária — sem escalada arquitetural |
+| **Status** | Aprovado — aguardando planejamento de execução pelo PM |
+| **Data de aprovação da versão atual** | 2024-03-28 |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Author | Status | Summary |
+| Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
-| v1 | 2024-03-20 | Lucas Mendes (PO) | Rejected by PM | Initial submission. PM returned package citing missing rollout strategy and undefined acceptance criteria for vote concealment edge cases. |
-| v2 | 2024-03-28 | Lucas Mendes (PO) | Approved | Added rollout strategy, defined acceptance criteria for all edge cases (facilitator disconnect, partial votes at reveal, participant reconnect mid-item). PM approved. |
+| v1 | 2024-03-20 | Lucas Mendes (PO) | Rejeitado pelo PM | Submissão inicial. PM devolveu o pacote citando falta de estratégia de rollout e critérios de aceite indefinidos para edge cases de ocultação de votos. |
+| v2 | 2024-03-28 | Lucas Mendes (PO) | Aprovado | Adicionada estratégia de rollout, definidos critérios de aceite para todos os edge cases (desconexão do facilitador, votos parciais no momento do reveal, reconexão de participante durante item). PM aprovou. |
 
 ---
 
-## Section 1 — Executive Summary
+## Seção 1 — Resumo Executivo
 
-The platform currently has no mechanism for facilitators to control the flow of story estimation during planning ceremonies. All items are visible simultaneously and all votes appear in real time as cast.
+A plataforma atualmente não possui mecanismo para os facilitadores controlarem o fluxo de estimativas de histórias durante cerimônias de planejamento. Todos os itens ficam visíveis simultaneamente e todos os votos aparecem em tempo real conforme são submetidos.
 
-This package defines the addition of two capabilities:
+Este pacote define a adição de duas capacidades:
 
-1. **Question Queue** — facilitators can load a list of stories/questions and reveal them one at a time to participants, controlling the estimation sequence.
-2. **Secret Voting** — participant votes are hidden from all other participants until the facilitator explicitly reveals them.
+1. **Fila de Questões** — facilitadores podem carregar uma lista de histórias/questões e revelá-las uma de cada vez aos participantes, controlando a sequência de estimativas.
+2. **Votação Secreta** — os votos dos participantes ficam ocultos de todos os outros participantes até que o facilitador os revele explicitamente.
 
-These capabilities address a retention risk with Banco Meridional (renewal in 90 days) and unblock adoption by 3 additional squads within the same account.
-
----
-
-## Section 2 — Context & Problem
-
-### Current Scenario
-
-When a facilitator creates a planning room and adds items to be estimated, all participants can see the full list immediately. Votes are displayed in real time as each participant submits them.
-
-### Limitations
-
-- No sequential control: participants read ahead and form anchored opinions before the item is discussed.
-- No vote concealment: early voters influence late voters, creating anchoring bias and less accurate estimates.
-- Facilitator has no flow control: the ceremony pace is dictated by the slowest voter on each item, with no mechanism to move forward deliberately.
-
-### Customer Pain
-
-Banco Meridional's Scrum Masters report that ceremonies with 10+ stories take 40–60% longer than expected due to participants debating items out of order and re-estimating based on visible peer votes. The workaround (sending one story at a time via chat) adds 15–20 min of overhead per ceremony.
-
-### Business Impact
-
-- Renewal risk: R$ 84.000 ARR (4 squads × R$ 21.000)
-- Expansion blocked: 3 additional squads not onboarded
-- Competitive gap: flagged against 2 competing tools in renewal conversation
+Essas capacidades tratam um risco de retenção com o Banco Meridional (renovação em 90 dias) e desbloqueiam a adoção por mais 3 squads dentro da mesma conta.
 
 ---
 
-## Section 3 — Objectives
+## Seção 2 — Contexto e Problema
 
-1. Enable facilitators to load a list of items and reveal them sequentially, one at a time.
-2. Conceal participant votes until the facilitator triggers the reveal.
-3. Reduce average ceremony time by at least 20% for ceremonies with 10+ items (measurable via session duration telemetry).
-4. Remove the adoption blocker for the 3 pending squads at Banco Meridional.
+### Cenário Atual
 
----
+Quando um facilitador cria uma sala de planejamento e adiciona itens para estimativa, todos os participantes podem ver a lista completa imediatamente. Os votos são exibidos em tempo real conforme cada participante os submete.
 
-## Section 4 — Scope
+### Limitações
 
-### Included
+- Sem controle sequencial: participantes leem à frente e formam opiniões ancoradas antes do item ser discutido.
+- Sem ocultação de votos: votantes iniciais influenciam votantes tardios, criando viés de ancoragem e estimativas menos precisas.
+- Facilitador sem controle de fluxo: o ritmo da cerimônia é ditado pelo votante mais lento em cada item, sem mecanismo para avançar deliberadamente.
 
-- Facilitator UI: ability to add a list of items to a queue before or during a session
-- Facilitator UI: "Reveal next item" control to advance the queue one item at a time
-- Participant UI: view of the current active item only (no visibility into queued items)
-- Vote concealment: all participant votes are hidden until facilitator triggers "Reveal votes"
-- Facilitator UI: "Reveal votes" control, available after all participants have voted or after a timer expires
-- Session state: persistence of queue order and reveal state across reconnections
-- Basic facilitator controls: skip item, return to previous item, end session
+### Dor do Cliente
 
-### Excluded
+Os Scrum Masters do Banco Meridional relatam que cerimônias com 10+ histórias levam 40–60% mais tempo do que o esperado, devido a participantes debatendo itens fora de ordem e re-estimando com base em votos de colegas visíveis. O workaround (enviar uma história por vez via chat) adiciona 15–20 min de overhead por cerimônia.
 
-- Timer per item (out of scope for this release — separate backlog item)
-- Automated reveal after all votes submitted (could be a preference toggle — future phase)
-- Export or reporting of voting results (existing functionality, no changes)
-- Mobile-specific redesign (existing mobile layout applies)
-- Multi-facilitator co-control (single facilitator per session remains the model)
+### Impacto de Negócio
+
+- Risco de renovação: R$ 84.000 ARR (4 squads × R$ 21.000)
+- Expansão bloqueada: 3 squads adicionais não integrados
+- Lacuna competitiva: sinalizada contra 2 ferramentas concorrentes na conversa de renovação
 
 ---
 
-## Section 5 — Personas Impacted
+## Seção 3 — Objetivos
 
-| Persona | Role in Session | Impact |
+1. Permitir que facilitadores carreguem uma lista de itens e os revelem sequencialmente, um de cada vez.
+2. Ocultar os votos dos participantes até que o facilitador acione a revelação.
+3. Reduzir o tempo médio de cerimônia em pelo menos 20% para cerimônias com 10+ itens (mensurável via telemetria de duração de sessão).
+4. Remover o bloqueador de adoção para os 3 squads pendentes no Banco Meridional.
+
+---
+
+## Seção 4 — Escopo
+
+### Incluído
+
+- UI do facilitador: capacidade de adicionar uma lista de itens à fila antes ou durante uma sessão
+- UI do facilitador: controle "Revelar próximo item" para avançar a fila um item de cada vez
+- UI do participante: visualização apenas do item ativo atual (sem visibilidade dos itens na fila)
+- Ocultação de votos: todos os votos dos participantes ficam ocultos até o facilitador acionar "Revelar votos"
+- UI do facilitador: controle "Revelar votos", disponível após todos os participantes votarem ou após um timer expirar
+- Estado de sessão: persistência da ordem da fila e estado de revelação através de reconexões
+- Controles básicos do facilitador: pular item, retornar ao item anterior, encerrar sessão
+
+### Excluído
+
+- Timer por item (fora do escopo deste release — item de backlog separado)
+- Revelação automática após todos os votos submetidos (poderia ser um toggle de preferência — fase futura)
+- Exportação ou relatórios de resultados de votação (funcionalidade existente, sem alterações)
+- Redesign específico para mobile (layout mobile existente se aplica)
+- Co-controle multi-facilitador (modelo de facilitador único por sessão permanece)
+
+---
+
+## Seção 5 — Personas Impactadas
+
+| Persona | Papel na Sessão | Impacto |
 |---|---|---|
-| **Scrum Master / Facilitator** | Creates and controls the room | Primary user of queue and reveal controls. Gains ceremony flow control. |
-| **Developer / Voter** | Estimates items | Sees only the active item. Votes are hidden until reveal. Experience change: less distraction, more focused estimation. |
-| **Observer** (future role, not in this scope) | Watches without voting | Not impacted in this release. |
+| **Scrum Master / Facilitador** | Cria e controla a sala | Usuário primário dos controles de fila e revelação. Ganha controle do fluxo da cerimônia. |
+| **Desenvolvedor / Votante** | Estima itens | Vê apenas o item ativo. Votos ficam ocultos até a revelação. Mudança de experiência: menos distração, estimativa mais focada. |
+| **Observador** (papel futuro, fora deste escopo) | Assiste sem votar | Não impactado neste release. |
 
 ---
 
-## Section 6 — Business Rules & Flows
+## Seção 6 — Regras de Negócio e Fluxos
 
-### Queue Management Rules
+### Regras de Gerenciamento da Fila
 
-1. Only the facilitator can add, reorder, or remove items from the queue.
-2. Items in the queue are not visible to participants until revealed.
-3. The facilitator can reveal items in order or skip ahead — but cannot un-reveal an already-revealed item without ending the session for that item.
-4. A session can have a maximum of 100 queued items (technical limit, not a business rule — to be confirmed by CTO if needed).
+1. Apenas o facilitador pode adicionar, reordenar ou remover itens da fila.
+2. Os itens na fila não são visíveis para os participantes até serem revelados.
+3. O facilitador pode revelar itens em ordem ou pular à frente — mas não pode "des-revelar" um item já revelado sem encerrar a sessão para aquele item.
+4. Uma sessão pode ter no máximo 100 itens enfileirados (limite técnico, não uma regra de negócio — a confirmar pelo CTO se necessário).
 
-### Vote Concealment Rules
+### Regras de Ocultação de Votos
 
-1. Once a participant submits a vote, it is recorded but displayed only as "Voted" (not the value) to other participants.
-2. The facilitator can see the count of votes submitted but not the values until reveal.
-3. The facilitator triggers "Reveal votes" at any time — this shows all submitted votes simultaneously to all participants.
-4. Participants who have not voted when reveal is triggered will see their slot as "Not voted" — no blocking.
-5. After reveal, the facilitator can move to the next queued item or re-vote the current item.
+1. Uma vez que um participante submete um voto, ele é registrado mas exibido apenas como "Votou" (não o valor) para os outros participantes.
+2. O facilitador pode ver a contagem de votos submetidos, mas não os valores até a revelação.
+3. O facilitador aciona "Revelar votos" a qualquer momento — isso mostra todos os votos submetidos simultaneamente a todos os participantes.
+4. Participantes que não votaram quando a revelação é acionada verão seu espaço como "Não votou" — sem bloqueio.
+5. Após a revelação, o facilitador pode avançar para o próximo item da fila ou re-votar o item atual.
 
-### State Transition Flow
+### Fluxo de Transição de Estado
 
 ```text
-Session created
+Sessão criada
     ↓
-Facilitator loads queue (1..N items)
+Facilitador carrega a fila (1..N itens)
     ↓
-Facilitator reveals item 1
+Facilitador revela o item 1
     ↓
-Participants vote (votes hidden)
+Participantes votam (votos ocultos)
     ↓
-Facilitator triggers "Reveal votes"
+Facilitador aciona "Revelar votos"
     ↓
-All votes shown simultaneously
+Todos os votos exibidos simultaneamente
     ↓
-Facilitator advances to item 2 (or closes session)
+Facilitador avança para o item 2 (ou encerra sessão)
     ↓
-[repeat]
+[repetição]
 ```
 
-### Edge Cases (in scope)
+### Edge Cases (no escopo)
 
-- **Participant joins mid-item**: sees the active item and can vote. Queue position is not shown.
-- **Facilitator disconnects**: session pauses. If facilitator reconnects within 5 min, state is restored. After 5 min, session closes.
-- **All participants vote before reveal**: facilitator still controls reveal timing — no auto-reveal.
-- **Facilitator skips an item**: item is marked as skipped in session history. Can be returned to.
+- **Participante entra durante um item**: vê o item ativo e pode votar. A posição na fila não é exibida.
+- **Facilitador desconecta**: sessão pausa. Se o facilitador reconectar em até 5 min, o estado é restaurado. Após 5 min, a sessão encerra.
+- **Todos os participantes votam antes da revelação**: o facilitador ainda controla o timing da revelação — sem auto-revelação.
+- **Facilitador pula um item**: item é marcado como pulado no histórico da sessão. Pode ser retornado.
 
 ---
 
-## Section 7 — Integrations Required
+## Seção 7 — Integrações Necessárias
 
-| System | Type | Detail |
+| Sistema | Tipo | Detalhe |
 |---|---|---|
-| **WebSocket / real-time session layer** | Internal | Queue state and vote reveal events must be broadcast to all session participants in real time. Existing WebSocket infrastructure applies. |
-| **Session persistence layer** | Internal | Queue order, reveal state, and votes must persist across reconnections. Existing session storage applies — schema extension required. |
+| **WebSocket / camada de sessão em tempo real** | Interno | Eventos de estado da fila e revelação de votos devem ser transmitidos a todos os participantes da sessão em tempo real. Infraestrutura WebSocket existente se aplica. |
+| **Camada de persistência de sessão** | Interno | Ordem da fila, estado de revelação e votos devem persistir através de reconexões. Armazenamento de sessão existente se aplica — extensão de schema necessária. |
 
-No external third-party integrations required for this feature.
+Nenhuma integração de terceiros externos é necessária para esta funcionalidade.
 
 ---
 
-## Section 8 — Technical Impact
+## Seção 8 — Impacto Técnico
 
-*CTO escalation: not required. Notes provided by PO based on existing system knowledge. Tech Leads to validate during breakdown.*
+*Escalada ao CTO: não necessária. Notas fornecidas pelo PO com base no conhecimento do sistema existente. Tech Leads devem validar durante o breakdown.*
 
-| Area | Impact |
+| Área | Impacto |
 |---|---|
-| **Session state model** | Schema extension to support queue (ordered list of items + reveal state per item) and vote concealment flag per session. |
-| **WebSocket events** | New event types: `item_revealed`, `votes_revealed`, `item_skipped`. Existing event bus applies. |
-| **Frontend (facilitator)** | New queue management UI component. New reveal controls. |
-| **Frontend (participant)** | Vote display logic change: show "Voted" instead of value until reveal event received. |
-| **Security** | Vote values must not be exposed in WebSocket payloads to participants before reveal — server must enforce concealment, not just the client. |
-| **Multi-tenancy** | No impact — session scope is already tenant-isolated. |
-| **Observability** | Add telemetry: session duration, time per item, reveal lag. Required for success metric measurement. |
-| **Scalability** | No new concerns — queue is session-scoped and bounded (max 100 items). |
+| **Modelo de estado de sessão** | Extensão de schema para suportar fila (lista ordenada de itens + estado de revelação por item) e flag de ocultação de votos por sessão. |
+| **Eventos WebSocket** | Novos tipos de evento: `item_revealed`, `votes_revealed`, `item_skipped`. Event bus existente se aplica. |
+| **Frontend (facilitador)** | Novo componente UI de gerenciamento de fila. Novos controles de revelação. |
+| **Frontend (participante)** | Mudança na lógica de exibição de votos: mostrar "Votou" em vez do valor até receber evento de revelação. |
+| **Segurança** | Valores de votos não devem ser expostos em payloads WebSocket para participantes antes da revelação — o servidor deve aplicar a ocultação, não apenas o cliente. |
+| **Multi-tenancy** | Sem impacto — escopo de sessão já é isolado por tenant. |
+| **Observabilidade** | Adicionar telemetria: duração de sessão, tempo por item, lag de revelação. Necessário para medição das métricas de sucesso. |
+| **Escalabilidade** | Sem novas preocupações — a fila tem escopo de sessão e é limitada (máx. 100 itens). |
 
 ---
 
-## Section 9 — Risks & Dependencies
+## Seção 9 — Riscos e Dependências
 
-| Risk | Type | Probability | Impact | Mitigation |
+| Risco | Tipo | Probabilidade | Impacto | Mitigação |
 |---|---|---|---|---|
-| WebSocket event ordering issues under high participant count | Technical | Medium | Medium | Load test with 30+ concurrent participants before release. |
-| Vote concealment bypass via client-side inspection | Security | Low | High | Server enforces concealment. Votes not included in broadcast payloads until reveal event. Penetration test on the reveal flow. |
-| Session state loss on facilitator reconnect | Technical | Low | High | Grace period of 5 min with state restoration. Fallback: session closes cleanly with a notification. |
-| Schema migration conflicts with active sessions | Technical | Low | Medium | Migration runs on sessions with status = closed only. Active sessions use old schema until natural close. |
+| Problemas de ordenação de eventos WebSocket com alta contagem de participantes | Técnico | Média | Médio | Load test com 30+ participantes concorrentes antes do release. |
+| Bypass de ocultação de votos via inspeção client-side | Segurança | Baixa | Alto | Servidor aplica a ocultação. Votos não incluídos nos payloads de broadcast até o evento de revelação. Teste de penetração no fluxo de revelação. |
+| Perda de estado de sessão na reconexão do facilitador | Técnico | Baixa | Alto | Período de graça de 5 min com restauração de estado. Fallback: sessão encerra limpa com notificação. |
+| Conflitos de migração de schema com sessões ativas | Técnico | Baixa | Médio | Migração roda apenas em sessões com status = encerrado. Sessões ativas usam schema antigo até encerramento natural. |
 
-**Dependencies:**
-- WebSocket infrastructure team availability for event schema review
-- QA environment with multi-participant simulation capability
+**Dependências:**
+- Disponibilidade da equipe de infraestrutura WebSocket para revisão do schema de eventos
+- Ambiente de QA com capacidade de simulação multi-participante
 
 ---
 
-## Section 10 — Internal Effort & Cost Assessment
+## Seção 10 — Avaliação Interna de Esforço e Custo
 
-> 🔒 **Internal use only.** This section is an operational planning instrument for internal decision-making. The estimates below are not commitments, not contractual obligations, and must never be shared with clients, prospects, or external stakeholders in any form. They exist to support capacity planning, prioritization trade-offs, and administrative resource allocation within the company.
+> 🔒 **Somente uso interno.** Esta seção é um instrumento de planejamento operacional para tomada de decisão interna. As estimativas abaixo não são compromissos, não são obrigações contratuais, e nunca devem ser compartilhadas com clientes, prospects ou stakeholders externos em qualquer forma. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação administrativa de recursos dentro da empresa.
 >
-> Estimates are based on current team seniority and known system state at the time of rationalization. They will be revised by the Tech Lead during technical breakdown.
+> As estimativas são baseadas na senioridade atual da equipe e no estado conhecido do sistema no momento da racionalização. Serão revisadas pelo Tech Lead durante o breakdown técnico.
 
-### Development Effort
+### Esforço de Desenvolvimento
 
-| Area | Estimate | Seniority |
+| Área | Estimativa | Senioridade |
 |---|---|---|
-| Backend (session state + WebSocket events) | 5 days | Mid-senior |
-| Frontend — facilitator UI | 4 days | Mid |
-| Frontend — participant UI | 2 days | Mid |
-| QA (functional + security + load) | 3 days | QA |
-| **Total** | **14 days** | |
+| Backend (estado de sessão + eventos WebSocket) | 5 dias | Mid-senior |
+| Frontend — UI do facilitador | 4 dias | Mid |
+| Frontend — UI do participante | 2 dias | Mid |
+| QA (funcional + segurança + carga) | 3 dias | QA |
+| **Total** | **14 dias** | |
 
-### Infrastructure Impact
+### Impacto de Infraestrutura
 
-No new infrastructure required. Existing WebSocket and session storage infrastructure absorbs this feature within current capacity. No procurement or provisioning actions needed.
+Sem nova infraestrutura necessária. A infraestrutura WebSocket e de armazenamento de sessão existente absorve esta funcionalidade dentro da capacidade atual. Sem ações de procurement ou provisionamento necessárias.
 
-### Third-party Cost Impact
+### Impacto de Custo com Terceiros
 
-None. No new external services, APIs, or licenses required.
+Nenhum. Sem novos serviços externos, APIs ou licenças necessárias.
 
-### Recurring Operational Cost Impact
+### Impacto de Custo Operacional Recorrente
 
-Minimal. Additional telemetry events increase observability storage by an estimated 2–3% at current session volume. No budget action required.
+Mínimo. Eventos de telemetria adicionais aumentam o armazenamento de observabilidade em aproximadamente 2–3% no volume de sessões atual. Sem ação de orçamento necessária.
 
-### TCO Assessment
+### Avaliação de TCO
 
-Feature is operationally neutral — no new services, no new external dependencies. Total cost of ownership impact is limited to development time. No ongoing cost line is added to the company's operational budget.
+A funcionalidade é operacionalmente neutra — sem novos serviços, sem novas dependências externas. O impacto no custo total de propriedade é limitado ao tempo de desenvolvimento. Nenhuma nova linha de custo recorrente é adicionada ao orçamento operacional da empresa.
 
 ---
 
-## Section 11 — Success Criteria
+## Seção 11 — Critérios de Sucesso
 
-| Metric | Target | Measurement |
+| Métrica | Meta | Medição |
 |---|---|---|
-| Average ceremony duration (10+ items) | Reduce by ≥ 20% vs. current baseline | Session duration telemetry — compare before/after for Banco Meridional cohort |
-| Banco Meridional renewal | Confirmed before contract date | CS tracks renewal outcome |
-| Additional squad adoption | 3 new squads activated within 60 days of release | Account dashboard — squad activation count |
-| Vote anchoring incidents reported | Zero CS tickets about anchoring bias post-release | CS ticket tagging |
-| Facilitator-reported satisfaction | ≥ 4.5/5 in post-ceremony survey (if survey exists) | CS follow-up with account |
+| Duração média de cerimônia (10+ itens) | Redução de ≥ 20% vs. baseline atual | Telemetria de duração de sessão — comparar antes/depois para coorte do Banco Meridional |
+| Renovação do Banco Meridional | Confirmada antes da data do contrato | CS acompanha resultado da renovação |
+| Adoção de squads adicionais | 3 novos squads ativados em até 60 dias do release | Dashboard da conta — contagem de ativação de squads |
+| Incidentes de ancoragem de votos reportados | Zero tickets de CS sobre viés de ancoragem pós-release | Tagueamento de tickets de CS |
+| Satisfação reportada pelo facilitador | ≥ 4,5/5 em pesquisa pós-cerimônia (se pesquisa existir) | Acompanhamento CS com a conta |
 
 ---
 
-## Section 12 — Suggested Roadmap
+## Seção 12 — Roadmap Sugerido
 
-### MVP (this release)
+### MVP (este release)
 
-- Queue management (add, order, reveal one at a time)
-- Vote concealment with facilitator-controlled reveal
-- Session state persistence across reconnections
-- Basic facilitator controls (skip, return, end)
+- Gerenciamento de fila (adicionar, ordenar, revelar um de cada vez)
+- Ocultação de votos com revelação controlada pelo facilitador
+- Persistência de estado de sessão através de reconexões
+- Controles básicos do facilitador (pular, retornar, encerrar)
 
-### Phase 2 (future backlog)
+### Fase 2 (backlog futuro)
 
-- Auto-reveal after all participants vote (optional preference toggle)
-- Per-item timer with optional auto-advance
-- Queue template reuse across sessions
-- Co-facilitator mode (multiple facilitators sharing control)
+- Auto-revelação após todos os participantes votarem (toggle de preferência opcional)
+- Timer por item com avanço automático opcional
+- Reuso de template de fila entre sessões
+- Modo co-facilitador (múltiplos facilitadores compartilhando controle)
 
-### Phase 3 (future backlog)
+### Fase 3 (backlog futuro)
 
-- Ceremony analytics dashboard (time per item, consensus rate, revision frequency)
-- Integration with Jira/Linear for direct story import into queue
+- Dashboard de analytics de cerimônias (tempo por item, taxa de consenso, frequência de revisão)
+- Integração com Jira/Linear para importação direta de histórias para a fila

@@ -1,78 +1,78 @@
-# Interaction 06 — CTO → PO (Technical Assessment Return)
+# Interação 06 — CTO → PO (Devolução da Avaliação Técnica)
 
-**Direction:** CTO initiates return. PO integrates.
-**Layer:** Within Intake Layer
-
----
-
-## Trigger
-
-CTO has completed the technical assessment of a demand that was escalated from the PO.
+**Direção:** CTO inicia a devolução. PO integra.
+**Camada:** Dentro da Camada de Intake
 
 ---
 
-## What CTO Delivers
+## Gatilho
 
-- **Section 8** filled: affected systems, components, infrastructure, architectural decisions required
-- **Risk additions to Section 9**: technical risks with likelihood, impact, and mitigation strategy
-- **Integration clarifications in Section 7**: protocols, constraints, known third-party limitations
-- Any hard constraints that affect scope (e.g., "this cannot use the existing session model — requires a new state machine")
+O CTO concluiu a avaliação técnica de uma demanda que foi escalada pelo PO.
 
 ---
 
-## What PO Does With It
+## O que o CTO Entrega
 
-- Integrates the CTO's contributions into the Readiness Package
-- Revises scope boundaries if hard constraints were introduced
-- Completes remaining sections (11, 12) based on the updated technical picture
-- Closes the package and submits to PM
+- **Seção 8** preenchida: sistemas afetados, componentes, infraestrutura, decisões arquiteturais necessárias
+- **Adições de risco à Seção 9**: riscos técnicos com probabilidade, impacto e estratégia de mitigação
+- **Esclarecimentos de integração na Seção 7**: protocolos, restrições, limitações conhecidas de terceiros
+- Quaisquer restrições rígidas que afetam o escopo (ex.: "isso não pode usar o modelo de sessão existente — requer uma nova máquina de estado")
 
 ---
 
-## Ownership Transferred
+## O que o PO Faz Com Isso
 
-**From CTO:** Technical assessment is complete and handed back. CTO's responsibility for this demand ends here unless the PO surfaces a disagreement or scope changes require re-escalation.
-**To PO:** Owns the completion of the Readiness Package — integrating the CTO's contributions, revising scope if necessary, communicating to the demand originator, and submitting to PM.
-**Artifact handed over:** Section 8 + additions to Sections 7 and 9 + hard constraints.
+- Integra as contribuições do CTO no Readiness Package
+- Revisa os limites de escopo se restrições rígidas foram introduzidas
+- Completa as seções restantes (11, 12) com base no quadro técnico atualizado
+- Fecha o pacote e submete ao PM
+
+---
+
+## Transferência de Ownership
+
+**Do CTO:** A avaliação técnica está completa e devolvida. A responsabilidade do CTO para esta demanda termina aqui, a menos que o PO apresente uma discordância ou mudanças de escopo exijam re-escalada.
+**Para o PO:** Detém a conclusão do Readiness Package — integrando as contribuições do CTO, revisando o escopo se necessário, comunicando ao originador da demanda e submetendo ao PM.
+**Artefato transferido:** Seção 8 + adições às Seções 7 e 9 + restrições rígidas.
 
 ---
 
 ## Gate
 
-The PO does not modify or soften the CTO's technical constraints. If the CTO says a constraint is non-negotiable, it is non-negotiable. If the PO disagrees, they surface the disagreement explicitly — they do not quietly revise the constraint.
+O PO não modifica nem suaviza as restrições técnicas do CTO. Se o CTO disser que uma restrição é não-negociável, ela é não-negociável. Se o PO discordar, ele apresenta a discordância explicitamente — não revisa silenciosamente a restrição.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If the CTO's constraints make the original scope undeliverable, the PO documents the revised scope and communicates the change back to the demand originator (Sales/CS/CEO) before submitting to PM.
-
----
-
-## What PO Must NOT Do
-
-- Quietly soften or reinterpret technical constraints to preserve the original scope
-- Submit to PM without integrating the CTO's contributions
-- Skip communication to the demand originator if scope changes materially
+Se as restrições do CTO tornarem o escopo original inentregável, o PO documenta o escopo revisado e comunica a mudança ao originador da demanda (Vendas/CS/CEO) antes de submeter ao PM.
 
 ---
 
-## Sequence
+## O que o PO NÃO Deve Fazer
+
+- Suavizar ou reinterpretar silenciosamente restrições técnicas para preservar o escopo original
+- Submeter ao PM sem integrar as contribuições do CTO
+- Pular a comunicação ao originador da demanda se o escopo mudar materialmente
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor CTO as CTO
     actor PO as PO
-    actor ORIG as Demand Originator
+    actor ORIG as Originador da Demanda
 
-    CTO-->>PO: Section 8 + S7/S9 additions + hard constraints
-    PO->>PO: Integrates CTO contributions
+    CTO-->>PO: Seção 8 + adições a S7/S9 + restrições rígidas
+    PO->>PO: Integra contribuições do CTO
 
-    alt Hard constraints change scope materially
-        PO->>ORIG: Communicates scope revision
-        ORIG-->>PO: Acknowledged
+    alt Restrições rígidas mudam o escopo materialmente
+        PO->>ORIG: Comunica revisão de escopo
+        ORIG-->>PO: Reconhecido
     end
 
-    PO->>PO: Completes S11 and S12
-    PO->>PO: Closes and submits RP to PM
+    PO->>PO: Completa S11 e S12
+    PO->>PO: Fecha e submete RP ao PM
 ```

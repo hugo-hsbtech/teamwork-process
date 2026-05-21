@@ -1,89 +1,89 @@
-# Case: PokerPlan — Startup Planning Poker Platform
+# Caso: PokerPlan — Plataforma SaaS de Planning Poker
 
-## Scenario
+## Cenário
 
-PokerPlan is a B2B SaaS platform for agile planning ceremonies. The platform already has paying clients and is in a growth phase. This case illustrates two concurrent demands flowing through the operational model — from intake capture to a complete Readiness Package ready for PM handoff.
+PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A plataforma já possui clientes pagantes e está em fase de crescimento. Este caso ilustra duas demandas concorrentes fluindo pelo modelo operacional — desde a captura no intake até um Readiness Package completo pronto para handoff ao PM.
 
 ---
 
-## Demands in This Case
+## Demandas Neste Caso
 
-### Demand 1 — Queue Voting
+### Demanda 1 — Queue Voting (Fila de Votação)
 
-**Client:** Banco Meridional (existing enterprise client, renewal in 90 days)
-**Pain:** No mechanism to control the sequence of story estimation or hide votes until reveal.
-**Priority:** High
-**Architectural escalation:** No
+**Cliente:** Banco Meridional (cliente enterprise existente, renovação em 90 dias)
+**Dor:** Sem mecanismo para controlar a sequência de estimativas de histórias ou ocultar votos até a revelação.
+**Prioridade:** Alta
+**Escalada arquitetural:** Não
 
-| Document | Description |
+| Documento | Descrição |
 |---|---|
-| `intake-queue-voting.md` | Structured intake record registered by CS |
-| `readiness-package-queue-voting.md` | Full 12-section Readiness Package — ready for PM |
+| `intake-queue-voting.md` | Registro de intake estruturado registrado pelo CS |
+| `readiness-package-queue-voting.md` | Readiness Package completo com 12 seções — pronto para o PM |
 
 ---
 
-### Demand 2 — Room Access Control
+### Demanda 2 — Room Access Control (Controle de Acesso à Sala)
 
-**Client:** Construtora Ágil (pre-close, deal contingent on feature)
-**Pain:** No access control, anonymity, or role differentiation within a planning room.
-**Priority:** High
-**Architectural escalation:** Yes — CTO reviewed participant data model and multi-tenancy implications.
+**Cliente:** Construtora Ágil (pré-fechamento, deal condicionado à funcionalidade)
+**Dor:** Sem controle de acesso, anonimato ou diferenciação de papéis dentro de uma sala de planejamento.
+**Prioridade:** Alta
+**Escalada arquitetural:** Sim — CTO revisou o modelo de dados de participantes e implicações de multi-tenancy.
 
-| Document | Description |
+| Documento | Descrição |
 |---|---|
-| `intake-access-control.md` | Structured intake record registered by Sales |
-| `readiness-package-access-control.md` | Full 12-section Readiness Package with CTO architectural notes |
+| `intake-access-control.md` | Registro de intake estruturado registrado por Vendas |
+| `readiness-package-access-control.md` | Readiness Package completo com 12 seções e notas arquiteturais do CTO |
 
 ---
 
-## Downstream Artifacts
+## Artefatos Downstream
 
-| Document | Owner | Description |
+| Documento | Responsável | Descrição |
 |---|---|---|
-| `05-execution-plan.md` | PM | Capacity assessment, demand sequencing, milestone map, sprint structure, escalation triggers |
-| `06.1-product-backlog-queue-voting.md` | PO | Epics + stories + acceptance criteria for Queue Voting — what to build and for whom |
-| `06.2-tech-backlog-queue-voting.md` | Tech Lead | ADRs, tasks, refined estimates, DoD, rollout strategy for Queue Voting — how to build it |
-| `07.1-product-backlog-access-control.md` | PO | Epics + stories + acceptance criteria for Access Control — what to build and for whom |
-| `07.2-tech-backlog-access-control.md` | Tech Lead | ADRs, tasks, refined estimates, DoD, rollout strategy for Access Control — how to build it |
+| `05-execution-plan.md` | PM | Avaliação de capacidade, sequenciamento de demandas, mapa de milestones, estrutura de sprints, gatilhos de escalada |
+| `06.1-product-backlog-queue-voting.md` | PO | Épicos + histórias + critérios de aceite para Queue Voting — o que construir e para quem |
+| `06.2-tech-backlog-queue-voting.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Queue Voting — como construir |
+| `07.1-product-backlog-access-control.md` | PO | Épicos + histórias + critérios de aceite para Access Control — o que construir e para quem |
+| `07.2-tech-backlog-access-control.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Access Control — como construir |
 
 ---
 
-## Process State
+## Estado do Processo
 
-Both demands have completed the Intake Layer and are approved for PM handoff.
+Ambas as demandas completaram o Intake Layer e estão aprovadas para handoff ao PM.
 
 ```text
-[INT-2024-001] Queue Voting (RP v2 — rejected once, resubmitted)
-  Intake → Triage → Rationalization → RP v1 rejected → RP v2 approved
-    → Execution Plan ✓ → Breakdown Package ✓ → In development (Sprint 1–2)
-    → Release target: 2024-04-26
+[INT-2024-001] Queue Voting (RP v2 — rejeitado uma vez, resubmetido)
+  Intake → Triagem → Racionalização → RP v1 rejeitado → RP v2 aprovado
+    → Plano de Execução ✓ → Breakdown Package ✓ → Em desenvolvimento (Sprint 1–2)
+    → Previsão de release: 2024-04-26
 
-[INT-2024-002] Room Access Control (RP v1 — approved directly after Discovery)
-  Intake → Triage → Discovery [7 days] → CTO Assessment → Rationalization → RP v1 approved
-    → Execution Plan ✓ → Breakdown Package ✓ → In development (Sprint 1–5)
-    → Release target: 2024-06-05 (revised from 2024-05-30 after Tech Lead refinement)
+[INT-2024-002] Room Access Control (RP v1 — aprovado diretamente após Discovery)
+  Intake → Triagem → Discovery [7 dias] → Avaliação CTO → Racionalização → RP v1 aprovado
+    → Plano de Execução ✓ → Breakdown Package ✓ → Em desenvolvimento (Sprint 1–5)
+    → Previsão de release: 2024-06-05 (revisada de 2024-05-30 após refinamento do Tech Lead)
 ```
 
-**INT-2024-002 went through Discovery** before it could be rationalized. Three integration unknowns were identified at intake and had to be resolved before scope could be defined:
+**INT-2024-002 passou por Discovery** antes de poder ser racionalizada. Três incógnitas de integração foram identificadas no intake e precisaram ser resolvidas antes que o escopo pudesse ser definido:
 
-| Unknown | Resolved by | Outcome |
+| Incógnita | Resolvida por | Resultado |
 |---|---|---|
-| Azure AD / OIDC integration feasibility | CTO technical spike | Feasible — added to scope |
-| Jira integration requirement | Client call | Not required — moved to backlog |
-| LGPD data residency posture | CTO infrastructure review | Non-compliant — Option C added to scope |
+| Viabilidade de integração Azure AD / OIDC | Spike técnico do CTO | Viável — adicionado ao escopo |
+| Requisito de integração Jira | Chamada com o cliente | Não obrigatório — movido para o backlog |
+| Postura de residência de dados LGPD | Revisão de infraestrutura pelo CTO | Não conforme — Opção C adicionada ao escopo |
 
 ---
 
-## Key Differences Between the Two Cases
+## Diferenças-Chave Entre os Dois Casos
 
-| Dimension | Queue Voting | Room Access Control |
+| Dimensão | Queue Voting | Room Access Control |
 |---|---|---|
-| CTO escalation | No | Yes |
-| Went through Discovery | No | Yes — 3 integration unknowns |
-| Architectural complexity | Low | High |
-| Effort estimate | 14 days | 25 days (revised up from initial estimate) |
-| Security considerations | Vote concealment (server-enforced) | Full access model + OIDC auth + LGPD routing |
-| Risk profile | Low | High |
-| Deal type | Renewal retention | Pre-close blocker |
-| Scope risk | Low | High (LGPD + Azure AD dependency on client action) |
-| External dependencies | None | Client must register app in Azure AD portal |
+| Escalada ao CTO | Não | Sim |
+| Passou por Discovery | Não | Sim — 3 incógnitas de integração |
+| Complexidade arquitetural | Baixa | Alta |
+| Estimativa de esforço | 14 dias | 25 dias (revisado para cima da estimativa inicial) |
+| Considerações de segurança | Ocultação de votos (aplicada pelo servidor) | Modelo de acesso completo + auth OIDC + roteamento LGPD |
+| Perfil de risco | Baixo | Alto |
+| Tipo de deal | Retenção de renovação | Bloqueador pré-fechamento |
+| Risco de escopo | Baixo | Alto (LGPD + dependência de ação do cliente para Azure AD) |
+| Dependências externas | Nenhuma | Cliente deve registrar app no portal Azure AD |

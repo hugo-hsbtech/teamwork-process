@@ -1,58 +1,58 @@
-# Execution Plan — [Sprint / Cycle Name]
+# Plano de Execução — [Nome do Sprint / Ciclo]
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Plan ID** | EP-YYYY-NNN |
-| **Version** | v1 |
-| **Owned by** | [Nome] (PM) |
-| **Covers demands** | [INT-YYYY-NNN · INT-YYYY-NNN] |
-| **Status** | Draft |
-| **Plan date** | YYYY-MM-DD |
-| **Execution window** | YYYY-MM-DD → YYYY-MM-DD |
+| **ID do Plano** | EP-AAAA-NNN |
+| **Versão** | v1 |
+| **Responsável** | [Nome] (PM) |
+| **Cobre demandas** | [INT-AAAA-NNN · INT-AAAA-NNN] |
+| **Status** | Rascunho |
+| **Data do plano** | AAAA-MM-DD |
+| **Janela de execução** | AAAA-MM-DD → AAAA-MM-DD |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Author | Summary |
+| Versão | Data | Autor | Resumo |
 |---|---|---|---|
-| v1 | YYYY-MM-DD | [Nome] (PM) | Initial plan. |
+| v1 | AAAA-MM-DD | [Nome] (PM) | Plano inicial. |
 
 ---
 
-## 1. Capacity Assessment
+## 1. Avaliação de Capacidade
 
-> 🔒 Internal use only.
+> 🔒 Somente uso interno.
 
-### Team Composition
+### Composição da Equipe
 
-| Person | Role | Seniority | Current allocation | Available from |
+| Pessoa | Papel | Senioridade | Alocação atual | Disponível a partir de |
 |---|---|---|---|---|
-| [Nome] | [Papel] | Senior / Mid / Junior | [%] | YYYY-MM-DD |
+| [Nome] | [Papel] | Senior / Mid / Junior | [%] | AAAA-MM-DD |
 
-### Skill Coverage
+### Cobertura de Skills
 
-| Required skill | Demand | Available? | Who |
+| Skill necessária | Demanda | Disponível? | Quem |
 |---|---|---|---|
-| [Skill 1] | [INT-ID] | Yes / No / Partial | [Nome] |
+| [Skill 1] | [INT-ID] | Sim / Não / Parcial | [Nome] |
 
-### Conflict Map
+### Mapa de Conflitos
 
-| Shared system | Demand A | Demand B | Risk |
+| Sistema compartilhado | Demanda A | Demanda B | Risco |
 |---|---|---|---|
 | [Sistema] | [Impacto] | [Impacto] | [Risco] |
 
-### Capacity Decision
+### Decisão de Capacidade
 
 [Decisão do PM com justificativa]
 
-### PM Recommendation
+### Recomendação do PM
 
 [Recomendação de sequenciamento]
 
 ---
 
-## 2. Demand Sequencing
+## 2. Sequenciamento de Demandas
 
 ```
 [Diagrama de Gantt ou timeline aqui]
@@ -60,36 +60,36 @@
 
 ---
 
-## 3. Milestone Map
+## 3. Mapa de Milestones
 
-### [Demand Name]
+### [Nome da Demanda]
 
-| Milestone | Owner | Target date | Gate |
+| Milestone | Responsável | Data alvo | Gate |
 |---|---|---|---|
-| M1 — [Nome] | [Nome] | YYYY-MM-DD | [Critério] |
+| M1 — [Nome] | [Nome] | AAAA-MM-DD | [Critério] |
 
 ---
 
-## 4. Cross-Demand Dependency Map
+## 4. Mapa de Dependências Cross-Demanda
 
-| Dependency | From | To | Type | Risk if missed |
+| Dependência | De | Para | Tipo | Risco se não cumprida |
 |---|---|---|---|---|
-| [Dependência] | [Demanda A] | [Demanda B] | Hard sequential / Coordination / External | [Risco] |
+| [Dependência] | [Demanda A] | [Demanda B] | Sequencial obrigatório / Coordenação / Externo | [Risco] |
 
 ---
 
-## 5. Sprint Structure
+## 5. Estrutura de Sprints
 
-### Sprint 1 — YYYY-MM-DD to YYYY-MM-DD
+### Sprint 1 — AAAA-MM-DD a AAAA-MM-DD
 
-| Task | Assignee | Demand |
+| Tarefa | Responsável | Demanda |
 |---|---|---|
-| [Task 1] | [Nome] | [INT-ID] |
+| [Tarefa 1] | [Nome] | [INT-ID] |
 
 ---
 
-## 6. Escalation Triggers
+## 6. Gatilhos de Escalada
 
-| Condition | PM Action | Escalation target |
+| Condição | Ação do PM | Destino da escalada |
 |---|---|---|
 | [Condição] | [Ação] | [Destino] |

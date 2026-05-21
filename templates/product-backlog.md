@@ -1,38 +1,38 @@
 # Product Backlog — [Nome da Demanda]
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Backlog ID** | PB-YYYY-NNN |
-| **Version** | v1 |
-| **Linked RP** | RP-YYYY-NNN vX |
-| **Owned by** | [Nome] (PO) |
-| **Status** | Draft |
-| **Baselined date** | — |
+| **ID do Backlog** | PB-AAAA-NNN |
+| **Versão** | v1 |
+| **RP vinculado** | RP-AAAA-NNN vX |
+| **Responsável** | [Nome] (PO) |
+| **Status** | Rascunho |
+| **Data de baseline** | — |
 
-> This document defines **what** will be built and **for whom**, from the user's perspective.
-> It does not define how it will be built. Technical decisions belong to the Tech Backlog.
+> Este documento define **o que** será construído e **para quem**, da perspectiva do usuário.
+> Não define como será construído. Decisões técnicas pertencem ao Tech Backlog.
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Author | Summary |
+| Versão | Data | Autor | Resumo |
 |---|---|---|---|
-| v1 | YYYY-MM-DD | [Nome] (PO) | Initial backlog. |
+| v1 | AAAA-MM-DD | [Nome] (PO) | Backlog inicial. |
 
 ---
 
-## Epic Map
+## Mapa de Épicos
 
-| Epic | Description | Priority |
+| Épico | Descrição | Prioridade |
 |---|---|---|
 | EP-001 | [Nome do Épico] | Must Have / Should Have / Could Have |
 
 ---
 
-## User Journey
+## Jornada do Usuário
 
-### Overall Journey — [Persona Principal]
+### Jornada Geral — [Persona Principal]
 
 ```mermaid
 journey
@@ -48,17 +48,17 @@ journey
 
 ## EP-001 — [Nome do Épico]
 
-**Goal:** [Objetivo do épico em uma frase]
+**Objetivo:** [Objetivo do épico em uma frase]
 
 ---
 
 ### ST-001 — [Nome da História]
 
-**As a** [persona],
-**I want to** [ação],
-**so that** [benefício].
+**Como** [persona],
+**quero** [ação],
+**para que** [benefício].
 
-**Acceptance Criteria:**
+**Critérios de Aceite:**
 - [ ] [Critério 1]
 - [ ] [Critério 2]
 
@@ -68,8 +68,8 @@ journey
 
 ---
 
-## Out of Scope (for this release)
+## Fora do Escopo (neste release)
 
-| Item | Reason |
+| Item | Motivo |
 |---|---|
 | [Item 1] | [Motivo] |

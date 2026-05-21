@@ -1,143 +1,143 @@
 # Readiness Package — [Nome da Demanda]
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Package ID** | RP-YYYY-NNN |
-| **Version** | v1 |
-| **Linked Intake** | INT-YYYY-NNN |
-| **Owned by** | [Nome] (PO) |
-| **CTO contribution** | Yes / Not required |
-| **Status** | Draft |
-| **Current version approval date** | — |
+| **ID do Pacote** | RP-AAAA-NNN |
+| **Versão** | v1 |
+| **Intake vinculado** | INT-AAAA-NNN |
+| **Responsável** | [Nome] (PO) |
+| **Contribuição do CTO** | Sim / Não necessária |
+| **Status** | Rascunho |
+| **Data de aprovação da versão atual** | — |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Author | Status | Summary |
+| Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
-| v1 | YYYY-MM-DD | [Nome] (PO) | Draft | Initial submission. |
+| v1 | AAAA-MM-DD | [Nome] (PO) | Rascunho | Submissão inicial. |
 
 ---
 
-## Section 1 — Executive Summary
+## Seção 1 — Resumo Executivo
 
-> 2–4 sentences. What is the problem, what will be built, and what is the expected outcome.
+> 2–4 frases. Qual é o problema, o que será construído e qual é o resultado esperado.
 
 [Resumo aqui]
 
 ---
 
-## Section 2 — Context & Problem
+## Seção 2 — Contexto e Problema
 
-> Detailed description of the problem. Include client context, current behavior, and why it matters now.
+> Descrição detalhada do problema. Inclua contexto do cliente, comportamento atual e por que é importante agora.
 
 [Contexto e problema aqui]
 
 ---
 
-## Section 3 — Objectives & Expected Outcome
+## Seção 3 — Objetivos e Resultado Esperado
 
-| Objective | Success Indicator |
+| Objetivo | Indicador de Sucesso |
 |---|---|
 | [Objetivo 1] | [Como medir] |
 | [Objetivo 2] | [Como medir] |
 
 ---
 
-## Section 4 — Scope
+## Seção 4 — Escopo
 
-### Included
-
-- [Item 1]
-- [Item 2]
-
-### Excluded
+### Incluído
 
 - [Item 1]
 - [Item 2]
 
-### Deferred (future phases)
+### Excluído
+
+- [Item 1]
+- [Item 2]
+
+### Adiado (fases futuras)
 
 - [Item 1]
 
 ---
 
-## Section 5 — Personas Impacted
+## Seção 5 — Personas Impactadas
 
-| Persona | Role | Impact |
+| Persona | Papel | Impacto |
 |---|---|---|
 | [Persona 1] | [Papel] | [Como é impactado] |
 
 ---
 
-## Section 6 — Business Rules & Flows
+## Seção 6 — Regras de Negócio e Fluxos
 
-> Describe the rules, validations, and state transitions that govern this feature.
+> Descreva as regras, validações e transições de estado que governam esta funcionalidade.
 
 [Regras e fluxos aqui]
 
 ---
 
-## Section 7 — Integrations Required
+## Seção 7 — Integrações Necessárias
 
-| System | Type | Notes |
+| Sistema | Tipo | Observações |
 |---|---|---|
-| [Sistema 1] | API / Event / Webhook / DB | [Observações] |
+| [Sistema 1] | API / Evento / Webhook / BD | [Observações] |
 
 ---
 
-## Section 8 — Technical Impact & Architecture
+## Seção 8 — Impacto Técnico e Arquitetura
 
-> Filled by CTO when architectural escalation is required.
+> Preenchida pelo CTO quando escalada arquitetural é necessária.
 
 [Avaliação técnica aqui]
 
 ---
 
-## Section 9 — Risks & Dependencies
+## Seção 9 — Riscos e Dependências
 
-| Risk / Dependency | Type | Likelihood | Impact | Mitigation |
+| Risco / Dependência | Tipo | Probabilidade | Impacto | Mitigação |
 |---|---|---|---|---|
-| [Risco 1] | Technical / Business / External | High / Med / Low | High / Med / Low | [Mitigação] |
+| [Risco 1] | Técnico / Negócio / Externo | Alto / Médio / Baixo | Alto / Médio / Baixo | [Mitigação] |
 
 ---
 
-## Section 10 — Internal Effort & Cost Assessment
+## Seção 10 — Avaliação Interna de Esforço e Custo
 
-> 🔒 **Internal use only.** Not a client commitment. Do not share externally.
+> 🔒 **Somente uso interno.** Não é um compromisso com o cliente. Não compartilhar externamente.
 
-### Development Effort
+### Esforço de Desenvolvimento
 
-| Area | Estimate | Seniority |
+| Área | Estimativa | Senioridade |
 |---|---|---|
-| [Área 1] | [X days] | Senior / Mid / Junior |
-| **Total** | **X days** | |
+| [Área 1] | [X dias] | Senior / Mid / Junior |
+| **Total** | **X dias** | |
 
-### Infrastructure Impact
-
-[Descreva aqui]
-
-### Third-party Cost Impact
+### Impacto de Infraestrutura
 
 [Descreva aqui]
 
-### Recurring Operational Cost Impact
+### Impacto de Custo com Terceiros
+
+[Descreva aqui]
+
+### Impacto de Custo Operacional Recorrente
 
 [Descreva aqui]
 
 ---
 
-## Section 11 — Success Criteria & Acceptance
+## Seção 11 — Critérios de Sucesso e Aceite
 
-| Criterion | Measurement | Target |
+| Critério | Medição | Meta |
 |---|---|---|
 | [Critério 1] | [Como medir] | [Meta] |
 
 ---
 
-## Section 12 — Suggested Roadmap
+## Seção 12 — Roadmap Sugerido
 
-| Phase | Scope | Target |
+| Fase | Escopo | Prazo |
 |---|---|---|
-| Phase 1 | [Escopo] | [Prazo] |
+| Fase 1 | [Escopo] | [Prazo] |

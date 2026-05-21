@@ -1,91 +1,91 @@
-# Interaction 05 — PO → CTO (Architectural Escalation)
+# Interação 05 — PO → CTO (Escalada Arquitetural)
 
-**Direction:** PO initiates. CTO receives.
-**Layer:** Within Intake Layer
-
----
-
-## Trigger
-
-During rationalization, the PO identifies that the demand touches any of the following:
-- New infrastructure
-- Platform-level changes
-- Multi-tenancy impact
-- AI/runtime behavior modifications
-- Security implications
-- External integrations with significant unknowns
-- Any decision that could affect the platform's architectural integrity
+**Direção:** PO inicia. CTO recebe.
+**Camada:** Dentro da Camada de Intake
 
 ---
 
-## What PO Must Provide
+## Gatilho
 
-- Partially completed Readiness Package (Sections 1–6 and 9 at minimum)
-- Specific questions or unknowns that require the CTO's input
-- Business constraints and timeline context
-
----
-
-## What CTO Produces
-
-- **Section 8** (Technical Impact & Architecture): affected systems, architectural constraints, patterns to follow or avoid
-- **Section 7 additions** (Integrations): technical feasibility, protocols, known risks
-- **Section 9 additions** (Risks & Dependencies): technical risks and mitigations
-- Explicit sign-off or veto on the architectural approach
+Durante a racionalização, o PO identifica que a demanda toca qualquer um dos seguintes:
+- Nova infraestrutura
+- Mudanças a nível de plataforma
+- Impacto de multi-tenancy
+- Modificações de comportamento de IA/runtime
+- Implicações de segurança
+- Integrações externas com incógnitas significativas
+- Qualquer decisão que possa afetar a integridade arquitetural da plataforma
 
 ---
 
-## Ownership Transferred
+## O que o PO Deve Fornecer
 
-**From PO:** The technical unknowns are handed over. PO retains ownership of the Readiness Package overall but cannot progress it until the CTO's contribution is returned.
-**To CTO:** Owns the technical assessment — Section 8, additions to Sections 7 and 9, and any feasibility verdict. CTO does not own the product or business sections.
-**Artifact handed over:** Partial Readiness Package (Sections 1–6 + 9) + specific technical questions.
+- Readiness Package parcialmente preenchido (Seções 1–6 e 9 no mínimo)
+- Perguntas específicas ou incógnitas que requerem o input do CTO
+- Restrições de negócio e contexto de prazo
+
+---
+
+## O que o CTO Produz
+
+- **Seção 8** (Impacto Técnico e Arquitetura): sistemas afetados, restrições arquiteturais, padrões a seguir ou evitar
+- **Adições à Seção 7** (Integrações): viabilidade técnica, protocolos, riscos conhecidos
+- **Adições à Seção 9** (Riscos e Dependências): riscos técnicos e mitigações
+- Sign-off ou veto explícito sobre a abordagem arquitetural
+
+---
+
+## Transferência de Ownership
+
+**Do PO:** As incógnitas técnicas são transferidas. O PO retém o ownership geral do Readiness Package mas não pode avançá-lo até que a contribuição do CTO seja devolvida.
+**Para o CTO:** Detém a avaliação técnica — Seção 8, adições às Seções 7 e 9, e qualquer veredicto de viabilidade. O CTO não é dono das seções de produto ou negócio.
+**Artefato transferido:** Readiness Package parcial (Seções 1–6 + 9) + perguntas técnicas específicas.
 
 ---
 
 ## Gate
 
-The CTO does not fill in the business or product sections of the Readiness Package. The CTO's contribution is bounded to technical assessment. If the CTO determines the demand is technically infeasible as scoped, the PO revises the scope — the CTO does not redefine the product.
+O CTO não preenche as seções de negócio ou produto do Readiness Package. A contribuição do CTO é limitada à avaliação técnica. Se o CTO determinar que a demanda é tecnicamente inviável como escopada, o PO revisa o escopo — o CTO não redefine o produto.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If the CTO identifies that the demand cannot be executed without resolving a technical unknown, the demand returns to Discovery. The CTO defines the spike or investigation required; the PO time-boxes it.
-
----
-
-## What PO Must NOT Do
-
-- Send an incomplete package without identifying the specific questions for the CTO
-- Expect the CTO to fill product or business sections
-- Silently revise the CTO's technical constraints after receiving the assessment
+Se o CTO identificar que a demanda não pode ser executada sem resolver uma incógnita técnica, a demanda volta para Discovery. O CTO define o spike ou investigação necessária; o PO determina o time-box.
 
 ---
 
-## Sequence
+## O que o PO NÃO Deve Fazer
+
+- Enviar um pacote incompleto sem identificar as perguntas específicas para o CTO
+- Esperar que o CTO preencha seções de produto ou negócio
+- Revisar silenciosamente as restrições técnicas do CTO após receber a avaliação
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor PO as PO
     actor CTO as CTO
 
-    PO->>CTO: Partial RP (S1-S6 + S9) + specific questions
-    CTO->>CTO: Technical assessment
+    PO->>CTO: RP parcial (S1-S6 + S9) + perguntas específicas
+    CTO->>CTO: Avaliação técnica
 
-    alt Technical unknown blocks execution
-        CTO-->>PO: Discovery required — defines spike
-        PO->>PO: Opens Discovery with CTO's spike definition
-        PO->>CTO: Discovery findings
-        CTO-->>PO: Assessment updated
+    alt Incógnita técnica bloqueia execução
+        CTO-->>PO: Discovery necessário — define spike
+        PO->>PO: Abre Discovery com definição do spike do CTO
+        PO->>CTO: Findings do Discovery
+        CTO-->>PO: Avaliação atualizada
     end
 
-    alt Demand infeasible as scoped
-        CTO-->>PO: Veto with reasoning
-        PO->>PO: Revises scope
-        PO->>CTO: Re-escalates with revised scope
+    alt Demanda inviável como escopada
+        CTO-->>PO: Veto com justificativa
+        PO->>PO: Revisa escopo
+        PO->>CTO: Re-escala com escopo revisado
     end
 
-    CTO-->>PO: Section 8 + additions to S7 and S9
-    PO->>PO: Completes RP with CTO contributions
+    CTO-->>PO: Seção 8 + adições a S7 e S9
+    PO->>PO: Completa RP com contribuições do CTO
 ```

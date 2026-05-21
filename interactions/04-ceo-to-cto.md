@@ -1,63 +1,63 @@
-# Interaction 04 — CEO → CTO
+# Interação 04 — CEO → CTO
 
-**Direction:** CEO initiates. CTO receives.
-**Layer:** Executive → Technical Leadership
-
----
-
-## Trigger
-
-A strategic decision requires technical leadership alignment — a new market direction, an architectural commitment, a compliance obligation, or an executive call that has direct implications on how the platform is built or operated.
+**Direção:** CEO inicia. CTO recebe.
+**Camada:** Executivo → Liderança Técnica
 
 ---
 
-## What CEO Must Provide
+## Gatilho
 
-- Context: the business driver and why it matters now
-- The decision or direction being taken (not a solution — the outcome expected)
-- Any external constraints (regulatory, contractual, timeline) that are non-negotiable
-- Explicit ask: is this a heads-up, a scope decision, or an action item for CTO?
+Uma decisão estratégica requer alinhamento da liderança técnica — uma nova direção de mercado, um compromisso arquitetural, uma obrigação de conformidade, ou uma decisão executiva com implicações diretas sobre como a plataforma é construída ou operada.
 
 ---
 
-## What CTO Does With It
+## O que o CEO Deve Fornecer
 
-- Assesses technical feasibility and infrastructure implications
-- Identifies any architectural decisions that must be made as a consequence
-- Determines whether the direction generates work that needs to enter the process (via PO intake) or is a platform-level investment decision
-- Communicates back to CEO: what is feasible, what the risks are, and what commitments can be made
+- Contexto: o driver de negócio e por que é relevante agora
+- A decisão ou direção tomada (não uma solução — o resultado esperado)
+- Quaisquer restrições externas (regulatórias, contratuais, de prazo) que são não-negociáveis
+- Pedido explícito: isso é um aviso, uma decisão de escopo ou um item de ação para o CTO?
 
 ---
 
-## Ownership Transferred
+## O que o CTO Faz Com Isso
 
-**From CEO:** Strategic direction is handed over. CEO does not communicate technical implications to Engineering or PM directly.
-**To CTO:** Owns the feasibility assessment and the decision of whether to route work into the process. If product work is generated, CTO initiates the handoff to PO — not the CEO.
-**Artifact handed over:** Strategic direction + business context + non-negotiable constraints.
+- Avalia viabilidade técnica e implicações de infraestrutura
+- Identifica decisões arquiteturais que devem ser tomadas como consequência
+- Determina se a direção gera trabalho que precisa entrar no processo (via intake do PO) ou é uma decisão de investimento a nível de plataforma
+- Comunica ao CEO: o que é viável, quais são os riscos e quais compromissos podem ser assumidos
+
+---
+
+## Transferência de Ownership
+
+**Do CEO:** A direção estratégica é transferida. O CEO não comunica implicações técnicas diretamente à Engenharia ou ao PM.
+**Para o CTO:** Detém a avaliação de viabilidade e a decisão de roteamento do trabalho para o processo. Se trabalho de produto for gerado, o CTO inicia o handoff para o PO — não o CEO.
+**Artefato transferido:** Direção estratégica + contexto de negócio + restrições não-negociáveis.
 
 ---
 
 ## Gate
 
-The CTO does not absorb direction silently. Every executive input that results in technical work must either produce an intake record (via PO) or a documented architectural decision. Nothing enters Engineering informally from this interaction.
+O CTO não absorve direção silenciosamente. Todo input executivo que resulte em trabalho técnico deve produzir um registro de intake (via PO) ou uma decisão arquitetural documentada. Nada entra na Engenharia informalmente a partir desta interação.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If the CEO's direction is technically infeasible, introduces unacceptable risk, or conflicts with existing architectural commitments, the CTO produces a written assessment and escalates the trade-off back to the CEO. The CTO does not unilaterally veto — they surface the cost and require an explicit decision.
-
----
-
-## What CEO Must NOT Do
-
-- Communicate technical direction directly to Engineering, Tech Leads, or PM
-- Expect an immediate implementation commitment before a feasibility assessment is complete
-- Override an existing architectural decision without a documented CTO sign-off
+Se a direção do CEO for tecnicamente inviável, introduzir risco inaceitável ou conflitar com compromissos arquiteturais existentes, o CTO produz uma avaliação escrita e escala o trade-off de volta ao CEO. O CTO não veta unilateralmente — ele apresenta o custo e requer uma decisão explícita.
 
 ---
 
-## Sequence
+## O que o CEO NÃO Deve Fazer
+
+- Comunicar direção técnica diretamente à Engenharia, Tech Leads ou PM
+- Esperar um compromisso de implementação imediato antes que uma avaliação de viabilidade seja concluída
+- Sobrepor uma decisão arquitetural existente sem sign-off documentado do CTO
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
@@ -65,19 +65,19 @@ sequenceDiagram
     actor CTO as CTO
     actor PO as PO
 
-    CEO->>CTO: Strategic direction + business context + constraints
-    CTO->>CTO: Feasibility assessment + architectural implications
+    CEO->>CTO: Direção estratégica + contexto de negócio + restrições
+    CTO->>CTO: Avaliação de viabilidade + implicações arquiteturais
 
-    alt Direction generates product work
-        CTO->>PO: Handoff — intake record required
-        PO->>PO: Registers as intake (origin: Internal, priority: Critical or High)
-        PO-->>CEO: Approved path + affected commitments + timeline
+    alt Direção gera trabalho de produto
+        CTO->>PO: Handoff — registro de intake necessário
+        PO->>PO: Registra como intake (origem: Interno, prioridade: Crítica ou Alta)
+        PO-->>CEO: Caminho aprovado + compromissos afetados + prazo
     end
 
-    alt Direction is infeasible or creates risk
-        CTO-->>CEO: Written trade-off — decision required
-        CEO->>CTO: Decision
+    alt Direção é inviável ou cria risco
+        CTO-->>CEO: Trade-off escrito — decisão necessária
+        CEO->>CTO: Decisão
     end
 
-    CTO-->>CEO: Technical assessment + feasibility + risk posture
+    CTO-->>CEO: Avaliação técnica + viabilidade + postura de risco
 ```

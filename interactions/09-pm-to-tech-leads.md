@@ -1,63 +1,63 @@
-# Interaction 09 — PM → Tech Leads (Execution Plan Handoff)
+# Interação 09 — PM → Tech Leads (Handoff do Plano de Execução)
 
-**Direction:** PM initiates. Tech Leads receive.
-**Layer:** Within Downstream
-
----
-
-## Trigger
-
-The Execution Plan is complete and the PM has verified capacity is sufficient to begin.
+**Direção:** PM inicia. Tech Leads recebem.
+**Camada:** Dentro do Downstream
 
 ---
 
-## What PM Must Provide
+## Gatilho
 
-- Complete Execution Plan: milestones, sprint structure, dependency map, escalation triggers
-- Readiness Package (passed through — Tech Leads need the full product and technical context)
-- Specific questions for Tech Leads to answer before breakdown begins (if any)
-- External dependency timeline: any actions required from outside the team (client registrations, procurement, CTO infrastructure provisioning)
+O Plano de Execução está completo e o PM verificou que a capacidade é suficiente para começar.
 
 ---
 
-## What Tech Leads Produce
+## O que o PM Deve Fornecer
 
-- Confirmation that they have sufficient context to begin technical breakdown
-- Product Backlog: epics, stories, acceptance criteria, edge cases, user journeys (owned by PO — Tech Lead validates)
-- Tech Backlog: ADRs, task breakdown, refined estimates, Definition of Done, rollout strategy
-- Escalation to PM if any scope item is technically impossible or requires a decision
+- Plano de Execução completo: marcos, estrutura de sprint, mapa de dependências, gatilhos de escalada
+- Readiness Package (repassado — Tech Leads precisam do contexto completo de produto e técnico)
+- Perguntas específicas para os Tech Leads responderem antes do breakdown começar (se houver)
+- Prazo de dependências externas: quaisquer ações necessárias de fora do time (registros de clientes, procurement, provisionamento de infraestrutura pelo CTO)
 
 ---
 
-## Ownership Transferred
+## O que os Tech Leads Produzem
 
-**From PM:** Execution planning is complete and handed over. PM remains accountable for milestones and escalation triggers but day-to-day technical execution is now in Tech Leads' hands.
-**To Tech Leads:** Own the technical breakdown — ADRs, task definition, effort refinement, and the Tech Backlog. Also responsible for validating the Product Backlog stories.
-**Artifact handed over:** Execution Plan + complete Readiness Package.
+- Confirmação de que têm contexto suficiente para iniciar o breakdown técnico
+- Product Backlog: épicos, histórias, critérios de aceite, edge cases, jornadas de usuário (de propriedade do PO — Tech Lead valida)
+- Tech Backlog: ADRs, breakdown de tarefas, estimativas refinadas, Definição de Pronto, estratégia de rollout
+- Escalada ao PM se qualquer item de escopo for tecnicamente impossível ou requerer uma decisão
+
+---
+
+## Transferência de Ownership
+
+**Do PM:** O planejamento de execução está completo e transferido. O PM permanece responsável pelos marcos e gatilhos de escalada, mas a execução técnica no dia a dia está agora nas mãos dos Tech Leads.
+**Para os Tech Leads:** Detêm o breakdown técnico — ADRs, definição de tarefas, refinamento de esforço e o Tech Backlog. Também responsáveis por validar as histórias do Product Backlog.
+**Artefato transferido:** Plano de Execução + Readiness Package completo.
 
 ---
 
 ## Gate
 
-Tech Leads do not begin breakdown until they have confirmed they have sufficient context. If the Readiness Package is missing technical detail they need, they surface it to the PM — not silently work around it.
+Os Tech Leads não começam o breakdown antes de confirmar que têm contexto suficiente. Se o Readiness Package estiver faltando detalhe técnico de que precisam, eles apresentam ao PM — não trabalham silenciosamente em torno disso.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If Tech Leads identify a scope item that is technically infeasible or requires a decision outside their authority, they return it to PM with a written description. PM escalates to PO. PO revises scope or escalates to CTO.
-
----
-
-## What PM Must NOT Do
-
-- Hand off without passing the full Readiness Package
-- Set a breakdown deadline before Tech Leads have confirmed sufficient context
-- Absorb scope infeasibility reports without escalating to PO
+Se os Tech Leads identificarem um item de escopo tecnicamente inviável ou que requer uma decisão fora de sua autoridade, devolvem ao PM com uma descrição escrita. O PM escala ao PO. O PO revisa o escopo ou escala ao CTO.
 
 ---
 
-## Sequence
+## O que o PM NÃO Deve Fazer
+
+- Fazer o handoff sem passar o Readiness Package completo
+- Definir um prazo para o breakdown antes que os Tech Leads tenham confirmado contexto suficiente
+- Absorver relatórios de inviabilidade de escopo sem escalar ao PO
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
@@ -65,25 +65,25 @@ sequenceDiagram
     actor TL as Tech Leads
     actor PO as PO
 
-    PM->>TL: Execution Plan + Readiness Package
-    TL->>TL: Context review
+    PM->>TL: Plano de Execução + Readiness Package
+    TL->>TL: Revisão de contexto
 
-    alt Insufficient technical context
-        TL-->>PM: Specific gaps listed
-        PM->>PO: Relays gaps
-        PO-->>PM: Fills gaps or opens CTO escalation
-        PM->>TL: Updated context
+    alt Contexto técnico insuficiente
+        TL-->>PM: Gaps específicos listados
+        PM->>PO: Repassa os gaps
+        PO-->>PM: Preenche gaps ou abre escalada ao CTO
+        PM->>TL: Contexto atualizado
     end
 
-    TL-->>PM: Context confirmed — breakdown begins
-    TL->>TL: Produces Tech Backlog + validates Product Backlog
+    TL-->>PM: Contexto confirmado — breakdown inicia
+    TL->>TL: Produz Tech Backlog + valida Product Backlog
 
-    alt Scope item technically infeasible
-        TL-->>PM: Written infeasibility report
-        PM->>PO: Scope decision required
-        PO-->>PM: Revised scope
-        PM->>TL: Scope update
+    alt Item de escopo tecnicamente inviável
+        TL-->>PM: Relatório de inviabilidade escrito
+        PM->>PO: Decisão de escopo necessária
+        PO-->>PM: Escopo revisado
+        PM->>TL: Atualização de escopo
     end
 
-    TL-->>PM: Tech Backlog complete — ready for engineers
+    TL-->>PM: Tech Backlog completo — pronto para engenheiros
 ```

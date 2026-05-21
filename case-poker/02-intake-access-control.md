@@ -1,284 +1,284 @@
-# Intake Record — Room Access Control
+# Registro de Intake — Room Access Control (Controle de Acesso à Sala)
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Record ID** | INT-2024-002 |
-| **Version** | v1 |
-| **Registered by** | Rafael Souza (Sales) |
-| **Registration date** | 2024-03-15 |
-| **Status** | Approved — in execution planning |
-| **Triage date** | 2024-03-17 |
-| **Triaged by** | Lucas Mendes (PO) |
-| **Linked Readiness Package** | RP-2024-002 v1 |
+| **ID do Registro** | INT-2024-002 |
+| **Versão** | v1 |
+| **Registrado por** | Rafael Souza (Vendas) |
+| **Data de registro** | 2024-03-15 |
+| **Status** | Aprovado — em planejamento de execução |
+| **Data de triagem** | 2024-03-17 |
+| **Triado por** | Lucas Mendes (PO) |
+| **Readiness Package vinculado** | RP-2024-002 v1 |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Event | Summary |
+| Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | 2024-03-15 | Intake registered | Sales registered demand from Construtora Ágil pre-close call. |
-| v1 | 2024-03-17 | Triage completed | PO triaged. Three integration unknowns identified. Demand sent to Discovery. |
-| v1 | 2024-03-18 | Discovery opened | PO opened Discovery for Azure AD, Jira, and LGPD unknowns. CTO notified. |
-| v1 | 2024-03-25 | Discovery closed | All unknowns resolved within time-box. Demand re-triaged as Product Ready. |
-| v1 | 2024-03-27 | RP-2024-002 v1 approved | PO + CTO submitted Readiness Package. PM approved on first review. Demand advances to execution planning. |
+| v1 | 2024-03-15 | Intake registrado | Vendas registrou demanda a partir de chamada pré-fechamento com Construtora Ágil. |
+| v1 | 2024-03-17 | Triagem concluída | PO triou. Três incógnitas de integração identificadas. Demanda enviada para Discovery. |
+| v1 | 2024-03-18 | Discovery aberto | PO abriu Discovery para incógnitas de Azure AD, Jira e LGPD. CTO notificado. |
+| v1 | 2024-03-25 | Discovery encerrado | Todas as incógnitas resolvidas dentro do time-box. Demanda retriada como Product Ready. |
+| v1 | 2024-03-27 | RP-2024-002 v1 aprovado | PO + CTO submeteram Readiness Package. PM aprovou na primeira revisão. Demanda avança para planejamento de execução. |
 
 ---
 
-## Origin
+## Origem
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Source** | Client |
-| **Client** | Construtora Ágil (mid-market, onboarding in progress) |
-| **Reported via** | Sales pre-close call |
+| **Fonte** | Cliente |
+| **Cliente** | Construtora Ágil (mid-market, onboarding em andamento) |
+| **Reportado via** | Chamada pré-fechamento de Vendas |
 
 ---
 
-## Type
+## Tipo
 
-- [x] Feature
+- [x] Funcionalidade
 - [ ] Bug
-- [ ] Improvement
+- [ ] Melhoria
 - [x] Compliance
-- [x] Integration
-- [ ] Operational
+- [x] Integração
+- [ ] Operacional
 
 ---
 
-## Problem Statement
+## Enunciado do Problema
 
-Construtora Ágil runs planning ceremonies with mixed attendance: some sessions include external contractors and consultants who should not have visibility into all participants' estimates or identities. The room owner (Scrum Master or Tech Lead) needs control over:
+A Construtora Ágil realiza cerimônias de planejamento com participação mista: algumas sessões incluem prestadores externos e consultores que não devem ter visibilidade sobre todas as estimativas ou identidades dos participantes. O dono da sala (Scrum Master ou Tech Lead) precisa de controle sobre:
 
-1. **Who can see the list of participants** in the room — in some sessions, anonymity between voters is required.
-2. **Who can join the room** — currently any person with the link can enter. The client needs invite-only or approval-based access.
-3. **Observer vs. voter distinction** — some attendees should be able to watch the ceremony without voting (e.g., product managers, executives observing the process).
+1. **Quem pode ver a lista de participantes** na sala — em algumas sessões, o anonimato entre votantes é obrigatório.
+2. **Quem pode entrar na sala** — atualmente qualquer pessoa com o link pode entrar. O cliente precisa de acesso somente por convite ou baseado em aprovação.
+3. **Distinção observador vs. votante** — alguns participantes devem poder acompanhar a cerimônia sem votar (ex.: product managers, executivos observando o processo).
 
-The current model is fully open: anyone with the link joins, sees everyone, and votes. There is no differentiation of roles or visibility control within the room.
+O modelo atual é completamente aberto: qualquer pessoa com o link entra, vê todos e vota. Não há diferenciação de papéis ou controle de visibilidade dentro da sala.
 
 ---
 
-## Business Impact
+## Impacto de Negócio
 
-| Dimension | Detail |
+| Dimensão | Detalhe |
 |---|---|
-| **Revenue** | This is a blocker for closing the Construtora Ágil contract (R$ 42.000/year). Deal is contingent on this feature. Sales has committed a 60-day delivery expectation informally — PO must clarify this with Sales. |
-| **Retention** | Not applicable (client not yet onboarded). |
-| **Market** | Sales reports this request came up in 2 other pipeline deals in Q1. Likely a segment-level need for enterprise and regulated environments. |
-| **Compliance** | Construtora Ágil operates under internal data governance policies that restrict participant data visibility across contractors. |
+| **Receita** | Este é um bloqueador para fechar o contrato da Construtora Ágil (R$ 42.000/ano). O deal está condicionado a esta funcionalidade. Vendas fez uma expectativa informal de 60 dias — PO deve esclarecer isso com Vendas. |
+| **Retenção** | Não aplicável (cliente ainda não integrado). |
+| **Mercado** | Vendas relata que este pedido surgiu em outros 2 deals em pipeline no Q1. Provável necessidade a nível de segmento para ambientes enterprise e regulados. |
+| **Compliance** | A Construtora Ágil opera sob políticas internas de governança de dados que restringem a visibilidade de dados de participantes entre prestadores. |
 
 ## Stakeholders
 
-| Stakeholder | Role | Interest | Influence |
+| Stakeholder | Papel | Interesse | Influência |
 |---|---|---|---|
-| Rafael Souza | Sales | Close the Construtora Ágil contract | High — demand reporter, owns deal relationship |
-| Construtora Ágil Scrum Masters | End users (facilitators) | Controlled, compliant ceremony access | High — primary operators of the feature |
-| Construtora Ágil IT Lead (Fernanda Ramos) | Client technical authority | Azure AD integration and LGPD compliance | High — must approve and configure Azure AD registration |
-| Construtora Ágil External Contractors | End users (restricted observers) | Join sessions with limited visibility | Medium — affected users, no product decision power |
-| Ana Costa | Customer Success | Smooth onboarding and post-sale health | Medium — will own the relationship post-close |
-| Lucas Mendes | PO | Product alignment, scope definition | High — owns rationalization and Readiness Package |
-| Rodrigo Lima | CTO | Architectural integrity, LGPD compliance, Azure AD feasibility | High — required for technical assessment and data residency decision |
-| CEO | Executive sponsor | Revenue (new contract) and compliance posture | Medium — must be informed of LGPD risk before scope is committed |
+| Rafael Souza | Vendas | Fechar o contrato da Construtora Ágil | Alta — reportador da demanda, dono do relacionamento com o deal |
+| Scrum Masters da Construtora Ágil | Usuários finais (facilitadores) | Acesso controlado e em conformidade às cerimônias | Alta — operadores primários da funcionalidade |
+| TI Lead da Construtora Ágil (Fernanda Ramos) | Autoridade técnica do cliente | Integração Azure AD e conformidade LGPD | Alta — deve aprovar e configurar o registro no Azure AD |
+| Prestadores Externos da Construtora Ágil | Usuários finais (observadores restritos) | Participar de sessões com visibilidade limitada | Média — usuários afetados, sem poder de decisão sobre produto |
+| Ana Costa | Customer Success | Onboarding tranquilo e saúde pós-venda | Média — será dona do relacionamento pós-fechamento |
+| Lucas Mendes | PO | Alinhamento de produto, definição de escopo | Alta — dono da racionalização e do Readiness Package |
+| Rodrigo Lima | CTO | Integridade arquitetural, conformidade LGPD, viabilidade Azure AD | Alta — necessário para avaliação técnica e decisão de residência de dados |
+| CEO | Sponsor executivo | Receita (novo contrato) e postura de compliance | Média — deve ser informado do risco LGPD antes do escopo ser comprometido |
 
 ---
 
-## Assumptions
+## Premissas
 
-These are conditions assumed to be true at intake. If any assumption proves false, the demand must be re-triaged.
+Estas são condições assumidas como verdadeiras no intake. Se alguma premissa se provar falsa, a demanda deve ser retriada.
 
-1. Construtora Ágil is willing and able to register the platform as an approved application in their Azure AD tenant.
-2. The client's IT team can complete the Azure AD registration within the delivery window once technical specs are provided.
-3. The existing auth layer (OAuth2) can be extended to support OIDC group-claim validation without replacing or rewriting the authentication service.
-4. LGPD compliance for this client can be achieved by scoping data residency per tenant (Option C), without requiring a full platform migration.
-5. The Jira integration is not a hard requirement for the deal to close (to be confirmed in Discovery).
-6. Anonymous mode aliases are sufficient for compliance — no additional data masking at the database level is required beyond what is displayed.
-7. The scope of access control is per-room, not per-organization-account. Organization-level defaults are out of scope for this release.
+1. A Construtora Ágil está disposta e é capaz de registrar a plataforma como aplicação aprovada no seu tenant Azure AD.
+2. A equipe de TI do cliente pode completar o registro no Azure AD dentro da janela de entrega após as especificações técnicas serem fornecidas.
+3. A camada de autenticação existente (OAuth2) pode ser estendida para suportar validação de group-claim OIDC sem substituir ou reescrever o serviço de autenticação.
+4. A conformidade LGPD para este cliente pode ser alcançada definindo residência de dados por tenant (Opção C), sem requerer migração completa da plataforma.
+5. A integração Jira não é um requisito obrigatório para o deal fechar (a confirmar no Discovery).
+6. Aliases de modo anônimo são suficientes para conformidade — sem necessidade de mascaramento adicional de dados a nível de banco de dados além do que é exibido.
+7. O escopo do controle de acesso é por sala, não por conta de organização. Configurações padrão a nível de organização estão fora do escopo deste release.
 
 ---
 
 ## Constraints
 
-Conditions that limit the solution space and must be respected regardless of what is built.
+Condições que limitam o espaço de solução e devem ser respeitadas independentemente do que for construído.
 
-| Constraint | Type | Detail |
+| Constraint | Tipo | Detalhe |
 |---|---|---|
-| Deal timeline | Time | Sales made an informal 60-day commitment. No date is confirmed until PM capacity assessment is complete. |
-| LGPD compliance | Legal / Regulatory | Participant identity data for Brazilian clients must be stored in Brazil (`sa-east-1`). Non-negotiable for this client. |
-| Azure AD dependency | External | Construtora Ágil controls their own Azure AD tenant. Platform cannot complete integration without their IT action. Timeline is partially outside our control. |
-| No SSO full implementation | Scope | Full enterprise SSO is out of scope. OIDC group-claim validation only for this release. |
-| Backward compatibility | Technical | Existing open-link rooms must continue to work unchanged. Access control is opt-in per room, not a platform-wide breaking change. |
-| No new external auth providers | Budget | No new identity providers (Okta, Auth0, etc.) may be contracted. Extension of existing auth layer only. |
+| Prazo do deal | Tempo | Vendas fez um compromisso informal de 60 dias. Nenhuma data é confirmada até que a avaliação de capacidade do PM seja concluída. |
+| Conformidade LGPD | Legal / Regulatório | Dados de identidade de participantes de clientes brasileiros devem ser armazenados no Brasil (`sa-east-1`). Inegociável para este cliente. |
+| Dependência Azure AD | Externa | A Construtora Ágil controla seu próprio tenant Azure AD. A plataforma não pode completar a integração sem ação do TI deles. O prazo está parcialmente fora do nosso controle. |
+| Sem implementação SSO completa | Escopo | SSO enterprise completo está fora do escopo. Apenas validação de group-claim OIDC para este release. |
+| Compatibilidade retroativa | Técnico | Salas com link aberto existentes devem continuar funcionando sem alterações. Controle de acesso é opt-in por sala, não uma mudança breaking a nível de plataforma. |
+| Sem novos provedores de auth externos | Orçamento | Nenhum novo provedor de identidade (Okta, Auth0, etc.) pode ser contratado. Apenas extensão da camada de auth existente. |
 
 ---
 
-## Preliminary Risks
+## Riscos Preliminares
 
-Risks identified at intake — before technical assessment. Updated after Discovery. Not a complete risk register (that belongs in the Readiness Package).
+Riscos identificados no intake — antes da avaliação técnica. Atualizados após Discovery. Não é um registro completo de riscos (isso pertence ao Readiness Package).
 
-| Risk | Category | Probability | Impact | Initial Assessment |
+| Risco | Categoria | Probabilidade | Impacto | Avaliação Inicial |
 |---|---|---|---|---|
-| Azure AD registration delayed by client IT | External / Schedule | Medium | High | Client-side dependency outside our control. Mitigation: provide spec and checklist to client IT early. |
-| LGPD posture requires infrastructure work beyond Option C | Compliance | Low | High | CTO must confirm scope of Option C before commitment. If broader, CEO must decide. |
-| Sales timeline commitment conflicts with actual capacity | Operational | High | High | PM must run capacity assessment before any date is communicated externally. PO owns this gate. |
-| Participant data model migration breaks active sessions | Technical | Low | High | Additive schema change strategy must be confirmed by CTO. |
-| Scope expansion pressure (audit logs, SSO, guest access) | Scope | Medium | Medium | Explicit exclusions documented in scope boundary below. PO enforces boundary. |
-| Jira integration escalated to hard requirement mid-delivery | Scope | Low | Medium | To be definitively closed in Discovery client call. |
-| Anonymous mode bypass (client infers identity from vote pattern) | Security / Product | Low | Low | Accepted risk — platform controls digital display only, not behavioral inference. |
+| Registro Azure AD atrasado pelo TI do cliente | Externo / Prazo | Média | Alto | Dependência do lado do cliente fora do nosso controle. Mitigação: fornecer spec e checklist ao TI do cliente cedo. |
+| Postura LGPD requer trabalho de infraestrutura além da Opção C | Compliance | Baixa | Alto | CTO deve confirmar escopo da Opção C antes do compromisso. Se for mais amplo, CEO deve decidir. |
+| Compromisso de prazo de Vendas conflita com capacidade real | Operacional | Alta | Alto | PM deve executar avaliação de capacidade antes de qualquer data ser comunicada externamente. PO é dono deste gate. |
+| Migração do modelo de dados de participantes quebra sessões ativas | Técnico | Baixa | Alto | Estratégia de mudança aditiva de schema deve ser confirmada pelo CTO. |
+| Pressão de expansão de escopo (audit logs, SSO, guest access) | Escopo | Média | Médio | Exclusões explícitas documentadas no limite de escopo abaixo. PO aplica o limite. |
+| Integração Jira escalada para requisito obrigatório durante a entrega | Escopo | Baixa | Médio | A ser definitivamente encerrado na chamada de Discovery com o cliente. |
+| Bypass do modo anônimo (cliente infere identidade pelo padrão de votos) | Segurança / Produto | Baixa | Baixo | Risco aceito — a plataforma controla apenas a exibição digital, não inferência comportamental. |
 
 ---
 
-## High-Level Scope Boundary
+## Limite de Escopo de Alto Nível
 
-**In:** Access modes (Open / Invite-only / Approval-required), anonymous mode, Voter/Observer role assignment, participant removal, Azure AD OIDC group-claim mapping, LGPD-compliant data residency (Option C — per-client `sa-east-1` routing).
+**Dentro:** Modos de acesso (Aberto / Somente convite / Aprovação obrigatória), modo anônimo, atribuição de papel Votante/Observador, remoção de participante, mapeamento de group-claim Azure AD OIDC, residência de dados em conformidade com LGPD (Opção C — roteamento `sa-east-1` por cliente).
 
-**Out:** Full SSO / SAML, audit logs, Jira integration, guest access without registration, organization-level default settings, room passwords.
+**Fora:** SSO / SAML completo, audit logs, integração Jira, guest access sem registro, configurações padrão a nível de organização, senhas de sala.
 
-**Deferred:** Bulk invite via CSV, automated observer assignment by org role, compliance export for governance.
+**Adiado:** Convite em massa via CSV, atribuição automática de observador por papel organizacional, exportação de compliance para governança.
 
 ---
 
-## Integration Challenges Identified at Intake
+## Desafios de Integração Identificados no Intake
 
-During the intake call, Sales surfaced three integration dependencies that were **not anticipated** and block rationalization until investigated:
+Durante a chamada de intake, Vendas trouxe três dependências de integração que **não eram antecipadas** e bloqueiam a racionalização até serem investigadas:
 
 ### 1. Microsoft Azure Active Directory (Azure AD / Entra ID)
 
-Construtora Ágil manages all employee and contractor identities through Azure AD. They expect the platform to validate room access against their existing Azure AD groups — not via invite links or manual approval. Specifically:
+A Construtora Ágil gerencia todas as identidades de funcionários e prestadores via Azure AD. Eles esperam que a plataforma valide o acesso à sala em relação aos seus grupos Azure AD existentes — não via links de convite ou aprovação manual. Especificamente:
 
-- Internal employees belong to the AD group `pokerplan-voters`
-- External contractors belong to `pokerplan-observers`
-- The room owner should not need to manually assign roles — roles should be derived from the user's AD group at join time
+- Funcionários internos pertencem ao grupo AD `pokerplan-voters`
+- Prestadores externos pertencem a `pokerplan-observers`
+- O dono da sala não deve precisar atribuir papéis manualmente — papéis devem ser derivados do grupo AD do usuário no momento de entrada
 
-**Unknown:** The platform currently has no OAuth/OIDC integration with Azure AD. It is unclear whether this requires a full SSO implementation, a lightweight group-claim validation, or a webhook-based sync. This needs a technical spike before scope can be defined.
+**Incógnita:** A plataforma atualmente não tem integração OAuth/OIDC com Azure AD. Não está claro se isso requer uma implementação SSO completa, uma validação leve de group-claim, ou uma sincronização via webhook. Necessita um spike técnico antes do escopo poder ser definido.
 
-### 2. Jira Integration for Participant Identity Resolution
+### 2. Integração Jira para Resolução de Identidade de Participantes
 
-Construtora Ágil uses Jira as the source of truth for team membership per squad. They reported that in their ideal flow, when a room is created for a specific Jira sprint, the platform should automatically pull the sprint participants from Jira and pre-populate the room's approved voter list.
+A Construtora Ágil usa o Jira como fonte de verdade para membros de squad por equipe. Eles relataram que no fluxo ideal, quando uma sala é criada para um sprint Jira específico, a plataforma deveria automaticamente puxar os participantes do sprint do Jira e pré-popular a lista de votantes aprovados da sala.
 
-**Unknown:** The platform currently has no Jira integration. A read-only Jira API connection would be needed. It is unclear if this is within scope for this demand or a separate integration initiative. PO needs to assess whether this is a hard requirement or a nice-to-have for the deal to close.
+**Incógnita:** A plataforma atualmente não tem integração Jira. Uma conexão de leitura via API do Jira seria necessária. Não está claro se isso está dentro do escopo desta demanda ou é uma iniciativa de integração separada. PO precisa avaliar se este é um requisito obrigatório ou desejável para o deal fechar.
 
-### 3. Client Data Residency Requirement
+### 3. Requisito de Residência de Dados do Cliente
 
-During the compliance discussion, Construtora Ágil's IT team mentioned that participant identity data (names, emails, AD group memberships) must be stored in Brazil (LGPD compliance). The current platform infrastructure uses a multi-region cloud setup — it is unknown whether participant session records are stored in a Brazil-based region or not.
+Durante a discussão de compliance, a equipe de TI da Construtora Ágil mencionou que dados de identidade de participantes (nomes, emails, memberships de grupo AD) devem ser armazenados no Brasil (conformidade LGPD). A infraestrutura atual da plataforma usa uma configuração de cloud multi-região — não se sabe se os registros de sessão de participantes estão armazenados em uma região brasileira ou não.
 
-**Unknown:** The CTO must confirm the current data residency posture of the session participant model. If data is stored outside Brazil, this may require infrastructure changes before the feature can be delivered to this client.
-
----
-
-## Priority
-
-**Level:** High
-
-**Reason:** Pre-close deal blocker. Sales has made an informal timeline commitment that needs to be validated against capacity before being confirmed to the client.
-
-> ⚠️ **Priority note:** Despite High urgency, this demand cannot proceed to rationalization until the three integration unknowns are resolved. Discovery is time-boxed to 2 weeks. If unknowns are not resolved within that window, the PO will escalate to CEO with a risk assessment for the deal.
+**Incógnita:** O CTO deve confirmar a postura atual de residência de dados do modelo de participante de sessão. Se os dados estão armazenados fora do Brasil, isso pode requerer mudanças de infraestrutura antes que a funcionalidade possa ser entregue a este cliente.
 
 ---
 
-## Success Criteria
+## Prioridade
 
-High-level indicators that define what "done and valuable" looks like for this demand. Detailed measurable targets are owned by the Readiness Package — these are the intake-level signals.
+**Nível:** Alta
 
-| Criterion | Type | Indicator |
+**Motivo:** Bloqueador pré-fechamento do deal. Vendas fez um compromisso informal de prazo que precisa ser validado contra a capacidade antes de ser confirmado ao cliente.
+
+> ⚠️ **Nota de prioridade:** Apesar da urgência Alta, esta demanda não pode prosseguir para racionalização até que as três incógnitas de integração sejam resolvidas. O Discovery tem time-box de 2 semanas. Se as incógnitas não forem resolvidas nesse período, o PO escalará ao CEO com uma avaliação de risco para o deal.
+
+---
+
+## Critérios de Sucesso
+
+Indicadores de alto nível que definem como é "concluído e valioso" para esta demanda. Metas mensuráveis detalhadas pertencem ao Readiness Package — estes são os sinais no nível do intake.
+
+| Critério | Tipo | Indicador |
 |---|---|---|
-| Construtora Ágil contract closed | Business | Contract signed within 30 days of release |
-| Zero unauthorized access incidents | Security / Compliance | No reported cases of blocked or removed participants accessing session data |
-| LGPD compliance confirmed | Legal | Construtora Ágil IT confirms data residency requirement is met before go-live |
-| Azure AD role mapping working end-to-end | Technical | Employees and contractors receive correct platform roles (Voter / Observer) automatically from AD group at join time |
-| At least 1 additional pipeline deal unblocked | Business | One of the 2 flagged pipeline deals advances to close within 90 days of release |
-| Anonymous mode adopted in enterprise sessions | Product | Used in ≥ 30% of enterprise-tier sessions within 60 days of release |
-| Sales no longer making informal timeline commitments | Process | PO and Sales align on a formal intake gate rule before next enterprise deal |
+| Contrato da Construtora Ágil fechado | Negócio | Contrato assinado em até 30 dias do release |
+| Zero incidentes de acesso não autorizado | Segurança / Compliance | Sem casos reportados de participantes bloqueados ou removidos acessando dados da sessão |
+| Conformidade LGPD confirmada | Legal | TI da Construtora Ágil confirma que o requisito de residência de dados está atendido antes do go-live |
+| Mapeamento de papéis Azure AD funcionando end-to-end | Técnico | Funcionários e prestadores recebem papéis corretos na plataforma (Votante / Observador) automaticamente do grupo AD no momento de entrada |
+| Pelo menos 1 deal adicional em pipeline desbloqueado | Negócio | Um dos 2 deals em pipeline sinalizados avança para fechamento em até 90 dias do release |
+| Modo anônimo adotado em sessões enterprise | Produto | Usado em ≥ 30% das sessões de nível enterprise em até 60 dias do release |
+| Vendas não fazendo mais compromissos informais de prazo | Processo | PO e Vendas alinham uma regra formal de gate de intake antes do próximo deal enterprise |
 
 ---
 
-## PO Triage Notes
+## Notas de Triagem do PO
 
-This demand is strategically aligned — the platform needs to mature its access model for enterprise segments. However, three integration unknowns surfaced during intake that prevent rationalization from starting. The demand cannot be scoped until these are resolved.
+Esta demanda está estrategicamente alinhada — a plataforma precisa amadurecer seu modelo de acesso para segmentos enterprise. No entanto, três incógnitas de integração surgiram durante o intake que impedem a racionalização de começar. A demanda não pode ser escopada até que estas sejam resolvidas.
 
-**Decision path:** ~~Product Ready~~ → **Discovery**
+**Caminho de decisão:** ~~Product Ready~~ → **Discovery**
 
-**Architectural escalation to CTO:** Yes — expanded. Originally flagged for participant data model. Now also requires CTO input on: (1) Azure AD OIDC feasibility, (2) Jira API integration scope, (3) data residency posture for LGPD compliance.
+**Escalada arquitetural ao CTO:** Sim — ampliada. Originalmente sinalizada para o modelo de dados de participantes. Agora também requer input do CTO em: (1) viabilidade OIDC Azure AD, (2) escopo de integração Jira API, (3) postura de residência de dados para conformidade LGPD.
 
-**Discovery time-box:** 2 weeks (2024-03-18 → 2024-04-01)
+**Time-box do Discovery:** 2 semanas (2024-03-18 → 2024-04-01)
 
-**Risk flag:** Sales made an informal timeline commitment to the client. No external date can be confirmed until Discovery concludes and PM runs a capacity assessment.
+**Sinalização de risco:** Vendas fez um compromisso informal de prazo ao cliente. Nenhuma data externa pode ser confirmada até que o Discovery conclua e o PM execute uma avaliação de capacidade.
 
 ---
 
 ## Discovery Brief
 
-### What is missing
+### O que está faltando
 
-| # | Unknown | Who can answer | Method |
+| # | Incógnita | Quem pode responder | Método |
 |---|---|---|---|
-| 1 | Azure AD integration: full SSO vs. group-claim validation vs. webhook sync | CTO | Technical spike (2–3 days max) |
-| 2 | Jira integration: hard requirement or nice-to-have for deal close | Construtora Ágil (via Sales) | Client call — Sales to schedule within 3 days |
-| 3 | Data residency: current posture of participant session records | CTO | Infrastructure review (1 day) |
+| 1 | Integração Azure AD: SSO completo vs. validação de group-claim vs. sincronização via webhook | CTO | Spike técnico (2–3 dias máx.) |
+| 2 | Integração Jira: requisito obrigatório ou desejável para fechar o deal | Construtora Ágil (via Vendas) | Chamada com cliente — Vendas deve agendar em 3 dias |
+| 3 | Residência de dados: postura atual dos registros de sessão de participantes | CTO | Revisão de infraestrutura (1 dia) |
 
 ---
 
-### Discovery Log
+### Log do Discovery
 
-#### 2024-03-18 — PO opens Discovery
+#### 2024-03-18 — PO abre o Discovery
 
-Demand moved to Discovery. Three unknowns registered above. PO notified Sales (Rafael Souza) to schedule a follow-up call with Construtora Ágil's IT team to clarify the Jira requirement. CTO (Rodrigo Lima) notified for technical spike on Azure AD and data residency.
-
----
-
-#### 2024-03-20 — CTO Technical Spike: Azure AD
-
-**Finding:** Azure AD integration via OIDC is feasible using the existing auth layer (which already supports OAuth2). A full SSO implementation is not required. The platform can request the `groups` claim at login and map AD groups to platform roles at session join time.
-
-**Effort estimate:** 4–6 days (backend auth extension + role mapping logic).
-
-**Dependency:** Construtora Ágil must provide their Azure AD tenant ID and register the platform as an allowed application in their Azure portal. This is a client-side action — timeline depends on their IT team.
-
-**CTO recommendation:** This is viable and does not require new infrastructure. However, it introduces a new auth flow that affects the participant model — the architectural escalation stands.
+Demanda movida para Discovery. Três incógnitas registradas acima. PO notificou Vendas (Rafael Souza) para agendar chamada de acompanhamento com a equipe de TI da Construtora Ágil para esclarecer o requisito Jira. CTO (Rodrigo Lima) notificado para spike técnico sobre Azure AD e residência de dados.
 
 ---
 
-#### 2024-03-21 — CTO Infrastructure Review: Data Residency
+#### 2024-03-20 — Spike Técnico do CTO: Azure AD
 
-**Finding:** The current platform uses a primary database cluster in `us-east-1` (AWS). Session participant records — including names, emails, and session metadata — are stored in this cluster. There is no Brazil-region (sa-east-1) replication for this data.
+**Finding:** Integração Azure AD via OIDC é viável usando a camada de auth existente (que já suporta OAuth2). Uma implementação SSO completa não é necessária. A plataforma pode solicitar o claim `groups` no login e mapear grupos AD para papéis da plataforma no momento de entrada na sessão.
 
-**LGPD implication:** Participant identity data for Brazilian clients is currently stored outside Brazil. Delivering this feature to Construtora Ágil without addressing this would expose the company to LGPD risk.
+**Estimativa de esforço:** 4–6 dias (extensão do auth backend + lógica de mapeamento de papéis).
 
-**Options identified by CTO:**
+**Dependência:** A Construtora Ágil deve fornecer o ID do tenant Azure AD e registrar a plataforma como aplicação permitida no seu portal Azure. Esta é uma ação do lado do cliente — o prazo depende da equipe de TI deles.
 
-| Option | Description | Effort | Risk |
+**Recomendação do CTO:** Isto é viável e não requer nova infraestrutura. No entanto, introduz um novo fluxo de auth que afeta o modelo de participantes — a escalada arquitetural se mantém.
+
+---
+
+#### 2024-03-21 — Revisão de Infraestrutura do CTO: Residência de Dados
+
+**Finding:** A plataforma atual usa um cluster de banco de dados primário em `us-east-1` (AWS). Registros de participantes de sessão — incluindo nomes, emails e metadados de sessão — estão armazenados neste cluster. Não há replicação para região do Brasil (sa-east-1) para estes dados.
+
+**Implicação LGPD:** Dados de identidade de participantes de clientes brasileiros estão atualmente armazenados fora do Brasil. Entregar esta funcionalidade à Construtora Ágil sem tratar isso exporia a empresa a risco LGPD.
+
+**Opções identificadas pelo CTO:**
+
+| Opção | Descrição | Esforço | Risco |
 |---|---|---|---|
-| A | Migrate participant table to `sa-east-1` for all tenants | High (3–4 weeks) | Disrupts all clients during migration |
-| B | Implement per-tenant data residency routing (participant data stored in tenant's declared region) | Very High (6–8 weeks) | Platform-level change, new complexity |
-| C | Store participant session data in `sa-east-1` only for clients who flag LGPD requirement | Medium (2 weeks) | Adds conditional routing logic, but scoped |
+| A | Migrar tabela de participantes para `sa-east-1` para todos os tenants | Alto (3–4 semanas) | Interrompe todos os clientes durante a migração |
+| B | Implementar roteamento de residência de dados por tenant (dados de participantes armazenados na região declarada do tenant) | Muito Alto (6–8 semanas) | Mudança a nível de plataforma, nova complexidade |
+| C | Armazenar dados de sessão de participantes em `sa-east-1` apenas para clientes que sinalizam requisito LGPD | Médio (2 semanas) | Adiciona lógica de roteamento condicional, mas escopado |
 
-**CTO recommendation:** Option C for this release. Options A and B are strategic platform decisions that require CEO alignment and cannot be committed to for a single deal.
+**Recomendação do CTO:** Opção C para este release. Opções A e B são decisões estratégicas de plataforma que requerem alinhamento com o CEO e não podem ser comprometidas para um único deal.
 
-**PO note:** Option C adds ~2 weeks of infrastructure work to this demand. This must be factored into the PM capacity assessment and communicated to Sales before any client commitment.
-
----
-
-#### 2024-03-22 — Client Call: Jira Integration Requirement
-
-**Attendees:** Rafael Souza (Sales), Ana Costa (CS), Construtora Ágil IT Lead (Fernanda Ramos)
-
-**Finding:** Jira integration is **not a hard requirement** for the deal to close. Fernanda confirmed that manually assigning voters and observers via Azure AD group mapping is acceptable for Phase 1. Jira-based room pre-population is a future wish, not a blocker.
-
-**Impact on scope:** Jira integration is removed from this demand. It is registered as a separate backlog item: `BACKLOG-2024-007 — Jira Sprint Integration for Room Pre-population`.
+**Nota do PO:** A Opção C adiciona ~2 semanas de trabalho de infraestrutura a esta demanda. Isso deve ser considerado na avaliação de capacidade do PM e comunicado a Vendas antes de qualquer compromisso com o cliente.
 
 ---
 
-### Discovery Outcome
+#### 2024-03-22 — Chamada com o Cliente: Requisito de Integração Jira
 
-**All three unknowns resolved.**
+**Participantes:** Rafael Souza (Vendas), Ana Costa (CS), TI Lead da Construtora Ágil (Fernanda Ramos)
 
-| # | Unknown | Resolution | Scope impact |
+**Finding:** A integração Jira **não é um requisito obrigatório** para o deal fechar. Fernanda confirmou que atribuir votantes e observadores manualmente via mapeamento de grupos Azure AD é aceitável para a Fase 1. Pré-população de sala baseada em Jira é um desejo futuro, não um bloqueador.
+
+**Impacto no escopo:** Integração Jira é removida desta demanda. É registrada como item de backlog separado: `BACKLOG-2024-007 — Integração Jira Sprint para Pré-população de Sala`.
+
+---
+
+### Resultado do Discovery
+
+**Todas as três incógnitas resolvidas.**
+
+| # | Incógnita | Resolução | Impacto no escopo |
 |---|---|---|---|
-| 1 | Azure AD integration | Feasible via OIDC group-claim. 4–6 days effort. Client must register app in Azure portal. | Added to scope |
-| 2 | Jira integration | Not required for deal close. Moved to backlog. | Removed from scope |
-| 3 | Data residency (LGPD) | Option C: per-client LGPD flag with `sa-east-1` routing. ~2 weeks effort. | Added to scope |
+| 1 | Integração Azure AD | Viável via group-claim OIDC. 4–6 dias de esforço. Cliente deve registrar app no portal Azure. | Adicionado ao escopo |
+| 2 | Integração Jira | Não obrigatório para fechar o deal. Movido para backlog. | Removido do escopo |
+| 3 | Residência de dados (LGPD) | Opção C: flag LGPD por cliente com roteamento `sa-east-1`. ~2 semanas de esforço. | Adicionado ao escopo |
 
-**New decision path:** Discovery → **Product Ready**
+**Novo caminho de decisão:** Discovery → **Product Ready**
 
-**Revised demand complexity:** Significantly higher than originally estimated. The Readiness Package must be updated to reflect Azure AD integration and LGPD data residency work.
+**Complexidade revisada da demanda:** Significativamente maior do que estimado originalmente. O Readiness Package deve ser atualizado para refletir o trabalho de integração Azure AD e residência de dados LGPD.
 
-**Discovery closed:** 2024-03-25 (7 days — within 2-week time-box ✓)
+**Discovery encerrado:** 2024-03-25 (7 dias — dentro do time-box de 2 semanas ✓)

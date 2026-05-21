@@ -1,166 +1,166 @@
-# Intake Record — Queue Voting
+# Registro de Intake — Queue Voting (Fila de Votação)
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Record ID** | INT-2024-001 |
-| **Version** | v2 |
-| **Registered by** | Ana Costa (Customer Success) |
-| **Registration date** | 2024-03-12 |
-| **Status** | Approved — in execution planning |
-| **Triage date** | 2024-03-13 |
-| **Triaged by** | Lucas Mendes (PO) |
-| **Linked Readiness Package** | RP-2024-001 v2 |
+| **ID do Registro** | INT-2024-001 |
+| **Versão** | v2 |
+| **Registrado por** | Ana Costa (Customer Success) |
+| **Data de registro** | 2024-03-12 |
+| **Status** | Aprovado — em planejamento de execução |
+| **Data de triagem** | 2024-03-13 |
+| **Triado por** | Lucas Mendes (PO) |
+| **Readiness Package vinculado** | RP-2024-001 v2 |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Event | Summary |
+| Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | 2024-03-12 | Intake registered | CS registered demand from Banco Meridional quarterly review call. |
-| v1 | 2024-03-13 | Triage completed | PO triaged as Product Ready. Readiness Package initiated. |
-| v1 | 2024-03-20 | RP-2024-001 v1 submitted | PO submitted first Readiness Package to PM. |
-| v1 | 2024-03-22 | RP rejected by PM | PM returned package: missing rollout strategy and incomplete acceptance criteria for edge cases. |
-| v2 | 2024-03-28 | RP-2024-001 v2 approved | PO resubmitted with corrections. PM approved. Demand advances to execution planning. |
+| v1 | 2024-03-12 | Intake registrado | CS registrou demanda a partir de chamada trimestral de revisão com Banco Meridional. |
+| v1 | 2024-03-13 | Triagem concluída | PO triou como Product Ready. Readiness Package iniciado. |
+| v1 | 2024-03-20 | RP-2024-001 v1 submetido | PO submeteu o primeiro Readiness Package ao PM. |
+| v1 | 2024-03-22 | RP rejeitado pelo PM | PM devolveu o pacote: faltava estratégia de rollout e critérios de aceite incompletos para edge cases. |
+| v2 | 2024-03-28 | RP-2024-001 v2 aprovado | PO resubmeteu com correções. PM aprovou. Demanda avança para planejamento de execução. |
 
 ---
 
-## Origin
+## Origem
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Source** | Client |
-| **Client** | Banco Meridional (enterprise customer, planning ceremonies for 12 squads) |
-| **Reported via** | CS quarterly review call |
+| **Fonte** | Cliente |
+| **Cliente** | Banco Meridional (cliente enterprise, cerimônias de planejamento para 12 squads) |
+| **Reportado via** | Chamada trimestral de revisão com CS |
 
 ---
 
-## Type
+## Tipo
 
-- [x] Feature
+- [x] Funcionalidade
 - [ ] Bug
-- [ ] Improvement
+- [ ] Melhoria
 - [ ] Compliance
-- [ ] Integration
-- [ ] Operational
+- [ ] Integração
+- [ ] Operacional
 
 ---
 
-## Problem Statement
+## Enunciado do Problema
 
-During sprint planning ceremonies, teams use the poker planning room to estimate user stories. However, facilitators currently have no way to control which questions or user stories get voted on next. All participants can see the full backlog of items simultaneously.
+Durante cerimônias de sprint planning, os times utilizam a sala de poker planning para estimar histórias de usuário. No entanto, os facilitadores atualmente não têm como controlar quais perguntas ou histórias serão votadas a seguir. Todos os participantes podem ver o backlog completo de itens simultaneamente.
 
-The specific pain reported: when a facilitator shares a list of 20+ stories with the team, participants jump ahead, read future items, form premature opinions, and derail the estimation flow. There is no mechanism to queue items and reveal them one at a time.
+A dor específica reportada: quando um facilitador compartilha uma lista de 20+ histórias com o time, os participantes pulam à frente, leem itens futuros, formam opiniões prematuras e desestabilizam o fluxo de estimativa. Não há mecanismo para enfileirar itens e revelá-los um de cada vez.
 
-Additionally, the client wants votes to remain hidden until the facilitator explicitly reveals them, preventing anchoring bias where participants copy the first vote they see.
+Adicionalmente, o cliente quer que os votos permaneçam ocultos até que o facilitador os revele explicitamente, prevenindo o viés de ancoragem onde participantes copiam o primeiro voto que veem.
 
 ---
 
-## Business Impact
+## Impacto de Negócio
 
-| Dimension | Detail |
+| Dimensão | Detalhe |
 |---|---|
-| **Revenue** | Banco Meridional has 3 other squads not yet using the platform. Adoption is blocked by this UX gap. Estimated expansion ARR: R$ 28.000/year. |
-| **Retention** | CS flagged this as a renewal risk. Contract renewal in 90 days. |
-| **Operational** | Facilitators are using workarounds (sharing stories one at a time via chat) which adds 15–20 min per ceremony. |
-| **Competitive** | Two competing tools already support this. It was mentioned as a differentiator gap in the renewal call. |
+| **Receita** | Banco Meridional tem 3 outros squads que ainda não usam a plataforma. A adoção está bloqueada por esta lacuna de UX. ARR de expansão estimado: R$ 28.000/ano. |
+| **Retenção** | CS sinalizou isso como risco de renovação. Renovação do contrato em 90 dias. |
+| **Operacional** | Facilitadores estão usando workarounds (compartilhando histórias uma de cada vez via chat) que adicionam 15–20 min por cerimônia. |
+| **Competitivo** | Duas ferramentas concorrentes já suportam isso. Foi mencionado como lacuna de diferenciação na chamada de renovação. |
 
 ---
 
 ## Stakeholders
 
-| Stakeholder | Role | Interest | Influence |
+| Stakeholder | Papel | Interesse | Influência |
 |---|---|---|---|
-| Ana Costa | Customer Success | Renewal retention for Banco Meridional | High — primary demand reporter, owns client relationship |
-| Banco Meridional Scrum Masters | End users (facilitators) | Ceremony flow control and vote integrity | High — direct users of the feature |
-| Banco Meridional Developers | End users (voters) | Less distraction, more focused estimation | Medium — affected but not decision-makers |
-| Lucas Mendes | PO | Product alignment and delivery quality | High — owns rationalization and Readiness Package |
-| PM (TBD) | Project Manager | Delivery execution | High — accountable for timeline and capacity |
-| CEO | Executive sponsor | Revenue retention and platform growth | Medium — not involved day-to-day, but informed of renewal risk |
+| Ana Costa | Customer Success | Retenção da renovação do Banco Meridional | Alta — reportadora principal da demanda, dona do relacionamento com o cliente |
+| Scrum Masters do Banco Meridional | Usuários finais (facilitadores) | Controle do fluxo da cerimônia e integridade dos votos | Alta — usuários diretos da funcionalidade |
+| Desenvolvedores do Banco Meridional | Usuários finais (votantes) | Menos distração, estimativa mais focada | Média — afetados mas não tomadores de decisão |
+| Lucas Mendes | PO | Alinhamento de produto e qualidade da entrega | Alta — dono da racionalização e do Readiness Package |
+| PM (a definir) | Gerente de Projeto | Execução da entrega | Alta — responsável pelo prazo e capacidade |
+| CEO | Sponsor executivo | Retenção de receita e crescimento da plataforma | Média — não envolvido no dia a dia, mas informado do risco de renovação |
 
 ---
 
-## Assumptions
+## Premissas
 
-These are conditions assumed to be true at intake. If any assumption proves false, the demand must be re-triaged.
+Estas são condições assumidas como verdadeiras no intake. Se alguma premissa se provar falsa, a demanda deve ser retriada.
 
-1. The existing WebSocket infrastructure supports new event types without requiring a new broker or messaging layer.
-2. Session state persistence is already implemented and can be extended with new fields (queue order, reveal state) without a full schema migration.
-3. Banco Meridional's Scrum Masters have authority to adopt new platform features without requiring IT approval from their organization.
-4. The feature applies to all room types equally — no special handling needed for different ceremony formats.
-5. A single facilitator per session remains the model (no co-facilitation required in this release).
+1. A infraestrutura WebSocket existente suporta novos tipos de eventos sem requerer um novo broker ou camada de mensageria.
+2. A persistência de estado de sessão já está implementada e pode ser estendida com novos campos (ordem da fila, estado de revelação) sem uma migração completa de schema.
+3. Os Scrum Masters do Banco Meridional têm autoridade para adotar novos recursos da plataforma sem requerer aprovação de TI de sua organização.
+4. A funcionalidade se aplica igualmente a todos os tipos de sala — sem tratamento especial necessário para diferentes formatos de cerimônia.
+5. Um único facilitador por sessão permanece o modelo (co-facilitação não é necessária neste release).
 
 ---
 
 ## Constraints
 
-Conditions that limit the solution space and must be respected regardless of what is built.
+Condições que limitam o espaço de solução e devem ser respeitadas independentemente do que for construído.
 
-| Constraint | Type | Detail |
+| Constraint | Tipo | Detalhe |
 |---|---|---|
-| Renewal deadline | Time | Contract renewal in 90 days. Feature must be live before renewal conversation. |
-| No mobile redesign | Scope | Existing mobile layout applies. No new mobile-specific UI investment in this release. |
-| Single facilitator model | Scope | Co-facilitation is explicitly out of scope. Architecture must not foreclose it but need not implement it. |
-| Zero downtime deployment | Technical | Feature must be deployable without session disruption for active clients. |
-| No new external services | Budget | Feature must be built on existing infrastructure. No new third-party services may be contracted. |
+| Prazo de renovação | Tempo | Renovação do contrato em 90 dias. A funcionalidade deve estar em produção antes da conversa de renovação. |
+| Sem redesign mobile | Escopo | O layout mobile existente se aplica. Sem investimento em UI mobile neste release. |
+| Modelo de facilitador único | Escopo | Co-facilitação está explicitamente fora do escopo. A arquitetura não deve impossibilitá-la, mas não precisa implementá-la. |
+| Deploy sem downtime | Técnico | A funcionalidade deve ser implantável sem interrupção de sessão para clientes ativos. |
+| Sem novos serviços externos | Orçamento | A funcionalidade deve ser construída na infraestrutura existente. Nenhum novo serviço de terceiros pode ser contratado. |
 
 ---
 
-## Preliminary Risks
+## Riscos Preliminares
 
-Risks identified at intake — before technical assessment. Not a complete risk register (that belongs in the Readiness Package).
+Riscos identificados no intake — antes da avaliação técnica. Não é um registro completo de riscos (isso pertence ao Readiness Package).
 
-| Risk | Category | Initial Assessment |
+| Risco | Categoria | Avaliação Inicial |
 |---|---|---|
-| WebSocket event ordering inconsistencies under load | Technical | Unknown — needs load testing during QA |
-| Vote concealment bypass via client-side inspection | Security | Likely mitigable — server must enforce, not client |
-| Session state loss during facilitator reconnect | Technical | Needs resilience design — grace period or session snapshot |
-| Anchor bias not fully eliminated (participants may still share verbally) | Product | Accepted — platform can only control digital visibility |
-| Renewal deadline not met if discovery reveals architectural blockers | Schedule | Low probability based on initial assessment, but not zero |
+| Inconsistências de ordenação de eventos WebSocket sob carga | Técnico | Desconhecido — necessita load testing durante QA |
+| Bypass de ocultação de votos via inspeção client-side | Segurança | Provavelmente mitigável — servidor deve aplicar, não o cliente |
+| Perda de estado de sessão durante reconexão do facilitador | Técnico | Requer design de resiliência — período de graça ou snapshot de sessão |
+| Viés de ancoragem não totalmente eliminado (participantes ainda podem compartilhar verbalmente) | Produto | Aceito — a plataforma só pode controlar a visibilidade digital |
+| Prazo de renovação não cumprido se discovery revelar bloqueadores arquiteturais | Prazo | Baixa probabilidade com base na avaliação inicial, mas não zero |
 
 ---
 
-## High-Level Scope Boundary
+## Limite de Escopo de Alto Nível
 
-**In:** Facilitator queue management, sequential item reveal, vote concealment, facilitator-controlled vote reveal, session state persistence.
+**Dentro:** Gerenciamento de fila pelo facilitador, revelação sequencial de itens, ocultação de votos, revelação de votos controlada pelo facilitador, persistência de estado de sessão.
 
-**Out:** Per-item timers, automated reveal triggers, multi-facilitator control, mobile redesign, reporting/analytics, Jira/Linear integration.
+**Fora:** Temporizadores por item, gatilhos de revelação automática, controle multi-facilitador, redesign mobile, relatórios/analytics, integração Jira/Linear.
 
-**Deferred:** Auto-reveal preference toggle, queue template reuse, ceremony analytics dashboard.
-
----
-
-## Priority
-
-**Level:** High
-
-**Reason:** Contract renewal in 90 days. CS has flagged as a potential churn signal if unresolved.
+**Adiado:** Toggle de preferência de revelação automática, reuso de template de fila, dashboard de analytics de cerimônias.
 
 ---
 
-## Success Criteria
+## Prioridade
 
-High-level indicators that define what "done and valuable" looks like for this demand. Detailed measurable targets are owned by the Readiness Package — these are the intake-level signals.
+**Nível:** Alta
 
-| Criterion | Type | Indicator |
+**Motivo:** Renovação do contrato em 90 dias. CS sinalizou como potencial risco de churn se não resolvido.
+
+---
+
+## Critérios de Sucesso
+
+Indicadores de alto nível que definem como é "concluído e valioso" para esta demanda. Metas mensuráveis detalhadas pertencem ao Readiness Package — estes são os sinais no nível do intake.
+
+| Critério | Tipo | Indicador |
 |---|---|---|
-| Banco Meridional contract renewed | Business | Renewal signed before contract expiry date |
-| 3 pending squads onboarded | Business | Squad activation count in account dashboard within 60 days of release |
-| Ceremony duration reduced | Operational | Average session time for 10+ item ceremonies drops by ≥ 20% vs. baseline |
-| Facilitator workaround eliminated | Operational | No CS tickets reporting manual story-sharing workaround post-release |
-| Zero vote anchoring complaints | Quality | No CS tickets citing vote visibility before reveal as a problem |
-| Feature adopted without training | UX | Facilitators activate queue and reveal controls without requiring support intervention |
+| Contrato do Banco Meridional renovado | Negócio | Renovação assinada antes da data de expiração |
+| 3 squads pendentes integrados | Negócio | Contagem de ativação de squads no dashboard da conta em até 60 dias do release |
+| Duração das cerimônias reduzida | Operacional | Tempo médio de sessão para cerimônias com 10+ itens cai ≥ 20% vs. baseline |
+| Workaround do facilitador eliminado | Operacional | Sem tickets de CS reportando workaround de compartilhamento manual de histórias pós-release |
+| Zero reclamações de ancoragem de votos | Qualidade | Sem tickets de CS citando visibilidade de votos antes da revelação como problema |
+| Funcionalidade adotada sem treinamento | UX | Facilitadores ativam controles de fila e revelação sem requerer intervenção de suporte |
 
 ---
 
-## PO Triage Notes
+## Notas de Triagem do PO
 
-This demand is real, recurring across 3 other enterprise clients (CS has informal records), and aligns with the platform's roadmap toward facilitator control and ceremony quality. The scope is bounded and does not appear to require platform-level architectural changes — no new infrastructure, no AI/runtime impact.
+Esta demanda é real, recorrente em outros 3 clientes enterprise (CS tem registros informais), e está alinhada com o roadmap da plataforma em direção ao controle do facilitador e qualidade das cerimônias. O escopo está delimitado e não parece requerer mudanças arquiteturais a nível de plataforma — sem nova infraestrutura, sem impacto em IA/runtime.
 
-**Decision path:** Product Ready → Rationalization
+**Caminho de decisão:** Product Ready → Racionalização
 
-**Architectural escalation to CTO:** No. UI and session state changes only. To be confirmed during rationalization.
+**Escalada arquitetural ao CTO:** Não. Apenas mudanças de UI e estado de sessão. A confirmar durante a racionalização.
 
-**Assumptions validated at triage:** All five assumptions above are considered reasonable. No immediate red flags.
+**Premissas validadas na triagem:** Todas as cinco premissas acima são consideradas razoáveis. Sem red flags imediatos.
 
-**Constraints acknowledged:** Renewal deadline is the binding time constraint. PM must factor this into capacity assessment from day one.
+**Constraints reconhecidos:** O prazo de renovação é o constraint de tempo vinculante. O PM deve considerar isso na avaliação de capacidade desde o primeiro dia.

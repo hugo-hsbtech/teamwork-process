@@ -1,62 +1,62 @@
-# Interaction 12 — QA → PM (Release Approval)
+# Interação 12 — QA → PM (Aprovação de Release)
 
-**Direction:** QA initiates. PM receives.
-**Layer:** Within Downstream
-
----
-
-## Trigger
-
-All acceptance criteria have been validated and QA is issuing a go or no-go decision.
+**Direção:** QA inicia. PM recebe.
+**Camada:** Dentro do Downstream
 
 ---
 
-## What QA Must Provide
+## Gatilho
 
-- Explicit go/no-go decision
-- Traceability matrix: each acceptance criterion and its validation result
-- List of any known issues deferred from this release (with documented justification for deferral)
-- Test environment summary (confirming staging environment matched production configuration)
+Todos os critérios de aceite foram validados e o QA está emitindo uma decisão de go ou no-go.
 
 ---
 
-## What PM Does With It
+## O que o QA Deve Fornecer
 
-- Coordinates release timing with Tech Leads and Engineers
-- Communicates the release to CS and PO
-- Initiates the feedback loop within 5 business days
+- Decisão explícita de go/no-go
+- Matriz de rastreabilidade: cada critério de aceite e seu resultado de validação
+- Lista de quaisquer issues conhecidos adiados deste release (com justificativa documentada para o adiamento)
+- Resumo do ambiente de teste (confirmando que o ambiente de staging correspondeu à configuração de produção)
 
 ---
 
-## Ownership Transferred
+## O que o PM Faz Com Isso
 
-**From QA:** Validation is complete and the release decision is handed over. QA's accountability for this cycle ends with the go/no-go issuance — unless a no-go triggers a re-validation cycle.
-**To PM:** Owns the release coordination, timing, and communication to CS and PO. PM cannot release without a go from QA and cannot override a no-go.
-**Artifact handed over:** Go/no-go decision + traceability matrix + deferred issues list.
+- Coordena o timing de release com Tech Leads e Engenheiros
+- Comunica o release ao CS e ao PO
+- Inicia o loop de feedback dentro de 5 dias úteis
+
+---
+
+## Transferência de Ownership
+
+**Do QA:** A validação está completa e a decisão de release é transferida. A responsabilidade do QA para este ciclo termina com a emissão do go/no-go — a menos que um no-go acione um ciclo de re-validação.
+**Para o PM:** Detém a coordenação de release, timing e comunicação ao CS e PO. O PM não pode fazer o release sem um go do QA e não pode sobrepor um no-go.
+**Artefato transferido:** Decisão go/no-go + matriz de rastreabilidade + lista de issues adiados.
 
 ---
 
 ## Gate
 
-PM does not override a QA no-go. If QA issues a no-go, the release is blocked until the failing criteria are resolved and QA re-approves. PM escalates timeline implications to PO.
+O PM não sobrepõe um no-go do QA. Se o QA emitir um no-go, o release é bloqueado até que os critérios com falha sejam resolvidos e o QA reaprove. O PM escala as implicações de prazo ao PO.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If a no-go significantly impacts a client commitment or milestone, PM produces a revised plan and communicates to PO and CS before the client is informed.
-
----
-
-## What PM Must NOT Do
-
-- Override or bypass a QA no-go decision
-- Release without a go decision from QA
-- Communicate a release to clients before QA has issued go
+Se um no-go impactar significativamente um compromisso com cliente ou marco, o PM produz um plano revisado e comunica ao PO e ao CS antes que o cliente seja informado.
 
 ---
 
-## Sequence
+## O que o PM NÃO Deve Fazer
+
+- Sobrepor ou contornar uma decisão de no-go do QA
+- Fazer o release sem uma decisão de go do QA
+- Comunicar um release a clientes antes que o QA tenha emitido go
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
@@ -64,16 +64,16 @@ sequenceDiagram
     actor PM as PM
     actor PO as PO
 
-    QA->>PM: Go/no-go decision + traceability matrix
+    QA->>PM: Decisão go/no-go + matriz de rastreabilidade
 
     alt No-go
-        PM->>PM: Release blocked
-        PM->>PO: Timeline impact escalation
-        Note over PM,PO: Engineers fix failing criteria
-        QA->>PM: Re-approval after fixes
+        PM->>PM: Release bloqueado
+        PM->>PO: Escalada de impacto de prazo
+        Note over PM,PO: Engenheiros corrigem critérios com falha
+        QA->>PM: Re-aprovação após correções
     end
 
-    PM->>PM: Coordinates release timing
-    PM->>PO: Release communicated
-    PM->>CS: Release communicated
+    PM->>PM: Coordena timing de release
+    PM->>PO: Release comunicado
+    PM->>CS: Release comunicado
 ```

@@ -1,62 +1,62 @@
-# Interaction 14 — PM → PO (Feedback Loop Close)
+# Interação 14 — PM → PO (Fechamento do Loop de Feedback)
 
-**Direction:** PM initiates. PO receives.
-**Layer:** Post-Delivery
-
----
-
-## Trigger
-
-Feedback has been collected from CS and internal delivery metrics are available.
+**Direção:** PM inicia. PO recebe.
+**Camada:** Pós-Entrega
 
 ---
 
-## What PM Provides
+## Gatilho
 
-- Delivery accuracy report: milestones met, scope changes, estimation accuracy
-- Process friction points: where the model slowed down or broke
-- CS feedback summary: client outcome vs. success criteria
+O feedback foi coletado do CS e as métricas de entrega internas estão disponíveis.
 
 ---
 
-## What PO Does With It
+## O que o PM Fornece
 
-- Updates product vision and backlog based on outcomes
-- Documents learnings that affect future triage decisions
-- Identifies any new demands surfaced by the delivery
-- Feeds insights back into the opportunity backlog for the next cycle
+- Relatório de precisão de entrega: marcos cumpridos, mudanças de escopo, precisão de estimativas
+- Pontos de atrito no processo: onde o modelo desacelerou ou quebrou
+- Resumo do feedback do CS: resultado do cliente vs. critérios de sucesso
 
 ---
 
-## Ownership Transferred
+## O que o PO Faz Com Isso
 
-**From PM:** Delivery metrics and CS feedback are compiled and handed over. PM's accountability for this demand cycle ends when PO acknowledges and closes the loop.
-**To PO:** Owns the learning integration — backlog updates, documented lessons, and any new demands surfaced by the delivery. The loop is not closed until PO has recorded the learnings, not merely received the report.
-**Artifact handed over:** Delivery accuracy report + process friction points + CS feedback summary.
+- Atualiza a visão de produto e o backlog com base nos resultados
+- Documenta aprendizados que afetam futuras decisões de triagem
+- Identifica quaisquer novas demandas surgidas pela entrega
+- Retroalimenta insights para o opportunity backlog para o próximo ciclo
+
+---
+
+## Transferência de Ownership
+
+**Do PM:** Métricas de entrega e feedback do CS são compilados e transferidos. A responsabilidade do PM para este ciclo de demanda termina quando o PO reconhece e fecha o loop.
+**Para o PO:** Detém a integração de aprendizados — atualizações de backlog, lições documentadas e quaisquer novas demandas surgidas pela entrega. O loop não está fechado até que o PO tenha registrado os aprendizados, não apenas recebido o relatório.
+**Artefato transferido:** Relatório de precisão de entrega + pontos de atrito no processo + resumo de feedback do CS.
 
 ---
 
 ## Gate
 
-The feedback loop is not closed until the PO has acknowledged the findings and documented the learnings. An unacknowledged feedback delivery is an open loop.
+O loop de feedback não está fechado até que o PO tenha reconhecido os findings e documentado os aprendizados. Uma entrega de feedback não reconhecida é um loop aberto.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If PO does not acknowledge within the expected window, PM escalates. Open feedback loops that span multiple delivery cycles degrade the quality of future triage decisions.
-
----
-
-## What PO Must NOT Do
-
-- Acknowledge receipt without documenting the learnings
-- Dismiss process friction points without noting them for review
-- Leave the loop open by not responding to the PM's report
+Se o PO não reconhecer dentro da janela esperada, o PM escala. Loops de feedback abertos que abrangem múltiplos ciclos de entrega degradam a qualidade das futuras decisões de triagem.
 
 ---
 
-## Sequence
+## O que o PO NÃO Deve Fazer
+
+- Reconhecer o recebimento sem documentar os aprendizados
+- Descartar pontos de atrito no processo sem anotá-los para revisão
+- Deixar o loop aberto sem responder ao relatório do PM
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
@@ -64,13 +64,13 @@ sequenceDiagram
     actor CS as CS
     actor PO as PO
 
-    PM->>CS: Delivery summary + success criteria to validate
-    CS->>CS: Collects client signals
-    CS-->>PM: Structured feedback (against success criteria)
+    PM->>CS: Resumo de entrega + critérios de sucesso a validar
+    CS->>CS: Coleta sinais do cliente
+    CS-->>PM: Feedback estruturado (contra critérios de sucesso)
 
-    PM->>PM: Compiles delivery accuracy + process friction report
+    PM->>PM: Compila relatório de precisão de entrega + atrito no processo
 
-    PM->>PO: Full feedback loop report
-    PO->>PO: Updates backlog + documents learnings
-    PO-->>PM: Loop acknowledged — learnings recorded
+    PM->>PO: Relatório completo do loop de feedback
+    PO->>PO: Atualiza backlog + documenta aprendizados
+    PO-->>PM: Loop reconhecido — aprendizados registrados
 ```

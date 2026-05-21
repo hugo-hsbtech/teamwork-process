@@ -1,22 +1,22 @@
-# Role Definitions
+# Definição de Papéis
 
-## Purpose
+## Propósito
 
-This document establishes the explicit boundaries of each role in the operational model.
-Every role has a defined start point (when it becomes active), a defined end point (when it hands off), a clear scope of authority, and explicit ownership.
+Este documento estabelece os limites explícitos de cada papel no modelo operacional.
+Todo papel tem um ponto de início definido (quando se torna ativo), um ponto de término definido (quando faz o handoff), um escopo claro de autoridade e uma ownership explícita.
 
-**Ownership** means: this role is the single accountable party for this artifact, decision, or domain. If it is not listed as owned by a role, that role does not have unilateral authority over it.
+**Ownership** significa: este papel é o único responsável por este artefato, decisão ou domínio. Se não estiver listado como de propriedade de um papel, esse papel não tem autoridade unilateral sobre ele.
 
-No role should cross into another's domain. When overlap appears, the rules below resolve it.
+Nenhum papel deve invadir o domínio de outro. Quando houver sobreposição, as regras abaixo a resolvem.
 
 ---
 
-# Organizational Layers
+# Camadas Organizacionais
 
 ```text
 ┌─────────────────────────────────────────────────────┐
 │                  UPSTREAM                           │
-│  CEO · Sales · Marketing · Customer Success         │
+│  CEO · Vendas · Marketing · Customer Success        │
 ├─────────────────────────────────────────────────────┤
 │                  INTAKE LAYER                       │
 │            CTO · PO (Product Owner)                 │
@@ -28,141 +28,141 @@ No role should cross into another's domain. When overlap appears, the rules belo
 
 ---
 
-# Upstream Roles
+# Papéis do Upstream
 
 ## CEO
 
-### What this role is
+### O que é este papel
 
-The CEO defines where the company is going and what matters now. This role operates at the strategic layer — market, investors, partnerships, and executive decisions.
+O CEO define para onde a empresa vai e o que importa agora. Este papel opera na camada estratégica — mercado, investidores, parcerias e decisões executivas.
 
-### Starts when
-- A new strategic direction is being set
-- A high-value deal or partnership requires executive involvement
-- A business priority needs to be established or changed
+### Inicia quando
+- Uma nova direção estratégica está sendo definida
+- Um deal ou parceria de alto valor requer envolvimento executivo
+- Uma prioridade de negócio precisa ser estabelecida ou alterada
 
-### Ends when
-- The strategic direction, priority, or deal context has been communicated to Sales, CS, or directly to the CTO
-- The CEO has no further involvement until a decision requires executive authority
+### Termina quando
+- A direção estratégica, prioridade ou contexto do deal foi comunicado a Vendas, CS ou diretamente ao CTO
+- O CEO não tem mais envolvimento até que uma decisão exija autoridade executiva
 
 ### Ownership
-- Company strategy and long-term direction
-- Executive prioritization decisions
-- External narrative (investors, partners, press)
-- Final authority on company-level trade-offs
+- Estratégia da empresa e direção de longo prazo
+- Decisões executivas de priorização
+- Narrativa externa (investidores, parceiros, imprensa)
+- Autoridade final sobre trade-offs no nível da empresa
 
-### Authority
-- Sets company-level priorities
-- Can override product prioritization at the strategic level
-- Owns the narrative of what the company builds and why
+### Autoridade
+- Define prioridades no nível da empresa
+- Pode sobrepor a priorização de produto no nível estratégico
+- É dono da narrativa do que a empresa constrói e por quê
 
-### Does NOT do
-- Define features or technical requirements
-- Manage backlog or sprints
-- Specify architecture or implementation
-- Bypass the Intake Layer to push demands directly into engineering
+### Não faz
+- Definir funcionalidades ou requisitos técnicos
+- Gerenciar backlog ou sprints
+- Especificar arquitetura ou implementação
+- Contornar o Intake Layer para empurrar demandas diretamente para a engenharia
 
-### CEO Intake Channel
+### Canal de Intake do CEO
 
-When the CEO needs to inject a strategic priority into the process, it follows this path:
+Quando o CEO precisa injetar uma prioridade estratégica no processo, segue este caminho:
 
-1. CEO communicates the priority to the PO directly — with context: why now, what business driver, what success looks like.
-2. The PO registers it as a structured intake record, marking origin as Internal and priority as Critical or High.
-3. The PO triages it against the current queue and produces a capacity impact assessment in partnership with the PM.
-4. The result (approved path, affected existing commitments, timeline) is communicated back to the CEO.
+1. O CEO comunica a prioridade diretamente ao PO — com contexto: por que agora, qual driver de negócio, como o sucesso se parece.
+2. O PO a registra como um intake record estruturado, marcando a origem como Interno e a prioridade como Crítica ou Alta.
+3. O PO a triaja contra a fila atual e produz uma avaliação de impacto de capacidade em parceria com o PM.
+4. O resultado (caminho aprovado, compromissos existentes afetados, prazo) é comunicado de volta ao CEO.
 
-The CEO does not communicate the priority directly to Engineering, Tech Leads, or PM. All injections go through the PO.
+O CEO não comunica a prioridade diretamente à Engenharia, aos Tech Leads ou ao PM. Todas as injeções passam pelo PO.
 
 ---
 
-## Sales
+## Vendas
 
-### What this role is
+### O que é este papel
 
-Sales captures market demand and customer pain from a commercial perspective. It translates client conversations into structured opportunities, not into feature requests.
+Vendas captura a demanda de mercado e a dor do cliente a partir de uma perspectiva comercial. Traduz conversas com clientes em oportunidades estruturadas, não em solicitações de funcionalidades.
 
-### Starts when
-- A prospect or client expresses a pain, gap, or need
-- A deal is contingent on a product capability
+### Inicia quando
+- Um prospect ou cliente expressa uma dor, gap ou necessidade
+- Um deal depende de uma capacidade de produto
 
-### Ends when
-- The demand has been registered in the Intake with structured context (origin, type, problem, business impact, priority)
-- The Intake Layer has acknowledged receipt
+### Termina quando
+- A demanda foi registrada no Intake com contexto estruturado (origem, tipo, problema, impacto de negócio, prioridade)
+- O Intake Layer confirmou o recebimento
 
 ### Ownership
-- Commercial demand capture and registration
-- Client pain documentation from a sales perspective
-- Priority signals tied to revenue or deal risk
+- Captura e registro de demandas comerciais
+- Documentação da dor do cliente a partir da perspectiva de vendas
+- Sinais de prioridade vinculados a receita ou risco de deal
 
-### Authority
-- Can signal priority of a demand based on commercial impact
-- Can escalate to CEO if a deal is at risk
+### Autoridade
+- Pode sinalizar a prioridade de uma demanda com base no impacto comercial
+- Pode escalar ao CEO se um deal estiver em risco
 
-### Does NOT do
-- Define the solution or technical approach
-- Commit engineering effort to clients
-- Bypass triage by going directly to CTO or Tech Leads
-- Prioritize the backlog
+### Não faz
+- Definir a solução ou abordagem técnica
+- Comprometer esforço de engenharia com clientes
+- Contornar a triagem indo diretamente ao CTO ou Tech Leads
+- Priorizar o backlog
 
 ---
 
 ## Marketing
 
-### What this role is
+### O que é este papel
 
-Marketing brings external perception: market trends, competitive positioning, and product-market fit signals. It identifies patterns across segments, not individual client requests.
+Marketing traz percepção externa: tendências de mercado, posicionamento competitivo e sinais de product-market fit. Identifica padrões entre segmentos, não solicitações individuais de clientes.
 
-### Starts when
-- Market intelligence identifies a relevant gap or trend
-- A campaign or positioning effort reveals unmet needs
+### Inicia quando
+- A inteligência de mercado identifica um gap ou tendência relevante
+- Uma campanha ou esforço de posicionamento revela necessidades não atendidas
 
-### Ends when
-- The insight has been registered in the Intake with sufficient context for triage
+### Termina quando
+- O insight foi registrado no Intake com contexto suficiente para triagem
 
 ### Ownership
-- Market intelligence and competitive signals
-- Segment-level pattern identification
-- Positioning and perception input to product strategy
+- Inteligência de mercado e sinais competitivos
+- Identificação de padrões no nível de segmento
+- Input de posicionamento e percepção para a estratégia de produto
 
-### Authority
-- Can surface strategic opportunities from market data
-- Can influence positioning input to CTO/PO during rationalization
+### Autoridade
+- Pode surfaçar oportunidades estratégicas a partir de dados de mercado
+- Pode influenciar o input de posicionamento ao CTO/PO durante a racionalização
 
-### Does NOT do
-- Register individual customer bugs or support tickets (that is CS/Support)
-- Define product roadmap
-- Represent a single client's request as a market signal
+### Não faz
+- Registrar bugs individuais de clientes ou tickets de suporte (isso é CS/Suporte)
+- Definir o roadmap de produto
+- Representar a solicitação de um único cliente como um sinal de mercado
 
 ---
 
 ## Customer Success (CS)
 
-### What this role is
+### O que é este papel
 
-CS is the closest role to the client post-sale. It captures real usage friction, retention risks, adoption gaps, and operational pain from existing customers. CS input is the most grounded signal in the system.
+CS é o papel mais próximo do cliente pós-venda. Captura fricção real de uso, riscos de retenção, gaps de adoção e dor operacional de clientes existentes. O input do CS é o sinal mais concreto do sistema.
 
-### Starts when
-- A customer reports friction, confusion, or a recurring workaround
-- A retention risk is identified
-- A customer requests a capability that is missing or broken
+### Inicia quando
+- Um cliente reporta fricção, confusão ou uma solução paliativa recorrente
+- Um risco de retenção é identificado
+- Um cliente solicita uma capacidade que está faltando ou quebrada
 
-### Ends when
-- The demand has been registered in the Intake with context: which customer, frequency, impact on retention or usage, severity
+### Termina quando
+- A demanda foi registrada no Intake com contexto: qual cliente, frequência, impacto na retenção ou uso, severidade
 
 ### Ownership
-- Post-sale client relationship and health monitoring
-- Real usage friction and adoption gap reporting
-- Retention risk signals and churn evidence
-- Customer satisfaction data feeding the feedback loop
+- Relacionamento pós-venda com o cliente e monitoramento de saúde
+- Reporte de fricção real de uso e gaps de adoção
+- Sinais de risco de retenção e evidências de churn
+- Dados de satisfação do cliente alimentando o feedback loop
 
-### Authority
-- Can flag customer health risks that elevate the urgency of a demand
-- Can provide evidence of impact (usage data, NPS, churn signals)
+### Autoridade
+- Pode sinalizar riscos de saúde do cliente que elevam a urgência de uma demanda
+- Pode fornecer evidências de impacto (dados de uso, NPS, sinais de churn)
 
-### Does NOT do
-- Promise product features or timelines to customers
-- Bypass the Intake and go directly to Engineering
-- Define what the solution should look like
+### Não faz
+- Prometer funcionalidades ou prazos de produto a clientes
+- Contornar o Intake e ir diretamente à Engenharia
+- Definir como a solução deve ser
 
 ---
 

@@ -1,77 +1,77 @@
-# Interaction 11 — Engineers → QA (Handoff for Testing)
+# Interação 11 — Engenheiros → QA (Handoff para Testes)
 
-**Direction:** Engineers initiate. QA receives.
-**Layer:** Within Downstream
-
----
-
-## Trigger
-
-All acceptance criteria for a story or defined task set are implemented, unit tests pass, and code review is complete.
+**Direção:** Engenheiros iniciam. QA recebe.
+**Camada:** Dentro do Downstream
 
 ---
 
-## What Engineers Must Provide
+## Gatilho
 
-- Implementation summary: what was built, what was changed, what was not implemented and why
-- Test coverage summary: unit and integration tests written
-- Known limitations or deferred edge cases (if any, must be documented — not silently omitted)
-- Environment and setup instructions if the feature requires specific configuration to test
+Todos os critérios de aceite para uma história ou conjunto de tarefas definidas estão implementados, testes unitários passam e o code review está completo.
 
 ---
 
-## What QA Produces
+## O que os Engenheiros Devem Fornecer
 
-- Validation against every acceptance criterion defined in the Product Backlog story
-- Edge case testing based on the edge cases defined per story
-- Regression suite pass confirmation
-- Release approval (go) or rejection (no-go) with specific failing criteria listed
+- Resumo de implementação: o que foi construído, o que foi alterado, o que não foi implementado e por quê
+- Resumo de cobertura de testes: testes unitários e de integração escritos
+- Limitações conhecidas ou edge cases adiados (se houver, devem ser documentados — não omitidos silenciosamente)
+- Instruções de ambiente e configuração se a funcionalidade requer configuração específica para testar
 
 ---
 
-## Ownership Transferred
+## O que o QA Produz
 
-**From Engineers:** Implementation is complete and handed over. Engineers no longer make changes to the feature without a QA bug report initiating it — no unsolicited modifications during QA.
-**To QA:** Owns the validation cycle — acceptance criterion traceability, edge case testing, regression, and the go/no-go release decision. QA is the sole issuer of release approval.
-**Artifact handed over:** Implementation + test coverage summary + known limitations.
+- Validação contra cada critério de aceite definido na história do Product Backlog
+- Testes de edge cases baseados nos edge cases definidos por história
+- Confirmação de aprovação do regression suite
+- Aprovação de release (go) ou rejeição (no-go) com critérios com falha listados especificamente
+
+---
+
+## Transferência de Ownership
+
+**Dos Engenheiros:** A implementação está completa e transferida. Engenheiros não fazem mais alterações na funcionalidade sem que um bug report do QA as inicie — sem modificações não solicitadas durante o QA.
+**Para o QA:** Detém o ciclo de validação — rastreabilidade de critérios de aceite, testes de edge cases, regressão e a decisão go/no-go de release. O QA é o único emissor de aprovação de release.
+**Artefato transferido:** Implementação + resumo de cobertura de testes + limitações conhecidas.
 
 ---
 
 ## Gate
 
-QA does not issue a release approval without explicitly validating all acceptance criteria. A "looks good to me" without traceability to the defined criteria is not a valid gate pass.
+O QA não emite uma aprovação de release sem validar explicitamente todos os critérios de aceite. Um "parece bom" sem rastreabilidade aos critérios definidos não é um gate pass válido.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If QA finds a failing acceptance criterion, it is returned to the Engineer with a bug report tracing the failure to the specific criterion. Engineers fix and re-submit to QA — they do not renegotiate the acceptance criterion.
-
----
-
-## What Engineers Must NOT Do
-
-- Hand off without a code review completed
-- Omit known limitations or deferred edge cases from the summary
-- Submit to QA before unit tests pass
+Se o QA encontrar um critério de aceite com falha, ele é devolvido ao Engenheiro com um bug report rastreando a falha ao critério específico. Engenheiros corrigem e resubmetem ao QA — não renegociam o critério de aceite.
 
 ---
 
-## Sequence
+## O que os Engenheiros NÃO Devem Fazer
+
+- Fazer o handoff sem um code review completo
+- Omitir limitações conhecidas ou edge cases adiados do resumo
+- Submeter ao QA antes que os testes unitários passem
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
-    actor ENG as Engineer
+    actor ENG as Engenheiro
     actor QA as QA
 
-    ENG->>QA: Implementation + test coverage summary + known limitations
-    QA->>QA: Validates each acceptance criterion
+    ENG->>QA: Implementação + resumo de cobertura de testes + limitações conhecidas
+    QA->>QA: Valida cada critério de aceite
 
-    loop For each failing criterion
-        QA-->>ENG: Bug report (criterion + observed vs expected)
-        ENG->>ENG: Fix
-        ENG->>QA: Resubmit
+    loop Para cada critério com falha
+        QA-->>ENG: Bug report (critério + observado vs esperado)
+        ENG->>ENG: Corrige
+        ENG->>QA: Resubmete
     end
 
-    QA-->>PM: Release approval (go/no-go) with criterion traceability
+    QA-->>PM: Aprovação de release (go/no-go) com rastreabilidade de critérios
 ```

@@ -13,29 +13,29 @@ Templates em branco para cada artefato do processo operacional.
 
 | Template | Dono | Quando usar |
 |---|---|---|
-| `intake-record.md` | Sales / CS / CEO / Marketing | Ao capturar qualquer nova demanda |
-| `readiness-package.md` | PO + CTO | Após triagem Product Ready, antes de entregar ao PM |
-| `execution-plan.md` | PM | Após receber e aprovar o Readiness Package |
-| `product-backlog.md` | PO | Em paralelo ao Execution Plan — o quê construir |
-| `tech-backlog.md` | Tech Lead | Após Product Backlog baselined — como construir |
+| `intake-record-pt-br.md` | Vendas / CS / CEO / Marketing | Ao capturar qualquer nova demanda |
+| `readiness-package-pt-br.md` | PO + CTO | Após triagem Product Ready, antes de entregar ao PM |
+| `execution-plan-pt-br.md` | PM | Após receber e aprovar o Readiness Package |
+| `product-backlog-pt-br.md` | PO | Em paralelo ao Execution Plan — o quê construir |
+| `tech-backlog-pt-br.md` | Tech Lead | Após Product Backlog baselined — como construir |
 
 ## Convenção de IDs
 
 | Artefato | Prefixo | Exemplo |
 |---|---|---|
-| Intake Record | INT-YYYY-NNN | INT-2024-001 |
-| Readiness Package | RP-YYYY-NNN | RP-2024-001 |
-| Execution Plan | EP-YYYY-NNN | EP-2024-001 |
-| Product Backlog | PB-YYYY-NNN | PB-2024-001 |
-| Tech Backlog | TB-YYYY-NNN | TB-2024-001 |
+| Registro de Intake | INT-AAAA-NNN | INT-2024-001 |
+| Readiness Package | RP-AAAA-NNN | RP-2024-001 |
+| Plano de Execução | EP-AAAA-NNN | EP-2024-001 |
+| Product Backlog | PB-AAAA-NNN | PB-2024-001 |
+| Tech Backlog | TB-AAAA-NNN | TB-2024-001 |
 
 ## Prefixos de arquivo
 
 | Artefato | Prefixo de arquivo |
 |---|---|
-| Intake Record | `01-` ou `02-` |
+| Registro de Intake | `01-` ou `02-` |
 | Readiness Package | `03-` ou `04-` |
-| Execution Plan | `05-` |
+| Plano de Execução | `05-` |
 | Product Backlog demanda 1 | `06.1-` |
 | Tech Backlog demanda 1 | `06.2-` |
 | Product Backlog demanda 2 | `07.1-` |

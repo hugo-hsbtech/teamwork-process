@@ -1,35 +1,35 @@
-# Interactions Index
+# Índice de Interações
 
-Each file in this folder documents one bilateral interaction between two roles.
+Cada arquivo nesta pasta documenta uma interação bilateral entre dois papéis.
 
-## Interaction Map
+## Mapa de Interações
 
 ```mermaid
 flowchart LR
-    CEO -->|Strategic direction| CTO
-    SALES -->|Intake record| PO
-    MKTG -->|Intake record| PO
-    CS -->|Intake record| PO
-    CS -->|Feedback signal| PM
+    CEO -->|Direção estratégica| CTO
+    SALES -->|Registro de intake| PO
+    MKTG -->|Registro de intake| PO
+    CS -->|Registro de intake| PO
+    CS -->|Sinal de feedback| PM
 
-    PO -->|Discovery request| CTO
-    PO -->|Architectural escalation| CTO
-    CTO -->|Technical assessment| PO
+    PO -->|Solicitação de discovery| CTO
+    PO -->|Escalada arquitetural| CTO
+    CTO -->|Avaliação técnica| PO
 
     PO -->|Readiness Package| PM
-    PM -->|Capacity escalation| PO
+    PM -->|Escalada de capacidade| PO
 
-    PM -->|Execution Plan + RP| TL
-    TL -->|Context confirmation / scope blocker| PM
+    PM -->|Plano de Execução + RP| TL
+    TL -->|Confirmação de contexto / bloqueio de escopo| PM
 
-    TL -->|Defined tasks| ENG
-    ENG -->|Scope discovery| TL
+    TL -->|Tarefas definidas| ENG
+    ENG -->|Discovery de escopo| TL
 
-    ENG -->|Implementation complete| QA
-    QA -->|Release approval / rejection| PM
+    ENG -->|Implementação concluída| QA
+    QA -->|Aprovação / rejeição de release| PM
 
-    PM -->|Delivery summary| CS
-    PM -->|Feedback loop report| PO
+    PM -->|Resumo de entrega| CS
+    PM -->|Relatório de feedback| PO
 
     style CEO fill:#e8f4f8,stroke:#2196F3,color:#000
     style SALES fill:#e8f4f8,stroke:#2196F3,color:#000
@@ -43,40 +43,40 @@ flowchart LR
     style QA fill:#e8f5e9,stroke:#4CAF50,color:#000
 ```
 
-## File Index
+## Índice de Arquivos
 
-| # | File | Interaction | Layer |
+| # | Arquivo | Interação | Camada |
 |---|---|---|---|
-| 01 | `01-sales-to-po.md` | Sales → PO | Upstream → Intake |
-| 02 | `02-cs-to-po.md` | CS → PO | Upstream → Intake |
-| 03 | `03-marketing-to-po.md` | Marketing → PO | Upstream → Intake |
-| 04 | `04-ceo-to-cto.md` | CEO → CTO | Executive → Technical Leadership |
-| 05 | `05-po-to-cto.md` | PO → CTO | Within Intake |
-| 06 | `06-cto-to-po.md` | CTO → PO | Within Intake |
-| 07 | `07-po-to-pm.md` | PO → PM | Intake → Downstream |
-| 08 | `08-pm-to-po-capacity.md` | PM → PO (Capacity Escalation) | Within Downstream |
-| 09 | `09-pm-to-tech-leads.md` | PM → Tech Leads | Within Downstream |
-| 10 | `10-tech-leads-to-engineers.md` | Tech Leads → Engineers | Within Downstream |
-| 11 | `11-engineers-to-qa.md` | Engineers → QA | Within Downstream |
-| 12 | `12-qa-to-pm.md` | QA → PM | Within Downstream |
-| 13 | `13-pm-to-cs.md` | PM → CS | Post-Delivery |
-| 14 | `14-pm-to-po-feedback.md` | PM → PO (Feedback Loop Close) | Post-Delivery |
+| 01 | `01-sales-to-po-pt-br.md` | Vendas → PO | Upstream → Intake |
+| 02 | `02-cs-to-po-pt-br.md` | CS → PO | Upstream → Intake |
+| 03 | `03-marketing-to-po-pt-br.md` | Marketing → PO | Upstream → Intake |
+| 04 | `04-ceo-to-cto-pt-br.md` | CEO → CTO | Executivo → Liderança Técnica |
+| 05 | `05-po-to-cto-pt-br.md` | PO → CTO | Dentro do Intake |
+| 06 | `06-cto-to-po-pt-br.md` | CTO → PO | Dentro do Intake |
+| 07 | `07-po-to-pm-pt-br.md` | PO → PM | Intake → Downstream |
+| 08 | `08-pm-to-po-capacity-pt-br.md` | PM → PO (Escalada de Capacidade) | Dentro do Downstream |
+| 09 | `09-pm-to-tech-leads-pt-br.md` | PM → Tech Leads | Dentro do Downstream |
+| 10 | `10-tech-leads-to-engineers-pt-br.md` | Tech Leads → Engenheiros | Dentro do Downstream |
+| 11 | `11-engineers-to-qa-pt-br.md` | Engenheiros → QA | Dentro do Downstream |
+| 12 | `12-qa-to-pm-pt-br.md` | QA → PM | Dentro do Downstream |
+| 13 | `13-pm-to-cs-pt-br.md` | PM → CS | Pós-Entrega |
+| 14 | `14-pm-to-po-feedback-pt-br.md` | PM → PO (Fechamento do Loop de Feedback) | Pós-Entrega |
 
-## Rejection Rules Summary
+## Resumo das Regras de Rejeição
 
-| Interaction | Can be rejected? | Rejection owner |
+| Interação | Pode ser rejeitada? | Responsável pela rejeição |
 |---|---|---|
-| Sales → PO | Yes — incomplete intake | PO returns to Sales |
-| CS → PO | Yes — insufficient evidence | PO opens Discovery |
-| Marketing → PO | Yes — not a segment pattern | PO redirects to CS/Sales |
-| CEO → CTO | No — but creates trade-off | CTO surfaces cost to CEO |
-| PO → CTO | Yes — infeasible scope | CTO returns with veto + reason |
-| CTO → PO | No — PO must integrate | PO escalates disagreement explicitly |
-| PO → PM | Yes — incomplete RP | PM returns with specific gaps |
-| PM → PO (capacity) | No — triggers decision | PO decides trade-off |
-| PM → Tech Leads | Yes — missing context | TL returns specific gaps |
-| Tech Leads → Engineers | Yes — undefined task | Eng returns specific question |
-| Engineers → QA | Yes — no-go | QA returns failing criteria |
-| QA → PM | No — PM cannot override | PM escalates timeline only |
-| PM → CS | No — CS must collect | CS returns structured feedback |
-| PM → PO (feedback) | No — PO must acknowledge | PO closes loop explicitly |
+| Vendas → PO | Sim — intake incompleto | PO devolve para Vendas |
+| CS → PO | Sim — evidência insuficiente | PO abre Discovery |
+| Marketing → PO | Sim — não é padrão de segmento | PO redireciona para CS/Vendas |
+| CEO → CTO | Não — mas gera trade-off | CTO apresenta o custo ao CEO |
+| PO → CTO | Sim — escopo inviável | CTO devolve com veto + justificativa |
+| CTO → PO | Não — PO deve integrar | PO escala discordância explicitamente |
+| PO → PM | Sim — RP incompleto | PM devolve com gaps específicos |
+| PM → PO (capacidade) | Não — dispara decisão | PO decide o trade-off |
+| PM → Tech Leads | Sim — contexto faltando | TL devolve gaps específicos |
+| Tech Leads → Engenheiros | Sim — tarefa indefinida | Eng devolve pergunta específica |
+| Engenheiros → QA | Sim — no-go | QA devolve critérios com falha |
+| QA → PM | Não — PM não pode sobrepor | PM escala apenas o prazo |
+| PM → CS | Não — CS deve coletar | CS devolve feedback estruturado |
+| PM → PO (feedback) | Não — PO deve reconhecer | PO fecha o loop explicitamente |

@@ -1,84 +1,84 @@
-# Interaction 07 — PO → PM (Readiness Package Handoff)
+# Interação 07 — PO → PM (Handoff do Readiness Package)
 
-**Direction:** PO initiates. PM receives.
-**Layer:** Intake Layer → Downstream
-
----
-
-## Trigger
-
-The Readiness Package is complete — all 12 sections filled, CTO contributions integrated if required, and PO has reviewed the full package for internal consistency.
+**Direção:** PO inicia. PM recebe.
+**Camada:** Camada de Intake → Downstream
 
 ---
 
-## What PO Must Provide
+## Gatilho
 
-- Complete Readiness Package (all 12 sections)
-- CTO sign-off documented in package metadata (if architectural escalation occurred)
-- Priority level and business context that informed the decision to advance this demand now
-- Any known external dependencies or blockers (client actions required, procurement pending)
+O Readiness Package está completo — todas as 12 seções preenchidas, contribuições do CTO integradas se necessário, e o PO revisou o pacote completo quanto à consistência interna.
 
 ---
 
-## What PM Does With It
+## O que o PO Deve Fornecer
 
-- Reviews the package for execution readiness: are the scope, risks, and dependencies sufficiently defined to plan?
-- Runs a capacity assessment before producing any timeline
-- Produces the Execution Plan: milestones, sprint structure, capacity allocation, dependency map, escalation triggers
-- Confirms to the PO that planning has begun and provides an expected timeline for the Execution Plan
+- Readiness Package completo (todas as 12 seções)
+- Sign-off do CTO documentado nos metadados do pacote (se escalada arquitetural ocorreu)
+- Nível de prioridade e contexto de negócio que embasou a decisão de avançar esta demanda agora
+- Quaisquer dependências externas conhecidas ou bloqueadores (ações necessárias do cliente, procurement pendente)
 
 ---
 
-## Ownership Transferred
+## O que o PM Faz Com Isso
 
-**From PO:** Product rationalization is complete and handed over. PO no longer drives this demand day-to-day — execution decisions belong to PM from this point forward.
-**To PM:** Owns the Execution Plan, capacity assessment, sprint structure, and milestone delivery. PM is the primary accountability holder until the feedback loop closes back to PO.
-**Artifact handed over:** Complete Readiness Package (all 12 sections).
+- Revisa o pacote quanto à prontidão de execução: escopo, riscos e dependências estão suficientemente definidos para planejar?
+- Executa uma avaliação de capacidade antes de produzir qualquer prazo
+- Produz o Plano de Execução: marcos, estrutura de sprint, alocação de capacidade, mapa de dependências, gatilhos de escalada
+- Confirma ao PO que o planejamento começou e fornece prazo esperado para o Plano de Execução
+
+---
+
+## Transferência de Ownership
+
+**Do PO:** A racionalização de produto está completa e transferida. O PO não conduz mais esta demanda no dia a dia — decisões de execução pertencem ao PM a partir deste ponto.
+**Para o PM:** Detém o Plano de Execução, avaliação de capacidade, estrutura de sprint e entrega de marcos. O PM é o principal responsável até que o loop de feedback se feche de volta ao PO.
+**Artefato transferido:** Readiness Package completo (todas as 12 seções).
 
 ---
 
 ## Gate
 
-The PM has explicit authority to reject the Readiness Package and return it to the PO. The PM does not start planning on an incomplete package. Rejection must include the specific reason — not a general "needs more detail."
+O PM tem autoridade explícita para rejeitar o Readiness Package e devolvê-lo ao PO. O PM não começa o planejamento com um pacote incompleto. A rejeição deve incluir o motivo específico — não um genérico "precisa de mais detalhes."
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If PM rejects, the PO addresses only the flagged gaps and resubmits. The package version increments. The rejection and reason are documented in the Revision History.
-
----
-
-## What PO Must NOT Do
-
-- Submit a package with any of the 12 sections incomplete or placeholder-filled
-- Omit known external blockers from the package
-- Pressure PM to start planning before the package is accepted
+Se o PM rejeitar, o PO trata apenas os gaps sinalizados e resubmete. A versão do pacote incrementa. A rejeição e o motivo são documentados no Histórico de Revisão.
 
 ---
 
-## Sequence
+## O que o PO NÃO Deve Fazer
+
+- Submeter um pacote com qualquer das 12 seções incompleta ou preenchida com placeholder
+- Omitir bloqueadores externos conhecidos do pacote
+- Pressionar o PM para começar o planejamento antes que o pacote seja aceito
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor PO as PO
     actor PM as PM
 
-    PO->>PM: Complete Readiness Package (12 sections)
-    PM->>PM: Execution readiness review
+    PO->>PM: Readiness Package completo (12 seções)
+    PM->>PM: Revisão de prontidão para execução
 
-    alt Package incomplete or insufficient
-        PM-->>PO: Rejection + specific gaps listed
-        PO->>PO: Addresses gaps, increments version
-        PO->>PM: Resubmits RP vN
+    alt Pacote incompleto ou insuficiente
+        PM-->>PO: Rejeição + gaps específicos listados
+        PO->>PO: Trata gaps, incrementa versão
+        PO->>PM: Resubmete RP vN
     end
 
-    PM->>PM: Capacity assessment
-    alt Insufficient capacity
-        PM-->>PO: Capacity assessment report
-        PO->>PO: Decision: delay, descope, or escalate
+    PM->>PM: Avaliação de capacidade
+    alt Capacidade insuficiente
+        PM-->>PO: Relatório de avaliação de capacidade
+        PO->>PO: Decisão: atrasar, reduzir escopo ou escalar
     end
 
-    PM->>PM: Produces Execution Plan
-    PM-->>PO: Confirms planning underway + expected EP delivery date
+    PM->>PM: Produz Plano de Execução
+    PM-->>PO: Confirma planejamento em andamento + data esperada de entrega do PE
 ```

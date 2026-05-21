@@ -1,76 +1,76 @@
-# Interaction 02 — CS → PO
+# Interação 02 — CS → PO
 
-**Direction:** Customer Success initiates. PO receives.
-**Layer:** Upstream → Intake Layer
-
----
-
-## Trigger
-
-A customer reports friction, a retention risk is identified, or a recurring workaround is documented.
+**Direção:** Customer Success inicia. PO recebe.
+**Camada:** Upstream → Camada de Intake
 
 ---
 
-## What CS Must Provide
+## Gatilho
 
-- Structured intake record with: origin (Client), type, problem statement, business impact
-- Customer health context: which customer, frequency of friction, usage data, retention risk signal
-- Severity indicator: is this causing active churn risk or is it an adoption gap?
-- Evidence: support tickets, NPS data, call recordings or notes
+Um cliente relata atrito, um risco de retenção é identificado, ou um workaround recorrente é documentado.
 
 ---
 
-## What PO Does With It
+## O que CS Deve Fornecer
 
-- Reviews and triages against current queue
-- Weights the signal against other demands already in rationalization
-- May ask CS to provide additional client data if the problem is ambiguous
+- Registro de intake estruturado com: origem (Cliente), tipo, descrição do problema, impacto de negócio
+- Contexto de saúde do cliente: qual cliente, frequência do atrito, dados de uso, sinal de risco de retenção
+- Indicador de severidade: isso está causando risco ativo de churn ou é uma lacuna de adoção?
+- Evidências: tickets de suporte, dados de NPS, gravações de chamadas ou notas
 
 ---
 
-## Ownership Transferred
+## O que o PO Faz Com Isso
 
-**From CS:** Accountability for the signal ends here. CS does not follow up directly with Engineering or make commitments to the client on timing.
-**To PO:** Owns the intake record and the triage decision. Responsible for communicating the outcome back to CS.
-**Artifact handed over:** Intake record + customer health context.
+- Revisa e faz a triagem contra a fila atual
+- Pondera o sinal frente a outras demandas já em racionalização
+- Pode pedir ao CS dados adicionais do cliente se o problema for ambíguo
+
+---
+
+## Transferência de Ownership
+
+**De CS:** A responsabilidade pelo sinal termina aqui. CS não faz follow-up diretamente com Engenharia nem faz compromissos ao cliente sobre prazo.
+**Para o PO:** Detém o registro de intake e a decisão de triagem. Responsável por comunicar o resultado de volta ao CS.
+**Artefato transferido:** Registro de intake + contexto de saúde do cliente.
 
 ---
 
 ## Gate
 
-CS cannot submit "the client is unhappy" as a problem statement. The intake must describe the specific friction with observable, reproducible context.
+CS não pode submeter "o cliente está insatisfeito" como descrição do problema. O intake deve descrever o atrito específico com contexto observável e reproduzível.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If CS cannot describe the problem specifically, PO opens a Discovery to gather the missing context with CS as the primary source.
-
----
-
-## What CS Must NOT Do
-
-- Promise the customer a fix, timeline, or priority before triage is complete
-- Submit problems that are individual one-off incidents without pattern evidence
-- Bypass PO and go directly to Engineering when a client is frustrated
+Se CS não conseguir descrever o problema especificamente, o PO abre um Discovery para coletar o contexto faltante com CS como fonte primária.
 
 ---
 
-## Sequence
+## O que CS NÃO Deve Fazer
+
+- Prometer ao cliente uma correção, prazo ou prioridade antes que a triagem seja concluída
+- Submeter problemas que sejam incidentes isolados sem evidência de padrão
+- Contornar o PO e ir diretamente à Engenharia quando um cliente está frustrado
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor CS as Customer Success
     actor PO as PO
 
-    CS->>PO: Intake record + customer health context
-    PO->>PO: Check completeness and pattern validity
+    CS->>PO: Registro de intake + contexto de saúde do cliente
+    PO->>PO: Verifica completude e validade do padrão
 
-    alt Ambiguous problem
-        PO-->>CS: Opens Discovery — requests specific client evidence
-        CS->>PO: Returns with evidence (tickets, data, recordings)
+    alt Problema ambíguo
+        PO-->>CS: Abre Discovery — solicita evidência específica do cliente
+        CS->>PO: Retorna com evidências (tickets, dados, gravações)
     end
 
-    PO->>PO: Triage
-    PO-->>CS: Triage outcome
+    PO->>PO: Triagem
+    PO-->>CS: Resultado da triagem
 ```

@@ -1,279 +1,279 @@
-# Readiness Package — Room Access Control
+# Readiness Package — Room Access Control (Controle de Acesso à Sala)
 
-## Metadata
+## Metadados
 
-| Field | Value |
+| Campo | Valor |
 |---|---|
-| **Package ID** | RP-2024-002 |
-| **Version** | v1 |
-| **Linked Intake** | INT-2024-002 |
-| **Owned by** | Lucas Mendes (PO) |
-| **CTO contribution** | Yes — architectural assessment on participant data model and real-time session membership |
-| **Status** | Approved — pending PM execution planning |
-| **Current version approval date** | 2024-03-27 |
+| **ID do Pacote** | RP-2024-002 |
+| **Versão** | v1 |
+| **Intake vinculado** | INT-2024-002 |
+| **Responsável** | Lucas Mendes (PO) |
+| **Contribuição do CTO** | Sim — avaliação arquitetural sobre o modelo de dados de participantes e membership de sessão em tempo real |
+| **Status** | Aprovado — aguardando planejamento de execução pelo PM |
+| **Data de aprovação da versão atual** | 2024-03-27 |
 
-## Revision History
+## Histórico de Revisão
 
-| Version | Date | Author | Status | Summary |
+| Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
-| v1 | 2024-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Approved | Initial submission. Package included full Discovery findings (Azure AD OIDC, LGPD Option C). PM approved on first review. |
+| v1 | 2024-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Aprovado | Submissão inicial. Pacote incluiu findings completos do Discovery (Azure AD OIDC, LGPD Opção C). PM aprovou na primeira revisão. |
 
 ---
 
-## Section 1 — Executive Summary
+## Seção 1 — Resumo Executivo
 
-The platform currently offers no access control within a planning room. Any person with the room link can join, see all participants, and vote. This model is insufficient for enterprise clients operating with mixed internal/external teams or under data governance policies that restrict participant visibility.
+A plataforma atualmente não oferece controle de acesso dentro de uma sala de planejamento. Qualquer pessoa com o link da sala pode entrar, ver todos os participantes e votar. Esse modelo é insuficiente para clientes enterprise operando com equipes mistas internas/externas ou sob políticas de governança de dados que restringem a visibilidade dos participantes.
 
-This package defines a **Room Access Control** system enabling the room owner to:
+Este pacote define um sistema de **Controle de Acesso à Sala** que permite ao dono da sala:
 
-1. Control who can join (invite-only or approval-required access)
-2. Control participant visibility (anonymous mode — voters cannot see each other's identities)
-3. Assign roles within the room (voter vs. observer)
+1. Controlar quem pode entrar (acesso somente por convite ou com aprovação obrigatória)
+2. Controlar a visibilidade dos participantes (modo anônimo — votantes não podem ver as identidades uns dos outros)
+3. Atribuir papéis dentro da sala (votante vs. observador)
 
-This feature is a pre-close blocker for Construtora Ágil (R$ 42.000 ARR) and has been flagged as a need in 2 additional pipeline deals. The CTO has assessed this as requiring a participant data model change with multi-tenancy implications that must be handled carefully.
-
----
-
-## Section 2 — Context & Problem
-
-### Current Scenario
-
-Room access is entirely link-based: whoever has the URL can join. Once inside, all participants are visible to each other by name or username. There is no distinction between voters and observers. The room owner has no control over who enters or what others can see.
-
-### Limitations
-
-- No access gate: any person with the link enters immediately.
-- No anonymity: participant identities are fully visible to all others.
-- No role differentiation: everyone who joins is a voter by default.
-- No mechanism to remove or restrict a participant mid-session.
-
-### Customer Pain
-
-Construtora Ágil's Scrum Masters run ceremonies that include external contractors. Their internal data governance policy prohibits contractor-to-contractor identity visibility. Additionally, they want product managers to attend as observers without being able to vote or influence estimates.
-
-### Business Impact
-
-- Deal blocker: R$ 42.000 ARR contingent on this feature
-- Pipeline signal: 2 other enterprise deals with same requirement
-- Compliance: Construtora Ágil cannot onboard without this — legal/governance sign-off required on their end
+Esta funcionalidade é um bloqueador pré-fechamento para a Construtora Ágil (R$ 42.000 ARR) e foi sinalizada como necessidade em outros 2 deals em pipeline. O CTO avaliou que isso requer uma mudança no modelo de dados de participantes com implicações de multi-tenancy que devem ser tratadas com cuidado.
 
 ---
 
-## Section 3 — Objectives
+## Seção 2 — Contexto e Problema
 
-1. Enable the room owner to set access mode: open (current behavior), invite-only, or approval-required.
-2. Enable the room owner to activate anonymous mode, hiding participant identities from other participants (facilitator retains full visibility).
-3. Enable the room owner to assign participants as voters or observers before or during a session.
-4. Enable the room owner to remove a participant from an active session.
-5. Close the Construtora Ágil deal by delivering a compliant access control model within 60 days of package approval.
+### Cenário Atual
 
----
+O acesso à sala é inteiramente baseado em link: quem tem a URL entra. Uma vez dentro, todos os participantes são visíveis uns para os outros por nome ou usuário. Não há distinção entre votantes e observadores. O dono da sala não tem controle sobre quem entra ou o que os outros podem ver.
 
-## Section 4 — Scope
+### Limitações
 
-### Included
+- Sem portão de acesso: qualquer pessoa com o link entra imediatamente.
+- Sem anonimato: identidades dos participantes são totalmente visíveis a todos os outros.
+- Sem diferenciação de papéis: todos que entram são votantes por padrão.
+- Sem mecanismo para remover ou restringir um participante durante a sessão.
 
-- Room settings: access mode selector (Open / Invite-only / Approval-required)
-- Invite-only mode: room owner sends invite links or email invitations; non-invited users are blocked
-- Approval-required mode: any user with the link can request to join; room owner approves or denies in real time
-- Anonymous mode: participant names replaced with randomized aliases (e.g., "Participant A", "Participant B") for non-facilitator participants; facilitator sees real names
-- Role assignment: room owner assigns Voter or Observer role per participant before session starts or during session
-- Observer experience: observers see the session in real time but have no voting controls
-- Room owner can remove a participant at any time during an active session
-- Access settings are configurable per room (not account-wide defaults in this release)
+### Dor do Cliente
 
-### Excluded
+Os Scrum Masters da Construtora Ágil realizam cerimônias que incluem prestadores externos. Sua política interna de governança de dados proíbe visibilidade de identidade entre prestadores. Adicionalmente, querem que gerentes de produto participem como observadores sem poder votar ou influenciar estimativas.
 
-- Account-level default access settings (future phase)
-- SSO / SAML integration for enterprise identity management (separate roadmap item)
-- Audit log of who joined, when, and what they voted (future compliance phase)
-- Guest access without account registration (remains out of scope)
-- Room password protection (access modes above are sufficient for this release)
+### Impacto de Negócio
+
+- Bloqueador de deal: R$ 42.000 ARR condicionado a esta funcionalidade
+- Sinal de pipeline: outros 2 deals enterprise com o mesmo requisito
+- Compliance: Construtora Ágil não pode fazer onboarding sem isso — sign-off legal/governance necessário no lado deles
 
 ---
 
-## Section 5 — Personas Impacted
+## Seção 3 — Objetivos
 
-| Persona | Role | Impact |
+1. Permitir que o dono da sala defina o modo de acesso: aberto (comportamento atual), somente convite ou aprovação obrigatória.
+2. Permitir que o dono da sala ative o modo anônimo, ocultando as identidades dos participantes uns dos outros (o facilitador mantém visibilidade completa).
+3. Permitir que o dono da sala atribua papéis de votante ou observador antes ou durante uma sessão.
+4. Permitir que o dono da sala remova um participante de uma sessão ativa.
+5. Fechar o deal da Construtora Ágil entregando um modelo de controle de acesso em conformidade dentro de 60 dias da aprovação do pacote.
+
+---
+
+## Seção 4 — Escopo
+
+### Incluído
+
+- Configurações da sala: seletor de modo de acesso (Aberto / Somente convite / Aprovação obrigatória)
+- Modo somente convite: dono da sala gera links de convite ou envia convites por email; usuários não convidados são bloqueados
+- Modo aprovação obrigatória: qualquer usuário com o link da sala pode solicitar entrada; dono da sala aprova ou nega em tempo real
+- Modo anônimo: nomes dos participantes substituídos por aliases randomizados (ex.: "Participante A", "Participante B") para participantes não-dono; dono vê nomes reais
+- Atribuição de papel: dono da sala atribui papel Votante ou Observador por participante antes ou durante a sessão
+- Experiência do observador: observadores veem a sessão em tempo real mas não têm controles de votação
+- Dono da sala pode remover um participante a qualquer momento durante uma sessão ativa
+- Configurações de acesso são configuráveis por sala (não configurações padrão a nível de conta neste release)
+
+### Excluído
+
+- Configurações padrão de acesso a nível de conta (fase futura)
+- Integração SSO / SAML para gerenciamento de identidade enterprise (item separado no roadmap)
+- Audit log de quem entrou, quando e o que votou (fase futura de compliance)
+- Guest access sem registro de conta (permanece fora do escopo)
+- Proteção de sala com senha (modos de acesso acima são suficientes para este release)
+
+---
+
+## Seção 5 — Personas Impactadas
+
+| Persona | Papel | Impacto |
 |---|---|---|
-| **Room Owner (Scrum Master / Tech Lead)** | Creates and manages the room | New: configures access mode, manages invites/approvals, assigns roles, activates anonymous mode |
-| **Voter (Developer / Team Member)** | Estimates items | Unchanged voting experience. In anonymous mode, sees peer aliases instead of names. |
-| **Observer (Product Manager / Executive)** | Watches the ceremony | New role: joins the room, sees everything in real time, cannot vote |
-| **Uninvited / Unapproved User** | Attempts to join | New: sees a waiting/blocked screen instead of entering directly |
+| **Dono da Sala (Scrum Master / Tech Lead)** | Cria e gerencia a sala | Novo: configura modo de acesso, gerencia convites/aprovações, atribui papéis, ativa modo anônimo |
+| **Votante (Desenvolvedor / Membro do Time)** | Estima itens | Experiência de votação inalterada. Em modo anônimo, vê aliases dos colegas em vez de nomes. |
+| **Observador (Product Manager / Executivo)** | Acompanha a cerimônia | Novo papel: entra na sala, vê tudo em tempo real, não pode votar |
+| **Usuário Não Convidado / Não Aprovado** | Tenta entrar | Novo: vê tela de espera/bloqueio em vez de entrar diretamente |
 
 ---
 
-## Section 6 — Business Rules & Flows
+## Seção 6 — Regras de Negócio e Fluxos
 
-### Access Mode Rules
+### Regras de Modo de Acesso
 
-**Open (default)**
-- Behavior unchanged from current.
+**Aberto (padrão)**
+- Comportamento inalterado em relação ao atual.
 
-**Invite-only**
-1. Room owner generates invite links or sends email invitations from the room settings panel.
-2. Only users who received an invitation can join.
-3. A user without an invitation who attempts to join via the room URL sees: "This room requires an invitation."
-4. The room owner can revoke an invitation before it is used.
+**Somente convite**
+1. Dono da sala gera links de convite ou envia convites por email pelo painel de configurações da sala.
+2. Apenas usuários que receberam um convite podem entrar.
+3. Um usuário sem convite que tenta entrar via URL da sala vê: "Esta sala requer um convite."
+4. O dono da sala pode revogar um convite antes que seja usado.
 
-**Approval-required**
-1. Any user with the room URL can request to join.
-2. The room owner receives a real-time notification: "User X is requesting to join."
-3. Room owner approves or denies. Approved users enter immediately. Denied users see: "Your request was not approved."
-4. If the room owner does not respond within 5 minutes, the request expires and the user sees: "Request expired. Contact the room owner."
+**Aprovação obrigatória**
+1. Qualquer usuário com a URL da sala pode solicitar entrada.
+2. O dono da sala recebe notificação em tempo real: "Usuário X está solicitando entrada."
+3. Dono aprova ou nega. Usuários aprovados entram imediatamente. Usuários negados veem: "Sua solicitação não foi aprovada."
+4. Se o dono da sala não responder em 5 minutos, a solicitação expira e o usuário vê: "Solicitação expirada. Entre em contato com o dono da sala."
 
-### Anonymous Mode Rules
+### Regras do Modo Anônimo
 
-1. Anonymous mode can be activated by the room owner at any time before votes are revealed.
-2. When active: all participant names are replaced with aliases for non-owner participants. Order of aliases is randomized per session.
-3. The room owner always sees real names regardless of anonymous mode.
-4. Aliases are consistent within a session — "Participant C" is the same person throughout.
-5. Anonymous mode cannot be deactivated mid-session once activated (prevents unmasking attempts).
+1. O modo anônimo pode ser ativado pelo dono da sala a qualquer momento antes dos votos serem revelados.
+2. Quando ativo: todos os nomes dos participantes são substituídos por aliases para participantes não-dono. A ordem dos aliases é randomizada por sessão.
+3. O dono da sala sempre vê os nomes reais independentemente do modo anônimo.
+4. Os aliases são consistentes dentro de uma sessão — "Participante C" é a mesma pessoa durante toda a sessão.
+5. O modo anônimo não pode ser desativado durante a sessão uma vez ativado (previne tentativas de desmascaramento).
 
-### Role Assignment Rules
+### Regras de Atribuição de Papéis
 
-1. Default role for any joined participant: Voter.
-2. Room owner can change a participant's role to Observer before the session starts or between items.
-3. Observers see the full session (items, votes after reveal) but have no voting controls.
-4. A Voter can be downgraded to Observer mid-session — their previously submitted votes for the current item are voided.
-5. An Observer cannot be upgraded to Voter after voting has started for the current item.
+1. Papel padrão para qualquer participante que entrou: Votante.
+2. O dono da sala pode alterar o papel de um participante para Observador antes da sessão começar ou entre itens.
+3. Observadores veem a sessão completa (itens, votos após revelação) mas não têm controles de votação.
+4. Um Votante pode ser rebaixado para Observador durante a sessão — seus votos já submetidos para o item atual são anulados.
+5. Um Observador não pode ser promovido para Votante após o início da votação para o item atual.
 
-### Participant Removal Rules
+### Regras de Remoção de Participante
 
-1. Room owner can remove any participant at any time.
-2. Removed participant sees: "You have been removed from this session."
-3. Any votes submitted by the removed participant in the current item are voided.
-4. Removed participants cannot rejoin via the same link in the same session.
+1. O dono da sala pode remover qualquer participante a qualquer momento.
+2. Participante removido vê: "Você foi removido desta sessão."
+3. Quaisquer votos submetidos pelo participante removido no item atual são anulados.
+4. Participantes removidos não podem re-entrar pelo mesmo link na mesma sessão.
 
-### State Transition — Approval Flow
+### Transição de Estado — Fluxo de Aprovação
 
 ```text
-User requests to join
+Usuário solicita entrada
     ↓
-Room owner receives notification
+Dono da sala recebe notificação
     ↓
-    ├── Approved → User enters session
-    ├── Denied → User sees denial message
-    └── No response in 5 min → Request expires
+    ├── Aprovado → Usuário entra na sessão
+    ├── Negado → Usuário vê mensagem de negação
+    └── Sem resposta em 5 min → Solicitação expira
 ```
 
 ---
 
-## Section 7 — Integrations Required
+## Seção 7 — Integrações Necessárias
 
-| System | Type | Detail |
+| Sistema | Tipo | Detalhe |
 |---|---|---|
-| **WebSocket / real-time session layer** | Internal | New event types required: `join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`. Existing WebSocket infrastructure applies. |
-| **Session persistence layer** | Internal | Participant records must now carry: access_mode, role, anonymous_alias, invite_token. Schema extension required — CTO has flagged multi-tenancy implications (see Section 8). |
-| **Email service (optional)** | Internal/External | If invite-by-email is included in MVP, the existing transactional email provider is used. No new provider required. |
-| **Authentication layer** | Internal | Invite-only and approval modes require participant identity to be verifiable at join time. Auth token validation at room entry must be enforced. |
+| **WebSocket / camada de sessão em tempo real** | Interno | Novos tipos de evento necessários: `join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`. Infraestrutura WebSocket existente se aplica. |
+| **Camada de persistência de sessão** | Interno | Registros de participantes agora devem carregar: access_mode, role, anonymous_alias, invite_token. Extensão de schema necessária — CTO sinalizou implicações de multi-tenancy (ver Seção 8). |
+| **Serviço de email (opcional)** | Interno/Externo | Se convite por email for incluído no MVP, o provedor de email transacional existente é usado. Sem novo provedor necessário. |
+| **Camada de autenticação** | Interno | Modos somente convite e aprovação requerem que a identidade do participante seja verificável no momento da entrada. Validação de token de auth na entrada da sala deve ser aplicada. |
 
 ---
 
-## Section 8 — Technical Impact
+## Seção 8 — Impacto Técnico
 
-*CTO architectural assessment completed 2024-03-25. Notes below are from CTO review.*
+*Avaliação arquitetural do CTO concluída em 2024-03-25. Notas abaixo são da revisão do CTO.*
 
-| Area | Impact | CTO Note |
+| Área | Impacto | Nota do CTO |
 |---|---|---|
-| **Participant data model** | Significant. The current participant model is a flat session-scoped record. Adding role, access_mode, anonymous_alias, and invite_token requires a schema migration and a new participant state machine. | Migration must be backward-compatible. Existing open sessions must not be affected. |
-| **Multi-tenancy** | Medium. Anonymous aliases must be scoped to the session, not the account. Invite tokens must be non-guessable and scoped to the specific room+session. | Token generation must use cryptographically secure random values. Tokens must expire after first use or session end. |
-| **Real-time membership** | Medium. The WebSocket layer currently broadcasts participant list to all members. With anonymous mode, the server must filter the participant list payload per recipient — room owner gets real names, others get aliases. | Server-side filtering is mandatory. Client must never receive another participant's real name in anonymous mode payloads. |
-| **Security** | High. The access control model must be enforced server-side. A participant who is denied or removed must not be able to rejoin or access session state via direct API calls. | Server must validate room membership on every WebSocket message and REST request. No client-trust for access state. |
-| **Performance** | Low. Approval notifications and role changes are low-frequency events. No scalability concerns at current session volumes. | Monitor at 10x current peak if enterprise adoption accelerates. |
-| **Observability** | Add telemetry: access mode distribution, approval rate, observer-to-voter ratio. | Required for product decisions in Phase 2. |
+| **Modelo de dados de participantes** | Significativo. O modelo atual de participante é um registro plano com escopo de sessão. Adicionar role, access_mode, anonymous_alias e invite_token requer migração de schema e uma nova máquina de estado do participante. | A migração deve ser retrocompatível. Sessões abertas existentes não devem ser afetadas. |
+| **Multi-tenancy** | Médio. Aliases anônimos devem ter escopo de sessão, não de conta. Tokens de convite devem ser não-adivinháveis e com escopo para a sala+sessão específica. | Geração de tokens deve usar valores aleatórios criptograficamente seguros. Tokens devem expirar após o primeiro uso ou fim da sessão. |
+| **Membership em tempo real** | Médio. A camada WebSocket atualmente transmite a lista de participantes a todos os membros. Com modo anônimo, o servidor deve filtrar o payload da lista de participantes por destinatário — dono da sala recebe nomes reais, outros recebem aliases. | Filtragem server-side é obrigatória. O cliente nunca deve receber o nome real de outro participante em payloads de modo anônimo. |
+| **Segurança** | Alto. O modelo de controle de acesso deve ser aplicado server-side. Um participante que foi negado ou removido não deve conseguir re-entrar ou acessar o estado da sessão via chamadas diretas de API. | O servidor deve validar a membership da sala em cada mensagem WebSocket e requisição REST. Sem confiança no cliente para estado de acesso. |
+| **Performance** | Baixo. Notificações de aprovação e mudanças de papel são eventos de baixa frequência. Sem preocupações de escalabilidade nos volumes atuais de sessão. | Monitorar com 10x o pico atual se a adoção enterprise acelerar. |
+| **Observabilidade** | Adicionar telemetria: distribuição de modo de acesso, taxa de aprovação, proporção observador/votante. | Necessário para decisões de produto na Fase 2. |
 
 ---
 
-## Section 9 — Risks & Dependencies
+## Seção 9 — Riscos e Dependências
 
-| Risk | Type | Probability | Impact | Mitigation |
+| Risco | Tipo | Probabilidade | Impacto | Mitigação |
 |---|---|---|---|---|
-| Participant data model migration breaks active sessions | Technical | Low | High | Migration strategy: additive schema change only. New fields are nullable with defaults matching current behavior. Existing sessions unaffected. |
-| Anonymous alias collision (two participants get same alias) | Technical | Low | Medium | Alias assignment is deterministic per session participant index. No collision possible within a session. |
-| Invite token brute-force | Security | Low | High | Tokens are 128-bit cryptographically random. Expire on first use. Rate limiting on join endpoint. |
-| Room owner disconnects during pending approvals | Technical | Medium | Medium | Pending approvals persist for 5 min. If room owner reconnects, queue is presented. If not, requests expire cleanly. |
-| Sales timeline commitment conflict | Operational | High | High | Sales informally committed 60-day delivery to client. PM must run capacity assessment and confirm timeline to PO before Sales communicates anything further to the client. |
-| Scope expansion pressure (SSO, audit logs) | Operational | Medium | Medium | Scope boundary is explicit in this package. Any additions require a new intake record. |
+| Migração do modelo de dados de participantes quebra sessões ativas | Técnico | Baixa | Alto | Estratégia de migração: mudança aditiva de schema apenas. Novos campos são nullable com defaults correspondendo ao comportamento atual. Sessões existentes não afetadas. |
+| Colisão de alias anônimo (dois participantes recebem o mesmo alias) | Técnico | Baixa | Médio | Atribuição de alias é determinística por índice de participante na sessão. Sem colisão possível dentro de uma sessão. |
+| Força bruta de token de convite | Segurança | Baixa | Alto | Tokens são 128-bit criptograficamente aleatórios. Expiram no primeiro uso. Rate limiting no endpoint de entrada. |
+| Dono da sala desconecta durante aprovações pendentes | Técnico | Média | Médio | Aprovações pendentes persistem por 5 min. Se dono da sala reconectar, fila é apresentada. Se não, solicitações expiram limpo. |
+| Conflito de compromisso de prazo de Vendas | Operacional | Alta | Alto | Vendas comprometeu informalmente entrega em 60 dias ao cliente. PM deve executar avaliação de capacidade e confirmar prazo ao PO antes de Vendas comunicar qualquer coisa adicional ao cliente. |
+| Pressão de expansão de escopo (SSO, audit logs) | Operacional | Média | Médio | Limite de escopo é explícito neste pacote. Qualquer adição requer um novo registro de intake. |
 
-**Dependencies:**
-- CTO availability to review participant model migration plan before Tech Lead breakdown begins
-- Auth team (or Tech Lead with auth ownership) for invite token and session validation work
-- QA environment with multi-tenant session simulation
+**Dependências:**
+- Disponibilidade do CTO para revisar plano de migração do modelo de participantes antes do início do breakdown do Tech Lead
+- Time de auth (ou Tech Lead com ownership de auth) para trabalho de token de convite e validação de sessão
+- Ambiente de QA com simulação de sessão multi-tenant
 
 ---
 
-## Section 10 — Internal Effort & Cost Assessment
+## Seção 10 — Avaliação Interna de Esforço e Custo
 
-> 🔒 **Internal use only.** This section is an operational planning instrument for internal decision-making. The estimates below are not commitments, not contractual obligations, and must never be shared with clients, prospects, or external stakeholders in any form. They exist to support capacity planning, prioritization trade-offs, and administrative resource allocation within the company.
+> 🔒 **Somente uso interno.** Esta seção é um instrumento de planejamento operacional para tomada de decisão interna. As estimativas abaixo não são compromissos, não são obrigações contratuais, e nunca devem ser compartilhadas com clientes, prospects ou stakeholders externos em qualquer forma. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação administrativa de recursos dentro da empresa.
 >
-> Estimates are based on current team seniority and known system state at the time of rationalization. They will be revised by the Tech Lead during technical breakdown. The inclusion of LGPD data residency work (Option C) and Azure AD integration increases the original estimate significantly from what was initially scoped at intake.
+> As estimativas são baseadas na senioridade atual da equipe e no estado conhecido do sistema no momento da racionalização. Serão revisadas pelo Tech Lead durante o breakdown técnico. A inclusão do trabalho de residência de dados LGPD (Opção C) e integração Azure AD aumenta significativamente a estimativa original do que foi inicialmente escopado no intake.
 
-### Development Effort
+### Esforço de Desenvolvimento
 
-| Area | Estimate | Seniority |
+| Área | Estimativa | Senioridade |
 |---|---|---|
-| Backend — participant model migration + state machine | 6 days | Senior |
-| Backend — WebSocket event filtering (anonymous mode) | 3 days | Senior |
-| Backend — access mode enforcement (invite, approval, removal) | 5 days | Mid-senior |
-| Backend — Azure AD OIDC group-claim integration | 5 days | Senior |
-| Backend — LGPD data residency routing (Option C, `sa-east-1`) | 10 days | Senior |
-| Frontend — room owner access settings panel | 4 days | Mid |
-| Frontend — participant UI (anonymous aliases, observer view, approval screen) | 3 days | Mid |
-| QA (functional + security + multi-tenant + LGPD validation) | 5 days | QA |
-| **Total** | **41 days** | |
+| Backend — migração do modelo de participantes + máquina de estado | 6 dias | Senior |
+| Backend — filtragem de eventos WebSocket (modo anônimo) | 3 dias | Senior |
+| Backend — aplicação de modo de acesso (convite, aprovação, remoção) | 5 dias | Mid-senior |
+| Backend — integração de group-claim OIDC do Azure AD | 5 dias | Senior |
+| Backend — roteamento de residência de dados LGPD (Opção C, `sa-east-1`) | 10 dias | Senior |
+| Frontend — painel de configurações de acesso do dono da sala | 4 dias | Mid |
+| Frontend — UI do participante (aliases anônimos, view do observador, tela de aprovação) | 3 dias | Mid |
+| QA (funcional + segurança + multi-tenant + validação LGPD) | 5 dias | QA |
+| **Total** | **41 dias** | |
 
-> ⚠️ **Estimate note:** The original intake-level estimate (25 days) did not include Azure AD integration or LGPD data residency work. Both were added to scope during Discovery. The revised total reflects the full post-Discovery scope.
+> ⚠️ **Nota sobre a estimativa:** A estimativa original no nível do intake (25 dias) não incluía integração Azure AD ou trabalho de residência de dados LGPD. Ambos foram adicionados ao escopo durante o Discovery. O total revisado reflete o escopo completo pós-Discovery.
 
-### Infrastructure Impact
+### Impacto de Infraestrutura
 
-No new infrastructure services. Database schema migration on existing cluster. Conditional `sa-east-1` routing requires a read-replica or write endpoint in the Brazil region — CTO to confirm whether this is already provisioned or requires a new RDS instance. If new instance required, procurement must be initiated by CTO before development begins.
+Sem novos serviços de infraestrutura. Migração de schema de banco de dados no cluster existente. O roteamento condicional `sa-east-1` requer uma read-replica ou write endpoint na região do Brasil — CTO deve confirmar se já está provisionado ou se requer uma nova instância RDS. Se nova instância for necessária, o procurement deve ser iniciado pelo CTO antes do início do desenvolvimento.
 
-### Third-party Cost Impact
+### Impacto de Custo com Terceiros
 
-None beyond existing services. Email provider is already contracted. Azure AD integration is client-side — no cost to the platform.
+Nenhum além dos serviços existentes. Provedor de email já está contratado. A integração Azure AD é do lado do cliente — sem custo para a plataforma.
 
-### Recurring Operational Cost Impact
+### Impacto de Custo Operacional Recorrente
 
-Low-to-medium. `sa-east-1` data residency adds a Brazil-region database endpoint. Estimated monthly cost increase: TBD by CTO infrastructure review. Must be factored into pricing for LGPD-flagged tenants in future commercial planning.
+Baixo a médio. A residência de dados `sa-east-1` adiciona um endpoint de banco de dados na região do Brasil. Aumento de custo mensal estimado: a definir pela revisão de infraestrutura do CTO. Deve ser considerado na precificação para tenants com flag LGPD no planejamento comercial futuro.
 
-### TCO Assessment
+### Avaliação de TCO
 
-This feature adds meaningful and lasting complexity to the participant model and the infrastructure layer. Future features touching session membership (SSO, audit logs, guest access) and multi-region data residency will build on this foundation — investment here reduces marginal cost of those phases. The LGPD routing pattern, once established, becomes reusable for any future compliance region requirement.
+Esta funcionalidade adiciona complexidade significativa e duradoura ao modelo de participantes e à camada de infraestrutura. Funcionalidades futuras que tocam membership de sessão (SSO, audit logs, guest access) e residência de dados multi-região construirão sobre esta base — o investimento aqui reduz o custo marginal dessas fases. O padrão de roteamento LGPD, uma vez estabelecido, torna-se reutilizável para qualquer requisito futuro de região de compliance.
 
 ---
 
-## Section 11 — Success Criteria
+## Seção 11 — Critérios de Sucesso
 
-| Metric | Target | Measurement |
+| Métrica | Meta | Medição |
 |---|---|---|
-| Construtora Ágil deal closed | Contract signed within 30 days of release | Sales CRM |
-| Anonymous mode adoption | Used in ≥ 30% of enterprise sessions within 60 days | Session telemetry |
-| Approval-mode join success rate | ≥ 95% of valid join requests approved within 2 min | Telemetry: request-to-approval latency |
-| Zero unauthorized access incidents | No reported cases of removed/blocked participants accessing session data | CS tickets + security monitoring |
-| Additional pipeline deals unblocked | At least 1 of 2 flagged pipeline deals advances to close within 90 days | Sales CRM |
+| Deal da Construtora Ágil fechado | Contrato assinado em até 30 dias do release | CRM de Vendas |
+| Adoção do modo anônimo | Usado em ≥ 30% das sessões enterprise em até 60 dias | Telemetria de sessões |
+| Taxa de sucesso de entrada em modo aprovação | ≥ 95% das solicitações válidas aprovadas em até 2 min | Telemetria: latência solicitação-para-aprovação |
+| Zero incidentes de acesso não autorizado | Sem casos reportados de participantes removidos/bloqueados acessando dados de sessão | Tickets de CS + monitoramento de segurança |
+| Deals adicionais em pipeline desbloqueados | Pelo menos 1 dos 2 deals em pipeline sinalizados avança para fechamento em até 90 dias | CRM de Vendas |
 
 ---
 
-## Section 12 — Suggested Roadmap
+## Seção 12 — Roadmap Sugerido
 
-### MVP (this release)
+### MVP (este release)
 
-- Access modes: Open / Invite-only / Approval-required
-- Anonymous mode
-- Voter / Observer role assignment
-- Participant removal
-- Server-side enforcement of all access rules
+- Modos de acesso: Aberto / Somente convite / Aprovação obrigatória
+- Modo anônimo
+- Atribuição de papel Votante / Observador
+- Remoção de participante
+- Aplicação server-side de todas as regras de acesso
 
-### Phase 2 (future backlog)
+### Fase 2 (backlog futuro)
 
-- Account-level default access settings
-- Audit log: who joined, when, role, votes submitted
-- Bulk invite via CSV or team roster
-- Automatic observer assignment for non-engineering roles (based on account role configuration)
+- Configurações padrão de acesso a nível de conta
+- Audit log: quem entrou, quando, papel, votos submetidos
+- Convite em massa via CSV ou roster de equipe
+- Atribuição automática de observador para papéis não-técnicos (baseado em configuração de papel da conta)
 
-### Phase 3 (future backlog)
+### Fase 3 (backlog futuro)
 
-- SSO / SAML integration for enterprise identity management
-- Compliance export (session audit report for governance purposes)
-- Guest access without account registration (scoped, time-limited tokens)
+- Integração SSO / SAML para gerenciamento de identidade enterprise
+- Exportação de compliance (relatório de audit de sessão para fins de governança)
+- Guest access sem registro de conta (tokens com escopo e tempo limitado)

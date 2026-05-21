@@ -1,624 +1,624 @@
-# Startup Operational Intake & Transition Model
+# Modelo Operacional de Intake & Transição para Startups
 
-## Overview
+## Visão Geral
 
-This document defines a lightweight but scalable operational structure for startups that already have clients and need to standardize the flow from customer demand to technical execution.
+Este documento define uma estrutura operacional leve, porém escalável, para startups que já possuem clientes e precisam padronizar o fluxo desde a demanda do cliente até a execução técnica.
 
-The goal is to create a predictable process where:
-- Business demands are rationalized before engineering execution
-- Product and technical context are formalized
-- Risks, integrations, and costs are visible early
-- Engineering receives execution-ready artifacts
+O objetivo é criar um processo previsível onde:
+- Demandas de negócio são racionalizadas antes da execução de engenharia
+- Contexto de produto e técnico é formalizado
+- Riscos, integrações e custos são visíveis desde cedo
+- A engenharia recebe artefatos prontos para execução
 
 ---
 
-# Organizational Structure
+# Estrutura Organizacional
 
 ## Upstream
 
-Responsible for:
-- Strategic direction
-- Demand generation
-- Opportunity identification
-- Product rationalization
+Responsável por:
+- Direção estratégica
+- Geração de demandas
+- Identificação de oportunidades
+- Racionalização de produto
 
-### Roles
+### Papéis
 
 #### CEO
-Responsible for:
-- Company vision
-- Strategic priorities
-- Executive decisions
-- Market direction
+Responsável por:
+- Visão da empresa
+- Prioridades estratégicas
+- Decisões executivas
+- Direção de mercado
 
-#### Sales / Marketing
-Responsible for:
-- Capturing customer pains
-- Identifying opportunities
-- Bringing market insights
-- Registering demands
+#### Vendas / Marketing
+Responsável por:
+- Capturar dores dos clientes
+- Identificar oportunidades
+- Trazer insights de mercado
+- Registrar demandas
 
 #### CTO / PO
-Responsible for:
-- Rationalization
-- Product vision
-- Technical/product alignment
-- Preparing readiness artifacts
+Responsável por:
+- Racionalização
+- Visão de produto
+- Alinhamento técnico/produto
+- Preparação dos artefatos de readiness
 
 ---
 
 # Downstream
 
-Responsible for:
-- Planning
-- Technical breakdown
-- Execution
-- Delivery
+Responsável por:
+- Planejamento
+- Quebra técnica
+- Execução
+- Entrega
 
-### Roles
+### Papéis
 
 #### PM
-Responsible for:
-- Execution planning
-- Prioritization
-- Coordination
+Responsável por:
+- Planejamento de execução
+- Priorização
+- Coordenação
 - Milestones
-- Dependency management
+- Gestão de dependências
 
 #### Tech Leads
-Responsible for:
-- Technical breakdown
-- Architecture detailing
-- Estimations
-- Technical guidance
-- Delivery quality
+Responsável por:
+- Quebra técnica
+- Detalhamento de arquitetura
+- Estimativas
+- Orientação técnica
+- Qualidade de entrega
 
 ---
 
 # Intake Layer
 
-## Definition
+## Definição
 
-The Intake Layer is the controlled operational gateway between:
-- Business demands
-- Product rationalization
-- Engineering execution
+O Intake Layer é o gateway operacional controlado entre:
+- Demandas de negócio
+- Racionalização de produto
+- Execução de engenharia
 
-Its purpose is to protect engineering from operational chaos and ensure only validated, contextualized, and rationalized demands reach execution.
-
----
-
-# Intake Layer Objectives
-
-- Standardize demand intake
-- Avoid direct interruptions in engineering
-- Eliminate ambiguous requests
-- Rationalize business demands
-- Identify risks early
-- Identify integrations early
-- Estimate costs before execution
-- Improve predictability
+Seu propósito é proteger a engenharia do caos operacional e garantir que apenas demandas validadas, contextualizadas e racionalizadas cheguem à execução.
 
 ---
 
-# Intake Flow
+# Objetivos do Intake Layer
+
+- Padronizar o recebimento de demandas
+- Evitar interrupções diretas na engenharia
+- Eliminar solicitações ambíguas
+- Racionalizar demandas de negócio
+- Identificar riscos com antecedência
+- Identificar integrações com antecedência
+- Estimar custos antes da execução
+- Melhorar a previsibilidade
+
+---
+
+# Fluxo do Intake
 
 ```text
-Demand
+Demanda
 ↓
-Capture
+Captura
 ↓
-Initial Triage
+Triagem Inicial
 ↓
-Decision
+Decisão
 ↓
-Rationalization
+Racionalização
 ↓
 Readiness Package
 ↓
-Execution Planning
+Planejamento de Execução
 ↓
-Technical Breakdown
+Quebra Técnica
 ↓
-Execution
+Execução
 ```
 
 ---
 
-# Intake Layer Process
+# Processo do Intake Layer
 
-## 1. Capture
+## 1. Captura
 
-### Responsible
-- Sales
+### Responsável
+- Vendas
 - Marketing
 - CEO
-- Internal stakeholders
+- Stakeholders internos
 
-### Goal
-Register the problem without defining technical implementation.
+### Objetivo
+Registrar o problema sem definir a implementação técnica.
 
-### Required Information
+### Informações Necessárias
 
-#### Origin
-- Client
-- Internal
-- Market
-- Support
+#### Origem
+- Cliente
+- Interno
+- Mercado
+- Suporte
 
-#### Type
+#### Tipo
 - Bug
-- Feature
-- Improvement
+- Funcionalidade
+- Melhoria
 - Compliance
-- Integration
-- Operational
+- Integração
+- Operacional
 
-#### Problem
-What pain exists?
+#### Problema
+Qual dor existe?
 
-#### Business Impact
-- Revenue
-- Retention
-- Operational blockage
-- Efficiency
-- Competitive advantage
+#### Impacto de Negócio
+- Receita
+- Retenção
+- Bloqueio operacional
+- Eficiência
+- Vantagem competitiva
 
-#### Priority
-- Critical
-- High
-- Medium
-- Low
+#### Prioridade
+- Crítica
+- Alta
+- Média
+- Baixa
 
 ---
 
-# Important Rule
+# Regra Importante
 
-The upstream should not define:
+O upstream não deve definir:
 - APIs
-- Databases
-- Architecture
-- Technical implementation
-- Engineering tasks
+- Bancos de dados
+- Arquitetura
+- Implementação técnica
+- Tasks de engenharia
 
-The focus must remain on:
-- Problem
-- Context
-- Value
-- Impact
+O foco deve permanecer em:
+- Problema
+- Contexto
+- Valor
+- Impacto
 
 ---
 
-# 2. Initial Triage
+# 2. Triagem Inicial
 
-## Responsible
+## Responsável
 CTO / PO
 
-## Goal
-Evaluate whether the demand:
-- Fits the strategy
-- Solves a real problem
-- Has business value
-- Should proceed
+## Objetivo
+Avaliar se a demanda:
+- Está alinhada à estratégia
+- Resolve um problema real
+- Tem valor de negócio
+- Deve avançar
 
 ---
 
-# Evaluation Questions
+# Perguntas de Avaliação
 
-## Business Questions
-- Is this recurring?
-- How many customers are impacted?
-- Does this increase retention?
-- Does this unlock revenue?
+## Perguntas de Negócio
+- É recorrente?
+- Quantos clientes são impactados?
+- Aumenta a retenção?
+- Desbloqueia receita?
 
-## Product Questions
-- Does this align with product vision?
-- Is this scalable?
-- Is this reusable?
+## Perguntas de Produto
+- Está alinhado com a visão de produto?
+- É escalável?
+- É reutilizável?
 
-## Technical Questions
-- What is the architectural impact?
-- What systems are affected?
-- Does this affect security?
-- Does this affect multi-tenancy?
-- Does this require AI/runtime changes?
+## Perguntas Técnicas
+- Qual é o impacto arquitetural?
+- Quais sistemas são afetados?
+- Afeta segurança?
+- Afeta multi-tenancy?
+- Requer mudanças em IA/runtime?
 
 ---
 
-# 3. Decision Paths
+# 3. Caminhos de Decisão
 
-## Rejected
-- Outside strategy
-- Low value
-- Not scalable
+## Rejeitado
+- Fora da estratégia
+- Baixo valor
+- Não escalável
 
-## Opportunity Backlog
-- Valuable but not prioritized now
+## Backlog de Oportunidades
+- Valioso, mas não priorizado agora
 
 ## Discovery
-- Requires further investigation
+- Requer investigação adicional
 
 ## Product Ready
-- Ready for formalization
+- Pronto para formalização
 
 ---
 
 # Readiness Package
 
-## Definition
+## Definição
 
-The Readiness Package is the official transition artifact between:
+O Readiness Package é o artefato oficial de transição entre:
 - CTO/PO
-and
+e
 - PM / Tech Leads
 
-It represents the operational handoff into execution.
+Representa o handoff operacional para execução.
 
 ---
 
-# Goals
+# Objetivos
 
-The package must answer:
+O pacote deve responder:
 
 ```text
-What are we building?
-Why are we building it?
-Who benefits from it?
-What are the rules?
-What are the integrations?
-What are the risks?
-What are the costs?
-How will success be measured?
+O que estamos construindo?
+Por que estamos construindo?
+Quem se beneficia?
+Quais são as regras?
+Quais são as integrações?
+Quais são os riscos?
+Quais são os custos?
+Como o sucesso será medido?
 ```
 
 ---
 
-# Readiness Package Structure
+# Estrutura do Readiness Package
 
-## 1. Executive Summary
+## 1. Resumo Executivo
 
-Contains:
-- Problem summary
-- Proposed solution
-- Expected impact
-
----
-
-## 2. Context & Problem
-
-Contains:
-- Current scenario
-- Existing limitations
-- Customer pain
-- Business impact
+Contém:
+- Resumo do problema
+- Solução proposta
+- Impacto esperado
 
 ---
 
-## 3. Objectives
+## 2. Contexto e Problema
 
-Examples:
-- Reduce operational time
-- Increase conversion
-- Enable enterprise onboarding
-- Improve automation
-
----
-
-## 4. Scope
-
-### Included
-What is part of the project.
-
-### Excluded
-What is explicitly outside the project.
+Contém:
+- Cenário atual
+- Limitações existentes
+- Dor do cliente
+- Impacto de negócio
 
 ---
 
-## 5. Personas Impacted
+## 3. Objetivos
 
-Defines:
-- Who uses it
-- Who operates it
-- Who benefits from it
-
----
-
-## 6. Business Rules & Flows
-
-Contains:
-- User journeys
-- Validations
-- Permissions
-- Exceptions
-- State transitions
+Exemplos:
+- Reduzir tempo operacional
+- Aumentar conversão
+- Viabilizar onboarding enterprise
+- Melhorar automação
 
 ---
 
-# Integrations Section
+## 4. Escopo
 
-## Purpose
+### Incluído
+O que faz parte do projeto.
 
-Ensure all dependencies are visible before execution.
+### Excluído
+O que está explicitamente fora do projeto.
 
 ---
 
-## Required Information
+## 5. Personas Impactadas
 
-### Systems Involved
-Examples:
+Define:
+- Quem usa
+- Quem opera
+- Quem se beneficia
+
+---
+
+## 6. Regras de Negócio e Fluxos
+
+Contém:
+- Jornadas do usuário
+- Validações
+- Permissões
+- Exceções
+- Transições de estado
+
+---
+
+# Seção de Integrações
+
+## Propósito
+
+Garantir que todas as dependências estejam visíveis antes da execução.
+
+---
+
+## Informações Necessárias
+
+### Sistemas Envolvidos
+Exemplos:
 - Twilio
 - OpenAI
 - Anthropic
 - Asaas
 - N8N
 - SPI
-- Internal APIs
+- APIs internas
 
-### Integration Types
+### Tipos de Integração
 - REST API
 - Webhooks
-- Events
-- Queues
-- File ingestion
+- Eventos
+- Filas
+- Ingestão de arquivos
 - Polling
 
-### External Dependencies
+### Dependências Externas
 - SLAs
-- Contracts
-- Authentication
+- Contratos
+- Autenticação
 - Rate limits
 
-### Architectural Impact
-- New services
-- Event flows
-- Queues
-- Runtime changes
+### Impacto Arquitetural
+- Novos serviços
+- Fluxos de eventos
+- Filas
+- Mudanças de runtime
 
 ---
 
-# Technical Impact Section
+# Seção de Impacto Técnico
 
-## Must Include
-- Affected components
-- Security impact
-- Multi-tenancy impact
-- Observability impact
-- AI/runtime impact
-- Storage impact
-- Scalability concerns
-
----
-
-# Risks & Dependencies
-
-## Goal
-
-Expose risks before execution starts.
+## Deve Incluir
+- Componentes afetados
+- Impacto em segurança
+- Impacto em multi-tenancy
+- Impacto em observabilidade
+- Impacto em IA/runtime
+- Impacto em storage
+- Preocupações de escalabilidade
 
 ---
 
-# Risk Structure
+# Riscos e Dependências
 
-## Risk Types
-- Technical
-- Business
-- Operational
+## Objetivo
+
+Expor riscos antes do início da execução.
+
+---
+
+# Estrutura de Riscos
+
+## Tipos de Risco
+- Técnico
+- Negócio
+- Operacional
 - Compliance
-- Third-party
+- Terceiros
 
-## Risk Evaluation
-- Probability
-- Impact
-- Severity
+## Avaliação de Risco
+- Probabilidade
+- Impacto
+- Severidade
 
-## Mitigation
-How risk will be reduced.
+## Mitigação
+Como o risco será reduzido.
 
 ---
 
-# Example Risk Matrix
+# Exemplo de Matriz de Riscos
 
-| Risk | Impact | Mitigation |
+| Risco | Impacto | Mitigação |
 |---|---|---|
-| External API instability | High | Retry + fallback |
-| High AI costs | Medium | Cache + rate limits |
-| Unknown dependency | High | Technical discovery |
+| Instabilidade de API externa | Alto | Retry + fallback |
+| Custos elevados de IA | Médio | Cache + rate limits |
+| Dependência desconhecida | Alto | Discovery técnico |
 
 ---
 
-# Costs & Resources
+# Custos e Recursos
 
-## Goal
+## Objetivo
 
-Estimate implementation and operational costs before commitment.
-
----
-
-# Development Costs
-- Estimated effort
-- Team size
-- Seniority required
+Estimar custos de implementação e operação antes do compromisso.
 
 ---
 
-# Infrastructure Costs
+# Custos de Desenvolvimento
+- Esforço estimado
+- Tamanho da equipe
+- Senioridade necessária
+
+---
+
+# Custos de Infraestrutura
 - Compute
 - Storage
 - Networking
-- Observability
-- Queues
+- Observabilidade
+- Filas
 
 ---
 
-# Third-party Costs
-- LLM providers
-- Communication APIs
-- SaaS providers
-- Licensing
+# Custos de Terceiros
+- Provedores de LLM
+- APIs de comunicação
+- Provedores SaaS
+- Licenciamento
 
 ---
 
-# Recurring Costs
-- Monthly costs
-- Usage-based costs
-- Scaling costs
+# Custos Recorrentes
+- Custos mensais
+- Custos por uso
+- Custos de escala
 
 ---
 
-# TCO (Total Cost of Ownership)
+# TCO (Custo Total de Propriedade)
 
-Must provide at least an approximate operational estimate.
-
----
-
-# Success Criteria
-
-## Goal
-
-Define measurable indicators.
+Deve fornecer ao menos uma estimativa operacional aproximada.
 
 ---
 
-# Examples
-- Reduce onboarding time by 50%
-- Reduce support tickets
-- Increase conversion
-- Reduce operational costs
+# Critérios de Sucesso
+
+## Objetivo
+
+Definir indicadores mensuráveis.
 
 ---
 
-# Suggested Roadmap
+# Exemplos
+- Reduzir tempo de onboarding em 50%
+- Reduzir tickets de suporte
+- Aumentar conversão
+- Reduzir custos operacionais
 
-Defines:
+---
+
+# Roadmap Sugerido
+
+Define:
 - MVP
-- Future phases
-- Expansion opportunities
+- Fases futuras
+- Oportunidades de expansão
 
 ---
 
-# Transition to PM
+# Transição para o PM
 
-## PM Receives
-- Context
-- Scope
-- Risks
-- Integrations
-- Costs
-- Objectives
-- Success criteria
+## O PM Recebe
+- Contexto
+- Escopo
+- Riscos
+- Integrações
+- Custos
+- Objetivos
+- Critérios de sucesso
 
 ---
 
-# PM Responsibilities
+# Responsabilidades do PM
 
-Transform readiness into:
+Transformar o readiness em:
 - Roadmap
 - Milestones
-- Priorities
-- Sequencing
-- Delivery planning
+- Prioridades
+- Sequenciamento
+- Planejamento de entrega
 
 ---
 
-# Transition to Tech Leads
+# Transição para os Tech Leads
 
-## Tech Leads Receive
-- Approved readiness package
-- Execution plan
+## Os Tech Leads Recebem
+- Readiness package aprovado
+- Plano de execução
 - Constraints
-- Risks
-- Integrations
+- Riscos
+- Integrações
 
 ---
 
-# Tech Lead Responsibilities
+# Responsabilidades dos Tech Leads
 
-Transform product context into:
-- Architecture
-- Technical tasks
-- Technical sequencing
-- Implementation strategy
+Transformar o contexto de produto em:
+- Arquitetura
+- Tasks técnicas
+- Sequenciamento técnico
+- Estratégia de implementação
 
 ---
 
 # Breakdown Package
 
-## Must Include
+## Deve Incluir
 
-### Architecture
-- Services
-- Components
+### Arquitetura
+- Serviços
+- Componentes
 - APIs
-- Events
-- Queues
+- Eventos
+- Filas
 
-### Technical Breakdown
-- Epics
-- Stories
+### Quebra Técnica
+- Épicos
+- Histórias
 - Tasks
 
-### Technical Constraints
-- Security
+### Constraints Técnicos
+- Segurança
 - Performance
-- Scalability
+- Escalabilidade
 - Compliance
 
-### Rollout Strategy
-- Deployment
-- Migration
-- Monitoring
+### Estratégia de Rollout
+- Deploy
+- Migração
+- Monitoramento
 - Rollback
 
 ### Definition of Done
-- Testing
-- Documentation
-- Observability
-- Acceptance criteria
+- Testes
+- Documentação
+- Observabilidade
+- Critérios de aceite
 
 ---
 
-# Golden Rules of Intake
+# Regras de Ouro do Intake
 
-## 1. Problem Before Solution
-Understand deeply before proposing implementation.
+## 1. Problema Antes da Solução
+Entender profundamente antes de propor implementação.
 
-## 2. Strategic Value
-Prioritize what creates value.
+## 2. Valor Estratégico
+Priorizar o que gera valor.
 
-## 3. Complete Context
-No execution without context.
+## 3. Contexto Completo
+Nenhuma execução sem contexto.
 
-## 4. Controlled Gate
-Nothing reaches engineering without readiness.
+## 4. Porta Controlada
+Nada chega à engenharia sem readiness.
 
-## 5. Transparency
-Risks, integrations, and costs must always be visible.
+## 5. Transparência
+Riscos, integrações e custos devem sempre estar visíveis.
 
-## 6. Continuous Learning
-Every cycle improves future decisions.
-
----
-
-# Expected Outcomes
-
-With this model the startup gains:
-- Predictability
-- Better alignment
-- Less rework
-- Faster execution
-- Better technical quality
-- Better scalability
-- Better product decisions
-- Better customer satisfaction
+## 6. Aprendizado Contínuo
+Cada ciclo melhora as decisões futuras.
 
 ---
 
-# Final Principle
+# Resultados Esperados
 
-The objective of this operational model is not bureaucracy.
+Com este modelo a startup ganha:
+- Previsibilidade
+- Melhor alinhamento
+- Menos retrabalho
+- Execução mais rápida
+- Melhor qualidade técnica
+- Melhor escalabilidade
+- Melhores decisões de produto
+- Maior satisfação dos clientes
 
-The objective is:
-- operational clarity,
-- execution readiness,
-- scalability,
-- and reduction of ambiguity between business and engineering.
+---
+
+# Princípio Final
+
+O objetivo deste modelo operacional não é burocracia.
+
+O objetivo é:
+- clareza operacional,
+- prontidão para execução,
+- escalabilidade,
+- e redução de ambiguidade entre negócio e engenharia.

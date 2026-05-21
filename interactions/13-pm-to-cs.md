@@ -1,74 +1,74 @@
-# Interaction 13 — PM → CS (Delivery Summary)
+# Interação 13 — PM → CS (Resumo de Entrega)
 
-**Direction:** PM initiates. CS receives.
-**Layer:** Post-Delivery
-
----
-
-## Trigger
-
-Release has been completed. PM initiates the feedback loop within 5 business days.
+**Direção:** PM inicia. CS recebe.
+**Camada:** Pós-Entrega
 
 ---
 
-## What PM Provides
+## Gatilho
 
-- Summary of what was delivered and what was deferred
-- Success criteria defined in the Readiness Package — for CS to validate against client behavior
-- Any known post-release limitations or monitoring points
-- Specific questions for CS to gather from clients (adoption signal, friction, outcome confirmation)
+O release foi concluído. O PM inicia o loop de feedback dentro de 5 dias úteis.
 
 ---
 
-## What CS Does With It
+## O que o PM Fornece
 
-- Collects client satisfaction and adoption signals
-- Documents friction or unexpected behavior post-release
-- Returns structured feedback to PM and PO within the agreed window
+- Resumo do que foi entregue e do que foi adiado
+- Critérios de sucesso definidos no Readiness Package — para CS validar contra o comportamento do cliente
+- Quaisquer limitações pós-release conhecidas ou pontos de monitoramento
+- Perguntas específicas para CS coletar dos clientes (sinal de adoção, atrito, confirmação de resultado)
 
 ---
 
-## Ownership Transferred
+## O que CS Faz Com Isso
 
-**From PM:** Delivery facts and success criteria are handed over. PM does not collect client feedback directly — that channel belongs to CS.
-**To CS:** Owns client signal collection — adoption indicators, friction reports, and structured feedback mapped to the success criteria. CS is accountable for returning the feedback within the agreed window.
-**Artifact handed over:** Delivery summary + success criteria to validate + specific questions for clients.
+- Coleta satisfação do cliente e sinais de adoção
+- Documenta atrito ou comportamento inesperado pós-release
+- Retorna feedback estruturado ao PM e ao PO dentro da janela acordada
+
+---
+
+## Transferência de Ownership
+
+**Do PM:** Fatos de entrega e critérios de sucesso são transferidos. O PM não coleta feedback do cliente diretamente — esse canal pertence ao CS.
+**Para o CS:** Detém a coleta de sinais do cliente — indicadores de adoção, relatórios de atrito e feedback estruturado mapeado aos critérios de sucesso. O CS é responsável por retornar o feedback dentro da janela acordada.
+**Artefato transferido:** Resumo de entrega + critérios de sucesso a validar + perguntas específicas para clientes.
 
 ---
 
 ## Gate
 
-CS does not summarize the feedback as "client is happy" or "client is not happy." The feedback must be structured against the success criteria defined in the package.
+CS não resume o feedback como "o cliente está feliz" ou "o cliente não está feliz." O feedback deve ser estruturado contra os critérios de sucesso definidos no pacote.
 
 ---
 
-## Failure Path
+## Caminho de Falha
 
-If CS cannot collect meaningful signal within the agreed window (e.g., client is unresponsive), CS documents the gap and escalates to PM. The loop is not silently left open.
-
----
-
-## What CS Must NOT Do
-
-- Promise the client a follow-up feature or fix based on their feedback without PO triage
-- Submit unstructured feedback ("generally positive")
-- Leave the feedback window open indefinitely without escalating
+Se CS não conseguir coletar sinal significativo dentro da janela acordada (ex.: cliente não responsivo), CS documenta o gap e escala ao PM. O loop não é deixado aberto silenciosamente.
 
 ---
 
-## Sequence
+## O que CS NÃO Deve Fazer
+
+- Prometer ao cliente uma funcionalidade de follow-up ou correção baseada no feedback sem triagem do PO
+- Submeter feedback não estruturado ("geralmente positivo")
+- Deixar a janela de feedback aberta indefinidamente sem escalar
+
+---
+
+## Sequência
 
 ```mermaid
 sequenceDiagram
     actor PM as PM
     actor CS as CS
 
-    PM->>CS: Delivery summary + success criteria to validate + specific questions
-    CS->>CS: Collects client signals
+    PM->>CS: Resumo de entrega + critérios de sucesso a validar + perguntas específicas
+    CS->>CS: Coleta sinais do cliente
 
-    alt Client unresponsive within window
-        CS-->>PM: Documents gap + escalates
+    alt Cliente não responsivo dentro da janela
+        CS-->>PM: Documenta gap + escala
     end
 
-    CS-->>PM: Structured feedback (mapped to success criteria)
+    CS-->>PM: Feedback estruturado (mapeado aos critérios de sucesso)
 ```
