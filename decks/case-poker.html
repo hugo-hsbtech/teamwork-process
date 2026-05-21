@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>PokerPlan — Estudo de Caso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ Tokens ============ */
+  :root {
+    --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+    --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', Menlo, Consolas, monospace;
+
+    --ink: #1a1612;
+    --ink-soft: #4a4036;
+    --ink-dim: #8a7e70;
+    --rule: #d9cfc0;
+    --rule-soft: #ece4d3;
+
+    --paper: #fefcf7;
+    --cream: #faf3e3;
+    --cream-deep: #f4e9cf;
+
+    --accent: #a8421b;          /* terracota profunda */
+    --accent-soft: #c4674a;
+    --accent-bg: #fbeee5;
+    --accent-deep: #722d12;
+
+    --green: #4a6b3a;
+    --green-bg: #eaf0e0;
+    --red: #9b2c2c;
+    --red-bg: #f6e4e4;
+    --blue: #2c4a7c;
+    --blue-bg: #e4ecf6;
+  }
+
+  /* ============ Print page — full-bleed @page, .page owns its own margins ============ */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 11pt;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  /* Each .page is exactly one A4 sheet — both on screen and in print.
+     Bottom padding 30mm reserves space above the absolutely-positioned footer
+     (footer sits at bottom: 12mm + ~6mm tall), preventing overflow collisions. */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm 20mm 30mm 20mm;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .page--cover {
+    padding: 0;
+  }
+  .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* On-screen preview: stack pages with shadows; print just outputs pages. */
+  @media screen {
+    body {
+      background: #e8e2d4;
+      padding: 32px 0;
+    }
+    .page {
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 32px rgba(60, 40, 20, 0.18);
+    }
+  }
+  @media print {
+    body { background: var(--paper); padding: 0; }
+    .page { margin: 0; box-shadow: none; }
+  }
+
+  /* ============ Typography ============ */
+  h1, h2, h3, h4, .display, .eyebrow, .label, .meta {
+    font-family: var(--font-sans);
+  }
+
+  h1 {
+    font-size: 26pt;
+    font-weight: 600;
+    letter-spacing: -0.5pt;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 8pt;
+  }
+  h2 {
+    font-size: 20pt;
+    font-weight: 600;
+    letter-spacing: -0.3pt;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 6pt;
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--accent-deep);
+    margin-top: 16pt;
+    margin-bottom: 4pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h4 {
+    font-size: 10pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--accent);
+    margin-top: 12pt;
+    margin-bottom: 3pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 6pt;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    text-wrap: pretty;
+    orphans: 2;
+    widows: 2;
+  }
+  p + p { text-indent: 0; }
+
+  strong { font-weight: 500; color: var(--ink); }
+  em { font-style: italic; }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0;
+    padding-left: 18pt;
+  }
+  li {
+    margin-bottom: 3pt;
+    text-align: justify;
+    hyphens: auto;
+  }
+  li::marker {
+    color: var(--accent);
+  }
+
+  code, .mono {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--accent-deep);
+    background: var(--accent-bg);
+    padding: 0 4pt;
+    border-radius: 2pt;
+  }
+
+  .eyebrow {
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    color: var(--accent);
+    margin-bottom: 6pt;
+  }
+
+  .lede {
+    font-size: 13pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 10pt 0 14pt 0;
+    text-wrap: balance;
+  }
+
+  /* ============ Running header / footer ============ */
+  .page-header {
+    position: absolute;
+    top: 12mm;
+    left: 20mm;
+    right: 20mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-sans);
+    font-size: 8pt;
+    color: var(--ink-dim);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    border-bottom: 0.4pt solid var(--rule);
+    padding-bottom: 4pt;
+  }
+  .page-footer {
+    position: absolute;
+    bottom: 12mm;
+    left: 20mm;
+    right: 20mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-sans);
+    font-size: 8pt;
+    color: var(--ink-dim);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    border-top: 0.4pt solid var(--rule);
+    padding-top: 4pt;
+  }
+  .page-footer .num {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ============ Cover ============ */
+  .cover {
+    width: 100%;
+    height: 297mm;
+    background:
+      radial-gradient(ellipse 80% 60% at 80% 90%, var(--cream-deep) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 10%, var(--accent-bg) 0%, transparent 50%),
+      var(--paper);
+    padding: 30mm 24mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover__mark {
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+  }
+  .cover__main {
+    margin-top: 40mm;
+  }
+  .cover__kicker {
+    font-family: var(--font-sans);
+    font-size: 11pt;
+    color: var(--ink-soft);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    margin-bottom: 14pt;
+  }
+  .cover__title {
+    font-family: var(--font-sans);
+    font-size: 64pt;
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -2pt;
+    color: var(--ink);
+    margin-bottom: 18pt;
+  }
+  .cover__title .accent { color: var(--accent); }
+  .cover__sub {
+    font-family: var(--font-serif);
+    font-size: 18pt;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    max-width: 130mm;
+    text-wrap: balance;
+  }
+  .cover__rule {
+    width: 60mm;
+    height: 2pt;
+    background: var(--accent);
+    margin: 18pt 0;
+  }
+  .cover__foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+  }
+  .cover__foot strong { color: var(--ink); font-weight: 500; }
+  .cover__decor {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* ============ Section opener (chapter page) ============ */
+  .opener {
+    padding-top: 60mm;
+    border-top: none;
+  }
+  .opener .number {
+    font-family: var(--font-sans);
+    font-size: 96pt;
+    font-weight: 200;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.18;
+    margin-bottom: -20pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .opener h1 {
+    font-size: 36pt;
+    font-weight: 600;
+    letter-spacing: -1pt;
+    line-height: 1.05;
+    margin-bottom: 12pt;
+  }
+  .opener .lede {
+    font-size: 14pt;
+    color: var(--ink-soft);
+    max-width: 140mm;
+  }
+  .opener__rule {
+    width: 40mm;
+    height: 1.5pt;
+    background: var(--accent);
+    margin: 16pt 0 8pt 0;
+  }
+
+  /* ============ TOC ============ */
+  .toc {
+    margin-top: 8pt;
+  }
+  .toc__item {
+    display: flex;
+    align-items: baseline;
+    gap: 8pt;
+    padding: 8pt 0;
+    border-bottom: 0.4pt dotted var(--rule);
+  }
+  .toc__num {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--accent);
+    width: 22pt;
+    font-variant-numeric: tabular-nums;
+    font-size: 11pt;
+  }
+  .toc__name {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--ink);
+    flex: 1;
+    font-size: 12pt;
+  }
+  .toc__name span {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 10pt;
+    font-weight: 400;
+    margin-top: 2pt;
+  }
+  .toc__page {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ============ Tables ============ */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0 12pt 0;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  table.data th {
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--accent);
+    border-bottom: 1pt solid var(--accent);
+    padding: 6pt 8pt 5pt 8pt;
+    background: var(--accent-bg);
+    vertical-align: bottom;
+  }
+  table.data td {
+    padding: 6pt 8pt;
+    border-bottom: 0.4pt solid var(--rule);
+    vertical-align: top;
+    font-family: var(--font-serif);
+  }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data tr:nth-child(even) td {
+    background: var(--cream);
+  }
+  table.data td.mono {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: var(--accent-deep);
+    background: transparent;
+    padding: 6pt 8pt;
+    border-radius: 0;
+  }
+  table.data td.num {
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  table.data th.num { text-align: right; }
+
+  /* Compact two-column key/value */
+  table.kv {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 10pt 0;
+    font-size: 9.5pt;
+  }
+  table.kv th {
+    text-align: left;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 4pt 12pt 4pt 0;
+    width: 32%;
+    vertical-align: top;
+    border-bottom: 0.3pt solid var(--rule-soft);
+  }
+  table.kv td {
+    padding: 4pt 0;
+    vertical-align: top;
+    border-bottom: 0.3pt solid var(--rule-soft);
+  }
+  table.kv tr:last-child th, table.kv tr:last-child td { border-bottom: none; }
+
+  /* ============ Callout box ============ */
+  .callout {
+    background: var(--cream);
+    border-left: 3pt solid var(--accent);
+    padding: 10pt 14pt;
+    margin: 10pt 0 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .callout .label {
+    font-family: var(--font-sans);
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2pt;
+    color: var(--accent);
+    margin-bottom: 4pt;
+    display: block;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout--info {
+    border-left-color: var(--blue);
+    background: var(--blue-bg);
+  }
+  .callout--info .label { color: var(--blue); }
+
+  .callout--ok {
+    border-left-color: var(--green);
+    background: var(--green-bg);
+  }
+  .callout--ok .label { color: var(--green); }
+
+  .callout--warn {
+    border-left-color: var(--red);
+    background: var(--red-bg);
+  }
+  .callout--warn .label { color: var(--red); }
+
+  /* ============ Pull quote ============ */
+  .pull {
+    margin: 12pt 0;
+    padding: 8pt 0 8pt 18pt;
+    border-left: 2pt solid var(--accent);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13pt;
+    line-height: 1.45;
+    color: var(--ink);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .pull cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--ink-dim);
+    margin-top: 6pt;
+  }
+
+  /* ============ Decision/flow strip ============ */
+  .flow {
+    display: flex;
+    gap: 0;
+    margin: 10pt 0 14pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    align-items: stretch;
+  }
+  .flow__step {
+    flex: 1;
+    background: var(--cream);
+    border-top: 2.5pt solid var(--accent);
+    padding: 8pt 8pt 8pt 8pt;
+    position: relative;
+    min-width: 0;
+  }
+  .flow__step + .flow__step { margin-left: 4pt; }
+  .flow__num {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.5pt;
+  }
+  .flow__name {
+    font-family: var(--font-sans);
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 2pt 0 3pt 0;
+    line-height: 1.15;
+  }
+  .flow__desc {
+    font-family: var(--font-serif);
+    font-size: 8.5pt;
+    line-height: 1.35;
+    color: var(--ink-soft);
+  }
+
+  /* ============ Side-by-side comparison ============ */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12pt;
+    margin: 10pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .compare__col {
+    background: var(--cream);
+    padding: 10pt 12pt;
+    border-top: 2pt solid var(--accent);
+  }
+  .compare__col h4 {
+    margin-top: 0;
+    color: var(--accent-deep);
+  }
+  .compare__col p, .compare__col li {
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  /* ============ Persona/Role grid ============ */
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8pt;
+    margin: 8pt 0 12pt 0;
+  }
+  .role {
+    border: 0.5pt solid var(--rule);
+    border-left: 2.5pt solid var(--accent);
+    padding: 7pt 10pt;
+    background: var(--paper);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .role__name {
+    font-family: var(--font-sans);
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .role__owner {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--ink-dim);
+    margin-bottom: 4pt;
+  }
+  .role__desc {
+    font-family: var(--font-serif);
+    font-size: 9pt;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  /* ============ Stats / metric strip ============ */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8pt;
+    margin: 8pt 0 14pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .stat {
+    padding: 10pt 10pt;
+    border-top: 1.5pt solid var(--accent);
+    background: var(--cream);
+  }
+  .stat__val {
+    font-family: var(--font-sans);
+    font-size: 22pt;
+    font-weight: 600;
+    color: var(--accent-deep);
+    line-height: 1;
+    letter-spacing: -0.5pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat__lbl {
+    font-family: var(--font-sans);
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    color: var(--ink-soft);
+    margin-top: 4pt;
+    line-height: 1.2;
+  }
+
+  /* ============ Pills / badges ============ */
+  .pill {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    padding: 1.5pt 6pt;
+    border-radius: 2pt;
+    background: var(--accent-bg);
+    color: var(--accent-deep);
+    vertical-align: 1pt;
+  }
+  .pill--ok { background: var(--green-bg); color: var(--green); }
+  .pill--warn { background: var(--red-bg); color: var(--red); }
+  .pill--info { background: var(--blue-bg); color: var(--blue); }
+
+  /* ============ Decorative ============ */
+  .rule {
+    border: none;
+    border-top: 0.5pt solid var(--rule);
+    margin: 14pt 0;
+  }
+  .rule--accent {
+    border-top: 1.5pt solid var(--accent);
+    width: 30mm;
+    margin: 10pt 0;
+  }
+
+  /* ============ Timeline strip (for execution plan) ============ */
+  .timeline {
+    margin: 10pt 0 14pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .timeline__head {
+    display: grid;
+    grid-template-columns: 40mm repeat(8, 1fr);
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    color: var(--ink-dim);
+    border-bottom: 0.5pt solid var(--rule);
+    padding-bottom: 3pt;
+    margin-bottom: 6pt;
+  }
+  .timeline__head span { text-align: center; }
+  .timeline__row {
+    display: grid;
+    grid-template-columns: 40mm repeat(8, 1fr);
+    align-items: center;
+    margin-bottom: 6pt;
+    min-height: 16pt;
+  }
+  .timeline__label {
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--ink);
+    padding-right: 8pt;
+  }
+  .timeline__bar {
+    height: 12pt;
+    background: var(--accent);
+    border-radius: 2pt;
+    position: relative;
+  }
+  .timeline__bar--soft {
+    background: var(--accent-soft);
+  }
+  .timeline__bar--ghost {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--accent-bg),
+      var(--accent-bg) 2pt,
+      var(--accent-soft) 2pt,
+      var(--accent-soft) 4pt
+    );
+    opacity: 0.7;
+  }
+
+  /* Two-column body text */
+  .twocol {
+    column-count: 2;
+    column-gap: 14pt;
+    column-rule: 0.4pt solid var(--rule-soft);
+  }
+
+  /* Print-only adjustments */
+  @media print {
+    .no-print { display: none !important; }
+    h1, h2, h3, h4 { break-after: avoid; }
+    table, .callout, .pull, .flow, .compare, .stats, .timeline {
+      break-inside: avoid;
+    }
+  }
+
+  /* Avoid section page break before for the cover */
+  .page--cover { break-after: page; }
+</style>
+</head>
+<body>
+
+<!-- =============================================================== -->
+<!-- CAPA                                                            -->
+<!-- =============================================================== -->
+<section class="page page--cover">
+  <div class="cover">
+    <!-- decorative SVG accents -->
+    <svg class="cover__decor" style="top:30mm; right:24mm;" width="80" height="80" viewBox="0 0 80 80">
+      <line x1="80" y1="0" x2="80" y2="32" stroke="#a8421b" stroke-width="2" opacity="0.4"/>
+      <line x1="48" y1="0" x2="80" y2="0" stroke="#a8421b" stroke-width="2" opacity="0.4"/>
+    </svg>
+    <svg class="cover__decor" style="bottom:30mm; left:24mm;" width="80" height="80" viewBox="0 0 80 80">
+      <line x1="0" y1="48" x2="0" y2="80" stroke="#a8421b" stroke-width="2" opacity="0.4"/>
+      <line x1="0" y1="80" x2="32" y2="80" stroke="#a8421b" stroke-width="2" opacity="0.4"/>
+    </svg>
+    <svg class="cover__decor" style="top:46%; right:24mm;" width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#a8421b" stroke-width="0.8" opacity="0.18"/>
+      <circle cx="60" cy="60" r="34" fill="none" stroke="#a8421b" stroke-width="0.8" opacity="0.18"/>
+      <circle cx="60" cy="60" r="18" fill="none" stroke="#a8421b" stroke-width="0.8" opacity="0.18"/>
+    </svg>
+
+    <div class="cover__mark">PokerPlan — Estudo de Caso</div>
+
+    <div class="cover__main">
+      <div class="cover__kicker">Modelo Operacional em Ação</div>
+      <h1 class="cover__title">Duas Demandas,<br><span class="accent">Um Processo.</span></h1>
+      <div class="cover__rule"></div>
+      <p class="cover__sub">Como duas solicitações concorrentes — uma de retenção, uma de pré-fechamento — caminharam pelo funil de intake, racionalização e execução até estarem prontas para handoff.</p>
+    </div>
+
+    <div class="cover__foot">
+      <div>
+        <strong>Documento didático</strong><br>
+        Apresentação interna ao time
+      </div>
+      <div style="text-align:right;">
+        <strong>v1.0</strong><br>
+        Pós-defesa do case
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================== -->
+<!-- SUMÁRIO                                                         -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>PokerPlan · Estudo de Caso</span>
+    <span>Sumário</span>
+  </header>
+
+  <div style="padding-top: 4pt;">
+    <p class="eyebrow">Índice</p>
+    <h1>O que você vai encontrar</h1>
+    <p class="lede">Seis partes que cobrem o ciclo completo: desde a captura no intake até o plano de execução com sequenciamento das duas demandas em paralelo.</p>
+    <div class="rule--accent"></div>
+
+    <div class="toc">
+      <div class="toc__item">
+        <div class="toc__num">01</div>
+        <div class="toc__name">O Cenário<span>PokerPlan, o trimestre, as duas demandas que chegaram</span></div>
+        <div class="toc__page">p. 4</div>
+      </div>
+      <div class="toc__item">
+        <div class="toc__num">02</div>
+        <div class="toc__name">O Modelo Operacional<span>Camadas do funil, papéis e gates de qualidade</span></div>
+        <div class="toc__page">p. 6</div>
+      </div>
+      <div class="toc__item">
+        <div class="toc__num">03</div>
+        <div class="toc__name">Demanda 1 — Queue Voting<span>Banco Meridional, renovação em risco, RP rejeitado e ressubmetido</span></div>
+        <div class="toc__page">p. 9</div>
+      </div>
+      <div class="toc__item">
+        <div class="toc__num">04</div>
+        <div class="toc__name">Demanda 2 — Room Access Control<span>Construtora Ágil, três incógnitas no intake, Discovery e escalada ao CTO</span></div>
+        <div class="toc__page">p. 13</div>
+      </div>
+      <div class="toc__item">
+        <div class="toc__num">05</div>
+        <div class="toc__name">Plano de Execução<span>Capacidade, sequenciamento, milestones e gatilhos de escalada</span></div>
+        <div class="toc__page">p. 20</div>
+      </div>
+      <div class="toc__item">
+        <div class="toc__num">06</div>
+        <div class="toc__name">Comparativo e Aprendizados<span>O que o processo provou e o que levamos adiante</span></div>
+        <div class="toc__page">p. 25</div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <h4>Como ler este documento</h4>
+    <p>Cada parte abre com o contexto e fecha com a transição para a próxima. As <span class="pill">pílulas coloridas</span> marcam status; as caixas em creme destacam fatos e citações; as tabelas concentram os dados que normalmente ficariam diluídos no texto. As referências entre colchetes — por exemplo <code>INT-2026-001</code> — apontam para os artefatos originais do caso.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">2</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 01 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 01 · O Cenário</span>
+    <span>PokerPlan</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">01</div>
+    <h1>O Cenário</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">PokerPlan é uma plataforma SaaS B2B para cerimônias de planejamento ágil. Tem clientes pagantes e está em fase de crescimento. Foi nesse momento — entre uma renovação importante e um deal de pré-fechamento — que duas demandas concorrentes entraram no funil em uma mesma semana.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">3</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 01 — CONTEÚDO                                             -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 01 · O Cenário</span>
+    <span>Sobre a plataforma</span>
+  </header>
+
+  <h2>Sobre a plataforma</h2>
+  <p>PokerPlan é uma plataforma SaaS B2B para cerimônias de planejamento ágil — Planning Poker, refinamento de backlog, estimativas de história. A empresa já passou do estágio inicial: tem clientes enterprise pagantes, ARR consistente e está em fase de crescimento por expansão dentro de contas e por novos contratos no segmento mid-market.</p>
+  <p>O modelo operacional do time é estruturado em <strong>camadas com gates</strong>: nada entra em execução sem antes passar por triagem, racionalização e um pacote de prontidão (<em>Readiness Package</em>) revisado pelo PM. Esse processo é o que permite que duas demandas muito diferentes — uma simples, uma com risco arquitetural — corram em paralelo sem se atropelarem.</p>
+
+  <h3>O trimestre em questão</h3>
+  <p>No início de março de 2026, duas demandas chegaram com poucos dias de diferença. Vieram de origens distintas, com riscos distintos, mas competindo pelas mesmas pessoas e pelo mesmo sistema.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__val">2</div>
+      <div class="stat__lbl">Demandas em paralelo</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">5</div>
+      <div class="stat__lbl">Pessoas no time de engenharia</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">~60</div>
+      <div class="stat__lbl">Dias úteis estimados de esforço</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">90d</div>
+      <div class="stat__lbl">Prazo mais curto (renovação)</div>
+    </div>
+  </div>
+
+  <h3>As duas demandas, lado a lado</h3>
+  <div class="compare">
+    <div class="compare__col">
+      <h4>Demanda 1 · Queue Voting</h4>
+      <p><strong>Cliente:</strong> Banco Meridional<br>
+      <strong>Origem:</strong> CS, em chamada de revisão trimestral<br>
+      <strong>Tipo:</strong> Retenção — renovação em 90 dias<br>
+      <strong>Risco:</strong> Baixo · Sem escalada arquitetural<br>
+      <strong>Dor:</strong> Sem mecanismo para enfileirar histórias ou ocultar votos. Cerimônias com 10+ itens ficam 40-60% mais longas.</p>
+    </div>
+    <div class="compare__col">
+      <h4>Demanda 2 · Access Control</h4>
+      <p><strong>Cliente:</strong> Construtora Ágil<br>
+      <strong>Origem:</strong> Vendas, em chamada pré-fechamento<br>
+      <strong>Tipo:</strong> Pré-fechamento — deal condicionado<br>
+      <strong>Risco:</strong> Alto · Escalada ao CTO + LGPD<br>
+      <strong>Dor:</strong> Sem controle de quem entra na sala, sem anonimato, sem distinção votante/observador.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="label">Por que este caso importa</span>
+    <p>As duas demandas são reais o suficiente para forçar o processo a se mostrar. Uma testa a <strong>velocidade do funil</strong> (uma renovação não espera). A outra testa a <strong>robustez dos gates</strong> (um deal não pode ser comprometido antes da capacidade ser avaliada). Juntas, elas exercitam todas as camadas do modelo.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">4</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 01 — PÁGINA 2: linha do tempo geral                       -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 01 · O Cenário</span>
+    <span>Linha do tempo</span>
+  </header>
+
+  <h2>O que aconteceu, em sequência</h2>
+  <p>O quadro abaixo mostra o caminho que cada demanda percorreu desde o registro de intake até a entrada em execução. Note que a Demanda 1 ficou mais curta no funil (passou direto pela triagem, mas teve o RP rejeitado uma vez); a Demanda 2 demorou mais para chegar à racionalização porque precisou de uma janela de Discovery, mas o RP passou de primeira.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:14%;">Data</th>
+        <th style="width:32%;">Demanda 1 — Queue Voting</th>
+        <th style="width:32%;">Demanda 2 — Access Control</th>
+        <th style="width:22%;">Marcadores</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono">12 mar</td><td>Intake registrado pelo CS</td><td>—</td><td><span class="pill">Intake</span></td></tr>
+      <tr><td class="mono">13 mar</td><td>Triagem do PO → Product Ready</td><td>—</td><td><span class="pill">Triagem</span></td></tr>
+      <tr><td class="mono">15 mar</td><td>—</td><td>Intake registrado por Vendas</td><td><span class="pill">Intake</span></td></tr>
+      <tr><td class="mono">17 mar</td><td>—</td><td>Triagem do PO → <strong>Discovery</strong></td><td><span class="pill pill--warn">3 incógnitas</span></td></tr>
+      <tr><td class="mono">18 mar</td><td>—</td><td>Discovery aberto. CTO notificado.</td><td><span class="pill pill--info">Time-box 2 sem.</span></td></tr>
+      <tr><td class="mono">20 mar</td><td>RP v1 submetido ao PM</td><td>Spike CTO: Azure AD viável via OIDC</td><td></td></tr>
+      <tr><td class="mono">21 mar</td><td>—</td><td>Revisão de infra: gap LGPD identificado</td><td><span class="pill pill--warn">Compliance</span></td></tr>
+      <tr><td class="mono">22 mar</td><td>RP v1 <strong>rejeitado pelo PM</strong></td><td>Chamada com cliente: Jira é desejo, não bloqueador</td><td><span class="pill pill--warn">Gate ativado</span></td></tr>
+      <tr><td class="mono">25 mar</td><td>—</td><td>Discovery encerrado em 7 dias</td><td><span class="pill pill--ok">No time-box</span></td></tr>
+      <tr><td class="mono">27 mar</td><td>—</td><td>RP v1 <strong>aprovado de primeira</strong></td><td><span class="pill pill--ok">Aprovado</span></td></tr>
+      <tr><td class="mono">28 mar</td><td>RP v2 <strong>aprovado</strong></td><td>—</td><td><span class="pill pill--ok">Aprovado</span></td></tr>
+      <tr><td class="mono">29 mar</td><td colspan="2">Plano de Execução EP-2026-001 publicado pelo PM cobrindo as duas demandas</td><td><span class="pill">Execução</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--info">
+    <span class="label">Observação</span>
+    <p>O Discovery da Demanda 2 não <em>atrasou</em> nada — ele <strong>protegeu</strong> a entrega. Os três bloqueadores (Azure AD, Jira, LGPD) seriam descobertos de qualquer jeito; descobri-los antes de comprometer escopo evitou que Vendas confirmasse um prazo impossível para o cliente.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">5</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 02 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 02 · O Modelo Operacional</span>
+    <span>Camadas e gates</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">02</div>
+    <h1>O Modelo Operacional</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">Antes de mergulhar nas demandas, vale entender o funil pelo qual elas passaram. Cada camada existe para responder uma pergunta — e o gate seguinte só abre quando a anterior está respondida.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">6</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 02 — fluxo                                                -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 02 · O Modelo Operacional</span>
+    <span>O funil</span>
+  </header>
+
+  <h2>O funil, da captura à execução</h2>
+  <p>Toda demanda que entra na plataforma percorre o mesmo caminho. O que varia é a <em>velocidade</em> com que cada uma o percorre — e em quais gates ela é obrigada a pausar.</p>
+
+  <div class="flow">
+    <div class="flow__step">
+      <div class="flow__num">01 · INTAKE</div>
+      <div class="flow__name">Captura</div>
+      <div class="flow__desc">CS, Vendas ou produto registram a demanda em formato estruturado: origem, dor, premissas, constraints.</div>
+    </div>
+    <div class="flow__step">
+      <div class="flow__num">02 · TRIAGEM</div>
+      <div class="flow__name">Decisão</div>
+      <div class="flow__desc">PO classifica: Product Ready, Discovery, Backlog ou Rejeitada. Decide se há escalada ao CTO.</div>
+    </div>
+    <div class="flow__step">
+      <div class="flow__num">03 · DISCOVERY*</div>
+      <div class="flow__name">Resolver incógnitas</div>
+      <div class="flow__desc">Time-boxed (até 2 semanas). Só acontece se a triagem identifica incógnitas que bloqueiam o escopo.</div>
+    </div>
+    <div class="flow__step">
+      <div class="flow__num">04 · RACIONALIZAÇÃO</div>
+      <div class="flow__name">Readiness Package</div>
+      <div class="flow__desc">PO redige 12 seções: contexto, escopo, regras, riscos, esforço, critérios de sucesso. CTO contribui se há escalada.</div>
+    </div>
+    <div class="flow__step">
+      <div class="flow__num">05 · EXECUÇÃO</div>
+      <div class="flow__name">Plano + entrega</div>
+      <div class="flow__desc">PM avalia capacidade, sequencia demandas, define milestones. Tech Lead detalha tarefas. Time entrega.</div>
+    </div>
+  </div>
+
+  <p style="font-size:8.5pt; color:var(--ink-dim); font-style:italic; margin-top:-6pt;">* Etapa condicional. Demandas sem incógnitas pulam diretamente do passo 02 para o passo 04.</p>
+
+  <h3>O que cada gate pergunta</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:24%;">Gate</th>
+        <th style="width:48%;">Pergunta que ele responde</th>
+        <th style="width:28%;">Quem decide</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Triagem</strong></td><td>Esta demanda é real, escopável e alinhada com o roadmap? Precisa de Discovery ou pode ser racionalizada agora?</td><td>PO</td></tr>
+      <tr><td><strong>Discovery</strong></td><td>As incógnitas que bloqueiam o escopo foram resolvidas dentro do time-box?</td><td>PO + CTO (quando há escalada)</td></tr>
+      <tr><td><strong>Aprovação do RP</strong></td><td>O pacote tem informação suficiente para o PM planejar capacidade sem surpresas?</td><td>PM</td></tr>
+      <tr><td><strong>Avaliação de capacidade</strong></td><td>Cabe no time disponível, no prazo desejado, sem comprometer outras demandas?</td><td>PM</td></tr>
+      <tr><td><strong>Release</strong></td><td>Os critérios de aceite foram validados? O QA aprovou? Há sign-off do cliente quando necessário?</td><td>PM + Tech Lead</td></tr>
+    </tbody>
+  </table>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">7</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 02 — PAPÉIS                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 02 · O Modelo Operacional</span>
+    <span>Papéis</span>
+  </header>
+
+  <h2>Quem faz o quê</h2>
+  <p>Cada papel tem um escopo de decisão claro. Ninguém compromete prazo no lugar do PM. Ninguém decide arquitetura no lugar do CTO. Ninguém aprova escopo no lugar do PO. É essa separação que faz o processo aguentar pressão comercial.</p>
+
+  <div class="roles">
+    <div class="role">
+      <div class="role__name">CS · Customer Success</div>
+      <div class="role__owner">Ana Costa</div>
+      <div class="role__desc">Captura demandas vindas de clientes existentes. Dona dos sinais de retenção. Não negocia escopo nem prazo.</div>
+    </div>
+    <div class="role">
+      <div class="role__name">Vendas</div>
+      <div class="role__owner">Rafael Souza</div>
+      <div class="role__desc">Captura demandas vindas de prospects e deals em pipeline. Não confirma prazos ao cliente antes da avaliação de capacidade do PM.</div>
+    </div>
+    <div class="role">
+      <div class="role__name">PO · Product Owner</div>
+      <div class="role__owner">Lucas Mendes</div>
+      <div class="role__desc">Triagem, decisão de Discovery, racionalização. Dono do Readiness Package. Aplica os limites de escopo durante a execução.</div>
+    </div>
+    <div class="role">
+      <div class="role__name">CTO</div>
+      <div class="role__owner">Rodrigo Lima</div>
+      <div class="role__desc">Avalia escaladas arquiteturais. Conduz spikes técnicos. Decide trade-offs de infraestrutura e compliance.</div>
+    </div>
+    <div class="role">
+      <div class="role__name">PM · Project Manager</div>
+      <div class="role__owner">Carla Ribeiro</div>
+      <div class="role__desc">Avaliação de capacidade. Sequenciamento de demandas. Mapa de milestones. Comunicação de cronograma. Único papel que confirma prazo externamente.</div>
+    </div>
+    <div class="role">
+      <div class="role__name">Tech Lead</div>
+      <div class="role__owner">Marco Viana</div>
+      <div class="role__desc">Breakdown técnico após aprovação do RP. Decisões de implementação (ADRs). Estimativas refinadas e estratégia de rollout.</div>
+    </div>
+  </div>
+
+  <div class="pull">
+    Vendas fez um compromisso informal de prazo. Nenhuma data externa pode ser confirmada até que o Discovery conclua e o PM execute uma avaliação de capacidade.
+    <cite>— Nota de risco no intake INT-2026-002</cite>
+  </div>
+
+  <p>Esse princípio aparece duas vezes neste caso: uma vez como aviso no intake, outra vez como gatilho explícito de escalada no plano de execução. Não é um detalhe — é o que separa um cronograma realista de uma promessa quebrada.</p>
+
+  <h3>Os artefatos que cada papel produz</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:22%;">Artefato</th>
+        <th style="width:18%;">Responsável</th>
+        <th style="width:60%;">Para quê serve</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="mono">Intake</td><td>CS / Vendas</td><td>Capturar a demanda com origem, dor, premissas e constraints. Não negocia escopo nem prazo.</td></tr>
+      <tr><td class="mono">Readiness Package</td><td>PO (+ CTO)</td><td>12 seções consolidando o que será construído, para quem, com quais riscos, em quanto esforço.</td></tr>
+      <tr><td class="mono">Plano de Execução</td><td>PM</td><td>Capacidade, sequenciamento, milestones, gates, gatilhos de escalada para todas as demandas ativas.</td></tr>
+      <tr><td class="mono">Product Backlog</td><td>PO</td><td>Épicos e histórias de usuário com critérios de aceite — o "o quê" para o time.</td></tr>
+      <tr><td class="mono">Tech Backlog</td><td>Tech Lead</td><td>ADRs, tarefas, estimativas refinadas, DoD, estratégia de rollout — o "como" para o time.</td></tr>
+    </tbody>
+  </table>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">8</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 03 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 03 · Demanda 1</span>
+    <span>Queue Voting</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">03</div>
+    <h1>Queue Voting</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">Banco Meridional, cliente enterprise, renovação em 90 dias. A demanda parece simples — controlar a sequência de estimativas e ocultar votos. E é simples. Mas o gate do PM ainda assim a devolveu na primeira tentativa.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">9</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 03 — O CLIENTE E A DOR                                    -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 03 · Demanda 1 · Queue Voting</span>
+    <span>O cliente e a dor</span>
+  </header>
+
+  <h2>O cliente e a dor</h2>
+
+  <table class="kv">
+    <tr><th>Cliente</th><td>Banco Meridional — enterprise, 4 squads ativos, 3 squads pendentes</td></tr>
+    <tr><th>Origem da demanda</th><td>Chamada trimestral de revisão com CS</td></tr>
+    <tr><th>Reportador</th><td>Ana Costa (Customer Success)</td></tr>
+    <tr><th>Tipo</th><td>Funcionalidade</td></tr>
+    <tr><th>Prioridade</th><td><span class="pill pill--warn">Alta</span> — risco de renovação (90 dias)</td></tr>
+    <tr><th>Receita em jogo</th><td>R$ 84.000 ARR (renovação) + R$ 28.000 ARR de expansão bloqueada</td></tr>
+  </table>
+
+  <h3>O problema, em uma frase</h3>
+  <p class="lede">Facilitadores não têm como controlar a sequência das estimativas, e os votos aparecem em tempo real — criando viés de ancoragem e atrasando cerimônias em 40 a 60%.</p>
+
+  <p>Durante o sprint planning do Banco Meridional, o facilitador compartilha uma lista com 20+ histórias. Os participantes pulam à frente, leem itens futuros, formam opiniões prematuras e desestabilizam o fluxo de estimativa. Não existe mecanismo para enfileirar itens e revelá-los um de cada vez. Além disso, votos são visíveis em tempo real conforme submetidos — quem vota primeiro influencia quem vota depois.</p>
+
+  <div class="callout">
+    <span class="label">Workaround atual do cliente</span>
+    <p>Os Scrum Masters estão compartilhando histórias <em>uma de cada vez via chat</em>, adicionando 15-20 minutos de overhead por cerimônia. Duas ferramentas concorrentes já suportam essa funcionalidade — foi mencionado como lacuna de diferenciação na própria chamada de renovação.</p>
+  </div>
+
+  <h3>Por que a CS sinalizou como risco de renovação</h3>
+  <ul>
+    <li>O contrato vence em 90 dias e a feature foi mencionada explicitamente na conversa.</li>
+    <li>Existem <strong>3 squads pendentes</strong> que não foram integrados por causa dessa lacuna de UX — R$ 28.000 ARR de expansão bloqueada.</li>
+    <li>O workaround atual é visível e desgastante. Não é um problema escondido — é uma queixa recorrente.</li>
+  </ul>
+
+  <div class="callout callout--info">
+    <span class="label">Decisão do PO na triagem</span>
+    <p><strong>Caminho:</strong> Product Ready → Racionalização direta. Sem Discovery. <strong>Escalada arquitetural ao CTO:</strong> não necessária — apenas mudanças de UI e estado de sessão, sem nova infraestrutura. As cinco premissas do intake (WebSocket existente suporta, persistência extensível, sem dependência de TI do cliente, etc.) foram consideradas razoáveis.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">10</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 03 — RP v1 REJEITADO                                      -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 03 · Demanda 1 · Queue Voting</span>
+    <span>RP v1 rejeitado</span>
+  </header>
+
+  <h2>O Readiness Package — e o gate do PM</h2>
+  <p>Em 20 de março, o PO submeteu a primeira versão do Readiness Package (<code>RP-2026-001 v1</code>) ao PM. Dois dias depois, o pacote voltou. <strong>Rejeitado.</strong></p>
+
+  <div class="pull">
+    Faltava estratégia de rollout e critérios de aceite indefinidos para edge cases — desconexão do facilitador, votos parciais no momento do reveal, reconexão de participante durante o item.
+    <cite>— Justificativa da rejeição no histórico de revisão</cite>
+  </div>
+
+  <h3>Por que isso é uma boa notícia</h3>
+  <p>A rejeição não é falha — é o processo funcionando. O PM não tem como planejar capacidade se não sabe como o time vai rolar a feature para produção, nem como o QA vai validar o comportamento sob desconexão. Aprovar um RP incompleto significa empurrar essas decisões para o meio da execução, onde elas custam muito mais.</p>
+
+  <div class="callout callout--ok">
+    <span class="label">O gate funcionou</span>
+    <p>RP v1 rejeitado em 22 mar. RP v2 ressubmetido com correções em 28 mar. Aprovado. Seis dias de retrabalho no RP — contra semanas de retrabalho que teriam vindo depois, em execução.</p>
+  </div>
+
+  <h3>O que mudou de v1 para v2</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:35%;">Lacuna apontada pelo PM</th>
+        <th style="width:65%;">Correção em v2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Estratégia de rollout ausente</strong></td>
+        <td>Adicionada estratégia: migração roda apenas em sessões com status=encerrado; sessões ativas usam schema antigo até encerramento natural; sem downtime.</td>
+      </tr>
+      <tr>
+        <td><strong>Desconexão do facilitador</strong></td>
+        <td>Definido período de graça de 5 min com restauração de estado de sessão. Fallback: sessão encerra limpa com notificação aos participantes.</td>
+      </tr>
+      <tr>
+        <td><strong>Votos parciais no reveal</strong></td>
+        <td>Participantes que não votaram quando a revelação é acionada veem seu espaço como "Não votou" — sem bloqueio do facilitador.</td>
+      </tr>
+      <tr>
+        <td><strong>Participante entra durante um item</strong></td>
+        <td>Vê o item ativo e pode votar. A posição na fila não é exibida. A consistência de estado é garantida server-side.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">11</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 03 — RP v2 APROVADO                                       -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 03 · Demanda 1 · Queue Voting</span>
+    <span>RP v2 — escopo aprovado</span>
+  </header>
+
+  <h2>O escopo aprovado — RP v2</h2>
+  <p>O Readiness Package final entrega duas capacidades coordenadas: <strong>fila de questões</strong> e <strong>votação secreta</strong>. As regras estão definidas no nível do servidor (não apenas client-side, o que evita bypass via DevTools), e a persistência de sessão é estendida para suportar reconexões.</p>
+
+  <h3>O que está dentro</h3>
+  <div class="compare">
+    <div class="compare__col">
+      <h4>Fila de questões</h4>
+      <ul style="margin:0; padding-left:14pt;">
+        <li>UI do facilitador para adicionar, reordenar e remover itens</li>
+        <li>Controle "Revelar próximo item" para avançar um de cada vez</li>
+        <li>Participantes veem apenas o item ativo</li>
+        <li>Controles auxiliares: pular, retornar, encerrar</li>
+      </ul>
+    </div>
+    <div class="compare__col">
+      <h4>Votação secreta</h4>
+      <ul style="margin:0; padding-left:14pt;">
+        <li>Votos ocultos até o facilitador acionar "Revelar"</li>
+        <li>Aplicação server-side — payload WebSocket só envia <code>"votou"</code>, não o valor</li>
+        <li>Facilitador vê contagem, não valores, até a revelação</li>
+        <li>Pós-revelação: avançar fila ou re-votar item atual</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>O que ficou fora</h3>
+  <ul>
+    <li>Timer por item (backlog futuro)</li>
+    <li>Revelação automática após todos votarem (toggle de preferência, fase futura)</li>
+    <li>Redesign mobile (layout atual se aplica)</li>
+    <li>Co-facilitação (modelo de facilitador único permanece)</li>
+    <li>Integração Jira/Linear para importação de histórias</li>
+  </ul>
+
+  <h3>Esforço e custo</h3>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__val">14d</div>
+      <div class="stat__lbl">Esforço estimado total</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">0</div>
+      <div class="stat__lbl">Nova infra necessária</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">0</div>
+      <div class="stat__lbl">Custo recorrente novo</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">26/abr</div>
+      <div class="stat__lbl">Release alvo</div>
+    </div>
+  </div>
+
+  <div class="callout callout--ok">
+    <span class="label">Pronto para handoff ao PM</span>
+    <p>Em 28 de março, o RP v2 entra na fila de planejamento de execução. A Demanda 1 está pronta para ser sequenciada — com baixo risco, escopo apertado e prazo de renovação suficiente para absorver imprevistos.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">12</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2</span>
+    <span>Room Access Control</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">04</div>
+    <h1>Room Access Control</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">Construtora Ágil, deal de pré-fechamento, R$ 42.000 ARR condicionados à funcionalidade. Vendas comprometeu informalmente 60 dias ao cliente. Três incógnitas de integração no intake forçaram o PO a abrir Discovery antes de qualquer escopo ser definido.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">13</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — O CLIENTE E A DOR                                    -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>O cliente e a dor</span>
+  </header>
+
+  <h2>O cliente e a dor</h2>
+
+  <table class="kv">
+    <tr><th>Cliente</th><td>Construtora Ágil — mid-market, em onboarding</td></tr>
+    <tr><th>Origem da demanda</th><td>Chamada pré-fechamento de Vendas</td></tr>
+    <tr><th>Reportador</th><td>Rafael Souza (Vendas)</td></tr>
+    <tr><th>Tipo</th><td>Funcionalidade · Compliance · Integração</td></tr>
+    <tr><th>Prioridade</th><td><span class="pill pill--warn">Alta</span> — bloqueador de pré-fechamento</td></tr>
+    <tr><th>Receita em jogo</th><td>R$ 42.000 ARR direto + 2 deals em pipeline com mesma necessidade</td></tr>
+  </table>
+
+  <h3>O problema, em uma frase</h3>
+  <p class="lede">A sala de planejamento é totalmente aberta — qualquer pessoa com o link entra, vê todos os participantes e vota. Para um cliente que opera com prestadores externos e sob governança de dados, isso não é aceitável.</p>
+
+  <p>A Construtora Ágil realiza cerimônias com participação mista: funcionários internos e prestadores externos. A política interna deles proíbe que prestadores tenham visibilidade sobre identidades uns dos outros. Além disso, querem que gerentes de produto participem como <strong>observadores</strong> — assistindo, sem votar nem influenciar estimativas.</p>
+
+  <p>O dono da sala precisa de três controles que hoje não existem:</p>
+  <ol>
+    <li><strong>Quem entra:</strong> acesso somente por convite ou com aprovação obrigatória.</li>
+    <li><strong>Quem vê quem:</strong> modo anônimo, com aliases entre votantes.</li>
+    <li><strong>Quem vota:</strong> distinção entre papéis Votante e Observador.</li>
+  </ol>
+
+  <div class="callout callout--warn">
+    <span class="label">Sinal vermelho no intake</span>
+    <p>Vendas fez um <strong>compromisso informal de 60 dias</strong> ao cliente durante a chamada. Esse compromisso não foi validado contra capacidade — e o PO marcou explicitamente no intake que nenhuma data externa pode ser confirmada até o Discovery encerrar e o PM rodar a avaliação. O gatilho de escalada está armado.</p>
+  </div>
+
+  <h3>O que tornou esta demanda diferente</h3>
+  <p>Diferente da Demanda 1, esta chegou com <strong>três incógnitas que bloqueiam a racionalização</strong>. Não se trata de detalhar critérios de aceite — se trata de não saber, ainda, o que pode ser entregue. O PO não tinha como redigir um Readiness Package sem antes saber se Azure AD é viável, se Jira é obrigatório, e se a residência de dados conformeo LGPD é alcançável.</p>
+
+  <div class="callout callout--info">
+    <span class="label">Decisão do PO na triagem</span>
+    <p><strong>Caminho:</strong> <s>Product Ready</s> → <strong>Discovery</strong>. Time-box de 2 semanas (18/mar a 01/abr). <strong>Escalada arquitetural ao CTO:</strong> sim — e ampliada de "modelo de dados de participantes" para também incluir viabilidade Azure AD OIDC, escopo de integração Jira e postura LGPD.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">14</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — AS 3 INCÓGNITAS                                      -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>O Discovery em ação</span>
+  </header>
+
+  <h2>Discovery — as três incógnitas</h2>
+  <p>Durante a chamada de intake, Vendas trouxe três dependências de integração que não estavam previstas e que bloqueavam a racionalização. O PO abriu Discovery em 18 de março com time-box de duas semanas e mobilizou três frentes paralelas.</p>
+
+  <h3>As três frentes</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:5%;">#</th>
+        <th style="width:30%;">Incógnita</th>
+        <th style="width:22%;">Quem resolve</th>
+        <th style="width:43%;">Método</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Azure AD — SSO completo, group-claim leve ou sincronização via webhook?</td>
+        <td>CTO</td>
+        <td>Spike técnico (2-3 dias)</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Integração Jira — requisito obrigatório ou desejável para o deal fechar?</td>
+        <td>Construtora Ágil (via Vendas)</td>
+        <td>Chamada com cliente</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Residência de dados — onde estão hoje os dados de identidade de participantes?</td>
+        <td>CTO</td>
+        <td>Revisão de infraestrutura (1 dia)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>As resoluções</h3>
+
+  <h4>Frente 1 · Azure AD — Spike do CTO, 20 mar</h4>
+  <p>A integração é <strong>viável via OIDC com group-claim</strong>, usando a camada de auth existente (que já suporta OAuth2). Não exige SSO completo. A plataforma pode solicitar o claim <code>groups</code> no login e mapear grupos AD para papéis no momento de entrada na sessão. Esforço: <strong>4-6 dias</strong>.</p>
+  <p>Dependência externa identificada: o cliente precisa registrar a plataforma como aplicação permitida no portal Azure deles. O prazo dessa ação está fora do nosso controle.</p>
+
+  <h4>Frente 2 · Jira — Chamada com o cliente, 22 mar</h4>
+  <p>A TI do cliente (Fernanda Ramos) confirmou que <strong>Jira não é obrigatório</strong> para o deal fechar. Atribuição manual via Azure AD é suficiente para a Fase 1. Movido para o backlog como item separado (<code>BACKLOG-2026-007</code>).</p>
+
+  <div class="callout callout--info">
+    <span class="label">Próxima página</span>
+    <p>A frente mais delicada do Discovery foi a terceira — a revisão de infraestrutura para LGPD. Ela revelou um gap de residência de dados que não estava no radar do intake.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">15</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — FRENTE 3 LGPD                                        -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>Frente 3 · LGPD</span>
+  </header>
+
+  <h2>Frente 3 — LGPD e residência de dados</h2>
+  <p>A revisão de infraestrutura conduzida pelo CTO em 21 de março identificou um gap que não estava no escopo original do intake — e que, se ignorado, exporia a empresa a risco regulatório direto.</p>
+
+  <h4>O achado</h4>
+  <div class="callout callout--warn">
+    <span class="label">Gap descoberto</span>
+    <p>O cluster primário da plataforma roda em <code>us-east-1</code>. Dados de identidade de participantes de clientes brasileiros — nomes, emails e metadados de sessão — estão hoje armazenados fora do Brasil. Entregar a funcionalidade à Construtora Ágil sem tratar isso exporia a empresa a risco LGPD direto.</p>
+  </div>
+
+  <h4>As três opções avaliadas pelo CTO</h4>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:8%;">Opção</th>
+        <th style="width:48%;">Descrição</th>
+        <th style="width:18%;">Esforço</th>
+        <th style="width:26%;">Risco</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>A</strong></td><td>Migrar tabela de participantes para <code>sa-east-1</code> para todos os tenants</td><td>3-4 semanas</td><td>Interrompe todos os clientes durante migração</td></tr>
+      <tr><td><strong>B</strong></td><td>Roteamento por tenant — dados armazenados na região declarada pelo tenant</td><td>6-8 semanas</td><td>Mudança a nível de plataforma, alta complexidade</td></tr>
+      <tr><td><strong>C</strong></td><td>Armazenar em <code>sa-east-1</code> só para clientes que sinalizam requisito LGPD</td><td>~2 semanas</td><td>Adiciona roteamento condicional, mas escopado</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--ok">
+    <span class="label">Decisão do CTO</span>
+    <p><strong>Opção C para este release.</strong> As opções A e B são decisões estratégicas de plataforma que requerem alinhamento com o CEO e não podem ser comprometidas para um único deal. A Opção C resolve o caso da Construtora Ágil e cria um padrão reutilizável para futuros requisitos de compliance regional — uma vez estabelecido, qualquer próximo cliente regulado entra pelo mesmo trilho.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">16</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — RESULTADO DO DISCOVERY                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>Resultado do Discovery</span>
+  </header>
+
+  <h2>O Discovery encerra em 7 dias</h2>
+  <p>Em 25 de março — sete dias após a abertura, bem dentro do time-box de duas semanas — todas as incógnitas estavam resolvidas. A demanda saiu de Discovery e voltou para racionalização com escopo significativamente diferente do que aparecia no intake.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:5%;">#</th>
+        <th style="width:25%;">Incógnita</th>
+        <th style="width:45%;">Resolução</th>
+        <th style="width:25%;">Impacto no escopo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Integração Azure AD</td><td>Viável via group-claim OIDC. 4-6 dias.</td><td><span class="pill">Adicionado</span></td></tr>
+      <tr><td>2</td><td>Integração Jira</td><td>Não obrigatório. Movido para backlog.</td><td><span class="pill pill--ok">Removido</span></td></tr>
+      <tr><td>3</td><td>Residência de dados</td><td>Opção C — flag LGPD por cliente, roteamento <code>sa-east-1</code>. ~2 semanas.</td><td><span class="pill">Adicionado</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull">
+    A complexidade revisada da demanda é significativamente maior do que estimado originalmente. O Readiness Package deve refletir o trabalho de integração Azure AD e residência de dados LGPD.
+    <cite>— Nota do PO no encerramento do Discovery</cite>
+  </div>
+
+  <h2>RP aprovado em v1</h2>
+  <p>Em 27 de março, PO e CTO submeteram o Readiness Package em conjunto. <strong>O PM aprovou na primeira revisão.</strong> A diferença de comportamento entre as duas demandas no gate de aprovação tem uma explicação simples: a Demanda 2 chegou com a contribuição direta do CTO em todas as decisões arquiteturais, com riscos mapeados, com opções avaliadas e com um caminho claro de mitigação. O PM não tinha perguntas em aberto.</p>
+
+  <h3>O escopo final aprovado</h3>
+  <div class="compare">
+    <div class="compare__col">
+      <h4>Capacidades funcionais</h4>
+      <ul style="margin:0; padding-left:14pt;">
+        <li>Modos de acesso: Aberto, Somente convite, Aprovação obrigatória</li>
+        <li>Modo anônimo com aliases server-side</li>
+        <li>Papéis Votante / Observador atribuíveis pelo dono</li>
+        <li>Remoção de participante em sessão ativa</li>
+        <li>Compatibilidade retroativa com salas existentes (opt-in por sala)</li>
+      </ul>
+    </div>
+    <div class="compare__col">
+      <h4>Camadas técnicas</h4>
+      <ul style="margin:0; padding-left:14pt;">
+        <li>Migração aditiva do modelo de participantes</li>
+        <li>Filtragem server-side de payloads WebSocket no modo anônimo</li>
+        <li>Tokens de convite 128-bit, expiram no primeiro uso</li>
+        <li>Integração group-claim OIDC com Azure AD</li>
+        <li>Roteamento LGPD Opção C — endpoint <code>sa-east-1</code> condicional</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">17</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — ESFORÇO EXPANDIDO                                    -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>Esforço expandido</span>
+  </header>
+
+  <h2>O custo real do escopo aprovado</h2>
+  <p>A estimativa que entrou no intake era de 25 dias. O Readiness Package aprovado, com Azure AD e LGPD Opção C incluídos, soma 41 dias. Não é um estouro — é o que o trabalho realmente custa quando todas as peças estão sobre a mesa.</p>
+
+  <h3>Esforço estimado</h3>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__val">25d</div>
+      <div class="stat__lbl">Estimativa no intake</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">41d</div>
+      <div class="stat__lbl">Estimativa pós-Discovery</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">+16d</div>
+      <div class="stat__lbl">Delta (Azure AD + LGPD)</div>
+    </div>
+    <div class="stat">
+      <div class="stat__val">30/mai</div>
+      <div class="stat__lbl">Release alvo</div>
+    </div>
+  </div>
+
+  <h3>De onde vêm os 16 dias adicionais</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:55%;">Trabalho adicionado pelo Discovery</th>
+        <th style="width:20%;">Esforço</th>
+        <th style="width:25%;">Senioridade necessária</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Integração de group-claim OIDC com Azure AD</td><td class="num">5 dias</td><td>Senior</td></tr>
+      <tr><td>Roteamento de residência de dados LGPD (Opção C, <code>sa-east-1</code>)</td><td class="num">10 dias</td><td>Senior</td></tr>
+      <tr><td>QA adicional: validação LGPD em tenant brasileiro</td><td class="num">+1 dia</td><td>QA</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">Porque essa diferença importa</span>
+    <p>Se a Demanda 2 tivesse pulado o Discovery, o time teria começado a execução com estimativa de 25 dias e descoberto LGPD no meio do caminho. Vendas teria confirmado 60 dias ao cliente baseado nessa estimativa. O deal estaria, hoje, com promessa quebrada. O Discovery custa tempo; <em>não</em> fazer Discovery custa credibilidade.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">18</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 04 — RISCOS                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 04 · Demanda 2 · Access Control</span>
+    <span>Riscos e mitigações</span>
+  </header>
+
+  <h2>Os riscos que o RP carrega para o PM</h2>
+  <p>O Readiness Package aprovado entrega ao PM um mapa de riscos detalhado. Eles não desaparecem com a aprovação — eles passam a ser responsabilidade do plano de execução. Os mais críticos para o cronograma são:</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:34%;">Risco</th>
+        <th style="width:12%;">Prob.</th>
+        <th style="width:12%;">Impacto</th>
+        <th style="width:42%;">Mitigação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Registro Azure AD atrasado pelo TI do cliente</strong></td>
+        <td>Média</td>
+        <td>Alto</td>
+        <td>Spec e checklist enviados ao TI do cliente cedo. PM acompanha como bloqueador de milestone — gatilho de escalada se não cumprido até 14/abr.</td>
+      </tr>
+      <tr>
+        <td><strong>Conflito entre prazo de Vendas e capacidade real</strong></td>
+        <td>Alta</td>
+        <td>Alto</td>
+        <td>PM executa avaliação de capacidade antes de qualquer data ser comunicada externamente. PO é dono deste gate.</td>
+      </tr>
+      <tr>
+        <td><strong>Migração do modelo de participantes quebra sessões ativas</strong></td>
+        <td>Baixa</td>
+        <td>Alto</td>
+        <td>Mudança aditiva apenas. Novos campos nullable com defaults correspondendo ao comportamento atual.</td>
+      </tr>
+      <tr>
+        <td><strong>Pressão de expansão de escopo (SSO, audit logs)</strong></td>
+        <td>Média</td>
+        <td>Médio</td>
+        <td>Exclusões explícitas documentadas no limite de escopo. PO aplica o limite — qualquer adição requer novo intake.</td>
+      </tr>
+      <tr>
+        <td><strong>LGPD requer trabalho de infra além da Opção C</strong></td>
+        <td>Baixa</td>
+        <td>Alto</td>
+        <td>CTO confirmou o escopo da Opção C antes do compromisso. Se ampliar, CEO decide.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>O que o RP da Demanda 2 trouxe que o da Demanda 1 não tinha</h3>
+  <ul>
+    <li><strong>Avaliação arquitetural do CTO em 6 dimensões</strong> — modelo de dados, multi-tenancy, membership em tempo real, segurança, performance, observabilidade.</li>
+    <li><strong>Dependências externas explicitamente mapeadas</strong> — registro Azure AD pelo TI do cliente, provisionamento RDS <code>sa-east-1</code>, sign-off LGPD pré-release.</li>
+    <li><strong>Premissas validadas item a item</strong> — sete premissas no intake foram cada uma reavaliada pelo CTO após o Discovery.</li>
+    <li><strong>Plano de migração retrocompatível</strong> — uma promessa explícita de que sessões abertas existentes não são afetadas.</li>
+  </ul>
+
+  <div class="callout callout--ok">
+    <span class="label">Pronto para handoff ao PM</span>
+    <p>Em 27 de março, ambas as demandas estão prontas para entrar no plano de execução. O PM tem dois pacotes na mesa — um com 14 dias e baixo risco, outro com 41 dias e dependências externas — e precisa orquestrar uma janela em que as duas caibam sem se atropelarem.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">19</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 05 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 05 · Plano de Execução</span>
+    <span>EP-2026-001</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">05</div>
+    <h1>Plano de Execução</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">O PM recebe os dois Readiness Packages aprovados e produz o EP-2026-001 em 29 de março. Capacidade avaliada, demandas sequenciadas, milestones definidos, gatilhos de escalada armados. A janela de execução vai de 1 de abril a 31 de maio.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">20</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 05 — CAPACIDADE                                           -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 05 · Plano de Execução</span>
+    <span>Capacidade e sequenciamento</span>
+  </header>
+
+  <h2>Avaliação de capacidade</h2>
+  <p>O time tem cinco pessoas com disponibilidade conhecida a partir de 1 de abril. O esforço somado das duas demandas é 55 dias úteis (14 + 41). A capacidade da janela cobre o esforço — mas o sequenciamento precisa respeitar conflitos em sistemas compartilhados.</p>
+
+  <h3>O time</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:25%;">Pessoa</th>
+        <th style="width:30%;">Papel</th>
+        <th style="width:20%;">Senioridade</th>
+        <th style="width:25%;">Disponível em</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Diego Alves</td><td>Engenheiro Backend</td><td>Senior</td><td class="mono">01/abr</td></tr>
+      <tr><td>Priya Nair</td><td>Engenheira Backend</td><td>Mid-senior</td><td class="mono">01/abr</td></tr>
+      <tr><td>Camila Torres</td><td>Engenheira Frontend</td><td>Mid</td><td class="mono">01/abr</td></tr>
+      <tr><td>Lucas Park</td><td>Engenheiro Frontend</td><td>Mid</td><td class="mono">01/abr</td></tr>
+      <tr><td>Fernanda Lima</td><td>QA</td><td>QA</td><td class="mono">08/abr</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Os sistemas compartilhados (e por isso as demandas devem ser sequenciadas)</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:25%;">Sistema</th>
+        <th style="width:35%;">Demanda 1 toca</th>
+        <th style="width:40%;">Demanda 2 toca</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Event bus WebSocket</strong></td><td>Novos eventos (item_revealed, votes_revealed)</td><td>Novos eventos (join_request, role_changed)</td></tr>
+      <tr><td><strong>Schema de sessão</strong></td><td>Campos de fila + estado de revelação</td><td>Papel do participante, access_mode, invite_token</td></tr>
+      <tr><td><strong>Modelo de participante</strong></td><td>Exibição de ocultação de votos</td><td>Reescrita completa da máquina de estado</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">Decisão do PM — recomendação no plano</span>
+    <p>Sequenciar a Demanda 1 primeiro. Menor risco, entrega mais curta, e resolve o prazo de renovação. A Demanda 2 começa em paralelo, mas em trilhas que não conflitam com o backend da Demanda 1, e ganha foco total após o release de 26/abr.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">21</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 05 — TIMELINE                                             -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 05 · Plano de Execução</span>
+    <span>Sequenciamento — abril e maio</span>
+  </header>
+
+  <h2>Como as duas demandas se encaixam na janela</h2>
+  <p>O diagrama abaixo mostra as faixas de trabalho de cada demanda dentro da janela de 8 semanas. As barras sólidas são trabalho contínuo; as barras tracejadas representam ciclos de QA e release. A Demanda 1 (Queue Voting) termina antes que o esforço da Demanda 2 entre na fase crítica de modos de acesso e LGPD.</p>
+
+  <div class="timeline">
+    <div class="timeline__head">
+      <span></span>
+      <span>S1<br>01/abr</span>
+      <span>S2<br>08/abr</span>
+      <span>S3<br>15/abr</span>
+      <span>S4<br>22/abr</span>
+      <span>S5<br>29/abr</span>
+      <span>S6<br>06/mai</span>
+      <span>S7<br>13/mai</span>
+      <span>S8<br>20/mai</span>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D1 · Backend</div>
+      <div class="timeline__bar" style="grid-column: 2 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D1 · Frontend</div>
+      <div class="timeline__bar timeline__bar--soft" style="grid-column: 3 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D1 · QA + Release</div>
+      <div class="timeline__bar timeline__bar--ghost" style="grid-column: 4 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D2 · Migração participantes</div>
+      <div class="timeline__bar" style="grid-column: 2 / span 3;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D2 · Azure AD OIDC</div>
+      <div class="timeline__bar timeline__bar--soft" style="grid-column: 3 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D2 · Modos + anônimo</div>
+      <div class="timeline__bar" style="grid-column: 5 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D2 · LGPD + Frontend</div>
+      <div class="timeline__bar timeline__bar--soft" style="grid-column: 7 / span 2;"></div>
+    </div>
+    <div class="timeline__row">
+      <div class="timeline__label">D2 · QA + Release</div>
+      <div class="timeline__bar timeline__bar--ghost" style="grid-column: 8 / span 1;"></div>
+    </div>
+  </div>
+
+  <h3>Como ler o diagrama</h3>
+  <ul>
+    <li><strong>Sequenciamento, não paralelismo cego.</strong> A migração do modelo de participantes (D2) começa em paralelo com o backend da D1 porque toca <em>partes diferentes</em> do schema. Quando os dois sistemas começam a competir pelo mesmo subsistema, a D1 já está em frontend ou QA.</li>
+    <li><strong>Azure AD começa cedo, com risco externo.</strong> A faixa de OIDC depende do registro pelo TI do cliente. Se atrasar, todo o bloco da D2 desliza.</li>
+    <li><strong>QA da D2 absorve LGPD + multi-tenant.</strong> O último sprint é exclusivamente validação — sem desenvolvimento concorrente.</li>
+  </ul>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">22</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 05 — MILESTONES E ESCALADAS                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 05 · Plano de Execução</span>
+    <span>Milestones e gatilhos</span>
+  </header>
+
+  <h2>Milestones críticos</h2>
+  <p>Os milestones são gates ao longo do caminho. Cada um tem responsável, data alvo e um critério explícito de "concluído". Sem absorção silenciosa: qualquer atraso superior a 3 dias úteis é comunicado ao PO imediatamente.</p>
+
+  <h3>Demanda 1 — Queue Voting</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:8%;">M</th>
+        <th style="width:40%;">Marco</th>
+        <th style="width:22%;">Responsável</th>
+        <th style="width:30%;">Gate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>M1</td><td>Breakdown Package completo</td><td>Tech Lead</td><td>PM confirma contexto suficiente</td></tr>
+      <tr><td>M2</td><td>Backend completo</td><td>Diego Alves</td><td>Code review + testes verdes</td></tr>
+      <tr><td>M3</td><td>Frontend completo</td><td>Camila + Lucas</td><td>Revisão do Tech Lead aprovada</td></tr>
+      <tr><td>M4</td><td>QA completo</td><td>Fernanda Lima</td><td>Critérios de aceite validados</td></tr>
+      <tr><td>M5</td><td><strong>Release · 26/abr</strong></td><td>PM + Tech Lead</td><td>Aprovação de release do QA</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Demanda 2 — Access Control</h3>
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:8%;">M</th>
+        <th style="width:40%;">Marco</th>
+        <th style="width:22%;">Responsável</th>
+        <th style="width:30%;">Gate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>M2</td><td>Migração do modelo de participantes</td><td>Priya Nair</td><td>Schema em staging, retrocompat verificada</td></tr>
+      <tr><td>M3</td><td>Azure AD OIDC integrado</td><td>Diego Alves</td><td>Bloqueado até cliente registrar app (14/abr)</td></tr>
+      <tr><td>M4</td><td>Modos de acesso + modo anônimo</td><td>Priya + Diego</td><td>Aplicação server-side verificada</td></tr>
+      <tr><td>M5</td><td>Roteamento LGPD <code>sa-east-1</code></td><td>Diego Alves</td><td>CTO confirma postura. Validação com tenant BR.</td></tr>
+      <tr><td>M7</td><td>QA completo</td><td>Fernanda Lima</td><td>Funcional + segurança + multi-tenant + LGPD</td></tr>
+      <tr><td>M8</td><td>Sign-off LGPD do cliente</td><td>TI Construtora Ágil</td><td>Cliente confirma residência atendida</td></tr>
+      <tr><td>M9</td><td><strong>Release · 30/mai</strong></td><td>PM + Tech Lead</td><td>QA + sign-off LGPD do cliente</td></tr>
+    </tbody>
+  </table>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">23</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 05 — GATILHOS DE ESCALADA                                 -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 05 · Plano de Execução</span>
+    <span>Gatilhos de escalada</span>
+  </header>
+
+  <h2>Gatilhos de escalada</h2>
+  <p>O PM não absorve atrasos silenciosamente. Cada condição abaixo dispara uma comunicação explícita ao PO e, quando aplicável, sobe a cadeia. O objetivo não é punir o atraso — é evitar que ele só apareça quando virar um problema irrecuperável.</p>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:42%;">Condição</th>
+        <th style="width:34%;">Ação do PM</th>
+        <th style="width:24%;">Destino</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Registro Azure AD não confirmado até 14/abr</td><td>PM notifica PO. PO aciona Vendas para pressionar TI do cliente.</td><td>PO → Vendas → Cliente</td></tr>
+      <tr><td>Instância RDS <code>sa-east-1</code> não provisionada até 05/mai</td><td>PM escala ao CTO. CTO escala ao CEO se aprovação de procurement for necessária.</td><td>CTO → CEO</td></tr>
+      <tr><td>QA da Demanda 1 revela bloqueador antes do release</td><td>PM segura o release. Tech Lead faz triagem. Se &gt; 2 dias, PM notifica PO do risco de renovação.</td><td>PO → CS → Banco Meridional</td></tr>
+      <tr><td>Qualquer milestone atrasado &gt; 3 dias úteis</td><td>PM produz mapa de milestones revisado e comunica ao PO. Sem absorção silenciosa.</td><td>PO</td></tr>
+      <tr><td>Solicitação de adição de escopo durante execução</td><td>PM rejeita. Qualquer adição requer um novo registro de intake.</td><td>PO</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">Princípio operacional</span>
+    <p>Cada gatilho tem três partes: <strong>uma condição observável</strong> (não "se eu achar que vai atrasar", mas "se a data X passar"), <strong>uma ação imediata</strong> do PM e <strong>um destino explícito</strong> na cadeia. Atrasos não são escondidos. Decisões de absorção, replanejamento ou escalada são feitas por quem tem autoridade — não por quem está executando.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">24</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 06 — OPENER                                               -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 06 · Aprendizados</span>
+    <span>O que o processo provou</span>
+  </header>
+
+  <div class="opener">
+    <div class="number">06</div>
+    <h1>Comparativo e<br>Aprendizados</h1>
+    <div class="opener__rule"></div>
+    <p class="lede">Olhando as duas demandas lado a lado, fica claro o que cada camada do modelo está protegendo. Esta parte sintetiza as diferenças, os princípios que o caso reforçou e o que levamos para o próximo ciclo.</p>
+  </div>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">25</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 06 — COMPARATIVO                                          -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 06 · Aprendizados</span>
+    <span>Comparativo</span>
+  </header>
+
+  <h2>As duas demandas, ponto a ponto</h2>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:28%;">Dimensão</th>
+        <th style="width:36%;">Queue Voting</th>
+        <th style="width:36%;">Access Control</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Escalada ao CTO</strong></td><td>Não</td><td>Sim — ampliada após intake</td></tr>
+      <tr><td><strong>Passou por Discovery</strong></td><td>Não</td><td>Sim — 3 incógnitas de integração</td></tr>
+      <tr><td><strong>Complexidade arquitetural</strong></td><td>Baixa</td><td>Alta</td></tr>
+      <tr><td><strong>Estimativa final</strong></td><td>14 dias</td><td>41 dias (revisada de 25)</td></tr>
+      <tr><td><strong>Considerações de segurança</strong></td><td>Ocultação de votos (server-side)</td><td>Modelo de acesso + OIDC + LGPD</td></tr>
+      <tr><td><strong>Perfil de risco</strong></td><td>Baixo</td><td>Alto</td></tr>
+      <tr><td><strong>Tipo de deal</strong></td><td>Retenção de renovação</td><td>Bloqueador pré-fechamento</td></tr>
+      <tr><td><strong>Risco de escopo</strong></td><td>Baixo</td><td>Alto (LGPD + dependência do cliente)</td></tr>
+      <tr><td><strong>Dependências externas</strong></td><td>Nenhuma</td><td>Cliente registra app no portal Azure</td></tr>
+      <tr><td><strong>Versões do RP</strong></td><td>v1 rejeitado · v2 aprovado</td><td>v1 aprovado direto</td></tr>
+      <tr><td><strong>Sequência no plano</strong></td><td>Primeira · release 26/abr</td><td>Paralela + foco · release 30/mai</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Os três princípios que o caso reforçou</h3>
+
+  <h4>1 · O intake captura, não negocia</h4>
+  <p>Tanto CS quanto Vendas registraram suas demandas em formato estruturado. <strong>Nem Vendas confirmou prazo</strong> (apesar do compromisso informal de 60 dias), <strong>nem CS prometeu funcionalidade</strong> ao Banco Meridional na chamada de renovação. A negociação só acontece quando o PM tem dados.</p>
+
+  <h4>2 · O gate só abre quando o anterior está respondido</h4>
+  <p>O PM rejeitou o RP v1 da Demanda 1 não por preciosismo, mas porque <em>não tinha como planejar capacidade</em> sem saber o que aconteceria em desconexão do facilitador. A Demanda 2 só saiu de Discovery quando as três incógnitas tinham resoluções — não quando o time-box expirou.</p>
+
+  <h4>3 · O Discovery economiza mais tempo do que custa</h4>
+  <p>A Demanda 2 ganhou 16 dias de esforço durante o Discovery (Azure AD + LGPD). Se esses 16 dias tivessem aparecido em execução, o cronograma teria estourado, Vendas teria comunicado um prazo impossível ao cliente, e o deal estaria em risco. <strong>Os 7 dias do Discovery valeram semanas de execução.</strong></p>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">26</span>
+  </footer>
+</section>
+
+<!-- =============================================================== -->
+<!-- PARTE 06 — FECHAMENTO                                           -->
+<!-- =============================================================== -->
+<section class="page">
+  <header class="page-header">
+    <span>Parte 06 · Aprendizados</span>
+    <span>Fechamento</span>
+  </header>
+
+  <h2>O que esse caso provou</h2>
+
+  <div class="pull">
+    Não é o tamanho da demanda que define quanto processo ela precisa. É o quanto de incerteza ela traz e o quanto de risco ela carrega para o resto do sistema.
+  </div>
+
+  <p>A Demanda 1 — pequena, simples, baixo risco — passou rápido pelo funil, mas ainda assim foi parada uma vez no gate do PM por <em>razões que economizaram retrabalho de execução</em>. A Demanda 2 — complexa, com compliance, com dependência externa — não foi parada porque o Discovery tornou explícito tudo que importava antes do escopo ser comprometido.</p>
+
+  <p>O modelo operacional não está aí para tornar tudo lento. Está aí para fazer com que <strong>cada camada responda sua pergunta</strong> antes de passar adiante. Quando uma demanda passa direto, é porque não havia o que esclarecer. Quando uma demanda é devolvida ou desvia para Discovery, é porque a próxima camada não teria como decidir sem a informação que falta.</p>
+
+  <h3>Onde estamos agora</h3>
+  <table class="kv">
+    <tr><th>Estado em 29/mar</th><td>Ambos os Readiness Packages aprovados. Plano de Execução EP-2026-001 publicado.</td></tr>
+    <tr><th>D1 — Queue Voting</th><td>Em desenvolvimento. Sprint 1-2. Release alvo <strong>26/abr</strong>.</td></tr>
+    <tr><th>D2 — Access Control</th><td>Em desenvolvimento. Sprint 1-5. Release alvo <strong>30/mai</strong>.</td></tr>
+    <tr><th>Próximos gates</th><td>14/abr — registro Azure AD pelo cliente. 24/abr — QA da D1. 05/mai — RDS <code>sa-east-1</code> provisionada.</td></tr>
+  </table>
+
+  <h3>O que levamos para o próximo ciclo</h3>
+  <ol>
+    <li><strong>Alinhamento formal de gate de intake com Vendas</strong> — para que o próximo deal enterprise não chegue com compromisso de prazo já feito ao cliente. Já registrado como item processual no critério de sucesso do INT-2026-002.</li>
+    <li><strong>O padrão de roteamento LGPD por tenant (Opção C)</strong> — agora reutilizável para qualquer requisito futuro de região de compliance. O investimento na Demanda 2 reduz o custo marginal dos próximos casos.</li>
+    <li><strong>Os dois Readiness Packages como referência</strong> — RP-2026-001 v2 e RP-2026-002 v1 servem de gabarito para futuras racionalizações. Um é exemplo de escopo apertado sem escalada; o outro é exemplo de pacote multidisciplinar com CTO.</li>
+  </ol>
+
+  <div class="callout callout--ok">
+    <span class="label">Fim do caso</span>
+    <p>Duas demandas concorrentes, caminhos distintos pelo mesmo funil, ambas prontas para entrega dentro da janela. O processo não fez milagre — ele fez exatamente o que foi desenhado para fazer: <strong>tornar cada decisão explícita e cada compromisso defensável</strong>.</p>
+  </div>
+
+  <hr class="rule">
+
+  <p style="text-align:center; font-family:var(--font-sans); font-size:9pt; color:var(--ink-dim); letter-spacing:1pt; text-transform:uppercase; margin-top:14pt;">PokerPlan · Estudo de Caso · Caso fictício ambientado em 2026</p>
+
+  <footer class="page-footer">
+    <span>PokerPlan · Duas Demandas, Um Processo</span>
+    <span class="num">27</span>
+  </footer>
+</section>
+
+</body>
+</html>
