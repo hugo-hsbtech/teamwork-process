@@ -4,6 +4,10 @@
 
 ---
 
+## Infográfico
+
+![Infográfico](./5b40de56-8d2a-4634-ac56-11bc2cc71873.png)
+
 ## 1. Visão Geral — As Três Camadas
 
 ```mermaid
