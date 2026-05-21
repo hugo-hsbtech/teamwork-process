@@ -13,11 +13,11 @@ Templates em branco para cada artefato do processo operacional.
 
 | Template | Dono | Quando usar |
 |---|---|---|
-| `intake-record-pt-br.md` | Vendas / CS / CEO / Marketing | Ao capturar qualquer nova demanda |
-| `readiness-package-pt-br.md` | PO + CTO | Após triagem Product Ready, antes de entregar ao PM |
-| `execution-plan-pt-br.md` | PM | Após receber e aprovar o Readiness Package |
-| `product-backlog-pt-br.md` | PO | Em paralelo ao Execution Plan — o quê construir |
-| `tech-backlog-pt-br.md` | Tech Lead | Após Product Backlog baselined — como construir |
+| `intake-record.md` | Vendas / CS / CEO / Marketing | Ao capturar qualquer nova demanda |
+| `readiness-package.md` | PO + CTO | Após triagem Product Ready, antes de entregar ao PM |
+| `execution-plan.md` | PM | Após receber e aprovar o Readiness Package |
+| `product-backlog.md` | PO | Em paralelo ao Execution Plan — o quê construir |
+| `tech-backlog.md` | Tech Lead | Após Product Backlog baselined — como construir |
 
 ## Convenção de IDs
 

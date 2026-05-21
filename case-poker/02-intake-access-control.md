@@ -67,6 +67,8 @@ O modelo atual é completamente aberto: qualquer pessoa com o link entra, vê to
 | **Mercado** | Vendas relata que este pedido surgiu em outros 2 deals em pipeline no Q1. Provável necessidade a nível de segmento para ambientes enterprise e regulados. |
 | **Compliance** | A Construtora Ágil opera sob políticas internas de governança de dados que restringem a visibilidade de dados de participantes entre prestadores. |
 
+---
+
 ## Stakeholders
 
 | Stakeholder | Papel | Interesse | Influência |
@@ -137,9 +139,9 @@ Riscos identificados no intake — antes da avaliação técnica. Atualizados ap
 
 ---
 
-## Desafios de Integração Identificados no Intake
+## Desafios de integração identificados no intake
 
-Durante a chamada de intake, Vendas trouxe três dependências de integração que **não eram antecipadas** e bloqueiam a racionalização até serem investigadas:
+Durante a chamada de intake, Vendas trouxe três dependências de integração que não estavam previstas e bloqueiam a racionalização até serem investigadas:
 
 ### 1. Microsoft Azure Active Directory (Azure AD / Entra ID)
 
@@ -171,7 +173,7 @@ Durante a discussão de compliance, a equipe de TI da Construtora Ágil menciono
 
 **Motivo:** Bloqueador pré-fechamento do deal. Vendas fez um compromisso informal de prazo que precisa ser validado contra a capacidade antes de ser confirmado ao cliente.
 
-> ⚠️ **Nota de prioridade:** Apesar da urgência Alta, esta demanda não pode prosseguir para racionalização até que as três incógnitas de integração sejam resolvidas. O Discovery tem time-box de 2 semanas. Se as incógnitas não forem resolvidas nesse período, o PO escalará ao CEO com uma avaliação de risco para o deal.
+> Nota de prioridade: apesar da urgência Alta, esta demanda não pode prosseguir para racionalização até que as três incógnitas de integração sejam resolvidas. O Discovery tem time-box de 2 semanas. Se as incógnitas não forem resolvidas nesse período, o PO escala ao CEO com avaliação de risco para o deal.
 
 ---
 

@@ -6,7 +6,7 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 
 ---
 
-## Demandas Neste Caso
+## Demandas neste caso
 
 ### Demanda 1 — Queue Voting (Fila de Votação)
 
@@ -17,8 +17,8 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 
 | Documento | Descrição |
 |---|---|
-| `intake-queue-voting.md` | Registro de intake estruturado registrado pelo CS |
-| `readiness-package-queue-voting.md` | Readiness Package completo com 12 seções — pronto para o PM |
+| `01-intake-queue-voting.md` | Registro de intake estruturado registrado pelo CS |
+| `03-readiness-package-queue-voting.md` | Readiness Package completo com 12 seções — pronto para o PM |
 
 ---
 
@@ -31,12 +31,12 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 
 | Documento | Descrição |
 |---|---|
-| `intake-access-control.md` | Registro de intake estruturado registrado por Vendas |
-| `readiness-package-access-control.md` | Readiness Package completo com 12 seções e notas arquiteturais do CTO |
+| `02-intake-access-control.md` | Registro de intake estruturado registrado por Vendas |
+| `04-readiness-package-access-control.md` | Readiness Package completo com 12 seções e notas arquiteturais do CTO |
 
 ---
 
-## Artefatos Downstream
+## Artefatos downstream
 
 | Documento | Responsável | Descrição |
 |---|---|---|
@@ -48,7 +48,7 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 
 ---
 
-## Estado do Processo
+## Estado do processo
 
 Ambas as demandas completaram o Intake Layer e estão aprovadas para handoff ao PM.
 
@@ -74,7 +74,7 @@ Ambas as demandas completaram o Intake Layer e estão aprovadas para handoff ao 
 
 ---
 
-## Diferenças-Chave Entre os Dois Casos
+## Principais diferenças entre os dois casos
 
 | Dimensão | Queue Voting | Room Access Control |
 |---|---|---|

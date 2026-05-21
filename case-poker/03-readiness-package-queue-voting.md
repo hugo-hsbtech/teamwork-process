@@ -190,7 +190,7 @@ Nenhuma integração de terceiros externos é necessária para esta funcionalida
 
 ## Seção 10 — Avaliação Interna de Esforço e Custo
 
-> 🔒 **Somente uso interno.** Esta seção é um instrumento de planejamento operacional para tomada de decisão interna. As estimativas abaixo não são compromissos, não são obrigações contratuais, e nunca devem ser compartilhadas com clientes, prospects ou stakeholders externos em qualquer forma. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação administrativa de recursos dentro da empresa.
+> Somente uso interno. As estimativas abaixo não são compromissos nem obrigações contratuais e não devem ser compartilhadas com clientes, prospects ou stakeholders externos. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação de recursos dentro da empresa.
 >
 > As estimativas são baseadas na senioridade atual da equipe e no estado conhecido do sistema no momento da racionalização. Serão revisadas pelo Tech Lead durante o breakdown técnico.
 

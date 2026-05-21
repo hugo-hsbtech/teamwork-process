@@ -205,9 +205,9 @@ Dono da sala recebe notificação
 
 ## Seção 10 — Avaliação Interna de Esforço e Custo
 
-> 🔒 **Somente uso interno.** Esta seção é um instrumento de planejamento operacional para tomada de decisão interna. As estimativas abaixo não são compromissos, não são obrigações contratuais, e nunca devem ser compartilhadas com clientes, prospects ou stakeholders externos em qualquer forma. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação administrativa de recursos dentro da empresa.
+> Somente uso interno. As estimativas abaixo não são compromissos nem obrigações contratuais e não devem ser compartilhadas com clientes, prospects ou stakeholders externos. Existem para suportar planejamento de capacidade, trade-offs de priorização e alocação de recursos dentro da empresa.
 >
-> As estimativas são baseadas na senioridade atual da equipe e no estado conhecido do sistema no momento da racionalização. Serão revisadas pelo Tech Lead durante o breakdown técnico. A inclusão do trabalho de residência de dados LGPD (Opção C) e integração Azure AD aumenta significativamente a estimativa original do que foi inicialmente escopado no intake.
+> As estimativas são baseadas na senioridade atual da equipe e no estado conhecido do sistema no momento da racionalização. Serão revisadas pelo Tech Lead durante o breakdown técnico. A inclusão do trabalho de residência de dados LGPD (Opção C) e da integração Azure AD aumenta a estimativa original do que foi escopado no intake.
 
 ### Esforço de Desenvolvimento
 
@@ -223,7 +223,7 @@ Dono da sala recebe notificação
 | QA (funcional + segurança + multi-tenant + validação LGPD) | 5 dias | QA |
 | **Total** | **41 dias** | |
 
-> ⚠️ **Nota sobre a estimativa:** A estimativa original no nível do intake (25 dias) não incluía integração Azure AD ou trabalho de residência de dados LGPD. Ambos foram adicionados ao escopo durante o Discovery. O total revisado reflete o escopo completo pós-Discovery.
+> Nota sobre a estimativa: a estimativa original no nível do intake (25 dias) não incluía integração Azure AD nem residência de dados LGPD. Ambos foram adicionados ao escopo durante o Discovery. O total revisado reflete o escopo completo pós-Discovery.
 
 ### Impacto de Infraestrutura
 

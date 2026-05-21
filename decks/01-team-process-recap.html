@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Process · Recap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-body: 'Fraunces', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+
+    --bg: #f5efe2;
+    --bg-tint: #ede4d1;
+    --surface: #fdfaf3;
+    --surface-elevated: #ffffff;
+    --surface-recessed: #f0e9d8;
+    --border: rgba(46, 56, 66, 0.10);
+    --border-bright: rgba(46, 56, 66, 0.18);
+
+    --text: #1f2d3a;
+    --text-dim: #6b6452;
+    --text-faint: #998d72;
+
+    --ink-blue: #2c4a6b;
+    --ink-blue-dim: rgba(44, 74, 107, 0.10);
+    --sage: #5d7e4f;
+    --sage-dim: rgba(93, 126, 79, 0.12);
+    --terracotta: #b6633a;
+    --terracotta-dim: rgba(182, 99, 58, 0.12);
+    --ochre: #a5832b;
+    --ochre-dim: rgba(165, 131, 43, 0.14);
+    --crimson: #92302a;
+    --crimson-dim: rgba(146, 48, 42, 0.10);
+
+    --accent: var(--ink-blue);
+    --accent-dim: var(--ink-blue-dim);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1d22;
+      --bg-tint: #232529;
+      --surface: #25262b;
+      --surface-elevated: #2c2d33;
+      --surface-recessed: #1a1b1f;
+      --border: rgba(232, 220, 196, 0.10);
+      --border-bright: rgba(232, 220, 196, 0.20);
+
+      --text: #e8dcc4;
+      --text-dim: #ada593;
+      --text-faint: #7d7665;
+
+      --ink-blue: #7ea8c9;
+      --ink-blue-dim: rgba(126, 168, 201, 0.14);
+      --sage: #9bba85;
+      --sage-dim: rgba(155, 186, 133, 0.14);
+      --terracotta: #d68a5f;
+      --terracotta-dim: rgba(214, 138, 95, 0.14);
+      --ochre: #d4ae5e;
+      --ochre-dim: rgba(212, 174, 94, 0.14);
+      --crimson: #d97169;
+      --crimson-dim: rgba(217, 113, 105, 0.14);
+
+      --accent: var(--ink-blue);
+      --accent-dim: var(--ink-blue-dim);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 12% 6%, var(--ink-blue-dim) 0%, transparent 48%),
+      radial-gradient(ellipse at 90% 100%, var(--sage-dim) 0%, transparent 50%),
+      repeating-linear-gradient(
+        -45deg, transparent, transparent 38px,
+        var(--border) 38px, var(--border) 38.6px
+      );
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-feature-settings: "ss01", "ss02";
+    padding: 40px;
+    min-height: 100vh;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    opacity: 0.35;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate { animation: fadeUp 0.55s ease-out both; animation-delay: calc(var(--i, 0) * 0.05s); }
+  .animate-kpi { animation: fadeScale 0.45s ease-out both; animation-delay: calc(var(--i, 0) * 0.06s); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ============ LAYOUT ============ */
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 0 48px;
+  }
+  .wrap > * { min-width: 0; }
+  .main { min-width: 0; }
+
+  /* ============ TOC ============ */
+  .toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    padding: 14px 0;
+    grid-row: 1 / -1;
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+  }
+  .toc::-webkit-scrollbar { width: 3px; }
+  .toc::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+  .toc-title {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.6px;
+    color: var(--text-faint);
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc a {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.45;
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
+  }
+  .toc a:hover { color: var(--text); background: var(--bg-tint); }
+  .toc a.active {
+    color: var(--text);
+    border-left-color: var(--ink-blue);
+    background: var(--ink-blue-dim);
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    margin-bottom: 56px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.6px;
+    color: var(--terracotta);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1.5px;
+    background: var(--terracotta);
+    display: inline-block;
+  }
+  h1 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -1.4px;
+    color: var(--text);
+    margin-bottom: 12px;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    text-wrap: balance;
+    max-width: 18ch;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--ink-blue);
+    font-weight: 500;
+  }
+  .lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 62ch;
+    margin-top: 18px;
+    margin-bottom: 28px;
+  }
+  .lead strong { color: var(--text); font-weight: 600; }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.4px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-meta strong { color: var(--text); font-weight: 600; }
+
+  /* ============ SECTION HEADERS ============ */
+  .sec-head {
+    margin-top: 72px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    scroll-margin-top: 28px;
+  }
+  .sec-head__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-blue);
+    letter-spacing: 2px;
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+  .sec-head__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 30px;
+    letter-spacing: -0.6px;
+    color: var(--text);
+    line-height: 1.1;
+    font-variation-settings: "opsz" 120;
+  }
+  .sec-head__title em {
+    font-style: italic;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  /* ============ IDENTITY CARDS ============ */
+  .id-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+  .id-grid > * { min-width: 0; }
+  @media (max-width: 920px) {
+    .id-grid { grid-template-columns: 1fr; }
+  }
+
+  .id-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 30px;
+    position: relative;
+  }
+  .id-card--hero {
+    background: linear-gradient(180deg, var(--surface) 0%, color-mix(in srgb, var(--surface) 86%, var(--ink-blue) 14%) 100%);
+    border: 1px solid color-mix(in srgb, var(--border) 50%, var(--ink-blue) 50%);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 4px 20px rgba(31, 45, 58, 0.06);
+  }
+  .id-card__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--ink-blue);
+    margin-bottom: 16px;
+  }
+  .id-card__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .id-card__body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin-top: 14px;
+  }
+  .id-card__body strong { color: var(--text); font-weight: 600; }
+
+  .id-pitch {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.45;
+    color: var(--text);
+    border-left: 2px solid var(--terracotta);
+    padding-left: 18px;
+    margin-top: 16px;
+  }
+
+  .id-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text-dim);
+  }
+  .id-list li {
+    padding-left: 18px;
+    position: relative;
+  }
+  .id-list li::before {
+    content: '·';
+    position: absolute;
+    left: 6px;
+    color: var(--terracotta);
+    font-weight: 700;
+  }
+  .id-list strong { color: var(--text); font-weight: 600; }
+  .id-list code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--ink-blue-dim);
+    color: var(--ink-blue);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* ============ MERMAID ARCHITECTURE ============ */
+  .diagram-shell {
+    position: relative;
+    margin-top: 8px;
+  }
+  .diagram-shell__hint {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+  }
+
+  .mermaid-wrap {
+    position: relative;
+    background: linear-gradient(180deg, var(--surface) 0%, color-mix(in srgb, var(--surface) 92%, var(--sage) 8%) 100%);
+    border: 1px solid color-mix(in srgb, var(--border) 50%, var(--ink-blue) 50%);
+    border-radius: 4px;
+    padding: 44px 32px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 520px;
+    box-shadow: 0 4px 24px rgba(31, 45, 58, 0.08), 0 1px 0 rgba(255,255,255,0.6) inset;
+    cursor: grab;
+  }
+  .mermaid-wrap.is-panning { cursor: grabbing; user-select: none; }
+
+  .mermaid-viewport {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    min-height: 460px;
+  }
+  .mermaid-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .zoom-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 2px;
+    z-index: 10;
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 3px;
+    padding: 2px;
+    box-shadow: 0 2px 6px rgba(31, 45, 58, 0.08);
+  }
+  .zoom-controls button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+  .zoom-controls button:hover {
+    background: var(--ink-blue-dim);
+    color: var(--ink-blue);
+  }
+  .zoom-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .mermaid .nodeLabel {
+    font-family: var(--font-body) !important;
+    font-size: 14px !important;
+    color: var(--text) !important;
+    font-weight: 500 !important;
+  }
+  .mermaid .nodeLabel small {
+    font-family: var(--font-mono) !important;
+    font-size: 10px !important;
+    color: var(--text-faint) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.3px;
+  }
+  .mermaid .edgeLabel {
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    color: var(--text-dim) !important;
+    background-color: var(--surface) !important;
+  }
+  .mermaid .edgeLabel rect { fill: var(--surface) !important; }
+  .mermaid .node rect,
+  .mermaid .node circle,
+  .mermaid .node polygon,
+  .mermaid .node path {
+    stroke-width: 1.4px !important;
+  }
+  .mermaid .edge-pattern-solid { stroke-width: 1.4px !important; }
+  .mermaid .flowchart-link { stroke-width: 1.3px !important; }
+
+  .legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding: 14px 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.3px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border-bright);
+  }
+
+  /* ============ ACTIVITY TIMELINE ============ */
+  .timeline {
+    position: relative;
+    padding-left: 26px;
+    margin-top: 8px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--ink-blue) 0%, var(--sage) 100%);
+    opacity: 0.4;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 6px 0 22px 0;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -23px;
+    top: 13px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--ink-blue);
+  }
+  .timeline-item--first::before { background: var(--ink-blue); }
+  .timeline-item--last::before {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .timeline-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .timeline-time {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.6px;
+  }
+  .timeline-sha {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-blue);
+    background: var(--ink-blue-dim);
+    padding: 1px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+  .timeline-title {
+    font-size: 17px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .timeline-body {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    max-width: 70ch;
+  }
+  .timeline-body code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--bg-tint);
+    color: var(--text);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  .theme-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .theme-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+  .theme-tag--blue { background: var(--ink-blue-dim); color: var(--ink-blue); }
+  .theme-tag--sage { background: var(--sage-dim); color: var(--sage); }
+  .theme-tag--ochre { background: var(--ochre-dim); color: var(--ochre); }
+  .theme-tag--terracotta { background: var(--terracotta-dim); color: var(--terracotta); }
+
+  /* ============ DECISION LOG ============ */
+  .decisions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .decisions > * { min-width: 0; }
+  @media (max-width: 920px) { .decisions { grid-template-columns: 1fr; } }
+
+  .decision {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+    position: relative;
+  }
+  .decision::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 22px;
+    bottom: 22px;
+    width: 2px;
+    background: var(--ink-blue);
+    border-radius: 0 2px 2px 0;
+  }
+  .decision--sage::before { background: var(--sage); }
+  .decision--ochre::before { background: var(--ochre); }
+  .decision--terracotta::before { background: var(--terracotta); }
+
+  .decision__label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: var(--text-faint);
+    margin-bottom: 12px;
+  }
+  .decision__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.2px;
+  }
+  .decision__title em { font-style: italic; color: var(--ink-blue); font-weight: 500; }
+  .decision__body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .decision__body p { margin-bottom: 8px; }
+  .decision__body strong { color: var(--text); font-weight: 600; }
+  .decision__alt {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .decision__alt strong { color: var(--text-dim); font-weight: 600; }
+
+  /* ============ KPI ROW (STATE OF THINGS) ============ */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .kpi-row > * { min-width: 0; }
+
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 0 0 0 60px;
+    opacity: 0.16;
+  }
+  .kpi--working::after { background: var(--sage); }
+  .kpi--progress::after { background: var(--ink-blue); }
+  .kpi--debt::after { background: var(--ochre); }
+  .kpi--blocked::after { background: var(--crimson); }
+
+  .kpi__value {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -1.5px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 6px;
+    font-variation-settings: "opsz" 144;
+  }
+  .kpi__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .kpi__trend {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: var(--text-dim);
+  }
+  .kpi__trend--up { color: var(--sage); }
+  .kpi__trend--info { color: var(--ink-blue); }
+  .kpi__trend--warn { color: var(--ochre); }
+  .kpi__trend--blocked { color: var(--crimson); }
+
+  .state-detail {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .state-detail > * { min-width: 0; }
+  @media (max-width: 760px) { .state-detail { grid-template-columns: 1fr; } }
+
+  .state-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .state-panel__head {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .state-panel__head--sage { color: var(--sage); }
+  .state-panel__head--blue { color: var(--ink-blue); }
+  .state-panel__head--ochre { color: var(--ochre); }
+  .state-panel__head--crimson { color: var(--crimson); }
+  .state-panel__head::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .state-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .state-panel li {
+    padding-left: 16px;
+    position: relative;
+  }
+  .state-panel li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+    font-weight: 600;
+  }
+  .state-panel li strong { color: var(--text); font-weight: 600; }
+  .state-panel code {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    background: var(--bg-tint);
+    color: var(--text);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  /* ============ MENTAL MODEL CARDS ============ */
+  .mm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .mm-grid > * { min-width: 0; }
+
+  .mm-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+    position: relative;
+  }
+  .mm-card__kind {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+  .mm-card__kind--invariant { color: var(--ink-blue); }
+  .mm-card__kind--coupling { color: var(--sage); }
+  .mm-card__kind--gotcha { color: var(--terracotta); }
+  .mm-card__kind--pattern { color: var(--ochre); }
+
+  .mm-card__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+  .mm-card__body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .mm-card__body strong { color: var(--text); font-weight: 600; }
+  .mm-card__body code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--ink-blue-dim);
+    color: var(--ink-blue);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  /* ============ COGNITIVE DEBT HOTSPOTS ============ */
+  .debt-grid {
+    display: grid;
+    gap: 14px;
+  }
+  .debt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 22px;
+    border-left: 4px solid var(--ochre);
+    background: color-mix(in srgb, var(--surface) 92%, var(--ochre) 8%);
+  }
+  .debt-card--high {
+    border-left-color: var(--crimson);
+    background: color-mix(in srgb, var(--surface) 92%, var(--crimson) 8%);
+  }
+  .debt-card--low {
+    border-left-color: var(--ink-blue);
+    background: color-mix(in srgb, var(--surface) 92%, var(--ink-blue) 6%);
+  }
+  .debt-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .debt-card__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 16.5px;
+    color: var(--text);
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+  }
+  .debt-card__sev {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .debt-card__sev--high { background: var(--crimson-dim); color: var(--crimson); }
+  .debt-card__sev--med { background: var(--ochre-dim); color: var(--ochre); }
+  .debt-card__sev--low { background: var(--ink-blue-dim); color: var(--ink-blue); }
+  .debt-card__body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .debt-card__body strong { color: var(--text); font-weight: 600; }
+  .debt-card__body code {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    background: var(--bg-tint);
+    color: var(--text);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .debt-card__suggestion {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .debt-card__suggestion strong {
+    font-style: normal;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ============ NEXT STEPS ============ */
+  .next-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .next-grid > * { min-width: 0; }
+  .next-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 24px;
+  }
+  .next-card__hour {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .next-card__title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+  .next-card__body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .pullquote {
+    margin: 56px auto 16px auto;
+    max-width: 60ch;
+    text-align: center;
+    padding: 24px 16px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--text);
+    font-variation-settings: "opsz" 144;
+  }
+  .pullquote::before {
+    content: '« ';
+    color: var(--terracotta);
+  }
+  .pullquote::after {
+    content: ' »';
+    color: var(--terracotta);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    justify-content: space-between;
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 1000px) {
+    body { padding: 0; }
+    .wrap { grid-template-columns: 1fr; gap: 0; padding: 0 24px 40px; }
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      max-height: none;
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      margin: 0 -24px 16px;
+      grid-row: auto;
+    }
+    .toc::-webkit-scrollbar { display: none; }
+    .toc-title { display: none; }
+    .toc a {
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 2px 2px 0 0;
+      padding: 6px 10px;
+      font-size: 10px;
+    }
+    .toc a.active {
+      border-left: none;
+      border-bottom-color: var(--ink-blue);
+      background: var(--surface);
+    }
+    .sec-head { scroll-margin-top: 54px; }
+    .main { padding-top: 24px; }
+    h1 { font-size: 36px; }
+    .mermaid-wrap { padding: 24px 14px; min-height: 460px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="toc" id="toc">
+    <div class="toc-title">Sumário</div>
+    <a href="#s1">1 · Identidade</a>
+    <a href="#s2">2 · Arquitetura</a>
+    <a href="#s3">3 · Atividade Recente</a>
+    <a href="#s4">4 · Log de Decisões</a>
+    <a href="#s5">5 · Estado da Obra</a>
+    <a href="#s6">6 · Modelo Mental</a>
+    <a href="#s7">7 · Dívida Cognitiva</a>
+    <a href="#s8">8 · Próximos Passos</a>
+  </nav>
+
+  <main class="main">
+
+    <header class="hero">
+      <div class="eyebrow animate" style="--i:0">Project Recap · 2026-05-21 · janela 2 semanas</div>
+      <h1 class="animate" style="--i:1">Do pedido do cliente à <em>execução</em></h1>
+      <p class="lead animate" style="--i:2">
+        Um manual operacional, ainda em parto, para uma startup que tem clientes pagantes mas
+        sente a fricção entre <strong>capturar demanda</strong> e <strong>entregar com previsibilidade</strong>.
+        Documenta os papéis, os handoffs e os SLAs de uma <strong>Camada de Intake</strong> CTO + PO,
+        com a Engenharia operando em modo <em>stream-aligned</em> sob ela.
+      </p>
+      <div class="hero-meta animate" style="--i:3">
+        <span><strong>Stage</strong> documentação inicial</span>
+        <span><strong>Branch</strong> main</span>
+        <span><strong>Idioma</strong> pt-BR</span>
+        <span><strong>Autor</strong> Hugo Seabra</span>
+        <span><strong>Última commit</strong> há ~29 min</span>
+      </div>
+    </header>
+
+    <!-- ============ 1. IDENTITY ============ -->
+    <div id="s1" class="sec-head animate" style="--i:4">
+      <div class="sec-head__num">01</div>
+      <div class="sec-head__title">Identidade <em>— o que isto é, agora</em></div>
+    </div>
+
+    <div class="id-grid">
+      <div class="id-card id-card--hero animate" style="--i:5">
+        <div class="id-card__label">Pitch</div>
+        <div class="id-card__title">Processo operacional, não cerimônia.</div>
+        <p class="id-pitch">
+          Separar quem entende o problema de quem o executa, com uma camada de tradução
+          (CTO + PO) entre os dois — e um único artefato, o <strong>Readiness Package</strong>, como
+          condição de saída.
+        </p>
+        <div class="id-card__body">
+          O repositório é um <strong>conjunto de documentos em prosa</strong> (5 arquivos na raiz, 15 em
+          <code>interactions/</code>), não código. O alvo é uma startup que opera IA, agentes,
+          fintech e workflows distribuídos — onde misturar venda, descoberta e execução
+          já custou tempo de engenharia.
+        </div>
+      </div>
+
+      <div class="id-card animate" style="--i:6">
+        <div class="id-card__label">Composição</div>
+        <ul class="id-list">
+          <li><strong>README.md</strong> — visão geral e diagramas <code>537 linhas</code></li>
+          <li><strong>01-roles.md</strong> — papéis e ownership <code>538 linhas</code></li>
+          <li><strong>02-happy-path.md</strong> — caminho ideal end-to-end <code>333 linhas</code></li>
+          <li><strong>03-slas.md</strong> — SLAs e cadências <code>104 linhas</code></li>
+          <li><strong>references.md</strong> — fundamentação acadêmica <code>355 linhas</code> <em>(untracked)</em></li>
+          <li><strong>interactions/</strong> — 14 handoffs bilaterais + índice</li>
+        </ul>
+        <div class="id-card__body" style="margin-top:18px;font-size:13px;">
+          Total no escopo desta recapitulação: <strong>~3.075 linhas</strong> de Markdown em 20 arquivos.
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 2. ARCHITECTURE ============ -->
+    <div id="s2" class="sec-head animate" style="--i:7">
+      <div class="sec-head__num">02</div>
+      <div class="sec-head__title">Arquitetura <em>— como a demanda flui</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:20px; font-size:16px;">
+      Três camadas, um gate. O sinal entra pelo upstream, é racionalizado no intake e
+      sai como Readiness Package; o downstream executa contra um escopo congelado. O loop
+      de feedback fecha em <strong>5 dias úteis</strong> após cada release.
+    </p>
+
+    <section class="diagram-shell animate" style="--i:8">
+      <p class="diagram-shell__hint">
+        Ctrl/Cmd + scroll para zoom. Arraste para deslocar. Duplo-clique para encaixar. ⛶ abre em nova aba.
+      </p>
+      <div class="mermaid-wrap">
+        <div class="zoom-controls">
+          <button type="button" data-action="zoom-in" title="Zoom in">+</button>
+          <button type="button" data-action="zoom-out" title="Zoom out">&minus;</button>
+          <button type="button" data-action="zoom-fit" title="Smart fit">&#8634;</button>
+          <button type="button" data-action="zoom-one" title="1:1 zoom">1:1</button>
+          <button type="button" data-action="zoom-expand" title="Open full size">&#x26F6;</button>
+          <span class="zoom-label">carregando…</span>
+        </div>
+        <div class="mermaid-viewport">
+          <div class="mermaid mermaid-canvas"></div>
+        </div>
+      </div>
+      <script type="text/plain" class="diagram-source">
+flowchart TD
+  S(["Sinal<br/><small>cliente · mercado · interno</small>"])
+  UP["Upstream<br/><small>CEO · Vendas · CS · Marketing</small>"]:::upstream
+  PO["PO — Triagem e Racionalização<br/><small>dono da fila do intake</small>"]:::intake
+  CTO["CTO — Avaliação Arquitetural<br/><small>puxado, não empurrado</small>"]:::intake
+  RP(["Readiness Package<br/><small>12 seções · gate de saída</small>"]):::gate
+  PM["PM — Planejamento e Capacidade<br/><small>pode rejeitar e devolver o RP</small>"]:::downstream
+  TL["Tech Leads — Quebra Técnica<br/><small>ADRs · épicos · estimativas</small>"]:::downstream
+  ENG["Engineers — Implementação<br/><small>testes · code review</small>"]:::downstream
+  QA["QA — Validação dos Critérios<br/><small>único emissor de release</small>"]:::downstream
+  REL["Release"]:::downstream
+  FB(["Feedback Loop<br/><small>5 dias úteis · PM + CS + PO</small>"]):::feedback
+
+  S --> UP --> PO
+  PO -.->|"impacto arquitetural"| CTO
+  CTO -.->|"Seção 8 + restrições"| PO
+  PO ==> RP
+  RP --> PM
+  PM -->|"plano + RP"| TL
+  TL --> ENG
+  ENG --> QA
+  QA -->|"go"| REL
+  REL --> FB
+  FB -.->|"aprendizado"| PO
+
+  classDef upstream fill:#dfe9f1,stroke:#2c4a6b,stroke-width:1.4px
+  classDef intake fill:#f0e7d2,stroke:#a5832b,stroke-width:1.4px
+  classDef gate fill:#e3eadc,stroke:#5d7e4f,stroke-width:1.6px
+  classDef downstream fill:#e9dccc,stroke:#b6633a,stroke-width:1.4px
+  classDef feedback fill:#e1dfe6,stroke:#6b5d7e,stroke-width:1.4px
+      </script>
+    </section>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-swatch" style="background:#dfe9f1;border-color:#2c4a6b;"></div> Upstream — gera demanda</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#f0e7d2;border-color:#a5832b;"></div> Intake Layer — traduz</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#e3eadc;border-color:#5d7e4f;"></div> Readiness Package — gate</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#e9dccc;border-color:#b6633a;"></div> Downstream — executa</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#e1dfe6;border-color:#6b5d7e;"></div> Feedback — fecha o ciclo</div>
+    </div>
+
+    <!-- ============ 3. RECENT ACTIVITY ============ -->
+    <div id="s3" class="sec-head animate" style="--i:9">
+      <div class="sec-head__num">03</div>
+      <div class="sec-head__title">Atividade Recente <em>— os últimos ~52 minutos</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:18px; font-size:16px;">
+      O repositório foi criado e reestruturado em uma única sessão de menos de uma hora.
+      Toda a atividade da janela cabe em <strong>5 commits</strong>, todos do mesmo autor,
+      organizados em dois temas: criação dos racionais e renomeação para uma sequência em pt-BR.
+    </p>
+
+    <div class="theme-tags">
+      <span class="theme-tag theme-tag--blue">Tema · Genesis</span>
+      <span class="theme-tag theme-tag--sage">Tema · Resequenciamento</span>
+      <span class="theme-tag theme-tag--ochre">Tema · Adição de índice</span>
+    </div>
+
+    <div class="timeline" style="margin-top:24px;">
+
+      <div class="timeline-item timeline-item--first">
+        <div class="timeline-head">
+          <span class="timeline-time">há 52 min</span>
+          <span class="timeline-sha">bea494f</span>
+          <span class="theme-tag theme-tag--blue">Genesis</span>
+        </div>
+        <div class="timeline-title">docs: racionais iniciais</div>
+        <div class="timeline-body">
+          Primeiro commit. Cria a base completa do manual: <code>01-rationale.md</code>,
+          <code>02-team-structure.md</code>, <code>03-roles.md</code>, <code>04-happy-path.md</code>,
+          <code>05-slas.md</code>, e os 14 arquivos de <code>interactions/</code>. O esqueleto inteiro
+          do processo aparece de uma vez.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="timeline-time">há 49 min</span>
+          <span class="timeline-sha">64363fd</span>
+          <span class="theme-tag theme-tag--blue">Genesis</span>
+        </div>
+        <div class="timeline-title">docs: racionais iniciais</div>
+        <div class="timeline-body">
+          Pequeno ajuste no <code>README.md</code> (+4 linhas) — provavelmente um esquecimento no
+          commit anterior. O ritmo de "puxa-rede" começa aqui.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="timeline-time">há 33 min</span>
+          <span class="timeline-sha">fc02652</span>
+          <span class="theme-tag theme-tag--sage">Resequenciamento</span>
+        </div>
+        <div class="timeline-title">docs: ajustando sequencia de docs em pt-br</div>
+        <div class="timeline-body">
+          Reescrita em pt-BR em larga escala: <code>02-team-structure.md</code>, <code>03-roles.md</code>,
+          <code>05-slas.md</code>, e quase todos os arquivos de <code>case-poker/</code> e
+          <code>templates/</code>. O ângulo dessa rodada é tradução + ajuste de tom, não
+          reestruturação semântica.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="timeline-time">há 30 min</span>
+          <span class="timeline-sha">cc67d1d</span>
+          <span class="theme-tag theme-tag--sage">Resequenciamento</span>
+        </div>
+        <div class="timeline-title">docs: ajustando sequencia de docs em pt-br</div>
+        <div class="timeline-body">
+          Substitui <code>03-roles.md</code> com uma versão mais enxuta (602 linhas alteradas,
+          –82 líquido). Deleta <code>interactions/00-index.md</code> — o índice migrará logo
+          em seguida para <code>interactions/README.md</code>.
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--last">
+        <div class="timeline-head">
+          <span class="timeline-time">há 29 min</span>
+          <span class="timeline-sha">02069ab</span>
+          <span class="theme-tag theme-tag--ochre">Adição de índice</span>
+        </div>
+        <div class="timeline-title">docs: ajustando sequencia de docs em pt-br</div>
+        <div class="timeline-body">
+          Cria <code>interactions/README.md</code> (82 linhas) — o índice oficial dos 14 handoffs
+          com diagrama Mermaid e tabela de regras de rejeição. Última commit antes desta sessão.
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 4. DECISIONS ============ -->
+    <div id="s4" class="sec-head animate" style="--i:10">
+      <div class="sec-head__num">04</div>
+      <div class="sec-head__title">Log de Decisões <em>— as escolhas que evaporam primeiro</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:20px; font-size:16px;">
+      As mensagens de commit são curtas ("docs: racionais iniciais"), mas o material em
+      si carrega as decisões. Aqui, extraídas direto dos textos enquanto ainda estão frescas.
+    </p>
+
+    <div class="decisions">
+
+      <div class="decision">
+        <div class="decision__label">DEC · 01 · Arquitetura</div>
+        <div class="decision__title">CTO + PO formam <em>uma camada de tradução</em>, não um comitê.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> Inserir uma camada explícita entre upstream e
+          engenharia, ao invés de deixar a engenharia receber o sinal direto.</p>
+          <p><strong>Por quê.</strong> "A maioria das startups quebra entre captura e execução. Falta
+          a etapa de racionalização." (<code>README.md:24</code>) O risco mitigado é a feature
+          que não resolve o problema porque alguém improvisou.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> CTO como gargalo direto sem PO operacional. Rejeitado:
+          "sem uma camada de intake antes do CTO/PO, o CTO vira gargalo" (Theory of
+          Constraints).
+        </div>
+      </div>
+
+      <div class="decision decision--sage">
+        <div class="decision__label">DEC · 02 · Artefato</div>
+        <div class="decision__title">Um artefato único — <em>Readiness Package</em> — com 12 seções fixas.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> O downstream nunca recebe ideia solta, áudio ou
+          Slack. Recebe um pacote estruturado, com 7 das 12 seções de propriedade do PO,
+          1 do CTO, e 4 compartilhadas.</p>
+          <p><strong>Por quê.</strong> Operacionaliza Definition of Ready (Scrum) + commitment point
+          (Upstream Kanban) + Stage-Gate gate decision em um único entregável tangível.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> Templates leves por tipo de demanda. Rejeitado em favor
+          de um único formato comum — reduz negociação a cada ciclo.
+        </div>
+      </div>
+
+      <div class="decision decision--ochre">
+        <div class="decision__label">DEC · 03 · Estrutura</div>
+        <div class="decision__title">PM <em>pode rejeitar</em> o Readiness Package. QA <em>não pode</em> ser sobreposto.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> Cada handoff tem um gate, mas as regras de rejeição
+          são assimétricas — explicitadas na tabela do <code>interactions/README.md</code>.</p>
+          <p><strong>Por quê.</strong> Sem gates, o intake vira balcão. Com gates rígidos em todo lugar,
+          vira burocracia. A linha está em quem pode "absorver silenciosamente" — proibido em
+          todo o sistema.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> Sign-off único do CTO em todas as decisões. Rejeitado:
+          "o CTO é puxado, não empurrado" — princípio explícito em <code>02-happy-path.md:330</code>.
+        </div>
+      </div>
+
+      <div class="decision decision--terracotta">
+        <div class="decision__label">DEC · 04 · Cadência</div>
+        <div class="decision__title">SLAs internos, <em>não</em> promessas a clientes.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> Crítica → triagem em 24h. Alta → 3 dias úteis.
+          Avaliação CTO → 5 dias. Feedback loop → 5 dias após release. Todos internos,
+          documentados em <code>03-slas.md</code>.</p>
+          <p><strong>Por quê.</strong> Reinertsen mostra que gates sem SLA criam filas invisíveis.
+          O risco aqui não é cliente insatisfeito — é o processo perder ritmo.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> Métricas externas com SLAs. Rejeitado para não atrelar
+          o sistema a compromissos contratuais quando o objetivo é fluxo interno.
+        </div>
+      </div>
+
+      <div class="decision decision--sage">
+        <div class="decision__label">DEC · 05 · Linguagem</div>
+        <div class="decision__title">Tudo em <em>português-BR</em>.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> Documentação operacional inteira em pt-BR. Os
+          três últimos commits são todos rodadas de "ajustando sequencia de docs em pt-br" —
+          isso é um eixo central da fase atual.</p>
+          <p><strong>Por quê.</strong> O time é local; o vocabulário operacional precisa ser usado
+          em reuniões de produto e 1:1s. Tradução de termos canônicos (stream-aligned →
+          fluxo de valor, gate → porta) sem perder ancoragem na literatura.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> Inglês para alinhar com a literatura. Rejeitado: o
+          ganho operacional do idioma nativo supera a fricção dos termos.
+        </div>
+      </div>
+
+      <div class="decision">
+        <div class="decision__label">DEC · 06 · Fundamentação</div>
+        <div class="decision__title">Mapear <em>cada</em> decisão a um framework canônico.</div>
+        <div class="decision__body">
+          <p><strong>O que foi decidido.</strong> Cada peça do processo aponta para o autor original:
+          Stage-Gate (Cooper), Dual-Track (Patton/Cagan), ToC (Goldratt), Team Topologies
+          (Skelton & Pais), Lean SW (Poppendieck), Reinertsen, Torres, Ries, Perri.</p>
+          <p><strong>Por quê.</strong> "Quando alguém perguntar 'isso segue alguma referência?',
+          este documento é a resposta." (<code>references.md:355</code>) Evita briga de opinião
+          em adoção interna.</p>
+        </div>
+        <div class="decision__alt">
+          <strong>Considerado.</strong> Modelo "feito em casa" sem citações. Rejeitado: vira
+          discussão religiosa em onboarding de seniores.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ 5. STATE ============ -->
+    <div id="s5" class="sec-head animate" style="--i:11">
+      <div class="sec-head__num">05</div>
+      <div class="sec-head__title">Estado da Obra <em>— o quadro de hoje</em></div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi kpi--working animate-kpi" style="--i:0">
+        <div class="kpi__value">15</div>
+        <div class="kpi__label">Docs estáveis</div>
+        <div class="kpi__trend kpi__trend--up">commitados na main</div>
+      </div>
+      <div class="kpi kpi--progress animate-kpi" style="--i:1">
+        <div class="kpi__value">22</div>
+        <div class="kpi__label">Em mudança</div>
+        <div class="kpi__trend kpi__trend--info">working tree dirty</div>
+      </div>
+      <div class="kpi kpi--debt animate-kpi" style="--i:2">
+        <div class="kpi__value">2</div>
+        <div class="kpi__label">Sem track</div>
+        <div class="kpi__trend kpi__trend--warn">references.md · tech-backlog</div>
+      </div>
+      <div class="kpi kpi--blocked animate-kpi" style="--i:3">
+        <div class="kpi__value">0</div>
+        <div class="kpi__label">Bloqueios</div>
+        <div class="kpi__trend kpi__trend--blocked">sem branches abertas</div>
+      </div>
+    </div>
+
+    <div class="state-detail">
+      <div class="state-panel">
+        <div class="state-panel__head state-panel__head--sage">O que está pronto</div>
+        <ul>
+          <li><strong>Camadas e papéis</strong> — definidos em <code>01-roles.md</code> com ownership matriz completa</li>
+          <li><strong>Happy path</strong> — 10 passos descritos em <code>02-happy-path.md</code></li>
+          <li><strong>14 handoffs bilaterais</strong> — cada um com gatilho, gate, falha, sequência</li>
+          <li><strong>SLAs e cadências</strong> — incluindo gestão de pessoas do CTO (8 cadências)</li>
+          <li><strong>Fundamentação acadêmica</strong> — 10 frameworks mapeados em <code>references.md</code></li>
+        </ul>
+      </div>
+
+      <div class="state-panel">
+        <div class="state-panel__head state-panel__head--blue">O que está em movimento</div>
+        <ul>
+          <li><strong>Renumeração</strong> — <code>03/04/05</code> viraram <code>01/02/03</code> (uncommitted)</li>
+          <li><strong>Arquivos deletados</strong> — <code>01-rationale.md</code> e <code>02-team-structure.md</code> sumiram do índice</li>
+          <li><strong>README.md</strong> — recebeu modificações ainda não commitadas</li>
+          <li><strong>references.md</strong> — 355 linhas escritas, ainda <code>untracked</code></li>
+          <li><strong>templates/tech-backlog.md</strong> — novo arquivo na pilha, sem track</li>
+        </ul>
+      </div>
+
+      <div class="state-panel">
+        <div class="state-panel__head state-panel__head--ochre">O que está degradado</div>
+        <ul>
+          <li><strong>Mensagens de commit</strong> — todas variações de "docs: …" — perde rastreabilidade do <em>porquê</em></li>
+          <li><strong>Referências cruzadas</strong> — <code>README.md</code> ainda cita <code>06.1-product-backlog-*</code> que pode não existir mais no nome pós-renumeração</li>
+          <li><strong>Diagramas Mermaid com emoji</strong> — <code>🔼 UPSTREAM</code>, <code>⚙️ INTAKE LAYER</code> — funcionam, mas fora do padrão pedido em design system</li>
+          <li><strong>case-poker/</strong> e <code>templates/</code> — modificados em massa nesta sessão, mas fora do escopo desta revisão</li>
+        </ul>
+      </div>
+
+      <div class="state-panel">
+        <div class="state-panel__head state-panel__head--crimson">O que está bloqueado</div>
+        <ul>
+          <li><strong>Nada explicitamente bloqueado.</strong> Não há branches paralelas, stash ou PR aberto</li>
+          <li><strong>Risco implícito</strong> — a renumeração precisa ser commitada antes que outro contribuidor abra um clone</li>
+          <li><strong>Risco implícito</strong> — <code>references.md</code> é citado pelo <code>README.md</code> mas não está versionado</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ 6. MENTAL MODEL ============ -->
+    <div id="s6" class="sec-head animate" style="--i:12">
+      <div class="sec-head__num">06</div>
+      <div class="sec-head__title">Modelo Mental <em>— o que segurar na cabeça</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:20px; font-size:16px;">
+      Quando você voltar aqui em duas semanas, estas são as oito coisas a recarregar antes
+      de tocar qualquer linha. Cada uma é regra ou ligação não óbvia que perdura por toda
+      a documentação.
+    </p>
+
+    <div class="mm-grid">
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--invariant">Invariante</div>
+        <div class="mm-card__title">Upstream define problema. Downstream define solução.</div>
+        <div class="mm-card__body">
+          Princípio #3 do happy path. Se o intake chegar com solução proposta, <strong>volta para
+          reformulação</strong>. Se o downstream redefinir escopo, é violação de gate.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--invariant">Invariante</div>
+        <div class="mm-card__title">Ambiguidade é escalada, não absorvida.</div>
+        <div class="mm-card__body">
+          Aparece em <strong>todos</strong> os 14 arquivos de <code>interactions/</code> como variação de
+          "não absorve silenciosamente". É a regra que define se o processo está funcionando
+          ou apenas sendo seguido.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--coupling">Acoplamento</div>
+        <div class="mm-card__title">README.md ↔ references.md.</div>
+        <div class="mm-card__body">
+          O <code>README.md</code> faz <strong>11 chamadas explícitas</strong> a seções de <code>references.md</code>
+          (ex: "ver § 5", "ver § 7"). Mover ou renumerar seções em <code>references.md</code>
+          quebra essas âncoras silenciosamente.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--coupling">Acoplamento</div>
+        <div class="mm-card__title">Interactions ↔ ownership matrix.</div>
+        <div class="mm-card__body">
+          Cada handoff em <code>interactions/</code> referencia o <em>ownership</em> definido em
+          <code>01-roles.md</code>. Se um papel ganha/perde ownership de um artefato,
+          múltiplos arquivos em <code>interactions/</code> ficam stale ao mesmo tempo.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--gotcha">Gotcha</div>
+        <div class="mm-card__title">CTO tem <em>dois</em> trabalhos, não um.</div>
+        <div class="mm-card__body">
+          Estratégia técnica <strong>e</strong> gestão de pessoas. Em <code>03-slas.md</code> isso se materializa em
+          duas tabelas distintas de cadências. Documentação que trata o CTO só como
+          arquiteto ignora metade do papel.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--gotcha">Gotcha</div>
+        <div class="mm-card__title">QA é o <em>único</em> emissor de release.</div>
+        <div class="mm-card__body">
+          PM coordena timing mas <strong>não sobrepõe um no-go</strong>. CEO pode pressionar, mas o
+          gate não move. Erro comum: tratar a aprovação como negociação de prazo.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--pattern">Padrão</div>
+        <div class="mm-card__title">Cada interaction tem 6 seções fixas.</div>
+        <div class="mm-card__body">
+          <code>Gatilho · O que X deve fornecer · O que Y faz · Transferência de Ownership · Gate · Caminho de Falha · Sequência (Mermaid)</code>.
+          Inconsistência com este padrão é sinal de que a interaction não foi pensada toda.
+        </div>
+      </div>
+
+      <div class="mm-card">
+        <div class="mm-card__kind mm-card__kind--pattern">Padrão</div>
+        <div class="mm-card__title">Priorização: 4 níveis, com obrigação operacional.</div>
+        <div class="mm-card__body">
+          <code>Crítica · Alta · Média · Baixa</code> — definidos em <code>02-happy-path.md</code> com
+          <strong>obrigações operacionais por nível</strong> (24h, 3d, 1w, backlog). Não é só
+          rótulo — cada nível dispara um SLA diferente do PO.
+        </div>
+      </div>
+
+    </div>
+
+    <p class="pullquote">
+      O ganho não vem do processo em si: vem de cada papel saber o que entrega e o que recebe.
+    </p>
+
+    <!-- ============ 7. COGNITIVE DEBT ============ -->
+    <div id="s7" class="sec-head animate" style="--i:13">
+      <div class="sec-head__num">07</div>
+      <div class="sec-head__title">Dívida Cognitiva <em>— onde o entendimento está mais frágil</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:20px; font-size:16px;">
+      Sinalizado por severidade. Cada item tem uma sugestão concreta — não "melhorar X",
+      mas a próxima ação específica.
+    </p>
+
+    <div class="debt-grid">
+
+      <div class="debt-card debt-card--high">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Working tree sujo com renumeração não commitada</div>
+          <div class="debt-card__sev debt-card__sev--high">High</div>
+        </div>
+        <div class="debt-card__body">
+          22 arquivos modificados, incluindo deletes de <code>01-rationale.md</code> e
+          <code>02-team-structure.md</code> e renomes de <code>03/04/05</code> para <code>01/02/03</code>.
+          Se outro contribuidor (ou agente) clonar agora, vai pegar um índice "fantasma" sem
+          a renumeração. <code>references.md</code> também é referenciado pelo <code>README.md</code>
+          mas está <code>untracked</code>.
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> commitar o estado atual em 1 commit com mensagem
+          descritiva ("docs: reorganiza numeração e adiciona references.md") antes de
+          qualquer trabalho novo. Inclua um <code>git add references.md templates/tech-backlog.md</code>.
+        </div>
+      </div>
+
+      <div class="debt-card">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Mensagens de commit não documentam <em>por quê</em></div>
+          <div class="debt-card__sev debt-card__sev--med">Medium</div>
+        </div>
+        <div class="debt-card__body">
+          As 5 commits são <code>"docs: racionais iniciais"</code> (2x) e
+          <code>"docs: ajustando sequencia de docs em pt-br"</code> (3x). A próxima leitura do
+          <code>git log</code> não vai dizer <em>por que</em> <code>01-rationale.md</code> foi deletado, por
+          que <code>references.md</code> foi extraído, ou o que mudou conceitualmente entre as
+          rodadas de "ajuste".
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> ao próximo commit, escrever uma mensagem completa com
+          contexto: "Por que separei racionais em references.md? Para isolar fundamentação
+          acadêmica de operação." Salvar o padrão para futuras commits.
+        </div>
+      </div>
+
+      <div class="debt-card">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Diagramas Mermaid usam estilos legacy com emoji</div>
+          <div class="debt-card__sev debt-card__sev--med">Medium</div>
+        </div>
+        <div class="debt-card__body">
+          <code>README.md</code> tem 11 diagramas Mermaid com cores hardcoded (<code>fill:#e8f4f8</code>),
+          emoji em labels (<code>🔼 UPSTREAM</code>, <code>⚙️ INTAKE LAYER</code>), e <code>color:#000</code>
+          que quebra em dark mode. Funciona, mas inconsistente com o resto da prosa.
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> padronizar via <code>themeVariables</code> baseado em
+          <code>prefers-color-scheme</code>, ou converter os emoji em prefixos textuais
+          (<code>UP — Upstream</code>) para alinhar com o tom do resto.
+        </div>
+      </div>
+
+      <div class="debt-card">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Tabela 12 do README cita arquivos que podem ter mudado de nome</div>
+          <div class="debt-card__sev debt-card__sev--med">Medium</div>
+        </div>
+        <div class="debt-card__body">
+          A "Tabela de Índice de Artefatos" (<code>README.md:511</code>) lista
+          <code>06.1-product-backlog-*</code> e <code>07.2-tech-backlog-*</code> como referência.
+          Esses arquivos vivem em <code>case-poker/</code>, fora do escopo desta revisão, mas o
+          README na raiz aponta para eles como se fossem padrão. Quem chegar primeiro pelo
+          README vai procurar arquivos com esses nomes na raiz.
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> trocar a coluna "Arquivo de referência" para
+          <code>case-poker/06.1-...</code> ou explicar no cabeçalho da tabela que esses são exemplos
+          de case-poker, não arquivos canônicos.
+        </div>
+      </div>
+
+      <div class="debt-card debt-card--low">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Sem testes ou validações automatizadas dos links internos</div>
+          <div class="debt-card__sev debt-card__sev--low">Low</div>
+        </div>
+        <div class="debt-card__body">
+          O <code>references.md</code> tem cerca de 11 links âncora para o <code>README.md</code> (ex:
+          <code>./README.md#1-as-três-camadas</code>). Nada valida se essas âncoras existem após
+          edições. Repos de documentação grandes costumam ter um lint de markdown.
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> opcional — adicionar <code>markdown-link-check</code> num
+          GitHub Action quando o repo for promovido a fonte canônica para o time.
+        </div>
+      </div>
+
+      <div class="debt-card debt-card--low">
+        <div class="debt-card__head">
+          <div class="debt-card__title">Diagrama Mermaid <code>block-beta</code> no README está incompleto</div>
+          <div class="debt-card__sev debt-card__sev--low">Low</div>
+        </div>
+        <div class="debt-card__body">
+          A "Matriz de responsabilidades" (<code>README.md:347</code>) começa com cabeçalho e
+          linha do CEO, mas para por aí — não desenha as linhas de Sales, PO, CTO, PM, TLs,
+          ENG, QA. É um <code>TODO</code> implícito.
+        </div>
+        <div class="debt-card__suggestion">
+          <strong>Próxima ação:</strong> ou completar a matriz <code>block-beta</code>, ou substituir por
+          uma tabela HTML (visualmente mais legível para 7 papéis × 5 fases).
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ 8. NEXT STEPS ============ -->
+    <div id="s8" class="sec-head animate" style="--i:14">
+      <div class="sec-head__num">08</div>
+      <div class="sec-head__title">Próximos Passos <em>— para onde o momentum apontava</em></div>
+    </div>
+
+    <p class="lead" style="margin-top:0; margin-bottom:20px; font-size:16px;">
+      Inferido da trajetória dos commits e do estado do working tree. Não prescritivo —
+      apenas o que parecia estar a meio caminho quando você saiu.
+    </p>
+
+    <div class="next-grid">
+
+      <div class="next-card">
+        <div class="next-card__hour">Imediato · próximos 30 min</div>
+        <div class="next-card__title">Fechar o working tree.</div>
+        <div class="next-card__body">
+          Commitar a renumeração + adicionar <code>references.md</code> e
+          <code>templates/tech-backlog.md</code> ao versionamento. Um único commit, mensagem
+          descritiva. Sem essa limpeza, qualquer outra mudança herda o caos.
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__hour">Curto prazo · esta semana</div>
+        <div class="next-card__title">Reconciliar README com a renumeração.</div>
+        <div class="next-card__body">
+          A "Tabela de Documentos de Governança" no README ainda cita os nomes antigos.
+          Atualizar para refletir <code>01-roles.md / 02-happy-path.md / 03-slas.md</code> e
+          o novo <code>references.md</code>.
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__hour">Curto prazo · esta semana</div>
+        <div class="next-card__title">Padronizar tom dos diagramas Mermaid.</div>
+        <div class="next-card__body">
+          11 diagramas no README com cores hardcoded e emoji. Se o repo vai virar fonte
+          oficial para o time, vale uma passada de consistência — ou aceitar o tom atual
+          conscientemente.
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__hour">Médio prazo</div>
+        <div class="next-card__title">Validação por uso real.</div>
+        <div class="next-card__body">
+          O modelo está completo no papel, mas nada foi rodado contra uma demanda real.
+          Próximo teste: pegar uma demanda em andamento, simular o intake até o Readiness
+          Package, identificar onde a documentação não acompanha a realidade.
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__hour">Médio prazo</div>
+        <div class="next-card__title">Instrumentar lead time por estado.</div>
+        <div class="next-card__body">
+          <code>references.md § 6</code> aponta para isso explicitamente: "próximo passo:
+          instrumentar lead time por estado". É a única forma de detectar se o gate do
+          intake está virando burocracia (crítica de Reinertsen).
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div class="next-card__hour">Médio prazo</div>
+        <div class="next-card__title">Onboarding em uma página.</div>
+        <div class="next-card__body">
+          Hoje o material exige ler ~3000 linhas para usar. Vale extrair um <strong>quickstart</strong>
+          de uma página por papel — "se você é PM, leia estes três trechos primeiro".
+          O modelo é poderoso só se for adotado.
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <span>~/.agent/diagrams/team-process-recap.html</span>
+      <span>visual-explainer · project-recap · janela 2 semanas</span>
+      <span>recap gerado em 2026-05-21</span>
+    </footer>
+
+  </main>
+
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const config = {
+    fitPadding: 28,
+    minHeight: 460,
+    maxHeightPx: 1000,
+    maxHeightVh: 0.84,
+    maxInitialZoom: 1.8,
+    minZoom: 0.08,
+    maxZoom: 6.5,
+    zoomStep: 0.14,
+    readabilityFloor: 0.58
+  };
+
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+  let activeDrag = null;
+  addEventListener('mousemove', (e) => activeDrag?.onMove(e));
+  addEventListener('mouseup', () => { activeDrag?.onEnd(); activeDrag = null; });
+
+  const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    look: 'classic',
+    themeVariables: {
+      fontFamily: "'Fraunces', Georgia, serif",
+      fontSize: '14px',
+      primaryColor: isDark ? '#1f3047' : '#dfe9f1',
+      primaryBorderColor: isDark ? '#7ea8c9' : '#2c4a6b',
+      primaryTextColor: isDark ? '#e8dcc4' : '#1f2d3a',
+      secondaryColor: isDark ? '#2e2a1f' : '#f0e7d2',
+      secondaryBorderColor: isDark ? '#d4ae5e' : '#a5832b',
+      secondaryTextColor: isDark ? '#e8dcc4' : '#1f2d3a',
+      tertiaryColor: isDark ? '#22321e' : '#e3eadc',
+      tertiaryBorderColor: isDark ? '#9bba85' : '#5d7e4f',
+      tertiaryTextColor: isDark ? '#e8dcc4' : '#1f2d3a',
+      lineColor: isDark ? '#ada593' : '#6b6452',
+      noteBkgColor: isDark ? '#2c2d33' : '#fdfaf3',
+      noteTextColor: isDark ? '#e8dcc4' : '#1f2d3a',
+      noteBorderColor: isDark ? '#d68a5f' : '#b6633a'
+    }
+  });
+
+  function initDiagram(shell) {
+    const wrap = shell.querySelector('.mermaid-wrap');
+    const viewport = shell.querySelector('.mermaid-viewport');
+    const canvas = shell.querySelector('.mermaid-canvas');
+    const source = shell.querySelector('.diagram-source');
+    const label = shell.querySelector('.zoom-label');
+    if (!wrap || !viewport || !canvas || !source || !label) return;
+
+    let zoom = 1, fitMode = 'contain', panX = 0, panY = 0, svgW = 0, svgH = 0;
+    let sx = 0, sy = 0, spx = 0, spy = 0;
+    let touchDist = 0, touchCx = 0, touchCy = 0;
+
+    function constrainPan() {
+      const vpW = viewport.clientWidth, vpH = viewport.clientHeight;
+      const rW = svgW * zoom, rH = svgH * zoom, pad = config.fitPadding;
+      panX = (rW + pad * 2 <= vpW) ? (vpW - rW) / 2 : clamp(panX, vpW - rW - pad, pad);
+      panY = (rH + pad * 2 <= vpH) ? (vpH - rH) / 2 : clamp(panY, vpH - rH - pad, pad);
+    }
+    function applyTransform() {
+      const svg = canvas.querySelector('svg');
+      if (!svg || !svgW) return;
+      constrainPan();
+      svg.style.width = (svgW * zoom) + 'px';
+      svg.style.height = (svgH * zoom) + 'px';
+      canvas.style.transform = `translate(${panX}px, ${panY}px)`;
+      label.textContent = Math.round(zoom * 100) + '% — ' + fitMode;
+    }
+    function canPan() {
+      const rW = svgW * zoom, rH = svgH * zoom;
+      return rW + config.fitPadding * 2 > viewport.clientWidth
+          || rH + config.fitPadding * 2 > viewport.clientHeight;
+    }
+    function computeSmartFit() {
+      const vpW = viewport.clientWidth, vpH = viewport.clientHeight;
+      const aW = Math.max(80, vpW - config.fitPadding * 2);
+      const aH = Math.max(80, vpH - config.fitPadding * 2);
+      const contain = Math.min(aW / svgW, aH / svgH);
+      let z = contain, mode = 'contain';
+      if (contain < config.readabilityFloor) {
+        const chartR = svgH / svgW, vpR = vpH / Math.max(vpW, 1);
+        if (chartR >= vpR) { z = aW / svgW; mode = 'width-priority'; }
+        else { z = aH / svgH; mode = 'height-priority'; }
+      }
+      return { zoom: clamp(z, config.minZoom, config.maxInitialZoom), mode };
+    }
+    function fitDiagram() {
+      if (!svgW) return;
+      const fit = computeSmartFit();
+      zoom = fit.zoom; fitMode = fit.mode;
+      panX = (viewport.clientWidth - svgW * zoom) / 2;
+      panY = (viewport.clientHeight - svgH * zoom) / 2;
+      applyTransform();
+    }
+    function setOneToOne() {
+      zoom = clamp(1, config.minZoom, config.maxZoom); fitMode = '1:1';
+      panX = (viewport.clientWidth - svgW * zoom) / 2;
+      panY = (viewport.clientHeight - svgH * zoom) / 2;
+      applyTransform();
+    }
+    function zoomAround(factor, cx, cy) {
+      const next = clamp(zoom * factor, config.minZoom, config.maxZoom);
+      const ratio = next / zoom;
+      panX = cx - ratio * (cx - panX);
+      panY = cy - ratio * (cy - panY);
+      zoom = next; fitMode = 'custom';
+      applyTransform();
+    }
+    function readSvgNaturalSize(svg) {
+      let w = 0, h = 0;
+      if (svg.viewBox?.baseVal?.width > 0) { w = svg.viewBox.baseVal.width; h = svg.viewBox.baseVal.height; }
+      if (!w) { w = parseFloat(svg.getAttribute('width')) || 0; h = parseFloat(svg.getAttribute('height')) || 0; }
+      if (!w) { const b = svg.getBBox(); w = b.width; h = b.height; }
+      if (!w) { const r = svg.getBoundingClientRect(); w = r.width || 1000; h = r.height || 700; }
+      if (!svg.getAttribute('viewBox')) svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      return { w, h };
+    }
+    function setAdaptiveHeight() {
+      if (!svgW) return;
+      const usableW = Math.max(280, wrap.getBoundingClientRect().width - 2);
+      const idealH = (svgH / svgW) * usableW + config.fitPadding * 2;
+      const maxVp = Math.floor(innerHeight * config.maxHeightVh);
+      const hardMax = Math.min(config.maxHeightPx, Math.max(config.minHeight + 40, maxVp));
+      wrap.style.height = Math.round(clamp(idealH, config.minHeight, hardMax)) + 'px';
+    }
+    function openInNewTab() {
+      const svg = canvas.querySelector('svg');
+      if (!svg) return;
+      const clone = svg.cloneNode(true);
+      clone.style.width = ''; clone.style.height = '';
+      const bg = isDark ? '#1c1d22' : '#f5efe2';
+      const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Diagrama · Arquitetura</title><style>
+      body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:${bg};padding:40px;box-sizing:border-box}
+      svg{max-width:100%;max-height:90vh;height:auto}
+      </style></head><body>${clone.outerHTML}</body></html>`;
+      open(URL.createObjectURL(new Blob([html], { type: 'text/html' })), '_blank');
+    }
+    async function render() {
+      try {
+        const code = source.textContent.trim();
+        if (!code) { label.textContent = 'Erro: vazio'; return; }
+        const id = 'diagram-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+        const { svg } = await mermaid.render(id, code);
+        canvas.innerHTML = svg;
+        const svgNode = canvas.querySelector('svg');
+        if (!svgNode) { label.textContent = 'Erro: sem SVG'; return; }
+        const size = readSvgNaturalSize(svgNode);
+        svgW = size.w; svgH = size.h;
+        svgNode.removeAttribute('width'); svgNode.removeAttribute('height');
+        svgNode.style.maxWidth = 'none'; svgNode.style.display = 'block';
+        setAdaptiveHeight();
+        fitDiagram();
+      } catch (err) {
+        console.error('Mermaid render failed:', err);
+        label.textContent = 'Erro: ' + (err.message || 'render falhou');
+      }
+    }
+    const actions = {
+      'zoom-in': () => zoomAround(1 + config.zoomStep, viewport.clientWidth / 2, viewport.clientHeight / 2),
+      'zoom-out': () => zoomAround(1 / (1 + config.zoomStep), viewport.clientWidth / 2, viewport.clientHeight / 2),
+      'zoom-fit': fitDiagram,
+      'zoom-one': setOneToOne,
+      'zoom-expand': openInNewTab
+    };
+    Object.entries(actions).forEach(([action, handler]) => {
+      wrap.querySelector(`[data-action="${action}"]`)?.addEventListener('click', handler);
+    });
+    viewport.addEventListener('dblclick', fitDiagram);
+    viewport.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        const rect = viewport.getBoundingClientRect();
+        const factor = e.deltaY < 0 ? 1 + config.zoomStep : 1 / (1 + config.zoomStep);
+        zoomAround(factor, e.clientX - rect.left, e.clientY - rect.top);
+        return;
+      }
+      if (canPan()) {
+        e.preventDefault();
+        panX -= e.deltaX; panY -= e.deltaY; applyTransform();
+      }
+    }, { passive: false });
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.zoom-controls') || !canPan()) return;
+      wrap.classList.add('is-panning');
+      sx = e.clientX; sy = e.clientY; spx = panX; spy = panY;
+      e.preventDefault();
+      activeDrag = {
+        onMove: (ev) => { panX = spx + (ev.clientX - sx); panY = spy + (ev.clientY - sy); applyTransform(); },
+        onEnd: () => { wrap.classList.remove('is-panning'); }
+      };
+    });
+    viewport.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; spx = panX; spy = panY; }
+      else if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        touchDist = Math.sqrt(dx * dx + dy * dy);
+        const r = viewport.getBoundingClientRect();
+        touchCx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left;
+        touchCy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top;
+      }
+    }, { passive: true });
+    viewport.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && canPan()) {
+        if (touchDist > 0) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; spx = panX; spy = panY; touchDist = 0; }
+        e.preventDefault();
+        panX = spx + (e.touches[0].clientX - sx);
+        panY = spy + (e.touches[0].clientY - sy);
+        applyTransform();
+      } else if (e.touches.length === 2 && touchDist > 0) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        zoomAround(d / touchDist, touchCx, touchCy);
+        touchDist = d;
+      }
+    }, { passive: false });
+    new ResizeObserver(() => { if (svgW) { setAdaptiveHeight(); fitDiagram(); } }).observe(wrap);
+    render();
+  }
+  document.querySelectorAll('.diagram-shell').forEach(initDiagram);
+</script>
+
+<script>
+(function() {
+  const toc = document.getElementById('toc');
+  if (!toc) return;
+  const links = toc.querySelectorAll('a');
+  const sections = [];
+  links.forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) sections.push({ id, el, link });
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = sections.find(s => s.el === entry.target);
+        if (match) {
+          match.link.classList.add('active');
+          if (window.innerWidth <= 1000) {
+            match.link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  sections.forEach(s => observer.observe(s.el));
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

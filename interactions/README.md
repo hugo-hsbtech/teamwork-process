@@ -47,20 +47,20 @@ flowchart LR
 
 | # | Arquivo | Interação | Camada |
 |---|---|---|---|
-| 01 | `01-sales-to-po-pt-br.md` | Vendas → PO | Upstream → Intake |
-| 02 | `02-cs-to-po-pt-br.md` | CS → PO | Upstream → Intake |
-| 03 | `03-marketing-to-po-pt-br.md` | Marketing → PO | Upstream → Intake |
-| 04 | `04-ceo-to-cto-pt-br.md` | CEO → CTO | Executivo → Liderança Técnica |
-| 05 | `05-po-to-cto-pt-br.md` | PO → CTO | Dentro do Intake |
-| 06 | `06-cto-to-po-pt-br.md` | CTO → PO | Dentro do Intake |
-| 07 | `07-po-to-pm-pt-br.md` | PO → PM | Intake → Downstream |
-| 08 | `08-pm-to-po-capacity-pt-br.md` | PM → PO (Escalada de Capacidade) | Dentro do Downstream |
-| 09 | `09-pm-to-tech-leads-pt-br.md` | PM → Tech Leads | Dentro do Downstream |
-| 10 | `10-tech-leads-to-engineers-pt-br.md` | Tech Leads → Engenheiros | Dentro do Downstream |
-| 11 | `11-engineers-to-qa-pt-br.md` | Engenheiros → QA | Dentro do Downstream |
-| 12 | `12-qa-to-pm-pt-br.md` | QA → PM | Dentro do Downstream |
-| 13 | `13-pm-to-cs-pt-br.md` | PM → CS | Pós-Entrega |
-| 14 | `14-pm-to-po-feedback-pt-br.md` | PM → PO (Fechamento do Loop de Feedback) | Pós-Entrega |
+| 01 | `01-sales-to-po.md` | Vendas → PO | Upstream → Intake |
+| 02 | `02-cs-to-po.md` | CS → PO | Upstream → Intake |
+| 03 | `03-marketing-to-po.md` | Marketing → PO | Upstream → Intake |
+| 04 | `04-ceo-to-cto.md` | CEO → CTO | Executivo → Liderança Técnica |
+| 05 | `05-po-to-cto.md` | PO → CTO | Dentro do Intake |
+| 06 | `06-cto-to-po.md` | CTO → PO | Dentro do Intake |
+| 07 | `07-po-to-pm.md` | PO → PM | Intake → Downstream |
+| 08 | `08-pm-to-po-capacity.md` | PM → PO (Escalada de Capacidade) | Dentro do Downstream |
+| 09 | `09-pm-to-tech-leads.md` | PM → Tech Leads | Dentro do Downstream |
+| 10 | `10-tech-leads-to-engineers.md` | Tech Leads → Engenheiros | Dentro do Downstream |
+| 11 | `11-engineers-to-qa.md` | Engenheiros → QA | Dentro do Downstream |
+| 12 | `12-qa-to-pm.md` | QA → PM | Dentro do Downstream |
+| 13 | `13-pm-to-cs.md` | PM → CS | Pós-Entrega |
+| 14 | `14-pm-to-po-feedback.md` | PM → PO (Fechamento do Loop de Feedback) | Pós-Entrega |
 
 ## Resumo das Regras de Rejeição
 

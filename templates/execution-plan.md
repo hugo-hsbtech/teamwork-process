@@ -22,7 +22,7 @@
 
 ## 1. Avaliação de Capacidade
 
-> 🔒 Somente uso interno.
+> Somente uso interno.
 
 ### Composição da Equipe
 

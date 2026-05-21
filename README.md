@@ -1,6 +1,6 @@
-# Do Pedido do Cliente à Execução com Excelência
+# Do Pedido do Cliente à Execução
 
-> Processo operacional padronizado para transformar demandas em entregas de valor.
+> Processo operacional para transformar demanda em entrega.
 
 ---
 
@@ -8,7 +8,79 @@
 
 ![Infográfico](./5b40de56-8d2a-4634-ac56-11bc2cc71873.png)
 
-## 1. Visão Geral — As Três Camadas
+---
+
+## Por que esse modelo existe
+
+> O desenho deste modelo puxa de Stage-Gate (Cooper), Dual-Track / Continuous Discovery (Cagan, Torres), Theory of Constraints (Goldratt), Lean Software Development (Poppendieck), Product Development Flow (Reinertsen) e Team Topologies (Skelton & Pais). O mapeamento de cada decisão está em [`references.md`](./references.md).
+
+Existem dois trabalhos diferentes que costumam ficar misturados em startups:
+
+1. Entender o negócio e racionalizar o problema (upstream).
+2. Executar com qualidade e previsibilidade (downstream).
+
+Quando esses dois trabalhos acontecem na mesma camada, a engenharia vira balcão de atendimento, o PO vira anotador de reunião e o CTO vira bombeiro. O modelo aqui descrito separa os dois e coloca uma camada de tradução entre eles: o intake. Essa separação é o Dual-Track Development de Patton e Cagan (ver [`references.md` § 1](./references.md#1-separação-upstream--downstream--dual-track-development)).
+
+A maioria das startups quebra entre captura e execução. Falta a etapa de racionalização. O sinal chega cru na engenharia, alguém improvisa o que entendeu, e o resultado é uma feature que não resolve o problema.
+
+O risco que esse modelo elimina é o mais comum em startups que já têm clientes pagantes: misturar venda, descoberta, definição e execução na mesma camada operacional. Quando isso acontece, o backlog vira caos e ninguém é dono de nada.
+
+---
+
+## A camada de tradução: CTO + PO
+
+CTO e PO formam a camada que transforma demanda em artefato executável. Eles deixam de apenas receber pedido e passam a produzir contexto, escopo e direção. Em startups que trabalham com IA, agentes, fintech e workflows distribuídos, esse trabalho não é opcional — sem ele, cada feature vira uma negociação técnica do zero.
+
+A redução de retrabalho, desalinhamento e interpretação errada de requisito vem daí. Não vem do processo em si, vem de ter uma camada responsável por consolidar contexto antes da execução começar.
+
+Sem uma camada de intake antes do CTO/PO, o CTO vira gargalo. Em times pequenos ela pode começar como uma função acumulada (PM, Product Ops, Chief of Staff, Founder Associate), mas precisa existir. É o que Goldratt chama de "elevar a restrição" na Theory of Constraints (ver [`references.md` § 5](./references.md#5-ctopo-como-gargalo-gerenciado--theory-of-constraints-goldratt)), e a função de Product Ops descrita por Perri & Tilles (ver [`references.md` § 9](./references.md#9-product-operations--perri--tilles-cagan)).
+
+---
+
+## O que o downstream recebe
+
+O downstream não recebe ideia solta, call gravada, mensagem no Slack ou áudio. Recebe um pacote com:
+
+- Objetivos e resultado esperado
+- Contexto consolidado e regras de negócio
+- Critérios de sucesso
+- Riscos e dependências mapeados
+- Visão arquitetural (quando há impacto)
+
+Esse pacote é a condição mínima para o downstream começar. Sem ele, o time downstream estaria fazendo discovery, não execução. Operacionalmente, é uma versão mais robusta da Definition of Ready do Scrum e do commitment point do Upstream Kanban, e funciona como o gate decision do Stage-Gate de Cooper (ver [`references.md` § 2](./references.md#2-intake-layer-com-gates--stage-gate-cooper) e [§ 8](./references.md#8-definition-of-ready--commitment-point--scrum--upstream-kanban)).
+
+No downstream o foco muda: não é mais descobrir o que fazer, é executar com qualidade. O PM organiza execução, define milestones, gerencia dependências, remove bloqueios e coordena squads, e não deveria precisar inventar requisito. Os Tech Leads recebem contexto racionalizado e artefatos claros, e fazem quebra técnica, arquitetura, sequenciamento, estimativa e orientação de implementação. Esse desenho — downstream como stream-aligned team e CTO+PO como enabling team — é o que Skelton & Pais formalizam em Team Topologies (ver [`references.md` § 7](./references.md#7-estrutura-de-papéis--team-topologies)).
+
+---
+
+## Regra do upstream
+
+O upstream não define API, banco de dados, arquitetura, implementação técnica ou tasks de engenharia. O foco fica em problema, contexto, valor e impacto.
+
+Se o registro de intake contém solução proposta, ele volta para reformulação.
+
+---
+
+## Architecture Governance leve
+
+Em startups que mexem com IA, agentes, fintech, workflows, multi-tenant, integrações e runtime distribuído, sem padrões e RFCs cada decisão técnica é refeita do zero. O objetivo é ter um log de decisões arquiteturais e algumas guidelines — não criar comitê.
+
+---
+
+## O que muda na prática
+
+A diferença que esse modelo faz é mudar engenharia orientada a tickets por engenharia orientada a contexto. Isso afeta qualidade, ownership, escalabilidade e previsibilidade — não como discurso, mas porque o time chega na execução com o problema já entendido em vez de tentando deduzir. Em termos de Lean Software Development (Poppendieck), isso elimina cinco dos sete desperdícios canônicos: handoffs, relearning, partial work, task switching e defects (ver [`references.md` § 10](./references.md#10-lean-software-development--poppendieck-sete-princípios-e-sete-desperdícios)).
+
+Ao final do ciclo, o processo entrega:
+
+- Demandas racionalizadas antes da execução de engenharia.
+- Contexto de produto e técnico formalizado num artefato único.
+- Riscos, integrações e custos visíveis antes do compromisso.
+- Engenharia recebendo um pacote pronto para execução, não uma mensagem solta.
+
+---
+
+## 1. As três camadas
 
 ```mermaid
 flowchart LR
@@ -40,7 +112,7 @@ flowchart LR
 
 ---
 
-## 2. Fluxo Completo — Do Sinal à Entrega
+## 2. Fluxo completo — do sinal à entrega
 
 ```mermaid
 flowchart TD
@@ -114,7 +186,7 @@ flowchart TD
 
 ---
 
-## 3. Intake Layer — Como Funciona em Detalhe
+## 3. Intake Layer em detalhe
 
 ```mermaid
 flowchart LR
@@ -178,7 +250,9 @@ flowchart LR
 
 ---
 
-## 4. O que o Intake Produz — Readiness Package
+## 4. O que o intake produz — Readiness Package
+
+> As 12 seções abaixo operacionalizam três princípios: validated learning (Ries), opportunity solution tree (Torres) e delay commitment (Poppendieck). Detalhes em [`references.md` § 3](./references.md#3-readiness-package--problema-antes-da-solução--lean-startup--continuous-discovery).
 
 ```mermaid
 mindmap
@@ -205,7 +279,7 @@ mindmap
 
 ---
 
-## 5. Entrega para o Downstream
+## 5. Entrega para o downstream
 
 ```mermaid
 flowchart LR
@@ -246,7 +320,7 @@ flowchart LR
 
 ---
 
-## 6. Gestão de Riscos
+## 6. Gestão de riscos
 
 ```mermaid
 quadrantChart
@@ -256,18 +330,18 @@ quadrantChart
     quadrant-1 Mitigar Ativamente
     quadrant-2 Monitorar
     quadrant-3 Aceitar
-    quadrant-4 Plano de Contingência
+    quadrant-4 Plano de Contingencia
     Bloqueador externo Azure AD: [0.5, 0.85]
     Atraso infraestrutura sa-east-1: [0.35, 0.9]
     Conflito de schema entre demandas: [0.4, 0.7]
-    Rejeição do PM no RP: [0.3, 0.5]
+    Rejeicao do PM no RP: [0.3, 0.5]
     Atraso de QA: [0.3, 0.4]
-    Baixa adoção pós-release: [0.25, 0.6]
+    Baixa adocao pos-release: [0.25, 0.6]
 ```
 
 ---
 
-## 7. Quem Faz o Quê — Matriz de Responsabilidades
+## 7. Matriz de responsabilidades
 
 ```mermaid
 block-beta
@@ -313,7 +387,7 @@ block-beta
 
 ---
 
-## 8. Sequência de Handoffs
+## 8. Sequência de handoffs
 
 ```mermaid
 sequenceDiagram
@@ -343,7 +417,9 @@ sequenceDiagram
 
 ---
 
-## 9. Estados de uma Demanda
+## 9. Estados de uma demanda
+
+> Estados explícitos são uma regra central de Kanban ("make process policies explicit", Anderson, 2010), e a forma de tornar visíveis as filas que Reinertsen identifica como o maior obstáculo ao fluxo de produto. Detalhes em [`references.md` § 6](./references.md#6-gestão-de-fluxo-e-wip--reinertsen-product-development-flow).
 
 ```mermaid
 stateDiagram-v2
@@ -384,7 +460,7 @@ stateDiagram-v2
 
 ---
 
-## 10. Regras de Ouro do Intake
+## 10. Regras de ouro do intake
 
 ```mermaid
 flowchart TD
@@ -407,7 +483,7 @@ flowchart TD
 
 ---
 
-## 11. Fluxo Resumido do Processo
+## 11. Fluxo resumido
 
 ```mermaid
 flowchart LR
@@ -430,7 +506,7 @@ flowchart LR
 
 ---
 
-## 12. Índice de Artefatos
+## 12. Índice de artefatos
 
 | Artefato | Dono | Quando é criado | Arquivo de referência |
 |---|---|---|---|
@@ -440,8 +516,22 @@ flowchart LR
 | Product Backlog | PO | Após aprovação do RP | `06.1-product-backlog-*.md` / `07.1-product-backlog-*.md` |
 | Tech Backlog | Tech Lead | Após Product Backlog baselined | `06.2-tech-backlog-*.md` / `07.2-tech-backlog-*.md` |
 
+### Documentos de governança
+
+| Documento | Propósito |
+|---|---|
+| [`README.md`](./README.md) | Visão geral do processo e diagramas |
+| [`01-roles.md`](./01-roles.md) | Papéis e responsabilidades |
+| [`02-happy-path.md`](./02-happy-path.md) | Caminho esperado de uma demanda |
+| [`03-slas.md`](./03-slas.md) | SLAs por estado da demanda |
+| [`references.md`](./references.md) | Fundamentação acadêmica e mapeamento de frameworks |
+
 ---
 
-## 13. Resultado Esperado
+## 13. Princípio final
 
-> **Equipes alinhadas, decisões melhores, entregas mais rápidas e clientes mais satisfeitos.**
+O objetivo deste modelo não é burocracia. É clareza operacional, prontidão para execução e redução de ambiguidade entre negócio e engenharia. Quando o processo começa a virar burocracia, a regra é simplificar, não adicionar mais um campo.
+
+O ganho não vem do processo em si: vem de cada papel saber o que entrega e o que recebe.
+
+> Para quem questiona se essa abordagem segue alguma referência reconhecida, [`references.md`](./references.md) mapeia cada decisão estrutural aos frameworks canônicos de gestão de produto, engenharia e operações.

@@ -22,7 +22,7 @@
 
 ## 1. Avaliação de Capacidade
 
-> 🔒 **Somente uso interno.** Esta seção não deve ser compartilhada com clientes ou stakeholders externos.
+> Somente uso interno. Esta seção não deve ser compartilhada com clientes ou stakeholders externos.
 
 ### Composição da Equipe (em 2024-03-29)
 
@@ -65,7 +65,7 @@ Capacidade disponível da equipe a partir de 2024-04-01 (2 backend + 2 frontend 
 - Frontend: 2 engenheiros × ~45 dias úteis = ~90 dias-frontend disponíveis
 - QA: 1 × ~42 dias úteis (inicia 2024-04-08) = ~42 dias-QA disponíveis
 
-**Avaliação: capacidade é suficiente para absorver ambas as demandas sequencialmente dentro da janela.**
+Avaliação: a capacidade é suficiente para absorver ambas as demandas sequencialmente dentro da janela.
 
 Constraint crítico: INT-2024-002 tem dependência externa (registro Azure AD pelo TI da Construtora Ágil). Isso deve ser acompanhado como bloqueador de milestone. Se não resolvido até 2024-04-14, o trabalho de auth backend da INT-2024-002 fica bloqueado e o cronograma muda.
 

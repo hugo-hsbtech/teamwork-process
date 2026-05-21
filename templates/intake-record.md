@@ -31,7 +31,7 @@
 
 ---
 
-## Tipo de Demanda
+## Tipo
 
 - [ ] Funcionalidade
 - [ ] Bug
@@ -44,7 +44,7 @@
 
 ## Enunciado do Problema
 
-> Qual é a dor, o atrito ou a lacuna existente? Descreva o problema, não a solução.
+> Qual a dor existente? Descreva o problema, não a solução.
 
 [Descreva o problema aqui]
 
@@ -52,87 +52,129 @@
 
 ## Impacto de Negócio
 
-| Dimensão | Descrição |
+> Use as dimensões aplicáveis à demanda. Receita, Retenção, Operacional, Competitivo, Compliance, Mercado são os mais comuns. Não force dimensões irrelevantes.
+
+| Dimensão | Detalhe |
 |---|---|
-| **Tipo de impacto** | Receita / Retenção / Operacional / Eficiência / Competitivo |
-| **Partes afetadas** | [Quem é impactado] |
-| **Impacto estimado** | [Quantifique se possível] |
-| **Se não tratado** | [O que acontece se não agirmos] |
-
----
-
-## Prioridade
-
-| Campo | Valor |
-|---|---|
-| **Nível** | Crítico / Alto / Médio / Baixo |
-| **Justificativa** | [Por que esse nível] |
-| **Sensibilidade ao tempo** | [Há prazo ou janela específica?] |
+| **Receita** | [Quantifique se possível — ARR de expansão, deal bloqueado, etc.] |
+| **Retenção** | [Risco de churn ou impacto em renovação] |
+| **Operacional** | [Impacto em workarounds, tempo, eficiência] |
+| **Competitivo** | [Lacuna em relação a concorrentes ou diferencial perdido] |
+| **Compliance** | [Requisitos legais ou regulatórios] |
 
 ---
 
 ## Stakeholders
 
-| Papel | Nome | Interesse |
-|---|---|---|
-| Sponsor | — | — |
-| Usuários Finais | — | — |
-| Times Impactados | — | — |
-| Tomadores de Decisão | — | — |
+| Stakeholder | Papel | Interesse | Influência |
+|---|---|---|---|
+| [Nome] | [Papel — Sponsor, Usuário Final, Time Impactado, Tomador de Decisão] | [O que essa pessoa quer] | Alta / Média / Baixa |
 
 ---
 
 ## Premissas
 
-> Condições tidas como verdadeiras no momento do intake. Se alguma premissa for falsa, a demanda deve ser retriada.
+Estas são condições assumidas como verdadeiras no intake. Se alguma premissa se provar falsa, a demanda deve ser retriada.
 
-- [ ] [Premissa 1]
-- [ ] [Premissa 2]
+1. [Premissa 1]
+2. [Premissa 2]
 
 ---
 
 ## Constraints
 
-> Limites fixos que não podem ser negociados — tempo, orçamento, legal, técnico, escopo.
+Condições que limitam o espaço de solução e devem ser respeitadas independentemente do que for construído.
 
-- [ ] [Constraint 1]
-- [ ] [Constraint 2]
+| Constraint | Tipo | Detalhe |
+|---|---|---|
+| [Constraint 1] | Tempo / Orçamento / Legal / Técnico / Escopo / Externo | [Detalhe] |
 
 ---
 
 ## Riscos Preliminares
 
-> Riscos visíveis no intake, antes da avaliação técnica. Não é um registro completo de riscos.
+Riscos identificados no intake — antes da avaliação técnica. Não é um registro completo de riscos (isso pertence ao Readiness Package).
 
-| Risco | Tipo | Avaliação Inicial |
+| Risco | Categoria | Avaliação Inicial |
 |---|---|---|
-| [Risco 1] | Técnico / Negócio / Externo | Alto / Médio / Baixo |
+| [Risco 1] | Técnico / Negócio / Externo / Segurança / Prazo / Produto | [Alto / Médio / Baixo + breve nota] |
+
+> Para demandas que passam por Discovery, este registro pode ser expandido com colunas de Probabilidade e Impacto.
 
 ---
 
 ## Limite de Escopo de Alto Nível
 
-| Categoria | Itens |
-|---|---|
-| **Dentro do escopo** | [O que claramente está dentro] |
-| **Fora do escopo** | [O que claramente está fora] |
-| **Adiado** | [O que pode ser futuro] |
+**Dentro:** [O que claramente está dentro deste release.]
+
+**Fora:** [O que claramente está fora — exclusões explícitas para prevenir scope creep.]
+
+**Adiado:** [O que pode ser tratado em fase futura — alimenta o backlog de oportunidades.]
+
+---
+
+## Prioridade
+
+**Nível:** Crítico / Alto / Médio / Baixo
+
+**Motivo:** [Por que esse nível]
 
 ---
 
 ## Critérios de Sucesso
 
-> Indicadores de alto nível de que a demanda entregou valor. Metas detalhadas são formalizadas no Readiness Package.
+Indicadores de alto nível que definem como é "concluído e valioso" para esta demanda. Metas mensuráveis detalhadas pertencem ao Readiness Package — estes são os sinais no nível do intake.
 
-- [ ] [Critério 1]
-- [ ] [Critério 2]
+| Critério | Tipo | Indicador |
+|---|---|---|
+| [Critério 1] | Negócio / Operacional / Qualidade / UX / Segurança / Compliance / Processo | [Como observar] |
 
 ---
 
 ## Notas de Triagem do PO
 
-**Decisão de triagem:** Rejeitado / Backlog de Oportunidades / Discovery / Product Ready
+Análise do PO sobre alinhamento estratégico, escopo aparente e necessidade de Discovery.
 
-**Justificativa:**
+**Caminho de decisão:** Rejeitado / Backlog de Oportunidades / Discovery / Product Ready
 
-[Notas do PO aqui]
+**Escalada arquitetural ao CTO:** Sim / Não — [breve justificativa]
+
+**Premissas validadas na triagem:** [Quais foram revisadas e o veredito]
+
+**Constraints reconhecidos:** [Quais o PM deve considerar desde o primeiro dia]
+
+[Notas adicionais do PO aqui]
+
+---
+
+## Discovery Brief
+
+> Preencher apenas se a demanda for enviada para Discovery. Caso contrário, remover esta seção.
+
+### O que está faltando
+
+| # | Incógnita | Quem pode responder | Método |
+|---|---|---|---|
+| 1 | [Incógnita] | [PO / CTO / Cliente / Vendas] | [Spike técnico / Chamada com cliente / Revisão de infraestrutura] |
+
+**Time-box do Discovery:** [N dias] (AAAA-MM-DD → AAAA-MM-DD)
+
+---
+
+### Log do Discovery
+
+#### AAAA-MM-DD — [Evento]
+
+[Resumo do que foi feito, finding, decisão ou bloqueio]
+
+---
+
+### Resultado do Discovery
+
+| # | Incógnita | Resolução | Impacto no escopo |
+|---|---|---|---|
+| 1 | [Incógnita] | [Resolução] | Adicionado / Removido / Movido para backlog |
+
+**Novo caminho de decisão:** Discovery → Product Ready / Rejeitado / Backlog de Oportunidades
+
+**Discovery encerrado:** AAAA-MM-DD ([N dias — dentro / fora do time-box])
