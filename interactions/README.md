@@ -80,3 +80,5 @@ flowchart LR
 | QA → PM | Não — PM não pode sobrepor | PM escala apenas o prazo |
 | PM → CS | Não — CS deve coletar | CS devolve feedback estruturado |
 | PM → PO (feedback) | Não — PO deve reconhecer | PO fecha o loop explicitamente |
+
+> **Nota sobre as três primeiras linhas (Submitter → PO).** Com o modelo maturado da persona Submitter ([`../personas/01-submitter.md`](../personas/01-submitter.md)), "intake incompleto" não é mais binário. A devolução só acontece quando um requisito **bloqueante** fica sem nenhuma disposição — não quando um campo tem baixa confiança. Um requisito atinge prontidão por qualquer disposição honesta (`answered · inferred · assumption · discovery · deferred`), então "ainda não sabemos" deixou de ser motivo de rejeição: vira premissa a validar ou rota de Discovery, e o registro avança com o Readiness Score refletindo o que ainda é frágil.

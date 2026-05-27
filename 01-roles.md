@@ -25,6 +25,8 @@ Nenhum papel deve invadir o domínio de outro. Quando houver sobreposição, as 
 
 ## Papéis do upstream
 
+> Os quatro papéis abaixo (CEO via canal de intake, Vendas, Marketing, CS) são, do ponto de vista do modelo de dados, instâncias de uma única persona genérica: a **Submitter**. Este documento define seus limites de autoridade individuais; [`personas/01-submitter.md`](./personas/01-submitter.md) consolida *como ela raciocina* — modelo de confiança por campo, Readiness Score e dispositions ("não sei" é uma disposição válida, não um bloqueio).
+
 ### CEO
 
 O CEO define para onde a empresa vai e o que importa agora. Opera na camada estratégica — mercado, investidores, parcerias e decisões executivas.
@@ -310,6 +312,7 @@ O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila 
 - Racionalização de produto — transformar dor em definição de capacidade.
 - Decisão de caminho: Rejeitado / Backlog de Oportunidades / Discovery / Product Ready.
 - Manutenção do Backlog de Oportunidades e cadência de revisão.
+- O contrato de compliance do intake (requisitos, pesos, o que bloqueia o gate) e a aplicação do Readiness Score na triagem — ver [`personas/01-submitter.md`](./personas/01-submitter.md).
 
 **Autoridade**
 - Conduz triagem de forma independente para demandas que não exigem julgamento arquitetural.
@@ -492,6 +495,7 @@ Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads
 | Inteligência de mercado e competitiva | Marketing |
 | Saúde do cliente pós-venda e sinais de uso | Customer Success |
 | Fila do Intake Layer e triagem | PO |
+| Contrato de compliance do intake e gate de prontidão (Readiness Score) | PO |
 | Readiness Package | PO |
 | Racionalização de produto | PO |
 | Backlog de Oportunidades | PO |

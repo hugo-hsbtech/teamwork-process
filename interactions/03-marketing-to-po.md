@@ -3,6 +3,8 @@
 **Direção:** Marketing inicia. PO recebe.
 **Camada:** Upstream → Camada de Intake
 
+> Marketing, Vendas, CS e o canal de intake do CEO são instâncias da persona **Submitter** — a persona de fronteira. Seu raciocínio, o modelo de confiança e a estrutura de dados do registro estão consolidados em [`../personas/01-submitter.md`](../personas/01-submitter.md). Esta interação descreve o *handoff*; a persona descreve *como o registro fica pronto*.
+
 ---
 
 ## Gatilho
@@ -39,11 +41,13 @@ Inteligência de mercado identifica uma lacuna relevante, sinal competitivo ou p
 
 O intake de Marketing deve descrever um padrão a nível de segmento. O pedido de uma conta única submetido como "sinal de mercado" é redirecionado para Vendas ou CS como canal apropriado.
 
+Sinais de mercado costumam carregar incerteza inerente: o gate (`gateReady`) aceita isso desde que venha como disposição honesta — `assumption` ("estamos assumindo que o segmento X sente isso") com `a validar`, ou `discovery` quando os dados ainda não substanciam o padrão. O alcance e o impacto entram graduados por confiança, não como certezas (ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md)).
+
 ---
 
 ## Caminho de Falha
 
-Se Marketing não conseguir substanciar o padrão com dados, o PO abre Discovery ou move para Opportunity Backlog aguardando mais evidências.
+Se Marketing não conseguir substanciar o padrão com dados, o PO abre Discovery ou move para Opportunity Backlog aguardando mais evidências. Abrir Discovery é a disposição `discovery` (time-boxed) no registro — o padrão fica marcado como *a investigar*, não devolvido sem rota.
 
 ---
 

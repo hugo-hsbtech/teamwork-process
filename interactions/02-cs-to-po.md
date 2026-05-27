@@ -3,6 +3,8 @@
 **Direção:** Customer Success inicia. PO recebe.
 **Camada:** Upstream → Camada de Intake
 
+> CS, Vendas, Marketing e o canal de intake do CEO são instâncias da persona **Submitter** — a persona de fronteira. Seu raciocínio, o modelo de confiança e a estrutura de dados do registro estão consolidados em [`../personas/01-submitter.md`](../personas/01-submitter.md). Esta interação descreve o *handoff*; a persona descreve *como o registro fica pronto*.
+
 ---
 
 ## Gatilho
@@ -40,11 +42,13 @@ Um cliente relata atrito, um risco de retenção é identificado, ou um workarou
 
 CS não pode submeter "o cliente está insatisfeito" como descrição do problema. O intake deve descrever o atrito específico com contexto observável e reproduzível.
 
+Muito do material do CS (tickets, NPS, gravações) entra como disposição `inferred` — extraída dos artefatos do cliente, com `source` registrada e confiança parcial. Isso é válido para atingir o gate: o requisito não precisa ser respondido "à mão" pelo CS se a evidência o sustenta. O gate (`gateReady`) exige uma disposição honesta por requisito bloqueante, não certeza total (ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md)).
+
 ---
 
 ## Caminho de Falha
 
-Se CS não conseguir descrever o problema especificamente, o PO abre um Discovery para coletar o contexto faltante com CS como fonte primária.
+Se CS não conseguir descrever o problema especificamente, o PO abre um Discovery para coletar o contexto faltante com CS como fonte primária. No modelo de dados, isso é a disposição `discovery` (time-boxed) em vez de uma devolução — o requisito conta como *resolvido-como-incógnita* enquanto o Discovery roda.
 
 ---
 

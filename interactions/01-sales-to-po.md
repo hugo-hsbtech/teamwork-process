@@ -3,6 +3,8 @@
 **Direção:** Vendas inicia. PO recebe.
 **Camada:** Upstream → Camada de Intake
 
+> Vendas, CS, Marketing e o canal de intake do CEO são instâncias da persona **Submitter** — a persona de fronteira. Seu raciocínio, o modelo de confiança e a estrutura de dados do registro estão consolidados em [`../personas/01-submitter.md`](../personas/01-submitter.md). Esta interação descreve o *handoff*; a persona descreve *como o registro fica pronto*.
+
 ---
 
 ## Gatilho
@@ -40,11 +42,15 @@ Um prospect ou cliente existente expressa uma dor, lacuna ou necessidade vincula
 
 O PO não aceita registros de intake sem descrição do problema, impacto de negócio ou justificativa de prioridade. Espera-se que Vendas complete o registro antes de submetê-lo — não depois.
 
+O gate é quantitativo: o registro está pronto quando `gateReady = true` — todos os requisitos bloqueantes (problema, originador, alcance, impacto) resolvidos por uma **disposição honesta**, não necessariamente respondidos com certeza. "Ainda não sei o ARR exato" não bloqueia se vier como premissa a validar ou rota de Discovery (ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md)). O que bloqueia é a *ausência de disposição* — um requisito bloqueante deixado vazio.
+
 ---
 
 ## Caminho de Falha
 
 Se o intake estiver incompleto, o PO o devolve para Vendas com os campos específicos faltantes anotados. Vendas não recebe um reconhecimento verbal como substituto a um registro completo.
+
+"Incompleto" aqui significa requisito bloqueante **sem disposição** — não campo com baixa confiança. Campos `low_confidence` viajam com o registro (graduados, com `hint` do que os elevaria) e contam como parciais no Readiness Score; eles não causam devolução.
 
 ---
 
