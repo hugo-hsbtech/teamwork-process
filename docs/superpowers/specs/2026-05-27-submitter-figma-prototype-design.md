@@ -18,6 +18,8 @@ The prototype aims at the **final product**: all Submitter journeys designed, ev
 
 The reasoning model behind the screens (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, 3-layer metrics) lives in [`personas/01-submitter.md`](../../../personas/01-submitter.md), [`templates/00-intake-record.md`](../../../templates/00-intake-record.md) and [`metrics.md`](../../../metrics.md). This spec instantiates that model as a UI.
 
+**Primary research:** prototype [`prototypes/demandos-prototype-v167.tsx`](../../../prototypes/demandos-prototype-v167.tsx) is the canonical source for screens and mechanics; `fase2-v9` / `fase4-v8` are superseded earlier explorations and are not mined.
+
 ## 2. Persona & seed scenario
 
 **Persona:** the Submitter — non-technical, business-language native (problem / value / opportunity / relationship). Cannot be asked to think like an engineer; the system meets her in her language and does the translation *for* her.
@@ -35,6 +37,7 @@ The reasoning model behind the screens (compliance contract, confidence layer, d
 | D5 | Fidelity | **High-fidelity, final-product intent, every state explicit** — empty / AI-reading / parsing / recording / transcribing / filled / disposition / tension / confirm / error. |
 | D6 | Seed scenario | Carlos Silva (COO) + the SSO/SAML + audit-log demand (see §2). |
 | D7 | Figma file | New file **"Intake · Submitter"** using Conductor as the visual language (Conductor itself is a different product). |
+| D8 | Create vs enrich | **Decoupled.** Creating a demand captures only **basic info** (fast, low-friction) and produces a **Draft**. All enrichment happens later, over multiple sessions, from a dedicated **Demand Panel** page — because maturing a good demand takes time and depends on external inputs the Submitter does not control. The Demand Panel is the **central object**, spanning the demand's whole lifecycle (enrich → handoff → monitor → outcome). Validated against prototype v167 (`NewDemandScreen` → `CaptureQueueScreen`). |
 
 ## 4. Experience principles (carried into every screen)
 
@@ -77,7 +80,12 @@ Button (variants: primary/secondary/ghost/destructive) · Input · Textarea · S
 - **SourcesTray** — persistent "what the AI knows" inventory.
 - **BlockReferenceChip** (quote-card) + **DiscussAffordance** (the hover/select pin) — see §7.
 - **CopilotMessage** (incl. reply-quoting-a-block variant) · **EvidenceChip** · **StakeholderRow**.
-- **KPICard** · **Sparkline / Donut / Funnel** minis · **TimelineStateRow** · **StateBadge** (demand lifecycle).
+- **KPICard** · **Sparkline / Donut / FunnelChart** (conversion across states) · **TimelineStateRow** · **StateBadge** (demand lifecycle: draft / capturing / triage / discovery / rationalization / RP-frozen / execution / delivered / backlog / archived-rejected).
+- **DemandPanel** — the per-demand page shell; layout variants: drafting/enriching · handoff · handed-off/monitoring · outcome · backlog · archived. **DraftBadge** + **Save-and-exit** affordance.
+- **CollectInboxItem** — a PO async question + her batched answer (decoupled enrichment).
+- **CommentThread / CommentItem** — inline collaboration on demand sections.
+- **EscalationModal** — escalate-early / flag-blocker urgency valve.
+- **TourBanner / OnboardingStep** — first-run guidance for a non-technical exec.
 
 ## 6. Input strategy — all three modalities, everywhere
 
@@ -105,30 +113,48 @@ One **MultimodalComposer** is the constant affordance — present at demand entr
 **J1 · Entry**
 - J1.1 Sign in
 - J1.2 Landing → Dashboard
+- J1.3 First-run onboarding (TourBanner): create + drop/voice · enrich pendencies · track impact
 
 **J2 · Submitter Dashboard** ("metrics & important infos")
-- J2.1 Dashboard — portfolio KPIs (Annual impact R$/yr · Conversion demand→RP 64% · Lead time submit→frozen 8.5d · 1st-version acceptance 78%), "My demands" list (StateBadge + readiness + last activity), Notifications rail, **New demand** CTA
+- J2.1 Dashboard — portfolio KPIs (Annual impact R$/yr · Conversion demand→RP 64% · Lead time submit→frozen 8.5d · 1st-version acceptance 78%) + FunnelChart (submitted→triaged→RP→accepted→executing), "My demands" list (StateBadge + readiness + last activity, incl. Draft / Backlog / Archived states), Collect-inbox badge (PO questions waiting), Notifications rail, **New demand** CTA
 - J2.2 Dashboard — empty state (no demands yet)
 
-**J3 · Create + Enrich** (TakeoverShell wizard — the core)
-- J3.1 New demand entry — title + MultimodalComposer (drop / type / record) *or* start blank
-- J3.2 AI reading/parsing state — extraction summary ("read your deck — found 5 of 8, 3 to go")
-- J3.3 Readiness workspace — three zones: **Conversation** (copilot thread + MultimodalComposer) · **Canvas** (ReadinessRing + 8 RequirementRows + RICE-lite + SemanticReflection, all addressable) · **Sources** (tray)
-- J3.4 Composer states — typing · recording · transcribing · file-attached · 1 block pinned · multiple blocks pinned
-- J3.5 Bot reply quoting a pinned block
-- J3.6 Answer-a-question turn (business language) → canvas update
-- J3.7 "I don't know" → DispositionPicker → explicit frames for: assumption · discovery · deferred
-- J3.8 RICE-lite mirror + TensionCallout (e.g., "big value, low confidence — what evidence would make you sure?") + a tension-resolution turn
-- J3.9 Evidence & docs sub-view
-- J3.10 Stakeholders sub-view
-- J3.11 Constraints sub-view
-- J3.12 Gate reached → Intake Record review (the frozen artifact, INT-2026-NNN)
-- J3.13 Handoff to PO confirm (gateReady = true)
+**J3 · Create demand (quick capture — light)**
+> Decoupled from enrichment. Goal: get the demand out of her head in under a minute; structure it later.
+- J3.1 Create — basic info only: title · one-line problem · origin (Client/Internal/Market/Support) · type — optionally drop an artifact or record a voice note
+- J3.2 AI quick-read (if an artifact was given) — "Saved as draft · pre-filled N fields from your deck"
+- J3.3 Lands on the Demand Panel in **Draft** state (see J4)
 
-**J4 · Monitor the steps ahead** (post-handoff)
-- J4.1 Demand timeline — state machine progress (Captured → Triage → Rationalization → RP → Execution → Delivered), with discovery loops & PM rebounds shown
-- J4.2 What the PO did — triage outcome + PO edits/notes reflected back to her (read-mostly: the notification + a diff of what changed)
-- J4.3 Projected vs realized — outcome tracking 30/60/90d, annual impact projected vs measured (closes metrics.md camada 3)
+**J4 · Demand Panel (the dedicated per-demand page — the heart)**
+> One persistent, beautiful page that is the home of a demand across its WHOLE lifecycle. Enrichment happens here over many sessions; she can leave and return; Discovery/assumptions wait on external inputs she doesn't control. Layout emphasis shifts by lifecycle phase.
+
+*Drafting / Enriching layout*
+- J4.1 Panel shell — identity header (INT-2026-NNN · title · StateBadge · ReadinessRing · handoff CTA, disabled until gate) over three zones: **Conversation** (copilot + MultimodalComposer) · **Canvas** (8 RequirementRows + RICE-lite + SemanticReflection, all addressable) · **Sources** tray
+- J4.2 Composer states — typing · recording · transcribing · file-attached · 1 block pinned · multiple blocks pinned
+- J4.3 Bot reply quoting a pinned block
+- J4.4 Answer-a-question turn (business language) → canvas update (ReadinessRing delta "+23%")
+- J4.5 "I don't know" → DispositionPicker → explicit frames: assumption · discovery · deferred
+- J4.6 RICE-lite mirror + TensionCallout ("big value, low confidence — what evidence would make you sure?") + a tension-resolution turn
+- J4.7 Evidence/Sources detail · Stakeholders · Constraints sub-views
+- J4.8 Save & exit — Draft persists (return-later); appears as a Draft on the dashboard
+- J4.9 Collect inbox — PO's async questions land on the panel; she answers in business language without re-opening the whole flow
+- J4.10 Comments thread — inline PO/CTO/PM comments on sections + her replies
+- J4.11 Escalate / flag blocker — urgency valve when waiting on something stuck
+
+*Handoff*
+- J4.12 Pre-send review — readiness checkpoint: every blocking requirement has an honest disposition (gateReady); the Intake Record (INT-2026-NNN) shown read-only
+- J4.13 Handoff to PO confirm → success
+
+*Handed-off / Monitoring layout*
+- J4.14 Timeline — state-machine progress (Captured → Triage → Rationalization → RP → Execution → Delivered), discovery loops & PM rebounds shown
+- J4.15 What the PO did — triage outcome + PO edits reflected back (read-mostly: notification + diff of what changed)
+
+*Outcome layout*
+- J4.16 Projected vs realized — outcome tracking 30/60/90d, annual impact projected vs measured (closes metrics.md camada 3)
+
+*Closure states*
+- J4.17 Backlog — deferred but valid, with the unlock trigger she's waiting on (e.g., "Q3 budget released")
+- J4.18 Archived / Rejected — reason + justification (closure narrative, so she doesn't resubmit the same idea)
 
 **J5 · Cross-cutting**
 - J5.1 Notifications center
@@ -142,17 +168,19 @@ Pre-fill extractor (with sources) → conversational gap-closer (one business-la
 
 ## 10. Prototype wiring & fidelity
 
-- Clickable **golden path** end-to-end (J1 → J2 → J3 → J4).
-- Explicit **branch demos**: the disposition fork (J3.7), a tension resolution (J3.8), a PO rebound (J4.2).
-- Figma interactive components for state toggles where they sell the experience (composer states, ConfidenceBar fill, ReadinessRing progress).
+- Clickable **golden path** end-to-end (J1 → J2 → J3 create → J4 panel: enrich → handoff → monitor → outcome).
+- Explicit **branch demos**: the disposition fork (J4.5), a tension resolution (J4.6), a PO rebound (J4.15), and the **save-and-return loop** (J4.8 → dashboard Draft → back into the panel) that proves create/enrich is decoupled.
+- Figma interactive components for state toggles where they sell the experience (composer states, ConfidenceBar fill, ReadinessRing progress with the "+23%" delta).
 - Goal: a real COO clicks through unaided.
 
 ## 11. Out of scope (this prototype)
 
-- Other personas' working UIs (PO/CTO/PM/Tech Leads) beyond the read-mostly reflection the Submitter sees in J4.2.
+- Other personas' working UIs (PO/CTO/PM/Tech Leads) beyond the read-mostly reflection the Submitter sees in J4.15.
 - Dark mode (token slot reserved, not designed).
 - Real backend / functional AI — all AI behavior is scripted for the validation narrative.
 - Production code / CSS / handoff specs — this is a Figma prototype.
+
+**Superseded prototype concepts — do NOT resurrect** (dropped between fase2/4 and v167, or dead code in v167): the three separate per-section pendency modals (use one unified DispositionPicker/answer flow instead) · PlaceholderDashboards for non-Submitter personas · DrillDownModal · RationalizationsListScreen (dead code) · ShowcaseRPScreen.
 
 ## 12. Build sequence
 
