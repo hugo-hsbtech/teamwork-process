@@ -82,15 +82,25 @@ Definições de nível de prioridade:
 | Média | Melhoria significativa sem risco imediato de receita ou retenção | Entra na fila normal de triagem. Processada no próximo ciclo de revisão. |
 | Baixa | Nice-to-have, sem impacto mensurável no curto prazo | Entra direto no Backlog de Oportunidades para revisão futura. |
 
-Output: registro de intake estruturado, pronto para triagem do PO.
+#### Camada de prontidão — como "completo" amadureceu
 
-Gate: nada avança sem um registro de intake completo.
+> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-intake-record.md`](./templates/00-intake-record.md).
+
+Três adições mudam o passo de captura, sem remover nada do que já existia:
+
+- **Confiança é de primeira classe.** Cada resposta substantiva carrega `confidence / source / status / hint`. O downstream recebe respostas *graduadas* — sabe o que é firme e o que ainda precisa de Discovery.
+- **Readiness Score é o gate quantitativo.** O registro avança quando todos os requisitos bloqueantes estão resolvidos (`gateReady = true`), não quando todo campo está preenchido. `low_confidence` conta como parcial no score (ver [`references.md` § 11.1](./references.md)).
+- **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — `answered`, `inferred`, `assumption` (a validar), `discovery` (a investigar, time-boxed) ou `deferred` (com dono). O gate é "todo requisito tem uma disposição honesta", não "o Submitter sabe tudo".
+
+Output: registro de intake estruturado e graduado por confiança, pronto para triagem do PO.
+
+Gate: nada avança sem um registro de intake **pronto** — e "pronto" agora significa `gateReady = true` (todos os requisitos bloqueantes resolvidos por uma disposição honesta), não apenas todos os campos preenchidos.
 
 ### Passo 2 — Triagem inicial (PO)
 
 Quem: PO.
 
-O PO revisa o registro de forma independente. Esta etapa avalia se a demanda vale ser processada — não se é tecnicamente viável, mas se é real, recorrente e alinhada com a direção estratégica.
+O PO revisa o registro de forma independente. Esta etapa avalia se a demanda vale ser processada — não se é tecnicamente viável, mas se é real, recorrente e alinhada com a direção estratégica. O PO herda o snapshot de prontidão do registro (Readiness Score, dispositions e confiança por campo): a triagem já chega sabendo o que é firme, o que é premissa e o que está marcado para Discovery.
 
 Perguntas de triagem:
 
@@ -331,3 +341,4 @@ O fluxo acima descreve uma demanda isolada. Na prática, várias estarão em est
 6. **Ambiguidade é escalada, não absorvida** — todo papel tem a obrigação de surfaçar inputs incompletos.
 7. **Capacidade é constraint, não negociação** — nenhum compromisso é feito sem avaliação de capacidade do PM.
 8. **Discovery é time-boxed** — todo Discovery tem prazo e condição de saída definidos.
+9. **Confiança viaja com o artefato** — cada resposta carrega o quão sólida é e de onde veio; "não sei, e este é o plano" é uma forma válida de atingir prontidão, não um bloqueio.

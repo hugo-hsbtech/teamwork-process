@@ -40,6 +40,9 @@ As seções abaixo descrevem como cada um aparece no modelo deste repositório.
 | Critérios de Sucesso explícitos | Outcome-based Product Management | Melissa Perri, Marty Cagan | *Escaping the Build Trap* (Perri, 2018) |
 | Intake / Triagem / Product Ops | Product Operations | Melissa Perri & Denise Tilles; Marty Cagan | *Product Operations* (Perri & Tilles, 2023) |
 | Commitment point (Discovery → Delivery) | Upstream Kanban | David J. Anderson; Klaus Leopold | *Kanban* (Anderson, 2010); *Practical Kanban* (Leopold, 2017) |
+| Readiness Score (gate quantitativo) | Definition of Ready scorada + gate decision do Stage-Gate | Robert G. Cooper; Schwaber & Sutherland | Cooper (1986); *The Scrum Guide* |
+| Confiança por campo + dispositions ("não sei" honesto) | Assumption Mapping + Validated Learning | Teresa Torres; David Bland & Alex Osterwalder; Eric Ries | *Continuous Discovery Habits* (2021); *Testing Business Ideas* (2019); *The Lean Startup* (2011) |
+| Indicadores de valor (RICE-lite) | RICE scoring | Sean McBride / Intercom | *Intercom on Product Management* (2016) |
 
 ---
 
@@ -272,6 +275,39 @@ Sete desperdícios em software:
 
 ---
 
+## 11. Confiança de primeira classe, Readiness Score e RICE-lite
+
+> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-intake-record.md`](./templates/00-intake-record.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
+
+### 11.1 Readiness Score → Definition of Ready scorada + gate do Stage-Gate
+
+O Readiness Score é a versão *quantitativa* do gate decision (§2, Cooper) e da Definition of Ready (§8). Em vez de um "pronto / não pronto" subjetivo, cada requisito de compliance tem um peso e um status; o score é uma função desses pesos, e `low_confidence` conta como parcial. A demanda só sai do Intake quando `gateReady = true` (todo requisito bloqueante resolvido). Isso responde diretamente à crítica de "DoR vira mecanismo de espera" (Crítica 2): o gate é uma rubrica objetiva, não uma aprovação de comitê.
+
+### 11.2 Confiança por campo + dispositions → Assumption Mapping + Validated Learning
+
+O RICE clássico trata "confiança" como um único número genérico. Aqui ela é **por campo e por indicador** (`confidence / source / status / hint`) — a camada de honestidade que viaja com o artefato. As **dispositions** (`answered · inferred · assumption · discovery · deferred`) operacionalizam o princípio de que uma premissa explícita é melhor que uma certeza falsa:
+
+- `assumption` é exatamente o *assumption mapping* de Bland & Osterwalder (*Testing Business Ideas*) e os *assumption tests* da Opportunity Solution Tree de Torres (§3.2);
+- `discovery` time-boxed é o *validated learning* de Ries (§3.1) — "não sabemos ainda, e este é o plano para descobrir" é uma forma válida de prontidão;
+- a graduação por confiança realiza o *delay commitment* de Poppendieck (§3.3) no nível do campo, não só no nível do gate.
+
+### 11.3 Indicadores de valor (RICE-lite) → RICE scoring (Intercom)
+
+Os indicadores Impacto / Alcance / Urgência são uma versão enxuta do RICE (Reach, Impact, Confidence, Effort), criado por Sean McBride na Intercom. Duas adaptações conscientes:
+
+- **Confiança não é re-pontuada** como no RICE original — ela reusa a camada de confiança de §11.2, evitando duplicação;
+- **Esforço fica *soft*** (chute da Submitter, firmado depois pelo CTO), porque a persona de fronteira não é técnica.
+
+O ponto crucial: RICE-lite **não** é usado como fórmula de ranking automático. É um espelho que desafia o pensamento — a tensão entre indicadores (ex.: Impacto alto + confiança baixa) é uma provocação, não um número de priorização. Isso preserva o princípio de Reinertsen (§6) de que decisões econômicas são contextuais, não mecânicas.
+
+**Fontes.**
+
+- [RICE Scoring Model — Intercom (Sean McBride)](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/)
+- [Testing Business Ideas — Bland & Osterwalder (Strategyzer)](https://www.strategyzer.com/library/testing-business-ideas)
+- [Assumptions Mapping — Product Talk (Teresa Torres)](https://www.producttalk.org/2021/06/assumption-testing/)
+
+---
+
 ## Críticas honestas e mitigações
 
 Toda escolha estrutural tem trade-off. Vale antecipar as críticas mais comuns.
@@ -319,8 +355,10 @@ Mitigação no projeto: o Intake pode começar enxuto (CTO e PO acumulando o pap
 - **Reinertsen, D. G.** (2009). *The Principles of Product Development Flow: Second Generation Lean Product Development*. Celeritas Publishing.
 - **Anderson, D. J.** (2010). *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press.
 - **Ries, E.** (2011). *The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses*. Crown Business.
+- **McBride, S., et al.** (2016). *Intercom on Product Management*. Intercom Inc. (origem do modelo RICE).
 - **Leopold, K.** (2017). *Practical Kanban: From Team Focus to Creating Value*. LEANability Press.
 - **Perri, M.** (2018). *Escaping the Build Trap: How Effective Product Management Creates Real Value*. O'Reilly.
+- **Bland, D. J., & Osterwalder, A.** (2019). *Testing Business Ideas*. Wiley / Strategyzer.
 - **Skelton, M., & Pais, M.** (2019). *Team Topologies: Organizing Business and Technology Teams for Fast Flow*. IT Revolution Press.
 - **Torres, T.** (2021). *Continuous Discovery Habits: Discover Products That Create Customer Value and Business Value*. Product Talk LLC.
 - **Perri, M., & Tilles, D.** (2023). *Product Operations: How Successful Companies Build Better Products at Scale*. Product Institute.

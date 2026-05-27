@@ -420,6 +420,8 @@ sequenceDiagram
 ## 9. Estados de uma demanda
 
 > Estados explícitos são uma regra central de Kanban ("make process policies explicit", Anderson, 2010), e a forma de tornar visíveis as filas que Reinertsen identifica como o maior obstáculo ao fluxo de produto. Detalhes em [`references.md` § 6](./references.md#6-gestão-de-fluxo-e-wip--reinertsen-product-development-flow).
+>
+> A transição **Capturada → EmTriagem** deixou de ser instantânea: durante a captura, o registro constrói prontidão de forma progressiva e só é entregue ao PO quando o **Readiness Score** atinge o gate (`gateReady = true` — todo requisito bloqueante resolvido por uma disposição honesta). Ver [`personas/01-submitter.md`](./personas/01-submitter.md), [`metrics.md`](./metrics.md) e [`references.md` § 11](./references.md).
 
 ```mermaid
 stateDiagram-v2
@@ -470,8 +472,9 @@ flowchart TD
     R4["4 - DISCIPLINA DE PORTA\nCada fase só avança quando estiver\npronto (readiness package)"]
     R5["5 - TRANSPARÊNCIA TOTAL\nRiscos, integrações e custos sempre\nidentificados antes de compromissos"]
     R6["6 - APRENDIZADO CONTÍNUO\nCada ciclo gera aprendizado que\nmelhora nossas decisões futuras"]
+    R7["7 - CONFIANÇA DE PRIMEIRA CLASSE\nCada informação carrega o quão sólida é\ne de onde veio — 'não sei, e este é o\nplano' é prontidão válida, não bloqueio"]
 
-    R1 --> R2 --> R3 --> R4 --> R5 --> R6
+    R1 --> R2 --> R3 --> R4 --> R5 --> R6 --> R7
 
     style R1 fill:#e8f4f8,stroke:#2196F3,color:#000
     style R2 fill:#fff8e1,stroke:#FF9800,color:#000
@@ -479,6 +482,7 @@ flowchart TD
     style R4 fill:#f3e5f5,stroke:#9C27B0,color:#000
     style R5 fill:#fce4ec,stroke:#E91E63,color:#000
     style R6 fill:#e0f2f1,stroke:#009688,color:#000
+    style R7 fill:#fff3e0,stroke:#FB8C00,color:#000
 ```
 
 ---
@@ -524,6 +528,8 @@ flowchart LR
 | [`01-roles.md`](./01-roles.md) | Papéis e responsabilidades |
 | [`02-happy-path.md`](./02-happy-path.md) | Caminho esperado de uma demanda |
 | [`03-slas.md`](./03-slas.md) | SLAs por estado da demanda |
+| [`metrics.md`](./metrics.md) | Métricas e observabilidade (demanda · portfólio · resultado pós-handoff) |
+| [`personas/01-submitter.md`](./personas/01-submitter.md) | Persona da Submitter — raciocínio, estrutura de dados e valor em tela |
 | [`references.md`](./references.md) | Fundamentação acadêmica e mapeamento de frameworks |
 
 ---
