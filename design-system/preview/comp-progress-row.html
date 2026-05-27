@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Components — progress step row</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+</head>
+<body>
+<div class="card">
+
+  <div class="eyebrow">COMPONENT · PROGRESS STEP ROW</div>
+  <div class="col" style="gap:6px; width:380px;">
+    <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px;">
+      <span style="width:10px; height:10px; border-radius:50%; background:var(--state-production);"></span>
+      <span style="flex:1; font:400 13px/1 var(--font-sans); color:var(--text-ink);">Validate config</span>
+      <span style="font:400 12px/1 var(--font-sans); color:var(--text-muted);">12 checks</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px; background:var(--state-running-wash);">
+      <span style="width:10px; height:10px; border-radius:50%; background:var(--state-running);"></span>
+      <span style="flex:1; font:400 13px/1 var(--font-sans); color:var(--text-ink);">Push to staging</span>
+      <span style="font:400 12px/1 var(--font-sans); color:var(--text-muted);">running…</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px;">
+      <span style="width:10px; height:10px; border-radius:50%; background:var(--border-strong);"></span>
+      <span style="flex:1; font:400 13px/1 var(--font-sans); color:var(--text-faint);">Promote to canary</span>
+      <span style="font:400 12px/1 var(--font-sans); color:var(--text-faint);">pending</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

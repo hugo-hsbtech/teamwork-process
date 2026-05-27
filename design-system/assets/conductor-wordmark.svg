@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 32" width="220" height="32">
+  <rect width="32" height="32" rx="6" fill="#0E7C86"></rect>
+  <g stroke="#ffffff" stroke-width="2.25" stroke-linecap="round">
+    <line x1="16" y1="8" x2="16" y2="24"></line>
+    <line x1="8" y1="16" x2="24" y2="16"></line>
+    <line x1="10.5" y1="10.5" x2="21.5" y2="21.5"></line>
+    <line x1="21.5" y1="10.5" x2="10.5" y2="21.5"></line>
+  </g>
+  <text x="44" y="22" font-family="Hanken Grotesk, system-ui, sans-serif" font-weight="800" font-size="20" letter-spacing="-0.4" fill="#1C1B18">Conductor</text>
+</svg>

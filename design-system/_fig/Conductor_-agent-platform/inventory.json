@@ -1,0 +1,270 @@
+{
+  "source": {
+    "filename": "Conductor_ agent platform.fig",
+    "nodeCount": 12985,
+    "pages": [
+      {
+        "id": "23:2",
+        "name": "Screens",
+        "selected": true
+      },
+      {
+        "id": "15:2",
+        "name": "Foundations",
+        "selected": true
+      },
+      {
+        "id": "15:3",
+        "name": "Components",
+        "selected": true
+      },
+      {
+        "id": "266:2",
+        "name": "MCP creation",
+        "selected": true
+      },
+      {
+        "id": "265:2",
+        "name": "Agent journeys",
+        "selected": true
+      },
+      {
+        "id": "267:2",
+        "name": "Namespace creation",
+        "selected": true
+      },
+      {
+        "id": "268:2",
+        "name": "KB Journeys",
+        "selected": true
+      },
+      {
+        "id": "270:2",
+        "name": "Trigger creation",
+        "selected": true
+      },
+      {
+        "id": "271:2",
+        "name": "Credentials",
+        "selected": true
+      },
+      {
+        "id": "278:2",
+        "name": "Lists pattern",
+        "selected": true
+      },
+      {
+        "id": "364:2",
+        "name": "shadcn pilot",
+        "selected": true
+      },
+      {
+        "id": "529:2",
+        "name": "Agent · data flow",
+        "selected": true
+      }
+    ],
+    "userSelectedFrames": []
+  },
+  "components": [
+    {
+      "name": "VersionStateBadge",
+      "figmaId": "20:23",
+      "variantProps": [
+        "state"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "ProviderChip",
+      "figmaId": "21:14",
+      "variantProps": [
+        "provider"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "Stepper",
+      "figmaId": "84:15",
+      "variantProps": [
+        "type"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "DrawerShell",
+      "figmaId": "87:30",
+      "variantProps": [
+        "size"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "TakeoverShell",
+      "figmaId": "88:26",
+      "variantProps": [],
+      "valueProps": []
+    },
+    {
+      "name": "ResultChip",
+      "figmaId": "89:46",
+      "variantProps": [
+        "state"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "ConnectorCard",
+      "figmaId": "91:49",
+      "variantProps": [
+        "selected"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "ProgressStepRow",
+      "figmaId": "92:48",
+      "variantProps": [
+        "state"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "ViewToggle",
+      "figmaId": "279:67",
+      "variantProps": [
+        "view"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "BlockGridSentinel",
+      "figmaId": "285:70",
+      "variantProps": [
+        "state"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "ButtonShadcnPS",
+      "figmaId": "392:77",
+      "variantProps": [
+        "variant"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "InputShadcnPS",
+      "figmaId": "393:94",
+      "variantProps": [],
+      "valueProps": []
+    },
+    {
+      "name": "BadgeShadcnPS",
+      "figmaId": "396:74",
+      "variantProps": [
+        "state"
+      ],
+      "valueProps": []
+    },
+    {
+      "name": "SegmentedShadcnPS",
+      "figmaId": "398:81",
+      "variantProps": [],
+      "valueProps": []
+    },
+    {
+      "name": "AnnotationNote",
+      "figmaId": "641:206",
+      "variantProps": [],
+      "valueProps": []
+    }
+  ],
+  "tokens": {
+    "count": 163,
+    "modes": [
+      "Value",
+      "Light",
+      "Value",
+      "Value",
+      "Mode 1",
+      "Mode 1",
+      "Mode 1",
+      "Mode 1",
+      "light mode",
+      "dark mode"
+    ]
+  },
+  "styles": {
+    "text": 0,
+    "effect": 0
+  },
+  "warnings": [
+    {
+      "component": "VersionStateBadge",
+      "nodeId": "20:23",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ProviderChip",
+      "nodeId": "21:14",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "Stepper",
+      "nodeId": "84:15",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "DrawerShell",
+      "nodeId": "87:30",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ResultChip",
+      "nodeId": "89:46",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ConnectorCard",
+      "nodeId": "91:49",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ProgressStepRow",
+      "nodeId": "92:48",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ViewToggle",
+      "nodeId": "279:67",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "BlockGridSentinel",
+      "nodeId": "285:70",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "ButtonShadcnPS",
+      "nodeId": "392:77",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    },
+    {
+      "component": "BadgeShadcnPS",
+      "nodeId": "396:74",
+      "kind": "variant-root-only",
+      "detail": "variant deltas capture root-level styles only; nested-child differences not diffed"
+    }
+  ]
+}

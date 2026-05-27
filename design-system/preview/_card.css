@@ -1,0 +1,55 @@
+/* Preview-card shared shell. Each card is a static HTML page that
+   imports colors_and_type.css and this file, then renders a single
+   focused specimen. Cards are ~700px wide. */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface-canvas);
+  font-family: var(--font-sans);
+  color: var(--text-ink);
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--surface-canvas);
+}
+.card.tight { padding: 16px 20px; gap: 10px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--brand-tide-text);
+}
+.row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.row.tight { gap: 8px; }
+.col { display: flex; flex-direction: column; gap: 6px; }
+.swatch {
+  width: 110px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hairline);
+  position: relative;
+}
+.swatch.sm { width: 88px; height: 52px; }
+.swatch-meta {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.swatch-meta .name { color: var(--text-ink); display: block; }
+hr.hairline { border: 0; border-top: 1px solid var(--border-hairline); margin: 6px 0; }

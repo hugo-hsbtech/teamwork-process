@@ -1,0 +1,151 @@
+/* Generated from Figma Variables. First mode = :root default. */
+
+:root {
+  --amber-500: rgb(217,119,6);
+  --amber-50: rgb(251,241,220);
+  --amber-600: rgb(180,83,9);
+  --black: rgb(0,0,0);
+  --green-50: rgb(228,243,234);
+  --green-600: rgb(21,128,61);
+  --provider-claude: rgb(204,120,92);
+  --provider-gemini: rgb(91,141,239);
+  --provider-grok: rgb(75,85,99);
+  --provider-openai: rgb(16,163,127);
+  --red-50: rgb(251,234,234);
+  --red-600: rgb(220,38,38);
+  --slate-500: rgb(100,116,139);
+  --slate-50: rgb(238,241,245);
+  --stone-100: rgb(244,242,236);
+  --stone-200: rgb(231,228,219);
+  --stone-300: rgb(214,210,199);
+  --stone-400: rgb(181,176,164);
+  --stone-500: rgb(156,151,140);
+  --stone-50: rgb(250,249,245);
+  --stone-600: rgb(107,103,94);
+  --stone-700: rgb(74,71,66);
+  --stone-800: rgb(46,44,40);
+  --stone-900: rgb(28,27,24);
+  --tide-100: rgb(199,230,233);
+  --tide-300: rgb(111,196,203);
+  --tide-500: rgb(19,164,176);
+  --tide-50: rgb(230,243,244);
+  --tide-600: rgb(14,138,148);
+  --tide-700: rgb(14,124,134);
+  --tide-900: rgb(10,90,97);
+  --violet-500: rgb(124,92,252);
+  --violet-50: rgb(238,233,254);
+  --white: rgb(255,255,255);
+}
+
+:root {
+  --border-hairline: var(--stone-200);
+  --border-strong: var(--stone-300);
+  --brand-tide-bright: var(--tide-500);
+  --brand-tide-text: var(--tide-700);
+  --brand-tide-wash: var(--tide-50);
+  --brand-tide: var(--tide-700);
+  --provider-claude-2: var(--provider-claude);
+  --provider-gemini-2: var(--provider-gemini);
+  --provider-grok-2: var(--provider-grok);
+  --provider-openai-2: var(--provider-openai);
+  --state-canary-wash: var(--amber-50);
+  --state-canary: var(--amber-500);
+  --state-draft-wash: var(--slate-50);
+  --state-draft: var(--slate-500);
+  --state-error-wash: var(--red-50);
+  --state-error: var(--red-600);
+  --state-paused-wash: var(--amber-50);
+  --state-paused: var(--amber-600);
+  --state-production-wash: var(--green-50);
+  --state-production: var(--green-600);
+  --state-running-wash: var(--tide-50);
+  --state-running: var(--tide-500);
+  --state-staging-wash: var(--violet-50);
+  --state-staging: var(--violet-500);
+  --surface-canvas: var(--stone-50);
+  --surface-card: var(--white);
+  --surface-inverse: var(--stone-900);
+  --surface-sunken: var(--stone-100);
+  --text-faint: var(--stone-500);
+  --text-ink: var(--stone-900);
+  --text-muted: var(--stone-600);
+  --text-on-brand: var(--white);
+}
+
+:root {
+  --spacing-2: 2px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-lg: 16px;
+  --spacing-md: 12px;
+  --spacing-none: 0px;
+  --spacing-sm: 8px;
+  --spacing-xl: 24px;
+  --spacing-xs: 4px;
+}
+
+:root {
+  --radius-full: 9999px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-none: 0px;
+  --radius-sm: 6px;
+  --radius-xl: 16px;
+}
+
+:root {
+  --neutral-100: rgb(245,245,245);
+  --neutral-200: rgb(229,229,229);
+  --neutral-400: rgb(163,163,163);
+  --neutral-500: rgb(115,115,115);
+  --neutral-50: rgb(250,250,250);
+  --neutral-700: rgb(64,64,64);
+  --neutral-800: rgb(38,38,38);
+  --neutral-900: rgb(23,23,23);
+  --neutral-950: rgb(10,10,10);
+  --red-400: rgb(248,113,113);
+  --red-600-2: rgb(220,38,38);
+  --white-2: rgb(255,255,255);
+}
+
+:root {
+  --10: 10px;
+  --12: 12px;
+  --16: 16px;
+  --2-2: 2px;
+  --20: 20px;
+  --24: 24px;
+  --4: 4px;
+  --6: 6px;
+  --8-2: 8px;
+}
+
+:root {
+  --0: 0px;
+  --10-2: 10px;
+  --12-2: 12px;
+  --14: 14px;
+  --16-2: 16px;
+  --1: 1px;
+  --20-2: 20px;
+  --24-2: 24px;
+  --2: 2px;
+  --400: 400px;
+  --500: 500px;
+  --8: 8px;
+  --9999: 9999px;
+}
+
+:root {
+  --family-mono: "Geist Mono";
+  --family-sans: "Inter";
+}
+
+:root {
+  --white-12: rgba(255,255,255,0.95);
+}
+
+:root[data-theme="dark"], .dark {
+  --white-12: rgba(255,255,255,0.95);
+}
