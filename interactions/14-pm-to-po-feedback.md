@@ -3,6 +3,8 @@
 **Direção:** PM inicia. PO recebe.
 **Camada:** Pós-Entrega
 
+> Esta interação **instancia a camada 3 de [`../metrics.md`](../metrics.md)** (resultado de negócio: projetado vs. realizado). O delta entre os Critérios de Sucesso *projetados* no intake/RP — que carregam confiança — e o resultado *medido* calibra a confiança de futuras projeções da Submitter. Com o tempo, o acerto de projeção vira uma métrica de qualidade da própria persona, análoga ao "aceite na 1ª versão".
+
 ---
 
 ## Gatilho

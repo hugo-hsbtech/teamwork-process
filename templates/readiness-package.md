@@ -1,5 +1,7 @@
 # Readiness Package — [Nome da Demanda]
 
+> O Readiness Package é o **output** do Intake Layer (PO + CTO) — a demanda já racionalizada. Ele **herda a camada de confiança** do Registro de Intake vinculado ([`00-intake-record.md`](./00-intake-record.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada" abaixo). Os valores *projetados* (sobretudo os Critérios de Sucesso) carregam confiança e viram o baseline que [`../metrics.md`](../metrics.md) confronta com o realizado pós-entrega.
+
 ## Metadados
 
 | Campo | Valor |
@@ -17,6 +19,21 @@
 | Versão | Data | Autor | Status | Resumo |
 |---|---|---|---|---|
 | v1 | AAAA-MM-DD | [Nome] (PO) | Rascunho | Submissão inicial. |
+
+---
+
+## Prontidão herdada e dispositions em aberto
+
+> Resumo do que o Intake entregou e do que continua *soft* na entrada da execução. Premissas, incógnitas e respostas delegadas que sobreviveram à racionalização precisam estar visíveis ao PM — não enterradas nas seções. Ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md).
+
+| Campo | Valor |
+|---|---|
+| **Readiness Score no handoff do Intake** | __ % |
+| **Premissas ainda a validar** | [lista ou —] |
+| **Incógnitas de Discovery** | [resolvidas / ainda abertas — ] |
+| **Requisitos delegados (com dono)** | [lista ou —] |
+
+> Se uma premissa carregada aqui se provar falsa durante a execução, a demanda deve ser reavaliada — o mesmo gatilho de retriagem do intake se aplica downstream.
 
 ---
 
@@ -173,9 +190,11 @@ Descreva as regras, validações e transições de estado que governam esta func
 
 ## Seção 11 — Critérios de Sucesso
 
-| Métrica | Meta | Medição |
-|---|---|---|
-| [Métrica 1] | [Meta] | [Como medir e quem mede] |
+> Estes são os valores **projetados** — o baseline que [`../metrics.md`](../metrics.md) (camada 3, projetado vs. realizado) confronta com o medido pós-rollout. Cada meta carrega a confiança da projeção; metas de baixa confiança sinalizam onde o acompanhamento pós-entrega é mais crítico.
+
+| Métrica | Meta (projetada) | Medição | Confiança |
+|---|---|---|---|
+| [Métrica 1] | [Meta] | [Como medir e quem mede] | __ |
 
 ---
 

@@ -20,6 +20,8 @@ Os SLAs aqui são metas operacionais internas, não compromissos com clientes.
 | Racionalização e Readiness Package | PO + CTO | Máx. 2 semanas para escopo padrão; máx. 1 semana para Crítica | Se excedido, PO sinaliza ao PM e CEO com relatório parcial de status. |
 | Avaliação arquitetural do CTO | CTO | Máx. 5 dias úteis a partir da escalada do PO | PO faz follow-up. Se não resolvido, CEO é notificado. |
 
+> **Onde o relógio da triagem começa.** Os SLAs de "Triagem Inicial" contam a partir do recebimento de um registro **pronto** (`gateReady = true`), não do primeiro rascunho. A construção da prontidão pelo Submitter — preencher requisitos, marcar premissas, abrir Discovery — acontece *antes* do handoff e não é SLA-bound: é o ritmo da própria persona, assistido pelo sistema (ver [`personas/01-submitter.md`](./personas/01-submitter.md)). O que o PO recebe já vem graduado por confiança; o timer de triagem mede a resposta do PO, não o tempo que o Submitter levou para amadurecer o registro.
+
 ### Downstream
 
 | Etapa | Responsável | SLA | O que acontece se excedido |
