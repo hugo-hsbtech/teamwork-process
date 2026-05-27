@@ -1,5 +1,7 @@
 # Submitter Figma Prototype — Implementation Plan
 
+> **Revision:** v2 (revised 2026-05-27 PM). Tracks spec v2. Sections marked *(v2)* are new or refactored; everything else is unchanged from v1 and stays valid.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 >
 > **Figma-specific:** This plan builds a Figma file, not code. Every `use_figma` / `create_new_file` / `generate_figma_design` call has a MANDATORY prerequisite skill that MUST be loaded first:
@@ -12,9 +14,11 @@
 
 **Goal:** Build a high-fidelity, clickable Figma prototype of the Submitter persona's end-to-end experience (create → enrich on a dedicated Demand Panel → hand off → monitor → outcome), on the Conductor "Paper & Signal" design language, to validate with real COO/CEO/Sales users.
 
-**Architecture:** One new Figma file, four pages (Foundations, Components, Screens, Prototype). Build bottom-up: variables + type styles → primitive components (shadcn/ui restyled with Conductor tokens) → domain components → screen frames assembled from components → prototype wiring. Light mode only.
+**Architecture:** One Figma file, four pages (Foundations, Components, Screens, Prototype). Build bottom-up: variables + type styles → primitive components (shadcn/ui restyled with Conductor tokens) → domain components → screen frames assembled from components → prototype wiring. Light mode only.
 
-**Tech Stack:** Figma (variables, components/variants, interactive components, prototype flows) via the Figma MCP + the figma:* skills. Source design system: `design-system/` (Conductor "Paper & Signal"). Source spec: `docs/superpowers/specs/2026-05-27-submitter-figma-prototype-design.md`. Primary research: `prototypes/demandos-prototype-v167.tsx`.
+**Tech Stack:** Figma (variables, components/variants, interactive components, prototype flows) via the Figma MCP + the figma:* skills. Source design system: `design-system/` (Conductor "Paper & Signal"). Source spec: `docs/superpowers/specs/2026-05-27-submitter-figma-prototype-design.md` (v2). Primary visual reference: `prototypes/demandos-prototype-unified-v1.tsx` (visual reference only — docs remain conceptual ground truth).
+
+**Existing Figma file (v2):** the Figma file `Intake · Submitter` already exists (fileKey `mUIHJQvbeHidhp8bjUcZbK`). v2 does not create a new file — it **refactors** specific frames and **adds** new components/frames inside the same file. Task 0 below covers the audit of the existing file before refactoring begins.
 
 ---
 
@@ -26,287 +30,258 @@
 - **Tokens are the source of truth.** Every fill/stroke/spacing/radius on every component and frame MUST bind to a variable from Phase A — never a raw hex except inside the variable definitions themselves.
 - **Copy is final.** All visible strings in this plan are the real prototype copy (Portuguese product, per the repo). Use them verbatim. Seed scenario below.
 - **No emoji anywhere** (Conductor hard rule). Status = colored dot + label. Tide is signal-only, never a large fill.
+- *(v2)* **Delete-when-replaced.** When a frame is refactored in v2 (e.g. J4.1, J2.1, J3.1, J3.2, J5.1, J5.3), the **previous frame is deleted** from the Screens page after the new one is verified. We do not keep parallel "old" and "new" versions cluttering the canvas. Frames not listed as refactored in the spec stay untouched.
 
 ### Seed scenario (use verbatim across all screens)
 
 - **User:** Carlos Silva · COO · `carlos.silva` · org `acme`.
 - **Demand:** `INT-2026-014` — **"Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."** A top-3 account threatens non-renewal without it.
-- **Dashboard portfolio numbers:** Impacto anual projetado **R$ 412k/ano** · **14** demandas submetidas · **3** em execução · Conversão demanda→RP **64%** · Lead time submissão→congelado **8,5 dias** · Aceite na 1ª versão **78%**. Funnel: **14 → 11 → 9 → 7 → 3**.
+- **Dashboard portfolio numbers:** HeroMetric = **R$ 412k/ano** (Impacto financeiro YTD) · CompactKPIs: **1** demanda ativa · **8/14** aceitas no ano (57%) · **6,2 dias** tempo médio até congelamento (−2,1d vs mercado) · **18h** que você não gastou · **4,2x** ROI médio realizado · Inadimplência projetada.
+- **Funnel (if used):** **14 → 11 → 9 → 7 → 3**.
+- **AI Impact (Dashboard scope):** "18h economizadas · 65% automatizado neste portfólio".
+- **AI Impact (Demand Panel scope, J4.1):** "12h economizadas nesta demanda · 5 de 8 requisitos pré-preenchidos · 3 fontes mineradas".
 - **8 compliance requirements (the canvas rows):** 1 Enunciado do problema (bloqueia) · 2 Originador e contexto (bloqueia) · 3 Quem é impactado / Alcance (bloqueia) · 4 Impacto de negócio (bloqueia) · 5 Urgência · 6 Evidência / documentos · 7 Constraints · 8 Stakeholders.
+- **PendencyGroups on J4.1 (initial state):**
+  - **"Bloqueiam envio · 3"** — Alcance (empty), Constraints (empty), Stakeholders (empty).
+  - **"Em discovery / premissa / delegado · 1"** — Impacto de negócio (Premissa, com nota "Assumindo R$ 2,1M de ARR combinado em risco — a validar com Vendas.").
+  - **"Respondidas · 4"** (collapsed) — Enunciado do problema, Originador e contexto, Urgência, Evidência/documentos.
 - **RICE-lite:** Impacto = Alto · Alcance = Médio · Urgência = Alta · (Esforço = soft/low_confidence). **Tension to show:** "Impacto alto + confiança baixa — que evidência te deixaria seguro?"
-- **Readiness during the demo:** opens at **38%**, climbs to **64%** after one answer (show the `+26%` delta), reaches **100% / gateReady** at review.
+- **Readiness during the demo:** opens at **38%** (`building`), climbs to **64%** after one answer (show the `+26%` delta), reaches **100% / gateReady** at J4.12 review.
+- **Gate copy (GateToolbar):**
+  - Pendente (≥1 bloqueante sem disposição honesta): *"Faltam {N} requisitos bloqueantes sem disposição honesta — responda, marque como Premissa/Discovery/Delegado, ou ajuste o escopo."*
+  - GateReady: *"Pronto para envio — todos os requisitos bloqueantes têm disposição honesta."*
 
 ---
 
-## Task 0 — File, connection, page scaffold
+## Task 0 — File state audit *(v2)*
 
-**Figma target:** new file `Intake · Submitter`.
+**Figma target:** existing file `Intake · Submitter` (fileKey `mUIHJQvbeHidhp8bjUcZbK`).
 
-- [ ] **Step 1: Confirm live Figma MCP connection.**
-Run `mcp__plugin_figma_figma__whoami`. Expected: a valid user, no auth error. If it errors, STOP — the user must open Figma (desktop/plugin) and authenticate; this plan cannot proceed without a live connection.
+- [ ] **Step 1: Confirm live Figma MCP connection.** Run `mcp__plugin_figma_figma__whoami`. Expected: a valid user, no auth error. STOP if it errors.
+- [ ] **Step 2: Audit current file.** Load **figma:figma-use**, then `get_metadata` on file root + each of the 4 pages (Foundations, Components, Screens, Prototype). Expected: confirm v1 components and frames exist; record nodeIDs of:
+  - All v1 components that are being kept unchanged.
+  - The v1 frames that will be replaced: J2.1, J2.2, J3.1, J3.2, J4.1, J5.1, J5.3.
+  - The v1 components that will be deprecated and removed after v2 lands: per-screen Copilot pill, "Notifications rail" on Dashboard (if instantiated as its own component), generic KPI row component on Dashboard.
+- [ ] **Step 3:** Save Figma version `Task 0 v2 · pre-refactor audit`.
 
-- [ ] **Step 2: Create the file.** Load **figma:figma-create-new-file**, then `create_new_file` (editorType `design`, name `Intake · Submitter`).
-Expected: a new fileKey is returned.
-
-- [ ] **Step 3: Create four pages.** Load **figma:figma-use**, then via `use_figma`: pages `Foundations`, `Components`, `Screens`, `Prototype`.
-
-- [ ] **Step 4: Verify.** Run `get_metadata` on the file root.
-Expected: four pages with the names above.
-
-- [ ] **Step 5: Checkpoint.** Save Figma version `Task 0 · scaffold`.
+> Original Tasks A1–A6, A8, A9, A10 from v1 of this plan (color variables, spacing/radii, type styles, primitive components, readiness/confidence/requirements components, conversation/input/sources components, panel/collab/scaffolding components, foundations specimen) are **unchanged** in v2 and continue valid. If those tasks were completed in v1, do not redo them — they are the foundation v2 builds on. Below we only enumerate the **new and refactored** tasks. See v1 of this file in git history if you need the originals.
 
 ---
 
-## Phase A — Foundations (page: Foundations / Components)
+## Phase A — Foundations refactor *(v2)*
 
-> Load **figma:figma-generate-library** for all of Phase A; load **figma:figma-use** before each `use_figma` call.
+### Task A7-bis — HeroMetric refactor + CompactKPI *(v2)*
 
-### Task A1 — Color variables (collection `color`, mode `Light`)
+**Figma target:** `Components` → section `Domain` → group `Metrics`.
 
-**Figma target:** Variables → new collection `color`, single mode `Light` (add an empty `Dark` mode slot, no values).
+- [ ] **Step 1: HeroMetric (refactored).** Replace the current `KPICard` "hero" usage with a dedicated `HeroMetric` component. Structure (1216 wide on 1184 content column, height ~140):
+  - Anchor: `surface/card`, 1px `border/hairline`, `radius/lg`, `elev/1`, `padding 24 32`.
+  - Left column: Eyebrow (Mono 11, +0.08em, `text/muted`) → big number (H2 56/56, mono numerics, `text/ink`, `font-variant-numeric: tabular-nums`) with inline suffix slot (H3, `text/muted`) → trend chip (Eyebrow style + arrow icon + `state/production` text for up, `state/error` for down) → sub-composition (Body/sm, `text/muted`).
+  - Right column: `Sparkline` slot (180×56), Meta caption ("Acumulado mensal").
+  - Right edge: `badge="Pay-justifying KPI"` — Eyebrow mono, `brand/tide-bright` wash background, `radius/sm`, padding 4 8. Positioned top-right of the card.
+  - Variants: `accent = submitter | po | cto | pm | viewer` (changes the left accent stripe — 4px wide, `radius/sm`, `tide-700` for submitter); `state = data | empty` (empty replaces value with em-dash + helper Body/sm).
+- [ ] **Step 2: CompactKPI.** New component for the secondary 3×2 grid. Structure (per card, ~200 wide × 92 tall):
+  - `surface/card`, 1px `border/hairline`, `radius/md`, padding 16 20.
+  - Top row: Eyebrow label (left) · 24×24 rounded icon square (right, `accent` color wash + accent foreground).
+  - Big number (H3 20, mono numerics) + optional suffix (Body, `text/muted`) + optional trend chip (Meta + arrow).
+  - Body/sm sub (`text/muted`).
+  - Variants: `accent = neutral | submitter | success | warning | ai`; `hasTrend = true|false`.
+- [ ] **Step 3:** Update Sparkline to support a `width=180` size variant.
+- [ ] **Step 4: Verify.** `get_screenshot` of the Metrics group. Expected: HeroMetric is visually heavier than CompactKPI, badge "Pay-justifying KPI" reads as a stamp, the accent stripe is unmistakably Tide for the Submitter, mono numerics align.
+- [ ] **Step 5: Checkpoint.** Version `A7-bis · HeroMetric + CompactKPI`.
 
-- [ ] **Step 1: Create primitive color variables** (group `primitive/…`), exact values from `design-system/_fig/.../tokens.css`:
+### Task A9-bis — PendencyGroup + GateToolbar *(v2)*
 
-```
-stone/50  rgb(250,249,245)   stone/100 rgb(244,242,236)  stone/200 rgb(231,228,219)
-stone/300 rgb(214,210,199)   stone/400 rgb(181,176,164)  stone/500 rgb(156,151,140)
-stone/600 rgb(107,103,94)    stone/700 rgb(74,71,66)     stone/800 rgb(46,44,40)
-stone/900 rgb(28,27,24)
-tide/50   rgb(230,243,244)   tide/100  rgb(199,230,233)  tide/300  rgb(111,196,203)
-tide/500  rgb(19,164,176)    tide/600  rgb(14,138,148)   tide/700  rgb(14,124,134)
-tide/900  rgb(10,90,97)
-amber/50  rgb(251,241,220)   amber/500 rgb(217,119,6)    amber/600 rgb(180,83,9)
-green/50  rgb(228,243,234)   green/600 rgb(21,128,61)
-red/50    rgb(251,234,234)   red/600   rgb(220,38,38)
-slate/50  rgb(238,241,245)   slate/500 rgb(100,116,139)
-violet/50 rgb(238,233,254)   violet/500 rgb(124,92,252)
-provider/claude rgb(204,120,92)  provider/gemini rgb(91,141,239)
-provider/grok   rgb(75,85,99)    provider/openai rgb(16,163,127)
-white rgb(255,255,255)   black rgb(0,0,0)
-```
+**Figma target:** `Components` → section `Domain` → group `Demand Panel`.
 
-- [ ] **Step 2: Create semantic alias variables** (group `semantic/…`) pointing at primitives:
+- [ ] **Step 1: PendencyGroup.** A wrapper component that groups N `RequirementRow`s. Structure:
+  - Header row: 6px dot (color = `state/error | state/canary | state/production` per group) · Eyebrow label uppercase ("BLOQUEIAM ENVIO" / "EM DISCOVERY / PREMISSA / DELEGADO" / "RESPONDIDAS") · count chip (`surface/sunken`, Meta) · ChevronDown/Up toggle on the right.
+  - Body: vertical stack of `RequirementRow` slots, spacing `space/sm` (8px).
+  - Variants:
+    - `tone = blocking | pending | resolved` (drives dot color + label color).
+    - `defaultOpen = true | false` (resolved defaults closed; the other two default open).
+    - `count` is a number prop.
+  - Animation hook: rows animate position when migrating between groups (this is wired in Phase C as an interactive component).
+- [ ] **Step 2: GateToolbar.** Sticky bottom toolbar inside DemandPanel `phase=drafting`. Structure (1216 wide, 66 tall):
+  - Anchor: `surface/card`, 1px top `border/hairline`, `elev/2`, padding 16 32.
+  - Left: Eyebrow "GATE" + Body/sm of dynamic copy. Two states of copy (see seed scenario): pending vs gateReady.
+  - Right: `Button variant=ghost label="Revisar tudo"` + `Button variant=primary label="Enviar ao PO"`.
+  - Variants: `gateState = pending | ready` (pending → primary button is disabled with tooltip "Atenda os bloqueantes acima primeiro"; ready → primary button is enabled and has the subtle pulse animation hook).
+- [ ] **Step 3: Verify.** `get_screenshot` of both. Expected: group header reads instantly as a sectioning device (not a card); GateToolbar pending state visually communicates "blocked" without being aggressive; ready state visually rewards (subtle Tide accent on the primary button).
+- [ ] **Step 4: Checkpoint.** Version `A9-bis · PendencyGroup + GateToolbar`.
 
-```
-surface/canvas→stone/50   surface/card→white   surface/sunken→stone/100   surface/inverse→stone/900
-text/ink→stone/900   text/muted→stone/600   text/faint→stone/500   text/on-brand→white
-border/hairline→stone/200   border/strong→stone/300
-brand/tide→tide/700   brand/tide-bright→tide/500   brand/tide-text→tide/700   brand/tide-wash→tide/50
-state/draft→slate/500       state/draft-wash→slate/50
-state/staging→violet/500    state/staging-wash→violet/50
-state/canary→amber/500      state/canary-wash→amber/50
-state/running→tide/500      state/running-wash→tide/50
-state/production→green/600  state/production-wash→green/50
-state/paused→amber/600      state/paused-wash→amber/50
-state/error→red/600         state/error-wash→red/50
-```
+### Task A11 — Persistent AI affordances *(v2)*
 
-- [ ] **Step 3: Verify.** Run `get_variable_defs`. Expected: collection `color` with all primitives + semantic aliases; aliases resolve to the correct primitives (e.g. `surface/canvas` = `stone/50`).
-- [ ] **Step 4: Checkpoint.** Version `A1 · color variables`.
+**Figma target:** `Components` → section `Domain` → group `AI surfaces`.
 
-### Task A2 — Spacing, radii, elevation
-
-- [ ] **Step 1: Collection `space`** (numbers): `0=0, 2=2, xs=4, sm=8, md=12, lg=16, xl=24, 2xl=32, 3xl=48, 4xl=64`.
-- [ ] **Step 2: Collection `radius`** (numbers): `none=0, sm=6, md=8, lg=12, xl=16, full=9999`.
-- [ ] **Step 3: Effect styles** (elevation): `elev/1` = `0 1px 0 rgba(28,27,24,0.04)` + `0 1px 2px rgba(28,27,24,0.04)`; `elev/2` = `0 4px 8px -2px rgba(28,27,24,0.06)` + `0 12px 32px -4px rgba(28,27,24,0.12)`; `elev/pop` = `0 8px 24px -8px rgba(28,27,24,0.16)` + `0 24px 56px -12px rgba(28,27,24,0.18)`.
-- [ ] **Step 4: Verify.** `get_variable_defs` shows `space` + `radius`; `get_metadata` on a probe rect with `elev/2` shows the effect style applied.
-- [ ] **Step 5: Checkpoint.** Version `A2 · space/radius/elevation`.
-
-### Task A3 — Type styles (13)
-
-**Figma target:** text styles. Fonts: **Hanken Grotesk**, **Inter**, **Geist Mono** (ship from `design-system/fonts/`; if Figma lacks them, surface to user to install — do not substitute silently).
-
-- [ ] **Step 1: Create styles** (family · weight · size · line-height · tracking · default color):
-
-```
-Display    Hanken Grotesk 800 · 56 · 1.05 · -0.02em · text/ink
-H1         Hanken Grotesk 800 · 40 · 1.10 · -0.02em · text/ink
-H2         Hanken Grotesk 700 · 28 · 1.15 · -0.01em · text/ink
-H3         Hanken Grotesk 700 · 20 · 1.20 · -0.005em · text/ink
-Label      Hanken Grotesk 700 · 14 · 1.0 · text/ink
-Label/sm   Hanken Grotesk 700 · 12 · 1.0 · text/ink
-Eyebrow    Geist Mono 500 · 11 · 1.0 · +0.08em · UPPERCASE · brand/tide-text
-Body       Inter 400 · 14 · 1.5 · text/ink
-Body/sm    Inter 400 · 12 · 1.5 · text/muted
-Meta       Inter 400 · 12 · 1.0 · text/faint
-Mono       Geist Mono 400 · 13 · 1.5 · text/ink
-Mono/sm    Geist Mono 400 · 12 · 1.4 · text/muted
-Code       Geist Mono 400 · 12.5 · 1.55 · text/ink · bg surface/sunken · radius/sm · pad 1px 5px
-```
-
-- [ ] **Step 2: Verify.** `get_metadata` on a specimen frame with one text node per style. Expected: 13 named text styles applied; eyebrow renders UPPERCASE in mono teal.
-- [ ] **Step 3: Checkpoint.** Version `A3 · type styles`.
-
-### Task A4 — Primitive components, cluster 1 (controls)
-
-**Figma target:** page `Components`, section `Primitives`. Build as components with variants; bind every property to Phase-A variables. Reference the existing JSX in `design-system/ui_kits/conductor-app/components/primitives.jsx` and `_fig/.../components/*.jsx` for exact structure.
-
-- [ ] **Step 1: Button** — variants `variant = primary | secondary | ghost | destructive` × `state = default | hover | disabled`. Primary: fill `brand/tide`, text `text/on-brand`, radius/md, pad `space/sm space/md`, Label style. Hover: fill `tide/900`. Ghost: transparent → hover `surface/sunken`. Disabled: 40% opacity. Optional trailing `→` only on forward variant.
-- [ ] **Step 2: Input / Textarea / Select** — fill `surface/sunken`, 1px `border/hairline`, radius/md, Body text, placeholder `text/faint`; focus = 2px `brand/tide-bright` outline + 2px offset. Select shows chevron (Lucide `chevron-down`, 16, stroke 1.75).
-- [ ] **Step 3: Checkbox / Radio** — 16px, `border/strong`, checked fill `brand/tide`.
-- [ ] **Step 4: Segmented** (`SegmentedShadcnPS`) — pill track `surface/sunken`, active item `surface/card` + Label/sm; radius/sm items in radius/md track.
-- [ ] **Step 5: Verify.** `get_screenshot` of the Primitives section. Expected: all controls render with tokenized fills, hairline borders, correct radii; no raw hex (spot-check via `get_variable_defs` on a fill).
-- [ ] **Step 6: Checkpoint.** Version `A4 · controls`.
-
-### Task A5 — Primitive components, cluster 2 (containers & chrome)
-
-- [ ] **Step 1: Card** — fill `surface/card`, 1px `border/hairline`, radius/lg, pad `space/lg`, `elev/1`. No left stripe, no corner icon.
-- [ ] **Step 2: Badge** (`BadgeShadcnPS`) + **StateBadge** — dot (7–8px, `state/*`) + Label/sm on `state/*-wash` pill, radius/full. Variants `state = draft | capturing | triage | discovery | rationalization | rp-frozen | execution | delivered | backlog | archived`. Map: draft→draft, capturing→running, triage→staging, discovery→tide/staging, rationalization→staging, rp-frozen→production, execution→running, delivered→production, backlog→canary, archived→error.
-- [ ] **Step 3: Tabs**, **Tooltip** (`surface/inverse`, `text/on-brand`, radius/md), **Progress** (track `surface/sunken`, fill `brand/tide`).
-- [ ] **Step 4: TopBar** (66px, `surface/card`, hairline-bottom, wordmark left from `design-system/assets/conductor-wordmark.svg` — replace with "Intake" wordmark text in Label), **Sidebar** (256px, nav groups in Eyebrow caps: `CRIAR · MINHAS DEMANDAS · CAIXA · MÉTRICAS`), **Toast**.
-- [ ] **Step 5: DrawerShell** (`size = 480 | 560`, right-anchored, `elev/2`), **TakeoverShell** (full-screen, 720 centered column, 66px top bar + exit), **Stepper** (`type` variants) + **ProgressStepRow** (`state = todo | active | done`).
-- [ ] **Step 6: Verify.** `get_screenshot` of the chrome section. Expected: TopBar/Sidebar/Drawer/Takeover match Conductor proportions; StateBadge shows all 10 states as dot+wash pill.
-- [ ] **Step 7: Checkpoint.** Version `A5 · containers & chrome`.
-
-### Task A6 — Domain components, cluster 1 (readiness & confidence)
-
-**Figma target:** `Components` → section `Domain`.
-
-- [ ] **Step 1: ReadinessRing** — circular gauge (SVG arc), center = score % in H3 mono-ish (use H3), color ramp by value: `<30 state/error · 31–70 state/canary · 71–99 brand/tide-bright · 100 state/production`. Variants `state = building | near-gate | gateReady`. Include a `delta` overlay slot (e.g. `+26%`).
-- [ ] **Step 2: ConfidenceBar** — 10 segments; filled = round(confidence/10); color `≥90 state/production · 70–89 state/canary · <70 state/error`. Variant `compact = true|false` (compact hides "Confiança: N%" Meta label).
-- [ ] **Step 3: RequirementRow** — label (Label) · dimension chip (Meta) · ConfidenceBar(compact) · DispositionPill · blocksGate flag (small `state/error` dot when blocking & unresolved); `status = empty | low_confidence | resolved` variants; `addressable` boolean (hover shows DiscussAffordance, Step in A8).
-- [ ] **Step 4: DispositionPill** + **DispositionPicker** — pill variants `answered | inferred | assumption | discovery | deferred` (each its own muted color + Mono/sm label). Picker = a small menu listing the five with one-line helper copy each (e.g. assumption → "Estamos assumindo — marcar a validar").
-- [ ] **Step 5: Verify.** `get_screenshot`. Expected: ReadinessRing at 38/64/100 shows correct colors + delta; ConfidenceBar fills match value; RequirementRow shows all three statuses.
-- [ ] **Step 6: Checkpoint.** Version `A6 · readiness & confidence`.
-
-### Task A7 — Domain components, cluster 2 (value mirror & reflection)
-
-- [ ] **Step 1: ValueIndicatorMeter** — label (Impacto/Alcance/Urgência) · B/M/A segmented value · ConfidenceBar(compact) · justification (Body/sm); `addressable`.
-- [ ] **Step 2: TensionCallout** — `surface/sunken` card, radius/md, Lucide `sparkles` (16, `brand/tide`), Body italic provocation text. Seed copy: "Impacto alto + confiança baixa — que evidência te deixaria seguro?"
-- [ ] **Step 3: SemanticReflectionCard** — Eyebrow "O QUE ESTA DEMANDA É" · H3 one-line restatement · Body paragraph in her language; spans `addressable`.
-- [ ] **Step 4: KPICard** — Eyebrow label · big number (H2, Mono for numerics) · trend Sparkline slot · Meta caption. **Sparkline**, **Donut**, **FunnelChart** (5 bars 14→11→9→7→3, labels Meta).
-- [ ] **Step 5: TimelineStateRow** — dot + state label (Label) + actor + timestamp (Meta, compact like "2d"); `state = done | current | upcoming`.
-- [ ] **Step 6: Verify.** `get_screenshot`. Expected: components render with tokens; FunnelChart shows the 5-stage drop-off; TensionCallout uses sparkles + italic.
-- [ ] **Step 7: Checkpoint.** Version `A7 · value & reflection`.
-
-### Task A8 — Domain components, cluster 3 (conversation & input)
-
-- [ ] **Step 1: CopilotMessage** — variants `author = ai | user`; AI has small `brand/tide` avatar dot; `quotesBlock = true` variant renders a left-border quote card (the pinned block) above the reply text.
-- [ ] **Step 2: MultimodalComposer** — `surface/card`, 1px `border/hairline`, radius/lg: textarea + a row with mic button, attach button, and a pinned-blocks strip + send (primary, `→`). States via variants `mode = idle | typing | recording | transcribing | file-attached | one-block | multi-block`.
-- [ ] **Step 3: VoiceRecorder** (`state = idle | recording | transcribing | done | error`; recording shows a waveform bar row) and **UploadDropzone** (`state = idle | dragging | parsing | parsed | error`; parsed shows extraction summary "Li seu deck — 5 de 8 preenchidos, faltam 3").
-- [ ] **Step 4: BlockReferenceChip** (quote-card chip with source label + ✕) and **DiscussAffordance** (floating pill "Discutir com a IA" + Lucide `message-square-quote`, appears on hover/selection of any `addressable` element).
-- [ ] **Step 5: SourceCard** (`type = file | voice | note`; shows name, "contribuiu N campos", ConfidenceBar(compact); `addressable`) and **SourcesTray** (vertical list of SourceCards under Eyebrow "O QUE A IA SABE").
-- [ ] **Step 6: Verify.** `get_screenshot`. Expected: composer shows all 7 modes; CopilotMessage `quotesBlock` shows the quoted block; SourcesTray lists sources with contribution counts.
-- [ ] **Step 7: Checkpoint.** Version `A8 · conversation & input`.
-
-### Task A9 — Domain components, cluster 4 (panel, collab, scaffolding)
-
-- [ ] **Step 1: DemandPanel** shell — identity header (INT id in Mono · title in H2 · StateBadge · ReadinessRing · handoff CTA) + three-zone body slots (Conversation | Canvas | Sources). Layout variants `phase = drafting | handoff | monitoring | outcome | backlog | archived`.
-- [ ] **Step 2: CollectInboxItem** — PO question (Body) + answer field + DispositionPill; `state = pending | answered`.
-- [ ] **Step 3: CommentThread / CommentItem** — author dot + Body + Meta timestamp, reply field; `resolved = true|false`.
-- [ ] **Step 4: EscalationModal** (reason select + justification textarea + Escalar primary), **TourBanner** (`surface/sunken`, 3-item checklist, "Entendi, ocultar" ghost), **EvidenceChip**, **StakeholderRow** (name · papel · interesse · influência B/M/A).
-- [ ] **Step 5: Verify.** `get_screenshot` of full Domain section. Expected: DemandPanel shell shows the header + three labelled zones; all collab/scaffold components present.
-- [ ] **Step 6: Checkpoint.** Version `A9 · panel & scaffolding`.
-
-### Task A10 — Foundations specimen + audit
-
-- [ ] **Step 1:** Build a single `Foundations` page specimen frame: color swatches (grouped), type ladder (13 styles), spacing/radius scales, and a component contact sheet.
-- [ ] **Step 2: Token audit.** Walk every component with `get_metadata`; confirm fills/strokes/spacing/radii reference variables (no raw hex outside variable defs). Fix any literal value found.
-- [ ] **Step 3: Checkpoint.** Version `A10 · foundations complete`.
+- [ ] **Step 1: AIImpactBanner.** Structure (full content width on the page it appears, height 56):
+  - Anchor: `radius/md`, 1px `border/hairline` with subtle tide tint, padding 12 16, background `linear-gradient(90deg, var(--tide-wash) 0%, var(--accent-wash) 100%)`.
+  - Left: 36×36 rounded square `brand/tide-bright` fill with Zap icon (white, 16).
+  - Middle (flex-1): Eyebrow "IA IMPACT" (Mono, `brand/tide-text`) · Label (Hanken 700/14) of dynamic copy ("18h economizadas · 65% automatizado neste portfólio" — context-driven).
+  - Right (flex-end): two stat blocks separated by a 1px hairline, each: big number (H3, mono numerics, `brand/tide-text`) over Meta caption (`text/muted`).
+  - Variants: `scope = portfolio | demand | review`, drives default copy and the second stat (portfolio → hoursSaved + automatedPct; demand → hoursSaved + reqsPrefilled; review → hoursSaved + automatedPct).
+- [ ] **Step 2: GlobalChatSheet.** Right-anchored sheet, 420 wide × full viewport height. Structure:
+  - Header (72 tall): 32×32 rounded `brand/tide-wash` square with Sparkles icon (`brand/tide-text`, 16) · Label "Assistente IA" + Eyebrow "CONTEXTO: {current-route-label}" (e.g. "CONTEXTO: DASHBOARD" / "CONTEXTO: INT-2026-014") · ✕ close button on the right.
+  - Divider (1px `border/hairline`).
+  - Body (scrollable):
+    - Empty-state variant: Sparkles icon (32, `brand/tide-bright`, centered top) · Body "Como posso ajudar?" · Body/sm "Tenho contexto completo desta tela." · 3 suggestion buttons (`surface/sunken`, `border/hairline`, padding 12 16, left-aligned, Body/sm): "Resuma o status da demanda", "Quais ADRs estão envolvidos?", "Qual o ROI estimado?".
+    - Conversation variant: `CopilotMessage` ai/user/quotesBlock stack (reuse from A8).
+  - Pinned-blocks strip (above composer, only when ≥1 block pinned): horizontal scroll of `BlockReferenceChip`s.
+  - Composer footer: `MultimodalComposer` (reuse from A8).
+  - Variants: `state = closed | open-empty | open-conversation`; `pinnedBlocks = 0 | 1 | many`.
+- [ ] **Step 3: TopBarNotifications.** Bell icon + dropdown. Structure:
+  - **Bell trigger** (in TopBar): 32×32 ghost button, Lucide `bell` (18, `text/muted`) · top-right badge: 16×16 rounded-full, `state/error` fill + count number (Meta white, mono) when unread > 0; hidden when 0.
+  - **Dropdown** (360 wide, max-height 480, anchored under bell):
+    - `surface/card`, `border/hairline`, `radius/md`, `elev/pop`.
+    - Header (Eyebrow "NOTIFICAÇÕES" + count of unread + "Marcar todas como lidas" ghost link).
+    - Divider.
+    - List of up to 5 `NotificationRow` items: 8px dot (unread → `brand/tide-bright`; read → `text/faint`) · Body two-line clamp · Meta timestamp ("1h" / "3h" / "1d").
+    - Footer link "Ver todas" → navigates to J5.1.
+  - Variants on the dropdown: `count = empty | 1 | 5+`.
+- [ ] **Step 4: Verify.** `get_screenshot` of all three components. Expected: AIImpactBanner reads as "the AI's badge of honor" without being noisy; GlobalChatSheet header shows context; TopBarNotifications dropdown is dense but legible.
+- [ ] **Step 5: Checkpoint.** Version `A11 · persistent AI affordances`.
 
 ---
 
-## Phase B — Journeys (page: Screens)
+## Phase B — Journeys refactor *(v2)*
 
-> Load **figma:figma-generate-design** for all of Phase B. Each frame is desktop **1440 wide**, `surface/canvas` background, TopBar + Sidebar chrome, named `J{n}.{m} · {Title}`. Assemble from Phase-A components only. Use the seed scenario copy verbatim.
+> Load **figma:figma-generate-design** for every screen task. Each frame is desktop **1440 wide**, `surface/canvas` background, TopBar + Sidebar chrome. Named `J{n}.{m} · {Title}`. v2-only: TopBar now includes `TopBarNotifications` and a `Button variant=ghost icon=sparkles label="Discutir com a IA"` to the right of the breadcrumb, before the avatar dropdown.
 
-### Task B1 — J1 Entry (3 frames)
+### Task B0 — Chrome update *(v2)*
 
-- [ ] **Step 1:** `J1.1 · Entrar` (sign-in: Intake wordmark, email/senha inputs, primary "Entrar"). `J1.2 · Landing → Dashboard` (redirect state). `J1.3 · Onboarding` (Dashboard with TourBanner: "Crie uma demanda + PDF/voz" · "Enriqueça as pendências" · "Acompanhe o impacto").
-- [ ] **Step 2: Verify.** `get_screenshot` of all 3. Expected: chrome consistent, tour banner dismissible affordance visible.
-- [ ] **Step 3: Checkpoint.** Version `B1 · J1 entry`.
+- [ ] **Step 1: Update TopBar component.** Add the "Discutir com a IA" button (right of breadcrumb area) and the `TopBarNotifications` bell + badge (right of that, before the avatar). Keep the existing wordmark/breadcrumb/avatar.
+- [ ] **Step 2: Verify.** `get_screenshot` of the TopBar specimen. Expected: clear horizontal rhythm wordmark → breadcrumb → chat button → notifications bell → avatar.
+- [ ] **Step 3: Checkpoint.** Version `B0 · TopBar v2`.
 
-### Task B2 — J2 Dashboard (2 frames)
+### Task B2 — J2 Dashboard (refactored) *(v2)*
 
-- [ ] **Step 1:** `J2.1 · Dashboard` — KPICards (R$ 412k/ano · 14 submetidas · 3 em execução · 64% conversão · 8,5d lead time · 78% aceite 1ª versão) + FunnelChart (14→11→9→7→3) + "Minhas demandas" list (StateBadge + ReadinessRing-mini + last activity; include one Draft, one Backlog, one Archived row) + Collect-inbox badge ("2 perguntas do PO") + Notifications rail + "Nova demanda" primary CTA. `J2.2 · Dashboard vazio` (empty state: "Nenhuma demanda ainda — crie a primeira para começar").
-- [ ] **Step 2: Verify.** `get_screenshot`. Expected: KPIs + funnel + mixed-state list render; empty state uses unit-of-work copy, not "comece agora!".
-- [ ] **Step 3: Checkpoint.** Version `B2 · J2 dashboard`.
+- [ ] **Step 1: DELETE the previous J2.1 and J2.2 frames** from the Screens page (record nodeIDs first from Task 0 audit).
+- [ ] **Step 2: Build new `J2.1 · Dashboard`.** Vertical rhythm (see spec §8):
+  1. TopBar + Sidebar chrome (uses B0).
+  2. Header row (32 margin top, 1184 content width centered): Eyebrow "PAINEL DO SUBMITTER" · H1 "Bom dia, Carlos" · Body/sm "Você tem 1 demanda ativa, 8 entregues no ano." · primary `Button label="Nova Demanda" icon=plus` top-right.
+  3. AIImpactBanner (scope=portfolio): "18h economizadas · 65% automatizado neste portfólio".
+  4. HeroMetric (badge="Pay-justifying KPI"): label "Impacto financeiro das suas demandas em produção (YTD)" · value "R$ 412k" · trend "+R$ 78k projetados nesta demanda" (up) · sub "8 entregues · 3 com ROI confirmado · 1 em andamento" · sparkline `[120, 145, 180, 230, 270, 340, 380, 412]` · accent=submitter.
+  5. CompactKPI grid (3 cols × 2 rows): Demandas ativas (1) · Aceitas no ano (8/14, sub "57% de aceite", accent=success) · Tempo médio até congelamento ("6,2" dias, trend "-2,1d vs média do mercado", up) · Horas que você não gastou ("18h", accent=ai, sub "vs preencher formulários") · ROI médio realizado ("4,2x", accent=success, sub "entre 8 entregas") · Inadimplência projetada (sub "redução de 18% para 6%", accent=success).
+  6. Showcase card: gradient `tide-wash → violet-50`, Award icon left, Eyebrow "VEJA UM RP COMPLETO", H3 "RP-2026-000 · Notificações WebSocket", Body/sm "Exemplo entregue de outro Submitter: 17 seções, 5 ADRs, score 96%, NPS 9.4. Cada afirmação tem origem rastreável.", trailing arrow chip.
+  7. "Demandas recentes" preview: 3 rows (1 In progress, 1 Draft, 1 Delivered) + ghost "Ver todas" link → Minhas Demandas route.
+- [ ] **Step 3: Build new `J2.2 · Dashboard vazio`.** Same chrome; HeroMetric in `state=empty` with helper Body/sm "Crie sua primeira demanda para começar a medir impacto."; CompactKPI grid hidden; big centered `Button size=lg label="Nova Demanda" icon=plus`; AIImpactBanner hidden (no value to show yet).
+- [ ] **Step 4: Verify.** `get_screenshot` of J2.1 and J2.2. Expected: J2.1 has one unmistakable number (R$ 412k), the AI's contribution is visible above it, CompactKPI feels supportive not competing, no Funnel/Notifications rail clutters the right side, sidebar's "Minhas Demandas" link is the path to the full list.
+- [ ] **Step 5: Checkpoint.** Version `B2 v2 · J2 dashboard`.
 
-### Task B3 — J3 Create (light) (3 frames)
+### Task B3 — J3 Create (refactored) *(v2)*
 
-- [ ] **Step 1:** `J3.1 · Nova demanda` (DrawerShell 560: título input, problema one-line textarea, Origem select [Cliente/Interno/Mercado/Suporte], Tipo select; footer with UploadDropzone + VoiceRecorder + "Salvar rascunho" primary). `J3.2 · IA lendo` (parsing state → "Salvo como rascunho · 5 campos pré-preenchidos do seu deck"). `J3.3 · Abre o Demand Panel (Draft)` (transition into J4.1).
-- [ ] **Step 2: Verify.** `get_screenshot`. Expected: create is light (4 fields + optional artifact), not the full canvas; ends in Draft.
-- [ ] **Step 3: Checkpoint.** Version `B3 · J3 create`.
+- [ ] **Step 1: DELETE the previous J3.1 and J3.2 frames** (record nodeIDs first).
+- [ ] **Step 2: Build new `J3.1 · Nova demanda`.** `TakeoverShell` 720 column centered, surface/canvas background, TopBar with breadcrumb "Demandas / Nova" + Exit ✕:
+  - H1 "Nova Demanda".
+  - Body "Conte como se estivesse falando com um colega. A plataforma estrutura o resto." (`text/muted`).
+  - Card (`surface/card`, `border/hairline`, `radius/lg`, padding 24): Eyebrow "O QUE ACONTECEU?" + Textarea 8 rows (placeholder "Ex: Conta enterprise top-3 ameaça não renovar sem SSO/SAML…").
+  - Sub-section in same card: Eyebrow "OU ANEXE ALGO QUE AJUDE" + two ghost buttons side-by-side: `Subir documento` (paperclip icon) + `Gravar áudio` (mic icon).
+  - Footer (right-aligned): ghost "Cancelar" + primary `Button label="Salvar rascunho" icon=arrow-right` (enabled when textarea non-empty OR an artifact attached).
+  - **NO** "Título" input, **NO** Origem select, **NO** Tipo select — these are inferred in J3.2.
+- [ ] **Step 3: Build new `J3.2 · IA lendo`.** Same TakeoverShell, content swaps to the process view:
+  - Animation phase: `Loader2` 32px spinning (`brand/tide-bright`) centered, H2 "Processando…" + three vertically-stacked `ProgressStepRow` items (`state = done | active | upcoming`):
+    1. "Lendo seu texto" — done.
+    2. "Analisando estrategia-monetizacao.pdf" — active.
+    3. "Identificando informações úteis para a demanda…" — upcoming.
+  - Success phase (same frame, second variant via `phase = processing | done`): 64×64 `surface/card` rounded square with green check (`state/production`), H2 "Processamento concluído", Body "Li seu documento e identifiquei 5 informações úteis. Vou usar para adiantar o preenchimento. Faltam apenas 3 pendências pra você responder." + primary `Button label="Continuar" size=lg icon=arrow-right` centered.
+- [ ] **Step 4: Verify.** `get_screenshot` of J3.1 and J3.2 (both phases). Expected: J3.1 is a single rich textarea + optional artifact — feels like "tell me a story", not a form; J3.2 makes the AI's work visible step-by-step then states the contribution explicitly.
+- [ ] **Step 5: Checkpoint.** Version `B3 v2 · J3 create`.
 
-### Task B4 — J4 Demand Panel: Drafting/Enriching (frames J4.1–J4.7)
+### Task B4-J4.1 — Demand Panel: Drafting (refactored) *(v2)*
 
-- [ ] **Step 1:** `J4.1 · Painel (Rascunho)` — DemandPanel `phase=drafting`: header (INT-2026-014 · título · StateBadge=draft · ReadinessRing=38% · "Enviar ao PO" disabled). Conversation zone (CopilotMessage ai: "Li seu deck. Identifiquei 5 de 8. Quem sente mais essa dor?") + MultimodalComposer(idle). Canvas zone (8 RequirementRows: 5 low_confidence/resolved, 3 empty; ValueIndicatorMeters; SemanticReflectionCard). Sources zone (SourcesTray: deck.pdf "contribuiu 5 campos").
-- [ ] **Step 2:** `J4.2 · Composer states` — five frames or one frame with the composer variants shown: typing, recording (waveform), transcribing, file-attached, one-block-pinned, multi-block-pinned.
-- [ ] **Step 3:** `J4.3 · Resposta citando bloco` — CopilotMessage `quotesBlock` quoting the pinned RequirementRow "Quem é impactado", then answering.
-- [ ] **Step 4:** `J4.4 · Turno de resposta` — after she answers, ReadinessRing animates 38%→64% with `+26%` delta; the "Alcance" RequirementRow flips to resolved.
-- [ ] **Step 5:** `J4.5 · Não sei → disposition` — DispositionPicker open on "Impacto de negócio"; three result frames: `assumption` ("Assumindo R$ 200k ARR — a validar"), `discovery` ("Ninguém sabe ainda — Discovery time-boxed 5d"), `deferred` ("Dono: CFO").
-- [ ] **Step 6:** `J4.6 · Espelho RICE + tensão` — ValueIndicatorMeters (Impacto Alto / Alcance Médio / Urgência Alta) + TensionCallout + a resolution turn that raises confidence.
-- [ ] **Step 7:** `J4.7 · Sub-vistas` — Evidência/Sources detail, Stakeholders (StakeholderRow list), Constraints.
-- [ ] **Step 8: Verify.** `get_screenshot` of J4.1, J4.4, J4.5(assumption). Expected: three-zone panel reads as a conversation+canvas+memory; readiness delta visible; disposition routes "não sei" without blocking.
-- [ ] **Step 9: Checkpoint.** Version `B4 · J4 enriching`.
+> Only J4.1 is refactored. J4.2 through J4.18 remain valid from v1 of this plan and stay untouched.
 
-### Task B5 — J4 Demand Panel: Handoff (frames J4.8–J4.13)
+- [ ] **Step 1: DELETE the previous J4.1 frame** (record nodeID first). Also delete the previously-instantiated header CTA "Enviar ao PO" affordance from the canvas (it is now living inside `GateToolbar`).
+- [ ] **Step 2: Build new `J4.1 · Painel (Rascunho)`.** DemandPanel `phase=drafting`, 1280 wide content (sidebar 160):
+  - **Identity header** (1216 wide, 200 tall, surface/card, border-bottom hairline, padding 24 32):
+    - Top row: INT-2026-014 (Mono 13, `text/faint`) · separator · `StateBadge` (variant=draft, label "Em Captura") · flex spacer · `ReadinessRing` 96×96 (state=building, score=38%, delta-slot empty in initial state, populated to "+26%" in J4.4).
+    - Title H2: "Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."
+    - **AIImpactBanner** (scope=demand, embedded inside the header card, full width): "12h economizadas nesta demanda · 5 de 8 requisitos pré-preenchidos · 3 fontes mineradas".
+    - No CTA here — moved to GateToolbar.
+  - **Three-zone body** (1280 wide, fills remaining height minus 66 for GateToolbar):
+    - **Left: Conversation zone** (380 wide, `surface/card`, border-right hairline, padding 20). Eyebrow "CONVERSA" · `CopilotMessage` ai (opening): "Li seu deck e o e-mail da renovação. Identifiquei 5 de 8 informações. Pra começar: quem sente mais essa dor — quais contas ou segmentos?" · spacer · `MultimodalComposer` (mode=idle). This zone shares state with GlobalChatSheet — when the user opens the sheet from anywhere else, it shows the same conversation.
+    - **Center: Canvas zone** (619 wide, `surface/canvas`, padding 20). Vertical stack:
+      1. Eyebrow "CANVAS".
+      2. **PendencyGroup tone=blocking defaultOpen=true count=3** — header "BLOQUEIAM ENVIO · 3" with state/error dot; body holds 3 `RequirementRow`s for Alcance / Constraints / Stakeholders (each: label · dimension chip · ConfidenceBar (empty, 0/10 segments) · DispositionPill `—` · blocksGate dot=state/error).
+      3. `SemanticReflectionCard` — Eyebrow "O QUE ESTA DEMANDA É" · H3 "Uma conta enterprise estratégica ameaça não renovar sem SSO/SAML e exportação de log de auditoria." · divider · Body "É risco de receita e retenção — não um pedido de funcionalidade.".
+      4. `ValueIndicatorMeter` Impacto — value=Alto, confidence=62%, justification "Afeta todos os usuários ativos mensalmente."
+      5. `ValueIndicatorMeter` Alcance — value=Médio, confidence=45%, justification "Estimativa baseada em dados de uso Q3." (addressable=false in this initial frame).
+      6. `ValueIndicatorMeter` Urgência — value=Alto, confidence=78%, justification "SLA comprometido sem ação este trimestre.".
+      7. **PendencyGroup tone=pending defaultOpen=true count=1** — header "EM DISCOVERY / PREMISSA / DELEGADO · 1" with state/canary dot; body holds 1 `RequirementRow` for Impacto de negócio with DispositionPill=Premissa and a sub-note (left-border tide stripe, Body/sm italic): "Assumindo R$ 2,1M de ARR combinado em risco — a validar com Vendas.".
+      8. **PendencyGroup tone=resolved defaultOpen=false count=4** — header "RESPONDIDAS · 4" with state/production dot, collapsed; body (hidden in initial view) holds 4 `RequirementRow`s for Enunciado / Originador / Urgência / Evidência (each DispositionPill=Respondido, ConfidenceBar 9/10).
+    - **Right: Sources zone** (279 wide, `surface/sunken`, border-left hairline, padding 20). Eyebrow "FONTES" · `SourcesTray` with 3 `SourceCard`s: deck-q2-2026.pdf (contribuiu 5 campos · conf alta), e-mail-renovacao.eml (contribuiu 2 campos · conf média), call-com-conta.m4a (contribuiu 1 campo · conf baixa).
+  - **GateToolbar (sticky bottom, 1216 wide, 66 tall, anchored at viewport bottom inside the panel)**: gateState=pending, copy "Faltam 3 requisitos bloqueantes sem disposição honesta — responda, marque como Premissa/Discovery/Delegado, ou ajuste o escopo." (left); Buttons "Revisar tudo" (ghost) + "Enviar ao PO" (primary, disabled, tooltip "Atenda os bloqueantes acima primeiro") (right).
+- [ ] **Step 3: Verify.** `get_screenshot` of J4.1. Expected: the page reads top-to-bottom as identity → AI contribution → conversation+canvas+memory; the canvas is grouped by urgency (red on top expanded, amber middle expanded, green bottom collapsed); the GateToolbar at the bottom explains *why* the CTA is disabled in business language.
+- [ ] **Step 4:** Audit the v1 J4.4 frame to update it consistently with the new J4.1: when the answer turn lands, the `Alcance` RequirementRow migrates from PendencyGroup `blocking` to `resolved`; the blocking count drops to 2; the resolved count rises to 5; the ReadinessRing animates 38%→64% with `+26%`. (Frame stays — only the contents inside it are aligned to the new grouping. Do NOT delete J4.4.)
+- [ ] **Step 5: Checkpoint.** Version `B4 v2 · J4.1 panel drafting`.
 
-- [ ] **Step 1:** `J4.8 · Salvar e sair` (Draft persists; toast "Rascunho salvo" → back to dashboard Draft row). `J4.9 · Caixa de coleta` (CollectInboxItems: PO asks "Quem é o dono das escaladas de suporte?" + "Quantifique a economia de horas"; she answers inline). `J4.10 · Comentários` (CommentThread on "Impacto de negócio"). `J4.11 · Escalar / bloqueio` (EscalationModal).
-- [ ] **Step 2:** `J4.12 · Revisão pré-envio` — readiness 100%/gateReady; read-only Intake Record (INT-2026-014) summary; "Enviar ao PO" now enabled. `J4.13 · Confirmar handoff` → success ("Enviado ao PO · aguardando triagem").
-- [ ] **Step 3: Verify.** `get_screenshot` of J4.9 and J4.12. Expected: collect-inbox answers async (no full re-open); review gate enables handoff only at gateReady.
-- [ ] **Step 4: Checkpoint.** Version `B5 · J4 handoff`.
+### Task B8 — J5 Cross-cutting (refactored) *(v2)*
 
-### Task B6 — J4 Demand Panel: Monitoring (frames J4.14–J4.15)
-
-- [ ] **Step 1:** `J4.14 · Timeline` — DemandPanel `phase=monitoring`: TimelineStateRows (Capturada→Em Triagem→Em Racionalização→RP Congelado→Em Execução→Entregue), with a Discovery loop and one PM rebound shown; current state highlighted. `J4.15 · O que o PO fez` — triage outcome (Product Ready) + a diff card of PO edits reflected back + notification.
-- [ ] **Step 2: Verify.** `get_screenshot`. Expected: she can see where the demand is and what the PO changed (read-mostly).
-- [ ] **Step 3: Checkpoint.** Version `B6 · J4 monitoring`.
-
-### Task B7 — J4 Demand Panel: Outcome + Closure (frames J4.16–J4.18)
-
-- [ ] **Step 1:** `J4.16 · Projetado vs realizado` — DemandPanel `phase=outcome`: a table/Donut of projected vs measured at 30/60/90d; annual impact R$ 412k projetado vs medido. `J4.17 · Backlog` (`phase=backlog`: deferred + unlock trigger "Orçamento Q3 liberado"). `J4.18 · Arquivada/Rejeitada` (`phase=archived`: reason + justification).
-- [ ] **Step 2: Verify.** `get_screenshot`. Expected: outcome closes metrics camada 3; closure states explain why (not a dead end).
-- [ ] **Step 3: Checkpoint.** Version `B7 · J4 outcome & closure`.
-
-### Task B8 — J5 Cross-cutting (4 frames)
-
-- [ ] **Step 1:** `J5.1 · Notificações` (NotificationsScreen: status updates, PO questions, escalations; mark-read). `J5.2 · Comentários (inbox)` (aggregated CommentThreads across demands). `J5.3 · Copilot afixado` (collapsed + expanded persistent copilot affordance). `J5.4 · Estados vazios & erro` (global empty + error/parse-error).
-- [ ] **Step 2: Verify.** `get_screenshot`. Expected: cross-cutting surfaces consistent with chrome.
-- [ ] **Step 3: Checkpoint.** Version `B8 · J5 cross-cutting`.
+- [ ] **Step 1: DELETE the previous J5.1 and J5.3 frames**.
+- [ ] **Step 2: Build new `J5.1 · Notificações`** as the "full archive" page (reachable from "Ver todas" in the TopBar bell dropdown).
+  - TopBar + Sidebar chrome (sidebar item "Notificações" highlighted only if reachable from sidebar — in v2 it is reachable via TopBar primarily; sidebar entry optional and lower-priority).
+  - H1 "Notificações".
+  - Filter chips row: `Não resolvidos` (active by default) · `Todos`.
+  - Sections: Eyebrow "RECENTES" + 3 NotificationRow items (PO perguntou; INT-2026-014 avançou para Em Captura; RP-041 foi congelado pelo Produto) · Eyebrow "ANTERIORES" + 2 NotificationRow items (Discovery encerrado; INT-2026-004 entregue).
+  - Footer ghost link "Marcar todas como lidas".
+- [ ] **Step 3: Build new `J5.1.1 · TopBar Notifications dropdown` (new frame)**.
+  - Render J2.1 Dashboard as the backdrop (small scrim, 30% black).
+  - Position the `TopBarNotifications` dropdown (360 wide, count=3 unread) anchored under the bell in TopBar.
+  - Show the same 3 recent items as J5.1 + footer link "Ver todas".
+- [ ] **Step 4: Build new `J5.3 · Chat global sobre qualquer tela`** — specimen demonstrating D11.
+  - Render J2.1 Dashboard as the backdrop (small scrim, 30% black).
+  - Render `GlobalChatSheet` (state=open-empty) on the right side, showing context "DASHBOARD" and the 3 quick suggestions.
+- [ ] **Step 5: Verify.** `get_screenshot` of J5.1, J5.1.1, J5.3. Expected: J5.1 is a calm archive; J5.1.1 shows the daily-driver triage right where it lives; J5.3 makes obvious that chat is summonable from anywhere.
+- [ ] **Step 6: Checkpoint.** Version `B8 v2 · J5 cross-cutting`.
 
 ---
 
-## Phase C — Wiring (page: Prototype)
+## Phase C — Wiring refactor *(v2)*
 
-> Load **figma:figma-use** for interaction wiring.
+### Task C1-bis — Golden path update *(v2)*
 
-### Task C1 — Golden path flow
+- [ ] **Step 1: Re-wire the golden path** to account for the refactored frames: J1.1 → J1.3 → J2.1 (new) → (Nova demanda) → J3.1 (new) → J3.2 (new) → J4.1 (new) → J4.4 (aligned) → J4.6 → J4.12 → J4.13 → J4.14 → J4.16. Use `on tap` → `navigate to`, ease-standard, 200–320ms.
+- [ ] **Step 2: Verify.** Open Present mode (or `get_screenshot` per node) and click through. Expected: uninterrupted end-to-end path, no dead hotspots; the new B-frames are reached.
+- [ ] **Step 3: Checkpoint.** Version `C1 v2 · golden path`.
 
-- [ ] **Step 1:** Wire the happy path with `on tap` → `navigate to`, ease-standard, 200–320ms: J1.1→J1.3→J2.1→(Nova demanda)→J3.1→J3.2→J4.1→J4.4→J4.6→J4.12→J4.13→J4.14→J4.16.
-- [ ] **Step 2: Verify.** Open Present mode (or `get_screenshot` per node) and click through. Expected: uninterrupted end-to-end path, no dead hotspots.
-- [ ] **Step 3: Checkpoint.** Version `C1 · golden path`.
+### Task C2-bis — New branch demos *(v2)*
 
-### Task C2 — Branch demos + interactive components
+- [ ] **Step 1: Global chat demo.** Wire the "Discutir com a IA" button in the TopBar (B0) to navigate from J2.1 → J5.3 (chat sheet open over Dashboard). Wire the ✕ on the sheet back to J2.1.
+- [ ] **Step 2: Notifications demo.** Wire the bell icon in TopBar to navigate from J2.1 → J5.1.1 (dropdown frame). Wire "Ver todas" in the dropdown → J5.1.
+- [ ] **Step 3: PendencyGroup migration demo on J4.1.** Make the `RequirementRow` for `Alcance` interactive (when tapped, it migrates from `blocking` group to `resolved` group; counts update; the ReadinessRing reaches its 64% state with delta "+26%"). Use Figma interactive components / variant swap on interaction.
+- [ ] **Step 4: GateToolbar enable demo.** Wire a flow that demonstrates the GateToolbar switching from `pending` to `ready` when all bloqueantes resolve (terminal state of the J4 enrich path leading into J4.12).
+- [ ] **Step 5: Verify.** Click each branch. Expected: branches return cleanly; component states animate on interaction.
+- [ ] **Step 6: Checkpoint.** Version `C2 v2 · branches & interactions`.
 
-- [ ] **Step 1:** Wire branch demos: disposition fork (J4.4→J4.5 → each of assumption/discovery/deferred → back), tension resolution (J4.6), PO rebound (J4.14→J4.15), and the save-and-return loop (J4.8→J2.1 Draft row→J4.1).
-- [ ] **Step 2:** Make these interactive components (variant swap on interaction): MultimodalComposer modes, ConfidenceBar fill, ReadinessRing 38→64→100 with delta.
-- [ ] **Step 3: Verify.** Click each branch + trigger each interactive component. Expected: branches return cleanly; component states animate on interaction.
-- [ ] **Step 4: Checkpoint.** Version `C2 · branches & interactions`.
+### Task C3-bis — Final review pass *(v2)*
 
-### Task C3 — Final review pass
-
-- [ ] **Step 1:** Full screenshot sweep (`get_screenshot` per frame) for visual consistency: tokenized colors, hairline borders, no emoji, Tide signal-only, status-as-dot, type ladder correct.
+- [ ] **Step 1:** Full screenshot sweep (`get_screenshot` per frame) for visual consistency post-refactor: tokenized colors, hairline borders, no emoji, Tide signal-only, status-as-dot, type ladder correct, **HeroMetric is the singular gravity center of J2.1**, **AIImpactBanner is present on J2.1 / J4.1 / J4.12**, **GlobalChatSheet button is present in TopBar of every screen**, **TopBarNotifications bell is present in TopBar of every screen**, **GateToolbar is at the bottom of J4.1 (not a header CTA)**, **PendencyGroups replace the flat 8-row list on J4.1**, **no Origem/Tipo selects on J3.1**.
 - [ ] **Step 2:** Fix any drift inline.
-- [ ] **Step 3:** Produce a shareable Present link; note the entry node (J1.1).
-- [ ] **Step 4: Checkpoint.** Version `C3 · prototype v1`.
+- [ ] **Step 3:** Verify deleted frames stay deleted (J2.1 old, J2.2 old, J3.1 old, J3.2 old, J4.1 old, J5.1 old, J5.3 old).
+- [ ] **Step 4:** Produce a shareable Present link; note the entry node (J1.1).
+- [ ] **Step 5: Checkpoint.** Version `C3 v2 · prototype v2`.
 
 ---
 
 ## Self-Review (run before execution)
 
-**Spec coverage (§ → task):**
-- §5.1 variables → A1, A2 ✓ · §5.2 type → A3 ✓ · §5.3 primitives → A4, A5 ✓ · §5.4 domain components → A6–A9 ✓
-- §6 input strategy (type/upload/voice + Sources tray) → A8 (composer/recorder/dropzone/SourcesTray) + B3/B4 ✓
-- §7 block-reference pattern → A8 (DiscussAffordance, BlockReferenceChip, CopilotMessage quotesBlock) + B4.3 ✓
-- §8 journeys: J1→B1 · J2→B2 · J3→B3 · J4 enrich→B4 · J4 handoff→B5 · J4 monitor→B6 · J4 outcome/closure→B7 · J5→B8 ✓
-- §10 wiring (golden path, branch demos, interactive components) → C1, C2 ✓
-- D8 create/enrich decoupling → B3 + B4 + save-return loop in C2 ✓
+**Spec coverage (spec v2 § → task):**
+- D9 (entry tone) → B3 v2 ✓
+- D10 (AI visibility) → A11 (AIImpactBanner) + B2 v2 + B4 v2 ✓
+- D11 (global chat) → A11 (GlobalChatSheet) + B0 + B8 (J5.3) + C2-bis (global chat demo) ✓
+- D12 (notifications in TopBar) → A11 (TopBarNotifications) + B0 + B8 (J5.1, J5.1.1) + C2-bis (notifications demo) ✓
+- D13 (pay-justifying KPI) → A7-bis (HeroMetric badge slot) + B2 v2 ✓
+- §4.6 (urgency-grouped lists) → A9-bis (PendencyGroup) + B4-J4.1 v2 ✓
+- §4.7 (gate explains itself) → A9-bis (GateToolbar) + B4-J4.1 v2 ✓
+- §4.8 (AI value shown not implied) → A11 (AIImpactBanner) + all v2 screens ✓
+- §5.4 new/revised components → A7-bis + A9-bis + A11 ✓
+- §8 refactored frames → B2 (J2.1/J2.2) + B3 (J3.1/J3.2) + B4-J4.1 + B8 (J5.1/J5.1.1/J5.3) ✓
+- §10 new branch demos (global chat, notifications, pendency-group migration) → C2-bis ✓
 
-**Placeholder scan:** No "TBD/TODO". Token values, type specs, and all visible copy are concrete (seed scenario). `use_figma` JS intentionally deferred to the figma:* skills per the header (not a placeholder — a skill boundary).
+**Placeholder scan:** No "TBD/TODO". Token values, type specs, and all visible copy are concrete (seed scenario). `use_figma` JS intentionally deferred to the figma:* skills.
 
-**Type/name consistency:** Component names match between A-definitions and B-usage (ReadinessRing, ConfidenceBar, RequirementRow, DispositionPicker, MultimodalComposer, DemandPanel, CollectInboxItem, FunnelChart, StateBadge, TimelineStateRow). StateBadge states (A5.2) match the lifecycle used in B6 timeline and B2 list.
+**Type/name consistency:** New components (HeroMetric, CompactKPI, PendencyGroup, GateToolbar, AIImpactBanner, GlobalChatSheet, TopBarNotifications) are referenced in Phase B with matching names.
 
-**Known dependency/risk:** Phase A/B require a live Figma MCP connection (Task 0 Step 1) and the three font families installed in Figma (A3). Both are surfaced as STOP conditions, not assumptions.
+**Do-not-resurrect (from spec §11 v2):** the flat 8-RequirementRow list on J4.1 · the header CTA on J4.1 · the Notifications rail on J2.1 · the per-screen Copilot pill · the Origem/Tipo selects on J3.1 · the generic KPI row component used as hero on J2.1.
 
-**Do-not-resurrect (from spec §11):** separate per-section pendency modals, PlaceholderDashboards, DrillDownModal, RationalizationsListScreen, ShowcaseRPScreen — none appear in any task. ✓
+**Delete-when-replaced enforcement:** Task 0 records nodeIDs of replaced frames; B2 / B3 / B4-J4.1 / B8 explicitly delete them before building the new ones. C3-bis Step 3 verifies the deletions stuck.

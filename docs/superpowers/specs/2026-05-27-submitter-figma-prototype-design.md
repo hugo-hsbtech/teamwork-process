@@ -1,7 +1,9 @@
 # Spec — Submitter Figma Prototype ("Intake")
 
-> **Status:** Draft for review · **Date:** 2026-05-27 · **Author:** hugo (+ Claude)
+> **Status:** Draft v2 (revised 2026-05-27 PM) · **Date:** 2026-05-27 · **Author:** hugo (+ Claude)
 > **Type:** Design spec for a high-fidelity, clickable Figma prototype of the Submitter persona's end-to-end experience, built on the Conductor "Paper & Signal" design system. Feeds an implementation (build) plan.
+
+> **Revision note (v2):** The spec's conceptual model (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, semantic reflection, RICE tensions, projected-vs-realized) is **kept intact** — it is more mature than any prototype. What this revision changes is the **visual coreography and inventory** so the Figma execution stops feeling like a wireframe and starts feeling like a living product. Driver of change: `prototypes/demandos-prototype-unified-v1.tsx` ships the visual maturity (HeroMetric, AIImpactBanner, global ChatSheet, TopBar notifications, "tell-me-as-a-colleague" entry tone, urgency-grouped Demand Panel, sticky-bottom toolbar with contextual gate copy) that the conceptual maturity of the docs deserves. The unified-v1 is **visual reference**, not conceptual ground truth — the docs remain the source of truth for what the Submitter *is*.
 
 ---
 
@@ -18,7 +20,10 @@ The prototype aims at the **final product**: all Submitter journeys designed, ev
 
 The reasoning model behind the screens (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, 3-layer metrics) lives in [`personas/01-submitter.md`](../../../personas/01-submitter.md), [`templates/00-intake-record.md`](../../../templates/00-intake-record.md) and [`metrics.md`](../../../metrics.md). This spec instantiates that model as a UI.
 
-**Primary research:** prototype [`prototypes/demandos-prototype-v167.tsx`](../../../prototypes/demandos-prototype-v167.tsx) is the canonical source for screens and mechanics; `fase2-v9` / `fase4-v8` are superseded earlier explorations and are not mined.
+**Primary research:**
+- Conceptual ground truth: `personas/01-submitter.md`, `templates/00-intake-record.md`, `metrics.md`.
+- Visual & coreography reference: `prototypes/demandos-prototype-unified-v1.tsx` (most mature *experience*, even if conceptually behind the docs in places).
+- Earlier prototypes (`v167`, `fase2-v9`, `fase4-v8`) are superseded.
 
 ## 2. Persona & seed scenario
 
@@ -37,17 +42,25 @@ The reasoning model behind the screens (compliance contract, confidence layer, d
 | D5 | Fidelity | **High-fidelity, final-product intent, every state explicit** — empty / AI-reading / parsing / recording / transcribing / filled / disposition / tension / confirm / error. |
 | D6 | Seed scenario | Carlos Silva (COO) + the SSO/SAML + audit-log demand (see §2). |
 | D7 | Figma file | New file **"Intake · Submitter"** using Conductor as the visual language (Conductor itself is a different product). |
-| D8 | Create vs enrich | **Decoupled.** Creating a demand captures only **basic info** (fast, low-friction) and produces a **Draft**. All enrichment happens later, over multiple sessions, from a dedicated **Demand Panel** page — because maturing a good demand takes time and depends on external inputs the Submitter does not control. The Demand Panel is the **central object**, spanning the demand's whole lifecycle (enrich → handoff → monitor → outcome). Validated against prototype v167 (`NewDemandScreen` → `CaptureQueueScreen`). |
+| D8 | Create vs enrich | **Decoupled.** Creating a demand captures only **basic info** (fast, low-friction) and produces a **Draft**. All enrichment happens later, over multiple sessions, from a dedicated **Demand Panel** page — because maturing a good demand takes time and depends on external inputs the Submitter does not control. The Demand Panel is the **central object**, spanning the demand's whole lifecycle (enrich → handoff → monitor → outcome). |
+| D9 *(new)* | Entry tone | **"Tell me as if you were talking to a colleague."** Quick-create is a single rich problem field + optional artifact/voice. Origin/type are inferred by the AI from the narrative or artifact — they are NOT separate form inputs the Submitter has to classify. This honors the persona's "she does not think like an engineer" constraint. |
+| D10 *(new)* | AI visibility | **AI value must be visible across the product, not only inside a demand.** A persistent `AIImpactBanner` (hours saved + % automated for the current artifact/context) appears at the top of every primary screen (Dashboard, Demand Panel, Pre-send Review). It is the explicit answer to "would she pay for this?" — she sees the value the AI is producing every time she opens the app. |
+| D11 *(new)* | Chat invocation | **The copilot is global, not per-screen.** A single `GlobalChatSheet` is summoned from a TopBar button on every screen; context (current demand, selected block, current dashboard) flows in automatically. The "Discuss this" block-reference pattern (§7) is its primary input. The Demand Panel's Conversation zone is the *same* sheet, anchored open in `phase=drafting`. |
+| D12 *(new)* | Notifications | **Notifications are anchored to the TopBar.** A bell icon with unread badge opens a dropdown for triage; the dedicated `J5.1 Notifications` page is the "view all" fallback, reachable from "Ver todas" in the dropdown. They are not a sidebar menu item competing with primary workflow. |
+| D13 *(new)* | Pay-justifying KPI | **The Dashboard has one number-rei.** A `HeroMetric` with explicit `badge="Pay-justifying KPI"`, trend, sparkline and sub-composition occupies the visual gravity center. For the Submitter that number is **"Impacto financeiro das suas demandas em produção (YTD)"** (R$ 412k). All other KPIs are secondary (`CompactKPI` grid) and orbit it. |
 
 ## 4. Experience principles (carried into every screen)
 
-From the persona + the Conductor README:
+From the persona + the Conductor README, augmented by the visual coreography from `unified-v1`:
 
-1. **Not a form being validated — a partner that understood the demand.** Contract lens renders as *readiness*; semantic lens renders as *meaning reflected back in her language*.
-2. **Confidence is first-class and visible.** Every substantive value carries `confidence / source / status / hint`. Honesty is the differentiator — the UI shows what is firm and what needs Discovery.
+1. **Not a form being validated — a partner that understood the demand.** Contract lens renders as *readiness*; semantic lens renders as *meaning reflected back in her language*. The AI shows its work (sources contributed, fields inferred, what is firm and what needs Discovery).
+2. **Confidence is first-class and visible.** Every substantive value carries `confidence / source / status / hint`. Honesty is the differentiator.
 3. **"I don't know" never blocks.** It routes to an honest disposition (`answered / inferred / assumption / discovery / deferred`). The gate is "every blocking requirement has an honest disposition," not "she knows everything."
 4. **RICE-lite is a mirror, not a ranking.** Tensions between indicators are gentle provocations that sharpen thinking; sharpening also raises readiness.
 5. **Operational quiet.** Bloomberg-terminal / Linear calm. Declarative noun headers, imperative buttons, middot metadata, status as a colored dot + label, no emoji.
+6. *(new)* **Urgency is grouped, not hidden.** Lists of work — pendencies, requirements, notifications — group **by what the Submitter must do now** ("Bloqueiam envio" → "Em discovery/premissa" → "Respondidas"), with the danger group on top and visible by default and the resolved group collapsible. Flat lists are out.
+7. *(new)* **The gate explains itself.** When an action is blocked (e.g. "Enviar ao PO" disabled), the surrounding UI states *what* unblocks it in business language ("Faltam 2 requisitos bloqueantes sem disposição honesta") and how to act, never just a greyed-out button.
+8. *(new)* **AI value is shown, not implied.** Every screen makes visible what the AI contributed in this context: hours saved, fields pre-filled, sources mined, blocks discussable. Invisible AI cannot be paid for.
 
 ## 5. Foundations (Phase A — build first in Figma)
 
@@ -66,13 +79,22 @@ Display (Hanken 800, 40–56, -0.02em) · Title/Label (Hanken 700) · Body (Inte
 ### 5.3 Primitive components (shadcn/ui → Conductor tokens)
 Button (variants: primary/secondary/ghost/destructive) · Input · Textarea · Select · Checkbox/Radio · Badge · Segmented · Tabs · Card · Tooltip · Progress · Dialog · **DrawerShell** (480/560) · **TakeoverShell** (720 column) · **Stepper** · ProgressStepRow · Toast · Sidebar · TopBar.
 
-### 5.4 Domain components (the Submitter kit — new)
-- **ReadinessRing** — score gauge; variants: building / near-gate / gateReady.
-- **ConfidenceBar** — 0–100 + source + hint; status: empty / low_confidence / resolved.
+### 5.4 Domain components (the Submitter kit)
+
+> Components marked *(new)* are added in v2 of the spec. Components marked *(revised)* exist already but have new variants/structure. Everything else is unchanged.
+
+**Readiness, confidence, requirements**
+- **ReadinessRing** — score gauge; variants: building / near-gate / gateReady; optional `delta` overlay (e.g. `+26%`).
+- **ConfidenceBar** — 0–100 + source + hint; 10 segments; status: empty / low_confidence / resolved.
 - **RequirementRow** — one of 8 compliance reqs: label · dimension · confidence · disposition · blocksGate flag; **addressable**.
 - **DispositionPill** + **DispositionPicker** — answered / inferred / assumption / discovery / deferred.
-- **ValueIndicatorMeter** — RICE-lite Impacto/Alcance/Urgência (B/M/A) + confidence; **addressable**. **TensionCallout** — the gentle provocation.
+
+**Value mirror & reflection**
+- **ValueIndicatorMeter** — RICE-lite Impacto/Alcance/Urgência (B/M/A) + confidence + contextual justification (Body/sm); **addressable**.
+- **TensionCallout** — gentle provocation card.
 - **SemanticReflectionCard** — "here's what this demand *is*, in your words"; spans **addressable**.
+
+**Conversation, input, sources**
 - **MultimodalComposer** — text + mic + attach + pinned block chips + send (see §6).
 - **VoiceRecorder** — idle / recording (waveform) / transcribing / transcribed / error.
 - **UploadDropzone** — idle / dragging / parsing / parsed / error.
@@ -80,16 +102,38 @@ Button (variants: primary/secondary/ghost/destructive) · Input · Textarea · S
 - **SourcesTray** — persistent "what the AI knows" inventory.
 - **BlockReferenceChip** (quote-card) + **DiscussAffordance** (the hover/select pin) — see §7.
 - **CopilotMessage** (incl. reply-quoting-a-block variant) · **EvidenceChip** · **StakeholderRow**.
-- **KPICard** · **Sparkline / Donut / FunnelChart** (conversion across states) · **TimelineStateRow** · **StateBadge** (demand lifecycle: draft / capturing / triage / discovery / rationalization / RP-frozen / execution / delivered / backlog / archived-rejected).
+
+**Metrics & navigation**
+- *(revised)* **HeroMetric** — the dashboard number-rei. Anatomy: Eyebrow label · big number H2 (mono numerics) · trailing suffix · trend chip (↑/↓ with delta) · sub-composition (Body/sm: "8 entregues · 3 com ROI confirmado · 1 em andamento") · `Sparkline` to the right · accent stripe in persona color · explicit `badge="Pay-justifying KPI"` slot. Replaces the generic `KPICard` for the *one* hero metric per screen.
+- *(new)* **CompactKPI** — secondary KPI grid card. Anatomy: Eyebrow label · Icon (top-right, in accent wash) · big-but-not-hero number · suffix · optional trend · Body/sm sub. Used in 3×2 grids beneath the HeroMetric.
+- **KPICard** — kept for cases where neither hero nor compact fits (e.g. drill-downs).
+- **Sparkline / Donut / FunnelChart** (5 bars 14→11→9→7→3, labels Meta).
+- **TimelineStateRow** — dot + state label (Label) + actor + timestamp (Meta).
+- **StateBadge** — demand lifecycle: draft / capturing / triage / discovery / rationalization / RP-frozen / execution / delivered / backlog / archived-rejected.
+
+**Panel & cross-cutting**
 - **DemandPanel** — the per-demand page shell; layout variants: drafting/enriching · handoff · handed-off/monitoring · outcome · backlog · archived. **DraftBadge** + **Save-and-exit** affordance.
+- *(new)* **PendencyGroup** — section header with state color + dot + Eyebrow label + count; collapsible body. Three canonical groups for the Demand Panel `phase=drafting`: **"Bloqueiam envio"** (state/error, expanded), **"Em discovery / premissa / delegado"** (state/canary, expanded), **"Respondidas"** (state/production, collapsed). Replaces the flat list of 8 RequirementRows.
+- *(new)* **GateToolbar** — sticky bottom toolbar inside DemandPanel. Anatomy: left side = gate status copy in business language ("Faltam 2 requisitos bloqueantes sem disposição honesta" / "Pronto para envio — todos os bloqueantes têm disposição honesta"); right side = secondary "Revisar tudo" + primary "Enviar ao PO" (disabled until gateReady, animate-pulse when enabled).
 - **CollectInboxItem** — a PO async question + her batched answer (decoupled enrichment).
 - **CommentThread / CommentItem** — inline collaboration on demand sections.
 - **EscalationModal** — escalate-early / flag-blocker urgency valve.
-- **TourBanner / OnboardingStep** — first-run guidance for a non-technical exec.
+- **TourBanner / OnboardingStep** — first-run guidance for a non-technical exec. Surface `surface/sunken`, 4-item checklist (per `unified-v1`), "Entendi, ocultar" ghost dismiss.
+
+**AI visibility & global chat**
+- *(new)* **AIImpactBanner** — horizontal banner shown above the HeroMetric on Dashboard and at the top of the Demand Panel canvas. Anatomy: small Zap-icon square in `brand/tide-bright` · Eyebrow "IA Impact" · Body label ("18h economizadas · 65% automatizado neste artefato") · right-aligned two stat blocks (`{hoursSaved}h economizadas` + `{automatedPct}% automatizado`). Surface: subtle gradient `tide-wash → persona-accent-wash`. Always present; never decorative — its numbers must be true to context (e.g. on the Demand Panel, it reflects this demand; on the Dashboard, it reflects the portfolio).
+- *(new)* **GlobalChatSheet** — right-anchored sheet (420 wide, full height), invoked from a TopBar button "Discutir com a IA" (Sparkles icon + label) present on every screen. Anatomy: header (Sparkles avatar · "Assistente IA" title · Eyebrow `Contexto: {current-route-label}` · close ✕) · scrollable message list (`CopilotMessage` ai/user variants, including the `quotesBlock` variant) · empty-state with 3 quick suggestions ("Resuma o status da demanda", "Quais ADRs estão envolvidos?", "Qual o ROI estimado?") · pinned-blocks strip · `MultimodalComposer` at the bottom. Variants: `state = closed | open-empty | open-conversation`. In Demand Panel `phase=drafting` the sheet is *anchored open* and shares state with the panel's Conversation zone (one and the same chat, not two).
+- *(new)* **TopBarNotifications** — bell icon on the right side of the TopBar with unread count badge (slate dot if 0, error dot if >0). Click opens a 360-wide dropdown: Eyebrow "Notificações" · top 5 `NotificationRow` items (status + body + timestamp) · footer link "Ver todas" → J5.1. The dedicated J5.1 page exists as the full archive.
+
+**Removed from inventory in v2 (replaced or absorbed)**
+- ~~"Notifications rail" on Dashboard~~ — replaced by `TopBarNotifications`.
+- ~~Flat list of 8 `RequirementRow` in J4.1~~ — wrapped by `PendencyGroup`s.
+- ~~Header CTA "Enviar ao PO" on J4.1~~ — moved into `GateToolbar` at bottom.
+- ~~Per-screen Copilot pill (J5.3)~~ — replaced by `GlobalChatSheet` button on TopBar; J5.3 frame becomes the "global chat sheet open from any screen" specimen.
 
 ## 6. Input strategy — all three modalities, everywhere
 
-One **MultimodalComposer** is the constant affordance — present at demand entry and persistently in the workspace.
+One **MultimodalComposer** is the constant affordance — present in the GlobalChatSheet, in the Demand Panel's Conversation zone (which is the sheet anchored open), and in the New Demand entry.
 
 | Modality | Role | Behavior |
 |---|---|---|
@@ -101,76 +145,110 @@ One **MultimodalComposer** is the constant affordance — present at demand entr
 
 ## 7. Core pattern — Block-reference-to-chat ("Discuss this")
 
-1. **Addressable everything.** Hover/select any unit — a requirement row, an AI-suggested value, a sentence in the semantic reflection, an excerpt in an uploaded source, a RICE tension — and a floating **"Discuss with AI"** affordance appears (Figma-comment / Notion-quote style).
+1. **Addressable everything.** Hover/select any unit — a requirement row, an AI-suggested value, a sentence in the semantic reflection, an excerpt in an uploaded source, a RICE tension, a KPI card, a HeroMetric sub-composition — and a floating **"Discuss with AI"** affordance appears (Figma-comment / Notion-quote style).
 2. **Pin it.** The block drops into the composer as a **BlockReferenceChip** (quote-card). Multiple pins allowed.
-3. **Harden the turn.** Her message is anchored to that block; the bot's reply quotes the block back and addresses exactly it. The bot retains **global context** (all sources + all injected content) — the pin just *focuses* this turn so it's precisely addressed.
+3. **Harden the turn.** Her message is anchored to that block; the bot's reply quotes the block back and addresses exactly it. The bot retains **global context** (all sources + all injected content + the current screen route) — the pin just *focuses* this turn so it's precisely addressed.
 4. **Canvas updates.** Resolution flows back: confidence rises, a disposition resolves, a to-do clears, the readiness ring moves.
+5. *(new)* **Cross-screen pinning.** A block pinned from a Dashboard KPI opens the `GlobalChatSheet` with that block already in the composer — discussing a number is a one-click action, not a navigation puzzle.
 
 ## 8. Journey & screen map (Phase B — every frame explicit)
 
-> Frame IDs are for 1:1 mapping in the build plan. Each transient state listed is its own frame.
+> Frame IDs are for 1:1 mapping in the build plan. Each transient state listed is its own frame. Frames marked *(refactored)* are being rebuilt in v2; frames not marked are unchanged from v1.
 
 **J1 · Entry**
 - J1.1 Sign in
 - J1.2 Landing → Dashboard
-- J1.3 First-run onboarding (TourBanner): create + drop/voice · enrich pendencies · track impact
+- J1.3 First-run onboarding (TourBanner overlaid on Dashboard): 4 bullets in business language ("Você cria demandas e acompanha o impacto — o sistema cuida do resto" · "O Hero Metric abaixo mostra o valor gerado pelas suas demandas em produção" · "Clique em 'Mostre o exemplo' para ver um RP completo" · "Você não preenche formulários — a IA captura por texto, PDF ou áudio"), "Entendi, ocultar" ghost.
 
-**J2 · Submitter Dashboard** ("metrics & important infos")
-- J2.1 Dashboard — portfolio KPIs (Annual impact R$/yr · Conversion demand→RP 64% · Lead time submit→frozen 8.5d · 1st-version acceptance 78%) + FunnelChart (submitted→triaged→RP→accepted→executing), "My demands" list (StateBadge + readiness + last activity, incl. Draft / Backlog / Archived states), Collect-inbox badge (PO questions waiting), Notifications rail, **New demand** CTA
-- J2.2 Dashboard — empty state (no demands yet)
+**J2 · Submitter Dashboard** *(refactored)*
+- **J2.1 Dashboard** — vertical rhythm from top to bottom:
+  1. TopBar (with Notifications bell, "Discutir com a IA" button) + Sidebar.
+  2. Header row: Eyebrow "Painel do Submitter" · H1 "Bom dia, Carlos" · Body/sm "Você tem 1 demanda ativa, 8 entregues no ano" · primary "Nova Demanda" CTA top-right.
+  3. **AIImpactBanner** — "18h economizadas · 65% automatizado neste portfólio" (portfolio scope).
+  4. **HeroMetric** — `label="Impacto financeiro das suas demandas em produção (YTD)"` · `value="R$ 412k"` · `trend="+R$ 78k projetados nesta demanda"` · `sub="8 entregues · 3 com ROI confirmado · 1 em andamento"` · `sparklineData` (8 monthly points) · `badge="Pay-justifying KPI"`.
+  5. **CompactKPI grid (3×2)** — Demandas ativas (1) · Aceitas no ano (8/14, 57%) · Tempo médio até congelamento (6,2d, -2,1d vs mercado) · Horas que você não gastou ({hours}h, accent IA) · ROI médio realizado (4,2x) · Inadimplência projetada.
+  6. **Showcase card** — gradient `tide-wash → tide-wash-2`, Award icon, "Veja um RP completo: RP-2026-000 · Notificações WebSocket — cada afirmação tem origem rastreável", click → ShowcaseRP. (Kept from original spec, restyled.)
+  7. **"Minhas demandas" list** — moved to its own primary route (`Minhas Demandas` in sidebar), NOT cluttering the dashboard. Dashboard shows a 3-row preview ("Demandas recentes") with link "Ver todas".
+- **J2.2 Dashboard — empty state** — same chrome, HeroMetric shows "—" with helper "Crie sua primeira demanda para começar a medir impacto", CompactKPI grid hidden, big "Nova Demanda" CTA center.
 
-**J3 · Create demand (quick capture — light)**
-> Decoupled from enrichment. Goal: get the demand out of her head in under a minute; structure it later.
-- J3.1 Create — basic info only: title · one-line problem · origin (Client/Internal/Market/Support) · type — optionally drop an artifact or record a voice note
-- J3.2 AI quick-read (if an artifact was given) — "Saved as draft · pre-filled N fields from your deck"
-- J3.3 Lands on the Demand Panel in **Draft** state (see J4)
+**J3 · Create demand (quick capture — light)** *(refactored)*
+> Decoupled from enrichment. Goal: get the demand out of her head in under a minute; structure it later. Honors D9 — tell-me-as-a-colleague.
+- **J3.1 Nova demanda** — `TakeoverShell` (720 column, not a side drawer). Centered:
+  - H1 "Nova Demanda"
+  - Body "Conte como se estivesse falando com um colega. A plataforma estrutura o resto."
+  - Single big textarea labelled "O que aconteceu?" (8 rows, surface/card)
+  - Below: Eyebrow "Ou anexe algo que ajude" + secondary buttons `Subir documento` (UploadDropzone trigger) + `Gravar áudio` (VoiceRecorder trigger)
+  - Footer: primary "Salvar rascunho" (always enabled once textarea has content OR an artifact is attached).
+  - **No** Origem/Tipo selects — these are inferred by the AI from the narrative or artifact during the AI quick-read step.
+- **J3.2 IA lendo** — `TakeoverShell` content swaps to a process view:
+  - Loader2 spinning · H2 "Processando…"
+  - Three `ProgressStepRow` items: "Lendo seu texto" → "Analisando estrategia-monetizacao.pdf" → "Identificando informações úteis para a demanda…"
+  - When done, swap to success: green check · H2 "Processamento concluído" · Body "Li seu documento e identifiquei 5 informações úteis. Vou usar para adiantar o preenchimento. Faltam apenas 3 pendências pra você responder." · primary "Continuar" → J4.1.
+- **J3.3 Lands on the Demand Panel in Draft state** — animated transition into J4.1.
 
 **J4 · Demand Panel (the dedicated per-demand page — the heart)**
 > One persistent, beautiful page that is the home of a demand across its WHOLE lifecycle. Enrichment happens here over many sessions; she can leave and return; Discovery/assumptions wait on external inputs she doesn't control. Layout emphasis shifts by lifecycle phase.
 
-*Drafting / Enriching layout*
-- J4.1 Panel shell — identity header (INT-2026-NNN · title · StateBadge · ReadinessRing · handoff CTA, disabled until gate) over three zones: **Conversation** (copilot + MultimodalComposer) · **Canvas** (8 RequirementRows + RICE-lite + SemanticReflection, all addressable) · **Sources** tray
-- J4.2 Composer states — typing · recording · transcribing · file-attached · 1 block pinned · multiple blocks pinned
-- J4.3 Bot reply quoting a pinned block
-- J4.4 Answer-a-question turn (business language) → canvas update (ReadinessRing delta "+23%")
-- J4.5 "I don't know" → DispositionPicker → explicit frames: assumption · discovery · deferred
-- J4.6 RICE-lite mirror + TensionCallout ("big value, low confidence — what evidence would make you sure?") + a tension-resolution turn
-- J4.7 Evidence/Sources detail · Stakeholders · Constraints sub-views
-- J4.8 Save & exit — Draft persists (return-later); appears as a Draft on the dashboard
-- J4.9 Collect inbox — PO's async questions land on the panel; she answers in business language without re-opening the whole flow
-- J4.10 Comments thread — inline PO/CTO/PM comments on sections + her replies
-- J4.11 Escalate / flag blocker — urgency valve when waiting on something stuck
+*Drafting / Enriching layout* *(refactored — J4.1 only)*
+- **J4.1 Panel shell** — DemandPanel `phase=drafting`:
+  - **Identity header**: INT-2026-014 (Mono) · separator · `StateBadge` (Em Captura) · spacer · `ReadinessRing` 38% (with `delta` slot for +26% animation in J4.4).
+  - Title H2: "Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."
+  - **AIImpactBanner** (demand-scoped): "12h economizadas nesta demanda · 5 de 8 requisitos pré-preenchidos · 3 fontes mineradas".
+  - **Three-zone body**:
+    - Left zone (380 wide) — **Conversation**: same content as GlobalChatSheet, anchored-open variant. `CopilotMessage` ai opening turn ("Li seu deck e o e-mail da renovação. Identifiquei 5 de 8 informações. Pra começar: quem sente mais essa dor — quais contas ou segmentos?") + composer.
+    - Center zone (619 wide) — **Canvas**: organized in **PendencyGroups** instead of a flat list:
+      - PendencyGroup "Bloqueiam envio" (state/error, expanded) — RequirementRows for the bloqueantes still without honest disposition (e.g. Alcance, Constraints, Stakeholders).
+      - `SemanticReflectionCard` ("O QUE ESTA DEMANDA É" · "Uma conta enterprise estratégica ameaça não renovar sem SSO/SAML…") — sits between groups as the meaning anchor.
+      - `ValueIndicatorMeters` (Impacto / Alcance / Urgência) with contextual justifications.
+      - PendencyGroup "Em discovery / premissa / delegado" (state/canary, expanded) — RequirementRows where disposition is honest but not answered yet (e.g. Impacto = Premissa).
+      - PendencyGroup "Respondidas" (state/production, collapsed by default with count) — RequirementRows resolved.
+    - Right zone (279 wide) — **Sources tray** (`SourcesTray` with 3 `SourceCard`s).
+  - **GateToolbar (sticky bottom)** — left: "Faltam 2 requisitos bloqueantes sem disposição honesta" (state/canary copy when between 1–N pending) → "Pronto para envio — todos os bloqueantes têm disposição honesta" (state/production copy when gateReady); right: "Revisar tudo" ghost + "Enviar ao PO" primary (disabled with explanation tooltip until gateReady).
+- J4.2 Composer states — typing · recording · transcribing · file-attached · 1 block pinned · multiple blocks pinned (unchanged).
+- J4.3 Bot reply quoting a pinned block (unchanged).
+- J4.4 Answer-a-question turn (business language) → canvas update (ReadinessRing delta "+26%"). Note: the resolved RequirementRow migrates visually from the "Bloqueiam envio" group into the "Respondidas" group; the count badges update.
+- J4.5 "I don't know" → DispositionPicker → explicit frames: assumption · discovery · deferred (unchanged).
+- J4.6 RICE-lite mirror + TensionCallout + tension-resolution turn (unchanged).
+- J4.7 Evidence/Sources detail · Stakeholders · Constraints sub-views (unchanged).
+- J4.8 Save & exit — Draft persists (return-later); appears as a Draft on the dashboard (unchanged).
+- J4.9 Collect inbox — PO's async questions land on the panel; she answers in business language without re-opening the whole flow (unchanged).
+- J4.10 Comments thread — inline PO/CTO/PM comments on sections + her replies (unchanged).
+- J4.11 Escalate / flag blocker — urgency valve when waiting on something stuck (unchanged).
 
 *Handoff*
-- J4.12 Pre-send review — readiness checkpoint: every blocking requirement has an honest disposition (gateReady); the Intake Record (INT-2026-NNN) shown read-only
-- J4.13 Handoff to PO confirm → success
+- J4.12 Pre-send review — readiness checkpoint: every blocking requirement has an honest disposition (gateReady); the Intake Record (INT-2026-NNN) shown read-only; **AIImpactBanner** present ("Pronto após 38min de trabalho seu · 12h economizadas · 65% automatizado").
+- J4.13 Handoff to PO confirm → success.
 
 *Handed-off / Monitoring layout*
-- J4.14 Timeline — state-machine progress (Captured → Triage → Rationalization → RP → Execution → Delivered), discovery loops & PM rebounds shown
-- J4.15 What the PO did — triage outcome + PO edits reflected back (read-mostly: notification + diff of what changed)
+- J4.14 Timeline (unchanged).
+- J4.15 What the PO did (unchanged).
 
 *Outcome layout*
-- J4.16 Projected vs realized — outcome tracking 30/60/90d, annual impact projected vs measured (closes metrics.md camada 3)
+- J4.16 Projected vs realized (unchanged — this is exemplary in v1).
 
 *Closure states*
-- J4.17 Backlog — deferred but valid, with the unlock trigger she's waiting on (e.g., "Q3 budget released")
-- J4.18 Archived / Rejected — reason + justification (closure narrative, so she doesn't resubmit the same idea)
+- J4.17 Backlog (unchanged).
+- J4.18 Archived / Rejected (unchanged).
 
-**J5 · Cross-cutting**
-- J5.1 Notifications center
-- J5.2 Comments / collaboration thread
-- J5.3 Persistent copilot affordance (collapsed/expanded)
-- J5.4 Global empty & error states
+**J5 · Cross-cutting** *(refactored — J5.1 and J5.3)*
+- **J5.1 Notifications full page** — reachable from the TopBar bell's "Ver todas". Filter chips · grouped list (Recentes / Anteriores) · `NotificationRow`s · "Marcar todas como lidas" ghost. This is the archive view; the TopBar dropdown is the daily-driver triage.
+- **J5.1.1 TopBar Notifications dropdown** *(new frame)* — 360-wide popover anchored under the bell icon, showing top 5 notifications + "Ver todas" footer link.
+- J5.2 Comments / collaboration thread (unchanged).
+- **J5.3 GlobalChatSheet — open from a non-Demand-Panel screen** *(refactored)* — specimen showing the sheet open over J2.1 Dashboard, with empty-state + 3 quick suggestions, demonstrating that chat is global.
+- J5.4 Global empty & error states (unchanged).
 
 ## 9. AI empowerment thread
 
-Pre-fill extractor (with sources) → conversational gap-closer (one business-language question at a time) → tension-spotter on RICE-lite → disposition coach ("don't know? mark it a premise, or send to Discovery") → summarizer that produces the Intake Record. **Velocity** = fewer blank fields to fight manually; **maturity** = the Readiness Score climbs visibly as honest dispositions resolve — as a *conversation*, not a form.
+Pre-fill extractor (with sources) → conversational gap-closer (one business-language question at a time) → tension-spotter on RICE-lite → disposition coach ("don't know? mark it a premise, or send to Discovery") → summarizer that produces the Intake Record. **Velocity** = fewer blank fields to fight manually; **maturity** = the Readiness Score climbs visibly as honest dispositions resolve — as a *conversation*, not a form. *(new)* Visibility is made explicit at all times via `AIImpactBanner`, so the Submitter never has to wonder if the AI is "really doing something" — the contribution count is shown.
 
 ## 10. Prototype wiring & fidelity
 
 - Clickable **golden path** end-to-end (J1 → J2 → J3 create → J4 panel: enrich → handoff → monitor → outcome).
 - Explicit **branch demos**: the disposition fork (J4.5), a tension resolution (J4.6), a PO rebound (J4.15), and the **save-and-return loop** (J4.8 → dashboard Draft → back into the panel) that proves create/enrich is decoupled.
-- Figma interactive components for state toggles where they sell the experience (composer states, ConfidenceBar fill, ReadinessRing progress with the "+23%" delta).
+- *(new)* **Global chat demo**: from J2.1 Dashboard, click "Discutir com a IA" in the TopBar → J5.3 (sheet open) → close → land back on J2.1. Demonstrates D11.
+- *(new)* **Notifications demo**: from J2.1, click the bell → J5.1.1 dropdown → click "Ver todas" → J5.1 page. Demonstrates D12.
+- *(new)* **Pendency-group demo on J4.1**: click an "Em discovery" RequirementRow → DispositionPicker → resolve as `answered` → row migrates to the "Respondidas" group (animate); the "Bloqueiam envio" group shrinks; if all bloqueantes are resolved, the GateToolbar switches state and the CTA enables.
+- Figma interactive components for state toggles where they sell the experience (composer states, ConfidenceBar fill, ReadinessRing progress with the "+26%" delta, AIImpactBanner number animation, GateToolbar enabled/disabled).
 - Goal: a real COO clicks through unaided.
 
 ## 11. Out of scope (this prototype)
@@ -180,12 +258,14 @@ Pre-fill extractor (with sources) → conversational gap-closer (one business-la
 - Real backend / functional AI — all AI behavior is scripted for the validation narrative.
 - Production code / CSS / handoff specs — this is a Figma prototype.
 
-**Superseded prototype concepts — do NOT resurrect** (dropped between fase2/4 and v167, or dead code in v167): the three separate per-section pendency modals (use one unified DispositionPicker/answer flow instead) · PlaceholderDashboards for non-Submitter personas · DrillDownModal · RationalizationsListScreen (dead code) · ShowcaseRPScreen.
+**Superseded prototype concepts — do NOT resurrect** (dropped between v167/unified-v1 explorations): the three separate per-section pendency modals (use one unified DispositionPicker/answer flow instead) · PlaceholderDashboards for non-Submitter personas · DrillDownModal · RationalizationsListScreen (dead code) · ShowcaseRPScreen.
+
+**Superseded patterns from v1 of THIS spec — do NOT keep** (replaced in v2): the flat 8-RequirementRow list on J4.1 (use PendencyGroups) · the header CTA "Enviar ao PO" on J4.1 (moved to GateToolbar) · the Notifications rail on J2.1 (moved to TopBar) · the per-screen Copilot pill J5.3 (replaced by GlobalChatSheet) · the Origem/Tipo selects on J3.1 (inferred by AI) · the generic KPI row on J2.1 (replaced by HeroMetric + CompactKPI grid).
 
 ## 12. Build sequence
 
-1. **Phase A — Foundations:** variables → type → primitives → domain components (figma-generate-library).
-2. **Phase B — Journeys:** assemble J1–J5 frames from components, every state explicit (figma-generate-design).
+1. **Phase A — Foundations:** variables → type → primitives → domain components (figma-generate-library). v2 adds A7-bis (HeroMetric refactor + CompactKPI), A9-bis (PendencyGroup + GateToolbar), A11 (AIImpactBanner + GlobalChatSheet + TopBarNotifications).
+2. **Phase B — Journeys:** assemble J1–J5 frames from components, every state explicit (figma-generate-design). v2 rebuilds B2 (J2.1/J2.2), B3 (J3.1/J3.2), refactors first frame of B4 (J4.1), refactors B8 (J5.1, J5.3) and adds J5.1.1.
 3. **Phase C — Wiring:** golden path + branch demos + interactive components.
 
-Next: turn this spec into a detailed build plan (writing-plans).
+Implementation plan: `docs/superpowers/plans/2026-05-27-submitter-figma-prototype.md` (revised v2).
