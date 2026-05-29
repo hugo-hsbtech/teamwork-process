@@ -2,6 +2,53 @@
 
 > **Revision:** v2 (revised 2026-05-27 PM). Tracks spec v2. Sections marked *(v2)* are new or refactored; everything else is unchanged from v1 and stays valid.
 
+---
+
+## Current build state (2026-05-29) — addendum
+
+> Living source-of-truth for what's actually built. The numbered tasks below are the original plan; this section is the **delta** between plan and the live Figma file.
+
+**Live Figma:** `Intake-Platform` · fileKey `6Yfv523dlb2bfZS9zWGJly` · Submitter journeys page `2:789` · 65 top-level frames.
+
+**Persona seed (active):** Hugo Seabra · COO · demand **`INT-2026-015`** *"Autenticação SSO/SAML para parceiros B2B"* · sources deck+transcript+pipeline · R$ 412k YTD.
+
+**Known data inconsistency:** C1 Demandas list row 1 still shows `INT-2026-015 · SSO/SAML para Pagamentos` (original Carlos seed); B4 Demand Panel shows `INT-2026-015 · Autenticação SSO/SAML para parceiros B2B`. Plan: sync C1 row 1 to match B4 panel in a later cycle.
+
+**Screen inventory built (Submitter):**
+
+| Surface | Status | Nodes |
+|---|---|---|
+| B0 · Sign in | ✓ built | `439:2` |
+| B1 · Dashboard | ✓ built | `811:3890` (component) + `736:3640` alt |
+| B2 · Nova demanda (rich form) | ✓ refactored 2026-05-29 — see Field-set update below | `835:3979` |
+| B2 · Gravando áudio (recording state) | ✓ built + mirrored fields 2026-05-29 | `850:4010` |
+| B4 · Demand Panel (39 variants, all fullscreen-no-sidebar) | ✓ built | base `478:703` + 38 variants across 9 semantic columns |
+| C1 · Demandas list (spacing fix 2026-05-29) | ✓ refactored | `548:2298` |
+| C2 · Notifications · C7 · Atividade · C8 · Pendências | ✓ built | `560:2492` · `752:3822` · `753:4085` |
+
+**Recent design system decisions (consolidated principles):**
+
+1. **Deep-detail screens are fullscreen (no sidebar).** B4 Demand Panel hides the global sidebar (`sidebar.visible=false`) and expands content to 1440w. The breadcrumb "Demandas" in the TopBar is the close affordance (wired → C1 in all 39 variants). Pages that KEEP sidebar: B0, B1, B2, C-series. Future deep-journey pages (B5 Discovery, etc.) should follow this pattern.
+
+2. **List rows HUG height with rich cells.** Rows with mixed-altura columns (id + rich title+byline + badges + bars) must NOT have any cell `layoutSizingVertical='FIXED'` with height >> content. Set the rich cell to HUG, row padding 16/16, `counterAxisAlignItems='CENTER'`, `itemSpacing=2` between title and subtitle. Gives ~60px rows that vertically center properly.
+
+3. **Form sections — Mono Medium 11px uppercase 8% labels.** Stack vertical with 24px gap. Sections obrigatórias (Título, Descrição) first with stroke stone-300 + radius/md + white fill. Evidências = ghost button row. Contexto/Opcional = labeled rows with 96px label column + control HUG.
+
+4. **Master instances over locals.** Every reusable element on a screen must be an instance of a master component on the `Components` page (253 components available). Audited 2026-05-29 — replaced 8 locals in B2 with `Input`, `Button`, `Avatar`, `Tag` instances.
+
+**Master components — known gaps surfaced by the build (TODO for the design-system page):**
+
+- **`Button` master `leadingIcon` is a RECTANGLE placeholder, not an `INSTANCE_SWAP` property.** Buttons with real icons need manual replacement of the rectangle. Future: convert to INSTANCE_SWAP so labels with icons can be assembled declaratively.
+- **No dedicated "Date field" component.** Prazo in B2 is a local custom frame.
+- **`Tag` selected variant visual is subtle.** When used for picked-state (e.g., Urgência "Alta"), the user signal could be stronger. Consider a `Variant=picked` with tide bg + white text.
+- **No `MultiSelect Tag`/`Tag input` component** for the tags chip-row affordance. Currently composed from Tag/removable + Tag/default.
+
+**Open Figma comments:** 1 vague comment (`1779637369` "We also need the complete place as well.") deferred until clarification.
+
+---
+
+
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 >
 > **Figma-specific:** This plan builds a Figma file, not code. Every `use_figma` / `create_new_file` / `generate_figma_design` call has a MANDATORY prerequisite skill that MUST be loaded first:
@@ -18,7 +65,7 @@
 
 **Tech Stack:** Figma (variables, components/variants, interactive components, prototype flows) via the Figma MCP + the figma:* skills. Source design system: `design-system/` (Conductor "Paper & Signal"). Source spec: `docs/superpowers/specs/2026-05-27-submitter-figma-prototype-design.md` (v2). Primary visual reference: `prototypes/demandos-prototype-unified-v1.tsx` (visual reference only — docs remain conceptual ground truth).
 
-**Existing Figma file (v2):** the Figma file `Intake · Submitter` already exists (fileKey `mUIHJQvbeHidhp8bjUcZbK`). v2 does not create a new file — it **refactors** specific frames and **adds** new components/frames inside the same file. Task 0 below covers the audit of the existing file before refactoring begins.
+**Existing Figma file (v2):** the Figma file `Intake · Submitter` already exists (fileKey `6Yfv523dlb2bfZS9zWGJly`). v2 does not create a new file — it **refactors** specific frames and **adds** new components/frames inside the same file. Task 0 below covers the audit of the existing file before refactoring begins.
 
 ---
 
@@ -34,8 +81,8 @@
 
 ### Seed scenario (use verbatim across all screens)
 
-- **User:** Carlos Silva · COO · `carlos.silva` · org `acme`.
-- **Demand:** `INT-2026-014` — **"Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."** A top-3 account threatens non-renewal without it.
+- **User:** Hugo Seabra · COO · `hugo.seabra` · org `acme`.
+- **Demand:** `INT-2026-015` — **"Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."** A top-3 account threatens non-renewal without it.
 - **Dashboard portfolio numbers:** HeroMetric = **R$ 412k/ano** (Impacto financeiro YTD) · CompactKPIs: **1** demanda ativa · **8/14** aceitas no ano (57%) · **6,2 dias** tempo médio até congelamento (−2,1d vs mercado) · **18h** que você não gastou · **4,2x** ROI médio realizado · Inadimplência projetada.
 - **Funnel (if used):** **14 → 11 → 9 → 7 → 3**.
 - **AI Impact (Dashboard scope):** "18h economizadas · 65% automatizado neste portfólio".
@@ -55,7 +102,7 @@
 
 ## Task 0 — File state audit *(v2)*
 
-**Figma target:** existing file `Intake · Submitter` (fileKey `mUIHJQvbeHidhp8bjUcZbK`).
+**Figma target:** existing file `Intake · Submitter` (fileKey `6Yfv523dlb2bfZS9zWGJly`).
 
 - [ ] **Step 1: Confirm live Figma MCP connection.** Run `mcp__plugin_figma_figma__whoami`. Expected: a valid user, no auth error. STOP if it errors.
 - [ ] **Step 2: Audit current file.** Load **figma:figma-use**, then `get_metadata` on file root + each of the 4 pages (Foundations, Components, Screens, Prototype). Expected: confirm v1 components and frames exist; record nodeIDs of:
@@ -121,7 +168,7 @@
   - Right (flex-end): two stat blocks separated by a 1px hairline, each: big number (H3, mono numerics, `brand/tide-text`) over Meta caption (`text/muted`).
   - Variants: `scope = portfolio | demand | review`, drives default copy and the second stat (portfolio → hoursSaved + automatedPct; demand → hoursSaved + reqsPrefilled; review → hoursSaved + automatedPct).
 - [ ] **Step 2: GlobalChatSheet.** Right-anchored sheet, 420 wide × full viewport height. Structure:
-  - Header (72 tall): 32×32 rounded `brand/tide-wash` square with Sparkles icon (`brand/tide-text`, 16) · Label "Assistente IA" + Eyebrow "CONTEXTO: {current-route-label}" (e.g. "CONTEXTO: DASHBOARD" / "CONTEXTO: INT-2026-014") · ✕ close button on the right.
+  - Header (72 tall): 32×32 rounded `brand/tide-wash` square with Sparkles icon (`brand/tide-text`, 16) · Label "Assistente IA" + Eyebrow "CONTEXTO: {current-route-label}" (e.g. "CONTEXTO: DASHBOARD" / "CONTEXTO: INT-2026-015") · ✕ close button on the right.
   - Divider (1px `border/hairline`).
   - Body (scrollable):
     - Empty-state variant: Sparkles icon (32, `brand/tide-bright`, centered top) · Body "Como posso ajudar?" · Body/sm "Tenho contexto completo desta tela." · 3 suggestion buttons (`surface/sunken`, `border/hairline`, padding 12 16, left-aligned, Body/sm): "Resuma o status da demanda", "Quais ADRs estão envolvidos?", "Qual o ROI estimado?".
@@ -194,7 +241,7 @@
 - [ ] **Step 1: DELETE the previous J4.1 frame** (record nodeID first). Also delete the previously-instantiated header CTA "Enviar ao PO" affordance from the canvas (it is now living inside `GateToolbar`).
 - [ ] **Step 2: Build new `J4.1 · Painel (Rascunho)`.** DemandPanel `phase=drafting`, 1280 wide content (sidebar 160):
   - **Identity header** (1216 wide, 200 tall, surface/card, border-bottom hairline, padding 24 32):
-    - Top row: INT-2026-014 (Mono 13, `text/faint`) · separator · `StateBadge` (variant=draft, label "Em Captura") · flex spacer · `ReadinessRing` 96×96 (state=building, score=38%, delta-slot empty in initial state, populated to "+26%" in J4.4).
+    - Top row: INT-2026-015 (Mono 13, `text/faint`) · separator · `StateBadge` (variant=draft, label "Em Captura") · flex spacer · `ReadinessRing` 96×96 (state=building, score=38%, delta-slot empty in initial state, populated to "+26%" in J4.4).
     - Title H2: "Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."
     - **AIImpactBanner** (scope=demand, embedded inside the header card, full width): "12h economizadas nesta demanda · 5 de 8 requisitos pré-preenchidos · 3 fontes mineradas".
     - No CTA here — moved to GateToolbar.
@@ -222,7 +269,7 @@
   - TopBar + Sidebar chrome (sidebar item "Notificações" highlighted only if reachable from sidebar — in v2 it is reachable via TopBar primarily; sidebar entry optional and lower-priority).
   - H1 "Notificações".
   - Filter chips row: `Não resolvidos` (active by default) · `Todos`.
-  - Sections: Eyebrow "RECENTES" + 3 NotificationRow items (PO perguntou; INT-2026-014 avançou para Em Captura; RP-041 foi congelado pelo Produto) · Eyebrow "ANTERIORES" + 2 NotificationRow items (Discovery encerrado; INT-2026-004 entregue).
+  - Sections: Eyebrow "RECENTES" + 3 NotificationRow items (PO perguntou; INT-2026-015 avançou para Em Captura; RP-041 foi congelado pelo Produto) · Eyebrow "ANTERIORES" + 2 NotificationRow items (Discovery encerrado; INT-2026-004 entregue).
   - Footer ghost link "Marcar todas como lidas".
 - [ ] **Step 3: Build new `J5.1.1 · TopBar Notifications dropdown` (new frame)**.
   - Render J2.1 Dashboard as the backdrop (small scrim, 30% black).

@@ -29,7 +29,7 @@ Ela vende, encanta e cria o vínculo entre empresa e cliente. Ela conhece (ou te
 
 Isso significa que **não podemos pedir que ela pense como engenheira.** O modelo precisa encontrá-la na linguagem dela e fazer a tradução *por* ela — extraindo estrutura suficiente para que a demanda tenha sucesso no downstream.
 
-No exemplo dos protótipos ela é Carlos Silva, COO. Na vida real, pode ser qualquer origem upstream: CEO/COO, Vendas, Marketing ou CS. **"Submitter" é a abstração genérica** desses papéis (definidos individualmente em [`01-roles.md`](../01-roles.md)).
+No exemplo dos protótipos ela é Hugo Seabra, COO. Na vida real, pode ser qualquer origem upstream: CEO/COO, Vendas, Marketing ou CS. **"Submitter" é a abstração genérica** desses papéis (definidos individualmente em [`01-roles.md`](../01-roles.md)).
 
 ---
 

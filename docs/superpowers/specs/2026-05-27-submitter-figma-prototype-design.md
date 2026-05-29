@@ -1,6 +1,8 @@
 # Spec — Submitter Figma Prototype ("Intake")
 
-> **Status:** Draft v2 (revised 2026-05-27 PM) · **Date:** 2026-05-27 · **Author:** hugo (+ Claude)
+> **Status:** Draft v3 (decisions revised 2026-05-29, conceptual model unchanged) · **Date:** 2026-05-27, last touched 2026-05-29 · **Author:** hugo (+ Claude)
+
+> **Revision note (v3 · 2026-05-29):** Two locked decisions evolved as the build progressed. **D8 (Create vs enrich)** and **D9 (Entry tone)** still describe the philosophy ("decoupled creation, demand-panel does the enrichment"), but the **field set** in B2 (create surface) was expanded based on Hugo's review — see "Field-set update (2026-05-29)" below. **D14** (deep-detail screens are fullscreen) added. Seed scenario updated: Hugo Seabra, INT-2026-015 ("Autenticação SSO/SAML para parceiros B2B"). File key changed to `6Yfv523dlb2bfZS9zWGJly` (`Intake-Platform`).
 > **Type:** Design spec for a high-fidelity, clickable Figma prototype of the Submitter persona's end-to-end experience, built on the Conductor "Paper & Signal" design system. Feeds an implementation (build) plan.
 
 > **Revision note (v2):** The spec's conceptual model (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, semantic reflection, RICE tensions, projected-vs-realized) is **kept intact** — it is more mature than any prototype. What this revision changes is the **visual coreography and inventory** so the Figma execution stops feeling like a wireframe and starts feeling like a living product. Driver of change: `prototypes/demandos-prototype-unified-v1.tsx` ships the visual maturity (HeroMetric, AIImpactBanner, global ChatSheet, TopBar notifications, "tell-me-as-a-colleague" entry tone, urgency-grouped Demand Panel, sticky-bottom toolbar with contextual gate copy) that the conceptual maturity of the docs deserves. The unified-v1 is **visual reference**, not conceptual ground truth — the docs remain the source of truth for what the Submitter *is*.
@@ -29,7 +31,7 @@ The reasoning model behind the screens (compliance contract, confidence layer, d
 
 **Persona:** the Submitter — non-technical, business-language native (problem / value / opportunity / relationship). Cannot be asked to think like an engineer; the system meets her in her language and does the translation *for* her.
 
-**Seed scenario (the demand we prototype):** Carlos Silva, COO. *"A top-3 enterprise account is threatening non-renewal unless we ship SSO/SAML login + audit-log export."* Chosen because it carries a clear ARR figure (Impact), a clear affected segment (Reach), real time pressure (Urgency), and natural tensions for the RICE-lite mirror. Easily swappable.
+**Seed scenario (the demand we prototype):** Hugo Seabra, COO. *"A top-3 enterprise account is threatening non-renewal unless we ship SSO/SAML login + audit-log export."* Chosen because it carries a clear ARR figure (Impact), a clear affected segment (Reach), real time pressure (Urgency), and natural tensions for the RICE-lite mirror. Easily swappable.
 
 ## 3. Locked design decisions
 
@@ -40,7 +42,7 @@ The reasoning model behind the screens (compliance contract, confidence layer, d
 | D3 | Component base | **shadcn/ui primitives** restyled with Conductor tokens (continues the existing "shadcn pilot" component set). |
 | D4 | Device | **Desktop, 1440 viewport.** Sidebar 256 · centered work column · top bar 66. |
 | D5 | Fidelity | **High-fidelity, final-product intent, every state explicit** — empty / AI-reading / parsing / recording / transcribing / filled / disposition / tension / confirm / error. |
-| D6 | Seed scenario | Carlos Silva (COO) + the SSO/SAML + audit-log demand (see §2). |
+| D6 | Seed scenario | Hugo Seabra (COO) + the SSO/SAML + audit-log demand (see §2). |
 | D7 | Figma file | New file **"Intake · Submitter"** using Conductor as the visual language (Conductor itself is a different product). |
 | D8 | Create vs enrich | **Decoupled.** Creating a demand captures only **basic info** (fast, low-friction) and produces a **Draft**. All enrichment happens later, over multiple sessions, from a dedicated **Demand Panel** page — because maturing a good demand takes time and depends on external inputs the Submitter does not control. The Demand Panel is the **central object**, spanning the demand's whole lifecycle (enrich → handoff → monitor → outcome). |
 | D9 *(new)* | Entry tone | **"Tell me as if you were talking to a colleague."** Quick-create is a single rich problem field + optional artifact/voice. Origin/type are inferred by the AI from the narrative or artifact — they are NOT separate form inputs the Submitter has to classify. This honors the persona's "she does not think like an engineer" constraint. |
@@ -48,6 +50,18 @@ The reasoning model behind the screens (compliance contract, confidence layer, d
 | D11 *(new)* | Chat invocation | **The copilot is global, not per-screen.** A single `GlobalChatSheet` is summoned from a TopBar button on every screen; context (current demand, selected block, current dashboard) flows in automatically. The "Discuss this" block-reference pattern (§7) is its primary input. The Demand Panel's Conversation zone is the *same* sheet, anchored open in `phase=drafting`. |
 | D12 *(new)* | Notifications | **Notifications are anchored to the TopBar.** A bell icon with unread badge opens a dropdown for triage; the dedicated `J5.1 Notifications` page is the "view all" fallback, reachable from "Ver todas" in the dropdown. They are not a sidebar menu item competing with primary workflow. |
 | D13 *(new)* | Pay-justifying KPI | **The Dashboard has one number-rei.** A `HeroMetric` with explicit `badge="Pay-justifying KPI"`, trend, sparkline and sub-composition occupies the visual gravity center. For the Submitter that number is **"Impacto financeiro das suas demandas em produção (YTD)"** (R$ 412k). All other KPIs are secondary (`CompactKPI` grid) and orbit it. |
+| D14 *(v3, 2026-05-29)* | Deep-detail screens are fullscreen | **B4 Demand Panel and similar deep-journey screens hide the global sidebar.** The full 1440w is the work surface; the TopBar breadcrumb ("Demandas") is the close affordance. Pages that keep the sidebar: B0, B1, B2, C-series. Future deep-journey pages (B5 Discovery, etc.) follow this pattern. |
+
+### Field-set update (2026-05-29) — B2 create surface
+
+D8/D9 are unchanged in spirit ("creation is decoupled from enrichment; tell me as a colleague"), but B2's actual field set was expanded after live review. The build now captures, on the create surface itself:
+
+- **Título** — short demand name (single-line Input)
+- **Descrição** — rich problem field with mic affordance (textarea, or recording state in the audio variant)
+- **Evidências** — `Anexar arquivo` + `Gravar áudio` ghost buttons
+- **Contexto · OPCIONAL** — Tags (chips, removable), Urgência (4-pill picker, default+selected), Prazo (date field), Pessoas (avatar + add)
+
+Why the expansion: "the moment the submitter has information to input" should not be blank when the user already has voice/files/context in hand. The original "single rich problem field" model still applies for **users with nothing but a sentence to say** (the mic + textarea covers them), but power users with deck/transcript/known stakeholders can drop everything they have without bouncing to a later step. The Contexto section is explicitly opcional to preserve D9's "no classification required" guarantee.
 
 ## 4. Experience principles (carried into every screen)
 
@@ -191,7 +205,7 @@ One **MultimodalComposer** is the constant affordance — present in the GlobalC
 
 *Drafting / Enriching layout* *(refactored — J4.1 only)*
 - **J4.1 Panel shell** — DemandPanel `phase=drafting`:
-  - **Identity header**: INT-2026-014 (Mono) · separator · `StateBadge` (Em Captura) · spacer · `ReadinessRing` 38% (with `delta` slot for +26% animation in J4.4).
+  - **Identity header**: INT-2026-015 (Mono) · separator · `StateBadge` (Em Captura) · spacer · `ReadinessRing` 38% (with `delta` slot for +26% animation in J4.4).
   - Title H2: "Conta enterprise em risco de churn exige SSO/SAML + exportação de log de auditoria."
   - **AIImpactBanner** (demand-scoped): "12h economizadas nesta demanda · 5 de 8 requisitos pré-preenchidos · 3 fontes mineradas".
   - **Three-zone body**:
