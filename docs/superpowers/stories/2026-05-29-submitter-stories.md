@@ -1,8 +1,10 @@
 # Submitter Journey Stories
 
-> **Status:** v1 · **Date:** 2026-05-29 · **Author:** hugo (+ Claude)
+> **Status:** v2 (flow validated 2026-05-29) · **Date:** 2026-05-29 · **Author:** hugo (+ Claude)
 > **Companion to:** [`specs/2026-05-27-submitter-figma-prototype-design.md`](../specs/2026-05-27-submitter-figma-prototype-design.md) (the WHAT) and [`plans/2026-05-27-submitter-figma-prototype.md`](../plans/2026-05-27-submitter-figma-prototype.md) (the HOW it was built).
 > **Live Figma:** `Intake-Platform` · fileKey `6Yfv523dlb2bfZS9zWGJly` · Submitter journeys page `2:789`.
+
+> **v2 revision (2026-05-29 tarde):** Walk-through validation done. Lane C merged into B (became "ENRICH · INPUTS" — voice + file converge). Several lanes reordered for narrative clarity (D, F, H, M). Alt-variants moved to slots BELOW their primary screen (B2 voz in A, Fontes-sem-chat in E, rails in G). Reason modal (universal) lifted to new Lane Z · REUSABLE PATTERNS. Arrows added for B/L which start mid-flow.
 
 ## Purpose
 
@@ -10,9 +12,15 @@ The prototype now contains ~54 Submitter screens. The spec describes the design 
 
 ## Reading the canvas
 
-The canvas is laid out in **15 horizontal lanes**, one per story (Story 0 + A→N). Each lane has a big letter label at the left (x=-900) and screens stacked left → right by narrative beat. Lanes are spaced 2800px vertically; screens 1740px horizontally.
+The canvas is laid out in **15 horizontal lanes** (Story 0 + A→N + Z). Each lane has a big letter label at the left (x=-900) and screens stacked left → right by narrative beat. Lanes are spaced 2800px vertically; screens 1740px horizontally.
 
-To trace a story: find its letter on the left of the canvas, then read left → right.
+**Reading conventions:**
+- Primary beats are on the main row (y = lane_y).
+- **Alt-variants and rails** sit on a row 1400px BELOW the main row (still inside the same lane). They are paths the user CAN take but aren't sequential beats.
+- **Lane Z** at the bottom contains reusable patterns referenced by multiple stories (currently: Reason modal).
+- Lanes that start mid-flow (B, L) have a text arrow at the far left pointing to the lane they depend on.
+
+To trace a story: find its letter on the left of the canvas, then read left → right on the main row.
 
 ## Seed scenario (used across every story)
 
@@ -38,39 +46,31 @@ Hugo abre o produto. Vê uma landing focada — eyebrow + display + quote de out
 
 **Intent:** Capturar uma nova demanda, do clique inicial até a primeira tela onde ela ganha forma.
 
-Hugo está em Demandas, vê o portfolio (8 ativas), clica em **+ Nova demanda**. A tela de captura **não pede que ele pense como engenheiro**: pede título curto, descrição na linguagem dele (com mic se preferir falar), evidências (arquivo ou áudio) e — opcional — tags/urgência/prazo/pessoas. Continua → cai no **Demand Panel** (B4), onde a demanda agora existe como objeto com seu próprio readiness, perguntas pendentes, fontes e abas. O modal de **Readiness breakdown** mostra o que falta pra 80% (gate de Discovery) com CTAs inline pra preencher.
+Hugo está em Demandas, vê o portfolio (8 ativas), clica em **+ Nova demanda**. A tela de captura **não pede que ele pense como engenheiro**: pede título, descrição na linguagem dele (com mic se preferir falar), evidências (arquivo ou áudio) e — opcional — tags/urgência/prazo/pessoas. Continua → cai no **Demand Panel** (B4), onde a demanda agora existe como objeto com seu próprio readiness, perguntas pendentes, fontes e abas. O modal de **Readiness breakdown** mostra o que falta pra 80% (gate de Discovery) com CTAs inline pra preencher.
 
-**Beats:**
+**Beats (main row):**
 1. **C1 · Demandas** (`548:2298`) — Lista de portfolio · row 1 highlighted INT-2026-015 · clica "+ Nova demanda" no topo direito.
 2. **B2 · Nova demanda** (`835:3979`) — Form rico: Título · Descrição (textarea + mic inline) · Evidências (Anexar arquivo · Gravar áudio) · Contexto opcional (Tags · Urgência · Prazo · Pessoas) · Continuar →.
-3. **B2 · Gravando áudio** (`850:4010`) — Alt da B2: textarea vira waveform live · ⏱ 00:42 · "Parar e transcrever" → volta com texto preenchido.
-4. **B4 · Demand Panel — drafting** (`478:703`) — A demanda nasceu. Readiness 24% Em Captura · aba Adicionar informação ativa · "Foque aqui · 10 itens precisam de você" com lista priorizada.
-5. **B4 · Readiness breakdown (modal)** (`963:5649`) — "Para abrir Discovery, falta…" com artefatos vazios e perguntas pendentes · cada um com CTA inline "Preencher →" / "Responder →".
+3. **B4 · Demand Panel — drafting** (`478:703`) — A demanda nasceu. Readiness 24% Em Captura · aba Adicionar informação ativa · "Foque aqui · 10 itens precisam de você" com lista priorizada.
+4. **B4 · Readiness breakdown (modal)** (`963:5649`) — "Para abrir Discovery, falta…" com artefatos vazios e perguntas pendentes · cada um com CTA inline "Preencher →" / "Responder →".
+
+**Alt-below (sobre B2 base):**
+- **B2 · Gravando áudio** (`850:4010`) — Alt da B2: textarea vira waveform live · ⏱ 00:42 · "Parar e transcrever" → volta com texto preenchido.
 
 ---
 
-## Story B · Enrich · Voz
+## Story B · Enrich · Inputs
 
-**Intent:** Falar dentro do Demand Panel ao invés de digitar — o áudio vira contribuição estruturada.
+**Intent:** Adicionar informação ao Demand Panel — por voz OU por arquivo — gerando uma contribuição aprovada.
 
-Hugo abre uma demanda existente, está no composer (aba Adicionar informação), clica no mic. O composer **morfa em waveform inline** — não muda de tela, não rouba o foco. Ele fala 40 segundos sobre quantos parceiros estão na fila e qual o impacto. Para. O feed mostra a **Contribuição aprovada**: a IA extraiu de fala → atualizou Alcance ("parceiros B2B") + atualizou Urgência. Cada extração tem source rastreável de volta ao áudio.
+*(Esta lane parte do Demand Panel já aberto — vem da lane A.)*
 
-**Beats:**
-1. **B4 · Gravando áudio (inline composer)** (`949:4132`) — Composer expandiu em waveform · ⏱ contador · "Parar e transcrever" preto · resto da tela inalterada.
-2. **B4 · Contribuição aprovada** (`949:4464`) — Feed atualizado · banner "IA extraiu · atualizou ALCANCE (parceiros B2B) · atualizou URGÊNCIA" · CTAs Aprovar/Discutir inline.
+Hugo abre uma demanda existente, está no composer (aba Adicionar informação). Dois caminhos disponíveis: **falar** (mic morfa o composer em waveform inline) ou **anexar arquivo** (modal centralizado pra escolher arquivos ou colar URL). Qualquer um dos dois acaba no mesmo destino: o feed mostra a **Contribuição aprovada** com banner "IA extraiu · atualizou ALCANCE · atualizou URGÊNCIA". Cada extração tem source rastreável de volta ao input original.
 
----
-
-## Story C · Enrich · Arquivo
-
-**Intent:** Anexar deck ou transcrição que ele já tem em mãos — IA processa.
-
-Hugo arrasta (ou clica) o botão Anexar arquivo. **Modal** com dois quadrantes: Anexar arquivos (drop zone, formatos aceitos) e Fonte web (URL). Hugo solta o deck da CISO. Modal fecha. Volta no Demand Panel — feed mostra "Contribuição aprovada" igual à Story B (IA já processou o deck).
-
-**Beats:**
-1. **B4 · Anexar arquivo (modal)** (`945:4039`) — Modal centralizado · "Anexar arquivos à demanda" · dois quadrantes (Anexar arquivos · Fonte web) · Cancelar · Anexar.
-
-> A contribuição aprovada resultante é a mesma da Story B (`949:4464`), na lane acima.
+**Beats (main row):**
+1. **B4 · Gravando áudio (inline composer)** (`949:4132`) — Composer expandiu em waveform · ⏱ contador · "Parar e transcrever" preto · resto da tela inalterada. *(Caminho voz)*
+2. **B4 · Anexar arquivo (modal)** (`945:4039`) — Modal centralizado · "Anexar arquivos à demanda" · dois quadrantes (Anexar arquivos · Fonte web) · Cancelar · Anexar. *(Caminho arquivo)*
+3. **B4 · Contribuição aprovada** (`949:4464`) — Feed atualizado · banner "IA extraiu · atualizou ALCANCE (parceiros B2B) · atualizou URGÊNCIA" · CTAs Aprovar/Discutir inline. *(Convergência — destino dos dois caminhos)*
 
 ---
 
@@ -78,14 +78,14 @@ Hugo arrasta (ou clica) o botão Anexar arquivo. **Modal** com dois quadrantes: 
 
 **Intent:** Responder uma das perguntas pendentes que bloqueiam o avanço da demanda.
 
-A aba **Perguntas** lista o que a IA ainda precisa saber. Hugo filtra por **Vazias** pra atacar o que mais bloqueia — vê "Quantos parceiros B2B na fila de onboarding hoje?" no topo (Bloqueia). Clica → modal **Responder pendência** com a pergunta em destaque, campo de resposta + opções de disposition (Responder · Premissa · Discovery · Delegar). Hugo responde "47, com 31 em backlog ≥30 dias." Salva. Volta na aba Perguntas — pergunta foi pra **Confirmar** filter (resposta dada, IA quer validar). Em paralelo, ele pode abrir um **Artefato detail** modal pra ver o que já foi preenchido em "Empresas afetadas".
+A aba **Perguntas** lista o que a IA ainda precisa saber. Hugo filtra por **Vazias** pra atacar o que mais bloqueia — vê "Quantos parceiros B2B na fila de onboarding hoje?" no topo (Bloqueia). Clica → modal **Responder pendência** com a pergunta em destaque, campo de resposta + opções de disposition (Responder · Premissa · Discovery · Delegar). Hugo responde "47, com 31 em backlog ≥30 dias." Salva. Volta na aba Perguntas — pergunta foi pra **Confirmar** filter (resposta dada, IA quer validar). Em paralelo, ele pode olhar a aba **Artefatos** pra ver o quadro completo das 8 dimensões, e abrir um **Artefato detail** modal pra ver o que já foi preenchido.
 
-**Beats:**
-1. **B4 · Artefatos (alt)** (`918:3471`) — Aba Artefatos · 8 cards (Problema · Originador · Alcance · Impacto · Urgência · Evidência · Constraints · Stakeholders) com readiness/status indicators.
-2. **B4 · Perguntas (alt)** (`919:3560`) — Aba Perguntas · lista priorizada · chips de filter (Todas · Vazias · Confirmar) · "+5 respondidas" collapsed.
-3. **B4 · Perguntas filter: Vazias** (`953:4874`) — Filter aplicado · só perguntas sem resposta · empty state quando esgota.
-4. **B4 · Perguntas filter: Confirmar** (`953:5321`) — Filter aplicado · perguntas que já tem resposta da IA aguardando confirmação do Submitter.
-5. **B4 · Responder pendência (modal)** (`922:3738`) — Pergunta em destaque · textarea · pill picker de disposition · "Salvar e seguir" / "Salvar e fechar".
+**Beats (main row):**
+1. **B4 · Perguntas (alt)** (`919:3560`) — Aba Perguntas · lista priorizada · chips de filter (Todas · Vazias · Confirmar) · "+5 respondidas" collapsed.
+2. **B4 · Perguntas filter: Vazias** (`953:4874`) — Filter aplicado · só perguntas sem resposta · empty state quando esgota.
+3. **B4 · Perguntas filter: Confirmar** (`953:5321`) — Filter aplicado · perguntas que já tem resposta da IA aguardando confirmação do Submitter.
+4. **B4 · Responder pendência (modal)** (`922:3738`) — Pergunta em destaque · textarea · pill picker de disposition · "Salvar e seguir" / "Salvar e fechar".
+5. **B4 · Artefatos (alt)** (`918:3471`) — Aba Artefatos · 8 cards (Problema · Originador · Alcance · Impacto · Urgência · Evidência · Constraints · Stakeholders) com readiness/status indicators. *(Visão paralela)*
 6. **B4 · Artefato detail (modal)** (`954:4819`) — Drawer/modal mostrando um artefato completo (ex: "Empresas afetadas") com source trail + edit affordances.
 
 ---
@@ -96,10 +96,12 @@ A aba **Perguntas** lista o que a IA ainda precisa saber. Hugo filtra por **Vazi
 
 Aba **Fontes** mostra o que já está vinculado (deck CISO · transcrição Stone · pipeline data). Hugo precisa adicionar a apresentação interna que mostra a perda mês a mês. Clica "+ Adicionar fonte" → modal igual ao de Anexar arquivo, mas com semântica "fonte estruturada" (terá source citation, será citada nos artefatos derivados). Salva. Lista cresce. A IA passa a citá-la nos próximos artefatos.
 
-**Beats:**
+**Beats (main row):**
 1. **B4 · Fontes (alt)** (`920:3649`) — Aba Fontes · lista vertical · cada item com title · tipo (📎/🎙/🔗) · "extraído por IA" trail.
-2. **B4 · Fontes (sem chat — visão arquivos)** (`1019:4815`) — Mesma aba mas chat panel fechado · usado quando o foco é só nas fontes.
-3. **B4 · Adicionar fonte (modal)** (`953:4552`) — Modal igual ao Anexar arquivo mas semantizado como Fonte · campos extras (Tipo · Tags · Descrição opcional).
+2. **B4 · Adicionar fonte (modal)** (`953:4552`) — Modal igual ao Anexar arquivo mas semantizado como Fonte · campos extras (Tipo · Tags · Descrição opcional).
+
+**Alt-below:**
+- **B4 · Fontes (sem chat — visão arquivos)** (`1019:4815`) — Mesma aba mas chat panel fechado · usado quando o foco é só nas fontes.
 
 ---
 
@@ -107,14 +109,14 @@ Aba **Fontes** mostra o que já está vinculado (deck CISO · transcrição Ston
 
 **Intent:** Tirar uma dúvida ou refinar entendimento com a IA, sem sair do Demand Panel.
 
-Hugo clica o ícone de chat no canto. **Side panel** abre à direita (Demand Panel continua visível à esquerda). Ele pode digitar livre ("ainda não sei o ROI") ou clicar **Discutir com IA** no chip-action de uma pergunta — abre o **Chat picker** pra escolher contexto (qual pergunta, qual artefato). Hugo manda mensagem → bubble user aparece · banner "pensando…" · após 1.5s, **resposta da IA** chega com chips de ação ("Ver Artefato Alcance" · "Adicionar como premissa"). Hugo clica "Ver X" → navega pra aba destino com o artefato em foco. O chat tem também um **modo voz inline** se Hugo preferir falar a resposta.
+Hugo clica o ícone de chat no canto. **Side panel** abre à direita (Demand Panel continua visível à esquerda). Ele digita livre ("ainda não sei o ROI") → bubble user aparece · banner "pensando…" · após 1.5s, **resposta da IA** chega com chips de ação ("Ver Artefato Alcance" · "Adicionar como premissa"). Como alternativa de entrada, ele pode usar o **Chat picker** pra escolher contexto antes (qual pergunta, qual artefato discutir). Ou pode falar a mensagem usando o **modo voz inline** do chat.
 
-**Beats:**
+**Beats (main row):**
 1. **B4 · Chat aberto (alt)** (`923:3827`) — Side panel chat aberto · histórico vazio · composer no rodapé · Demand Panel à esquerda intacta.
-2. **B4 · Chat picker (modal)** (`951:4314`) — Picker modal · "Discutir o quê?" · lista (Perguntas · Artefatos · Fontes · A demanda) com chip filter.
-3. **B4 · Chat com nova msg enviada** (`951:4624`) — User bubble enviada · IA "pensando…" com 3-dots animado · AFTER_TIMEOUT 1.5s pra próxima beat.
-4. **B4 · Chat com resposta da IA** (`963:5280`) — Resposta IA com chips de ação ("Ver Alcance" · "Revisar texto" · "Enviar direto") · loop conversacional completo.
-5. **B4 · Chat com voz inline (alt)** (`939:3946`) — Composer chat morfou em waveform inline (mesma pattern do composer principal).
+2. **B4 · Chat com nova msg enviada** (`951:4624`) — User bubble enviada · IA "pensando…" com 3-dots animado · AFTER_TIMEOUT 1.5s pra próxima beat.
+3. **B4 · Chat com resposta da IA** (`963:5280`) — Resposta IA com chips de ação ("Ver Alcance" · "Revisar texto" · "Enviar direto") · loop conversacional completo.
+4. **B4 · Chat picker (modal)** (`951:4314`) — *Alt entry.* Picker modal · "Discutir o quê?" · lista (Perguntas · Artefatos · Fontes · A demanda) com chip filter.
+5. **B4 · Chat com voz inline (alt)** (`939:3946`) — *Alt input.* Composer chat morfou em waveform inline (mesma pattern do composer principal).
 
 ---
 
@@ -122,29 +124,31 @@ Hugo clica o ícone de chat no canto. **Side panel** abre à direita (Demand Pan
 
 **Intent:** Falar com a IA por longos minutos sem distração visual.
 
-Do chat side panel, Hugo clica expandir → **Chat fullscreen** (tela inteira, sidebar escondida automaticamente). Tem dois rails opcionais: **+Contribuições** (mostra o que ele já contribuiu em paralelo ao chat) ou **+Artefatos** (mostra o estado dos 8 artefatos em paralelo). Hugo clica mic → **Voice mode**: waveform centralizada, IA escutando, contador. Hugo pausa pra pensar — **Voice paused**: mostra "Pausado · 1:23 gravados" + opções (Retomar · Parar e enviar · Descartar). Retomar → volta gravando. Stop → transcrição volta no chat normal.
+Do chat side panel, Hugo clica expandir → **Chat fullscreen** (tela inteira, sidebar escondida automaticamente). Clica mic → **Voice mode**: waveform centralizada, IA escutando, contador. Hugo pausa pra pensar — **Voice paused**: mostra "Pausado · 1:23 gravados" + opções (Retomar · Parar e enviar · Descartar). Opcionalmente, pode ativar um rail à direita: **+Contribuições** (mostra o que ele já contribuiu) ou **+Artefatos** (mostra estado dos 8 artefatos) — visíveis em paralelo à conversa.
 
-**Beats:**
+**Beats (main row):**
 1. **B4 · Chat fullscreen** (`933:3927`) — Chat ocupa tela inteira · sidebar global escondida · breadcrumb topo "Demandas > INT-2026-015 > Chat".
-2. **B4 · Chat fullscreen + Contribuições rail** (`952:4599`) — Rail à direita mostra o que Hugo contribuiu (transcrições · arquivos) como referência durante a conversa.
-3. **B4 · Chat fullscreen + Artefatos rail** (`952:4814`) — Mesma estrutura mas rail mostra os 8 artefatos · útil pra "completar o quadro" enquanto conversa.
-4. **B4 · Chat voice mode** (`936:3946`) — Waveform centralizado · IA "escutando" indicator · pausar · parar · descartar.
-5. **B4 · Voice mode paused** (`952:4500`) — Waveform congelado · banner "Pausado · 1:23 gravados" · Retomar (primary) · Parar e enviar · Descartar.
+2. **B4 · Chat voice mode** (`936:3946`) — Waveform centralizado · IA "escutando" indicator · pausar · parar · descartar.
+3. **B4 · Voice mode paused** (`952:4500`) — Waveform congelado · banner "Pausado · 1:23 gravados" · Retomar (primary) · Parar e enviar · Descartar.
+
+**Alt-below (rails):**
+- **B4 · Chat fullscreen + Contribuições rail** (`952:4599`) — Rail à direita mostra o que Hugo contribuiu (transcrições · arquivos) como referência durante a conversa.
+- **B4 · Chat fullscreen + Artefatos rail** (`952:4814`) — Mesma estrutura mas rail mostra os 8 artefatos · útil pra "completar o quadro" enquanto conversa.
 
 ---
 
 ## Story H · Editar metadata
 
-**Intent:** Mudar título, atribuir responsável, ver quem está envolvido.
+**Intent:** Atribuir responsável e ver quem está envolvido (principal); editar título/descrição (alt).
 
-Hugo clica nos **três pontinhos** no header da demanda → menu de ações (Editar título e descrição · Atribuir · Adiar · Pedir revisão · Histórico · …). Clica **Editar título** → modal com dois campos pré-preenchidos. Salva. Em outro momento, **Atribuir demanda** → modal com avatar picker (lista do time + busca). Após escolher, o header passa a mostrar **avatar do assignee + deadline chip + version chip** (v0 DRAFT, vai virar v1 PUBLICADA depois). Em hover no avatar, **popover** mostra responsável + revisor + última atualização.
+Hugo clica nos **três pontinhos** no header da demanda → menu de ações. Path principal: **Atribuir** → modal com avatar picker (lista do time + busca). Após escolher, o header passa a mostrar **avatar do assignee + deadline chip + version chip** (v0 DRAFT). Em hover no avatar, **popover** mostra responsável + revisor + última atualização. Path alternativo do mesmo menu: **Editar título e descrição** → modal com dois campos pré-preenchidos.
 
-**Beats:**
+**Beats (main row):**
 1. **B4 · Menu de ações** (`910:3397`) — Demand Panel com menu "..." aberto · lista de actions ordenada por uso.
-2. **B4 · Editar título e descrição (modal)** (`904:3285`) — Modal com Input "Título" pré-preenchido + Textarea "Descrição" expandido · Salvar / Cancelar.
-3. **B4 · Atribuir demanda (modal)** (`974:4077`) — Modal com avatar grid · busca · seleção single (responsável) + multi (revisores) · Confirmar.
-4. **B4 · Header com assignee + deadline + version** (`974:4389`) — Header completo final: avatar HS + nome · ⏱ 11 DIAS · 12 JUN · v0 DRAFT chip.
-5. **B4 · Hover popover · responsável + revisor** (`976:4296`) — Popover sobre avatar stack · "Responsável: Hugo Seabra (COO) · Revisor: Ana Costa (PO)" + última atualização timestamp.
+2. **B4 · Atribuir demanda (modal)** (`974:4077`) — Modal com avatar grid · busca · seleção single (responsável) + multi (revisores) · Confirmar.
+3. **B4 · Header com assignee + deadline + version** (`974:4389`) — Header completo final: avatar HS + nome · ⏱ 11 DIAS · 12 JUN · v0 DRAFT chip.
+4. **B4 · Hover popover · responsável + revisor** (`976:4296`) — Popover sobre avatar stack · "Responsável: Hugo Seabra (COO) · Revisor: Ana Costa (PO)" + última atualização timestamp.
+5. **B4 · Editar título e descrição (modal)** (`904:3285`) — *Alt action.* Modal com Input "Título" pré-preenchido + Textarea "Descrição" expandido · Salvar / Cancelar.
 
 ---
 
@@ -154,12 +158,11 @@ Hugo clica nos **três pontinhos** no header da demanda → menu de ações (Edi
 
 Hugo decide adiar (CISO viaja, vai voltar daqui 3 semanas). Menu "..." → **Adiar**. Modal pede motivo (textarea livre + chips de razão comum: "Aguardando stakeholder" · "Re-priorização" · "Falta evidência crítica") + data de retomada. Confirma. Demand Panel volta com **banner amber** no topo ("Adiada · há 1 min · você"), header com **left-strip 4px amber** + StateBadge "Adiada", "Desfazer" ghost button no banner pra reverter rápido. Toda a aba Adicionar informação fica acinzentada — sinaliza pause.
 
-> O **Reason modal** (`969:3430`) é universal — usado por Adiar, Pedir revisão e outros (devolver pro PO, arquivar). Padrão consistente: textarea + chips de razão + data condicional.
+*(O modal de razão é um pattern reusable em Lane Z — ver Reason modal.)*
 
 **Beats:**
-1. **B4 · Reason modal (universal · transition why)** (`969:3430`) — Modal genérico de "por quê?" · textarea · chips · CTA contextual ("Adiar" · "Pedir revisão" · "Arquivar").
-2. **B4 · Adiar (modal)** (`954:5177`) — Instância do Reason modal especializada pra Adiar · chips de razões · campo "Voltar a falar disso em" (date picker).
-3. **B4 · Adiada** (`955:5094`) — Demand Panel pós-Adiar · banner amber · header strip amber · StateBadge "Adiada" · "Desfazer" disponível.
+1. **B4 · Adiar (modal)** (`954:5177`) — Versão especializada do Reason modal · chips de razões pra adiar · campo "Voltar a falar disso em" (date picker).
+2. **B4 · Adiada** (`955:5094`) — Demand Panel pós-Adiar · banner amber · header strip amber · StateBadge "Adiada" · "Desfazer" disponível.
 
 ---
 
@@ -191,6 +194,8 @@ Readiness Ring atinge 100%. CTA primário no rodapé muda pra **"Congelar e publ
 
 **Intent:** A v1 já saiu, mas Hugo descobriu mais info — quer atualizar.
 
+*(Esta lane parte de Handoff publicada — vem da lane K.)*
+
 Hugo abre a demanda já publicada. Vê o estado v1 frozen. Clica **"Editar nova versão"** → cria v2 draft. Header agora mostra **dois chips: v1 PUBLICADA + v2 DRAFT** (lado a lado). Os campos voltam a ser editáveis (mas em uma camada v2). Quando ele faz uma edição, **Diff modal** abre opcionalmente mostrando v1 → v2 inline (campo por campo, com strikethrough/insertion). Versão **v2 enxuta** = visão pós-publicação onde só TODOs novos são mostrados (não revisita tudo).
 
 **Beats:**
@@ -204,22 +209,15 @@ Hugo abre a demanda já publicada. Vê o estado v1 frozen. Clica **"Editar nova 
 
 **Intent:** O que o Submitter vê depois que entrega — diferentes destinos da demanda no funil.
 
-Após handoff, a demanda passa por estados controlados pelo PO/Discovery. Submitter **não edita**, mas precisa **saber onde está**. Cinco estados terminais ou interimediários:
+Após handoff, a demanda passa por estados controlados pelo PO/Discovery. Submitter **não edita**, mas precisa **saber onde está**. Quatro estados terminais ou intermediários (em ordem do mais comum/positivo ao mais crítico): **Sent** (PO recebeu, está triando) → **Returned** (PO devolveu pedindo mais info) → **Late** (passou o deadline) → **Archived** (terminou, rejeitada ou de-priorizada). Em qualquer momento o **Histórico/Auditoria** tab mostra o event log completo, e o **Status Journey + Events downstream** é a visão expandida do funil inteiro (Sent → Discovery → RP-Congelado → Em Execução → Entregue).
 
-- **Sent**: PO recebeu e está triando. Banner tide neutro.
-- **Returned**: PO devolveu pedindo mais info ("Faltou cenário de fallback"). Banner amber crítico. Hugo precisa agir.
-- **Archived**: PO arquivou (não é prioridade ou foi rejeitada). Banner stone. Histórico preservado.
-- **Late**: passou o deadline sem progresso. Banner red. Alarme suave pra Submitter renegociar prazo.
-
-E o **Histórico/Auditoria tab** mostra todo o histórico de transições (event log: quem fez o quê e quando). E o **Status Journey + Events downstream** (970:3895) é a tela "expandida" mostrando todo o caminho da demanda no funil (Sent → Discovery → RP-Congelado → Em Execução → Entregue) com events do downstream visíveis.
-
-**Beats:**
-1. **B4 · Histórico / Auditoria (tab)** (`972:3988`) — Tab Histórico · event log vertical · cada evento com timestamp + ator + ação ("Hugo congelou v1" · "Ana abriu Discovery" · …).
-2. **B4 · Sent (status)** (`969:3615`) — Demand Panel pós-handoff · banner tide "Enviada · aguardando PO".
-3. **B4 · Returned (status)** (`969:3873`) — Banner amber "Devolvida pelo PO · 'Falta cenário de fallback'" + CTA "Responder devolução" primary.
+**Beats (main row):**
+1. **B4 · Sent (status)** (`969:3615`) — Banner tide "Enviada · aguardando PO" · estado natural pós-handoff.
+2. **B4 · Returned (status)** (`969:3873`) — Banner amber "Devolvida pelo PO · 'Falta cenário de fallback'" + CTA "Responder devolução" primary.
+3. **B4 · Late (status)** (`969:4387`) — Banner red "Atrasada · prazo era 12 jun" · CTA "Renegociar prazo".
 4. **B4 · Archived (status)** (`969:4128`) — Banner stone "Arquivada · 28 mai 2026 · por Ana Costa" · campos frozen.
-5. **B4 · Late (status)** (`969:4387`) — Banner red "Atrasada · prazo era 12 jun" · CTA "Renegociar prazo".
-6. **B4 · Status Journey + Events downstream** (`970:3895`) — Tela alta (2134h) · timeline horizontal do funil completo · events do downstream (Discovery iniciou · RP versionado · etc).
+5. **B4 · Histórico / Auditoria (tab)** (`972:3988`) — Tab Histórico · event log vertical · cada evento com timestamp + ator + ação ("Hugo congelou v1" · "Ana abriu Discovery" · …).
+6. **B4 · Status Journey + Events downstream** (`970:3895`) — Tela alta (2134h) · timeline horizontal do funil completo · events do downstream visíveis.
 
 ---
 
@@ -241,6 +239,17 @@ Quatro surfaces que o Submitter visita pra ter visão de alto nível:
 3. **C2 · Notifications** (`560:2492`) — Tela "ver todas" das notificações · seções (Recentes · Anteriores) · NotificationRow components.
 4. **C7 · Atividade** (`752:3822`) — Activity feed cross-demand · grupos por dia · cada item linka pra demanda fonte.
 5. **C8 · Pendências** (`752:4085`) — Lista priorizada de pendências do Submitter cross-demand · "X demandas com Y pendências bloqueantes" · agrupado por urgência.
+
+---
+
+## Lane Z · Reusable patterns
+
+**Intent:** Patterns referenciados por múltiplas stories, mantidos centralizados pra não duplicar.
+
+Padrões que aparecem em mais de uma story merecem visibilidade autônoma — referência única, fácil de iterar sem mexer nas stories.
+
+**Beats:**
+1. **B4 · Reason modal (universal · transition why)** (`969:3430`) — Modal genérico de "por quê?" · textarea + chips de razões comuns + data condicional. Usado por: Adiar (lane I — `954:5177` é uma versão especializada), Pedir revisão (lane J — `954:5363`), e potencialmente Arquivar / Devolver no futuro.
 
 ---
 
