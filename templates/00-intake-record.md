@@ -3,6 +3,8 @@
 > **Este é o documento formal do Submitter** — o primeiro artefato da jornada (`00`), e o único entregável da persona Submitter. Ele **tangibiliza** o modelo descrito em [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda. É um **output**: preenchido durante a captura e **congelado no handoff ao PO**. Cada resposta carrega o quão sólida ela é e de onde veio — a camada de confiança viaja *com* o registro.
 >
 > **Jornada:** `00 Intake Record (Submitter)` → [`01 Readiness Package (PO)`](./01-readiness-package.md) → [`02 Technical Assessment (CTO)`](./02-technical-assessment.md) → [`03 PRD (PO+CTO → PM)`](./03-prd.md). Ver [`README.md`](./README.md).
+>
+> **Não existe documento que anteceda este.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** e nunca é entregue ao PO como tal (ver [`../README.md` › O que o downstream recebe](../README.md)). Esse sinal entra *aqui dentro* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma no primeiro documento formal da jornada. Validado contra [`personas/01-submitter.md` §9](../personas/01-submitter.md) e [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md).
 
 ## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
 
