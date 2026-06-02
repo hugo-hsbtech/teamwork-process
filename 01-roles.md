@@ -302,13 +302,13 @@ O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila 
 - a etapa de captura foi concluída e o input estruturado existe.
 
 **Termina quando**
-- o Readiness Package foi aprovado e entregue ao PM;
+- o **PRD** (fusão do Readiness Package com o Technical Assessment, quando houver) foi entregue ao PM;
 - ou a demanda foi rejeitada, movida para o backlog ou enviada para Discovery.
 
 **Ownership**
 - A fila do Intake Layer e sua saúde operacional.
 - Decisões de triagem para todas as demandas não arquiteturais.
-- O Readiness Package como entregável primário do Intake.
+- O Readiness Package como entregável de produto do PO — fundido no PRD que abre o downstream.
 - Racionalização de produto — transformar dor em definição de capacidade.
 - Decisão de caminho: Rejeitado / Backlog de Oportunidades / Discovery / Product Ready.
 - Manutenção do Backlog de Oportunidades e cadência de revisão.
@@ -373,13 +373,13 @@ QA valida que o que foi construído corresponde ao que foi prometido. Opera cont
 
 ### PM (Project Manager / Program Manager)
 
-O PM recebe o Readiness Package e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o pacote vier incompleto ou contraditório, o PM devolve.
+O PM recebe o **PRD** (a fusão do Readiness Package com o Technical Assessment) e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o PRD vier incompleto ou contraditório, o PM devolve.
 
 O PM também é o guardião da capacidade do time. Antes de comprometer qualquer prazo, avalia se o time atual tem as habilidades, disponibilidade e senioridade para executar o escopo. Se uma demanda vira urgente ou desce por pressão top-down, a obrigação do PM é surfaçar o gap de capacidade — não absorvê-lo silenciosamente — e escalar ao tomador de decisão certo com uma avaliação clara de impacto.
 
 **Inicia quando**
-- o Readiness Package foi entregue pelo PO e marcado como completo;
-- os Tech Leads confirmaram que o pacote é suficiente para a quebra técnica;
+- o PRD foi entregue pelo PO e marcado como completo;
+- os Tech Leads confirmaram que o PRD é suficiente para a quebra técnica;
 - uma avaliação de capacidade é necessária antes que um compromisso possa ser feito.
 
 **Termina quando**
@@ -387,7 +387,7 @@ O PM também é o guardião da capacidade do time. Antes de comprometer qualquer
 - o feedback loop foi iniciado (resultados pós-entrega retornados ao upstream).
 
 **Ownership**
-- Execução da entrega, do Readiness Package aprovado ao release.
+- Execução da entrega, do PRD aprovado ao release.
 - Definição de milestones, sequenciamento e prazo de entrega.
 - Gestão de dependências cross-team durante a execução.
 - Escalada de bloqueios de execução ao papel upstream apropriado.
@@ -426,7 +426,7 @@ A avaliação vai ao PO (e ao CEO se a pressão top-down for o gatilho) antes qu
 
 ### Tech Leads
 
-Os Tech Leads recebem o Readiness Package aprovado e o plano de execução do PM, e são responsáveis por todas as decisões técnicas dentro desse escopo. Traduzem contexto de produto em arquitetura, tasks e estratégia de implementação.
+Os Tech Leads recebem o PRD aprovado e o plano de execução do PM, e são responsáveis por todas as decisões técnicas dentro desse escopo. Traduzem contexto de produto em arquitetura, tasks e estratégia de implementação.
 
 **Inicia quando**
 - o PM entregou o plano de execução baseado no Readiness Package aprovado;

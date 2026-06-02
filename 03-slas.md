@@ -26,7 +26,7 @@ Os SLAs aqui são metas operacionais internas, não compromissos com clientes.
 
 | Etapa | Responsável | SLA | O que acontece se excedido |
 |---|---|---|---|
-| Avaliação de capacidade do PM | PM | Máx. 3 dias úteis após receber o Readiness Package | PM comunica o atraso ao PO. Nenhum compromisso de execução até concluir. |
+| Avaliação de capacidade do PM | PM | Máx. 3 dias úteis após receber o PRD | PM comunica o atraso ao PO. Nenhum compromisso de execução até concluir. |
 | Planejamento de execução do PM | PM | Máx. 1 semana após a avaliação de capacidade | PM sinaliza o atraso ao PO com justificativa. |
 | Quebra técnica dos Tech Leads | Tech Leads | Máx. 1 semana para escopo padrão | Tech Lead sinaliza ao PM. O escopo pode precisar de faseamento. |
 | Início de task pelo Engineer após atribuição | Engineers | Máx. 2 dias úteis | Tech Lead investiga o bloqueio. |
