@@ -13,27 +13,30 @@ O CTO concluiu a avaliação técnica de uma demanda que foi escalada pelo PO.
 
 ## O que o CTO Entrega
 
-- **Seção 8** preenchida: sistemas afetados, componentes, infraestrutura, decisões arquiteturais necessárias
-- **Adições de risco à Seção 9**: riscos técnicos com probabilidade, impacto e estratégia de mitigação
-- **Esclarecimentos de integração na Seção 7**: protocolos, restrições, limitações conhecidas de terceiros
+O CTO entrega um artefato próprio — o **Technical Assessment** — e **nunca edita o RP**:
+
+- **Viabilidade e constraints arquiteturais**: padrões a seguir, limites rígidos, decisões arquiteturais necessárias
+- **Sistemas e componentes afetados**: infraestrutura, multi-tenancy, segurança, comportamento de IA/runtime
+- **Riscos técnicos e mitigações**: probabilidade, impacto, ADRs sugeridos
+- **Diretrizes para a quebra técnica downstream**
 - Quaisquer restrições rígidas que afetam o escopo (ex.: "isso não pode usar o modelo de sessão existente — requer uma nova máquina de estado")
 
 ---
 
 ## O que o PO Faz Com Isso
 
-- Integra as contribuições do CTO no Readiness Package
+- **Referencia** o Technical Assessment no RP via `TechAssessmentRef` — não copia o conteúdo para o corpo do RP
 - Revisa os limites de escopo se restrições rígidas foram introduzidas
-- Completa as seções restantes (11, 12) com base no quadro técnico atualizado
-- Fecha o pacote e submete ao PM
+- Completa as seções restantes do RP com base no quadro técnico atualizado
+- Congela o RP e funde-o ao Technical Assessment no **PRD**, que submete ao PM — o **commitment point**
 
 ---
 
 ## Transferência de Ownership
 
-**Do CTO:** A avaliação técnica está completa e devolvida. A responsabilidade do CTO para esta demanda termina aqui, a menos que o PO apresente uma discordância ou mudanças de escopo exijam re-escalada.
-**Para o PO:** Detém a conclusão do Readiness Package — integrando as contribuições do CTO, revisando o escopo se necessário, comunicando ao originador da demanda e submetendo ao PM.
-**Artefato transferido:** Seção 8 + adições às Seções 7 e 9 + restrições rígidas.
+**Do CTO:** O Technical Assessment está completo e devolvido. A responsabilidade do CTO para esta demanda termina aqui, a menos que o PO apresente uma discordância ou mudanças de escopo exijam re-escalada.
+**Para o PO:** Detém o congelamento do RP e a montagem do PRD — referenciando o Technical Assessment, revisando o escopo se necessário, comunicando ao originador da demanda e submetendo o PRD ao PM.
+**Artefato transferido:** Technical Assessment (artefato separado; o CTO nunca edita o RP).
 
 ---
 
@@ -52,7 +55,7 @@ Se as restrições do CTO tornarem o escopo original inentregável, o PO documen
 ## O que o PO NÃO Deve Fazer
 
 - Suavizar ou reinterpretar silenciosamente restrições técnicas para preservar o escopo original
-- Submeter ao PM sem integrar as contribuições do CTO
+- Editar o Technical Assessment do CTO ou submeter o PRD ao PM sem referenciá-lo
 - Pular a comunicação ao originador da demanda se o escopo mudar materialmente
 
 ---
@@ -65,14 +68,14 @@ sequenceDiagram
     actor PO as PO
     actor ORIG as Originador da Demanda
 
-    CTO-->>PO: Seção 8 + adições a S7/S9 + restrições rígidas
-    PO->>PO: Integra contribuições do CTO
+    CTO-->>PO: Technical Assessment (artefato separado) + restrições rígidas
+    PO->>PO: Referencia via TechAssessmentRef (não edita o TA)
 
     alt Restrições rígidas mudam o escopo materialmente
         PO->>ORIG: Comunica revisão de escopo
         ORIG-->>PO: Reconhecido
     end
 
-    PO->>PO: Completa S11 e S12
-    PO->>PO: Fecha e submete RP ao PM
+    PO->>PO: Completa e congela o RP (14 seções)
+    PO->>PM: Funde RP + Technical Assessment no PRD e submete (commitment point)
 ```
