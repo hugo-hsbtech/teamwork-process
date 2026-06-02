@@ -1,7 +1,17 @@
-# Registro de Intake — [Nome da Demanda]
+# Intake Record — [Nome da Demanda]
 
-> **Este é o template em branco.** Instâncias usam prefixo de arquivo `01-`/`02-` (ver [`README.md`](./README.md)).
-> O Registro de Intake é um **output**: um artefato preenchido e congelado no handoff ao PO. Cada resposta carrega o quão sólida ela é e de onde veio — a camada de confiança viaja *com* o registro. O raciocínio do modelo (requisitos de compliance, geração de ToDos, fórmula de score) vive em [`personas/01-submitter.md`](../personas/01-submitter.md); este registro apenas o **instancia**.
+> **Este é o documento formal do Submitter** — o primeiro artefato da jornada (`00`), e o único entregável da persona Submitter. Ele **tangibiliza** o modelo descrito em [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda. É um **output**: preenchido durante a captura e **congelado no handoff ao PO**. Cada resposta carrega o quão sólida ela é e de onde veio — a camada de confiança viaja *com* o registro.
+>
+> **Jornada:** `00 Intake Record (Submitter)` → [`01 Readiness Package (PO)`](./01-readiness-package.md) → [`02 Technical Assessment (CTO)`](./02-technical-assessment.md) → [`03 PRD (PO+CTO → PM)`](./03-prd.md). Ver [`README.md`](./README.md).
+
+## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
+
+> Ver [`personas/01-submitter.md` §2](../personas/01-submitter.md). Os ToDos vivem onde as lentes se cruzam: "dado o que *esta* demanda significa, o que o contrato ainda precisa?"
+
+| Lente | O que é | Onde aparece neste documento |
+|---|---|---|
+| **Contrato** (determinístico) | Os requisitos fixos de compliance que toda demanda precisa satisfazer para avançar | **Resumo de Prontidão** + os requisitos numerados (score + pendências) |
+| **Semântica** (contextual) | O que *esta* demanda significa: a dor real, seu tipo, sua tese de valor, suas incógnitas | **Enunciado do Problema**, **Impacto**, **Indicadores de Valor** e suas tensões |
 
 ## Metadados
 
