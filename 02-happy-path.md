@@ -84,7 +84,7 @@ Definições de nível de prioridade:
 
 #### Camada de prontidão — como "completo" amadureceu
 
-> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-intake-record.md`](./templates/00-intake-record.md).
+> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md).
 
 Três adições mudam o passo de captura, sem remover nada do que já existia:
 

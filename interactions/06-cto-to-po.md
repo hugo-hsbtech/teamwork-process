@@ -3,7 +3,7 @@
 **Direção:** CTO inicia a devolução. PO funde no PRD.
 **Camada:** Dentro da Camada de Intake
 
-> **Mudança estrutural (ver [`personas/02-po.md` §10](../personas/02-po.md)).** O CTO devolve um **artefato próprio — o [Technical Assessment](../templates/02-technical-assessment.md)** — não "edições nas Seções 7/8/9 do RP". O PO **não integra texto do CTO dentro do RP**; ele **referencia** o TA no RP e funde os dois no **PRD**.
+> **Mudança estrutural (ver [`personas/02-po.md` §10](../personas/02-po.md)).** O CTO devolve um **artefato próprio — o [Technical Assessment](../templates/03-technical-assessment.md)** — não "edições nas Seções 7/8/9 do RP". O PO **não integra texto do CTO dentro do RP**; ele **referencia** o TA no RP e funde os dois no **PRD**.
 
 ---
 
@@ -15,7 +15,7 @@ O CTO concluiu o Technical Assessment de uma demanda escalada pelo PO.
 
 ## O que o CTO Entrega
 
-- **Technical Assessment** ([`02-technical-assessment.md`](../templates/02-technical-assessment.md)) assinado, contendo:
+- **Technical Assessment** ([`03-technical-assessment.md`](../templates/03-technical-assessment.md)) assinado, contendo:
   - Veredito de viabilidade + justificativa
   - Impacto arquitetural, integrações, riscos técnicos, ADRs, esforço/custo firme
   - **Constraints rígidas** que afetam o escopo (ex.: "não pode usar o modelo de sessão existente — requer nova máquina de estado")

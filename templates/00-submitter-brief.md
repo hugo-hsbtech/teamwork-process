@@ -1,10 +1,12 @@
-# Intake Record — [Nome da Demanda]
+# Documento do Submitter — [Nome da Demanda]
 
-> **Este é o documento formal do Submitter** — o primeiro artefato da jornada (`00`), e o único entregável da persona Submitter. Ele **tangibiliza** o modelo descrito em [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda. É um **output**: preenchido durante a captura e **congelado no handoff ao PO**. Cada resposta carrega o quão sólida ela é e de onde veio — a camada de confiança viaja *com* o registro.
+> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
 >
-> **Jornada:** `00 Intake Record (Submitter)` → [`01 Readiness Package (PO)`](./01-readiness-package.md) → [`02 Technical Assessment (CTO)`](./02-technical-assessment.md) → [`03 PRD (PO+CTO → PM)`](./03-prd.md). Ver [`README.md`](./README.md).
+> **Jornada:** `00 Documento do Submitter` → [`01 Intake Record (PO — triagem)`](./01-intake-record.md) → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md). Ver [`README.md`](./README.md).
 >
-> **Não existe documento que anteceda este.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** e nunca é entregue ao PO como tal (ver [`../README.md` › O que o downstream recebe](../README.md)). Esse sinal entra *aqui dentro* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma no primeiro documento formal da jornada. Validado contra [`personas/01-submitter.md` §9](../personas/01-submitter.md) e [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md).
+> **Nada antecede este documento como artefato.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** (ver [`../README.md`](../README.md)). Esse sinal entra *aqui* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma neste primeiro documento formal.
+>
+> **Handoff:** congela quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) e é entregue ao **PO**, que o formaliza e tria no [`01 Intake Record`](./01-intake-record.md).
 
 ## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
 
@@ -19,26 +21,23 @@
 
 | Campo | Valor |
 |---|---|
-| **ID do Registro** | INT-AAAA-NNN |
-| **Versão** | v1 |
-| **Registrado por** | [Nome] ([Papel]) |
-| **Data de registro** | AAAA-MM-DD |
-| **Status** | Novo |
-| **Data de triagem** | — |
-| **Triado por** | — |
-| **Readiness Package vinculado** | — |
+| **Demanda** | [Nome] |
+| **Registrado por** | [Nome] ([Vendas / CS / CEO / Marketing]) |
+| **Data de captura** | AAAA-MM-DD |
+| **Status** | Em captura / Pronto para handoff (`gateReady`) |
+| **Intake Record vinculado** | INT-AAAA-NNN (atribuído pelo PO na triagem) |
 
 ## Histórico de Revisão
 
 | Versão | Data | Evento | Resumo |
 |---|---|---|---|
-| v1 | AAAA-MM-DD | Intake registrado | [Breve descrição] |
+| v1 | AAAA-MM-DD | Captura iniciada | [Breve descrição] |
 
 ---
 
 ## Resumo de Prontidão (Readiness)
 
-> Snapshot no handoff. O score é derivado dos requisitos abaixo; `low_confidence` conta como parcial. A demanda só sai do Intake quando todos os requisitos bloqueantes estão resolvidos (`gateReady = Sim`).
+> Snapshot da captura. O score é derivado dos requisitos abaixo; `low_confidence` conta como parcial. A demanda só é entregue ao PO quando todos os requisitos bloqueantes estão resolvidos (`gateReady = Sim`).
 
 | Campo | Valor |
 |---|---|
@@ -48,8 +47,6 @@
 | **Dispositions** | __ respondidos · __ inferidos · __ premissas · __ discovery · __ delegados |
 
 ### Legenda de confiança (aplica-se a cada seção respondida)
-
-Cada seção substantiva traz uma faixa de metadados:
 
 | Atributo | Valores |
 |---|---|
@@ -127,9 +124,9 @@ Cada seção substantiva traz uma faixa de metadados:
 
 ## Indicadores de Valor (RICE-lite)
 
-> Espelho para desafiar o pensamento — **não** ranking automático. Pontue cada um (Baixo / Médio / Alto). A confiança reusa a coluna acima — não se pontua de novo. O Esforço fica *soft* (chute da Submitter, firmado depois pelo CTO).
+> Espelho para desafiar o pensamento — **não** ranking automático. Pontue cada um (Baixo / Médio / Alto). A confiança reusa a coluna acima — não se pontua de novo. O Esforço fica *soft* (chute do Submitter, firmado depois pelo CTO).
 
-| Indicador | Score | Justificativa (na linguagem dela) | Confiança |
+| Indicador | Score | Justificativa (na linguagem dele) | Confiança |
 |---|---|---|---|
 | **Impacto** ("quanto move o negócio?") | B / M / A | [por quê] | __ |
 | **Alcance** ("quantos sentem isso?") | B / M / A | [por quê] | __ |
@@ -174,7 +171,7 @@ Cada seção substantiva traz uma faixa de metadados:
 
 ## Premissas
 
-Condições assumidas como verdadeiras no intake. Se uma premissa se provar falsa, a demanda deve ser retriada. Premissas são uma **disposição válida** para requisitos sem resposta direta.
+Condições assumidas como verdadeiras na captura. Se uma premissa se provar falsa, a demanda deve ser retriada. Premissas são uma **disposição válida** para requisitos sem resposta direta.
 
 1. [Premissa 1] — `a validar com:` __
 2. [Premissa 2] — `a validar com:` __
@@ -195,7 +192,7 @@ Condições que limitam o espaço de solução, a respeitar independentemente do
 
 ## Riscos Preliminares
 
-Riscos identificados no intake — antes da avaliação técnica. Registro completo pertence ao Readiness Package.
+Riscos identificados na captura — antes da avaliação técnica. Registro completo pertence ao Readiness Package.
 
 | Risco | Categoria | Avaliação Inicial |
 |---|---|---|
@@ -223,58 +220,8 @@ Riscos identificados no intake — antes da avaliação técnica. Registro compl
 
 ## Critérios de Sucesso
 
-Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível do intake. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../metrics.md)).
+Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível da captura. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../metrics.md)).
 
 | Critério | Tipo | Indicador | Valor projetado |
 |---|---|---|---|
 | [Critério 1] | Negócio / Operacional / Qualidade / UX / Segurança / Compliance / Processo | [Como observar] | [Meta — ex.: R$ 78k/ano] |
-
----
-
-## Notas de Triagem do PO
-
-Análise do PO sobre alinhamento estratégico, escopo aparente e necessidade de Discovery.
-
-**Caminho de decisão:** Rejeitado / Backlog de Oportunidades / Discovery / Product Ready
-
-**Escalada arquitetural ao CTO:** Sim / Não — [breve justificativa]
-
-**Premissas validadas na triagem:** [Quais foram revisadas e o veredito]
-
-**Constraints reconhecidos:** [Quais o PM deve considerar desde o primeiro dia]
-
-[Notas adicionais do PO aqui]
-
----
-
-## Discovery Brief
-
-> Preencher apenas se a demanda for enviada para Discovery (disposição "Discovery" em qualquer requisito). Caso contrário, remover esta seção.
-
-### O que está faltando
-
-| # | Incógnita | Quem pode responder | Método |
-|---|---|---|---|
-| 1 | [Incógnita] | [PO / CTO / Cliente / Vendas] | [Spike técnico / Chamada com cliente / Revisão de infraestrutura] |
-
-**Time-box do Discovery:** [N dias] (AAAA-MM-DD → AAAA-MM-DD)
-
----
-
-### Log do Discovery
-
-#### AAAA-MM-DD — [Evento]
-
-[Resumo do que foi feito, finding, decisão ou bloqueio]
-
----
-
-### Resultado do Discovery
-
-| # | Incógnita | Resolução | Impacto no escopo |
-|---|---|---|---|
-| 1 | [Incógnita] | [Resolução] | Adicionado / Removido / Movido para backlog |
-
-**Novo caminho de decisão:** Discovery → Product Ready / Rejeitado / Backlog de Oportunidades
-
-**Discovery encerrado:** AAAA-MM-DD ([N dias — dentro / fora do time-box])

@@ -1,6 +1,6 @@
 # PRD — [Nome da Demanda]
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./01-readiness-package.md) (produto, autoria do PO) com o [Technical Assessment](./02-technical-assessment.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
 >
 > **Quando não houve escalada ao CTO:** o PRD se forma apenas a partir do RP; a Parte B referencia "sem Technical Assessment — sem impacto arquitetural".
 >
@@ -48,7 +48,7 @@
 
 ## Parte A — Definição de Produto (do Readiness Package · PO)
 
-> Síntese das seções-chave do RP. O documento-fonte completo é [`RP-AAAA-NNN`](./01-readiness-package.md); aqui fica o que o PM precisa para planejar, sem reescrever o RP inteiro.
+> Síntese das seções-chave do RP. O documento-fonte completo é [`RP-AAAA-NNN`](./02-readiness-package.md); aqui fica o que o PM precisa para planejar, sem reescrever o RP inteiro.
 
 ### A.1 Objetivos e Resultado Esperado
 
@@ -90,7 +90,7 @@
 
 ## Parte B — Definição Técnica (do Technical Assessment · CTO)
 
-> Síntese do TA. O documento-fonte completo é [`TA-AAAA-NNN`](./02-technical-assessment.md). Preencher "N/A — sem escalada arquitetural" quando não houve CTO.
+> Síntese do TA. O documento-fonte completo é [`TA-AAAA-NNN`](./03-technical-assessment.md). Preencher "N/A — sem escalada arquitetural" quando não houve CTO.
 
 ### B.1 Veredito de Viabilidade
 

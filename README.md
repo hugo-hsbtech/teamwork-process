@@ -523,15 +523,16 @@ flowchart LR
 
 | Artefato | Dono | Quando é criado | Arquivo de referência |
 |---|---|---|---|
-| Intake Record | Submitter (Sales / CS / CEO / Marketing) | No momento da captura | `00-intake-*.md` |
-| Readiness Package | PO (sozinho) | Após triagem Product Ready | `01-readiness-package-*.md` |
-| Technical Assessment | CTO (sozinho) | Quando há escalada arquitetural | `02-technical-assessment-*.md` |
-| PRD (RP + Technical Assessment) | PO + CTO (fusão) | Antes do handoff ao PM | `03-prd-*.md` |
+| Documento do Submitter | Submitter (Sales / CS / CEO / Marketing) | No momento da captura | `00-submitter-brief-*.md` |
+| Intake Record | PO (ato 1 — triagem) | Ao receber o brief (`gateReady`) | `01-intake-record-*.md` |
+| Readiness Package | PO (ato 2 — racionalização) | Após triagem Product Ready | `02-readiness-package-*.md` |
+| Technical Assessment | CTO (sozinho) | Quando há escalada arquitetural | `03-technical-assessment-*.md` |
+| PRD (RP + Technical Assessment) | PO + CTO (fusão) | Antes do handoff ao PM | `04-prd-*.md` |
 | Execution Plan | PM | Após aceite do PRD | `05-execution-plan.md` |
 | Product Backlog | PO | Após aceite do PRD | `06.1-product-backlog-*.md` / `07.1-product-backlog-*.md` |
 | Tech Backlog | Tech Lead | Após Product Backlog baselined | `06.2-tech-backlog-*.md` / `07.2-tech-backlog-*.md` |
 
-> **Cadeia de artefatos (correção amadurecida nas personas).** O RP (PO) e o Technical Assessment (CTO) são artefatos **separados** que se fundem no **PRD** — e é o PRD, não o RP, que abre o downstream. Ver [`personas/02-po.md` §2](./personas/02-po.md).
+> **Cadeia de artefatos (correção amadurecida nas personas).** O Submitter (`00`) e o PO têm artefatos distintos — o PO formaliza/tria (`01`) e depois racionaliza no RP (`02`). O RP (PO) e o Technical Assessment (CTO) são **separados** e se fundem no **PRD** — e é o PRD, não o RP, que abre o downstream. Ver [`personas/02-po.md` §2 e §3](./personas/02-po.md).
 
 ### Documentos de governança
 

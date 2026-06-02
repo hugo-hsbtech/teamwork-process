@@ -2,7 +2,7 @@
 
 > O Technical Assessment (TA) é o **output do CTO** — viabilidade, constraints, arquitetura, integrações, riscos técnicos, ADRs e custo firme. É escrito **sozinho** pelo CTO, **em paralelo** ao Readiness Package, e **responde** a ele: o CTO **nunca edita o RP**. O TA não redefine o produto — pode **vetar** a viabilidade do escopo, e nesse caso o PO revisa o escopo do RP.
 >
-> A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./03-prd.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./04-prd.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
 >
 > **Quando NÃO existe TA:** se a demanda não tem impacto arquitetural (sem escalada), não há Technical Assessment — o PRD se forma apenas a partir do RP, e a referência no RP fica `Status: Não requisitado`.
 

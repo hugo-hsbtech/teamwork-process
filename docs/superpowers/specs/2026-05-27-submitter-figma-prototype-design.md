@@ -20,10 +20,10 @@ Build a Figma prototype we can put in front of a **real Submitter (COO / CEO / S
 
 The prototype aims at the **final product**: all Submitter journeys designed, every state explicit, **no implicit screens**.
 
-The reasoning model behind the screens (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, 3-layer metrics) lives in [`personas/01-submitter.md`](../../../personas/01-submitter.md), [`templates/00-intake-record.md`](../../../templates/00-intake-record.md) and [`metrics.md`](../../../metrics.md). This spec instantiates that model as a UI.
+The reasoning model behind the screens (compliance contract, confidence layer, dispositions, Readiness Score, RICE-lite, 3-layer metrics) lives in [`personas/01-submitter.md`](../../../personas/01-submitter.md), [`templates/00-submitter-brief.md`](../../../templates/00-submitter-brief.md) and [`metrics.md`](../../../metrics.md). This spec instantiates that model as a UI.
 
 **Primary research:**
-- Conceptual ground truth: `personas/01-submitter.md`, `templates/00-intake-record.md`, `metrics.md`.
+- Conceptual ground truth: `personas/01-submitter.md`, `templates/00-submitter-brief.md`, `metrics.md`.
 - Visual & coreography reference: `prototypes/demandos-prototype-unified-v1.tsx` (most mature *experience*, even if conceptually behind the docs in places).
 - Earlier prototypes (`v167`, `fase2-v9`, `fase4-v8`) are superseded.
 

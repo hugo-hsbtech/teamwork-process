@@ -277,7 +277,7 @@ Sete desperdícios em software:
 
 ## 11. Confiança de primeira classe, Readiness Score e RICE-lite
 
-> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-intake-record.md`](./templates/00-intake-record.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
+> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
 
 ### 11.1 Readiness Score → Definition of Ready scorada + gate do Stage-Gate
 
