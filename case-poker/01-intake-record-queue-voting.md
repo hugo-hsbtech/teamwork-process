@@ -4,7 +4,7 @@
 >
 > **Ele não reescreve a captura do Submitter** — **referencia** o brief 00 e o consolida. O aprofundamento de produto (visão, escopo, regras, métricas) é o **segundo ato** do PO e vive no [`02 Readiness Package`](./02-readiness-package-queue-voting.md).
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → `01 Intake Record (PO — triagem)` → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
+> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → `01 Intake Record (PO — triagem)` → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — não requisitado` → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
 
 ## Metadados
 

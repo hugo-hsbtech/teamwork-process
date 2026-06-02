@@ -1,10 +1,10 @@
 # Readiness Package — Queue Voting (Fila de Votação)
 
-> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-queue-voting.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../personas/02-po.md).
+> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o Technical Assessment (não requisitado neste caso) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-queue-voting.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../personas/02-po.md).
 >
 > O RP **herda a camada de confiança** do Registro de Intake vinculado ([`01-intake-record-queue-voting.md`](./01-intake-record-queue-voting.md)): o que entrou como premissa não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada"). Os valores *projetados* (sobretudo as Métricas de Sucesso) carregam confiança e viram o baseline que [`../metrics.md`](../metrics.md) confronta com o realizado pós-entrega.
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → `02 Readiness Package (PO)` → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
+> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → `02 Readiness Package (PO)` → `03 Technical Assessment — não requisitado` → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
 
 ## Metadados
 
