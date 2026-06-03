@@ -179,18 +179,21 @@ and the captured document (default en-US). The Translator produces any additiona
 requested languages as separate `output/` files. Section *structure* is identical
 across languages.
 
-## Install (user-scoped, for other projects)
+## Using it elsewhere
 
-Copy the skill and its agents to your user config; no repository content is needed
-at runtime:
+In **this repo** it already works — no install step. To reuse it in **other
+projects** you have options, best to simplest:
 
-```
-cp -r .claude/skills/intake-brainstorm  ~/.claude/skills/
-cp .claude/agents/intake-*.md           ~/.claude/agents/
-```
+- **Claude Code plugin** (cleanest): package the skill + agents as a plugin and
+  install from a git marketplace — versioned, namespaced, no copying. (Not set up
+  yet; ask if you want this.)
+- **Copy** the skill to `~/.claude/skills/` and the agents to `~/.claude/agents/`.
+  Works, but you maintain two copies. Everything needed is bundled under
+  [`assets/`](assets/), so no repository content is required at runtime.
+- **Codex**: use [`codex/AGENTS.md`](codex/AGENTS.md) — the same method files, run
+  sequentially under Codex's single-agent model.
 
-The default template, its companion guide, and the calibration exemplar are all
-bundled under [`assets/`](assets/). To target a different document type, copy
+To target a different document type, copy
 `assets/target-template.intake-record.md`, re-annotate its sections, and pass it
 as the template.
 
@@ -207,6 +210,8 @@ intake-brainstorm/
 │   ├── questioning-method.md
 │   ├── writing-integrity.md  # no-truncation + queue/merge/conflict
 │   └── grounding.md
+├── codex/
+│   └── AGENTS.md             # Codex entry point (reuses references/ + assets/)
 └── assets/
     ├── target-template.intake-record.md
     ├── target-template.intake-record.guide.md
