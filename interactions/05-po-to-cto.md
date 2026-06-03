@@ -3,6 +3,8 @@
 **Direção:** PO inicia. CTO recebe.
 **Camada:** Dentro da Camada de Intake
 
+> **Mudança estrutural (ver [`personas/02-po.md` §2 e §10](../personas/02-po.md)).** O CTO **não preenche seções do Readiness Package**. Ele produz um **artefato próprio — o [Technical Assessment](../templates/03-technical-assessment.md) (TA)** — em paralelo ao RP. O RP referencia o TA via uma ponte (status + veredito + link); a fusão dos dois acontece no **PRD**. O CTO responde ao RP, não o co-edita.
+
 ---
 
 ## Gatilho
@@ -20,48 +22,51 @@ Durante a racionalização, o PO identifica que a demanda toca qualquer um dos s
 
 ## O que o PO Deve Fornecer
 
-- Contexto de produto da racionalização em andamento (problema, escopo, jornadas, regras de negócio, riscos de produto)
-- Perguntas específicas ou incógnitas que requerem o input do CTO
+- O **Readiness Package** (a visão de produto — não seções vazias para o CTO preencher)
+- **Perguntas técnicas específicas** ou incógnitas que requerem o input do CTO
 - Restrições de negócio e contexto de prazo
 
 ---
 
 ## O que o CTO Produz
 
-O CTO produz um artefato próprio — o **Technical Assessment** — e **nunca edita o RP**:
+Um **Technical Assessment** ([`03-technical-assessment.md`](../templates/03-technical-assessment.md)) — artefato separado, de autoria exclusiva do CTO:
 
-- **Viabilidade e constraints arquiteturais**: sistemas afetados, restrições, padrões a seguir ou evitar
-- **Integrações**: viabilidade técnica, protocolos, riscos conhecidos
-- **Riscos técnicos e mitigações**: ADRs sugeridos
-- Sign-off ou veto explícito sobre a abordagem arquitetural
+- **Veredito de viabilidade** (viável / viável com ressalvas / inviável como escopado) + justificativa
+- **Impacto arquitetural**: sistemas afetados, modelo de dados, eventos, multi-tenancy, segurança, performance, observabilidade
+- **Integrações**: viabilidade técnica, protocolos, riscos conhecidos de terceiros
+- **Constraints rígidas** que afetam o escopo
+- **Riscos técnicos** e mitigações
+- **ADRs** no nível arquitetural (sugeridos pela IA, aprovados/ajustados pelo CTO)
+- **Esforço e custo firme** (substitui a estimativa preliminar do PO)
 
 ---
 
 ## Transferência de Ownership
 
-**Do PO:** As incógnitas técnicas são transferidas. O PO retém o ownership exclusivo do Readiness Package mas não pode congelá-lo até que o Technical Assessment seja devolvido.
-**Para o CTO:** Detém o Technical Assessment — viabilidade, constraints, arquitetura, riscos técnicos e qualquer veredicto. O CTO não é dono das seções de produto ou negócio e nunca edita o RP.
-**Artefato transferido:** Contexto de produto da racionalização + perguntas técnicas específicas.
+**Do PO:** As incógnitas técnicas são transferidas. O PO retém o ownership do RP, mas não pode congelá-lo (`freezeReady`) até que o TA volte assinado quando foi requisitado.
+**Para o CTO:** Detém o **Technical Assessment** inteiro e o veredito de viabilidade. O CTO **não é dono** das seções de produto ou negócio e **não edita o RP**.
+**Artefato transferido:** o RP (visão de produto) + perguntas técnicas específicas. O CTO devolve um artefato novo (o TA), não edições no RP.
 
 ---
 
 ## Gate
 
-O CTO não edita o Readiness Package — produz o Technical Assessment como artefato separado, que o RP referencia via `TechAssessmentRef`. A contribuição do CTO é limitada à avaliação técnica. Se o CTO determinar que a demanda é tecnicamente inviável como escopada, o PO revisa o escopo — o CTO não redefine o produto.
+O CTO não preenche as seções de produto ou negócio. Sua contribuição é o Technical Assessment. Se o CTO determinar que a demanda é **inviável como escopada**, ele veta com justificativa; o PO revisa o escopo do RP — o CTO não redefine o produto.
 
 ---
 
 ## Caminho de Falha
 
-Se o CTO identificar que a demanda não pode ser executada sem resolver uma incógnita técnica, a demanda volta para Discovery. O CTO define o spike ou investigação necessária; o PO determina o time-box.
+Se o CTO identificar que a demanda não pode ser avaliada sem resolver uma incógnita técnica, a demanda volta para Discovery. O CTO define o spike ou investigação necessária (registrado no TA); o PO determina o time-box.
 
 ---
 
 ## O que o PO NÃO Deve Fazer
 
-- Escalar sem identificar as perguntas específicas para o CTO
-- Esperar que o CTO edite o RP ou preencha seções de produto ou negócio
-- Revisar silenciosamente as restrições técnicas do CTO após receber o Technical Assessment
+- Entregar "seções vazias do RP" esperando que o CTO as preencha
+- Enviar a escalada sem perguntas técnicas específicas
+- Revisar silenciosamente as constraints do CTO após receber o assessment
 
 ---
 
@@ -72,22 +77,22 @@ sequenceDiagram
     actor PO as PO
     actor CTO as CTO
 
-    PO->>CTO: Contexto de produto + perguntas técnicas específicas
-    CTO->>CTO: Technical Assessment (artefato separado)
+    PO->>CTO: RP (visão de produto) + perguntas específicas
+    CTO->>CTO: Produz Technical Assessment
 
-    alt Incógnita técnica bloqueia execução
+    alt Incógnita técnica bloqueia avaliação
         CTO-->>PO: Discovery necessário — define spike
-        PO->>PO: Abre Discovery com definição do spike do CTO
+        PO->>PO: Abre Discovery com a definição do spike do CTO
         PO->>CTO: Findings do Discovery
-        CTO-->>PO: Avaliação atualizada
+        CTO-->>PO: Assessment atualizado
     end
 
     alt Demanda inviável como escopada
         CTO-->>PO: Veto com justificativa
-        PO->>PO: Revisa escopo
+        PO->>PO: Revisa escopo do RP
         PO->>CTO: Re-escala com escopo revisado
     end
 
-    CTO-->>PO: Technical Assessment (artefato separado)
-    PO->>PO: Referencia via TechAssessmentRef e congela o RP
+    CTO-->>PO: Technical Assessment assinado
+    PO->>PO: Referencia o TA no RP (ponte) e prepara a fusão no PRD
 ```

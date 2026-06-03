@@ -308,7 +308,7 @@ O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila 
 **Ownership**
 - A fila do Intake Layer e sua saúde operacional.
 - Decisões de triagem para todas as demandas não arquiteturais.
-- O Readiness Package como entregável primário do Intake.
+- O Readiness Package como entregável de produto do PO — fundido no PRD que abre o downstream.
 - Racionalização de produto — transformar dor em definição de capacidade.
 - Decisão de caminho: Rejeitado / Backlog de Oportunidades / Discovery / Product Ready.
 - Manutenção do Backlog de Oportunidades e cadência de revisão.

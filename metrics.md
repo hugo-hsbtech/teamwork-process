@@ -1,6 +1,6 @@
 # Métricas e Observabilidade do Modelo
 
-> O Registro de Intake ([`templates/00-intake-record.md`](./templates/00-intake-record.md)) é um **snapshot** do conteúdo de *uma* demanda no handoff. Este documento cobre o que o snapshot não captura: **medição ao longo do tempo e entre demandas**. São três camadas distintas, com donos e ciclos de vida diferentes.
+> O Registro de Intake ([`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md)) é um **snapshot** do conteúdo de *uma* demanda no handoff. Este documento cobre o que o snapshot não captura: **medição ao longo do tempo e entre demandas**. São três camadas distintas, com donos e ciclos de vida diferentes.
 
 | Camada | Pergunta que responde | Dono | Horizonte |
 |---|---|---|---|
@@ -85,7 +85,7 @@ O delta projetado-vs-realizado alimenta o aprendizado do PO ([`README.md` Feedba
 
 | Documento | Relação |
 |---|---|
-| [`templates/00-intake-record.md`](./templates/00-intake-record.md) | Fornece os valores *projetados* (Critérios de Sucesso, Indicadores de Valor) que a camada 3 confronta com o realizado |
+| [`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md) | Fornece os valores *projetados* (Critérios de Sucesso, Indicadores de Valor) que a camada 3 confronta com o realizado |
 | [`personas/01-submitter.md`](./personas/01-submitter.md) | §8 define as métricas de portfólio da Submitter; este doc generaliza para demanda, portfólio e resultado |
 | [`03-slas.md`](./03-slas.md) | Define os SLAs que a camada 1 mede aderência |
 | [`README.md`](./README.md) | Máquina de estados (§9) e Feedback Loop (§11) são as fontes das camadas 1 e 3 |

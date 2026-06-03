@@ -15,14 +15,15 @@ flowchart TD
     A([Cliente / Mercado / Sinal Interno]) --> B
 
     subgraph UPSTREAM ["🔼 UPSTREAM"]
-        B[Vendas / CS / Marketing captura a demanda]
-        B --> C[Formulário de intake estruturado submetido\nOrigem · Tipo · Problema · Impacto · Prioridade]
+        B[Submitter captura a demanda\nVendas / CS / Marketing / CEO]
+        B --> C[Documento do Submitter\nconfiança por campo · gateReady = true]
     end
 
     subgraph INTAKE ["⚙️ INTAKE LAYER"]
-        C --> D[PO — Triagem Inicial\nÉ real? Recorrente? Estrategicamente alinhado?]
+        C --> D[PO — Triagem\nÉ real? Recorrente? Estrategicamente alinhado?]
         D --> E{Decisão de Triagem}
-        E -- Product Ready --> F[PO — Racionalização e Preparação\nTransforma a dor em contexto de produto]
+        E -- Product Ready --> D2[Intake Record\nPO formaliza · atribui INT · roteia]
+        D2 --> F[PO — Racionalização → Readiness Package\nTransforma a dor em contexto de produto]
         F --> G{Impacto Arquitetural?}
         G -- Não --> H[PO — Congela o Readiness Package]
         G -- Sim --> I[CTO — Technical Assessment\nConstraints · Arquitetura · Riscos · ADRs]
@@ -85,7 +86,7 @@ Definições de nível de prioridade:
 
 #### Camada de prontidão — como "completo" amadureceu
 
-> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-intake-record.md`](./templates/00-intake-record.md).
+> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md).
 
 Três adições mudam o passo de captura, sem remover nada do que já existia:
 
@@ -93,9 +94,9 @@ Três adições mudam o passo de captura, sem remover nada do que já existia:
 - **Readiness Score é o gate quantitativo.** O registro avança quando todos os requisitos bloqueantes estão resolvidos (`gateReady = true`), não quando todo campo está preenchido. `low_confidence` conta como parcial no score (ver [`references.md` § 11.1](./references.md)).
 - **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — `answered`, `inferred`, `assumption` (a validar), `discovery` (a investigar, time-boxed) ou `deferred` (com dono). O gate é "todo requisito tem uma disposição honesta", não "o Submitter sabe tudo".
 
-Output: registro de intake estruturado e graduado por confiança, pronto para triagem do PO.
+Output: **Documento do Submitter** estruturado e graduado por confiança, pronto para triagem do PO.
 
-Gate: nada avança sem um registro de intake **pronto** — e "pronto" agora significa `gateReady = true` (todos os requisitos bloqueantes resolvidos por uma disposição honesta), não apenas todos os campos preenchidos.
+Gate: nada avança sem um Documento do Submitter **pronto** — e "pronto" agora significa `gateReady = true` (todos os requisitos bloqueantes resolvidos por uma disposição honesta), não apenas todos os campos preenchidos.
 
 ### Passo 2 — Triagem inicial (PO)
 
@@ -117,6 +118,8 @@ Output, um de quatro caminhos:
 - **Backlog de Oportunidades** — valioso, mas não priorizado agora. Retido para revisão futura.
 - **Discovery** — requer investigação antes de a demanda poder ser racionalizada.
 - **Product Ready** — contexto suficiente para seguir para a racionalização.
+
+Quando a decisão é **Product Ready**, o PO formaliza o **Intake Record** (`01`) — atribui o `INT-AAAA-NNN` e registra a decisão de roteamento (ver [`templates/01-intake-record.md`](./templates/01-intake-record.md)) — abrindo a racionalização.
 
 Gate: o PO só escala ao CTO neste passo se uma preocupação arquitetural óbvia já estiver visível.
 
@@ -159,36 +162,41 @@ O PO produz:
 - critérios de sucesso (outcomes mensuráveis);
 - identificação inicial de riscos.
 
-Avaliação arquitetural (CTO): se a demanda toca nova infraestrutura, mudanças de plataforma, comportamento de IA/runtime, multi-tenancy, segurança, ou introduz incógnitas técnicas significativas, o PO escala ao CTO. O CTO **não edita o RP** — produz um artefato próprio, o **Technical Assessment**:
+Avaliação arquitetural (CTO): se a demanda toca nova infraestrutura, mudanças de plataforma, comportamento de IA/runtime, multi-tenancy, segurança, ou introduz incógnitas técnicas significativas, o PO escala ao CTO.
+
+O CTO produz um **Technical Assessment** — artefato próprio, de autoria exclusiva do CTO (ver [`templates/03-technical-assessment.md`](./templates/03-technical-assessment.md)), **não** seções dentro do RP:
 
 - constraints arquiteturais e padrões a seguir;
 - sistemas e componentes afetados;
-- riscos técnicos e mitigações (ADRs sugeridos);
+- riscos técnicos e mitigações;
+- esforço e custo firme;
 - diretrizes para a quebra técnica downstream.
 
-O RP apenas **referencia** o Technical Assessment (`TechAssessmentRef`); as duas peças se fundem no **PRD**.
+Gate: o Readiness Package congela (`freezeReady`) quando suas seções bloqueantes estão resolvidas e — se houve escalada — o Technical Assessment voltou assinado. RP e TA então se fundem no **PRD**.
 
-Gate: o RP não congela até que todas as seções bloqueantes tenham disposição honesta (ver o contrato de 14 seções em [`personas/03-po.md` § 6.2](./personas/03-po.md)).
+### Passo 4 — Readiness Package, Technical Assessment e PRD
 
-### Passo 4 — RP congelado → PRD (commitment point)
+Quem: PO (dono do RP e do PRD), CTO (dono do Technical Assessment, quando escalado).
 
-Quem: PO (dono exclusivo do RP), CTO (dono do Technical Assessment). A **fusão** dos dois é o **PRD** — o **commitment point** que encerra o arco do PO.
+A correção estrutural amadurecida ([`personas/02-po.md` §2](./personas/02-po.md)): o RP e o Technical Assessment são **artefatos separados, de autores diferentes**, que se **fundem no PRD**. É o **PRD** — não o RP isolado — que abre o downstream.
 
 | Artefato | Dono | Conteúdo |
 |---|---|---|
-| **Readiness Package** | PO (exclusivo) | 14 seções de produto: contexto, escopo, regras, user stories + critérios de aceite, **NFRs**, **edge cases**, **métricas com guardrails**, riscos de produto, roadmap |
-| **Technical Assessment** | CTO (separado) | viabilidade, constraints, arquitetura, riscos técnicos, ADRs — o RP nunca o absorve, apenas referencia |
-| **PRD** | PO + CTO (fusão) | `RP + Technical Assessment` — é **o que vai ao PM** |
+| **Readiness Package** | PO (sozinho) | Visão, problema, escopo, regras de negócio, user stories, NFRs, edge cases, métricas com guardrails, critérios de sucesso |
+| **Technical Assessment** | CTO (só se houver escalada arquitetural) | Viabilidade, arquitetura, integrações, constraints técnicas, riscos, ADRs, custo firme |
+| **PRD** | PO + CTO (fusão) | `RP + Technical Assessment` combinados — o documento que abre o downstream |
 
-Output: PRD completo, entregue ao PM — cruzando o commitment point.
+> Sem escalada arquitetural, o PRD se forma só a partir do RP, e a referência ao Technical Assessment fica `Status: Não requisitado`.
 
-Gate: o PM recebe o PRD e tem autoridade para rejeitá-lo e devolver ao PO (gaps técnicos seguem ao CTO) se qualquer parte estiver faltando, contraditória ou insuficiente para o planejamento.
+Output: **PRD** completo e assinado (RP + Technical Assessment), entregue ao PM.
+
+Gate: o PM recebe o PRD e tem autoridade para rejeitá-lo e devolver ao PO se qualquer parte estiver faltando, contraditória ou insuficiente para o planejamento.
 
 ### Passo 5 — Planejamento de execução (PM)
 
 Quem: PM.
 
-O PM recebe o PRD e o traduz em plano de entrega. Antes de produzir cronograma, o PM executa uma avaliação de capacidade. O escopo está fixo no pacote — o PM não redefine. O foco do PM é sequência, timing, dependências e coordenação da equipe.
+O PM recebe o PRD e o traduz em plano de entrega. Antes de produzir cronograma, o PM executa uma avaliação de capacidade. O escopo está fixo no PRD — o PM não redefine. O foco do PM é sequência, timing, dependências e coordenação da equipe.
 
 Avaliação de capacidade:
 
@@ -248,7 +256,7 @@ Gate: o código passa em QA/UAT antes do release.
 
 Quem: QA (interno), stakeholders relevantes para UAT.
 
-Os critérios de aceite definidos no Readiness Package são validados. Este passo confirma que o que foi construído corresponde ao que foi prometido.
+Os critérios de aceite definidos no PRD são validados. Este passo confirma que o que foi construído corresponde ao que foi prometido.
 
 Output: aprovação de release.
 
@@ -298,8 +306,8 @@ sequenceDiagram
     participant ENG as Engineers
     participant QA as QA / UAT
 
-    UP->>PO: Registro de intake estruturado
-    PO->>PO: Triagem inicial
+    UP->>PO: Documento do Submitter (gateReady)
+    PO->>PO: Triagem → Intake Record
     PO->>CTO: Escala se impacto arquitetural
     CTO-->>PO: Technical Assessment (artefato separado)
     PO->>PM: PRD (RP + Technical Assessment) — commitment point

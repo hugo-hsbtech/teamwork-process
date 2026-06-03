@@ -28,8 +28,8 @@ As seções abaixo descrevem como cada um aparece no modelo deste repositório.
 |---|---|---|---|
 | Upstream vs. Downstream | Dual-Track Agile / Continuous Discovery & Delivery | Jeff Patton, Marty Cagan, Teresa Torres | *INSPIRED* (Cagan, 2008/2017); *Continuous Discovery Habits* (Torres, 2021) |
 | Intake Layer com gates | Stage-Gate System | Robert G. Cooper | *Winning at New Products* (Cooper, 1986/2017) |
-| Readiness Package → PRD | Stage-Gate deliverable + commitment point | Cooper; Anderson; Leopold | Cooper (1986); *Kanban* (Anderson, 2010) |
-| 14 seções do Readiness Package | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
+| Readiness Package | Stage-Gate deliverables + Definition of Ready | Cooper; Schwaber & Sutherland | Cooper (1986); *The Scrum Guide* |
+| Seções do Readiness Package (gate `freezeReady`) | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
 | Feedback Loop | Build-Measure-Learn / PDCA | Eric Ries, W. Edwards Deming | *The Lean Startup* (2011); *Out of the Crisis* (Deming, 1986) |
 | CTO/PO como gargalo gerenciado | Theory of Constraints | Eliyahu M. Goldratt | *The Goal* (1984) |
 | Estados explícitos da demanda | Kanban — "make process policies explicit" | David J. Anderson | *Kanban* (Anderson, 2010) |
@@ -93,7 +93,7 @@ Vale lembrar que Cooper evoluiu o modelo para Next Generation Stage-Gate, adapta
 
 Ver [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package) e [README › 10. Regras de ouro do intake](./README.md#10-regras-de-ouro-do-intake) (regra 1: "PROBLEMA ANTES DA SOLUÇÃO").
 
-As 14 seções do Readiness Package (autoria exclusiva do PO; as seções técnicas migraram para o Technical Assessment do CTO) operacionalizam três princípios complementares:
+As seções do Readiness Package operacionalizam três princípios complementares:
 
 ### 3.1 Validated Learning (Eric Ries)
 
@@ -143,7 +143,7 @@ Os cinco passos focais:
 
 1. Identificar o gargalo (CTO/PO).
 2. Explorar — o Intake Layer existe para extrair eficiência dele.
-3. Subordinar — os outros papéis (PM, TL, Eng) trabalham em função do output dele; o Readiness Package é o output que governa o ritmo do downstream.
+3. Subordinar — os outros papéis (PM, TL, Eng) trabalham em função do output dele; o **PRD** — a fusão do Readiness Package (PO) com o Technical Assessment (CTO) — é o output que governa o ritmo do downstream.
 4. Elevar — quando saturar, adicionar Product Ops, Chief of Staff ou Founder Associate (o `README.md` já antecipa).
 5. Repetir — após elevar, o gargalo muda de lugar; repete o ciclo.
 
@@ -264,7 +264,7 @@ Sete desperdícios em software:
 
 | Desperdício | Como o Intake Layer combate |
 |---|---|
-| Partial work | RP exige todas as 14 seções antes de seguir |
+| Partial work | RP exige suas seções bloqueantes resolvidas (`freezeReady`) antes de seguir |
 | Extra features | "Problema antes da solução" elimina features especulativas |
 | Relearning | Contexto consolidado evita que downstream "descubra de novo" |
 | Handoffs | RP transfere contexto completo, não fragmentado |
@@ -282,7 +282,7 @@ Sete desperdícios em software:
 
 ## 11. Confiança de primeira classe, Readiness Score e RICE-lite
 
-> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-intake-record.md`](./templates/00-intake-record.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
+> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
 
 ### 11.1 Readiness Score → gate de completude do intake + gate decision do Stage-Gate
 
@@ -327,7 +327,7 @@ Mitigação no projeto: o Readiness Package tem deliverables fixos e SLAs claros
 
 Mike Cohn alerta que a DoR pode degenerar em "não posso começar até ser aprovado".
 
-Mitigação no projeto: SLAs explícitos por estado da demanda e critérios objetivos (14 seções) em vez de aprovação subjetiva.
+Mitigação no projeto: SLAs explícitos por estado da demanda e critérios objetivos (gate `freezeReady` do RP) em vez de aprovação subjetiva.
 
 ### Crítica 3: "Gates criam filas invisíveis"
 
