@@ -47,7 +47,7 @@ O downstream não recebe ideia solta, call gravada, mensagem no Slack ou áudio.
 - Riscos e dependências mapeados
 - Visão arquitetural (quando há impacto)
 
-Esse pacote é a condição mínima para o downstream começar. Sem ele, o time downstream estaria fazendo discovery, não execução. Operacionalmente, é uma versão mais robusta da Definition of Ready do Scrum e do commitment point do Upstream Kanban, e funciona como o gate decision do Stage-Gate de Cooper (ver [`references.md` § 2](./references.md#2-intake-layer-com-gates--stage-gate-cooper) e [§ 8](./references.md#8-definition-of-ready--commitment-point--scrum--upstream-kanban)).
+Esse pacote é a condição mínima para o downstream começar. Sem ele, o time downstream estaria fazendo discovery, não execução. Operacionalmente, é uma versão mais robusta da Definition of Ready do Scrum e do commitment point do Upstream Kanban, e funciona como o gate decision do Stage-Gate de Cooper (ver [`references.md` § 2](./references.md#2-intake-layer-com-gates--stage-gate-cooper) e [§ 8](./references.md#8-commitment-point-rpprd--definition-of-ready--scrum--safe--upstream-kanban)).
 
 No downstream o foco muda: não é mais descobrir o que fazer, é executar com qualidade. O PM organiza execução, define milestones, gerencia dependências, remove bloqueios e coordena squads, e não deveria precisar inventar requisito. Os Tech Leads recebem contexto racionalizado e artefatos claros, e fazem quebra técnica, arquitetura, sequenciamento, estimativa e orientação de implementação. Esse desenho — downstream como stream-aligned team e CTO+PO como enabling team — é o que Skelton & Pais formalizam em Team Topologies (ver [`references.md` § 7](./references.md#7-estrutura-de-papéis--team-topologies)).
 
