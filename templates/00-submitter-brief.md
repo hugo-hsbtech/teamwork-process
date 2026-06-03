@@ -1,10 +1,12 @@
-# Intake Record — [Nome da Demanda]
+# Documento do Submitter — [Nome da Demanda]
 
-> **Este é o documento formal do Submitter** — o primeiro artefato da jornada (`00`), e o único entregável da persona Submitter. Ele **tangibiliza** o modelo descrito em [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda. É um **output**: preenchido durante a captura e **congelado no handoff ao PO**. Cada resposta carrega o quão sólida ela é e de onde veio — a camada de confiança viaja *com* o registro.
+> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
 >
-> **Jornada:** `00 Intake Record (Submitter)` → [`01 Readiness Package (PO)`](./01-readiness-package.md) → [`02 Technical Assessment (CTO)`](./02-technical-assessment.md) → [`03 PRD (PO+CTO → PM)`](./03-prd.md). Ver [`README.md`](./README.md).
+> **Jornada:** `00 Documento do Submitter` → [`01 Intake Record (PO — triagem)`](./01-intake-record.md) → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md). Ver [`README.md`](./README.md).
 >
-> **Não existe documento que anteceda este.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** e nunca é entregue ao PO como tal (ver [`../README.md` › O que o downstream recebe](../README.md)). Esse sinal entra *aqui dentro* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma no primeiro documento formal da jornada. Validado contra [`personas/01-submitter.md` §9](../personas/01-submitter.md) e [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md).
+> **Nada antecede este documento como artefato.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** (ver [`../README.md`](../README.md)). Esse sinal entra *aqui* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma neste primeiro documento formal.
+>
+> **Handoff:** congela quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) e é entregue ao **PO**, que o formaliza e tria no [`01 Intake Record`](./01-intake-record.md).
 
 ## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
 

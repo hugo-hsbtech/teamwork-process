@@ -194,7 +194,7 @@ O protótipo deu à Submitter um dashboard que os docs nunca imaginaram. Essas m
 
 ## 9. O entregável e o handoff
 
-- **Entregável:** o **Documento do Submitter** — ver [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md). É a captura, congelada no handoff. O PO o formaliza e atribui o ID oficial `INT-AAAA-NNN` na triagem, produzindo o [`01 Intake Record`](../templates/01-intake-record.md).
+- **Entregável:** o **Intake Record** (`INT-AAAA-NNN`) — ver [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md).
 - **Gate:** a demanda só sai quando `gateReady = true` (todos os requisitos `blocksGate` resolvidos). O **Readiness Score** é a versão quantitativa do gate decision do Stage-Gate (ver [`references.md` § 2](../references.md)).
 - **Handoff:** entregue ao **PO** (camada de Intake). O handoff só se completa quando "o Intake Layer confirmou o recebimento" (ver [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md)).
 
