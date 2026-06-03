@@ -104,6 +104,8 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 
 ### Declared priority
 <!-- intake: id=priority; blocks=false; min-confidence=0; kind=capture -->
+> Rubric: the Submitter's priority call **and** the reason behind it (why this
+> level, not just the label).
 
 **Level:** Critical / High / Medium / Low — **Reason:** [why]
 
@@ -141,6 +143,10 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 
 ## Architectural escalation
 <!-- intake: id=cto_escalation; blocks=false; min-confidence=0; kind=derived; inputs=impact,constraints,assumptions -->
+> Rubric: whether the demand needs CTO/architectural review before scope can
+> freeze (new infra, payments, multi-tenancy, security, AI/runtime, integrations
+> with unknowns), with a one-line reason. A flagged draft signal pending owner
+> confirmation — not a final call.
 
 **Needed:** Yes / No — [brief rationale; draft signal pending owner confirmation]
 
@@ -172,7 +178,7 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 ---
 
 ## Discovery brief
-<!-- intake: id=discovery; blocks=false; min-confidence=0; kind=derived; condition=decision==Discovery -->
+<!-- intake: id=discovery; blocks=false; min-confidence=0; kind=derived; inputs=triage; condition=triage.decision==Discovery -->
 
 > Fill ONLY if the triage decision is **Discovery**; otherwise remove this section.
 
@@ -185,7 +191,7 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 ---
 
 ## Handoff
-<!-- intake: id=handoff; blocks=false; min-confidence=0; kind=derived -->
+<!-- intake: id=handoff; blocks=false; min-confidence=0; kind=derived; inputs=triage -->
 
 - **If Product Ready:** proceed to rationalization (Readiness Package).
 - **If Discovery:** open the Discovery brief above; re-triage when it closes.

@@ -31,6 +31,8 @@ Annotation fields:
 | `blocks` | `true` = the gate cannot clear until this section is resolved or honestly disposed |
 | `min-confidence` | the **X%** threshold a *direct* answer must meet to count as resolved (default 70; raise for high-stakes sections) |
 | `kind` | `capture` (filled from Submitter answers) · `derived` (computed from other sections, e.g. a triage draft) · `meta` (IDs, dates) |
+| `inputs` | (derived only) the section ids this one is computed from |
+| `condition` | (optional) include the section only when the condition holds; may reference a derived field as `<section-id>.<field>` (e.g. `triage.decision==Discovery`) |
 
 The **explanation/rubric** under the heading is mandatory and must be
 self-sufficient: it is what tells every agent (Strategist, Doc Updater, Auditor)
@@ -69,8 +71,13 @@ A template is "ready to drive the pipeline" only if **every** fillable section:
 - [ ] has an annotation with `id`, `blocks`, `min-confidence`, `kind`;
 - [ ] has a rubric that states what a confident answer contains (not just a label);
 - [ ] carries the confidence line (`Confidence/Source/Status/Disposition/Hint`)
-      when `kind=capture` or `derived`;
-- [ ] for `derived` sections, names the inputs it is computed from;
+      on every `capture` section whose `min-confidence` > 0 (the ones graded for
+      readiness). `min-confidence=0` capture sections (e.g. a simple priority or a
+      list) and `derived` sections do **not** require it — a `derived` section
+      signals confidence through its own mechanism (e.g. the triage DRAFT banner
+      with `low_confidence`);
+- [ ] for `derived` sections, names the `inputs` it is computed from (and, if
+      conditional, a `condition` that references an existing id/field);
 - [ ] has `blocks=true` set on exactly the sections that must not be guessed.
 
 If any box is unchecked, enrich the template until it passes. The guarantee we are
