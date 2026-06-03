@@ -1,12 +1,12 @@
 # PRD — Queue Voting (Fila de Votação)
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-queue-voting.md) (produto, autoria do PO) com o Technical Assessment (técnico, autoria do CTO) — **neste caso não requisitado**. É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-queue-voting.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
 >
 > **Neste caso, não houve escalada ao CTO:** o PRD se forma apenas a partir do RP; a Parte B referencia "sem Technical Assessment — sem impacto arquitetural".
 >
 > `PRD = RP (PO) [Technical Assessment: Não requisitado]`
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — não requisitado` → `04 PRD (PO+CTO → PM)`.
+> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → `04 PRD (PO+CTO → PM)`.
 
 ## Metadados
 
