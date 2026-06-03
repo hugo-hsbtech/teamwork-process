@@ -56,14 +56,23 @@ based heuristic (it guides the *draft*; the PO owns the final call):
 
 | Propose… | When the capture shows… |
 |---|---|
-| **Discovery** | Blocking unknowns that prevent scoping with confidence — open `assumption`/`discovery` items on critical dimensions (e.g. "does the current PSP support split?", unmapped fiscal/legal rules, unverified integration). **Default to Discovery when key blocking sections cleared the gate only via `assumption`/`discovery` dispositions.** |
+| **Discovery** | Open unknowns **on the blocking capture itself** (problem, reach, impact) or on product scope that prevent closing the scope with confidence — e.g. unmapped fiscal/legal rules, an unverified integration the whole demand hinges on, a problem still framed as a guess. Route here when a *blocking* section cleared the gate only via `assumption`/`discovery`. **Do not** send to Discovery merely because *technical-feasibility* assumptions are open — those belong in rationalization / the Technical Assessment (see CTO escalation below). |
 | **Product Ready** | A real, recurring, strategically-aligned problem with clear-enough impact and urgency, and **no blocking unknowns** — the scope can be closed. |
 | **Backlog (Opportunity)** | A good demand whose urgency/impact don't justify acting now. |
 | **Reject** | Out of strategy or low value. Closes the door — only draft this with strong, explicit rationale, and be conservative: rejection is the PO's call to make, so lean toward flagging for review rather than proposing a hard reject. |
 
-Because the Submitter's capture is your only evidence and unknowns are common at
-intake time, **Discovery is the most common honest draft** when blocking items
-were parked as assumptions. Don't over-claim *Product Ready* on soft evidence.
+Distinguish two kinds of open assumption. A **product/scoping** unknown (does
+the demand even make sense without answering X?) is a reason for Discovery. A
+**technical-feasibility** assumption ("the existing WebSocket layer can carry a
+new event type", "session state extends without a full schema migration") is
+*not* — it is exactly what rationalization and the CTO's Technical Assessment
+exist to firm up, and parking it does not block triage.
+
+So: when the four blocking capture sections are **answered directly** at solid
+confidence and the only open items are reasonable technical-feasibility
+assumptions, **draft `Product Ready`** — don't hedge to Discovery. Reserve
+Discovery for genuine product/scoping unknowns. Conversely, don't over-claim
+`Product Ready` when the *problem or impact itself* is still a guess.
 
 Fill the decision table: Decisão · Justificativa · Reversível? · Submitter
 notificado (leave the notification date blank — that's a human action).
@@ -80,16 +89,38 @@ notificado (leave the notification date blank — that's a human action).
 ## Step 4 — CTO escalation signal
 
 Fill *Escalada arquitetural ao CTO* (Sim/Não + brief rationale). Draft **Sim**
-when the capture touches infra, platform, payments/split, security, AI/runtime,
-or integrations with unknowns — these need CTO feasibility before scope can
-freeze. This too is a draft signal for the PO to confirm.
+only when the capture touches genuine **architectural** impact — new infra or
+platform changes, payments/split, multi-tenancy, the security model, AI/runtime,
+or integrations with real unknowns — the kind of thing that must be de-risked
+*before* scope can freeze.
+
+Draft **Não** when the work is an extension of existing UI and session state on
+current infrastructure, even if it carries ordinary technical assumptions. Those
+are validated by the **Tech Lead during the technical breakdown in
+rationalization** — they do not, by themselves, require a CTO Technical
+Assessment. Escalating every routine assumption defeats the purpose of the gate;
+reserve escalation for architectural risk that actually changes the build. As
+always, this is a draft signal the PO confirms.
 
 ## Premissas validadas na triagem
 
 For each assumption captured during the interview, give a **proposed PO verdict**
-(Aceita / Rejeitada / A validar) and who to validate it with — again, flagged as
-a draft read of the evidence, not a final PO ruling. Assumptions that survive
-must travel forward explicitly.
+and who to validate it with — flagged as a draft read of the evidence, not a
+final PO ruling. Calibrate the verdict to the assumption's risk; don't default
+everything to "A validar":
+
+- **Aceita** — reasonable and low-risk given the system, and *does not block the
+  routing decision*. Most routine technical-feasibility and scope assumptions
+  land here. (They still travel forward to be confirmed during rationalization —
+  acceptance at triage isn't a guarantee, it's "no red flag.")
+- **A validar** — material to scope or value **and** genuinely uncertain (e.g. an
+  expansion-ARR ticket estimate, a customer-adoption dependency, an integration
+  the demand hinges on).
+- **Rejeitada** — evidence already contradicts it.
+
+Blanket "A validar" on every premissa is the over-cautious failure mode: it
+mirrors the human PO poorly, who accepts reasonable assumptions and moves on.
+Assumptions that survive must travel forward explicitly, whatever the verdict.
 
 ## The bar
 
