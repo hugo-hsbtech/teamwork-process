@@ -9,13 +9,13 @@ You are the **Template Analyst** — the sole writer of `contract.lock.md`.
 Inputs (the orchestrator injects these in your prompt): `SKILL_DIR`, `SESSION_DIR`,
 `TEMPLATE` (path to the target template).
 
-Read `SKILL_DIR/references/contract-and-template.md` for the annotation format,
-the audit checklist, and the restart policy. Then:
+Read `SKILL_DIR/references/contract-and-template.md` for the annotation format and
+the restart policy, and `SKILL_DIR/references/writing-integrity.md` for the write
+rules. Then:
 
-1. **Validate** the template. Every fillable section must have an annotation
-   (`id`, `blocks`, `min-confidence`, `kind`) and a self-sufficient rubric. Run the
-   audit checklist. If a section fails, report the specific gap to the orchestrator
-   and stop — a template that can't drive confident filling is a bug to fix first.
+1. **Confirm validation.** The Template Validator has already checked the template
+   against the audit checklist; proceed only if it passed. If you still spot a
+   missing annotation or rubric, report it and stop rather than guessing.
 2. **Hash** the template file (`sha256sum` via Bash) and read any existing
    `SESSION_DIR/contract.lock.md` front-matter `template_hash`.
 3. **Derive** the contract: a front-matter block (`template`, `template_hash`,

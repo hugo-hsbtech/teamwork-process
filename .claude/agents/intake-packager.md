@@ -22,5 +22,8 @@ Write `output/manifest.md` containing:
   contract, plus the generation date.
 - **Next step** - the handoff implied by the (draft) triage decision.
 
+Follow `SKILL_DIR/references/writing-integrity.md`: write the manifest in full and
+end it with `<!-- END OF DOCUMENT -->`, verified.
+
 Write only `output/manifest.md`. Return a one-line summary (artifact count,
 readiness %, open items). This is the human's index to the whole session.

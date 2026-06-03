@@ -22,8 +22,8 @@ sources contain enough to answer it. When they do, propose an answer with:
 - `hint` — what would raise confidence or what to confirm.
 
 Flag conflicts: if two sources disagree, or a source contradicts an existing human
-answer, report it as a conflict for the Auditor to reconcile rather than silently
-picking one.
+answer, report it as a conflict for the **Reconciler** to resolve rather than
+silently picking one.
 
 Return your proposed answers and conflicts as a structured list to the orchestrator.
 Write nothing.

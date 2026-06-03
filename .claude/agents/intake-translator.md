@@ -23,5 +23,12 @@ Translate the document into the requested language, and:
 - Translate naturally - the source is already humanized, so keep that register and
   avoid re-introducing stiff machine-translation phrasing.
 
+**Writing integrity:** read `SKILL_DIR/references/writing-integrity.md` and
+`SESSION_DIR/glossary.md` (if present). Translate and write the **whole** document
+(section by section for long docs); never drop the tail or leave a section
+untranslated with a placeholder; keep `<!-- END OF DOCUMENT -->` as the final line
+and verify it. Use the glossary's canonical terms consistently.
+
 Write one file per language as `output/translated.<lang>.md`. Each file is yours
-alone; never edit another agent's file. Return a one-line summary per language.
+alone; never edit another agent's file. Return per language: sections / total and
+"sentinel present: yes".

@@ -19,10 +19,22 @@ the pen on the same file, so concurrent writes are impossible by construction.
 | `sources/`, `sources-index.md` | Source Indexer | read-only |
 | `qa-log.md` | Ledger Writer | read-only |
 | `target-document.md` | Doc Updater | read-only |
+| `glossary.md` | Glossary Keeper | read-only |
+| `readiness-report.md` | Readiness Reporter | read-only |
 | `output/humanized.md` | Humanizer | read-only |
 | `output/translated.<lang>.md` | Translator | read-only |
 | `output/enriched.md` | Visual Enricher | read-only |
 | `output/manifest.md` | Packager | read-only |
+
+**Serialize, queue, and merge — never clobber.** Beyond one-writer-per-file: you
+never spawn two writers on the *same* file at once, you **queue** pending changes
+and drain them through that single writer in one commit pass (nothing is dropped),
+and every writer does **read-modify-write** (re-read the file, merge the batch
+keyed by stable id, bump the `rev` marker) so no change is lost and overlapping
+edits surface as conflicts for the Reconciler rather than silent overwrites. The
+full protocol — queue, RMW, merge, conflict handling, the `rev` marker, and the
+no-truncation rules — is in
+[`writing-integrity.md`](writing-integrity.md); every writer agent reads it.
 
 ## Paths are passed in, never hardcoded (portability)
 
@@ -46,6 +58,8 @@ Create once, at the start of a run:
 ├── sources/                  # Source Indexer (copies/links of inputs)
 ├── qa-log.md                 # Ledger Writer
 ├── target-document.md        # Doc Updater
+├── glossary.md               # Glossary Keeper
+├── readiness-report.md       # Readiness Reporter
 └── output/                   # Humanizer · Translator · Enricher · Packager
 ```
 
@@ -58,13 +72,15 @@ it). Slugify the demand, create `SESSION_DIR`. Do not ask a wall of questions ye
 
 ## Phase 1 — Setup (parallel, then gate)
 
-Spawn **in the same turn** (independent → parallel):
+First, **Template Validator** checks the template against the audit checklist;
+proceed only once it passes (fix the template otherwise). Then spawn **in the same
+turn** (independent → parallel):
 - **Source Indexer** — only if files were referenced. Normalizes them into
   `sources/` and writes `sources-index.md`.
-- **Template Analyst** — validates the template's annotations, derives
-  `contract.lock.md` (sections, rubrics, `blocks`, `min-confidence`), and records
-  the **template hash**. If a prior `contract.lock.md` exists with a *different*
-  hash → it restarts analysis (see `contract-and-template.md` § Restart).
+- **Template Analyst** — derives `contract.lock.md` (sections, rubrics, `blocks`,
+  `min-confidence`) from the validated template and records the **template hash**.
+  If a prior `contract.lock.md` exists with a *different* hash → it restarts
+  analysis (see `contract-and-template.md` § Restart).
 
 Gate: `contract.lock.md` must exist before looping.
 
@@ -88,8 +104,15 @@ Each iteration:
 4. **Doc Updater** (serial) fills/updates `target-document.md` from the committed
    answers, preserving each section's confidence/disposition line.
 5. **Confidence Auditor** (read-only) re-scores every section against its rubric,
-   reconciles source-vs-human and source-vs-source conflicts, and returns the
-   **gap verdict** + readiness score.
+   checks the document for truncation, **flags** conflicts (it does not resolve
+   them), and returns the **gap verdict** + readiness score.
+   - On a flagged conflict, spawn the **Reconciler** (read-only): it recommends
+     which value to keep (or a disambiguating question); you route that to the
+     Ledger Writer.
+   - To show the human where things stand, spawn the **Readiness Reporter** (writes
+     `readiness-report.md`) — the live gap map.
+   - When new domain terms appear, spawn the **Glossary Keeper** (writes
+     `glossary.md`) so the Doc Updater and production agents stay consistent.
 6. Gate check: **stop** when every `blocks=true` section is either ≥ its
    `min-confidence` *or* honestly disposed (`assumption`/`discovery`/`deferred`).
    Otherwise loop — Strategist's next batch targets the Auditor's flagged gaps.
@@ -118,13 +141,15 @@ this keeps your context lean ("isolate when satisfied"):
 - You report to the human: what was produced, the readiness score, and every item
   still parked as assumption/discovery/deferred.
 
-## Folded responsibilities (named, not separate spawns)
+## The full roster (each a standalone agent)
 
-To avoid agent sprawl that fragments context without adding parallelism:
-- **Template validation** is the Analyst's first step.
-- **Conflict reconciliation** and **readiness scoring** live in the Auditor.
-- **Terminology consistency** lives in the Humanizer (and is respected by the
-  Translator).
+- **Setup:** Template Validator, Source Indexer, Template Analyst.
+- **Loop:** Question Strategist, File Extraction, Reconciler (read-only proposers);
+  Ledger Writer, Doc Updater, Glossary Keeper, Readiness Reporter (writers);
+  Confidence Auditor (read-only gate).
+- **Production:** Humanizer, then Translator ∥ Visual Enricher.
+- **Wrap:** Packager.
 
-If a future need is genuinely independent and parallelizable, add it as its own
-agent under the same single-writer rule.
+Every writer obeys the single-writer + serialize/queue/merge/RMW rules in
+`writing-integrity.md`. Add any future capability as its own agent under the same
+rules rather than overloading an existing one.

@@ -9,6 +9,7 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 -->
 
 # Intake Record — [Demand name]
+<!-- rev: 0 · updated: AAAA-MM-DD -->
 
 > The formal intake artifact. It consolidates the captured demand, records the
 > readiness it arrived with, and carries a **triage draft** (routing decision)
@@ -189,3 +190,5 @@ Default confidence threshold (X) = 70. Raise per-section for high-stakes fields.
 - **If Product Ready:** proceed to rationalization (Readiness Package).
 - **If Discovery:** open the Discovery brief above; re-triage when it closes.
 - **If Backlog / Reject:** close the pass with a recorded rationale; notify originator.
+
+<!-- END OF DOCUMENT -->

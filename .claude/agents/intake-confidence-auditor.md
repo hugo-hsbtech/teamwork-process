@@ -19,12 +19,17 @@ For every `capture` and `derived` section:
 2. **Check the gate condition:** each `blocks=true` section must be either ≥ its
    `min-confidence` as a direct answer, or carry an honest disposition
    (`assumption`/`discovery`/`deferred`). List every blocking section that fails.
-3. **Reconcile conflicts** flagged by File Extraction or the ledger (source vs.
-   human, source vs. source): recommend which to keep and why, or recommend a
-   question to resolve it.
+3. **Flag conflicts** (do not resolve them) — source vs. human, source vs. source
+   — for the **Reconciler** to settle. List each with both values and their
+   provenance.
 4. **Quality bar:** compare against the exemplar — is the problem pain-not-solution,
    are soft sections hinted, are tensions resolved, are derived sections flagged
    drafts? Note shortfalls.
+5. **Completeness / truncation:** confirm `target-document.md` ends with the
+   `<!-- END OF DOCUMENT -->` sentinel and that no section was truncated or replaced
+   by a placeholder (`...`, `unchanged`, `omitted`). A missing sentinel or an
+   elision is a hard finding — the document was truncated and must be rewritten
+   before it can pass.
 
 Return a structured verdict: `gate = clear | open`; the list of failing blocking
 sections with *why* and *what would close them*; conflict recommendations; and any

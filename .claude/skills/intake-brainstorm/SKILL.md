@@ -39,6 +39,8 @@ here. Pass paths into agents; never let them assume a location.
 - [`references/questioning-method.md`](references/questioning-method.md) — how to
   ask (you run the human-facing questions).
 - [`references/grounding.md`](references/grounding.md) — the quality bar.
+- [`references/writing-integrity.md`](references/writing-integrity.md) — the
+  no-truncation + serialize/queue/merge/conflict rules every writer obeys.
 
 ## The principle that makes parallelism safe
 
@@ -51,12 +53,16 @@ ownership table is in `orchestration.md`.
 
 | Phase | `subagent_type` | Role |
 |---|---|---|
+| 1 | `intake-template-validator` | validate the template (read-only); run before the Analyst |
 | 1 | `intake-source-indexer` | normalize referenced files into `sources/` |
 | 1 | `intake-template-analyst` | derive `contract.lock.md`, hash, restart-on-change |
 | 2 | `intake-question-strategist` | propose the next questions (read-only) |
 | 2 | `intake-file-extraction` | propose answers from files (read-only) |
+| 2 | `intake-reconciler` | resolve conflicting evidence (read-only) |
 | 2 | `intake-ledger-writer` | commit questions/answers to `qa-log.md` |
 | 2 | `intake-doc-updater` | fill `target-document.md` |
+| 2 | `intake-glossary-keeper` | maintain canonical terms in `glossary.md` |
+| 2 | `intake-readiness-reporter` | write the live gap map `readiness-report.md` |
 | 2 | `intake-confidence-auditor` | re-score + gate verdict (read-only) |
 | 3 | `intake-humanizer` | write `output/humanized.md` |
 | 3 | `intake-translator` | write `output/translated.<lang>.md` |
@@ -126,6 +132,7 @@ golden exemplar are all bundled under `assets/`.
 | `references/ledger-schema.md` | `qa-log.md` format |
 | `references/questioning-method.md` | how to ask, dispositions, tensions |
 | `references/grounding.md` | quality bar + pointer to the exemplar |
+| `references/writing-integrity.md` | no-truncation + queue/merge/conflict rules for writers |
 | `assets/target-template.intake-record.md` | default target template (annotated) |
 | `assets/target-template.intake-record.guide.md` | companion filling guide (incl. triage drafting) |
 | `assets/golden-example.md` | self-contained calibration exemplar |

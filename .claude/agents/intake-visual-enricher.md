@@ -29,5 +29,10 @@ Rules:
 - Don't over-decorate: a diagram must earn its place by making something clearer.
   No emoji decoration.
 
-Write only `output/enriched.md`. Return a short list of the visuals you added and
-what each clarifies.
+**Writing integrity:** follow `SKILL_DIR/references/writing-integrity.md` —
+enrichment is additive, so preserve every line of the source; build the file
+incrementally if long; keep `<!-- END OF DOCUMENT -->` as the final line and
+verify it after writing (a missing sentinel means the copy was truncated).
+
+Write only `output/enriched.md`. Return the list of visuals you added, what each
+clarifies, and "sentinel present: yes".
