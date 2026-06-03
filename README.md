@@ -47,7 +47,7 @@ O downstream não recebe ideia solta, call gravada, mensagem no Slack ou áudio.
 - Riscos e dependências mapeados
 - Visão arquitetural (quando há impacto)
 
-Esse pacote (o RP congelado, fundido com o Technical Assessment no PRD) é a condição mínima para o downstream começar. Sem ele, o time downstream estaria fazendo discovery, não execução. Operacionalmente, ele marca o **commitment point** do Upstream Kanban — a linha onde *opções* viram *compromisso* — e é o *gate deliverable* do Stage-Gate de Cooper. **Não é a Definition of Ready.** A DoR de verdade (*"Ready for Development"*) vive **vários passos depois, downstream**: quando os Tech Leads já escreveram e estimaram épicos, histórias e tasks (INVEST / *Story Ready* do SAFe) e não resta passo à frente além de codar. Escrever épicos e histórias é trabalho downstream, fora do escopo do PO (ver [`references.md` § 2](./references.md#2-intake-layer-com-gates--stage-gate-cooper) e [§ 8](./references.md#8-commitment-point-rpprd--definition-of-ready--scrum--safe--upstream-kanban)).
+Esse pacote é a condição mínima para o downstream começar. Sem ele, o time downstream estaria fazendo discovery, não execução. Operacionalmente, é uma versão mais robusta da Definition of Ready do Scrum e do commitment point do Upstream Kanban, e funciona como o gate decision do Stage-Gate de Cooper (ver [`references.md` § 2](./references.md#2-intake-layer-com-gates--stage-gate-cooper) e [§ 8](./references.md#8-commitment-point-rpprd--definition-of-ready--scrum--safe--upstream-kanban)).
 
 No downstream o foco muda: não é mais descobrir o que fazer, é executar com qualidade. O PM organiza execução, define milestones, gerencia dependências, remove bloqueios e coordena squads, e não deveria precisar inventar requisito. Os Tech Leads recebem contexto racionalizado e artefatos claros, e fazem quebra técnica, arquitetura, sequenciamento, estimativa e orientação de implementação. Esse desenho — downstream como stream-aligned team e CTO+PO como enabling team — é o que Skelton & Pais formalizam em Team Topologies (ver [`references.md` § 7](./references.md#7-estrutura-de-papéis--team-topologies)).
 
@@ -76,7 +76,7 @@ Ao final do ciclo, o processo entrega:
 - Demandas racionalizadas antes da execução de engenharia.
 - Contexto de produto e técnico formalizado num artefato único.
 - Riscos, integrações e custos visíveis antes do compromisso.
-- Downstream recebendo um PRD que abre planejamento e quebra técnica, não uma mensagem solta.
+- Engenharia recebendo um pacote pronto para execução, não uma mensagem solta.
 
 ---
 
@@ -131,20 +131,19 @@ flowchart TD
         DISC[🔍 DISCOVERY\nPrecisa investigar mais]
         PR[✅ PRODUCT READY\nPode ser racionalizado]
         E[PO — Racionalização\nTransforma dor em contexto de produto]
+        RP[📄 Readiness Package\nPO — definição de pronto de produto]
         F{Impacto Arquitetural?}
-        CTO_A[CTO — Avaliação Técnica\nConstraints · Arquitetura · Riscos]
-        RP[📄 Readiness Package congelado\nAutoria exclusiva do PO]
-        PRD[📦 PRD\nRP + Technical Assessment\n═ COMMITMENT POINT ═ · fim do arco do PO]
+        CTO_A[🔧 Technical Assessment\nCTO — viabilidade · arquitetura · riscos]
+        PRD[📄 PRD\nFusão RP + Technical Assessment]
     end
 
     subgraph DS ["🔽 DOWNSTREAM"]
         PM_R[PM — Recebe o PRD\nValida completude]
         PM_P[PM — Planejamento de Execução\nRoadmap · Milestones · Capacidade]
-        TL_B[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks · Estimativas]
-        DOR[✅ READY FOR DEVELOPMENT\na Definition of Ready · só falta codar]
+        TL_B[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks]
         ENG_I[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
         QA[QA / UAT\nValidação de Critérios de Aceite]
-        REL[🚀 Release · Definition of Done]
+        REL[🚀 Release]
     end
 
     subgraph FB ["🔁 FEEDBACK LOOP"]
@@ -162,16 +161,15 @@ flowchart TD
     DISC -.->|Após investigação| C
     D -- Product Ready --> PR
     PR --> E
-    E --> F
-    F -- Não --> RP
+    E --> RP
+    RP --> F
+    F -- Não --> PRD
     F -- Sim --> CTO_A
-    CTO_A --> RP
-    RP --> PRD
-    PRD -->|cruza o commitment point| PM_R
+    CTO_A --> PRD
+    PRD --> PM_R
     PM_R --> PM_P
     PM_P --> TL_B
-    TL_B -->|atinge a DoR| DOR
-    DOR -->|puxa para a sprint| ENG_I
+    TL_B --> ENG_I
     ENG_I --> QA
     QA --> REL
     REL --> FB1
@@ -186,8 +184,6 @@ flowchart TD
     style OPP fill:#fff3cd,stroke:#ffc107,color:#000
     style DISC fill:#cce5ff,stroke:#004085,color:#000
     style PR fill:#d4edda,stroke:#28a745,color:#000
-    style PRD fill:#ffe0b2,stroke:#FF9800,color:#000
-    style DOR fill:#d4edda,stroke:#28a745,color:#000
 ```
 
 ---
@@ -231,11 +227,11 @@ flowchart LR
         R5["Define critérios\nde sucesso"]
     end
 
-    subgraph S5 ["5 - Readiness Package"]
+    subgraph S5 ["5 - PRD (RP + Technical Assessment)"]
         direction TB
-        RP1["RP congelado + Technical\nAssessment fundidos no PRD"]
-        RP2["Entrega ao PM com tudo\nnecessário para\nplanejamento e quebra\ntécnica"]
-        RP3["✅ Demanda sai do Intake\nao cruzar o commitment\npoint (PRD) — não antes"]
+        RP1["RP (PO) + Technical\nAssessment (CTO)\nfundidos no PRD"]
+        RP2["PRD entregue ao PM\ncom tudo necessário\npara planejamento e\nquebra técnica"]
+        RP3["✅ Demanda sai do Intake\nsomente quando está\nPRONTA para execução"]
     end
 
     subgraph S6 ["6 - Feedback Loop"]
@@ -256,49 +252,47 @@ flowchart LR
 
 ---
 
-## 4. O que o intake produz — Readiness Package
+## 4. O que o intake produz — RP + Technical Assessment → PRD
 
-> As seções abaixo operacionalizam três princípios: validated learning (Ries), opportunity solution tree (Torres) e delay commitment (Poppendieck). Detalhes em [`references.md` § 3](./references.md#3-readiness-package--problema-antes-da-solução--lean-startup--continuous-discovery).
->
-> **O RP é de autoria exclusiva do PO** (puro território de produto). As seções **técnicas** — integrações, impacto arquitetural, riscos técnicos — **saem do RP e viram o Technical Assessment do CTO**, um artefato separado; o RP apenas o referencia via `TechAssessmentRef`. Em troca, o RP ganha as seções que a literatura de PRD aponta como as mais ausentes: NFRs, edge cases e métricas com guardrails (ver [`personas/03-po.md` § 6.2](./personas/03-po.md)).
+> O intake produz um **PRD**: a fusão do **Readiness Package** (produto — PO) com o **Technical Assessment** (técnico — CTO). As seções de produto operacionalizam validated learning (Ries), opportunity solution tree (Torres) e delay commitment (Poppendieck); as seções técnicas vivem no artefato do CTO. Detalhes em [`references.md` § 3](./references.md#3-readiness-package--problema-antes-da-solução--lean-startup--continuous-discovery) e [`personas/02-po.md`](./personas/02-po.md).
 
 ```mermaid
 mindmap
-  root((Readiness Package - PO))
-    Contexto
-      1 - Resumo Executivo
-      2 - Contexto e Problema
-      3 - Objetivos e Resultado Esperado
-      4 - Personas / Jobs-to-be-done
-    Escopo
-      5 - Escopo Incluído e Excluído
-      6 - Regras de Negócio e Fluxos
-    Comportamento
-      7 - User Stories + Critérios de Aceite
-    Qualidade
-      8 - Requisitos Não-Funcionais NFRs
-      9 - Edge Cases e Modos de Falha
-    Sucesso
-      10 - Métricas primária secundária guardrail
-      11 - Critérios de Sucesso do Release
-    Riscos
-      12 - Riscos e Dependências de produto
-      13 - Esforço e Custo preliminar
-    Roadmap
-      14 - Roadmap Sugerido
-    Ponte
-      Referência ao Technical Assessment - CTO
+  root((PRD))
+    Readiness Package - PO
+      Contexto
+        Resumo Executivo
+        Contexto e Problema
+        Objetivos
+        Personas / JTBD
+      Escopo e Comportamento
+        Escopo in e out
+        Regras de Negocio
+        User Stories e Aceite
+      Qualidade
+        NFRs
+        Edge Cases e Falhas
+      Sucesso
+        Metricas e guardrails
+        Criterios de Aceite
+        Riscos de produto
+    Technical Assessment - CTO
+      Veredito de viabilidade
+      Impacto arquitetural
+      Integracoes
+      Constraints rigidas
+      Riscos tecnicos
+      ADRs
+      Esforco e custo firme
 ```
 
 ---
 
 ## 5. Entrega para o downstream
 
-> A entrada do downstream é o **PRD** (RP + Technical Assessment) — o **commitment point**, não a DoR. A escrita de épicos, histórias e tasks acontece **aqui, downstream**, fora do escopo do PO; quando está escrita e estimada e só falta codar, a demanda atinge a **Definition of Ready** (*Ready for Development*).
-
 ```mermaid
 flowchart LR
-    PRD["📦 PRD\nRP + Technical Assessment\n(commitment point)"]
+    PRD["📄 PRD\nAceito pelo PM"]
 
     subgraph EP ["Execution Plan - PM"]
         EP1["Avaliação de capacidade"]
@@ -308,7 +302,7 @@ flowchart LR
         EP5["Gatilhos de escalação"]
     end
 
-    subgraph PB ["Product Backlog - Tech Leads (downstream)"]
+    subgraph PB ["Product Backlog - PO"]
         PB1["Épicos"]
         PB2["Histórias de usuário"]
         PB3["Critérios de aceite"]
@@ -316,7 +310,7 @@ flowchart LR
         PB5["Jornadas do usuário"]
     end
 
-    subgraph TB ["Tech Backlog - Tech Leads"]
+    subgraph TB ["Tech Backlog - Tech Lead"]
         TB1["ADRs - Decisões arquiteturais"]
         TB2["Tasks técnicas por história"]
         TB3["Estimativas refinadas"]
@@ -324,18 +318,13 @@ flowchart LR
         TB5["Estratégia de rollout"]
     end
 
-    DOR(["✅ Ready for Development\na Definition of Ready · só falta codar"])
-
     PRD --> EP
     PRD --> PB
     PB --> TB
-    TB --> DOR
 
     style EP fill:#e8f4f8,stroke:#2196F3,color:#000
     style PB fill:#fff8e1,stroke:#FF9800,color:#000
     style TB fill:#e8f5e9,stroke:#4CAF50,color:#000
-    style PRD fill:#ffe0b2,stroke:#FF9800,color:#000
-    style DOR fill:#d4edda,stroke:#28a745,color:#000
 ```
 
 ---
@@ -419,19 +408,19 @@ sequenceDiagram
     participant ENG as Engineers
     participant QA as QA
 
-    UP->>PO: Intake estruturado
-    PO->>PO: Triagem inicial
-    alt Architectural impact
-        PO->>CTO: Escalada técnica
-        CTO-->>PO: Constraints e avaliação
+    UP->>PO: Intake Record
+    PO->>PO: Triagem + racionalização (RP)
+    alt Impacto arquitetural
+        PO->>CTO: Escalada — RP + perguntas específicas
+        CTO-->>PO: Technical Assessment assinado
     end
-    PO->>PM: PRD (RP + Technical Assessment) — commitment point
+    PO->>PM: PRD (RP + Technical Assessment)
     PM->>PM: Avaliação de capacidade
     PM->>TL: Plano de execução + PRD
-    TL->>TL: Quebra técnica (épicos, histórias, tasks, estimativas)
-    TL->>ENG: Ready for Development (DoR) — só falta codar
+    TL->>TL: Quebra técnica
+    TL->>ENG: Tasks definidas + contexto
     ENG->>QA: Implementação completa
-    QA-->>PM: Release aprovado (Definition of Done)
+    QA-->>PM: Release aprovado
     PM-->>UP: Entrega completa + feedback coletado
 ```
 
@@ -459,21 +448,19 @@ stateDiagram-v2
 
     ProductReady --> EmRacionalização : PO inicia preparo
 
-    EmRacionalização --> AvaliacaoCTO : Impacto arquitetural identificado
-    AvaliacaoCTO --> EmRacionalização : CTO entrega assessment
+    EmRacionalização --> RPCongelado : Seções de produto resolvidas
+    RPCongelado --> AvaliacaoCTO : Impacto arquitetural — escala ao CTO
+    AvaliacaoCTO --> PRDMontado : Technical Assessment assinado → fusão
+    RPCongelado --> PRDMontado : Sem escalada → PRD só com o RP
 
-    EmRacionalização --> RPCongelado : freezeReady = true (RP congelado)
-    RPCongelado --> PRDMontado : Fusão com Technical Assessment
-
-    PRDMontado --> EmRevisaoPM : Cruza o commitment point (PRD ao PM)
-    EmRevisaoPM --> PRDMontado : PM rejeita - retorna ao PO
-    EmRevisaoPM --> EmPlanejamento : PM aprova
+    PRDMontado --> EmRevisaoPM : PRD enviado ao PM
+    EmRevisaoPM --> PRDMontado : PM rejeita - retorna ao PO/CTO
+    EmRevisaoPM --> EmPlanejamento : PM aceita
 
     EmPlanejamento --> EmQuebraTecnica : Tech Leads recebem
-    EmQuebraTecnica --> ProntoParaDesenvolvimento : Atinge a Definition of Ready (épicos/histórias/tasks escritos e estimados)
-    ProntoParaDesenvolvimento --> EmDesenvolvimento : Puxa para a sprint
+    EmQuebraTecnica --> EmDesenvolvimento : Tasks definidas
     EmDesenvolvimento --> EmQA : Implementação completa
-    EmQA --> Entregue : Definition of Done satisfeita
+    EmQA --> Entregue : Release aprovado
 
     Entregue --> FeedbackLoop : PM inicia em 5 dias úteis
     FeedbackLoop --> [*] : Aprendizados incorporados ao backlog
@@ -517,16 +504,16 @@ flowchart LR
     CA["📝 Captura\nRegistro estruturado\nno intake"]
     TR["🔍 Triagem\nCTO/PO avalia\ne define caminho"]
     RA["📦 Racionalização\nCriação dos artefatos\ne visão de produto"]
-    PRD(["📦 PRD · Commitment Point\nRP + Technical Assessment\nfim do arco do PO"])
+    RP(["📄 PRD\nPronto para\nplanejamento"])
     PL["📋 Planejamento\nPM organiza execução\ne roadmap"]
-    QB["⚙️ Quebra Técnica\nTech Leads escrevem e estimam\népicos, histórias e tasks → DoR"]
+    QB["⚙️ Quebra Técnica\nTech Leads definem\ne estimam"]
     EX["👨‍💻 Execução\nEngenharia entrega\nvalor ao cliente"]
     FB["🔁 Feedback\nMede resultado\ne alimenta o ciclo"]
 
-    D --> CA --> TR --> RA --> PRD --> PL --> QB --> EX --> FB --> D
+    D --> CA --> TR --> RA --> RP --> PL --> QB --> EX --> FB --> D
 
     style D fill:#e8f4f8,stroke:#2196F3,color:#000
-    style PRD fill:#ffe0b2,stroke:#FF9800,color:#000
+    style RP fill:#d4edda,stroke:#28a745,color:#000
     style FB fill:#f3e5f5,stroke:#9C27B0,color:#000
 ```
 
@@ -536,13 +523,16 @@ flowchart LR
 
 | Artefato | Dono | Quando é criado | Arquivo de referência |
 |---|---|---|---|
-| Intake Record | Sales / CS / CEO | No momento da captura | `01-intake-*.md` |
-| Readiness Package | PO | Após triagem Product Ready (autoria exclusiva do PO) | `03-readiness-package-*.md` / `04-readiness-package-*.md` |
-| Technical Assessment | CTO | Quando há impacto arquitetural (artefato separado; o CTO nunca edita o RP) | `04-readiness-package-*.md` |
-| PRD | PO + CTO | Fusão `RP + Technical Assessment` — o **commitment point** que abre o downstream | — |
-| Execution Plan | PM | Após aprovação do PRD | `05-execution-plan.md` |
-| Product Backlog | Tech Leads (downstream) | Após o commitment point — decomposição em épicos/histórias/tasks (fora do escopo do PO) | `06.1-product-backlog-*.md` / `07.1-product-backlog-*.md` |
+| Documento do Submitter | Submitter (Sales / CS / CEO / Marketing) | No momento da captura | `00-submitter-brief-*.md` |
+| Intake Record | PO (ato 1 — triagem) | Ao receber o brief (`gateReady`) | `01-intake-record-*.md` |
+| Readiness Package | PO (ato 2 — racionalização) | Após triagem Product Ready | `02-readiness-package-*.md` |
+| Technical Assessment | CTO (sozinho) | Quando há escalada arquitetural | `03-technical-assessment-*.md` |
+| PRD (RP + Technical Assessment) | PO + CTO (fusão) | Antes do handoff ao PM | `04-prd-*.md` |
+| Execution Plan | PM | Após aceite do PRD | `05-execution-plan.md` |
+| Product Backlog | PO | Após aceite do PRD | `06.1-product-backlog-*.md` / `07.1-product-backlog-*.md` |
 | Tech Backlog | Tech Lead | Após Product Backlog baselined | `06.2-tech-backlog-*.md` / `07.2-tech-backlog-*.md` |
+
+> **Cadeia de artefatos (correção amadurecida nas personas).** O Submitter (`00`) e o PO têm artefatos distintos — o PO formaliza/tria (`01`) e depois racionaliza no RP (`02`). O RP (PO) e o Technical Assessment (CTO) são **separados** e se fundem no **PRD** — e é o PRD, não o RP, que abre o downstream. Ver [`personas/02-po.md` §2 e §3](./personas/02-po.md).
 
 ### Documentos de governança
 
@@ -554,6 +544,7 @@ flowchart LR
 | [`03-slas.md`](./03-slas.md) | SLAs por estado da demanda |
 | [`metrics.md`](./metrics.md) | Métricas e observabilidade (demanda · portfólio · resultado pós-handoff) |
 | [`personas/01-submitter.md`](./personas/01-submitter.md) | Persona da Submitter — raciocínio, estrutura de dados e valor em tela |
+| [`personas/02-po.md`](./personas/02-po.md) | Persona do PO — triagem, racionalização, cadeia RP → PRD e valor em tela |
 | [`references.md`](./references.md) | Fundamentação acadêmica e mapeamento de frameworks |
 
 ---
