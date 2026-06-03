@@ -127,7 +127,7 @@ is `plugins/hsb-teamwork/skills/intake-brainstorm/` inside it). Install it
 from the `hsb-tech` marketplace — no copying, versioned, namespaced:
 
 ```
-/plugin marketplace add hugo-hsbtech/teamwork-process
+/plugin marketplace add hugo-hsbtech/hsb-teamwork
 /plugin install hsb-teamwork@hsb-tech
 ```
 

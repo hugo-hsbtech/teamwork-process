@@ -199,9 +199,12 @@ To reuse it in **other projects**, install it as a **Claude Code plugin** from
 this repo's marketplace — versioned, namespaced, no copying:
 
 ```
-/plugin marketplace add hugo-hsbtech/teamwork-process
+/plugin marketplace add hugo-hsbtech/hsb-teamwork
 /plugin install hsb-teamwork@hsb-tech
 ```
+
+(The plugin is published from its own repo; while still in the monorepo you can
+add `hugo-hsbtech/teamwork-process` instead — same marketplace.json.)
 
 Then invoke it as `/hsb-teamwork:intake-brainstorm` (plugin skills are
 namespaced `<plugin>:<skill>`).
