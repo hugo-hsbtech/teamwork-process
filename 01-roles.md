@@ -302,7 +302,7 @@ O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila 
 - a etapa de captura foi concluída e o input estruturado existe.
 
 **Termina quando**
-- o RP foi congelado (`freezeReady = true`) e, fundido ao Technical Assessment do CTO, entregue ao PM como **PRD** — o **commitment point** que encerra o arco do PO;
+- o **PRD** (fusão do Readiness Package com o Technical Assessment, quando houver) foi entregue ao PM;
 - ou a demanda foi rejeitada, movida para o backlog ou enviada para Discovery.
 
 **Ownership**
@@ -373,13 +373,13 @@ QA valida que o que foi construído corresponde ao que foi prometido. Opera cont
 
 ### PM (Project Manager / Program Manager)
 
-O PM recebe o **PRD** (o RP do PO fundido ao Technical Assessment do CTO) e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o pacote vier incompleto ou contraditório, o PM devolve.
+O PM recebe o **PRD** (a fusão do Readiness Package com o Technical Assessment) e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o PRD vier incompleto ou contraditório, o PM devolve.
 
 O PM também é o guardião da capacidade do time. Antes de comprometer qualquer prazo, avalia se o time atual tem as habilidades, disponibilidade e senioridade para executar o escopo. Se uma demanda vira urgente ou desce por pressão top-down, a obrigação do PM é surfaçar o gap de capacidade — não absorvê-lo silenciosamente — e escalar ao tomador de decisão certo com uma avaliação clara de impacto.
 
 **Inicia quando**
-- o PRD foi entregue pelo PO e marcado como completo (commitment point cruzado);
-- os Tech Leads confirmaram que o pacote é suficiente para a quebra técnica;
+- o PRD foi entregue pelo PO e marcado como completo;
+- os Tech Leads confirmaram que o PRD é suficiente para a quebra técnica;
 - uma avaliação de capacidade é necessária antes que um compromisso possa ser feito.
 
 **Termina quando**

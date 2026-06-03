@@ -229,8 +229,8 @@ flowchart LR
 
     subgraph S5 ["5 - PRD (RP + Technical Assessment)"]
         direction TB
-        RP1["Artefatos prontos\npara execução"]
-        RP2["Entrega ao PM com tudo\nnecessário para\nplanejamento e quebra\ntécnica"]
+        RP1["RP (PO) + Technical\nAssessment (CTO)\nfundidos no PRD"]
+        RP2["PRD entregue ao PM\ncom tudo necessário\npara planejamento e\nquebra técnica"]
         RP3["✅ Demanda sai do Intake\nsomente quando está\nPRONTA para execução"]
     end
 

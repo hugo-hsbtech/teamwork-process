@@ -25,14 +25,13 @@ flowchart TD
         E -- Product Ready --> D2[Intake Record\nPO formaliza · atribui INT · roteia]
         D2 --> F[PO — Racionalização → Readiness Package\nTransforma a dor em contexto de produto]
         F --> G{Impacto Arquitetural?}
-        G -- Não --> H[PO — Congela o Readiness Package]
-        G -- Sim --> I[CTO — Technical Assessment\nConstraints · Arquitetura · Riscos · ADRs]
-        I --> H
-        H --> J[PRD = RP + Technical Assessment\n═ COMMITMENT POINT ═ · fim do arco do PO]
+        G -- Sim --> I[CTO — Technical Assessment\nViabilidade · Arquitetura · Riscos]
+        G -- Não --> PRD
+        I --> PRD[PRD\nRP + Technical Assessment fundidos · assinado]
     end
 
     subgraph DOWNSTREAM ["🔽 DOWNSTREAM"]
-        J --> K[PM — Recebe o PRD\nValida completude]
+        PRD --> K[PM — Recebe o PRD\nValida completude]
         K --> L[PM — Planejamento de Execução\nRoadmap · Milestones · Sequenciamento · Prioridades]
         L --> M[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks · Estimativas]
         M --> DOR[✅ Ready for Development\na Definition of Ready · só falta codar]
@@ -309,12 +308,12 @@ sequenceDiagram
     UP->>PO: Documento do Submitter (gateReady)
     PO->>PO: Triagem → Intake Record
     PO->>CTO: Escala se impacto arquitetural
-    CTO-->>PO: Technical Assessment (artefato separado)
-    PO->>PM: PRD (RP + Technical Assessment) — commitment point
+    CTO-->>PO: Technical Assessment assinado
+    PO->>PM: PRD (RP + Technical Assessment)
     PM->>PM: Planejamento de execução
     PM->>TL: Plano de execução + PRD
-    TL->>TL: Quebra técnica (épicos, histórias, tasks, estimativas)
-    TL->>ENG: Ready for Development (DoR) — só falta codar
+    TL->>TL: Quebra técnica
+    TL->>ENG: Tasks definidas + contexto
     ENG->>QA: Implementação completa
     QA->>PM: Release aprovado (Definition of Done)
     PM->>UP: Entrega completa + feedback coletado
@@ -334,7 +333,7 @@ O fluxo acima descreve uma demanda isolada. Na prática, várias estarão em est
 ## Princípios do happy path
 
 1. **Cada handoff tem um gate** — nenhum papel aceita input incompleto sem devolvê-lo.
-2. **O escopo congela no commitment point (RP→PRD)** — papéis downstream executam, não redefinem.
+2. **O escopo congela no PRD** (RP + Technical Assessment) — papéis downstream executam, não redefinem.
 3. **Upstream define o problema, downstream define a solução** — nunca o inverso.
 4. **O CTO é puxado, não empurrado** — o PO escala ao CTO; o CTO não participa de toda triagem.
 5. **Feedback é obrigatório** — o loop fecha em todo ciclo de entrega.
