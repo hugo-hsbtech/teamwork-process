@@ -24,19 +24,20 @@ flowchart TD
         D --> E{Decisão de Triagem}
         E -- Product Ready --> F[PO — Racionalização e Preparação\nTransforma a dor em contexto de produto]
         F --> G{Impacto Arquitetural?}
-        G -- Não --> H[PO — Monta o Readiness Package]
-        G -- Sim --> I[CTO — Avaliação Técnica\nConstraints · Arquitetura · Riscos]
+        G -- Não --> H[PO — Congela o Readiness Package]
+        G -- Sim --> I[CTO — Technical Assessment\nConstraints · Arquitetura · Riscos · ADRs]
         I --> H
-        H --> J[Readiness Package Completo\nRevisado e assinado por PO + CTO se aplicável]
+        H --> J[PRD = RP + Technical Assessment\n═ COMMITMENT POINT ═ · fim do arco do PO]
     end
 
     subgraph DOWNSTREAM ["🔽 DOWNSTREAM"]
-        J --> K[PM — Recebe o Readiness Package\nValida completude]
+        J --> K[PM — Recebe o PRD\nValida completude]
         K --> L[PM — Planejamento de Execução\nRoadmap · Milestones · Sequenciamento · Prioridades]
         L --> M[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks · Estimativas]
-        M --> N[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
+        M --> DOR[✅ Ready for Development\na Definition of Ready · só falta codar]
+        DOR --> N[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
         N --> O[QA / UAT\nValidação dos Critérios de Aceite]
-        O --> P[Release]
+        O --> P[Release · Definition of Done]
     end
 
     subgraph FEEDBACK ["🔁 FEEDBACK LOOP"]
@@ -158,45 +159,36 @@ O PO produz:
 - critérios de sucesso (outcomes mensuráveis);
 - identificação inicial de riscos.
 
-Avaliação arquitetural (CTO): se a demanda toca nova infraestrutura, mudanças de plataforma, comportamento de IA/runtime, multi-tenancy, segurança, ou introduz incógnitas técnicas significativas, o PO escala ao CTO.
-
-O CTO adiciona:
+Avaliação arquitetural (CTO): se a demanda toca nova infraestrutura, mudanças de plataforma, comportamento de IA/runtime, multi-tenancy, segurança, ou introduz incógnitas técnicas significativas, o PO escala ao CTO. O CTO **não edita o RP** — produz um artefato próprio, o **Technical Assessment**:
 
 - constraints arquiteturais e padrões a seguir;
 - sistemas e componentes afetados;
-- riscos técnicos e mitigações;
+- riscos técnicos e mitigações (ADRs sugeridos);
 - diretrizes para a quebra técnica downstream.
 
-Gate: o Readiness Package não está completo até que todas as 12 seções estejam preenchidas.
+O RP apenas **referencia** o Technical Assessment (`TechAssessmentRef`); as duas peças se fundem no **PRD**.
 
-### Passo 4 — Readiness Package (PO + CTO)
+Gate: o RP não congela até que todas as seções bloqueantes tenham disposição honesta (ver o contrato de 14 seções em [`personas/03-po.md` § 6.2](./personas/03-po.md)).
 
-Quem: PO (dono e entregador), CTO (contribui com seções técnicas).
+### Passo 4 — RP congelado → PRD (commitment point)
 
-| # | Seção | Responsável |
+Quem: PO (dono exclusivo do RP), CTO (dono do Technical Assessment). A **fusão** dos dois é o **PRD** — o **commitment point** que encerra o arco do PO.
+
+| Artefato | Dono | Conteúdo |
 |---|---|---|
-| 1 | Resumo Executivo | PO |
-| 2 | Contexto e Problema | PO |
-| 3 | Objetivos | PO |
-| 4 | Escopo (Incluído / Excluído) | PO |
-| 5 | Personas Impactadas | PO |
-| 6 | Regras de Negócio e Fluxos | PO |
-| 7 | Integrações Necessárias | PO + CTO |
-| 8 | Impacto Técnico | CTO |
-| 9 | Riscos e Dependências | PO + CTO |
-| 10 | Avaliação Interna de Esforço e Custo | PO + CTO |
-| 11 | Critérios de Sucesso | PO |
-| 12 | Roadmap Sugerido | PO |
+| **Readiness Package** | PO (exclusivo) | 14 seções de produto: contexto, escopo, regras, user stories + critérios de aceite, **NFRs**, **edge cases**, **métricas com guardrails**, riscos de produto, roadmap |
+| **Technical Assessment** | CTO (separado) | viabilidade, constraints, arquitetura, riscos técnicos, ADRs — o RP nunca o absorve, apenas referencia |
+| **PRD** | PO + CTO (fusão) | `RP + Technical Assessment` — é **o que vai ao PM** |
 
-Output: pacote completo e assinado, entregue ao PM.
+Output: PRD completo, entregue ao PM — cruzando o commitment point.
 
-Gate: o PM recebe o pacote e tem autoridade para rejeitá-lo e devolver ao PO se qualquer seção estiver faltando, contraditória ou insuficiente para o planejamento.
+Gate: o PM recebe o PRD e tem autoridade para rejeitá-lo e devolver ao PO (gaps técnicos seguem ao CTO) se qualquer parte estiver faltando, contraditória ou insuficiente para o planejamento.
 
 ### Passo 5 — Planejamento de execução (PM)
 
 Quem: PM.
 
-O PM recebe o Readiness Package e o traduz em plano de entrega. Antes de produzir cronograma, o PM executa uma avaliação de capacidade. O escopo está fixo no pacote — o PM não redefine. O foco do PM é sequência, timing, dependências e coordenação da equipe.
+O PM recebe o PRD e o traduz em plano de entrega. Antes de produzir cronograma, o PM executa uma avaliação de capacidade. O escopo está fixo no pacote — o PM não redefine. O foco do PM é sequência, timing, dependências e coordenação da equipe.
 
 Avaliação de capacidade:
 
@@ -223,7 +215,7 @@ Gate: Tech Leads confirmam contexto suficiente para iniciar a quebra técnica.
 
 Quem: Tech Leads.
 
-Os Tech Leads recebem o Readiness Package e o plano de execução. São donos de todas as decisões técnicas dentro deste escopo. Traduzem contexto de produto em estrutura pronta para engenharia.
+Os Tech Leads recebem o PRD e o plano de execução. São donos de todas as decisões técnicas dentro deste escopo. Traduzem contexto de produto em estrutura pronta para engenharia.
 
 O que produzem:
 
@@ -235,7 +227,7 @@ O que produzem:
 - estratégia de rollout (deploy, migração, monitoramento, rollback);
 - Definition of Done.
 
-Gate: Engineers não iniciam o trabalho até que as tasks estejam definidas com contexto, constraints e critérios de aceite.
+Gate: a **Definition of Ready** (*Ready for Development*) — Engineers não iniciam o trabalho até que épicos, histórias e tasks estejam escritos e estimados, com contexto, constraints e critérios de aceite. É aqui, downstream, que a demanda fica "pronta para codar" — não no congelamento do RP.
 
 ### Passo 7 — Implementação (Engineers)
 
@@ -309,14 +301,14 @@ sequenceDiagram
     UP->>PO: Registro de intake estruturado
     PO->>PO: Triagem inicial
     PO->>CTO: Escala se impacto arquitetural
-    CTO-->>PO: Constraints e avaliação técnica
-    PO->>PM: Readiness Package completo
+    CTO-->>PO: Technical Assessment (artefato separado)
+    PO->>PM: PRD (RP + Technical Assessment) — commitment point
     PM->>PM: Planejamento de execução
-    PM->>TL: Plano de execução + Readiness Package
-    TL->>TL: Quebra técnica
-    TL->>ENG: Tasks definidas + contexto
+    PM->>TL: Plano de execução + PRD
+    TL->>TL: Quebra técnica (épicos, histórias, tasks, estimativas)
+    TL->>ENG: Ready for Development (DoR) — só falta codar
     ENG->>QA: Implementação completa
-    QA->>PM: Release aprovado
+    QA->>PM: Release aprovado (Definition of Done)
     PM->>UP: Entrega completa + feedback coletado
 ```
 
@@ -327,14 +319,14 @@ O fluxo acima descreve uma demanda isolada. Na prática, várias estarão em est
 - **O PO gerencia a fila do Intake, não demandas individuais** — a qualquer momento, várias podem estar em Triagem, Discovery ou Racionalização ao mesmo tempo.
 - **A ordem de prioridade vem do nível de prioridade + alinhamento estratégico**, não da ordem de chegada.
 - **Demanda Crítica sempre interrompe a fila atual do PO** — o PO pausa a racionalização de menor prioridade para triá-la em 24h.
-- **O downstream só absorve o que a capacidade permite** — a avaliação de capacidade do PM é o constraint vinculante. Múltiplos Readiness Packages aprovados não viram execução paralela automaticamente.
+- **O downstream só absorve o que a capacidade permite** — a avaliação de capacidade do PM é o constraint vinculante. Múltiplos PRDs aprovados não viram execução paralela automaticamente.
 - **O PM mantém uma única fila de execução sequenciada** — se duas demandas estão aprovadas, o PM as sequencia com base em capacidade, dependências e prioridade estratégica, e comunica a sequência ao PO.
 - **O PO é dono da revisão do Backlog de Oportunidades** — a cada 2 semanas, o PO revisa o backlog para promover, retriar ou expirar itens. Itens com mais de 90 dias sem atividade são escalados ao CEO para decisão ou encerrados.
 
 ## Princípios do happy path
 
 1. **Cada handoff tem um gate** — nenhum papel aceita input incompleto sem devolvê-lo.
-2. **O escopo congela no Readiness Package** — papéis downstream executam, não redefinem.
+2. **O escopo congela no commitment point (RP→PRD)** — papéis downstream executam, não redefinem.
 3. **Upstream define o problema, downstream define a solução** — nunca o inverso.
 4. **O CTO é puxado, não empurrado** — o PO escala ao CTO; o CTO não participa de toda triagem.
 5. **Feedback é obrigatório** — o loop fecha em todo ciclo de entrega.
