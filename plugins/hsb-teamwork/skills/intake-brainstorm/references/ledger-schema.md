@@ -18,7 +18,9 @@ audit it directly, and structured enough that any agent can parse it.
   good answer unlocks downstream. (If it was triggered by another answer, say so.)
 - **Spawned-by:** — | A004
 - **Asked:** AAAA-MM-DD
+- **Mode:** open | choice
 - **Question:** <the question, in the human's language, business terms>
+- **Choice:** <selected option label> | Other: <verbatim> | — (for `open`/prose)
 - **Answer:** <verbatim-ish answer, or — if still open>
 - **Disposition:** answered | inferred | assumption | discovery | deferred | —
 - **Confidence:** 0–100 | —
@@ -54,6 +56,11 @@ audit it directly, and structured enough that any agent can parse it.
    conflict for the Auditor to reconcile.
 5. **Keep the header summary fresh** (readiness %, gate state, open blocking) on
    every edit — it is the at-a-glance state for the orchestrator and the human.
+6. **Record the selection for `choice` questions.** Store the picked option label
+   (or `Other: <verbatim>`) in `Choice`, and set `Disposition` from it: an appended
+   escape-hatch option maps to `assumption` / `discovery` / `deferred`; a substantive
+   option or `Other` maps to `answered` / `inferred`. For `open`/prose questions
+   leave `Choice: —` and record the answer as before.
 
 ## How other agents use it (read-only)
 

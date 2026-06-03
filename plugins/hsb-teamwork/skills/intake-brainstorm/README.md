@@ -105,10 +105,13 @@ flowchart TD
   records the template hash (a changed hash restarts the analysis).
 - **Phase 2 — Capture loop:** the Strategist and File Extraction *propose* in
   parallel; the Ledger Writer commits questions + answers; the Doc Updater fills
-  the document; the Auditor re-scores and gates. Conflicts go to the Reconciler;
-  the Readiness Reporter shows the live gap map; the Glossary Keeper keeps terms
-  consistent. The loop ends when every blocking section is ≥ X or honestly
-  disposed.
+  the document; the Auditor re-scores and gates. Each question is tagged `open`
+  (free-text prose, for pain/why gaps) or `choice` (interactive `AskUserQuestion`
+  with scaffolded hypothesis options + escape hatches, for categorical gaps and
+  follow-up rounds) — see `references/questioning-method.md`. Conflicts go to the
+  Reconciler; the Readiness Reporter shows the live gap map; the Glossary Keeper
+  keeps terms consistent. The loop ends when every blocking section is ≥ X or
+  honestly disposed.
 - **Phase 3 — Production:** the Humanizer writes the clean canonical copy; then the
   Translator and Visual Enricher run in parallel as independent variants.
 - **Phase 4 — Wrap:** the Packager writes a manifest indexing every artifact.
