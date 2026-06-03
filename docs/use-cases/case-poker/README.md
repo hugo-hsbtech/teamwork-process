@@ -4,7 +4,7 @@
 
 PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A plataforma já possui clientes pagantes e está em fase de crescimento. Este caso ilustra duas demandas concorrentes fluindo pelo modelo operacional — desde a captura no intake até um **PRD** completo pronto para handoff ao PM.
 
-> **Cadeia de artefatos (modelo maduro).** Cada demanda atravessa: **00 Documento do Submitter** (captura) → **01 Intake Record** (PO — triagem) → **02 Readiness Package** (PO — racionalização) → **03 Technical Assessment** (CTO — só quando há escalada arquitetural) → **04 PRD** (fusão RP + TA, abre o downstream). Ver [`../templates/README.md`](../templates/README.md).
+> **Cadeia de artefatos (modelo maduro).** Cada demanda atravessa: **00 Documento do Submitter** (captura) → **01 Intake Record** (PO — triagem) → **02 Readiness Package** (PO — racionalização) → **03 Technical Assessment** (CTO — só quando há escalada arquitetural) → **04 PRD** (fusão RP + TA, abre o downstream). Ver [`../../../templates/README.md`](../../../templates/README.md).
 
 ---
 

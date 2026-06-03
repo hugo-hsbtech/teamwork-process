@@ -1,6 +1,6 @@
 # PRD — Room Access Control (Controle de Acesso à Sala)
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-access-control.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment-access-control.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-access-control.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment-access-control.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../../../personas/02-po.md).
 >
 > `PRD = RP-2026-002 (PO) + TA-2026-002 (CTO)`
 >
@@ -275,7 +275,7 @@ Regras detalhadas em [`RP-2026-002, Seção 6`](./02-readiness-package-access-co
 
 ## Handoff ao PM — Gate de Aceite
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos. Ver [`interactions/07-po-to-pm.md`](../interactions/07-po-to-pm.md).
+> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos. Ver [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
 
 | Checklist de entrega | OK? |
 |---|---|

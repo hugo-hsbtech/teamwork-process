@@ -1,6 +1,6 @@
 # PRD — Queue Voting (Fila de Votação)
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-queue-voting.md) (produto, autoria do PO) com o Technical Assessment (técnico, autoria do CTO) — **neste caso não requisitado**. É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-queue-voting.md) (produto, autoria do PO) com o Technical Assessment (técnico, autoria do CTO) — **neste caso não requisitado**. É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. Ver [`personas/02-po.md` §2, §10 e §11](../../../personas/02-po.md).
 >
 > **Neste caso, não houve escalada ao CTO:** o PRD se forma apenas a partir do RP; a Parte B referencia "sem Technical Assessment — sem impacto arquitetural".
 >
@@ -241,7 +241,7 @@ Edge cases completos com comportamento esperado em [`RP-2026-001 v2 — Seção 
 
 ## Critérios de Sucesso e Métricas (projetados)
 
-> Baseline projetado que [`../metrics.md`](../metrics.md) confronta com o medido pós-rollout.
+> Baseline projetado que [`../../../metrics.md`](../../../metrics.md) confronta com o medido pós-rollout.
 
 | Tipo | Métrica | Meta (projetada) | Janela | Confiança |
 |---|---|---|---|---|
@@ -255,7 +255,7 @@ Edge cases completos com comportamento esperado em [`RP-2026-001 v2 — Seção 
 
 ## Handoff ao PM — Gate de Aceite
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../interactions/07-po-to-pm.md).
+> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
 
 | Checklist de entrega | OK? |
 |---|---|
