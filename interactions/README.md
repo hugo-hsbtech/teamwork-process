@@ -14,12 +14,12 @@ flowchart LR
 
     PO -->|Solicitação de discovery| CTO
     PO -->|Escalada arquitetural| CTO
-    CTO -->|Avaliação técnica| PO
+    CTO -->|Technical Assessment| PO
 
-    PO -->|Readiness Package| PM
+    PO -->|PRD - commitment point| PM
     PM -->|Escalada de capacidade| PO
 
-    PM -->|Plano de Execução + RP| TL
+    PM -->|Plano de Execução + PRD| TL
     TL -->|Confirmação de contexto / bloqueio de escopo| PM
 
     TL -->|Tarefas definidas| ENG

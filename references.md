@@ -28,8 +28,8 @@ As seções abaixo descrevem como cada um aparece no modelo deste repositório.
 |---|---|---|---|
 | Upstream vs. Downstream | Dual-Track Agile / Continuous Discovery & Delivery | Jeff Patton, Marty Cagan, Teresa Torres | *INSPIRED* (Cagan, 2008/2017); *Continuous Discovery Habits* (Torres, 2021) |
 | Intake Layer com gates | Stage-Gate System | Robert G. Cooper | *Winning at New Products* (Cooper, 1986/2017) |
-| Readiness Package | Stage-Gate deliverables + Definition of Ready | Cooper; Schwaber & Sutherland | Cooper (1986); *The Scrum Guide* |
-| 12 seções do Readiness Package | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
+| Readiness Package → PRD | Stage-Gate deliverable + commitment point | Cooper; Anderson; Leopold | Cooper (1986); *Kanban* (Anderson, 2010) |
+| 14 seções do Readiness Package | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
 | Feedback Loop | Build-Measure-Learn / PDCA | Eric Ries, W. Edwards Deming | *The Lean Startup* (2011); *Out of the Crisis* (Deming, 1986) |
 | CTO/PO como gargalo gerenciado | Theory of Constraints | Eliyahu M. Goldratt | *The Goal* (1984) |
 | Estados explícitos da demanda | Kanban — "make process policies explicit" | David J. Anderson | *Kanban* (Anderson, 2010) |
@@ -40,7 +40,7 @@ As seções abaixo descrevem como cada um aparece no modelo deste repositório.
 | Critérios de Sucesso explícitos | Outcome-based Product Management | Melissa Perri, Marty Cagan | *Escaping the Build Trap* (Perri, 2018) |
 | Intake / Triagem / Product Ops | Product Operations | Melissa Perri & Denise Tilles; Marty Cagan | *Product Operations* (Perri & Tilles, 2023) |
 | Commitment point (Discovery → Delivery) | Upstream Kanban | David J. Anderson; Klaus Leopold | *Kanban* (Anderson, 2010); *Practical Kanban* (Leopold, 2017) |
-| Readiness Score (gate quantitativo) | Definition of Ready scorada + gate decision do Stage-Gate | Robert G. Cooper; Schwaber & Sutherland | Cooper (1986); *The Scrum Guide* |
+| Readiness Score (gate quantitativo) | Gate de completude do intake (`gateReady`) + gate decision do Stage-Gate | Robert G. Cooper; David J. Anderson | Cooper (1986); *Kanban* (Anderson, 2010) |
 | Confiança por campo + dispositions ("não sei" honesto) | Assumption Mapping + Validated Learning | Teresa Torres; David Bland & Alex Osterwalder; Eric Ries | *Continuous Discovery Habits* (2021); *Testing Business Ideas* (2019); *The Lean Startup* (2011) |
 | Indicadores de valor (RICE-lite) | RICE scoring | Sean McBride / Intercom | *Intercom on Product Management* (2016) |
 
@@ -93,7 +93,7 @@ Vale lembrar que Cooper evoluiu o modelo para Next Generation Stage-Gate, adapta
 
 Ver [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package) e [README › 10. Regras de ouro do intake](./README.md#10-regras-de-ouro-do-intake) (regra 1: "PROBLEMA ANTES DA SOLUÇÃO").
 
-As 12 seções do Readiness Package operacionalizam três princípios complementares:
+As 14 seções do Readiness Package (autoria exclusiva do PO; as seções técnicas migraram para o Technical Assessment do CTO) operacionalizam três princípios complementares:
 
 ### 3.1 Validated Learning (Eric Ries)
 
@@ -200,22 +200,27 @@ A leitura moderna da Lei de Conway: a estrutura do software replica a estrutura 
 
 ---
 
-## 8. Definition of Ready e commitment point → Scrum + Upstream Kanban
+## 8. Commitment point (RP→PRD) ≠ Definition of Ready → Scrum + SAFe + Upstream Kanban
 
 Ver [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package) e [README › 10. Regras de ouro do intake](./README.md#10-regras-de-ouro-do-intake) (regra 4: "DISCIPLINA DE PORTA").
 
-O Readiness Package é uma versão mais robusta da Definition of Ready do Scrum e do commitment point do Upstream Kanban.
+**O congelamento do RP é o *commitment point*, não a Definition of Ready.** Este foi o erro que o projeto corrigiu: tratar "RP congelado" como DoR. São coisas diferentes, em pontos diferentes da cadeia:
 
-- Definition of Ready (Scrum) — acordo leve sobre quando um item está pronto para entrar na sprint.
-- Commitment point (Upstream Kanban) — linha que separa "discovery" (incerto, opcional, descartável) de "delivery" (comprometido, com prazo, com SLA). Antes da linha: opções. Depois da linha: compromissos.
+- **Commitment point** (Upstream/Discovery Kanban — Anderson, Leopold) = a linha que separa "discovery" (incerto, opcional, descartável) de "delivery" (comprometido, com prazo, com SLA). Antes da linha: opções. Depois da linha: compromissos. **O congelamento do RP e sua fusão no PRD são essa linha** — e o *gate deliverable* do Stage-Gate (Cooper). É o **fim do arco do PO**, não a prontidão para codar.
+- **Definition of Ready** (*"Ready for Development"*) = vive **downstream**, vários passos depois do commitment point: quando os Tech Leads já escreveram e estimaram épicos, histórias e tasks (INVEST; "*ready for development*" / *Story Ready* do SAFe) e **não resta passo à frente além de codar**. Exige a decomposição e a estimativa do time de entrega. **Escrever épicos e histórias é downstream, fora do escopo do PO.**
+- **Definition of Done** = mais à frente ainda: incremento entregue + critérios de qualidade satisfeitos. Distinta da DoR.
 
-Mike Cohn (Mountain Goat Software) alerta que a DoR pode degenerar em mecanismo de espera e aprovação que reduz agilidade. Por isso este projeto define SLAs explícitos em `03-slas.md`: o gate do RP não pode virar burocracia indefinida.
+Em uma linha: triagem = *"vale o esforço?"* (gate decision do Stage-Gate) · commitment point (RP→PRD) = *"estamos nos comprometendo a construir"* · DoR = *"pronto para codar"* · DoD = *"código concluído"*.
+
+Mike Cohn (Mountain Goat Software) alerta que a DoR pode degenerar em mecanismo de espera e aprovação que reduz agilidade. Por isso este projeto define SLAs explícitos em `03-slas.md`: nenhum gate — nem o congelamento do RP, nem a DoR downstream — pode virar burocracia indefinida.
 
 **Fontes.**
 
 - [Definition of Ready — Atlassian](https://www.atlassian.com/agile/project-management/definition-of-ready)
 - [Definition of Ready — Scrum Inc.](https://www.scruminc.com/definition-of-ready/)
 - [The Definition of Ready and Its Dangers — Mountain Goat Software](https://www.mountaingoatsoftware.com/blog/the-dangers-of-a-definition-of-ready)
+- [What does it mean to be "Feature Ready"? — Ivar Jacobson International](https://www.ivarjacobson.com/preparation-for-pi-planning/agile-product-management-what-is-feature-ready)
+- [Ready or Not? Demystifying the Definition of Ready in Scrum — Scrum.org](https://www.scrum.org/resources/blog/ready-or-not-demystifying-definition-ready-scrum)
 - [Upstream Kanban: The 5-Step Process — Nave](https://getnave.com/blog/upstream-kanban/)
 - [Discovery Kanban — Aktia Solutions](https://aktiasolutions.com/discovery-kanban-upstream-kanban/)
 
@@ -259,7 +264,7 @@ Sete desperdícios em software:
 
 | Desperdício | Como o Intake Layer combate |
 |---|---|
-| Partial work | RP exige todas as 12 seções antes de seguir |
+| Partial work | RP exige todas as 14 seções antes de seguir |
 | Extra features | "Problema antes da solução" elimina features especulativas |
 | Relearning | Contexto consolidado evita que downstream "descubra de novo" |
 | Handoffs | RP transfere contexto completo, não fragmentado |
@@ -279,9 +284,9 @@ Sete desperdícios em software:
 
 > Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-intake-record.md`](./templates/00-intake-record.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
 
-### 11.1 Readiness Score → Definition of Ready scorada + gate do Stage-Gate
+### 11.1 Readiness Score → gate de completude do intake + gate decision do Stage-Gate
 
-O Readiness Score é a versão *quantitativa* do gate decision (§2, Cooper) e da Definition of Ready (§8). Em vez de um "pronto / não pronto" subjetivo, cada requisito de compliance tem um peso e um status; o score é uma função desses pesos, e `low_confidence` conta como parcial. A demanda só sai do Intake quando `gateReady = true` (todo requisito bloqueante resolvido). Isso responde diretamente à crítica de "DoR vira mecanismo de espera" (Crítica 2): o gate é uma rubrica objetiva, não uma aprovação de comitê.
+O Readiness Score é a versão *quantitativa* do **gate de completude do intake** (a transição `Capturada → EmTriagem`) — **não** é a Definition of Ready, que vive downstream (§8). Em vez de um "pronto / não pronto" subjetivo, cada requisito de compliance tem um peso e um status; o score é uma função desses pesos, e `low_confidence` conta como parcial. A demanda só sai do Intake e chega ao PO quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) — ou seja, está completa o bastante para ser **triada**, não pronta para codar. Isso responde diretamente à crítica de "gate vira mecanismo de espera" (Crítica 2): o gate é uma rubrica objetiva, não uma aprovação de comitê.
 
 ### 11.2 Confiança por campo + dispositions → Assumption Mapping + Validated Learning
 
@@ -322,7 +327,7 @@ Mitigação no projeto: o Readiness Package tem deliverables fixos e SLAs claros
 
 Mike Cohn alerta que a DoR pode degenerar em "não posso começar até ser aprovado".
 
-Mitigação no projeto: SLAs explícitos por estado da demanda e critérios objetivos (12 seções) em vez de aprovação subjetiva.
+Mitigação no projeto: SLAs explícitos por estado da demanda e critérios objetivos (14 seções) em vez de aprovação subjetiva.
 
 ### Crítica 3: "Gates criam filas invisíveis"
 

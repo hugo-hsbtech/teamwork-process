@@ -19,7 +19,7 @@
 |---|---|---|---|
 | v1 | 2026-03-12 | Intake registrado | CS registrou demanda a partir de chamada trimestral de revisão com Banco Meridional. |
 | v1 | 2026-03-13 | Triagem concluída | PO triou como Product Ready. Readiness Package iniciado. |
-| v1 | 2026-03-20 | RP-2026-001 v1 submetido | PO submeteu o primeiro Readiness Package ao PM. |
+| v1 | 2026-03-20 | RP-2026-001 v1 submetido | PO congelou o RP e submeteu o primeiro PRD ao PM (sem escalada arquitetural, RP = PRD). |
 | v1 | 2026-03-22 | RP rejeitado pelo PM | PM devolveu o pacote: faltava estratégia de rollout e critérios de aceite incompletos para edge cases. |
 | v2 | 2026-03-28 | RP-2026-001 v2 aprovado | PO resubmeteu com correções. PM aprovou. Demanda avança para planejamento de execução. |
 
