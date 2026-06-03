@@ -5,8 +5,8 @@
     {
       "id": 0,
       "name": "file-grounded-queue-voting",
-      "prompt": "Run the hsb-teamwork intake-brainstorm skill in non-interactive mode. Source file: ../../case-poker/00-submitter-brief-queue-voting.md. Extract everything the file supports; for any genuine gap, make a reasonable assumption and mark it with an honest disposition rather than asking. Write the filled target document to {OUT}/target-document.md (keep the section annotations and the END OF DOCUMENT sentinel). Do not ask questions.",
-      "files": ["case-poker/00-submitter-brief-queue-voting.md"],
+      "prompt": "Run the hsb-teamwork intake-brainstorm skill in non-interactive mode. Source file: evals/intake-brainstorm/fixtures/sources/00-submitter-brief-queue-voting.md. Extract everything the file supports; for any genuine gap, make a reasonable assumption and mark it with an honest disposition rather than asking. Write the filled target document to {OUT}/target-document.md (keep the section annotations and the END OF DOCUMENT sentinel). Do not ask questions.",
+      "files": ["evals/intake-brainstorm/fixtures/sources/00-submitter-brief-queue-voting.md"],
       "golden": "golden/queue-voting.target-document.md",
       "expected_output": "A filled intake record: all four blocking capture sections (problem/originator/reach/impact) resolved at or above threshold, a flagged triage DRAFT, confidence lines preserved, sentinel present."
     },
@@ -30,8 +30,8 @@
     {
       "id": 3,
       "name": "batch-headless",
-      "prompt": "Run the hsb-teamwork intake-brainstorm skill in BATCH/headless mode (no human) on source ../../case-poker/00-submitter-brief-access-control.md. Extract from the file; every truly-unknown blocking field becomes an honest assumption/discovery disposition (this is draft-for-review, never gateReady on its own). Write the target document to {OUT}/target-document.md.",
-      "files": ["case-poker/00-submitter-brief-access-control.md"],
+      "prompt": "Run the hsb-teamwork intake-brainstorm skill in BATCH/headless mode (no human) on source evals/intake-brainstorm/fixtures/sources/00-submitter-brief-access-control.md. Extract from the file; every truly-unknown blocking field becomes an honest assumption/discovery disposition (this is draft-for-review, never gateReady on its own). Write the target document to {OUT}/target-document.md.",
+      "files": ["evals/intake-brainstorm/fixtures/sources/00-submitter-brief-access-control.md"],
       "golden": null,
       "expected_output": "A draft-for-review intake: blocking sections resolved or disposed, dispositions explicit, triage flagged draft, sentinel present."
     }
