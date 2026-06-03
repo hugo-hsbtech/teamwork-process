@@ -15,10 +15,15 @@ apply them.
 
 On each commit:
 1. Append new questions as `Q###` blocks with their **rationale** (mandatory),
-   `targets`, `status: open`, and `spawned-by` if applicable.
-2. Record answers on the matching `Q###`: `Answer`, `Disposition`, `Confidence`,
+   `targets`, `Mode` (`open` | `choice`), `status: open`, and `spawned-by` if
+   applicable.
+2. Record answers on the matching `Q###`: `Choice` (selected option label, or
+   `Other: <verbatim>`, or `—` for prose), `Answer`, `Disposition`, `Confidence`,
    `Source`, `Hint`; set `status` to `answered` (direct answer ≥ section threshold)
-   or `parked` (honest assumption/discovery/deferred).
+   or `parked` (honest assumption/discovery/deferred). For a `choice` answer, derive
+   `Disposition` from the picked option per `ledger-schema.md` rule 6 (escape-hatch
+   option → assumption/discovery/deferred; substantive option or `Other` →
+   answered/inferred).
 3. When an answer reveals a new gap, add the follow-up question and link it via the
    parent's `Follow-ups` and the child's `spawned-by`.
 4. **Never delete** — retire obsolete entries as `superseded` (e.g. after a template

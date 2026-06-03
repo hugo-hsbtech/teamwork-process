@@ -34,6 +34,57 @@ chase high-leverage threads. Regenerate the set after every answer: the contract
 never changes, but your *semantic reading* of this demand sharpens, so new
 questions appear because it came into focus, not because a box is still empty.
 
+## Rendering the questions — prose vs. interactive options
+
+A question can reach the human two ways. The **Strategist tags each question with a
+`mode`** (`open` | `choice`); the **orchestrator** renders it accordingly. The goal
+is the same — a brainstorm, not a form — but `choice` lets the human pick-or-correct
+instead of writing from scratch.
+
+- **`open` (free-text prose).** The opening pass at a *pain / why / story* gap. Ask
+  it as prose and let them narrate "solto." Offering canned answers here would put
+  words in their mouth and corrupt the signal. This is the default for the first
+  question of any new theme.
+- **`choice` (interactive `AskUserQuestion`).** *Categorical or convergent* gaps
+  (reach, urgency, which stakeholders feel it, where the idea came from) and
+  **follow-up rounds** on a pain you already understand. The Strategist supplies
+  2–4 hypothesis `options` ({label, description}); the orchestrator renders them as
+  clickable choices.
+
+**How the orchestrator renders a `choice` batch:**
+
+1. Open with one short line of *reflection* in normal text (the "deixa eu te
+   devolver o que entendi" mirror from rule 4) — `AskUserQuestion` has no preamble
+   field, so the mirror lives in the message right before the tool call.
+2. Call `AskUserQuestion` with up to ~3 questions (one theme). Each question's
+   `options` are the Strategist's hypotheses; each option's `description` carries the
+   "why/what it means" that would otherwise be prose.
+3. **Always append the escape hatches as options** (the human never has to type to
+   say "I don't know") and rely on the built-in **"Other"** for the genuinely open
+   answer — so `choice` never *loses* the free-text path, it just makes the common
+   answers one click:
+
+   | Appended option (label) | Records as |
+   |---|---|
+   | "Acho que sim, sem dados" | `assumption` (flag to validate) |
+   | "Ninguém sabe ainda" | `discovery` (time-boxed) |
+   | "É decisão de outra pessoa" | `deferred` (capture the owner) |
+   | *"Other"* (built-in free text) | `answered` / `inferred`, verbatim |
+
+4. Use `multiSelect: true` when several answers can be true at once (e.g. *who feels
+   the pain*).
+
+**Portability — no interactive tool?** `AskUserQuestion` is a Claude Code
+affordance. On a host without it (e.g. the Codex adapter, single-agent CLIs), render
+a `choice` question as **prose with the options enumerated** ("a) … b) … c) …"),
+list the same escape hatches, and invite "ou descreva você mesmo" for the open path.
+The substance — scaffolded hypotheses + honest dispositions — is identical; only the
+widget differs. Never let the mode silently drop a question.
+
+Either way, the **Ledger Writer records the selection**: the chosen option label (or
+`Other: <verbatim>`) plus the disposition it maps to. A pure prose answer is recorded
+exactly as today.
+
 ## Dispositions — making "I don't know" productive
 
 A blocking section isn't binary (answered / missing). It has honest routes to

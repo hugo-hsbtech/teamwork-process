@@ -17,11 +17,37 @@ by: blocking sections before non-blocking → lowest confidence first → the ga
 answer unlocks the most other sections. For each proposed question return:
 
 - `targets` — the section `id` it serves;
+- `mode` — **`open`** or **`choice`** (see *Open vs. choice* below). This tells the
+  orchestrator whether to render the question as free-text prose or as an interactive
+  `AskUserQuestion` with clickable options.
 - the **question** itself, in the human's language, in business terms (no
   technical implementation questions), with a built-in escape hatch so "I don't
   know" can become an `assumption` / `discovery` / `deferred` disposition;
 - a **rationale** — why this question, what gap it closes, what it unlocks;
-- `spawned-by` — if it follows from a specific prior answer, name it.
+- `spawned-by` — if it follows from a specific prior answer, name it;
+- for `choice` questions only: **`options`** — 2–4 *hypothesis answers*, each a
+  `{label, description}` pair (label ≤ ~5 words for a button; description = the
+  one-line "why/what it means" that would otherwise sit in your prose). These are
+  your best guesses at the answer, phrased so the human can pick or correct. Add
+  `multiSelect: true` when several can be true at once (e.g. *who feels the pain*).
+  Do **not** add an "Other" or "I don't know" option — the orchestrator injects the
+  free-text escape and the disposition hatches automatically.
+
+## Open vs. choice — which mode to pick
+
+The skill is open pain-discovery first, scaffolded-options second. Choose `mode`
+per question by the *kind* of gap, never by laziness:
+
+- **`open`** — the first pass at a *pain / why / story* gap, where putting words in
+  the submitter's mouth would corrupt the signal ("o que dói hoje, na prática?").
+  Let them narrate; you harvest hypotheses from what they say.
+- **`choice`** — *categorical or convergent* gaps where you genuinely have
+  hypotheses to offer: reach, urgency, which stakeholders feel it, where the idea
+  came from, picking among a few framings — and **follow-up rounds** on a pain you
+  already understand (round 2+), where you can reflect back concrete options.
+
+When unsure, prefer `open` for the opening question of a brand-new theme and
+`choice` once the theme is in focus.
 
 If the contract was just restarted (new/changed sections), prioritize those. If
 every blocking section is already resolved or honestly disposed, say so and propose

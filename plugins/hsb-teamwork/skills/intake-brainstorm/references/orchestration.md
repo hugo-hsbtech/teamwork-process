@@ -95,17 +95,24 @@ Each iteration:
 
 1. Spawn **in the same turn** (both read-only proposers → parallel):
    - **Question Strategist** — reads contract + `qa-log.md` + `target-document.md`,
-     returns the next batch of questions (≈1–3, one theme) each with rationale and
-     the section it targets, aimed at the lowest-confidence **blocking** gaps.
+     returns the next batch of questions (≈1–3, one theme) each with rationale, the
+     section it targets, a **`mode`** (`open` | `choice`), and — for `choice`
+     questions — 2–4 hypothesis `options`, aimed at the lowest-confidence
+     **blocking** gaps.
    - **File Extraction** — reads `sources/` + `qa-log.md` + contract, returns
      *proposed answers* to open questions it can satisfy from the files
      (`inferred`, with `source` + confidence).
 2. **Ledger Writer** (serial) commits: the new questions+rationale, and any
    file-derived proposed answers.
 3. **You** present to the human only the questions *not* already satisfied by File
-   Extraction. Collect answers. Hand them to the **Ledger Writer** to record. An
-   answer may spawn follow-up questions → Strategist proposes, Ledger Writer
-   records them with `spawned-by`.
+   Extraction, **rendering each by its `mode`** (see `questioning-method.md` §
+   *Rendering the questions*): `open` questions as free-text prose; `choice`
+   questions via `AskUserQuestion` — the Strategist's hypotheses as options, the
+   disposition hatches appended, "Other" for the open answer, `multiSelect` where
+   several apply. Collect answers (the chosen option label / `Other:` text, or the
+   prose reply). Hand them to the **Ledger Writer** to record, including which option
+   was picked and the disposition it maps to. An answer may spawn follow-up questions
+   → Strategist proposes, Ledger Writer records them with `spawned-by`.
 4. **Doc Updater** (serial) fills/updates `target-document.md` from the committed
    answers, preserving each section's confidence/disposition line.
 5. **Confidence Auditor** (read-only) re-scores every section against its rubric,
