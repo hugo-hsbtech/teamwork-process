@@ -14,12 +14,12 @@ flowchart LR
 
     PO -->|Solicitação de discovery| CTO
     PO -->|Escalada arquitetural| CTO
-    CTO -->|Avaliação técnica| PO
+    CTO -->|Technical Assessment| PO
 
-    PO -->|Readiness Package| PM
+    PO -->|PRD - commitment point| PM
     PM -->|Escalada de capacidade| PO
 
-    PM -->|Plano de Execução + RP| TL
+    PM -->|Plano de Execução + PRD| TL
     TL -->|Confirmação de contexto / bloqueio de escopo| PM
 
     TL -->|Tarefas definidas| ENG
@@ -70,9 +70,9 @@ flowchart LR
 | CS → PO | Sim — evidência insuficiente | PO abre Discovery |
 | Marketing → PO | Sim — não é padrão de segmento | PO redireciona para CS/Vendas |
 | CEO → CTO | Não — mas gera trade-off | CTO apresenta o custo ao CEO |
-| PO → CTO | Sim — escopo inviável | CTO devolve com veto + justificativa |
-| CTO → PO | Não — PO deve integrar | PO escala discordância explicitamente |
-| PO → PM | Sim — RP incompleto | PM devolve com gaps específicos |
+| PO → CTO | Sim — escopo inviável | CTO devolve Technical Assessment com veto + justificativa |
+| CTO → PO | Não — PO deve referenciar e fundir no PRD | PO escala discordância explicitamente |
+| PO → PM | Sim — PRD incompleto | PM devolve com gaps específicos (roteados a PO ou CTO) |
 | PM → PO (capacidade) | Não — dispara decisão | PO decide o trade-off |
 | PM → Tech Leads | Sim — contexto faltando | TL devolve gaps específicos |
 | Tech Leads → Engenheiros | Sim — tarefa indefinida | Eng devolve pergunta específica |

@@ -6,7 +6,7 @@
 
 ## Propósito deste documento
 
-Os documentos atuais ([`01-roles.md`](../01-roles.md), [`interactions/`](../interactions/), [`templates/00-intake-record.md`](../templates/00-intake-record.md)) definem a Submitter de forma **fragmentada**: seus limites estão nos papéis, seu handoff nas interações, e a forma do entregável no template. Nenhum lugar reúne isso em uma visão única de persona.
+Os documentos atuais ([`01-roles.md`](../01-roles.md), [`interactions/`](../interactions/), [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md)) definem a Submitter de forma **fragmentada**: seus limites estão nos papéis, seu handoff nas interações, e a forma do entregável no template. Nenhum lugar reúne isso em uma visão única de persona.
 
 Além disso, os [protótipos](../prototypes/) — construídos aprendendo diretamente com a persona — codificaram conhecimento que os documentos **ainda não têm**: um modelo de confiança por campo, um score de prontidão como gate quantitativo, indicadores de valor e métricas de portfólio.
 
@@ -106,7 +106,7 @@ A linha limpa: **`ComplianceRequirement` é o contrato determinístico; tudo aba
 
 ## 5. Requisitos de compliance — o contrato da Submitter
 
-Conjunto fixo derivado do [`00-intake-record.md`](../templates/00-intake-record.md) e das pendências de captura do protótipo. Cada requisito tem uma dimensão, uma razão e uma rubrica do que o satisfaz. `blocksGate` marca o que impede o avanço.
+Conjunto fixo derivado do [`00-submitter-brief.md`](../templates/00-submitter-brief.md) e das pendências de captura do protótipo. Cada requisito tem uma dimensão, uma razão e uma rubrica do que o satisfaz. `blocksGate` marca o que impede o avanço.
 
 | # | Requisito (`label`) | Dimensão | Satisfeito quando… | Bloqueia gate? |
 |---|---|---|---|---|
@@ -194,7 +194,7 @@ O protótipo deu à Submitter um dashboard que os docs nunca imaginaram. Essas m
 
 ## 9. O entregável e o handoff
 
-- **Entregável:** o **Intake Record** (`INT-AAAA-NNN`) — ver [`templates/00-intake-record.md`](../templates/00-intake-record.md).
+- **Entregável:** o **Documento do Submitter** — ver [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md). É a captura, congelada no handoff. O PO o formaliza e atribui o ID oficial `INT-AAAA-NNN` na triagem, produzindo o [`01 Intake Record`](../templates/01-intake-record.md).
 - **Gate:** a demanda só sai quando `gateReady = true` (todos os requisitos `blocksGate` resolvidos). O **Readiness Score** é a versão quantitativa do gate decision do Stage-Gate (ver [`references.md` § 2](../references.md)).
 - **Handoff:** entregue ao **PO** (camada de Intake). O handoff só se completa quando "o Intake Layer confirmou o recebimento" (ver [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md)).
 
@@ -224,7 +224,7 @@ A tela **não** deve parecer um formulário sendo validado. Deve parecer que o s
 | Documento | Relação |
 |---|---|
 | [`01-roles.md`](../01-roles.md) | Define os papéis upstream individuais (CEO, Vendas, Marketing, CS). Este doc os **abstrai** na persona genérica Submitter. |
-| [`templates/00-intake-record.md`](../templates/00-intake-record.md) | A forma do entregável. Os **requisitos de compliance** (§5) derivam dele e o tornam graduável por confiança. |
+| [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md) | A forma do entregável. Os **requisitos de compliance** (§5) derivam dele e o tornam graduável por confiança. |
 | [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md) (e demais upstream→PO) | Descrevem o handoff. Este doc adiciona o **gate quantitativo** (Readiness Score) sobre ele. |
 | [`prototypes/`](../prototypes/) | Pesquisa primária. As mecânicas de confiança, score, indicadores e métricas (§3, §7, §8, §11) vêm daqui. |
 

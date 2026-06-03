@@ -165,7 +165,7 @@ O CTO não gerencia a triagem do dia a dia (isso é do PO) nem a execução de s
 
 **Termina quando**
 - o impacto arquitetural foi avaliado e documentado;
-- constraints técnicos e diretrizes foram adicionados ao Readiness Package;
+- o **Technical Assessment** (artefato próprio — viabilidade, constraints, arquitetura, riscos técnicos, ADRs) foi produzido; o CTO **nunca edita o RP**, apenas é referenciado por ele e fundido no PRD;
 - a demanda foi aprovada ou rejeitada no nível técnico.
 
 A gestão de pessoas não tem fim — é responsabilidade contínua.
@@ -173,7 +173,7 @@ A gestão de pessoas não tem fim — é responsabilidade contínua.
 **Ownership — Estratégia Técnica**
 - Todas as decisões arquiteturais (autoridade final, sem override abaixo deste papel).
 - Padrões técnicos, patterns e Architecture Governance.
-- Seções técnicas do Readiness Package.
+- O **Technical Assessment** (artefato separado; o CTO nunca edita o RP).
 - Estratégia de tecnologia e direção da plataforma.
 - Decisão sobre viabilidade técnica no nível da plataforma.
 - Visibilidade da dívida técnica e estratégia de remediação.
@@ -302,13 +302,13 @@ O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila 
 - a etapa de captura foi concluída e o input estruturado existe.
 
 **Termina quando**
-- o Readiness Package foi aprovado e entregue ao PM;
+- o RP foi congelado (`freezeReady = true`) e, fundido ao Technical Assessment do CTO, entregue ao PM como **PRD** — o **commitment point** que encerra o arco do PO;
 - ou a demanda foi rejeitada, movida para o backlog ou enviada para Discovery.
 
 **Ownership**
 - A fila do Intake Layer e sua saúde operacional.
 - Decisões de triagem para todas as demandas não arquiteturais.
-- O Readiness Package como entregável primário do Intake.
+- O Readiness Package como entregável de produto do PO — fundido no PRD que abre o downstream.
 - Racionalização de produto — transformar dor em definição de capacidade.
 - Decisão de caminho: Rejeitado / Backlog de Oportunidades / Discovery / Product Ready.
 - Manutenção do Backlog de Oportunidades e cadência de revisão.
@@ -335,7 +335,7 @@ O backlog não é cemitério. Todo item tem status e próxima ação.
 - Aprovar decisões arquiteturais sem o CTO.
 - Gerenciar a execução de engenharia (isso é do PM).
 - Comprometer prazos de entrega.
-- Aceitar demanda para execução sem Readiness Package completo.
+- Encaminhar demanda ao downstream sem PRD completo (RP congelado + Technical Assessment).
 
 ## Papéis de qualidade
 
@@ -373,12 +373,12 @@ QA valida que o que foi construído corresponde ao que foi prometido. Opera cont
 
 ### PM (Project Manager / Program Manager)
 
-O PM recebe o Readiness Package e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o pacote vier incompleto ou contraditório, o PM devolve.
+O PM recebe o **PRD** (o RP do PO fundido ao Technical Assessment do CTO) e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o pacote vier incompleto ou contraditório, o PM devolve.
 
 O PM também é o guardião da capacidade do time. Antes de comprometer qualquer prazo, avalia se o time atual tem as habilidades, disponibilidade e senioridade para executar o escopo. Se uma demanda vira urgente ou desce por pressão top-down, a obrigação do PM é surfaçar o gap de capacidade — não absorvê-lo silenciosamente — e escalar ao tomador de decisão certo com uma avaliação clara de impacto.
 
 **Inicia quando**
-- o Readiness Package foi entregue pelo PO e marcado como completo;
+- o PRD foi entregue pelo PO e marcado como completo (commitment point cruzado);
 - os Tech Leads confirmaram que o pacote é suficiente para a quebra técnica;
 - uma avaliação de capacidade é necessária antes que um compromisso possa ser feito.
 
@@ -387,7 +387,7 @@ O PM também é o guardião da capacidade do time. Antes de comprometer qualquer
 - o feedback loop foi iniciado (resultados pós-entrega retornados ao upstream).
 
 **Ownership**
-- Execução da entrega, do Readiness Package aprovado ao release.
+- Execução da entrega, do PRD aprovado ao release.
 - Definição de milestones, sequenciamento e prazo de entrega.
 - Gestão de dependências cross-team durante a execução.
 - Escalada de bloqueios de execução ao papel upstream apropriado.
@@ -397,7 +397,7 @@ O PM também é o guardião da capacidade do time. Antes de comprometer qualquer
 - **Garantia de entrega de valor** — garantir que compromissos com o upstream estejam baseados em capacidade real, não em otimismo.
 
 **Autoridade**
-- Pode rejeitar um Readiness Package e devolvê-lo ao PO se informação necessária estiver faltando.
+- Pode rejeitar um PRD e devolvê-lo ao PO se informação necessária estiver faltando (gaps técnicos seguem ao CTO).
 - Gerencia prioridades, milestones e sequenciamento dentro do escopo aprovado.
 - Coordena entre Tech Leads e outros times.
 - Pode escalar bloqueios ao CTO ou PO se um constraint for descoberto durante a execução.
@@ -418,7 +418,7 @@ Quando uma demanda chega ou urgência é imposta externamente, o PM produz uma a
 A avaliação vai ao PO (e ao CEO se a pressão top-down for o gatilho) antes que um prazo seja comprometido.
 
 **Não faz**
-- Inventar ou redefinir requisitos (o escopo vem do Readiness Package).
+- Inventar ou redefinir requisitos (o escopo vem do PRD).
 - Tomar decisões arquiteturais.
 - Negociar diretamente com clientes sobre escopo ou prazos sem alinhamento com PO/CEO.
 - Aceitar urgência imposta top-down sem surfaçar uma avaliação de impacto de capacidade.
@@ -426,14 +426,14 @@ A avaliação vai ao PO (e ao CEO se a pressão top-down for o gatilho) antes qu
 
 ### Tech Leads
 
-Os Tech Leads recebem o Readiness Package aprovado e o plano de execução do PM, e são responsáveis por todas as decisões técnicas dentro desse escopo. Traduzem contexto de produto em arquitetura, tasks e estratégia de implementação.
+Os Tech Leads recebem o PRD aprovado e o plano de execução do PM, e são responsáveis por todas as decisões técnicas dentro desse escopo. Traduzem contexto de produto em arquitetura, tasks e estratégia de implementação.
 
 **Inicia quando**
-- o PM entregou o plano de execução baseado no Readiness Package aprovado;
+- o PM entregou o plano de execução baseado no PRD aprovado;
 - a quebra técnica ainda não começou.
 
 **Termina quando**
-- épicos, histórias e tasks estão definidos;
+- épicos, histórias e tasks estão escritos e estimados — a demanda atinge a **Definition of Ready** (*Ready for Development*: só falta codar);
 - arquitetura e sequenciamento estão documentados;
 - os Engineers iniciaram a implementação.
 
@@ -460,7 +460,7 @@ Durante a execução, os Tech Leads continuam fornecendo orientação e desbloqu
 
 ### Engineers
 
-Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads, dentro do escopo do Readiness Package. São especialistas de execução com autonomia técnica total dentro das tasks atribuídas.
+Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads, dentro do escopo do PRD. São especialistas de execução com autonomia técnica total dentro das tasks atribuídas.
 
 **Inicia quando**
 - as tasks foram definidas e atribuídas pelo Tech Lead;
@@ -496,12 +496,13 @@ Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads
 | Saúde do cliente pós-venda e sinais de uso | Customer Success |
 | Fila do Intake Layer e triagem | PO |
 | Contrato de compliance do intake e gate de prontidão (Readiness Score) | PO |
-| Readiness Package | PO |
+| Readiness Package (autoria exclusiva) | PO |
+| PRD (fusão RP + Technical Assessment) | PO + CTO |
 | Racionalização de produto | PO |
 | Backlog de Oportunidades | PO |
 | Decisões arquiteturais | CTO |
 | Padrões técnicos e Architecture Governance | CTO |
-| Seções técnicas do Readiness Package | CTO |
+| Technical Assessment (artefato separado; o CTO nunca edita o RP) | CTO |
 | Visibilidade da dívida técnica e estratégia de remediação | CTO |
 | Performance e crescimento dos Tech Leads | CTO |
 | Avaliações de 90 dias (Tech Leads direto, Engineers revisados) | CTO |
@@ -526,8 +527,8 @@ Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads
 |---|---|---|---|
 | Upstream → Intake | Vendas / CS / Marketing / CEO | PO | A demanda precisa ser capturada em formato estruturado antes de chegar ao PO |
 | Triagem do Intake | PO | CTO | PO faz triagem independente; escala ao CTO apenas em impacto arquitetural/estratégico |
-| Intake → Downstream | PO | PM | Apenas um Readiness Package completo aciona esta transição |
-| Validação do PM | PM | PO | PM pode rejeitar e devolver um pacote incompleto ao PO |
+| Intake → Downstream | PO | PM | Apenas um PRD completo (RP congelado + Technical Assessment) aciona esta transição — o commitment point |
+| Validação do PM | PM | PO | PM pode rejeitar e devolver um PRD incompleto ao PO (gaps técnicos seguem ao CTO) |
 | Planejamento do downstream | PM | Tech Leads | PM entrega o plano de execução; Tech Leads são donos da quebra técnica |
 | Gate de implementação | Tech Leads | Engineers | Engineers iniciam apenas com tasks definidas e contexto claro |
 | Escalada técnica | Engineers | Tech Leads | Engineers escalam bloqueios ao Tech Lead, não direto ao PO/CTO |
@@ -535,7 +536,7 @@ Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads
 
 ## O que nenhum papel deve fazer
 
-- Comprometer capacidade de engenharia sem um Readiness Package.
+- Comprometer capacidade de engenharia sem um PRD.
 - Contornar o Intake Layer (nenhuma demanda vai direto do upstream para a execução).
 - Absorver ambiguidade silenciosamente — todo papel tem a autoridade e a obrigação de escalar ou rejeitar inputs incompletos.
 - Definir implementação técnica no upstream (apenas problema e contexto).

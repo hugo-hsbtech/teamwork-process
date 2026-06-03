@@ -7,7 +7,7 @@
 | **ID do Plano** | EP-2026-001 |
 | **Versão** | v1 |
 | **Responsável** | Carla Ribeiro (PM) |
-| **Cobre demandas** | INT-2026-001 (Queue Voting, RP v2) · INT-2026-002 (Access Control, RP v1) |
+| **Cobre demandas** | INT-2026-001 (Queue Voting, PRD-2026-001) · INT-2026-002 (Access Control, PRD-2026-002) |
 | **Status** | Ativo |
 | **Data do plano** | 2026-03-29 |
 | **Janela de execução** | 2026-04-01 → 2026-05-31 |
