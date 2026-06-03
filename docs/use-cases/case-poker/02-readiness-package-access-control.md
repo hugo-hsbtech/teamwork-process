@@ -1,6 +1,6 @@
 # Readiness Package — Room Access Control (Controle de Acesso à Sala)
 
-> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment-access-control.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-access-control.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../personas/02-po.md).
+> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment-access-control.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-access-control.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../../../personas/02-po.md).
 >
 > O RP **herda a camada de confiança** do Intake Record vinculado ([`01-intake-record-access-control.md`](./01-intake-record-access-control.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente.
 >
@@ -418,7 +418,7 @@ Tentativas futuras de re-entrada pelo mesmo link são bloqueadas server-side
 
 ## Referência ao Technical Assessment  ·  *(bloqueia freeze se requisitado)*
 
-> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. Todo o conteúdo arquitetural (modelo de dados de participantes, multi-tenancy, Azure AD OIDC, LGPD `sa-east-1`, riscos técnicos, ADRs e esforço firme) vive em [`03-technical-assessment-access-control.md`](./03-technical-assessment-access-control.md). A fusão acontece no [PRD](./04-prd-access-control.md). Ver [`personas/02-po.md` §5 e §10](../personas/02-po.md).
+> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. Todo o conteúdo arquitetural (modelo de dados de participantes, multi-tenancy, Azure AD OIDC, LGPD `sa-east-1`, riscos técnicos, ADRs e esforço firme) vive em [`03-technical-assessment-access-control.md`](./03-technical-assessment-access-control.md). A fusão acontece no [PRD](./04-prd-access-control.md). Ver [`personas/02-po.md` §5 e §10](../../../personas/02-po.md).
 
 | Campo | Valor |
 |---|---|

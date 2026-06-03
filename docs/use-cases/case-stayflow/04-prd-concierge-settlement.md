@@ -1,6 +1,6 @@
 # PRD — Concierge & Settlement
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-concierge-settlement.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-concierge-settlement.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../../../personas/02-po.md).
 >
 > `PRD = RP (PO) + Technical Assessment (CTO)`
 >
@@ -291,7 +291,7 @@ Ver listagem completa no [RP-2026-050, Seção 9](./02-readiness-package-concier
 
 ## Handoff ao PM — Gate de Aceite
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO (ou o CTO, conforme o gap) trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../interactions/07-po-to-pm.md).
+> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO (ou o CTO, conforme o gap) trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
 
 | Checklist de entrega | OK? |
 |---|---|

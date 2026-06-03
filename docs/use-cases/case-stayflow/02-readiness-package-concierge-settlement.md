@@ -1,8 +1,8 @@
 # Readiness Package — Concierge & Settlement
 
-> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-concierge-settlement.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../personas/02-po.md).
+> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-concierge-settlement.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../../../personas/02-po.md).
 >
-> O RP **herda a camada de confiança** do Registro de Intake vinculado ([`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada"). Os valores *projetados* (sobretudo as Métricas de Sucesso) carregam confiança e viram o baseline que [`../metrics.md`](../metrics.md) confronta com o realizado pós-entrega.
+> O RP **herda a camada de confiança** do Registro de Intake vinculado ([`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada"). Os valores *projetados* (sobretudo as Métricas de Sucesso) carregam confiança e viram o baseline que [`../../../metrics.md`](../../../metrics.md) confronta com o realizado pós-entrega.
 >
 > **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-concierge-settlement.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-concierge-settlement.md) → `02 Readiness Package (PO)` → [`03 Technical Assessment (CTO)`](./03-technical-assessment-concierge-settlement.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md).
 
@@ -29,7 +29,7 @@
 
 ## Prontidão herdada e dispositions em aberto
 
-> Resumo do que o Intake entregou e do que continua *soft* na entrada da execução. Premissas, incógnitas e respostas delegadas que sobreviveram à racionalização precisam estar visíveis — não enterradas nas seções. Ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md).
+> Resumo do que o Intake entregou e do que continua *soft* na entrada da execução. Premissas, incógnitas e respostas delegadas que sobreviveram à racionalização precisam estar visíveis — não enterradas nas seções. Ver [`../../../personas/01-submitter.md` §6](../../../personas/01-submitter.md).
 
 | Campo | Valor |
 |---|---|
@@ -523,7 +523,7 @@ Indicadores de alto nível que definem "concluído e valioso" para **este releas
 
 ## Referência ao Technical Assessment  ·  *(bloqueia freeze se requisitado)*
 
-> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. A fusão acontece no [PRD](./04-prd-concierge-settlement.md). Ver [`personas/02-po.md` §5 e §10](../personas/02-po.md).
+> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. A fusão acontece no [PRD](./04-prd-concierge-settlement.md). Ver [`personas/02-po.md` §5 e §10](../../../personas/02-po.md).
 
 | Campo | Valor |
 |---|---|

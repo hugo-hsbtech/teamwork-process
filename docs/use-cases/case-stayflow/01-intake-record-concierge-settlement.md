@@ -1,6 +1,6 @@
 # Intake Record — Concierge & Settlement
 
-> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief-concierge-settlement.md) (`gateReady = true`), atribui o ID oficial `INT-AAAA-NNN` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento (Product Ready / Discovery / Backlog / Rejeitar) com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../personas/02-po.md).
+> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief-concierge-settlement.md) (`gateReady = true`), atribui o ID oficial `INT-AAAA-NNN` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento (Product Ready / Discovery / Backlog / Rejeitar) com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../../../personas/02-po.md).
 >
 > **Ele não reescreve a captura do Submitter** — **referencia** o brief 00 e o consolida. O aprofundamento de produto (visão, escopo, regras, métricas) é o **segundo ato** do PO e vive no [`02 Readiness Package`](./02-readiness-package-concierge-settlement.md).
 >
@@ -59,7 +59,7 @@
 
 ## Triagem — decisão de roteamento  ·  *(Ato 1 do PO)*
 
-> O PO avalia cada critério (todos avaliados = pode concluir a triagem) e então toma **uma** decisão de caminho, com justificativa obrigatória. Ver [`personas/02-po.md` §6.1](../personas/02-po.md).
+> O PO avalia cada critério (todos avaliados = pode concluir a triagem) e então toma **uma** decisão de caminho, com justificativa obrigatória. Ver [`personas/02-po.md` §6.1](../../../personas/02-po.md).
 
 ### Critérios avaliados
 
@@ -95,7 +95,7 @@
 
 **Necessária:** **Sim** — A demanda toca split de pagamento, idempotência de transações financeiras, integração com PSP/gateway, conciliação contábil e orquestração de IA. Todos esses domínios requerem avaliação de viabilidade, escolha de arquitetura e definição de constraints pelo CTO antes de o escopo de produto poder ser congelado.
 
-> A escalada será formalizada durante a racionalização (RP). O CTO produzirá o Technical Assessment TA-2026-050 em paralelo ao RP. Ver [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> A escalada será formalizada durante a racionalização (RP). O CTO produzirá o Technical Assessment TA-2026-050 em paralelo ao RP. Ver [`interactions/05-po-to-cto.md`](../../../interactions/05-po-to-cto.md).
 
 ---
 

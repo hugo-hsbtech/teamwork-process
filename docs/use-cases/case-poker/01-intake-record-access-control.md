@@ -1,6 +1,6 @@
 # Intake Record — Room Access Control (Controle de Acesso à Sala)
 
-> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief-access-control.md) (`gateReady = true`), atribui o ID oficial `INT-2026-002` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../personas/02-po.md).
+> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief-access-control.md) (`gateReady = true`), atribui o ID oficial `INT-2026-002` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../../../personas/02-po.md).
 >
 > **Ele não reescreve a captura do Submitter** — **referencia** o brief 00 e o consolida. O aprofundamento de produto (visão, escopo, regras, métricas) é o **segundo ato** do PO e vive no [`02 Readiness Package`](./02-readiness-package-access-control.md).
 >
@@ -60,7 +60,7 @@
 
 ## Triagem — decisão de roteamento  ·  *(Ato 1 do PO)*
 
-> PO avaliou todos os critérios antes de concluir a triagem. Ver [`personas/02-po.md` §6.1](../personas/02-po.md).
+> PO avaliou todos os critérios antes de concluir a triagem. Ver [`personas/02-po.md` §6.1](../../../personas/02-po.md).
 
 ### Critérios avaliados
 
@@ -89,7 +89,7 @@
 
 **Necessária:** Sim — o impacto arquitetural é múltiplo: (1) mudança no modelo de dados de participantes (novos campos, máquina de estado), (2) filtragem server-side de eventos WebSocket para modo anônimo, (3) integração de group-claim OIDC com Azure AD, e (4) roteamento de residência de dados LGPD (`sa-east-1`). Qualquer um desses pontos individualmente já justificaria a escalada; os quatro juntos tornam o Technical Assessment indispensável.
 
-> O Technical Assessment aconteceu durante o Discovery (spikes técnicos do CTO) e foi formalizado no RP. Ver [`03 Technical Assessment`](./03-technical-assessment-access-control.md) e [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> O Technical Assessment aconteceu durante o Discovery (spikes técnicos do CTO) e foi formalizado no RP. Ver [`03 Technical Assessment`](./03-technical-assessment-access-control.md) e [`interactions/05-po-to-cto.md`](../../../interactions/05-po-to-cto.md).
 
 ---
 

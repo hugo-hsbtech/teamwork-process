@@ -1,6 +1,6 @@
 # Documento do Submitter — Queue Voting (Fila de Votação)
 
-> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
+> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../../../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
 >
 > **Jornada:** `00 Documento do Submitter` → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — não requisitado` → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md). Ver [`README.md`](./README.md).
 >
@@ -10,7 +10,7 @@
 
 ## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
 
-> Ver [`personas/01-submitter.md` §2](../personas/01-submitter.md). Os ToDos vivem onde as lentes se cruzam: "dado o que *esta* demanda significa, o que o contrato ainda precisa?"
+> Ver [`personas/01-submitter.md` §2](../../../personas/01-submitter.md). Os ToDos vivem onde as lentes se cruzam: "dado o que *esta* demanda significa, o que o contrato ainda precisa?"
 
 | Lente | O que é | Onde aparece neste documento |
 |---|---|---|
@@ -56,7 +56,7 @@
 | **Disposição** | Respondido · Inferido · Premissa (a validar) · Discovery (a investigar) · Delegado (dono: __) |
 | **Hint** | Por que a confiança está baixa / o que a elevaria |
 
-> **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — inclusive "ninguém sabe ainda, e este é o plano" (Discovery) ou "estamos assumindo X" (Premissa). Ver [`personas/01-submitter.md` §6](../personas/01-submitter.md).
+> **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — inclusive "ninguém sabe ainda, e este é o plano" (Discovery) ou "estamos assumindo X" (Premissa). Ver [`personas/01-submitter.md` §6](../../../personas/01-submitter.md).
 
 ---
 
@@ -244,7 +244,7 @@ Riscos identificados na captura — antes da avaliação técnica. Registro comp
 
 ## Critérios de Sucesso
 
-Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível da captura. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../metrics.md)).
+Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível da captura. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../../../metrics.md)).
 
 | Critério | Tipo | Indicador | Valor projetado |
 |---|---|---|---|

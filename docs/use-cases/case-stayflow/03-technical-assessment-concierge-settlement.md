@@ -2,7 +2,7 @@
 
 > O Technical Assessment (TA) é o **output do CTO** — viabilidade, constraints, arquitetura, integrações, riscos técnicos, ADRs e custo firme. É escrito **sozinho** pelo CTO, **em paralelo** ao Readiness Package, e **responde** a ele: o CTO **nunca edita o RP**. O TA não redefine o produto — pode **vetar** a viabilidade do escopo, e nesse caso o PO revisa o escopo do RP.
 >
-> A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./04-prd-concierge-settlement.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./04-prd-concierge-settlement.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../../../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../../../interactions/05-po-to-cto.md).
 >
 > **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-concierge-settlement.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-concierge-settlement.md) → [`02 Readiness Package (PO)`](./02-readiness-package-concierge-settlement.md) → `03 Technical Assessment (CTO)` → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md).
 
