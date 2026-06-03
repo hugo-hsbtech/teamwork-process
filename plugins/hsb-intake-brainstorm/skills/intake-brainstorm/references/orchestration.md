@@ -38,7 +38,7 @@ no-truncation rules — is in
 
 ## Paths are passed in, never hardcoded (portability)
 
-The skill ships in the **`intake-brainstorm` plugin** and is repo-independent. Its
+The skill ships in the **`hsb-intake-brainstorm` plugin** and is repo-independent. Its
 base directory varies by install (the plugin cache, or `.claude/skills/...` when
 symlinked in-repo), so you inject paths into every agent's spawn prompt — never let
 an agent assume a location:

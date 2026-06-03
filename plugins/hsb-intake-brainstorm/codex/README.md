@@ -1,4 +1,4 @@
-# intake-brainstorm — Codex adapter
+# hsb-intake-brainstorm — Codex adapter
 
 The same pipeline as the Claude plugin, adapted to Codex. It reuses the identical
 method files under `../skills/intake-brainstorm/references/` and `../assets/` —
@@ -9,17 +9,22 @@ method files under `../skills/intake-brainstorm/references/` and `../assets/` �
 | File | Purpose |
 |---|---|
 | `AGENTS.md` | the orchestrator entry — Codex reads it from repo root → cwd, or install it as a prompt |
-| `prompts/intake-brainstorm.md` | a custom prompt → `/intake-brainstorm` slash command |
-| `agents/*.toml` | 15 Codex subagents (one per role), mirroring the Claude agents |
+| `prompts/hsb-intake-brainstorm.md` | a custom prompt → `/hsb-intake-brainstorm` slash command |
+| `agents/hsb-intake-*.toml` | 15 Codex subagents (one per role), mirroring the Claude agents |
+
+> **Naming:** Codex has a **flat** namespace for prompts and subagents, so they are
+> vendor-prefixed `hsb-intake-*` to avoid collisions. Claude namespaces components
+> under the plugin instead, so its skill/agents stay unprefixed (`intake-*`). Each
+> Codex subagent reads its shared role spec from the unprefixed `agents/intake-<role>.md`.
 
 ## Setup
 
 ```bash
 # Slash command:
-cp codex/prompts/intake-brainstorm.md  ~/.codex/prompts/intake-brainstorm.md
+cp codex/prompts/hsb-intake-brainstorm.md  ~/.codex/prompts/hsb-intake-brainstorm.md
 
 # Subagents (project-scoped or global):
-cp codex/agents/*.toml  .codex/agents/        # or ~/.codex/agents/
+cp codex/agents/hsb-intake-*.toml  .codex/agents/        # or ~/.codex/agents/
 
 # Orchestrator entry: keep codex/AGENTS.md reachable, or drop it in as AGENTS.md.
 ```
@@ -28,7 +33,7 @@ Keep the package's `skills/intake-brainstorm/{references,assets}` reachable from
 where you run Codex — the agents read the method (the contract, the rubrics, the
 writing-integrity rules, the golden exemplar) from there. The Codex subagent
 `.toml` files are thin wrappers: each points at its full role spec in
-`../agents/<name>.md` and the shared references.
+`../agents/intake-<role>.md` and the shared references.
 
 ## The one real difference from Claude
 

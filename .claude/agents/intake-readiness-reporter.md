@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-readiness-reporter.md
+../../plugins/hsb-intake-brainstorm/agents/intake-readiness-reporter.md

@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-source-indexer.md
+../../plugins/hsb-intake-brainstorm/agents/intake-source-indexer.md

@@ -1,12 +1,13 @@
 {
-  "name": "teamwork-process",
-  "owner": { "name": "hugo-hsbtech" },
+  "name": "hsb-tech",
+  "owner": { "name": "Hugo Seabra", "email": "contato.hsbtec@gmail.com" },
   "plugins": [
     {
-      "name": "intake-brainstorm",
-      "source": "./plugins/intake-brainstorm",
+      "name": "hsb-intake-brainstorm",
+      "source": "./plugins/hsb-intake-brainstorm",
       "version": "0.1.0",
-      "description": "Multi-agent intake pipeline: raw demand description to a fully-filled, confidence-graded document, plus humanized/translated/enriched variants. Includes a Codex adapter."
+      "description": "Multi-agent intake pipeline: a raw demand description (and any referenced files) becomes a fully-filled, confidence-graded document, plus humanized/translated/enriched variants. Includes a Codex adapter.",
+      "author": { "name": "Hugo Seabra", "email": "contato.hsbtec@gmail.com" }
     }
   ]
 }

@@ -195,16 +195,19 @@ this repo's marketplace — versioned, namespaced, no copying:
 
 ```
 /plugin marketplace add hugo-hsbtech/teamwork-process
-/plugin install intake-brainstorm@teamwork-process
+/plugin install hsb-intake-brainstorm@hsb-tech
 ```
+
+Then invoke it as `/hsb-intake-brainstorm:intake-brainstorm` (plugin skills are
+namespaced `<plugin>:<skill>`).
 
 The plugin is self-contained (template, companion guide, and exemplar are bundled
 under [`assets/`](assets/)), so no repository content is needed at runtime.
 
 - **Codex**: see [`../../codex/README.md`](../../codex/README.md) — the same method
-  files, an `AGENTS.md` orchestrator, an `/intake-brainstorm` prompt, and the 15
-  roles as Codex subagents (`.toml`), run sequentially under Codex's single-agent
-  model.
+  files, an `AGENTS.md` orchestrator, an `/hsb-intake-brainstorm` prompt, and the 15
+  roles as Codex subagents (`hsb-intake-*.toml`), run sequentially under Codex's
+  single-agent model.
 
 To target a different document type, copy
 `assets/target-template.intake-record.md`, re-annotate its sections, and pass it
@@ -213,7 +216,7 @@ as the template.
 ## Layout (the plugin)
 
 ```
-plugins/intake-brainstorm/            # the Claude Code plugin (self-contained)
+plugins/hsb-intake-brainstorm/        # the Claude Code plugin (self-contained)
 ├── .claude-plugin/plugin.json
 ├── skills/intake-brainstorm/
 │   ├── SKILL.md                       # orchestrator spec
@@ -224,16 +227,17 @@ plugins/intake-brainstorm/            # the Claude Code plugin (self-contained)
 │   │   ├── ledger-schema.md
 │   │   ├── questioning-method.md
 │   │   ├── writing-integrity.md       # no-truncation + queue/merge/conflict
+│   │   ├── sessions.md                # resolve-or-resume, cross-run idempotency
 │   │   └── grounding.md
 │   └── assets/
 │       ├── target-template.intake-record.md
 │       ├── target-template.intake-record.guide.md
 │       └── golden-example.md
-├── agents/intake-*.md                 # 15 Claude subagents
+├── agents/intake-*.md                 # 15 Claude subagents (plugin-namespaced)
 └── codex/                             # Codex adapter (reuses the files above)
     ├── AGENTS.md
-    ├── prompts/intake-brainstorm.md
-    └── agents/intake-*.toml           # 15 Codex subagents
+    ├── prompts/hsb-intake-brainstorm.md
+    └── agents/hsb-intake-*.toml        # 15 Codex subagents (flat namespace -> prefixed)
 ```
 
 The repo root holds `.claude-plugin/marketplace.json`, and `.claude/skills` +

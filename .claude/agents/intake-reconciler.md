@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-reconciler.md
+../../plugins/hsb-intake-brainstorm/agents/intake-reconciler.md

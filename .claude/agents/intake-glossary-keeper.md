@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-glossary-keeper.md
+../../plugins/hsb-intake-brainstorm/agents/intake-glossary-keeper.md

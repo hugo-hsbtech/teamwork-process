@@ -1,6 +1,7 @@
-# Intake Brainstorm — Codex entry point (AGENTS.md)
+# hsb-intake-brainstorm — Codex entry point (AGENTS.md)
 
-This is the **Codex** adapter for the same skill described in `../SKILL.md`. It
+This is the **Codex** adapter for the same skill described in
+`../skills/intake-brainstorm/SKILL.md`. It
 reuses the identical method files — `../skills/intake-brainstorm/references/` and `../skills/intake-brainstorm/assets/` — so there
 is **no duplicated logic**: Claude Code and Codex read the same specs, they just
 spawn work differently.
@@ -9,8 +10,8 @@ spawn work differently.
 
 - Drop this file in a project as `AGENTS.md` (Codex reads it automatically from
   the repo root down to the working directory), **or**
-- Install it as a custom prompt: copy to `~/.codex/prompts/intake-brainstorm.md`
-  to get an `/intake-brainstorm` slash command.
+- Install it as a custom prompt: copy `prompts/hsb-intake-brainstorm.md` to
+  `~/.codex/prompts/` to get an `/hsb-intake-brainstorm` slash command.
 
 Either way, keep the `intake-brainstorm/` skill folder (its `references/` and
 `assets/`) reachable from where you run Codex, since this entry points at those

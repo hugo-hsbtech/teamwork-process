@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-visual-enricher.md
+../../plugins/hsb-intake-brainstorm/agents/intake-visual-enricher.md

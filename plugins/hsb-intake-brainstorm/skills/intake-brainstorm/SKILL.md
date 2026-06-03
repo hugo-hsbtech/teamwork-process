@@ -122,14 +122,16 @@ any additional requested languages as separate `output/` files. Keep section
 
 ## Installing in other projects
 
-This skill ships as the **`intake-brainstorm` Claude Code plugin** (this folder is
-`plugins/intake-brainstorm/skills/intake-brainstorm/` inside it). Install it from
-the repo's marketplace — no copying, versioned, namespaced:
+This skill ships as the **`hsb-intake-brainstorm` Claude Code plugin** (this folder
+is `plugins/hsb-intake-brainstorm/skills/intake-brainstorm/` inside it). Install it
+from the `hsb-tech` marketplace — no copying, versioned, namespaced:
 
 ```
 /plugin marketplace add hugo-hsbtech/teamwork-process
-/plugin install intake-brainstorm@teamwork-process
+/plugin install hsb-intake-brainstorm@hsb-tech
 ```
+
+Invoke it as `/hsb-intake-brainstorm:intake-brainstorm`.
 
 The plugin is self-contained (template, companion guide, and exemplar bundled
 under `assets/`), so no repository content is required at runtime. A Codex adapter

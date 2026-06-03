@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-packager.md
+../../plugins/hsb-intake-brainstorm/agents/intake-packager.md

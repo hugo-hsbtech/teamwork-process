@@ -1,1 +1,1 @@
-../../plugins/intake-brainstorm/agents/intake-doc-updater.md
+../../plugins/hsb-intake-brainstorm/agents/intake-doc-updater.md

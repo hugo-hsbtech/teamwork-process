@@ -1,12 +1,12 @@
-# /intake-brainstorm — orchestrator (Codex)
+# /hsb-intake-brainstorm — orchestrator (Codex)
 
-Act as the **intake-brainstorm orchestrator**. Read `codex/AGENTS.md` in the
-intake-brainstorm package and follow it for this run. You are the only layer that
-talks to the user.
+Act as the **hsb-intake-brainstorm orchestrator**. Read `codex/AGENTS.md` in the
+package and follow it for this run. You are the only layer that talks to the user.
 
 1. Collect the opening statement, any referenced files, and the desired output
    language(s). Pick the mode (fresh / revisit / batch).
-2. Create the session folder `intake/<demand-slug>/`.
+2. Resolve-or-resume the session (anchor at the project root, resume if it exists;
+   see the package's `references/sessions.md`).
 3. Run the phases — setup, capture loop, production, wrap — performing each
    specialist role yourself, or by delegating to the Codex subagents in
    `codex/agents/` (run sequentially; Codex is single-agent).
