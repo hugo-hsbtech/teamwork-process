@@ -1,0 +1,12 @@
+{
+  "name": "teamwork-process",
+  "owner": { "name": "hugo-hsbtech" },
+  "plugins": [
+    {
+      "name": "intake-brainstorm",
+      "source": "./plugins/intake-brainstorm",
+      "version": "0.1.0",
+      "description": "Multi-agent intake pipeline: raw demand description to a fully-filled, confidence-graded document, plus humanized/translated/enriched variants. Includes a Codex adapter."
+    }
+  ]
+}

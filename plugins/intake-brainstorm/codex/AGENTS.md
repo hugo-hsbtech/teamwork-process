@@ -1,7 +1,7 @@
 # Intake Brainstorm — Codex entry point (AGENTS.md)
 
 This is the **Codex** adapter for the same skill described in `../SKILL.md`. It
-reuses the identical method files — `../references/` and `../assets/` — so there
+reuses the identical method files — `../skills/intake-brainstorm/references/` and `../skills/intake-brainstorm/assets/` — so there
 is **no duplicated logic**: Claude Code and Codex read the same specs, they just
 spawn work differently.
 
@@ -23,14 +23,14 @@ a fully-filled target document, then produce humanized / translated / enriched
 variants. You are the only layer that talks to the human.
 
 Read these once, then follow them for the whole run:
-- `../references/orchestration.md` — the phases and the agent roles.
-- `../references/contract-and-template.md` — the template-as-contract + threshold X.
-- `../references/ledger-schema.md` — the Q&A ledger format.
-- `../references/questioning-method.md` — how to ask.
-- `../references/writing-integrity.md` — the no-truncation + merge rules (critical).
-- `../references/grounding.md` + `../assets/golden-example.md` — the quality bar.
+- `../skills/intake-brainstorm/references/orchestration.md` — the phases and the agent roles.
+- `../skills/intake-brainstorm/references/contract-and-template.md` — the template-as-contract + threshold X.
+- `../skills/intake-brainstorm/references/ledger-schema.md` — the Q&A ledger format.
+- `../skills/intake-brainstorm/references/questioning-method.md` — how to ask.
+- `../skills/intake-brainstorm/references/writing-integrity.md` — the no-truncation + merge rules (critical).
+- `../skills/intake-brainstorm/references/grounding.md` + `../skills/intake-brainstorm/assets/golden-example.md` — the quality bar.
 
-Default target template: `../assets/target-template.intake-record.md` (+ its
+Default target template: `../skills/intake-brainstorm/assets/target-template.intake-record.md` (+ its
 `...guide.md`). Swap it by pointing at a different annotated template.
 
 ## Codex execution model (the one real difference from Claude)
@@ -63,7 +63,7 @@ by performing each role yourself as a step, in this order:
   truncation risk, so this matters more in Codex, not less: write full content,
   prefer section-scoped edits over whole-file rewrites, end every produced
   document with `<!-- END OF DOCUMENT -->`, and verify it is present before moving
-  on. Full rules in `../references/writing-integrity.md`.
+  on. Full rules in `../skills/intake-brainstorm/references/writing-integrity.md`.
 
 ## Modes
 

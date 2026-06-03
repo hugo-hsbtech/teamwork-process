@@ -116,12 +116,21 @@ any additional requested languages as separate `output/` files. Keep section
 5. **Phase 4:** Packager writes the manifest. You report: artifacts produced,
    readiness score, and every item parked as assumption/discovery/deferred.
 
-## Installing user-scoped (for use in other projects)
+## Installing in other projects
 
-Develop here; to make it available everywhere, copy the skill to
-`~/.claude/skills/intake-brainstorm/` and the agent files to `~/.claude/agents/`.
-No repository content is required at runtime — the template, companion guide, and
-golden exemplar are all bundled under `assets/`.
+This skill ships as the **`intake-brainstorm` Claude Code plugin** (this folder is
+`plugins/intake-brainstorm/skills/intake-brainstorm/` inside it). Install it from
+the repo's marketplace — no copying, versioned, namespaced:
+
+```
+/plugin marketplace add hugo-hsbtech/teamwork-process
+/plugin install intake-brainstorm@teamwork-process
+```
+
+The plugin is self-contained (template, companion guide, and exemplar bundled
+under `assets/`), so no repository content is required at runtime. A Codex adapter
+lives alongside at the plugin's `codex/` (see its README). See the plugin
+[`README.md`](README.md) for the full layout.
 
 ## Bundled resources
 

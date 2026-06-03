@@ -111,8 +111,12 @@ Each iteration:
      Ledger Writer.
    - To show the human where things stand, spawn the **Readiness Reporter** (writes
      `readiness-report.md`) — the live gap map.
-   - When new domain terms appear, spawn the **Glossary Keeper** (writes
-     `glossary.md`) so the Doc Updater and production agents stay consistent.
+   - When domain terms accumulate (typically after the first capture rounds, and
+     again before production), spawn the **Glossary Keeper**: it reads `qa-log.md`
+     and `target-document.md` and writes canonical terms to `glossary.md`. That
+     file is then read by the **Doc Updater** (this phase) and by the **Humanizer**
+     and **Translator** (Phase 3) so terminology never drifts. Optional for trivial
+     demands with no special vocabulary.
 6. Gate check: **stop** when every `blocks=true` section is either ≥ its
    `min-confidence` *or* honestly disposed (`assumption`/`discovery`/`deferred`).
    Otherwise loop — Strategist's next batch targets the Auditor's flagged gaps.

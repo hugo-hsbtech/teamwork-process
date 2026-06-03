@@ -71,6 +71,12 @@ flowchart TD
     CA --> RR
     CA -->|"gate clear"| HU
 
+    LEDGER --> GK
+    DOC --> GK
+    GLOSS -.terms.-> DU
+    GLOSS -.terms.-> HU
+    GLOSS -.terms.-> TR
+
     subgraph P3["Phase 3 · Production (isolated, parallel variants)"]
         HU["Humanizer"] --> HMD[("humanized.md")]
         TR["Translator"] --> TMD[("translated.lang.md")]
@@ -181,39 +187,55 @@ across languages.
 
 ## Using it elsewhere
 
-In **this repo** it already works — no install step. To reuse it in **other
-projects** you have options, best to simplest:
+In **this repo** it already works — it is symlinked into `.claude/` from the
+plugin, so no install step is needed here.
 
-- **Claude Code plugin** (cleanest): package the skill + agents as a plugin and
-  install from a git marketplace — versioned, namespaced, no copying. (Not set up
-  yet; ask if you want this.)
-- **Copy** the skill to `~/.claude/skills/` and the agents to `~/.claude/agents/`.
-  Works, but you maintain two copies. Everything needed is bundled under
-  [`assets/`](assets/), so no repository content is required at runtime.
-- **Codex**: use [`codex/AGENTS.md`](codex/AGENTS.md) — the same method files, run
-  sequentially under Codex's single-agent model.
+To reuse it in **other projects**, install it as a **Claude Code plugin** from
+this repo's marketplace — versioned, namespaced, no copying:
+
+```
+/plugin marketplace add hugo-hsbtech/teamwork-process
+/plugin install intake-brainstorm@teamwork-process
+```
+
+The plugin is self-contained (template, companion guide, and exemplar are bundled
+under [`assets/`](assets/)), so no repository content is needed at runtime.
+
+- **Codex**: see [`../../codex/README.md`](../../codex/README.md) — the same method
+  files, an `AGENTS.md` orchestrator, an `/intake-brainstorm` prompt, and the 15
+  roles as Codex subagents (`.toml`), run sequentially under Codex's single-agent
+  model.
 
 To target a different document type, copy
 `assets/target-template.intake-record.md`, re-annotate its sections, and pass it
 as the template.
 
-## Layout
+## Layout (the plugin)
 
 ```
-intake-brainstorm/
-├── README.md                 # this file
-├── SKILL.md                  # orchestrator spec
-├── references/
-│   ├── orchestration.md      # phases, roster, single-writer rule
-│   ├── contract-and-template.md
-│   ├── ledger-schema.md
-│   ├── questioning-method.md
-│   ├── writing-integrity.md  # no-truncation + queue/merge/conflict
-│   └── grounding.md
-├── codex/
-│   └── AGENTS.md             # Codex entry point (reuses references/ + assets/)
-└── assets/
-    ├── target-template.intake-record.md
-    ├── target-template.intake-record.guide.md
-    └── golden-example.md
+plugins/intake-brainstorm/            # the Claude Code plugin (self-contained)
+├── .claude-plugin/plugin.json
+├── skills/intake-brainstorm/
+│   ├── SKILL.md                       # orchestrator spec
+│   ├── README.md                      # this file
+│   ├── references/
+│   │   ├── orchestration.md           # phases, roster, single-writer rule
+│   │   ├── contract-and-template.md
+│   │   ├── ledger-schema.md
+│   │   ├── questioning-method.md
+│   │   ├── writing-integrity.md       # no-truncation + queue/merge/conflict
+│   │   └── grounding.md
+│   └── assets/
+│       ├── target-template.intake-record.md
+│       ├── target-template.intake-record.guide.md
+│       └── golden-example.md
+├── agents/intake-*.md                 # 15 Claude subagents
+└── codex/                             # Codex adapter (reuses the files above)
+    ├── AGENTS.md
+    ├── prompts/intake-brainstorm.md
+    └── agents/intake-*.toml           # 15 Codex subagents
 ```
+
+The repo root holds `.claude-plugin/marketplace.json`, and `.claude/skills` +
+`.claude/agents` are symlinks into this plugin so it also works in-repo without a
+second copy.
