@@ -19,7 +19,7 @@
 
 **Architecture:** This is the **second persona** in the same product. Reuse the existing Submitter Figma file's Foundations + Components pages. Add a new **PO domain component set** on the Components page and a new **PO Journeys** page for the P-frames. Build bottom-up: extend tokens/badges → PO domain components → screen frames → wiring. Light mode only.
 
-**Tech stack:** Figma (variables, components/variants, interactive components, prototype flows) via the Figma MCP + figma:* skills. Source design system: `design-system/` (Conductor). Source spec: the PO spec above. Conceptual ground truth: [`personas/03-po.md`](../../../personas/03-po.md). Visual/component reference: the live Submitter Figma file + `prototypes/demandos-prototype-unified-v1.tsx` (PO surfaces only — and superseded where it mixes technical sections into the RP).
+**Tech stack:** Figma (variables, components/variants, interactive components, prototype flows) via the Figma MCP + figma:* skills. Source design system: `design-system/` (Conductor). Source spec: the PO spec above. Conceptual ground truth: [`personas/02-po.md`](../../../personas/02-po.md). Visual/component reference: the live Submitter Figma file + `prototypes/demandos-prototype-unified-v1.tsx` (PO surfaces only — and superseded where it mixes technical sections into the RP).
 
 ---
 

@@ -2,7 +2,7 @@
 
 > **Status:** v1 · **Date:** 2026-05-30 · **Author:** hugo (+ Claude)
 > **Companion to:** [`specs/2026-05-30-po-figma-prototype-design.md`](../specs/2026-05-30-po-figma-prototype-design.md) (the WHAT) and [`plans/2026-05-30-po-figma-prototype.md`](../plans/2026-05-30-po-figma-prototype.md) (the HOW it is built).
-> **Conceptual ground truth:** [`personas/03-po.md`](../../../personas/03-po.md). **Engine inherited from:** [`personas/01-submitter.md`](../../../personas/01-submitter.md).
+> **Conceptual ground truth:** [`personas/02-po.md`](../../../personas/02-po.md). **Engine inherited from:** [`personas/01-submitter.md`](../../../personas/01-submitter.md).
 
 ## Purpose
 
@@ -228,7 +228,7 @@ Carrega adiante os gaps já registrados pela Submitter (Button leadingIcon como 
 
 ## Próximas personas
 
-CTO e PM entram no protótipo no mesmo molde (ver a nota final de [`personas/03-po.md`](../../../personas/03-po.md)):
+CTO e PM entram no protótipo no mesmo molde (ver a nota final de [`personas/02-po.md`](../../../personas/02-po.md)):
 - O **CTO** assume o **Technical Assessment** como entregável de primeira classe (viabilidade como o seu modelo de primeira classe) e a fusão no PRD como handoff — as telas P4.3 e P5.2 deste protótipo já são o ponto de partida dele.
 - O **PM** recebe o **PRD** e tem autoridade de aceitar/devolver — as telas P6.1–P6.4 já mostram o lado do PO desse loop.
 - Repetir: definir intents (uma por story) · categorizar screens em lanes · escrever narrativa · aplicar os princípios de `03-po.md` (dois atos, decisão de primeira classe, dispositions, cadeia RP→PRD).

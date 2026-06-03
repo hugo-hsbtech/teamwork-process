@@ -3,7 +3,7 @@
 > **Status:** Draft v1 · **Date:** 2026-05-30 · **Author:** hugo (+ Claude)
 > **Type:** Design spec for a high-fidelity, clickable Figma prototype of the **PO persona's** end-to-end experience, built on the Conductor "Paper & Signal" design system. Feeds an implementation (build) plan and a stories doc.
 >
-> **Lineage:** This is the **second persona prototype**. It inherits the engine, the confidence layer, the *trace-to-source* honesty layer and the whole component foundation from the Submitter prototype ([`specs/2026-05-27-submitter-figma-prototype-design.md`](2026-05-27-submitter-figma-prototype-design.md)). It does **not** rebuild foundations — it adds the PO-specific domain kit on top. Conceptual ground truth is [`personas/03-po.md`](../../../personas/03-po.md); this spec instantiates that model as a UI.
+> **Lineage:** This is the **second persona prototype**. It inherits the engine, the confidence layer, the *trace-to-source* honesty layer and the whole component foundation from the Submitter prototype ([`specs/2026-05-27-submitter-figma-prototype-design.md`](2026-05-27-submitter-figma-prototype-design.md)). It does **not** rebuild foundations — it adds the PO-specific domain kit on top. Conceptual ground truth is [`personas/02-po.md`](../../../personas/02-po.md); this spec instantiates that model as a UI.
 
 ---
 
@@ -22,10 +22,10 @@ Build a Figma prototype we can put in front of a **real PO / Product Manager** t
 
 The prototype aims at the **final product**: all PO journeys designed, every state explicit, **no implicit screens**.
 
-The reasoning model behind the screens (decision-as-first-class, the two acts, the data structure, the two compliance contracts, dispositions, portfolio indicators, the RP→PRD chain) lives in [`personas/03-po.md`](../../../personas/03-po.md). The Submitter prototype is the **visual & component reference**.
+The reasoning model behind the screens (decision-as-first-class, the two acts, the data structure, the two compliance contracts, dispositions, portfolio indicators, the RP→PRD chain) lives in [`personas/02-po.md`](../../../personas/02-po.md). The Submitter prototype is the **visual & component reference**.
 
 **Primary research:**
-- Conceptual ground truth: `personas/03-po.md` (decision is first-class — the exact analog to the Submitter's confidence layer).
+- Conceptual ground truth: `personas/02-po.md` (decision is first-class — the exact analog to the Submitter's confidence layer).
 - Engine & honesty layer (inherited): `personas/01-submitter.md`.
 - Visual & component reference: the live Submitter Figma file + `prototypes/demandos-prototype-unified-v1.tsx` (the PO surfaces — triage items, rationalization pendencies, RP-2026-000 showcase, PO dashboard KPIs — already exist there as visual reference, even where conceptually behind `03-po.md`).
 - Interactions: [`interactions/01-sales-to-po.md`](../../../interactions/01-sales-to-po.md), [`05-po-to-cto.md`](../../../interactions/05-po-to-cto.md), [`07-po-to-pm.md`](../../../interactions/07-po-to-pm.md), [`08-pm-to-po-capacity.md`](../../../interactions/08-pm-to-po-capacity.md).
