@@ -38,21 +38,24 @@ no-truncation rules — is in
 
 ## Paths are passed in, never hardcoded (portability)
 
-The skill is **user-scoped and repo-independent**. It may live at
-`~/.claude/skills/intake-brainstorm/` or `<project>/.claude/skills/...`. So you
-inject paths into every agent's spawn prompt — never let an agent assume a
-location:
+The skill ships in the **`intake-brainstorm` plugin** and is repo-independent. Its
+base directory varies by install (the plugin cache, or `.claude/skills/...` when
+symlinked in-repo), so you inject paths into every agent's spawn prompt — never let
+an agent assume a location:
 
 - `SKILL_DIR` — this skill's base directory (you are told it at launch).
-- `SESSION_DIR` — `<cwd>/intake/<demand-slug>/` for this run.
+- `SESSION_DIR` — `<SESSION_ROOT>/<demand-slug>/`, resolved per [`sessions.md`](sessions.md) (resume if it exists).
 - `TEMPLATE` — the target template file (default: `SKILL_DIR/assets/target-template.intake-record.md`, or a user-supplied template).
 
 ## The session folder
 
-Create once, at the start of a run:
+Resolve-or-resume at the start of every run (see [`sessions.md`](sessions.md)):
+`SESSION_ROOT` anchors at `$INTAKE_HOME` or the project (git) root, **not** the
+cwd, and if the demand's folder already exists you **resume** it rather than
+creating a duplicate.
 
 ```
-<cwd>/intake/<demand-slug>/
+<SESSION_ROOT>/<demand-slug>/
 ├── contract.lock.md          # Template Analyst
 ├── sources-index.md          # Source Indexer
 ├── sources/                  # Source Indexer (copies/links of inputs)
@@ -68,7 +71,9 @@ Create once, at the start of a run:
 Collect, in the human's language: the opening statement, any **file references**,
 the **desired output language(s)**, and (optional) a custom `TEMPLATE`. Decide the
 **mode**: *fresh* (no `target-document.md` yet) or *revisit* (one exists — re-score
-it). Slugify the demand, create `SESSION_DIR`. Do not ask a wall of questions yet.
+it). **Resolve-or-resume** the session ([`sessions.md`](sessions.md)): if the
+demand's `SESSION_DIR` already exists, resume it instead of creating a second one.
+Do not ask a wall of questions yet.
 
 ## Phase 1 — Setup (parallel, then gate)
 

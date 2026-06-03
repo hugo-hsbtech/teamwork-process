@@ -158,7 +158,7 @@ Agent definitions live in `.claude/agents/intake-*.md`.
 A run creates one folder per demand:
 
 ```
-<cwd>/intake/<demand-slug>/
+<SESSION_ROOT>/<demand-slug>/      # SESSION_ROOT = $INTAKE_HOME or the project (git) root + /intake
 ├── contract.lock.md        # derived contract + template hash
 ├── sources-index.md        # index of ingested inputs
 ├── sources/                # normalized input files
