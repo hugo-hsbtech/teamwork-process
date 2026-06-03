@@ -1,0 +1,259 @@
+/* ============================================================
+   Intake · Submitter — prototype app layer
+   Sits on top of Conductor "Paper & Signal" (conductor.css).
+   Adds: scalable type system, density, accent theming, and an
+   EXPLORATORY dark mode (no dark palette ships in the DS yet).
+   ============================================================ */
+
+:root {
+  /* ---- Type scale (driven by Tweaks) ---- */
+  --type-scale: 1;
+  --fs-display: calc(52px * var(--type-scale));
+  --fs-h1:      calc(40px * var(--type-scale));
+  --fs-h2:      calc(28px * var(--type-scale));
+  --fs-h3:      calc(20px * var(--type-scale));
+  --fs-title:   calc(16px * var(--type-scale));
+  --fs-label:   calc(14px * var(--type-scale));
+  --fs-body:    calc(14px * var(--type-scale));
+  --fs-sm:      calc(12px * var(--type-scale));
+  --fs-xs:      calc(11px * var(--type-scale));
+  --fs-eyebrow: calc(11px * var(--type-scale));
+
+  /* ---- Density (driven by Tweaks) ---- */
+  --row-pad-y: 16px;
+  --list-gap: 0px;
+
+  /* ---- Accent (defaults to Tide; overridable by Tweaks) ---- */
+  --accent:        var(--tide-700);
+  --accent-bright: var(--tide-500);
+  --accent-text:   var(--tide-700);
+  --accent-wash:   var(--tide-50);
+  --accent-on:     #ffffff;
+}
+
+/* re-point the DS brand tokens at the accent so existing classes follow */
+:root {
+  --brand-tide:        var(--accent);
+  --brand-tide-bright: var(--accent-bright);
+  --brand-tide-text:   var(--accent-text);
+  --brand-tide-wash:   var(--accent-wash);
+}
+
+/* ============================================================
+   DARK MODE — exploratory. Warm charcoal "paper at night".
+   ============================================================ */
+[data-theme="dark"] {
+  --stone-50:  rgb(23,22,20);    /* canvas */
+  --stone-100: rgb(38,36,33);    /* sunken */
+  --stone-200: rgb(54,51,47);    /* hairline */
+  --stone-300: rgb(72,68,62);    /* strong border */
+  --stone-400: rgb(110,105,96);
+  --stone-500: rgb(140,134,123); /* faint */
+  --stone-600: rgb(176,170,158); /* muted */
+  --stone-700: rgb(214,210,199);
+  --stone-800: rgb(236,233,225);
+  --stone-900: rgb(245,243,237); /* ink */
+
+  --surface-canvas: rgb(23,22,20);
+  --surface-card:   rgb(33,31,28);
+  --surface-sunken: rgb(43,41,37);
+  --surface-inverse: rgb(245,243,237);
+
+  --text-ink:   rgb(245,243,237);
+  --text-muted: rgb(176,170,158);
+  --text-faint: rgb(140,134,123);
+
+  --border-hairline: rgb(54,51,47);
+  --border-strong:   rgb(74,70,64);
+
+  --accent-bright: var(--tide-500);
+  --tide-50: rgba(19,164,176,0.14);
+
+  --slate-50: rgba(100,116,139,0.18);
+  --violet-50: rgba(124,92,252,0.18);
+  --amber-50: rgba(217,119,6,0.16);
+  --green-50: rgba(21,128,61,0.18);
+  --red-50:   rgba(220,38,38,0.16);
+
+  --elev-1: 0 1px 0 rgba(0,0,0,0.30), 0 1px 2px rgba(0,0,0,0.30);
+  --elev-2: 0 4px 8px -2px rgba(0,0,0,0.45), 0 12px 32px -4px rgba(0,0,0,0.55);
+  --elev-pop: 0 8px 24px -8px rgba(0,0,0,0.55), 0 24px 56px -12px rgba(0,0,0,0.6);
+}
+[data-theme="dark"] body { background: var(--surface-canvas); }
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: var(--surface-canvas);
+  color: var(--text-ink);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea { font-family: inherit; }
+::selection { background: var(--tide-100); color: var(--text-ink); }
+*:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
+
+/* thin scrollbars that match the paper aesthetic */
+.scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong); border-radius: 9999px;
+  border: 3px solid transparent; background-clip: padding-box;
+}
+.scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+#root { height: 100vh; width: 100vw; }
+.app-frame { display: flex; height: 100vh; width: 100vw; background: var(--surface-canvas); }
+.app-main { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100vh; }
+.app-scroll { flex: 1; overflow-y: auto; min-height: 0; }
+
+/* ============================================================
+   TYPE HELPERS (scale-aware — supersede DS fixed px)
+   ============================================================ */
+.f-display { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-display); line-height: 1.05; letter-spacing: -0.02em; }
+.f-h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h1); line-height: 1.08; letter-spacing: -0.02em; }
+.f-h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: 1.15; letter-spacing: -0.012em; }
+.f-h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h3); line-height: 1.2; letter-spacing: -0.006em; }
+.f-title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-title); line-height: 1.25; }
+.f-label { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-label); line-height: 1; }
+.f-body { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-body); line-height: 1.55; }
+.f-sm { font-family: var(--font-sans); font-weight: 400; font-size: var(--fs-sm); line-height: 1.5; }
+.f-eyebrow {
+  font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-eyebrow);
+  line-height: 1; letter-spacing: 0.09em; text-transform: uppercase;
+}
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--text-muted); }
+.faint { color: var(--text-faint); }
+.ink { color: var(--text-ink); }
+.accent { color: var(--accent-text); }
+
+/* ============================================================
+   ANIMATION UTILITIES
+   ============================================================ */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes riseIn { from { transform: translateY(10px); } to { transform: translateY(0); } }
+@keyframes scaleIn { from { transform: translateY(8px) scale(0.985); } to { transform: none; } }
+@keyframes slideUp { from { transform: translateY(14px); } to { transform: none; } }
+@keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes pulse { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes ringDraw { from { stroke-dashoffset: var(--circ); } }
+@keyframes voicePulse { 0%,100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+@keyframes segGrow { from { transform: scaleY(0.18); opacity: 0.35; } to { transform: scaleY(1); opacity: 1; } }
+@keyframes fadeInPage { from { transform: translateY(6px); } to { transform: translateY(0); } }
+
+.anim-fade { animation: riseIn 240ms var(--ease-out) forwards; }
+.anim-screen { animation: riseIn 280ms var(--ease-out) forwards; }
+.anim-scale { animation: scaleIn var(--dur-base) var(--ease-out) forwards; }
+.anim-up { animation: riseIn 320ms var(--ease-out) forwards; }
+.skel { background: var(--border-hairline); border-radius: 6px; animation: pulse 1.4s ease-in-out infinite; }
+
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-label);
+  border-radius: var(--radius-md); white-space: nowrap; line-height: 1;
+  transition: background var(--dur-fast) var(--ease-standard), border-color var(--dur-fast), color var(--dur-fast), opacity var(--dur-fast);
+  border: 1px solid transparent; user-select: none;
+}
+.btn-md { height: 36px; padding: 0 14px; }
+.btn-lg { height: 44px; padding: 0 18px; font-size: var(--fs-title); }
+.btn-sm { height: 28px; padding: 0 10px; font-size: var(--fs-sm); }
+.btn-primary { background: var(--accent); color: var(--accent-on); }
+.btn-primary:hover { background: var(--tide-900); }
+.btn-secondary { background: var(--surface-card); color: var(--text-ink); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--surface-sunken); }
+.btn-ghost { background: transparent; color: var(--text-muted); }
+.btn-ghost:hover { background: var(--surface-sunken); color: var(--text-ink); }
+.btn-danger { background: var(--surface-card); color: var(--red-600); border-color: var(--border-strong); }
+.btn-danger:hover { background: var(--red-50); border-color: var(--red-600); }
+.btn[disabled], .btn.is-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* Cards */
+.card {
+  background: var(--surface-card); border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+}
+.card-pad { padding: 24px; }
+
+/* Pills / chips */
+.pill {
+  display: inline-flex; align-items: center; gap: 5px; border-radius: 9999px;
+  padding: 3px 9px; font-family: var(--font-mono); font-weight: 500;
+  font-size: var(--fs-xs); letter-spacing: 0.06em; line-height: 1;
+}
+.dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+
+/* Inputs */
+.field {
+  width: 100%; background: var(--surface-sunken); border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md); padding: 10px 12px; color: var(--text-ink);
+  font-family: var(--font-sans); font-size: var(--fs-body); line-height: 1.5;
+  transition: border-color var(--dur-fast), background var(--dur-fast);
+}
+.field::placeholder { color: var(--text-faint); }
+.field:focus { outline: none; border-color: var(--accent-bright); background: var(--surface-card); }
+
+/* Tabs */
+.tab {
+  display: inline-flex; align-items: center; gap: 7px; padding: 12px 4px; position: relative;
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-label);
+  color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent;
+  transition: color var(--dur-fast);
+}
+.tab:hover { color: var(--text-ink); }
+.tab.is-active { color: var(--text-ink); border-bottom-color: var(--accent); }
+
+.count-chip {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 18px;
+  padding: 0 6px; border-radius: 9999px; background: var(--surface-sunken);
+  font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted);
+}
+.tab.is-active .count-chip { background: var(--accent-wash); color: var(--accent-text); }
+
+/* Avatars */
+.avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px;
+  font-family: var(--font-display); font-weight: 700; color: #fff; flex: none; }
+
+/* Modal */
+.scrim { position: fixed; inset: 0; background: rgba(28,27,24,0.45); z-index: 60; animation: fadeIn 160ms var(--ease-standard) forwards; }
+.modal {
+  position: fixed; z-index: 61; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  background: var(--surface-card); border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg); box-shadow: var(--elev-pop); animation: scaleIn 220ms var(--ease-out) forwards;
+  max-height: 88vh; display: flex; flex-direction: column;
+}
+
+/* Hairline divider */
+.hr { height: 1px; background: var(--border-hairline); border: 0; }
+
+/* Tooltip */
+.tip {
+  position: absolute; z-index: 80; background: var(--surface-inverse);
+  color: var(--surface-canvas); font-size: var(--fs-xs); font-family: var(--font-sans);
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--elev-2); white-space: nowrap;
+  pointer-events: none; animation: fadeIn 120ms var(--ease-standard) forwards;
+}
+
+/* link */
+.lnk { color: var(--accent-text); font-weight: 700; cursor: pointer; text-decoration: none; }
+.lnk:hover { text-decoration: underline; }
+
+/* misc */
+.row { display: flex; align-items: center; }
+.col { display: flex; flex-direction: column; }
+.spread { display: flex; align-items: center; justify-content: space-between; }
+.gap4 { gap: 4px; } .gap6 { gap: 6px; } .gap8 { gap: 8px; } .gap12 { gap: 12px; } .gap16 { gap: 16px; } .gap24 { gap: 24px; }
+.grow { flex: 1; min-width: 0; }
+.clip { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nodrag { user-select: none; }
