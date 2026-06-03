@@ -3,7 +3,7 @@
 **Direção:** PO inicia. PM recebe.
 **Camada:** Camada de Intake → Downstream
 
-> **Mudança estrutural (ver [`personas/02-po.md` §2 e §11](../personas/02-po.md)).** O artefato transferido ao PM é o **[PRD](../templates/04-prd.md)** — a fusão do Readiness Package (PO) com o Technical Assessment (CTO) — **não o RP isolado**. É o PRD que abre o downstream.
+> **Mudança estrutural (ver [`personas/02-po.md` §2 e §11](../personas/02-po.md)).** O artefato transferido ao PM é o **[PRD](../templates/03-prd.md)** — a fusão do Readiness Package (PO) com o Technical Assessment (CTO) — **não o RP isolado**. É o PRD que abre o downstream.
 
 ---
 

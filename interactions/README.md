@@ -16,7 +16,7 @@ flowchart LR
     PO -->|Escalada arquitetural| CTO
     CTO -->|Technical Assessment| PO
 
-    PO -->|PRD - commitment point| PM
+    PO -->|PRD| PM
     PM -->|Escalada de capacidade| PO
 
     PM -->|Plano de Execução + PRD| TL

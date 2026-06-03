@@ -3,7 +3,7 @@
 **Direção:** PO inicia. CTO recebe.
 **Camada:** Dentro da Camada de Intake
 
-> **Mudança estrutural (ver [`personas/02-po.md` §2 e §10](../personas/02-po.md)).** O CTO **não preenche seções do Readiness Package**. Ele produz um **artefato próprio — o [Technical Assessment](../templates/03-technical-assessment.md) (TA)** — em paralelo ao RP. O RP referencia o TA via uma ponte (status + veredito + link); a fusão dos dois acontece no **PRD**. O CTO responde ao RP, não o co-edita.
+> **Mudança estrutural (ver [`personas/02-po.md` §2 e §10](../personas/02-po.md)).** O CTO **não preenche seções do Readiness Package**. Ele produz um **artefato próprio — o [Technical Assessment](../templates/02-technical-assessment.md) (TA)** — em paralelo ao RP. O RP referencia o TA via uma ponte (status + veredito + link); a fusão dos dois acontece no **PRD**. O CTO responde ao RP, não o co-edita.
 
 ---
 
@@ -30,7 +30,7 @@ Durante a racionalização, o PO identifica que a demanda toca qualquer um dos s
 
 ## O que o CTO Produz
 
-Um **Technical Assessment** ([`03-technical-assessment.md`](../templates/03-technical-assessment.md)) — artefato separado, de autoria exclusiva do CTO:
+Um **Technical Assessment** ([`02-technical-assessment.md`](../templates/02-technical-assessment.md)) — artefato separado, de autoria exclusiva do CTO:
 
 - **Veredito de viabilidade** (viável / viável com ressalvas / inviável como escopado) + justificativa
 - **Impacto arquitetural**: sistemas afetados, modelo de dados, eventos, multi-tenancy, segurança, performance, observabilidade
