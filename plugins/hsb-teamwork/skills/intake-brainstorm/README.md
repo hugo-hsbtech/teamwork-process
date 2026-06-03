@@ -199,7 +199,7 @@ To reuse it in **other projects**, install it as a **Claude Code plugin** from
 this repo's marketplace — versioned, namespaced, no copying:
 
 ```
-/plugin marketplace add hugo-hsbtech/hsb-teamwork
+/plugin marketplace add hugo-hsbtech/teamwork-process-marketplace
 /plugin install hsb-teamwork@hsb-tech
 ```
 

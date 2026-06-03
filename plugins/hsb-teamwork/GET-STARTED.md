@@ -6,7 +6,7 @@ translated, and visually-enriched variants. It runs on **Claude Code** and on
 **Codex**. Pick your tool below.
 
 - Marketplace: **`hsb-tech`** · Plugin: **`hsb-teamwork`**
-- Author: Hugo Seabra · Dedicated repo: `hugo-hsbtech/hsb-teamwork`
+- Author: Hugo Seabra · Dedicated repo: `hugo-hsbtech/teamwork-process-marketplace`
 
 **`hsb-teamwork` is a multi-step toolkit.** Today it ships one skill,
 `intake-brainstorm`. Planned siblings in the same plugin: `readiness-package`,
@@ -23,7 +23,7 @@ The plugin is published from its **own repository** — a dedicated repo is the
 clean way to host a marketplace (its root holds `.claude-plugin/marketplace.json`).
 
 ```
-/plugin marketplace add hugo-hsbtech/hsb-teamwork
+/plugin marketplace add hugo-hsbtech/teamwork-process-marketplace
 /plugin install hsb-teamwork@hsb-tech
 ```
 
