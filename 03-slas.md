@@ -17,7 +17,7 @@ Os SLAs aqui são metas operacionais internas, não compromissos com clientes.
 | Triagem Inicial — demanda Média | PO | Próximo ciclo de triagem (máx. 1 semana) | Demanda aguarda a próxima sessão agendada. |
 | Triagem Inicial — demanda Baixa | PO | Movida direto para o Backlog de Oportunidades | Triagem não necessária. |
 | Time-box de Discovery | PO | Máx. 2 semanas por demanda | Demanda vai para o Backlog de Oportunidades com justificativa documentada. |
-| Racionalização e Readiness Package | PO + CTO | Máx. 2 semanas para escopo padrão; máx. 1 semana para Crítica | Se excedido, PO sinaliza ao PM e CEO com relatório parcial de status. |
+| Racionalização → PRD (RP congelado + Technical Assessment) | PO + CTO | Máx. 2 semanas para escopo padrão; máx. 1 semana para Crítica | Se excedido, PO sinaliza ao PM e CEO com relatório parcial de status. |
 | Avaliação arquitetural do CTO | CTO | Máx. 5 dias úteis a partir da escalada do PO | PO faz follow-up. Se não resolvido, CEO é notificado. |
 
 > **Onde o relógio da triagem começa.** Os SLAs de "Triagem Inicial" contam a partir do recebimento de um registro **pronto** (`gateReady = true`), não do primeiro rascunho. A construção da prontidão pelo Submitter — preencher requisitos, marcar premissas, abrir Discovery — acontece *antes* do handoff e não é SLA-bound: é o ritmo da própria persona, assistido pelo sistema (ver [`personas/01-submitter.md`](./personas/01-submitter.md)). O que o PO recebe já vem graduado por confiança; o timer de triagem mede a resposta do PO, não o tempo que o Submitter levou para amadurecer o registro.
@@ -91,7 +91,7 @@ Quando uma etapa está bloqueada ou um SLA está prestes a ser excedido, o camin
 | Situação | Primeira escalada | Segunda escalada | Prazo antes da segunda |
 |---|---|---|---|
 | Demanda presa na triagem do PO | PO sinaliza ao CEO | CEO e CTO alinham sobre prioridade | 48h após a primeira escalada |
-| Readiness Package rejeitado pelo PM | PM devolve ao PO com gaps documentados | PO escala ao CTO se os gaps forem técnicos | 3 dias úteis |
+| PRD rejeitado pelo PM | PM devolve ao PO com gaps documentados | PO escala ao CTO se os gaps forem técnicos | 3 dias úteis |
 | Conflito de capacidade não resolvido | PM escala ao PO | PO e CEO tomam decisão de trade-off de prioridade | 3 dias úteis |
 | CTO indisponível para revisão arquitetural | PO escala ao CEO | CEO define caminho interino | 5 dias úteis |
 | Defeito bloqueador de QA não resolvido | QA escala ao Tech Lead | Tech Lead escala ao CTO se for arquitetural | 2 dias úteis |

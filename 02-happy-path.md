@@ -25,18 +25,20 @@ flowchart TD
         E -- Product Ready --> D2[Intake Record\nPO formaliza · atribui INT · roteia]
         D2 --> F[PO — Racionalização → Readiness Package\nTransforma a dor em contexto de produto]
         F --> G{Impacto Arquitetural?}
-        G -- Sim --> I[CTO — Technical Assessment\nViabilidade · Arquitetura · Riscos]
-        G -- Não --> PRD
-        I --> PRD[PRD\nRP + Technical Assessment fundidos · assinado]
+        G -- Não --> H[PO — Congela o Readiness Package]
+        G -- Sim --> I[CTO — Technical Assessment\nConstraints · Arquitetura · Riscos · ADRs]
+        I --> H
+        H --> J[PRD = RP + Technical Assessment\n═ COMMITMENT POINT ═ · fim do arco do PO]
     end
 
     subgraph DOWNSTREAM ["🔽 DOWNSTREAM"]
-        PRD --> K[PM — Recebe o PRD\nValida completude]
+        J --> K[PM — Recebe o PRD\nValida completude]
         K --> L[PM — Planejamento de Execução\nRoadmap · Milestones · Sequenciamento · Prioridades]
         L --> M[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks · Estimativas]
-        M --> N[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
+        M --> DOR[✅ Ready for Development\na Definition of Ready · só falta codar]
+        DOR --> N[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
         N --> O[QA / UAT\nValidação dos Critérios de Aceite]
-        O --> P[Release]
+        O --> P[Release · Definition of Done]
     end
 
     subgraph FEEDBACK ["🔁 FEEDBACK LOOP"]
@@ -233,7 +235,7 @@ O que produzem:
 - estratégia de rollout (deploy, migração, monitoramento, rollback);
 - Definition of Done.
 
-Gate: Engineers não iniciam o trabalho até que as tasks estejam definidas com contexto, constraints e critérios de aceite.
+Gate: a **Definition of Ready** (*Ready for Development*) — Engineers não iniciam o trabalho até que épicos, histórias e tasks estejam escritos e estimados, com contexto, constraints e critérios de aceite. É aqui, downstream, que a demanda fica "pronta para codar" — não no congelamento do RP.
 
 ### Passo 7 — Implementação (Engineers)
 
@@ -307,14 +309,14 @@ sequenceDiagram
     UP->>PO: Documento do Submitter (gateReady)
     PO->>PO: Triagem → Intake Record
     PO->>CTO: Escala se impacto arquitetural
-    CTO-->>PO: Technical Assessment assinado
-    PO->>PM: PRD (RP + Technical Assessment)
+    CTO-->>PO: Technical Assessment (artefato separado)
+    PO->>PM: PRD (RP + Technical Assessment) — commitment point
     PM->>PM: Planejamento de execução
     PM->>TL: Plano de execução + PRD
-    TL->>TL: Quebra técnica
-    TL->>ENG: Tasks definidas + contexto
+    TL->>TL: Quebra técnica (épicos, histórias, tasks, estimativas)
+    TL->>ENG: Ready for Development (DoR) — só falta codar
     ENG->>QA: Implementação completa
-    QA->>PM: Release aprovado
+    QA->>PM: Release aprovado (Definition of Done)
     PM->>UP: Entrega completa + feedback coletado
 ```
 
@@ -332,7 +334,7 @@ O fluxo acima descreve uma demanda isolada. Na prática, várias estarão em est
 ## Princípios do happy path
 
 1. **Cada handoff tem um gate** — nenhum papel aceita input incompleto sem devolvê-lo.
-2. **O escopo congela no PRD** (RP + Technical Assessment) — papéis downstream executam, não redefinem.
+2. **O escopo congela no commitment point (RP→PRD)** — papéis downstream executam, não redefinem.
 3. **Upstream define o problema, downstream define a solução** — nunca o inverso.
 4. **O CTO é puxado, não empurrado** — o PO escala ao CTO; o CTO não participa de toda triagem.
 5. **Feedback é obrigatório** — o loop fecha em todo ciclo de entrega.

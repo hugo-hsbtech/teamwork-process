@@ -1,0 +1,316 @@
+/* ============================================================
+   Conductor Design System — colors & type
+   Source: extracted from Figma "Conductor · agent platform"
+   System name: Paper & Signal
+   ============================================================ */
+
+/* ------- 0. LOCAL WEBFONTS ---------------------------------- */
+/* All three families ship as local variable-weight TTFs. The
+   Google Fonts <link> tags scattered in earlier HTML files are
+   no longer needed — these @font-face rules supersede them. */
+
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("../fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("../fonts/HankenGrotesk-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/HankenGrotesk-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont.ttf") format("truetype-variations"),
+       url("../fonts/Inter-VariableFont.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Italic-VariableFont.ttf") format("truetype-variations"),
+       url("../fonts/Inter-Italic-VariableFont.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../fonts/GeistMono-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/GeistMono-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../fonts/GeistMono-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/GeistMono-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ------- 1. RAW PALETTE (Figma variables) ------------------- */
+:root {
+  /* Stone — the "paper" neutral. Warm, slightly yellowed greys. */
+  --stone-50:  rgb(250,249,245);   /* canvas */
+  --stone-100: rgb(244,242,236);   /* sunken / hover */
+  --stone-200: rgb(231,228,219);   /* hairline border */
+  --stone-300: rgb(214,210,199);   /* strong border */
+  --stone-400: rgb(181,176,164);
+  --stone-500: rgb(156,151,140);   /* faint text */
+  --stone-600: rgb(107,103,94);    /* muted text */
+  --stone-700: rgb(74,71,66);
+  --stone-800: rgb(46,44,40);
+  --stone-900: rgb(28,27,24);      /* ink */
+
+  /* Tide — the "signal" brand teal. */
+  --tide-50:  rgb(230,243,244);
+  --tide-100: rgb(199,230,233);
+  --tide-300: rgb(111,196,203);
+  --tide-500: rgb(19,164,176);     /* bright */
+  --tide-600: rgb(14,138,148);
+  --tide-700: rgb(14,124,134);     /* default brand */
+  --tide-900: rgb(10,90,97);
+
+  /* Semantic accents */
+  --amber-50:  rgb(251,241,220);
+  --amber-500: rgb(217,119,6);
+  --amber-600: rgb(180,83,9);
+  --green-50:  rgb(228,243,234);
+  --green-600: rgb(21,128,61);
+  --red-50:    rgb(251,234,234);
+  --red-600:   rgb(220,38,38);
+  --slate-50:  rgb(238,241,245);
+  --slate-500: rgb(100,116,139);
+  --violet-50: rgb(238,233,254);
+  --violet-500: rgb(124,92,252);
+
+  /* Provider chips — colors lifted from each vendor's brand. */
+  --provider-claude: rgb(204,120,92);
+  --provider-gemini: rgb(91,141,239);
+  --provider-grok:   rgb(75,85,99);
+  --provider-openai: rgb(16,163,127);
+
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* ------- 2. SEMANTIC TOKENS --------------------------------- */
+:root {
+  /* Surfaces */
+  --surface-canvas:  var(--stone-50);   /* page background */
+  --surface-card:    var(--white);      /* cards, drawers, sheets */
+  --surface-sunken:  var(--stone-100);  /* inputs, code blocks, hover */
+  --surface-inverse: var(--stone-900);  /* tooltips, dark chrome */
+
+  /* Text */
+  --text-ink:      var(--stone-900);
+  --text-muted:    var(--stone-600);
+  --text-faint:    var(--stone-500);
+  --text-on-brand: var(--white);
+
+  /* Borders */
+  --border-hairline: var(--stone-200);
+  --border-strong:   var(--stone-300);
+
+  /* Brand */
+  --brand-tide:        var(--tide-700);
+  --brand-tide-bright: var(--tide-500);
+  --brand-tide-text:   var(--tide-700);
+  --brand-tide-wash:   var(--tide-50);
+
+  /* Lifecycle states (badges, dots, washes) */
+  --state-draft:        var(--slate-500);
+  --state-draft-wash:   var(--slate-50);
+  --state-staging:      var(--violet-500);
+  --state-staging-wash: var(--violet-50);
+  --state-canary:       var(--amber-500);
+  --state-canary-wash:  var(--amber-50);
+  --state-running:      var(--tide-500);
+  --state-running-wash: var(--tide-50);
+  --state-production:      var(--green-600);
+  --state-production-wash: var(--green-50);
+  --state-paused:       var(--amber-600);
+  --state-paused-wash:  var(--amber-50);
+  --state-error:        var(--red-600);
+  --state-error-wash:   var(--red-50);
+
+  /* Spacing */
+  --space-0:   0px;
+  --space-2:   2px;
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  /* Radii */
+  --radius-none: 0;
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Elevation — flat, almost no shadow. Paper, not chrome. */
+  --elev-0: none;
+  --elev-1: 0 1px 0 rgba(28,27,24,0.04), 0 1px 2px rgba(28,27,24,0.04);
+  --elev-2: 0 4px 8px -2px rgba(28,27,24,0.06), 0 12px 32px -4px rgba(28,27,24,0.12);
+  --elev-pop: 0 8px 24px -8px rgba(28,27,24,0.16), 0 24px 56px -12px rgba(28,27,24,0.18);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+}
+
+/* ------- 3. TYPE FAMILIES ----------------------------------- */
+:root {
+  /* Hanken Grotesk — display + UI labels. Substituted via Google Fonts. */
+  --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans:    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+}
+
+/* Webfonts (Google Fonts) — pulled at runtime in HTML files. */
+/* See README "Fonts" section for the recommended <link> tags. */
+
+/* ------- 4. SEMANTIC TYPE STYLES (13 styles) ---------------- */
+/* Display / page titles — Hanken Grotesk, very heavy */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-ink);
+}
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-ink);
+}
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-ink);
+}
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--text-ink);
+}
+/* UI labels — Hanken Grotesk, bold */
+.t-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.0;
+  color: var(--text-ink);
+}
+.t-label-sm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.0;
+  color: var(--text-ink);
+}
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-tide-text);
+}
+/* Body — Inter */
+.t-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-ink);
+}
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.t-meta {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.0;
+  color: var(--text-faint);
+}
+/* Monospace — Geist Mono. Used for: identifiers (agent.foo.bar),
+   token names, code, numeric data, and "scientific notation" eyebrows. */
+.t-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-ink);
+}
+.t-mono-sm {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+.t-code {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-ink);
+  background: var(--surface-sunken);
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+}
+
+/* ------- 5. RAW ELEMENT DEFAULTS ---------------------------- */
+html, body {
+  background: var(--surface-canvas);
+  color: var(--text-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1 { font: 800 40px/1.1 var(--font-display); letter-spacing: -0.02em; color: var(--text-ink); }
+h2 { font: 700 28px/1.15 var(--font-display); letter-spacing: -0.01em; color: var(--text-ink); }
+h3 { font: 700 20px/1.2  var(--font-display); color: var(--text-ink); }
+h4 { font: 700 16px/1.25 var(--font-display); color: var(--text-ink); }
+p  { font: 400 14px/1.5 var(--font-sans); color: var(--text-ink); }
+code, kbd, samp, pre { font-family: var(--font-mono); }
+hr { border: 0; border-top: 1px solid var(--border-hairline); }
+::selection { background: var(--tide-100); color: var(--text-ink); }

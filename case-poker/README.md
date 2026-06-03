@@ -48,9 +48,9 @@ PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A p
 | Documento | Responsável | Descrição |
 |---|---|---|
 | `05-execution-plan.md` | PM | Avaliação de capacidade, sequenciamento de demandas, mapa de milestones, estrutura de sprints, gatilhos de escalada |
-| `06.1-product-backlog-queue-voting.md` | PO | Épicos + histórias + critérios de aceite para Queue Voting — o que construir e para quem |
+| `06.1-product-backlog-queue-voting.md` | Tech Leads | Épicos + histórias + critérios de aceite para Queue Voting, derivados das user stories de produto do PRD — atinge a Definition of Ready |
 | `06.2-tech-backlog-queue-voting.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Queue Voting — como construir |
-| `07.1-product-backlog-access-control.md` | PO | Épicos + histórias + critérios de aceite para Access Control — o que construir e para quem |
+| `07.1-product-backlog-access-control.md` | Tech Leads | Épicos + histórias + critérios de aceite para Access Control, derivados das user stories de produto do PRD — atinge a Definition of Ready |
 | `07.2-tech-backlog-access-control.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Access Control — como construir |
 
 > Os backlogs e o plano de execução recebem o **PRD** (`PRD vinculado`), não o RP isolado.
