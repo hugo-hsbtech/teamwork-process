@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-confidence-auditor.md
+../../plugins/hsb-teamwork/agents/intake-confidence-auditor.md

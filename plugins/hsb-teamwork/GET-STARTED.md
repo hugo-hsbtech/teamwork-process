@@ -1,12 +1,17 @@
-# Get started — hsb-intake-brainstorm
+# Get started — hsb-teamwork
 
 A multi-agent pipeline that turns a rough demand description (and any files you
 point at) into a fully-filled, confidence-graded document, then humanized,
 translated, and visually-enriched variants. It runs on **Claude Code** and on
 **Codex**. Pick your tool below.
 
-- Marketplace: **`hsb-tech`** · Plugin: **`hsb-intake-brainstorm`**
+- Marketplace: **`hsb-tech`** · Plugin: **`hsb-teamwork`**
 - Author: Hugo Seabra · Repo: `hugo-hsbtech/teamwork-process`
+
+**`hsb-teamwork` is a multi-step toolkit.** Today it ships one skill,
+`intake-brainstorm`. Planned siblings in the same plugin: `readiness-package`,
+`tech-assessment`, `prd-generation` — each invoked as `/hsb-teamwork:<skill>`
+(Claude) or `/hsb-teamwork-<skill>` (Codex).
 
 ---
 
@@ -16,11 +21,11 @@ translated, and visually-enriched variants. It runs on **Claude Code** and on
 
 ```
 /plugin marketplace add hugo-hsbtech/teamwork-process
-/plugin install hsb-intake-brainstorm@hsb-tech
+/plugin install hsb-teamwork@hsb-tech
 ```
 
 - `marketplace add` takes the **git repo** that holds `.claude-plugin/marketplace.json`.
-- `install` takes `<plugin>@<marketplace>` = `hsb-intake-brainstorm@hsb-tech`.
+- `install` takes `<plugin>@<marketplace>` = `hsb-teamwork@hsb-tech`.
 - When prompted, choose a **scope**: *user* (all your projects), *project*
   (committed for your team), or *local* (just you, this repo).
 
@@ -29,7 +34,7 @@ translated, and visually-enriched variants. It runs on **Claude Code** and on
 Invoke the skill (plugin skills are namespaced `<plugin>:<skill>`):
 
 ```
-/hsb-intake-brainstorm:intake-brainstorm
+/hsb-teamwork:intake-brainstorm
 ```
 
 Then describe your demand in one line, optionally naming files to read. The
@@ -41,7 +46,7 @@ on intake/capture/triage requests.
 
 ```
 /plugin marketplace update hsb-tech     # pull the latest
-/plugin uninstall hsb-intake-brainstorm@hsb-tech
+/plugin uninstall hsb-teamwork@hsb-tech
 ```
 
 ---
@@ -54,13 +59,13 @@ namespace**, so the Codex artifacts are vendor-prefixed `hsb-intake-*`.
 ### Install
 
 From a clone of the repo (so the method files under
-`plugins/hsb-intake-brainstorm/skills/intake-brainstorm/` are reachable):
+`plugins/hsb-teamwork/skills/intake-brainstorm/` are reachable):
 
 ```bash
-cd plugins/hsb-intake-brainstorm
+cd plugins/hsb-teamwork
 
-# 1. Slash command  ->  /hsb-intake-brainstorm
-cp codex/prompts/hsb-intake-brainstorm.md  ~/.codex/prompts/
+# 1. Slash command  ->  /hsb-teamwork-intake-brainstorm
+cp codex/prompts/hsb-teamwork-intake-brainstorm.md  ~/.codex/prompts/
 
 # 2. The 15 subagents (project-scoped, or ~/.codex/agents for global)
 mkdir -p .codex/agents && cp codex/agents/hsb-intake-*.toml  .codex/agents/
@@ -76,7 +81,7 @@ writing-integrity rules, golden exemplar) from there.
 ### Use
 
 ```
-/hsb-intake-brainstorm
+/hsb-teamwork-intake-brainstorm
 ```
 
 Then describe the demand. Codex runs the roles **sequentially** (single-agent);

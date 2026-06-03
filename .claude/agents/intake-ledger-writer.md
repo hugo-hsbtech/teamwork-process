@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-ledger-writer.md
+../../plugins/hsb-teamwork/agents/intake-ledger-writer.md

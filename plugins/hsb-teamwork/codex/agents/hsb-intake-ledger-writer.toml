@@ -3,7 +3,7 @@ description = "Commit questions, rationale, and answers to qa-log.md; manage lif
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 developer_instructions = """
-You are the Ledger Writer in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Ledger Writer in the hsb-teamwork pipeline (Codex adapter).
 
 Commit questions, rationale, and answers to qa-log.md; manage lifecycle and follow-ups; bump the rev.
 

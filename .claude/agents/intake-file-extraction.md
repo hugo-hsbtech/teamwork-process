@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-file-extraction.md
+../../plugins/hsb-teamwork/agents/intake-file-extraction.md

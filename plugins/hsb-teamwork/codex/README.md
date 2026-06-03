@@ -1,4 +1,4 @@
-# hsb-intake-brainstorm — Codex adapter
+# hsb-teamwork — Codex adapter
 
 The same pipeline as the Claude plugin, adapted to Codex. It reuses the identical
 method files under `../skills/intake-brainstorm/references/` and `../assets/` —
@@ -9,7 +9,7 @@ method files under `../skills/intake-brainstorm/references/` and `../assets/` �
 | File | Purpose |
 |---|---|
 | `AGENTS.md` | the orchestrator entry — Codex reads it from repo root → cwd, or install it as a prompt |
-| `prompts/hsb-intake-brainstorm.md` | a custom prompt → `/hsb-intake-brainstorm` slash command |
+| `prompts/hsb-teamwork-intake-brainstorm.md` | a custom prompt → `/hsb-teamwork-intake-brainstorm` slash command |
 | `agents/hsb-intake-*.toml` | 15 Codex subagents (one per role), mirroring the Claude agents |
 
 > **Naming:** Codex has a **flat** namespace for prompts and subagents, so they are
@@ -21,7 +21,7 @@ method files under `../skills/intake-brainstorm/references/` and `../assets/` �
 
 ```bash
 # Slash command:
-cp codex/prompts/hsb-intake-brainstorm.md  ~/.codex/prompts/hsb-intake-brainstorm.md
+cp codex/prompts/hsb-teamwork-intake-brainstorm.md  ~/.codex/prompts/hsb-teamwork-intake-brainstorm.md
 
 # Subagents (project-scoped or global):
 cp codex/agents/hsb-intake-*.toml  .codex/agents/        # or ~/.codex/agents/

@@ -1,6 +1,6 @@
-# /hsb-intake-brainstorm — orchestrator (Codex)
+# /hsb-teamwork-intake-brainstorm — orchestrator (Codex)
 
-Act as the **hsb-intake-brainstorm orchestrator**. Read `codex/AGENTS.md` in the
+Act as the **hsb-teamwork orchestrator**. Read `codex/AGENTS.md` in the
 package and follow it for this run. You are the only layer that talks to the user.
 
 1. Collect the opening statement, any referenced files, and the desired output

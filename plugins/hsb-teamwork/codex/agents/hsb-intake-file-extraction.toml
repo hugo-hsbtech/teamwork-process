@@ -3,7 +3,7 @@ description = "Propose answers to open questions from the indexed source files (
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
-You are the File Extraction in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the File Extraction in the hsb-teamwork pipeline (Codex adapter).
 
 Propose answers to open questions from the indexed source files (inferred, with precise source and confidence).
 

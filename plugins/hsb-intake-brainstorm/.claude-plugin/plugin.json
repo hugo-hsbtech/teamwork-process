@@ -1,9 +1,0 @@
-{
-  "name": "hsb-intake-brainstorm",
-  "version": "0.1.0",
-  "description": "Multi-agent pipeline that turns a raw demand description (a sentence, a paragraph, and/or referenced files) into a fully-filled, confidence-graded target document, then humanized, translated, and visually-enriched variants. Template-driven and portable; includes a Codex adapter.",
-  "author": { "name": "Hugo Seabra", "email": "contato.hsbtec@gmail.com" },
-  "homepage": "https://github.com/hugo-hsbtech/teamwork-process",
-  "repository": "https://github.com/hugo-hsbtech/teamwork-process",
-  "keywords": ["intake", "brainstorm", "requirements", "triage", "product", "multi-agent", "codex"]
-}

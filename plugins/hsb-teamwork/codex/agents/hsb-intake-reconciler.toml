@@ -3,7 +3,7 @@ description = "Resolve conflicting evidence (source vs human, source vs source);
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
-You are the Reconciler in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Reconciler in the hsb-teamwork pipeline (Codex adapter).
 
 Resolve conflicting evidence (source vs human, source vs source); recommend which value to keep or a disambiguating question.
 

@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-humanizer.md
+../../plugins/hsb-teamwork/agents/intake-humanizer.md

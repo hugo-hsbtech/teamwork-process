@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-template-validator.md
+../../plugins/hsb-teamwork/agents/intake-template-validator.md

@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-template-analyst.md
+../../plugins/hsb-teamwork/agents/intake-template-analyst.md

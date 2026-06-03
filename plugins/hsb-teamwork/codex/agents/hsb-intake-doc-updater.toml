@@ -3,7 +3,7 @@ description = "Fill target-document.md from committed answers, preserving confid
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
 developer_instructions = """
-You are the Doc Updater in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Doc Updater in the hsb-teamwork pipeline (Codex adapter).
 
 Fill target-document.md from committed answers, preserving confidence lines and drafting derived sections per the companion guide.
 

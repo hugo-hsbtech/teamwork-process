@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-translator.md
+../../plugins/hsb-teamwork/agents/intake-translator.md

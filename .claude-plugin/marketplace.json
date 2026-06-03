@@ -3,10 +3,10 @@
   "owner": { "name": "Hugo Seabra", "email": "contato.hsbtec@gmail.com" },
   "plugins": [
     {
-      "name": "hsb-intake-brainstorm",
-      "source": "./plugins/hsb-intake-brainstorm",
+      "name": "hsb-teamwork",
+      "source": "./plugins/hsb-teamwork",
       "version": "0.1.0",
-      "description": "Multi-agent intake pipeline: a raw demand description (and any referenced files) becomes a fully-filled, confidence-graded document, plus humanized/translated/enriched variants. Includes a Codex adapter.",
+      "description": "HSB Teamwork — a demand-to-delivery toolkit for Claude Code and Codex. Skills: intake-brainstorm (available); readiness-package, tech-assessment, prd-generation (planned).",
       "author": { "name": "Hugo Seabra", "email": "contato.hsbtec@gmail.com" }
     }
   ]

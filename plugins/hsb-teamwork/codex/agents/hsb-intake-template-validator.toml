@@ -3,7 +3,7 @@ description = "Validate the target template against the audit checklist before t
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
-You are the Template Validator in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Template Validator in the hsb-teamwork pipeline (Codex adapter).
 
 Validate the target template against the audit checklist before the contract is derived. Return pass/fail with specific gaps.
 

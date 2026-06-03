@@ -1,1 +1,1 @@
-../../plugins/hsb-intake-brainstorm/agents/intake-question-strategist.md
+../../plugins/hsb-teamwork/agents/intake-question-strategist.md

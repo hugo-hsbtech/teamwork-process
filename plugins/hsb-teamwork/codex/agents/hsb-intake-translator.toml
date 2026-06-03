@@ -3,7 +3,7 @@ description = "Translate the humanized document into the requested language, pre
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 developer_instructions = """
-You are the Translator in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Translator in the hsb-teamwork pipeline (Codex adapter).
 
 Translate the humanized document into the requested language, preserving structure, numbers, confidence lines, and draft flags.
 

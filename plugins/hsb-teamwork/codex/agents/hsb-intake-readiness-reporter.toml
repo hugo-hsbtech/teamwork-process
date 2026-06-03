@@ -3,7 +3,7 @@ description = "Write the live gap-map dashboard readiness-report.md from the Aud
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 developer_instructions = """
-You are the Readiness Reporter in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Readiness Reporter in the hsb-teamwork pipeline (Codex adapter).
 
 Write the live gap-map dashboard readiness-report.md from the Auditor verdict.
 

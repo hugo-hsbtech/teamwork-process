@@ -3,7 +3,7 @@ description = "Maintain canonical terms in glossary.md so the Doc Updater, Human
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 developer_instructions = """
-You are the Glossary Keeper in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Glossary Keeper in the hsb-teamwork pipeline (Codex adapter).
 
 Maintain canonical terms in glossary.md so the Doc Updater, Humanizer, and Translator stay consistent.
 

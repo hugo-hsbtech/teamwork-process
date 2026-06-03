@@ -3,7 +3,7 @@ description = "Propose the next small batch of business-language questions aimed
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 developer_instructions = """
-You are the Question Strategist in the hsb-intake-brainstorm pipeline (Codex adapter).
+You are the Question Strategist in the hsb-teamwork pipeline (Codex adapter).
 
 Propose the next small batch of business-language questions aimed at the lowest-confidence blocking gaps.
 

@@ -1,5 +1,10 @@
 # intake-brainstorm
 
+> **Part of the `hsb-teamwork` toolkit.** `intake-brainstorm` is the first skill,
+> invoked as `/hsb-teamwork:intake-brainstorm`. Sibling steps are planned in the
+> same plugin: `readiness-package`, `tech-assessment`, `prd-generation` — each a
+> skill under `/hsb-teamwork:<skill>`, reusing this skill's agents and references.
+
 A portable, user-scoped Claude skill that turns a raw Submitter description — a
 sentence, a paragraph, and/or referenced files — into a fully-filled **target
 document**, through a confidence-driven brainstorming loop, and then produces
@@ -195,17 +200,17 @@ this repo's marketplace — versioned, namespaced, no copying:
 
 ```
 /plugin marketplace add hugo-hsbtech/teamwork-process
-/plugin install hsb-intake-brainstorm@hsb-tech
+/plugin install hsb-teamwork@hsb-tech
 ```
 
-Then invoke it as `/hsb-intake-brainstorm:intake-brainstorm` (plugin skills are
+Then invoke it as `/hsb-teamwork:intake-brainstorm` (plugin skills are
 namespaced `<plugin>:<skill>`).
 
 The plugin is self-contained (template, companion guide, and exemplar are bundled
 under [`assets/`](assets/)), so no repository content is needed at runtime.
 
 - **Codex**: see [`../../codex/README.md`](../../codex/README.md) — the same method
-  files, an `AGENTS.md` orchestrator, an `/hsb-intake-brainstorm` prompt, and the 15
+  files, an `AGENTS.md` orchestrator, an `/hsb-teamwork-intake-brainstorm` prompt, and the 15
   roles as Codex subagents (`hsb-intake-*.toml`), run sequentially under Codex's
   single-agent model.
 
@@ -216,7 +221,7 @@ as the template.
 ## Layout (the plugin)
 
 ```
-plugins/hsb-intake-brainstorm/        # the Claude Code plugin (self-contained)
+plugins/hsb-teamwork/        # the Claude Code plugin (self-contained)
 ├── .claude-plugin/plugin.json
 ├── skills/intake-brainstorm/
 │   ├── SKILL.md                       # orchestrator spec
@@ -236,7 +241,7 @@ plugins/hsb-intake-brainstorm/        # the Claude Code plugin (self-contained)
 ├── agents/intake-*.md                 # 15 Claude subagents (plugin-namespaced)
 └── codex/                             # Codex adapter (reuses the files above)
     ├── AGENTS.md
-    ├── prompts/hsb-intake-brainstorm.md
+    ├── prompts/hsb-teamwork-intake-brainstorm.md
     └── agents/hsb-intake-*.toml        # 15 Codex subagents (flat namespace -> prefixed)
 ```
 
