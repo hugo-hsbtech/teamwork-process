@@ -12,6 +12,8 @@
 | **Versão** | v1 |
 | **Intake vinculado** | INT-AAAA-NNN |
 | **Responsável** | [Nome] (PO) |
+| **Natureza da demanda** | Greenfield / Brownfield / Híbrido (herdado do Intake) |
+| **Base de conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · Parcial · A criar · N/A (greenfield) |
 | **Escalada ao CTO** | Não necessária — sem impacto arquitetural / Sim — Technical Assessment TA-AAAA-NNN |
 | **Status** | Rascunho |
 | **Data de congelamento (freeze)** | — |
@@ -122,6 +124,41 @@ Descreva as regras, validações e transições de estado que governam esta func
 ```text
 [Diagrama textual ou referência a diagrama]
 ```
+
+---
+
+## Seção 6.5 — Jornada(s) do Usuário (ponta-a-ponta)  ·  *(bloqueia freeze)*
+
+> **A peça que faltava entre "o que" e "as histórias".** Uma definição de produto precisa de uma noção do que o usuário faz **de ponta a ponta** — o caminho completo, não fragmentos. As User Stories (Seção 7) **derivam** dos passos desta jornada; sem ela, as histórias flutuam soltas e o downstream (humano ou agente de IA) não enxerga o fluxo que precisa implementar. É território do **PO** — produto, não UX detalhado (os fluxos de tela finos ficam downstream). Padrão: *user journey map* (a experiência) e, quando há bastidor relevante, *service blueprint*.
+>
+> **Regra de compressão:** melhoria pequena = uma jornada de 3–5 passos do happy path, sem service blueprint. O contrato é teto, não piso.
+
+### Jornada principal (happy path) — [Nome da jornada]
+
+> Os passos que o usuário percorre para alcançar o resultado de valor. Cada passo gera (ou valida) uma User Story na Seção 7.
+
+| # | Gatilho / Ação do usuário | Resultado esperado | Touchpoint / Tela | Pré-condição |
+|---|---|---|---|---|
+| 1 | [O que o usuário faz] | [O que o sistema entrega/responde] | [Onde acontece] | [O que precisa ser verdade antes] |
+| 2 | | | | |
+| 3 | | | | |
+
+### Caminhos alternativos e de saída
+
+> Desvios, cancelamentos, estados vazios. Ligam-se aos Edge Cases (Seção 9).
+
+- **[Caminho alternativo]:** [quando ocorre → para onde leva]
+- **[Saída / cancelamento]:** [o que acontece com o estado]
+
+### Service Blueprint *(opcional — só quando há bastidor/ops/integração humana relevante)*
+
+> Expõe o que sustenta a jornada "por trás do palco". Pular quando a jornada é puramente self-service.
+
+| Camada | [Passo 1] | [Passo 2] | [Passo 3] |
+|---|---|---|---|
+| **Frontstage** (o que o usuário vê) | | | |
+| **Backstage** (ações internas/time) | | | |
+| **Sistemas de apoio** (serviços, dados, terceiros) | | | |
 
 ---
 

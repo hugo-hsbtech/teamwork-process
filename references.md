@@ -43,6 +43,15 @@ As seções abaixo descrevem como cada um aparece no modelo deste repositório.
 | Readiness Score (gate quantitativo) | Gate de completude do intake (`gateReady`) + gate decision do Stage-Gate | Robert G. Cooper; David J. Anderson | Cooper (1986); *Kanban* (Anderson, 2010) |
 | Confiança por campo + dispositions ("não sei" honesto) | Assumption Mapping + Validated Learning | Teresa Torres; David Bland & Alex Osterwalder; Eric Ries | *Continuous Discovery Habits* (2021); *Testing Business Ideas* (2019); *The Lean Startup* (2011) |
 | Indicadores de valor (RICE-lite) | RICE scoring | Sean McBride / Intercom | *Intercom on Product Management* (2016) |
+| Classificação Greenfield vs Brownfield | Trilhas greenfield/brownfield; código legado | BMAD Method; Michael Feathers | BMAD (2024–25); *Working Effectively with Legacy Code* (2004) |
+| Jornada do usuário ponta-a-ponta (RP §6.5) | Journey Mapping / Service Blueprinting | Nielsen Norman Group; Jim Kalbach | *Mapping Experiences* (Kalbach, 2016) |
+| Base de Conhecimento técnica (`tech-landscape`) | *Steering docs* / contexto persistente | Kiro (AWS); BMAD Method | Kiro Docs; BMAD `document-project` |
+| Technical Assessment além da arquitetura | Design Docs / arc42 / C4 / ADRs | Google; Starke & Hruschka; Simon Brown; Michael Nygard | *Design Docs at Google*; arc42; c4model.com; ADRs (2011) |
+| Viabilidade dos NFRs (quality scenarios) | Quality requirements as scenarios | arc42; ISO/IEC | arc42 §10; *ISO/IEC 25010* |
+| Contexto suficiente p/ decisão de implementação | Spec-Driven Development / Context Engineering | GitHub; Kiro; Thoughtworks | Spec Kit; Kiro; Thoughtworks (2025) |
+| Critérios de aceite testáveis (suporte) | EARS — Easy Approach to Requirements Syntax | Alistair Mavin et al. | IEEE RE'09 (Mavin et al., 2009) |
+
+> **Detalhamento das oito linhas acima** (o que mudou em cada template, por quê, e fontes verificadas): ver [`templates/references-evolucao.md`](./templates/references-evolucao.md), que estende este documento para a evolução dos templates (jornada, greenfield/brownfield, base de conhecimento, TA enriquecido).
 
 ---
 
@@ -368,10 +377,19 @@ Mitigação no projeto: o Intake pode começar enxuto (CTO e PO acumulando o pap
 - **Torres, T.** (2021). *Continuous Discovery Habits: Discover Products That Create Customer Value and Business Value*. Product Talk LLC.
 - **Perri, M., & Tilles, D.** (2023). *Product Operations: How Successful Companies Build Better Products at Scale*. Product Institute.
 
+> **Extensão — evolução dos templates** (detalhe e fontes online verificadas em [`templates/references-evolucao.md`](./templates/references-evolucao.md)):
+> - **Feathers, M.** (2004). *Working Effectively with Legacy Code*. Prentice Hall. *(raciocínio brownfield.)*
+> - **Kalbach, J.** (2016). *Mapping Experiences*. O'Reilly. *(journey maps + service blueprints.)*
+> - **Brown, S.** (2018). *Software Architecture for Developers* (C4 model). Leanpub.
+> - **Starke, G., & Hruschka, P.** — *arc42* (template de documentação de arquitetura).
+
 ### Padrões e Normas
 
 - **PMI** (2021). *A Guide to the Project Management Body of Knowledge (PMBOK Guide)* — 7ª edição.
 - **ISO** (2018). *ISO 31000:2018 — Risk management — Guidelines*.
+- **ISO/IEC** (2011/2023). *ISO/IEC 25010 — Systems and software Quality Requirements and Evaluation (SQuaRE)*. *(dimensões de qualidade / NFRs.)*
+- **Mavin, A., et al.** (2009). *Easy Approach to Requirements Syntax (EARS)*. IEEE RE'09, pp. 317–322.
+- **Nygard, M.** (2011). *Documenting Architecture Decisions* (ADRs).
 
 ### Artigos e Recursos Online
 

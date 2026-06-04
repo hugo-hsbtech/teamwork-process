@@ -82,6 +82,10 @@
 - [ ] Integração
 - [ ] Operacional
 
+> **Dica (semeia a classificação do PO):** isto parece uma **capacidade nova** (algo que hoje não existe) ou um ajuste em **algo que já funciona**? Não precisa de certeza — é só um sinal que ajuda o PO a classificar a demanda como greenfield/brownfield na triagem.
+
+**Toca o quê:** Capacidade nova / Algo existente / Não sei
+
 ---
 
 ## Enunciado do Problema  ·  *(Requisito 1 — bloqueia gate)*

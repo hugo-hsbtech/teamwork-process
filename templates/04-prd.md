@@ -15,6 +15,8 @@
 | **RP vinculado** | RP-AAAA-NNN vX |
 | **Technical Assessment vinculado** | TA-AAAA-NNN vX / N/A — sem escalada |
 | **Intake vinculado** | INT-AAAA-NNN |
+| **Natureza da demanda** | Greenfield / Brownfield / Híbrido |
+| **Base de conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · A criar · N/A (greenfield) |
 | **Autores** | [Nome] (PO) + [Nome] (CTO) |
 | **Status** | Rascunho / Em revisão do PM / Aceito / Devolvido |
 | **Entregue ao PM em** | — |
@@ -66,23 +68,31 @@
 |---|---|---|
 | [Persona] | [Job] | [Impacto] |
 
-### A.4 Regras de Negócio e Fluxos
+### A.4 Jornada do Usuário (ponta-a-ponta)
+
+> Resumo do happy path da [RP, Seção 6.5]. O que o usuário faz de ponta a ponta — o fluxo do qual as User Stories derivam. O documento-fonte completo (com caminhos alternativos e service blueprint) está no RP.
+
+| # | Ação do usuário | Resultado esperado | Touchpoint |
+|---|---|---|---|
+| 1 | [Ação] | [Resultado] | [Onde] |
+
+### A.5 Regras de Negócio e Fluxos
 
 [Resumo ou referência às seções do RP]
 
-### A.5 User Stories + Critérios de Aceite
+### A.6 User Stories + Critérios de Aceite
 
 | ID | História | Critério de aceite (Given/When/Then) |
 |---|---|---|
 | ST-001 | [Como… quero… para…] | [Dado/Quando/Então] |
 
-### A.6 Requisitos Não-Funcionais (NFRs)
+### A.7 Requisitos Não-Funcionais (NFRs)
 
 | Dimensão | Requisito | Verificação |
 |---|---|---|
 | [Performance / Segurança / …] | [Requisito] | [Como] |
 
-### A.7 Edge Cases e Modos de Falha
+### A.8 Edge Cases e Modos de Falha
 
 - [Edge case / falha → comportamento esperado]
 
@@ -99,19 +109,46 @@
 | **Veredito** | Viável / Viável com ressalvas / Inviável como escopado / N/A |
 | **Ressalvas** | [—] |
 
-### B.2 Impacto Arquitetural e Integrações
+### B.2 Natureza e Panorama Técnico
+
+> O terreno sobre o qual a engenharia decide. Brownfield → resumo do **estado atual** (padrões, integrações, dívida) com link para a [`tech-landscape`](./tech-landscape.md). Greenfield → resumo da **fundação** (stack escolhida + arquitetura-alvo). Síntese do TA; fonte completa em [`TA-AAAA-NNN`](./03-technical-assessment.md).
+
+| Campo | Valor |
+|---|---|
+| **Natureza** | Greenfield / Brownfield / Híbrido |
+| **Base de conhecimento** | [referência ou "criada neste ciclo"] |
+| **Estado atual (brownfield)** | [Sistemas/padrões/integrações tocados — ou N/A] |
+| **Fundação (greenfield)** | [Stack + arquitetura-alvo — ou N/A] |
+
+### B.3 Impacto Arquitetural e Integrações
 
 | Área / Sistema | Impacto | Nota |
 |---|---|---|
 | [Modelo de dados / Integração / …] | [Descrição] | |
 
-### B.3 Constraints Rígidas
+### B.4 Viabilidade dos NFRs
+
+> Resposta do CTO aos requisitos de qualidade do RP (§8): cada NFR é viável e como. Síntese do TA.
+
+| NFR (do RP §8) | Viável? | Abordagem | Ressalva |
+|---|---|---|---|
+| [Requisito] | Sim / Com ressalvas / Não | [Como] | [—] |
+
+### B.5 Alternativas-chave Consideradas
+
+> O racional por trás das decisões — o que foi descartado e por quê. Só as alternativas que o PM precisa conhecer.
+
+| Alternativa | Por que NÃO foi escolhida |
+|---|---|
+| [Abordagem] | [Motivo] |
+
+### B.6 Constraints Rígidas
 
 | Constraint | Efeito no escopo |
 |---|---|
 | [Constraint] | [O que limita] |
 
-### B.4 ADRs (nível arquitetural)
+### B.7 ADRs (nível arquitetural)
 
 | # | Decisão | Sign-off CTO |
 |---|---|---|
