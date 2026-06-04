@@ -1,6 +1,8 @@
 # Technical Assessment — [Nome da Demanda]
 
-> O Technical Assessment (TA) é o **output do CTO** — viabilidade, constraints, arquitetura, integrações, riscos técnicos, ADRs e custo firme. É escrito **sozinho** pelo CTO, **em paralelo** ao Readiness Package, e **responde** a ele: o CTO **nunca edita o RP**. O TA não redefine o produto — pode **vetar** a viabilidade do escopo, e nesse caso o PO revisa o escopo do RP.
+> O Technical Assessment (TA) é o **output do CTO** — e vai **além da arquitetura**: estabelece o **terreno técnico** sobre o qual a engenharia decide. Porque a camada de execução (humana ou agente de IA) **não tem conhecimento implícito do código-fonte**, o TA precisa tornar explícito o que normalmente fica subentendido: a natureza da demanda (software novo vs existente), o estado atual ou a fundação a ser criada, a base de conhecimento, a viabilidade de cada NFR, as alternativas descartadas, testabilidade e observabilidade — não só o impacto arquitetural. É escrito **sozinho** pelo CTO, **em paralelo** ao Readiness Package, e **responde** a ele: o CTO **nunca edita o RP**. O TA não redefine o produto — pode **vetar** a viabilidade do escopo, e nesse caso o PO revisa o escopo do RP.
+>
+> **Dois caminhos, um template.** A seção *Classificação técnica* abaixo determina qual caminho preencher: **Greenfield** (software/módulo novo → o TA *define* a fundação: stack, ADRs, estrutura) ou **Brownfield/Híbrido** (altera software existente → o TA *descobre e documenta* o sistema atual). Preencha o caminho que se aplica; pule o outro. O contrato é teto, não piso. Inspirado nas trilhas greenfield/brownfield do BMAD Method, nas lentes do arc42 (contexto, *solution strategy*, *quality scenarios*) e em design docs de engenharia (alternativas consideradas, *goals/non-goals*).
 >
 > A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./04-prd.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
 >
@@ -41,6 +43,22 @@
 
 ---
 
+## Classificação técnica e Base de Conhecimento
+
+> **A decisão que governa o resto do documento.** Herda a Natureza da demanda do [Intake](./01-intake-record.md) e a confirma sob a lente técnica. Define qual caminho preencher (greenfield vs brownfield) e ancora o TA na base de conhecimento — o que existe, o que falta, o que será criado.
+
+| Campo | Valor |
+|---|---|
+| **Natureza (confirmada pelo CTO)** | Greenfield (novo) · Brownfield (existente) · Híbrido (novo dentro de existente) |
+| **Caminho a preencher** | Fundação técnica (greenfield) · Estado atual (brownfield) · Ambos (híbrido) |
+| **Base de Conhecimento (KB)** | Existe → referência · Parcial → referência + lacunas · Não existe → criar (Discovery) |
+| **Referência da KB** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · link · — |
+
+> **Se a KB não existe ou está incompleta (brownfield):** documentar o sistema atual é **pré-requisito** do assessment — registre como spike no *Caminho de Discovery* (fim do documento) e produza/atualize a [`tech-landscape`](./tech-landscape.md). Não se avalia viabilidade sobre um terreno desconhecido.
+> **Se greenfield:** os ADRs fundacionais (abaixo) **semeiam** uma nova [`tech-landscape`](./tech-landscape.md) — o assessment é a origem da KB, não consumidor dela.
+
+---
+
 ## Perguntas do PO Endereçadas
 
 > *Trace-to-source.* As incógnitas técnicas específicas que o PO escalou — e a resposta de cada uma. Mantém o assessment ancorado no que foi perguntado.
@@ -48,6 +66,62 @@
 | # | Pergunta do PO | Resposta do CTO |
 |---|---|---|
 | 1 | [Incógnita técnica] | [Resposta] |
+
+---
+
+## Caminho BROWNFIELD — Estado atual / Panorama técnico  ·  *(preencher se a demanda altera software existente)*
+
+> **Documente o sistema antes de mudá-lo.** Em brownfield, a decisão de implementação depende do que já existe — padrões, convenções, integrações, dívida. Esta seção é o equivalente ao *document-project* do BMAD: torna o terreno explícito para quem não conhece o código. Quando há uma [`tech-landscape`](./tech-landscape.md) atualizada, **referencie-a** e registre aqui apenas o que é específico desta demanda. Pular inteiramente se greenfield.
+
+### Padrões e convenções existentes a respeitar
+
+| Aspecto | Como é hoje | Implicação para esta demanda |
+|---|---|---|
+| **Estrutura / organização do código** | [Onde mora o quê] | [O que seguir] |
+| **Padrões de dados / persistência** | [Modelo, migrations] | |
+| **Padrões de API / contratos** | [REST/eventos, versionamento] | |
+| **Autenticação / autorização** | [Como é aplicado] | |
+
+### Pontos de integração tocados
+
+| Ponto de integração | Sistema/módulo | Natureza do acoplamento | Risco de mexer |
+|---|---|---|---|
+| [Interface/serviço] | [Quem] | [Síncrono / evento / BD compartilhado] | Alto / Médio / Baixo |
+
+### Dívida técnica e risco de regressão
+
+| Área | Dívida / fragilidade conhecida | Risco de regressão | Cobertura de testes atual |
+|---|---|---|---|
+| [Módulo] | [O que está frágil] | Alto / Médio / Baixo | [Boa / parcial / inexistente] |
+
+---
+
+## Caminho GREENFIELD — Fundação técnica  ·  *(preencher se a demanda constrói software/módulo novo)*
+
+> **Decida a fundação — com critérios, não por reflexo.** Em greenfield não há terreno a descobrir: o TA o **cria**. Registre as escolhas de base e o *porquê*, para que sustentem ADRs e sejam o ponto de partida da nova [`tech-landscape`](./tech-landscape.md). Pular inteiramente se brownfield puro.
+
+### Seleção de stack (com critérios)
+
+| Camada | Escolha | Critério de decisão | Alternativa descartada |
+|---|---|---|---|
+| **Linguagem / runtime** | [Escolha] | [Por quê — equipe, ecossistema, performance] | [O que e por que não] |
+| **Framework / app** | | | |
+| **Persistência / dados** | | | |
+| **Infra / deploy** | | | |
+
+### Arquitetura-alvo
+
+> Diagrama de contexto e de contêiner (estilo C4 — só os níveis que agregam valor). Texto ou referência a diagrama.
+
+```text
+[Diagrama de contexto/contêiner — sistemas, usuários, contêineres e como se comunicam]
+```
+
+### Convenções de estrutura e repositório
+
+- **Organização de pastas / módulos:** [padrão a adotar]
+- **Convenções de nomeação / lint / testes:** [padrão a adotar]
+- **Estratégia de branching / CI:** [padrão a adotar]
 
 ---
 
@@ -82,6 +156,49 @@
 | Sistema | Tipo | Protocolo | Viabilidade / Riscos conhecidos |
 |---|---|---|---|
 | [Sistema 1] | Interno / Externo / API / Evento / Webhook / BD | [REST / OIDC / gRPC / …] | [Viável / limitações de terceiros / risco] |
+
+---
+
+## Build vs Buy
+
+> Para cada capacidade não-trivial: construir, comprar/integrar terceiro, ou reusar algo existente? A decisão tem efeito direto em custo, prazo e risco. Pular se não há decisão relevante de make-or-buy.
+
+| Capacidade | Decisão | Justificativa | Efeito em custo/prazo |
+|---|---|---|---|
+| [Capacidade] | Build / Buy / Reusar | [Por quê] | [Resumo] |
+
+---
+
+## Alternativas Consideradas
+
+> **O racional, não só a conclusão.** Padrão de design doc (Google/RFC): registrar o que foi avaliado e **por que foi descartado** dá ao downstream o contexto para decidir implementação — e evita que a mesma alternativa seja re-litigada depois. Uma linha por alternativa significativa.
+
+| Alternativa | Prós | Contras | Por que NÃO foi escolhida |
+|---|---|---|---|
+| [Abordagem A] | [Prós] | [Contras] | [Motivo da rejeição] |
+
+---
+
+## Viabilidade dos NFRs  ·  *(mapeamento ao RP, Seção 8)*
+
+> **Fecha o loop produto ↔ técnico.** O PO declarou requisitos de qualidade no RP (Seção 8); aqui o CTO responde, NFR por NFR, se são **viáveis** e **como** — os *quality scenarios* do arc42. Um NFR inviável é um sinal de veto ou de re-escopo, não um detalhe.
+
+| NFR (do RP §8) | Viável? | Como será atingido / abordagem | Risco / ressalva |
+|---|---|---|---|
+| [ex.: propagação < 500ms] | Sim / Com ressalvas / Não | [Mecanismo técnico] | [O que ameaça] |
+
+---
+
+## Testabilidade e Observabilidade
+
+> Como se **prova** que funciona e como se **enxerga** em produção. Sem isto, o critério de aceite do RP não tem como ser verificado nem o comportamento monitorado.
+
+| Dimensão | Abordagem |
+|---|---|
+| **Estratégia de teste** | [Unit / integração / e2e — o que cobre o quê; áreas de risco de regressão] |
+| **Dados / ambiente de teste** | [Como reproduzir cenários, incluindo edge cases do RP §9] |
+| **Telemetria / métricas técnicas** | [O que instrumentar para observar a feature] |
+| **Logs / alertas** | [Sinais de falha e como serão detectados] |
 
 ---
 

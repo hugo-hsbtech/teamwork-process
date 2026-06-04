@@ -81,11 +81,27 @@
 
 ---
 
+## Natureza da demanda e Base de Conhecimento  ·  *(classificação — nasce aqui)*
+
+> **Por que esta seção existe.** Antes de qualquer avaliação técnica, é preciso saber se a demanda constrói **software novo** ou altera **software existente** — porque os dois exigem raciocínios opostos no Technical Assessment: greenfield *decide* a fundação (stack, ADRs, estrutura); brownfield *descobre* o que já existe (padrões, integrações, dívida). Sem esta classificação, o CTO adivinha. A camada de IA/engenharia **não tem conhecimento implícito do código** — ela depende do que está declarado aqui. Ver [`03-technical-assessment.md`](./03-technical-assessment.md).
+
+| Campo | Valor |
+|---|---|
+| **Natureza** | Greenfield (software/módulo novo) · Brownfield (altera software existente) · Híbrido (módulo novo dentro de sistema existente) |
+| **Sistema(s) afetado(s)** | [Nome do produto/serviço/módulo — ou "novo" se greenfield] |
+| **Base de conhecimento existe?** | Sim (referência abaixo) · Parcial · Não → exige discovery de documentação |
+| **Referência da Base de Conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · link · — |
+
+> **Greenfield** → o Technical Assessment vai **definir** a fundação técnica, e os ADRs fundacionais **semeiam** uma nova Base de Conhecimento.
+> **Brownfield/Híbrido** → o Technical Assessment **referencia** a Base de Conhecimento existente; se ela não existe (ou está incompleta), a primeira tarefa técnica é **criá-la** (documentar o sistema atual) — registrar como Discovery.
+
+---
+
 ## Escalada arquitetural ao CTO
 
 **Necessária:** Sim / Não — [breve justificativa]
 
-> Se Sim, a escalada e o Technical Assessment acontecem durante a racionalização (RP). Ver [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> Se Sim, a escalada e o Technical Assessment acontecem durante a racionalização (RP). A **Natureza da demanda** (acima) viaja junto e determina o caminho do assessment. Ver [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
 
 ---
 
