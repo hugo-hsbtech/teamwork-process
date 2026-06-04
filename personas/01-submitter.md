@@ -1,233 +1,233 @@
-# Persona: Submitter (Originador da Demanda)
+# Persona: Submitter (Demand Originator)
 
-> Primeiro documento da série de personas. Mapeia uma persona de ponta a ponta: quem ela é, como ela raciocina, o que ela faz, o que ela entrega — e a **estrutura de dados** que torna esse raciocínio operável em tela.
-
----
-
-## Propósito deste documento
-
-Os documentos atuais ([`01-roles.md`](../01-roles.md), [`interactions/`](../interactions/), [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md)) definem a Submitter de forma **fragmentada**: seus limites estão nos papéis, seu handoff nas interações, e a forma do entregável no template. Nenhum lugar reúne isso em uma visão única de persona.
-
-Além disso, os [protótipos](../prototypes/) — construídos aprendendo diretamente com a persona — codificaram conhecimento que os documentos **ainda não têm**: um modelo de confiança por campo, um score de prontidão como gate quantitativo, indicadores de valor e métricas de portfólio.
-
-Este documento **consolida as duas fontes** e assume que os docs estão imaturos em relação ao que aprendemos. Ele é, ao mesmo tempo:
-
-- **Documentação** da persona (evolui os docs existentes);
-- **Especificação** da abstração que deve virar valor em tela.
-
-O princípio que atravessa tudo: **confiança é de primeira classe.** Cada informação carrega o quão sólida ela é e de onde veio.
+> First document in the persona series. Maps a persona end to end: who she is, how she reasons, what she does, what she delivers — and the **data structure** that makes that reasoning operable on screen.
 
 ---
 
-## 1. Quem é a Submitter
+## Purpose of this document
 
-A Submitter é a **persona de fronteira** — a única cujo rosto aponta para fora, em direção a clientes, usuários finais e mercado. Sua língua nativa é **problema, valor, oportunidade, relacionamento** — não funcionalidade, não arquitetura.
+The current documents ([`01-roles.md`](../01-roles.md), [`interactions/`](../interactions/), [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md)) define the Submitter in a **fragmented** way: her boundaries are in the roles doc, her handoff in the interactions, and the shape of her deliverable in the template. No single place brings this together into a unified persona view.
 
-Ela vende, encanta e cria o vínculo entre empresa e cliente. Ela conhece (ou tenta descobrir) dores, ideias, mercado e oportunidades. Ela se preocupa com **valor de negócio**.
+Additionally, the [prototypes](../prototypes/) — built by learning directly from the persona — encoded knowledge that the documents **do not yet have**: a per-field trust model, a readiness score as a quantitative gate, value indicators, and portfolio metrics.
 
-> **Restrição central de design:** ela não é técnica, não é desenvolvedora de produto. Ela quer o trabalho feito e o que pediu, entregue.
+This document **consolidates both sources** and assumes the docs are immature relative to what we have learned. It is simultaneously:
 
-Isso significa que **não podemos pedir que ela pense como engenheira.** O modelo precisa encontrá-la na linguagem dela e fazer a tradução *por* ela — extraindo estrutura suficiente para que a demanda tenha sucesso no downstream.
+- **Documentation** of the persona (evolves existing docs);
+- **Specification** of the abstraction that should become screen value.
 
-No exemplo dos protótipos ela é Hugo Seabra, COO. Na vida real, pode ser qualquer origem upstream: CEO/COO, Vendas, Marketing ou CS. **"Submitter" é a abstração genérica** desses papéis (definidos individualmente em [`01-roles.md`](../01-roles.md)).
+The principle that runs through everything: **confidence is first class.** Every piece of information carries how solid it is and where it came from.
 
 ---
 
-## 2. As duas lentes de toda demanda
+## 1. Who the Submitter is
 
-Toda demanda é lida por **duas lentes ao mesmo tempo**. Elas coexistem — nenhuma substitui a outra.
+The Submitter is the **boundary persona** — the only one whose face points outward, toward customers, end users, and the market. Her native language is **problem, value, opportunity, relationship** — not feature, not architecture.
 
-| Lente | Natureza | O que é | Como aparece em tela |
+She sells, delights, and creates the bond between company and customer. She knows (or tries to discover) pains, ideas, market conditions, and opportunities. She cares about **business value**.
+
+> **Central design constraint:** she is not technical, not a product developer. She wants the work done and what she asked for, delivered.
+
+This means **we cannot ask her to think like an engineer.** The model must meet her in her own language and do the translation *for* her — extracting enough structure for the demand to succeed downstream.
+
+In the prototype example she is Hugo Seabra, COO. In real life, she can be any upstream origin: CEO/COO, Sales, Marketing, or CS. **"Submitter" is the generic abstraction** of those roles (defined individually in [`01-roles.md`](../01-roles.md)).
+
+---
+
+## 2. The two lenses of every demand
+
+Every demand is read through **two lenses simultaneously**. They coexist — neither replaces the other.
+
+| Lens | Nature | What it is | How it appears on screen |
 |---|---|---|---|
-| **Contrato** | Determinística · compartilhada por todas as demandas | O conjunto fixo de **requisitos de compliance** que uma demanda precisa satisfazer para estar "pronta para avançar" | **Prontidão** — o quanto falta, o que está fraco (score + pendências) |
-| **Semântica** | Contextual · única por demanda | O que *esta* demanda específica **significa**: a dor real sob o pedido, seu tipo, sua tese de valor, suas incógnitas | **Significado** — a demanda refletida de volta para ela, na linguagem dela |
+| **Contract** | Deterministic · shared by all demands | The fixed set of **compliance requirements** a demand must satisfy to be "ready to advance" | **Readiness** — how close, what is missing, what is weak (score + pending items) |
+| **Semantic** | Contextual · unique per demand | What *this specific* demand **means**: the real pain beneath the request, its type, its value thesis, its unknowns | **Meaning** — the demand reflected back to her, in her language, so she sees the system *understood* her, not just evaluated her |
 
-O contrato é o mesmo para um gateway de pagamento e uma integração SAP. A semântica é completamente diferente.
+The contract is the same for a payment gateway and a SAP integration. The semantics are completely different.
 
-> **A lista de ToDos vive exatamente onde as duas lentes se encontram:** "dado o que *esta* demanda significa, o que o contrato ainda precisa?" Por isso os ToDos se regeneram — não porque o contrato mudou (ele nunca muda), mas porque a **leitura semântica** da demanda ficou mais nítida.
+> **The ToDo list lives exactly where the two lenses meet:** "given what *this* demand means, what does the contract still need?" That is why ToDos regenerate — not because the contract changed (it never changes), but because the **semantic reading** of the demand became sharper.
 
 ---
 
-## 3. O modelo de confiança (núcleo)
+## 3. The trust model (core)
 
-Confiança é o eixo que sustenta todo o resto. Cada informação capturada — seja resposta a um requisito, seja um indicador de valor — carrega:
+Confidence is the axis that sustains everything else. Every captured piece of information — whether an answer to a requirement or a value indicator — carries:
 
-| Atributo | Significado |
+| Attribute | Meaning |
 |---|---|
-| `confidence` | 0–100 — o quão sólida é a informação |
-| `source` | de onde veio (ex.: "PDF p.4", "Submitter direto", "inferido", "premissa") |
+| `confidence` | 0–100 — how solid the information is |
+| `source` | where it came from (e.g.: "PDF p.4", "Submitter direct", "inferred", "assumption") |
 | `status` | `empty` · `low_confidence` · `resolved` |
-| `hint` | *por que* a confiança está baixa / o que a elevaria |
+| `hint` | *why* the confidence is low / what would raise it |
 
-Esse é o **camada de honestidade**: o downstream não recebe só respostas, recebe respostas **graduadas por confiança**, sabendo o que é firme e o que precisa de Discovery. O `hint` é o que transforma "está fraco" em "está fraco *por isso*, e *isto* resolveria".
+This is the **honesty layer**: downstream does not just receive answers, it receives **confidence-graded** answers, knowing what is firm and what needs Discovery. The `hint` is what transforms "it's weak" into "it's weak *because of this*, and *this* would fix it".
 
-> O RICE clássico trata "confiança" como um único número genérico. Aqui ela é **por campo e por indicador** — essa granularidade é a principal contribuição nova que o protótipo nos ensinou.
+> Classic RICE treats "confidence" as a single generic number. Here it is **per field and per indicator** — that granularity is the main new contribution the prototype taught us.
 
 ---
 
-## 4. Estrutura de dados — determinística na forma, não-determinística no conteúdo
+## 4. Data structure — deterministic in form, non-deterministic in content
 
-A frase-guia: **a estrutura é fixa; o conteúdo varia.** O modelo de dados é conhecido de antemão; o que preenche cada campo (e quais ToDos surgem) é gerado a partir do conteúdo de cada demanda.
+The guiding phrase: **the structure is fixed; the content varies.** The data model is known in advance; what fills each field (and which ToDos emerge) is generated from the content of each demand.
 
 ```
-ComplianceRequirement   (DETERMINÍSTICO — o contrato fixo)
-  id                chave estável
-  label             "Impacto no negócio quantificado"
+ComplianceRequirement   (DETERMINISTIC — the fixed contract)
+  id                stable key
+  label             "Quantified business impact"
   dimension         Problem | Reach | Impact | Constraints | Stakeholders | Evidence | …
-  why               por que a prontidão exige isso
-  satisfiedWhen     rubrica: o que é "bom o suficiente" (orienta o julgamento de IA)
-  weight            contribuição para o readiness score
-  blocksGate        true = não pode avançar até resolver
+  why               why readiness requires this
+  satisfiedWhen     rubric: what is "good enough" (guides AI judgment)
+  weight            contribution to readiness score
+  blocksGate        true = cannot advance until resolved
 
-SubmissionEntry         (conteúdo NÃO-DETERMINÍSTICO, envelope determinístico)
-  requirementId     → qual requisito esta entrada responde
-  content           texto livre, na linguagem dela
-  confidence        0–100, avaliado contra satisfiedWhen
-  source            origem da informação
+SubmissionEntry         (NON-DETERMINISTIC content, deterministic envelope)
+  requirementId     → which requirement this entry answers
+  content           free text, in her language
+  confidence        0–100, evaluated against satisfiedWhen
+  source            origin of the information
   status            empty | low_confidence | resolved
-  hint              por que está fraco / o que o elevaria
-  disposition       answered | inferred | assumption | discovery | deferred   (ver §6)
+  hint              why it is weak / what would raise it
+  disposition       answered | inferred | assumption | discovery | deferred   (see §6)
 
-ValueIndicator          (RICE-lite — o espelho, ver §7)
-  id                impacto | alcance | urgencia
-  score             baixo | médio | alto  (ou 1–3)
-  confidence        0–100  (reusa a camada de confiança — não duplica)
-  rationale         por que ela pontuou assim
+ValueIndicator          (RICE-lite — the mirror, see §7)
+  id                impact | reach | urgency
+  score             low | medium | high  (or 1–3)
+  confidence        0–100  (reuses the confidence layer — does not duplicate)
+  rationale         why she scored it that way
 
-— DERIVADO, regenerado a cada mudança (o motor, não verdade armazenada) —
-  todos[]           = requisitos cujo status ≠ resolved   ← o guia dinâmico
-  readinessScore    = f(weights, statuses)  (low_confidence conta como parcial)
-  gateReady         = todos os requisitos com blocksGate estão resolvidos
+— DERIVED, regenerated on every change (the engine, not stored truth) —
+  todos[]           = requirements whose status ≠ resolved   ← the dynamic guide
+  readinessScore    = f(weights, statuses)  (low_confidence counts as partial)
+  gateReady         = all requirements with blocksGate are resolved
 ```
 
-A linha limpa: **`ComplianceRequirement` é o contrato determinístico; tudo abaixo de `SubmissionEntry.content` é gerado; `todos`/`readinessScore`/`gateReady` são funções puras do que está acima.** Esse mesmo motor é reutilizável para *cada* persona futura (cada uma tem seu próprio conjunto de requisitos, mesmo motor).
+The clean line: **`ComplianceRequirement` is the deterministic contract; everything below `SubmissionEntry.content` is generated; `todos`/`readinessScore`/`gateReady` are pure functions of what is above.** This same engine is reusable for *each* future persona (each has its own set of requirements, same engine).
 
 ---
 
-## 5. Requisitos de compliance — o contrato da Submitter
+## 5. Compliance requirements — the Submitter's contract
 
-Conjunto fixo derivado do [`00-submitter-brief.md`](../templates/00-submitter-brief.md) e das pendências de captura do protótipo. Cada requisito tem uma dimensão, uma razão e uma rubrica do que o satisfaz. `blocksGate` marca o que impede o avanço.
+Fixed set derived from [`00-submitter-brief.md`](../templates/00-submitter-brief.md) and the capture pending items from the prototype. Each requirement has a dimension, a reason, and a rubric for what satisfies it. `blocksGate` marks what prevents advancement.
 
-| # | Requisito (`label`) | Dimensão | Satisfeito quando… | Bloqueia gate? |
+| # | Requirement (`label`) | Dimension | Satisfied when… | Blocks gate? |
 |---|---|---|---|---|
-| 1 | Enunciado do problema (não a solução) | Problem | A dor está descrita sem propor implementação | ✅ |
-| 2 | Originador e contexto | Evidence | Quem levantou e em que situação está claro | ✅ |
-| 3 | Quem é impactado | Reach | Personas/segmentos afetados nomeados | ✅ |
-| 4 | Impacto de negócio | Impact | Valor descrito (R$, retenção, horas, risco) — quantificado quando possível | ✅ |
-| 5 | Urgência e porquê | Impact | "Por que agora" e o custo de esperar estão claros | — |
-| 6 | Evidência / documentos anteriores | Evidence | Anexos ou conversas que embasam a demanda | — |
-| 7 | Restrições conhecidas | Constraints | Prazo, regulatório, orçamento sinalizados (ou "nenhuma conhecida") | — |
-| 8 | Stakeholders | Stakeholders | Quem precisa estar a par / decidir está nomeado | — |
+| 1 | Problem statement (not the solution) | Problem | The pain is described without proposing an implementation | ✅ |
+| 2 | Originator and context | Evidence | Who raised it and in what situation is clear | ✅ |
+| 3 | Who is impacted | Reach | Affected personas/segments are named | ✅ |
+| 4 | Business impact | Impact | Value described (revenue, retention, hours, risk) — quantified when possible | ✅ |
+| 5 | Urgency and why | Impact | "Why now" and the cost of waiting are clear | — |
+| 6 | Evidence / prior documents | Evidence | Attachments or conversations that support the demand | — |
+| 7 | Known constraints | Constraints | Deadline, regulatory, budget flagged (or "none known") | — |
+| 8 | Stakeholders | Stakeholders | Who needs to be informed / decide is named | — |
 
-> **Regra de ouro herdada do modelo:** se o registro contém solução proposta em vez de problema, o requisito 1 não é satisfeito e a demanda volta para reformulação (ver [`README.md` › Regra do upstream](../README.md#regra-do-upstream)).
+> **Golden rule inherited from the model:** if the record contains a proposed solution instead of a problem, requirement 1 is not satisfied and the demand is returned for reformulation (see [`README.md` › Upstream rule](../README.md#upstream-rule)).
 
-O conteúdo de cada requisito é não-determinístico (varia por demanda). A **existência e a forma** dos requisitos é determinística.
+The content of each requirement is non-deterministic (varies by demand). The **existence and shape** of the requirements is deterministic.
 
 ---
 
-## 6. As perguntas que guiam o "mergulho"
+## 6. The questions that guide the "deep dive"
 
-A unidade de trabalho é **a pergunta**. Cada pergunta:
+The unit of work is **the question**. Each question:
 
-- mira um requisito de compliance **e/ou** uma lacuna semântica desta demanda;
-- é feita em **linguagem de negócio** (clientes, valor, dor, dinheiro — nunca "qual o modelo de dados");
-- existe para **elevar a prontidão**, progressivamente — o "mergulho" aprofunda conforme as respostas revelam onde está a substância (ou a névoa).
+- targets a compliance requirement **and/or** a semantic gap in this demand;
+- is asked in **business language** (customers, value, pain, money — never "what is the data model");
+- exists to **raise readiness**, progressively — the "deep dive" deepens as answers reveal where the substance (or the fog) lies.
 
-### "Não sei" não é beco sem saída — é uma disposição estruturada
+### "I don't know" is not a dead end — it is a structured disposition
 
-Porque ela é de negócio e pode genuinamente não ter a resposta, um requisito não tem só dois estados (respondido / faltando). Ele tem **vários caminhos até "resolvido o suficiente para avançar"**, cada um com sua própria confiança e origem (`SubmissionEntry.disposition`):
+Because she is a business person and may genuinely not have the answer, a requirement does not have just two states (answered / missing). It has **several paths to "resolved enough to advance"**, each with its own confidence and origin (`SubmissionEntry.disposition`):
 
-| Disposição | O que significa | Efeito na prontidão |
+| Disposition | What it means | Effect on readiness |
 |---|---|---|
-| `answered` | Ela responde diretamente | confiança cheia |
-| `inferred` | Sistema extrai dos artefatos dela (PDF/deck anexado) | confiança parcial + `source` registrada |
-| `assumption` | "Estamos assumindo 40% de opt-in" | conta, mas marcada *a validar* |
-| `discovery` | "Ninguém sabe ainda — eis como vamos descobrir" | conta como *resolvido-como-incógnita*, time-boxed |
-| `deferred` | Outro stakeholder é dono da resposta | conta, com um dono anexado |
+| `answered` | She answers directly | full confidence |
+| `inferred` | System extracts from her artifacts (attached PDF/deck) | partial confidence + `source` recorded |
+| `assumption` | "We are assuming 40% opt-in" | counts, but marked *to be validated* |
+| `discovery` | "No one knows yet — here is how we will find out" | counts as *resolved-as-unknown*, time-boxed |
+| `deferred` | Another stakeholder owns the answer | counts, with an owner attached |
 
-> O gate **não** é "ela sabe tudo". O gate é **"todo requisito tem uma disposição honesta"**. "Não sabemos ainda, e este é o plano para descobrir" é uma forma perfeitamente válida de atingir prontidão — é exatamente o que o **Discovery Brief** e as **Premissas** do template já codificam.
+> The gate is **not** "she knows everything". The gate is **"every requirement has an honest disposition"**. "We don't know yet, and this is the plan to find out" is a perfectly valid way to reach readiness — it is exactly what the **Discovery Brief** and the **Assumptions** in the template already encode.
 
-Isso é o que mantém a tela como **parceira de brainstorming**: ela nunca diz "você está faltando isto". Ela diz *"me ajuda a entender X — ou, se você não tem certeza, a gente assume, ou manda pra Discovery?"* O sistema carrega o fardo de transformar a névoa de linguagem de negócio em uma disposição estruturada e graduada por confiança.
+This is what keeps the screen as a **brainstorming partner**: it never says "you are missing this". It says *"help me understand X — or, if you're not sure, we can assume it, or send it to Discovery?"* The system carries the burden of transforming the fog of business language into a structured, confidence-graded disposition.
 
 ---
 
-## 7. Indicadores (RICE-lite) — o espelho que desafia o pensamento
+## 7. Indicators (RICE-lite) — the mirror that challenges thinking
 
-Não é RICE-a-fórmula (Reach × Impact × Confidence ÷ Effort → um número de ranking). É **um punhado de indicadores de negócio, cada um com um score leve, usados como espelho para desafiar o raciocínio** — não para priorizar automaticamente.
+This is not RICE-as-formula (Reach × Impact × Confidence ÷ Effort → a ranking number). It is **a handful of business indicators, each with a lightweight score, used as a mirror to challenge reasoning** — not to prioritize automatically.
 
-Ela pontua cada um de forma simples (Baixo / Médio / Alto, ou 1–3). Ela **fornece a informação**, e o score é só um gatilho para raciocinar:
+She scores each one simply (Low / Medium / High, or 1–3). She **provides the information**, and the score is just a trigger for reasoning:
 
-| Indicador | A pergunta dela, na linguagem dela | Nota |
+| Indicator | Her question, in her language | Note |
 |---|---|---|
-| **Impacto** | "Quanto isso move o negócio?" (R$, retenção, horas de operação) | a tese de valor |
-| **Alcance** | "Quantos clientes / usuários / segmentos sentem isso?" | reach |
-| **Urgência** | "Por que agora — e o que acontece se a gente esperar?" | sensibilidade ao tempo |
-| ~~Confiança~~ | *já coberta* | é a camada de confiança que já temos — não se adiciona de novo |
-| **Esforço** | *(deixado soft / adiado)* | ela não é técnica; firma depois com o CTO. Pode dar um chute, marcado `low_confidence` |
+| **Impact** | "How much does this move the business?" (revenue, retention, operating hours) | the value thesis |
+| **Reach** | "How many customers / users / segments feel this?" | reach |
+| **Urgency** | "Why now — and what happens if we wait?" | time sensitivity |
+| ~~Confidence~~ | *already covered* | it is the confidence layer we already have — not added again |
+| **Effort** | *(left soft / deferred)* | she is not technical; firms up later with the CTO. She can give a rough guess, marked `low_confidence` |
 
-### O mecanismo de "desafiar o pensamento"
+### The "challenge thinking" mechanism
 
-O valor não está nos scores em si — está na **tensão entre eles**, exibida em tela como uma provocação gentil:
+The value is not in the scores themselves — it is in the **tension between them**, displayed on screen as a gentle provocation:
 
-- **Impacto alto + confiança baixa** → *"Você vê valor grande aqui — que evidência te deixaria seguro?"*
-- **Urgência alta + Impacto baixo** → *"Parece urgente — é de fato agora, ou só barulhento?"*
-- **Alcance alto + Impacto-por-usuário fino** → *"Muita gente, efeito pequeno em cada — esse é o ganho real?"*
+- **High impact + low confidence** → *"You see big value here — what evidence would make you confident?"*
+- **High urgency + low impact** → *"Seems urgent — is it really now, or just noisy?"*
+- **High reach + thin per-user impact** → *"Many people, small effect on each — is that the real gain?"*
 
-Cada desafio que afia uma resposta **também eleva a prontidão** — espelho e gate puxam na mesma direção. A confiança (§3) é o que torna a tensão visível: ela é a coordenada que cruza com cada indicador.
+Each challenge that sharpens an answer **also raises readiness** — mirror and gate pull in the same direction. Confidence (§3) is what makes the tension visible: it is the coordinate that crosses with each indicator.
 
 ---
 
-## 8. Como ela é medida — visão de portfólio
+## 8. How she is measured — portfolio view
 
-O protótipo deu à Submitter um dashboard que os docs nunca imaginaram. Essas métricas *são* como ela raciocina sobre o próprio trabalho:
+The prototype gave the Submitter a dashboard the docs never imagined. These metrics *are* how she reasons about her own work:
 
-| Métrica | O que diz | Origem |
+| Metric | What it says | Origin |
 |---|---|---|
-| **Impacto anual** (R$/ano por demanda) | Ela pensa em dinheiro | drill-down do protótipo |
-| **Taxa de conversão demanda → RP** (ex.: 64%) | Quantas das demandas dela sobrevivem ao gate | KPI do protótipo |
-| **Lead time submissão → congelado** (ex.: 8,5 dias) | Quão rápido o input dela é racionalizado | KPI do protótipo |
-| **Aceite na 1ª versão** (ex.: 78%) | Qualidade do material *bruto dela* (o RP foi aceito de primeira) | KPI do protótipo |
+| **Annual impact** ($/year per demand) | She thinks in money | prototype drill-down |
+| **Demand → RP conversion rate** (e.g.: 64%) | How many of her demands survive the gate | prototype KPI |
+| **Lead time submission → frozen** (e.g.: 8.5 days) | How quickly her input is rationalized | prototype KPI |
+| **First-version acceptance** (e.g.: 78%) | Quality of *her raw material* (the RP was accepted on the first try) | prototype KPI |
 
-> **Insight silencioso:** "aceite na 1ª versão" é um *score de qualidade sobre a própria Submitter* — diz se ela está alimentando bem a máquina, sem exigir que ela seja técnica.
-
----
-
-## 9. O entregável e o handoff
-
-- **Entregável:** o **Documento do Submitter** — ver [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md). É a captura, congelada no handoff. O PO o formaliza e atribui o ID oficial `INT-AAAA-NNN` na triagem, produzindo o [`01 Intake Record`](../templates/01-intake-record.md).
-- **Gate:** a demanda só sai quando `gateReady = true` (todos os requisitos `blocksGate` resolvidos). O **Readiness Score** é a versão quantitativa do gate decision do Stage-Gate (ver [`references.md` § 2](../references.md)).
-- **Handoff:** entregue ao **PO** (camada de Intake). O handoff só se completa quando "o Intake Layer confirmou o recebimento" (ver [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md)).
+> **Silent insight:** "first-version acceptance" is a *quality score about the Submitter herself* — it tells whether she is feeding the machine well, without requiring her to be technical.
 
 ---
 
-## 10. Valor na tela
+## 9. The deliverable and the handoff
 
-A tela **não** deve parecer um formulário sendo validado. Deve parecer que o sistema **entendeu a demanda** e está fazendo brainstorming dela com ela.
-
-- A **lente de contrato** renderiza como *prontidão*: o quão perto estou, o que falta, o que está fraco.
-- A **lente semântica** renderiza como *significado*: eis o que esta demanda **é** — seu problema, seu valor, sua forma — refletida na linguagem dela, para que ela veja que o sistema *a entendeu*, não só a avaliou.
-
----
-
-## 11. O que o protótipo ensinou (e os docs ainda não têm)
-
-1. **Confiança por campo** (`confidence/source/status/hint`) — a camada de honestidade.
-2. **Readiness Score** — o gate do Stage-Gate virado número com regra (`low_confidence` conta parcial; 100% para avançar).
-3. **Pré-preenchimento por IA** — o sistema extrai dos artefatos dela e só pergunta as lacunas ("li seu documento, identifiquei 5 infos, faltam 3 pendências").
-4. **Indicadores de valor + tensões** (RICE-lite) — o espelho que desafia o pensamento.
-5. **Métricas de portfólio** — incluindo "aceite na 1ª versão" como score de qualidade da própria persona.
+- **Deliverable:** the **Submitter Brief** — see [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md). It is the capture, frozen at handoff. The PO formalizes it and assigns the official ID `INT-YYYY-NNN` at triage, producing the [`01 Intake Record`](../templates/01-intake-record.md).
+- **Gate:** the demand only exits when `gateReady = true` (all `blocksGate` requirements resolved). The **Readiness Score** is the quantitative version of the Stage-Gate gate decision (see [`references.md` § 2](../references.md)).
+- **Handoff:** delivered to the **PO** (Intake layer). The handoff is only complete when "the Intake Layer has confirmed receipt" (see [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md)).
 
 ---
 
-## 12. Relação com os documentos existentes
+## 10. Screen value
 
-| Documento | Relação |
+The screen should **not** feel like a form being validated. It should feel like the system **understood the demand** and is brainstorming it with her.
+
+- The **contract lens** renders as *readiness*: how close I am, what is missing, what is weak.
+- The **semantic lens** renders as *meaning*: here is what this demand **is** — its problem, its value, its shape — reflected in her language, so she sees the system *understood* her, not just evaluated her.
+
+---
+
+## 11. What the prototype taught us (and the docs did not yet have)
+
+1. **Per-field confidence** (`confidence/source/status/hint`) — the honesty layer.
+2. **Readiness Score** — the Stage-Gate gate turned into a number with a rule (`low_confidence` counts as partial; 100% to advance).
+3. **AI pre-fill** — the system extracts from her artifacts and only asks about gaps ("I read your document, identified 5 pieces of info, 3 pending items remain").
+4. **Value indicators + tensions** (RICE-lite) — the mirror that challenges thinking.
+5. **Portfolio metrics** — including "first-version acceptance" as a quality score for the persona itself.
+
+---
+
+## 12. Relation to existing documents
+
+| Document | Relation |
 |---|---|
-| [`01-roles.md`](../01-roles.md) | Define os papéis upstream individuais (CEO, Vendas, Marketing, CS). Este doc os **abstrai** na persona genérica Submitter. |
-| [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md) | A forma do entregável. Os **requisitos de compliance** (§5) derivam dele e o tornam graduável por confiança. |
-| [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md) (e demais upstream→PO) | Descrevem o handoff. Este doc adiciona o **gate quantitativo** (Readiness Score) sobre ele. |
-| [`prototypes/`](../prototypes/) | Pesquisa primária. As mecânicas de confiança, score, indicadores e métricas (§3, §7, §8, §11) vêm daqui. |
+| [`01-roles.md`](../01-roles.md) | Defines the individual upstream roles (CEO, Sales, Marketing, CS). This doc **abstracts** them into the generic Submitter persona. |
+| [`templates/00-submitter-brief.md`](../templates/00-submitter-brief.md) | The shape of the deliverable. The **compliance requirements** (§5) derive from it and make it confidence-gradable. |
+| [`interactions/01-sales-to-po.md`](../interactions/01-sales-to-po.md) (and other upstream→PO) | Describe the handoff. This doc adds the **quantitative gate** (Readiness Score) on top of it. |
+| [`prototypes/`](../prototypes/) | Primary research. The confidence mechanics, score, indicators, and metrics (§3, §7, §8, §11) come from here. |
 
 ---
 
-> **Próximas personas** seguem este mesmo molde: quem é · duas lentes · modelo de confiança · estrutura de dados · requisitos de compliance · perguntas/dispositions · indicadores · métricas · handoff · valor em tela.
+> **Next personas** follow this same template: who they are · two lenses · trust model · data structure · compliance requirements · questions/dispositions · indicators · metrics · handoff · screen value.

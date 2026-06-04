@@ -1,194 +1,194 @@
-# Technical Assessment — Room Access Control (Controle de Acesso à Sala)
+# Technical Assessment — Room Access Control
 
-> O Technical Assessment (TA) é o **output do CTO** — viabilidade, constraints, arquitetura, integrações, riscos técnicos, ADRs e custo firme. É escrito **sozinho** pelo CTO, **em paralelo** ao Readiness Package, e **responde** a ele: o CTO **nunca edita o RP**. O TA não redefine o produto — pode **vetar** a viabilidade do escopo, e nesse caso o PO revisa o escopo do RP.
+> The Technical Assessment (TA) is the **CTO's output** — feasibility, constraints, architecture, integrations, technical risks, ADRs, and firm cost. It is written **alone** by the CTO, **in parallel** with the Readiness Package, and **responds** to it: the CTO **never edits the RP**. The TA does not redefine the product — it may **veto** the feasibility of the scope, in which case the PO revises the RP scope.
 >
-> A fusão do RP (produto) com este TA (técnico) acontece no [PRD](./04-prd-access-control.md), e é o PRD que abre o downstream. Ver [`personas/02-po.md` §2 e §10](../../../personas/02-po.md) e [`interactions/05-po-to-cto.md`](../../../interactions/05-po-to-cto.md).
+> The merge of the RP (product) with this TA (technical) happens in the [PRD](./04-prd-access-control.md), and it is the PRD that opens the downstream. See [`personas/02-po.md` §2 and §10](../../../personas/02-po.md) and [`interactions/05-po-to-cto.md`](../../../interactions/05-po-to-cto.md).
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-access-control.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-access-control.md) → [`02 Readiness Package (PO)`](./02-readiness-package-access-control.md) → `03 Technical Assessment (CTO)` → [`04 PRD (PO+CTO → PM)`](./04-prd-access-control.md).
+> **Journey:** [`00 Submitter Document`](./00-submitter-brief-access-control.md) → [`01 Intake Record (PO — triage)`](./01-intake-record-access-control.md) → [`02 Readiness Package (PO)`](./02-readiness-package-access-control.md) → `03 Technical Assessment (CTO)` → [`04 PRD (PO+CTO → PM)`](./04-prd-access-control.md).
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Assessment** | TA-2026-002 |
-| **Versão** | v1 |
-| **RP vinculado** | RP-2026-002 v1 |
-| **Intake vinculado** | INT-2026-002 |
-| **Responsável** | Rodrigo Lima (CTO) |
-| **Status** | Assinado |
-| **Veredito de viabilidade** | Viável com ressalvas |
-| **Data de sign-off** | 2026-03-27 |
+| **Assessment ID** | TA-2026-002 |
+| **Version** | v1 |
+| **Linked RP** | RP-2026-002 v1 |
+| **Linked Intake** | INT-2026-002 |
+| **Owner** | Rodrigo Lima (CTO) |
+| **Status** | Signed |
+| **Feasibility Verdict** | Viable with caveats |
+| **Sign-off date** | 2026-03-27 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | 2026-03-20 a 2026-03-25 | Rodrigo Lima (CTO) | Assinado | Spikes técnicos de Azure AD (2026-03-20) e residência de dados LGPD (2026-03-21) executados durante o Discovery. Assessment formalizado e assinado em 2026-03-27 junto ao RP. |
+| v1 | 2026-03-20 to 2026-03-25 | Rodrigo Lima (CTO) | Signed | Technical spikes on Azure AD (2026-03-20) and LGPD data residency (2026-03-21) executed during Discovery. Assessment formalized and signed on 2026-03-27 alongside the RP. |
 
 ---
 
-## Veredito de Viabilidade
+## Feasibility Verdict
 
-> A decisão de primeira classe do CTO.
+> The CTO's first-class decision.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Veredito** | Viável com ressalvas |
-| **Justificativa** | O escopo de produto definido no RP-2026-002 é tecnicamente realizável com a stack atual. A integração Azure AD OIDC pode ser implementada via extensão da camada de auth existente, sem novo provedor de identidade. A conformidade LGPD pode ser atingida com a Opção C (roteamento condicional por cliente). As ressalvas são: (1) nova instância RDS em `sa-east-1` pode ser necessária e seu procurement precisa ser iniciado antes do desenvolvimento da Opção C; (2) a dependência de ação do cliente para registro Azure AD é externa e não está sob controle da plataforma. |
-| **Ressalvas (se aplicável)** | (1) Procurement de instância RDS em `sa-east-1` deve ser iniciado pelo CTO antes do início do trabalho de roteamento LGPD. Se o ambiente não estiver disponível na janela certa, essa parte do escopo atrasa. (2) A integração Azure AD só pode ser completada após a Construtora Ágil registrar a plataforma no portal Azure AD deles — dependência externa fora do nosso controle. (3) O esforço firmado assume senioridade sênior nas áreas de backend crítico (auth, roteamento LGPD) — rebaixar senioridade nessas tarefas invalida a estimativa. |
+| **Verdict** | Viable with caveats |
+| **Justification** | The product scope defined in RP-2026-002 is technically achievable with the current stack. Azure AD OIDC integration can be implemented by extending the existing auth layer, without a new identity provider. LGPD compliance can be achieved with Option C (conditional routing per client). The caveats are: (1) a new RDS instance in `sa-east-1` may be needed and its procurement must be initiated before Option C development begins; (2) the client's action to register Azure AD is external and outside the platform's control. |
+| **Caveats (if applicable)** | (1) RDS instance procurement in `sa-east-1` must be initiated by the CTO before LGPD routing work begins. If the environment is not available within the right window, that part of the scope is delayed. (2) Azure AD integration can only be completed after Construtora Ágil registers the platform in their Azure AD portal — external dependency outside our control. (3) The firm effort assumes senior-level engineers in critical backend areas (auth, LGPD routing) — downgrading seniority on those tasks invalidates the estimate. |
 
 ---
 
-## Perguntas do PO Endereçadas
+## PO Questions Addressed
 
-> Incógnitas técnicas específicas escaladas pelo PO durante o Discovery — e a resposta de cada uma.
+> Specific technical unknowns escalated by the PO during Discovery — and each answer.
 
-| # | Pergunta do PO | Resposta do CTO |
+| # | PO Question | CTO Answer |
 |---|---|---|
-| 1 | Integração Azure AD requer SSO completo, validação de group-claim OIDC ou sincronização via webhook? | Validação de group-claim OIDC. A camada de auth existente (OAuth2) suporta extensão para OIDC sem reescrita. A plataforma solicita o claim `groups` no login e mapeia grupos AD para papéis da plataforma no momento de entrada. SSO completo e webhook não são necessários para este escopo. |
-| 2 | A postura atual de residência de dados dos registros de sessão está em conformidade com LGPD para clientes brasileiros? | Não. O cluster primário está em `us-east-1`. Registros de participantes (nomes, emails, metadados de sessão) estão armazenados fora do Brasil. A Opção C — roteamento condicional com armazenamento em `sa-east-1` apenas para tenants com flag LGPD — é a abordagem recomendada para este release. Opções A e B (migração global) são decisões estratégicas de plataforma que requerem alinhamento com o CEO e não podem ser comprometidas para um único deal. |
-| 3 | Integração Jira API está dentro do escopo técnico deste assessment? | Não — encerrado por chamada com o cliente em 2026-03-22. Fernanda Ramos confirmou que não é obrigatório. Registrado como `BACKLOG-2026-007`. |
+| 1 | Does Azure AD integration require full SSO, OIDC group-claim validation, or webhook-based synchronization? | OIDC group-claim validation. The existing auth layer (OAuth2) supports extension to OIDC without a rewrite. The platform requests the `groups` claim at login and maps AD groups to platform roles at room entry. Full SSO and webhooks are not needed for this scope. |
+| 2 | Is the current data residency posture for session records LGPD-compliant for Brazilian clients? | No. The primary cluster is in `us-east-1`. Participant records (names, emails, session metadata) are stored outside Brazil. Option C — conditional routing with storage in `sa-east-1` only for tenants with the LGPD flag — is the recommended approach for this release. Options A and B (global migration) are strategic platform decisions that require CEO alignment and cannot be committed for a single deal. |
+| 3 | Is Jira API integration within the technical scope of this assessment? | No — closed by call with the client on 2026-03-22. Fernanda Ramos confirmed it is not mandatory. Logged as `BACKLOG-2026-007`. |
 
 ---
 
-## Sistemas e Componentes Afetados
+## Affected Systems and Components
 
-| Sistema / Componente | Natureza do impacto |
+| System / Component | Nature of impact |
 |---|---|
-| **Modelo de dados de participantes** | Modificado — novos campos (`role`, `access_mode`, `anonymous_alias`, `invite_token`), nova máquina de estado |
-| **Camada de autenticação / auth backend** | Modificado — extensão para solicitar claim `groups` no fluxo OIDC + lógica de mapeamento grupo AD → papel de sala |
-| **Camada WebSocket / eventos de sessão em tempo real** | Modificado — novos tipos de evento (`join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`); filtragem server-side de payload por destinatário em modo anônimo |
-| **Camada de persistência de sessão** | Modificado — schema migration aditiva; novos campos nullable com defaults compatíveis com comportamento atual |
-| **Roteamento de dados por região** | Novo — lógica de roteamento condicional `us-east-1` / `sa-east-1` baseada em flag LGPD do tenant |
-| **Infraestrutura de banco de dados** | Possivelmente novo — instância RDS (ou read-write endpoint) em `sa-east-1` dependendo do estado atual de provisionamento |
-| **Serviço de email transacional** | Somente consumido — sem modificação no provedor existente; novo template de convite por email |
+| **Participant data model** | Modified — new fields (`role`, `access_mode`, `anonymous_alias`, `invite_token`), new state machine |
+| **Authentication / auth backend layer** | Modified — extension to request `groups` claim in OIDC flow + AD group → room role mapping logic |
+| **WebSocket / real-time session events layer** | Modified — new event types (`join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`); server-side payload filtering per recipient in anonymous mode |
+| **Session persistence layer** | Modified — additive schema migration; new nullable fields with defaults compatible with current behavior |
+| **Data routing by region** | New — conditional routing logic `us-east-1` / `sa-east-1` based on tenant LGPD flag |
+| **Database infrastructure** | Possibly new — RDS instance (or read-write endpoint) in `sa-east-1` depending on current provisioning state |
+| **Transactional email service** | Consumed only — no modification to existing provider; new email invite template |
 
 ---
 
-## Impacto Arquitetural
+## Architectural Impact
 
-> Território exclusivo do CTO. Conteúdo migrado e expandido do antigo RP (antigas Seções 7 e 8) para este artefato.
+> Exclusive CTO territory. Content migrated and expanded from the former RP (old Sections 7 and 8) into this artifact.
 
-| Área | Impacto | Nota arquitetural |
+| Area | Impact | Architectural note |
 |---|---|---|
-| **Modelo de dados de participantes** | Significativo. O modelo atual de participante é um registro plano com escopo de sessão. Adicionar `role`, `access_mode`, `anonymous_alias` e `invite_token` requer schema migration e uma nova máquina de estado do participante. | A migração deve ser estritamente aditiva (novos campos nullable com defaults que reproduzem o comportamento atual). Sessões existentes com link aberto não devem ser afetadas. Sem migração de dados existentes — apenas novos campos opcionais. |
-| **Multi-tenancy** | Médio. Aliases anônimos devem ter escopo de sessão, não de conta. Tokens de convite devem ser não-adivinháveis e escopados para a sala+sessão específica. | Geração de tokens: 128 bits criptograficamente aleatórios (ex.: `crypto.randomBytes(16).toString('hex')`). Tokens expiram no primeiro uso ou ao fim da sessão — o que ocorrer primeiro. Rate limiting no endpoint de entrada para mitigar força bruta. |
-| **Membership em tempo real (WebSocket)** | Médio. A camada WebSocket atual transmite a lista de participantes a todos os membros. Com modo anônimo, o servidor deve filtrar o payload da lista de participantes por destinatário. | Filtragem server-side é obrigatória e inegociável. O cliente nunca deve receber o nome real de outro participante em payloads de modo anônimo. A filtragem deve ser aplicada no momento do envio, por conexão de destinatário — não no cliente. |
-| **Segurança** | Alto. O modelo de controle de acesso deve ser aplicado server-side. Um participante negado, removido ou não convidado não deve conseguir acessar o estado da sessão via chamadas diretas de API ou WebSocket. | O servidor deve validar a membership da sala em **cada** mensagem WebSocket e **cada** requisição REST que toca o estado da sessão. Token de sessão válido não é suficiente — a membership da sala específica deve ser verificada. Sem confiança no cliente para estado de acesso. |
-| **Performance / Escalabilidade** | Baixo. Notificações de aprovação e mudanças de papel são eventos de baixa frequência. Sem preocupações de escalabilidade nos volumes atuais de sessão. | Monitorar com 10× o pico atual se a adoção enterprise acelerar de forma significativa. A filtragem de payload WebSocket por destinatário adiciona CPU marginal no servidor de eventos — irrelevante nos volumes atuais. |
-| **Observabilidade** | Adição obrigatória. Telemetria de produto deve ser adicionada: distribuição de modo de acesso por sala, taxa de aprovação/negação, proporção Observador/Votante, uso de modo anônimo por sessão enterprise, latência de eventos de aprovação. | Necessário para decisões de produto na Fase 2 e para monitoramento de segurança. Os eventos devem ser emitidos antes do go-live — não retro-ativados. |
-| **Roteamento de residência de dados (LGPD)** | Alto. Novo padrão arquitetural: roteamento condicional de escrita/leitura por tenant baseado em flag LGPD. Para tenants com flag, dados de participantes são escritos e lidos de `sa-east-1`. Para os demais, comportamento atual (`us-east-1`) preservado. | Implementar via camada de abstração de acesso a dados (DAL) que resolve o endpoint de banco correto baseado no flag do tenant no contexto de request. Não vazar a lógica de roteamento para a camada de negócio. Uma vez que o padrão esteja estabelecido, torna-se reutilizável para qualquer requisito futuro de região de compliance. |
+| **Participant data model** | Significant. The current participant model is a flat, session-scoped record. Adding `role`, `access_mode`, `anonymous_alias`, and `invite_token` requires a schema migration and a new participant state machine. | The migration must be strictly additive (new nullable fields with defaults that reproduce current behavior). Existing sessions with an open link must not be affected. No existing data migration — only new optional fields. |
+| **Multi-tenancy** | Medium. Anonymous aliases must be session-scoped, not account-scoped. Invite tokens must be non-guessable and scoped to the specific room+session. | Token generation: cryptographically random 128 bits (e.g., `crypto.randomBytes(16).toString('hex')`). Tokens expire on first use or at session end — whichever comes first. Rate limiting on the join endpoint to mitigate brute force. |
+| **Real-time membership (WebSocket)** | Medium. The current WebSocket layer broadcasts the participant list to all members. With anonymous mode, the server must filter the participant list payload per recipient. | Server-side filtering is mandatory and non-negotiable. The client must never receive another participant's real name in anonymous mode payloads. Filtering must be applied at send time, per recipient connection — not on the client. |
+| **Security** | High. The access control model must be enforced server-side. A denied, removed, or uninvited participant must not be able to access session state via direct API calls or WebSocket. | The server must validate room membership on **every** WebSocket message and **every** REST request that touches session state. A valid session token is not sufficient — the specific room membership must be verified. No client trust for access state. |
+| **Performance / Scalability** | Low. Approval notifications and role changes are low-frequency events. No scalability concerns at current session volumes. | Monitor at 10× current peak if enterprise adoption accelerates significantly. Per-recipient WebSocket payload filtering adds marginal CPU on the event server — irrelevant at current volumes. |
+| **Observability** | Mandatory addition. Product telemetry must be added: access mode distribution per room, approval/denial rate, Observer/Voter ratio, anonymous mode usage per enterprise session, approval event latency. | Needed for Phase 2 product decisions and security monitoring. Events must be emitted before go-live — not retrofitted. |
+| **Data residency routing (LGPD)** | High. New architectural pattern: conditional write/read routing per tenant based on LGPD flag. For flagged tenants, participant data is written to and read from `sa-east-1`. For others, current behavior (`us-east-1`) is preserved. | Implement via a data access layer (DAL) that resolves the correct database endpoint based on the tenant flag in the request context. Do not leak routing logic into the business layer. Once the pattern is established, it becomes reusable for any future compliance region requirement. |
 
 ---
 
-## Integrações Necessárias
+## Required Integrations
 
-> Agora com a lente de viabilidade técnica.
+> Now with the lens of technical feasibility.
 
-| Sistema | Tipo | Protocolo | Viabilidade / Riscos conhecidos |
+| System | Type | Protocol | Feasibility / Known risks |
 |---|---|---|---|
-| **Azure AD (Entra ID) da Construtora Ágil** | Externo | OIDC (OpenID Connect) — claim `groups` | Viável via extensão da camada de auth existente. A plataforma solicita claim `groups` no fluxo OIDC; grupos AD são mapeados para papéis de sala no momento de entrada. **Risco:** a integração só pode ser completada após a Construtora Ágil registrar a plataforma no portal Azure AD deles (ação do cliente, fora do nosso controle). Spec técnica de registro (redirect URIs, scopes necessários, tenant ID) deve ser entregue ao TI do cliente (Fernanda Ramos) o mais cedo possível. |
-| **Camada WebSocket (interna)** | Interno | WebSocket / eventos de sessão | Infraestrutura existente se aplica. Novos tipos de evento a implementar: `join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`. Filtragem de payload por destinatário para modo anônimo é a adição mais sensível. |
-| **Banco de dados — endpoint `sa-east-1`** | Infraestrutura | PostgreSQL (RDS) | Viável com provisionamento. Verificar se já existe instância em `sa-east-1` ou se procurement é necessário. Iniciar procurement imediatamente se ausente — não bloqueia o desenvolvimento paralelo das demais partes, mas bloqueia o merge do roteamento LGPD. |
-| **Serviço de email transacional** | Interno/Externo | SMTP / API do provedor existente | Somente consumido — sem mudança no provedor. Novo template de convite por email a ser criado. |
-| **Camada de autenticação existente** | Interno | OAuth2 / extensão OIDC | Modificado. A extensão para OIDC com claim `groups` é aditiva — o fluxo OAuth2 existente para usuários sem Azure AD não é alterado. Os dois fluxos coexistem. |
+| **Construtora Ágil's Azure AD (Entra ID)** | External | OIDC (OpenID Connect) — `groups` claim | Viable via extension of the existing auth layer. The platform requests the `groups` claim in the OIDC flow; AD groups are mapped to room roles at entry. **Risk:** integration can only be completed after Construtora Ágil registers the platform in their Azure AD portal (client action, outside our control). The technical registration spec (redirect URIs, required scopes, tenant ID) must be delivered to the client's IT team (Fernanda Ramos) as early as possible. |
+| **WebSocket layer (internal)** | Internal | WebSocket / session events | Existing infrastructure applies. New event types to implement: `join_request`, `join_approved`, `join_denied`, `role_changed`, `participant_removed`. Per-recipient payload filtering for anonymous mode is the most sensitive addition. |
+| **Database — `sa-east-1` endpoint** | Infrastructure | PostgreSQL (RDS) | Viable with provisioning. Verify whether an instance already exists in `sa-east-1` or if procurement is needed. Start procurement immediately if absent — does not block parallel development of other parts, but blocks LGPD routing merge and testing. |
+| **Transactional email service** | Internal/External | SMTP / existing provider API | Consumed only — no change to provider. New email invite template to be created. |
+| **Existing authentication layer** | Internal | OAuth2 / OIDC extension | Modified. The extension to OIDC with `groups` claim is additive — the existing OAuth2 flow for users without Azure AD is not altered. Both flows coexist. |
 
 ---
 
-## Constraints Rígidas
+## Hard Constraints
 
-> Condições não-negociáveis que limitam o espaço de solução.
+> Non-negotiable conditions that limit the solution space.
 
-| Constraint | Tipo | Detalhe | Efeito no escopo |
+| Constraint | Type | Detail | Effect on scope |
 |---|---|---|---|
-| LGPD: dados de participantes de clientes com flag em `sa-east-1` | Segurança / Compliance / Legal | Dados de identidade de participantes (nomes, emails, metadados de sessão) de tenants com flag LGPD devem ser escritos e lidos exclusivamente de `sa-east-1`. Inegociável para onboarding da Construtora Ágil. | Adiciona ~2 semanas de esforço (roteamento condicional + provisionamento de infraestrutura). Não pode ser feito após o go-live — é pré-requisito. |
-| Provisionamento RDS `sa-east-1` necessário | Infraestrutura | Se a instância em `sa-east-1` não existir, deve ser provisionada antes do desenvolvimento do roteamento LGPD. Procurement leva tempo. | O CTO deve verificar o estado atual e iniciar procurement imediatamente se ausente. Não bloqueia desenvolvimento paralelo de outras partes. |
-| Integração Azure AD: group-claim OIDC apenas (sem SSO completo) | Escopo / Externo | O escopo é restrito à validação de group-claim OIDC para mapeamento de papéis na entrada da sala. SSO/SAML completo e sincronização de usuários estão fora do escopo deste release. | Limita a complexidade da integração de auth. Qualquer pressão para expandir para SSO completo deve ser triada como nova demanda. |
-| Migração de schema estritamente aditiva | Técnico | Novos campos no modelo de participantes devem ser nullable com defaults que reproduzem o comportamento atual. Sem DROP de colunas, sem mudanças de tipo. Sessões existentes não devem ser afetadas. | Preserva compatibilidade retroativa. Limita o design de alguns campos (ex.: `access_mode` não pode ser NOT NULL sem default). |
-| Sem novos provedores de identidade externos | Orçamento / Escopo | Nenhum novo provedor (Okta, Auth0, Cognito, etc.) pode ser contratado. Apenas extensão da camada de auth existente. | Confirma a abordagem de extensão OIDC aditiva. |
-| Filtragem de payload em modo anônimo: server-side obrigatória | Segurança | O cliente nunca deve receber o nome real de outro participante em payloads de modo anônimo. A filtragem é no servidor, no momento do envio, por destinatário. | Afeta o design da camada de eventos WebSocket — a filtragem deve ser centralizada no servidor de eventos, não delegada ao cliente. |
+| LGPD: participant data from flagged clients in `sa-east-1` | Security / Compliance / Legal | Participant identity data (names, emails, session metadata) from LGPD-flagged tenants must be written to and read exclusively from `sa-east-1`. Non-negotiable for Construtora Ágil onboarding. | Adds ~2 weeks of effort (conditional routing + infrastructure provisioning). Cannot be done post go-live — it is a prerequisite. |
+| RDS provisioning in `sa-east-1` required | Infrastructure | If the instance in `sa-east-1` does not exist, it must be provisioned before LGPD routing development begins. Procurement takes time. | CTO must verify current state and start procurement immediately if absent. Does not block parallel development of other parts. |
+| Azure AD integration: OIDC group-claim only (no full SSO) | Scope / External | Scope is restricted to OIDC group-claim validation for role mapping at room entry. Full SSO/SAML and user synchronization are out of scope for this release. | Limits auth integration complexity. Any pressure to expand to full SSO must be triaged as a new demand. |
+| Strictly additive schema migration | Technical | New fields in the participant model must be nullable with defaults that reproduce current behavior. No DROP of columns, no type changes. Existing sessions must not be affected. | Preserves backward compatibility. Limits the design of some fields (e.g., `access_mode` cannot be NOT NULL without a default). |
+| No new external identity providers | Budget / Scope | No new provider (Okta, Auth0, Cognito, etc.) may be contracted. Extension of the existing auth layer only. | Confirms the additive OIDC extension approach. |
+| Anonymous mode payload filtering: server-side mandatory | Security | The client must never receive another participant's real name in anonymous mode payloads. Filtering is on the server, at send time, per recipient. | Affects the design of the WebSocket events layer — filtering must be centralized on the event server, not delegated to the client. |
 
 ---
 
-## Riscos Técnicos e Mitigações
+## Technical Risks and Mitigations
 
-> Riscos **técnicos** vivem aqui. Riscos de produto/negócio estão no RP-2026-002, Seção 12.
+> **Technical** risks live here. Product/business risks are in RP-2026-002, Section 12.
 
-| Risco | Categoria | Probabilidade | Impacto | Mitigação |
+| Risk | Category | Probability | Impact | Mitigation |
 |---|---|---|---|---|
-| Migração do modelo de dados de participantes quebra sessões ativas | Dados | Baixa | Alto | Migração estritamente aditiva — novos campos nullable com defaults. Deploy em janela de baixo tráfego. Rollback testado antes do deploy de produção. Sessões existentes não afetadas por design. |
-| Colisão de alias anônimo (dois participantes com o mesmo alias) | Técnico | Baixa | Médio | Atribuição de alias é determinística por índice ordinal de participante na sessão. Sem colisão possível dentro de uma sessão por construção. |
-| Força bruta de token de convite | Segurança | Baixa | Alto | Tokens são 128 bits criptograficamente aleatórios. Expiram no primeiro uso. Rate limiting no endpoint de entrada da sala. Sem exposição de IDs sequenciais. |
-| Dono da sala desconecta com aprovações pendentes em fila | Técnico | Média | Médio | Aprovações pendentes persistem no servidor com TTL de 5 min. Se o dono reconectar dentro do TTL, a fila é apresentada. Se não, solicitações expiram. Design stateful no servidor (não no cliente). |
-| Instância RDS `sa-east-1` não provisionada na janela necessária | Infraestrutura | Média | Alto | Verificar imediatamente o estado do ambiente. Se não existir, iniciar procurement antes do kick-off do desenvolvimento. Desenvolvimento paralelo das demais partes pode ocorrer sem bloquear — mas o merge do roteamento LGPD fica bloqueado. |
-| Claim `groups` não disponível no fluxo OIDC do tenant do cliente | Integração | Baixa | Alto | A spec técnica de registro (incluindo o scope `groups`) deve ser entregue ao TI da Construtora Ágil cedo. Fernanda Ramos deve confirmar que o tenant Azure AD expõe o claim `groups` e que os grupos `pokerplan-voters` e `pokerplan-observers` existem no tenant. Testar em ambiente de staging com tenant de teste antes do go-live. |
-| Lógica de roteamento LGPD vaza para a camada de negócio | Arquitetural | Média | Médio | Implementar roteamento via DAL (Data Access Layer) com abstração de endpoint. A lógica de resolução de region/endpoint é interna à DAL — a camada de negócio não conhece nem decide a region. Code review obrigatório antes do merge. |
-| Bypass de controle de acesso via chamada API direta | Segurança | Baixa | Alto | Validação de membership da sala em **cada** requisição (REST e WebSocket). Testes de segurança automáticos cobrindo: replay de mensagem após remoção, tentativa de entrada sem convite via API, acesso a payload de sessão sem membership válida. |
+| Participant data model migration breaks active sessions | Data | Low | High | Strictly additive migration — new nullable fields with defaults. Deploy in low-traffic window. Rollback tested before production deploy. Existing sessions unaffected by design. |
+| Anonymous alias collision (two participants with the same alias) | Technical | Low | Medium | Alias assignment is deterministic by participant ordinal index in the session. No collision possible within a session by construction. |
+| Invite token brute force | Security | Low | High | Tokens are cryptographically random 128 bits. Expire on first use. Rate limiting on the room join endpoint. No sequential ID exposure. |
+| Room owner disconnects with approvals pending in queue | Technical | Medium | Medium | Pending approvals persist on the server with a 5-min TTL. If the owner reconnects within the TTL, the queue is presented. If not, requests expire. Stateful design on the server (not the client). |
+| RDS `sa-east-1` instance not provisioned within the required window | Infrastructure | Medium | High | Immediately verify environment state. If absent, start procurement before development kick-off. Parallel development of other parts can proceed without blocking — but LGPD routing merge is blocked. |
+| `groups` claim not available in the client tenant's OIDC flow | Integration | Low | High | Technical registration spec (including `groups` scope) must be delivered to Construtora Ágil IT early. Fernanda Ramos must confirm the Azure AD tenant exposes the `groups` claim and that the `pokerplan-voters` and `pokerplan-observers` groups exist in the tenant. Test in staging with a test tenant before go-live. |
+| LGPD routing logic leaks into the business layer | Architectural | Medium | Medium | Implement routing via DAL (Data Access Layer) with endpoint abstraction. Region/endpoint resolution logic is internal to the DAL — the business layer neither knows nor decides the region. Mandatory code review before merge. |
+| Access control bypass via direct API call | Security | Low | High | Room membership validation on **every** request (REST and WebSocket). Automated security tests covering: message replay after removal, uninvited join attempt via API, session payload access without valid membership. |
 
 ---
 
-## Decisões de Arquitetura (ADRs)
+## Architectural Decisions (ADRs)
 
-> Direção arquitetural no nível do CTO. Breakdown fino e ADRs de implementação pertencem ao Tech Backlog (TB) do Tech Lead.
+> Architectural direction at the CTO level. Fine-grained breakdown and implementation ADRs belong to the Tech Lead's Tech Backlog (TB).
 
-| # | Decisão | Justificativa | Sign-off do CTO |
+| # | Decision | Justification | CTO Sign-off |
 |---|---|---|---|
-| ADR-001 | Integração Azure AD via OIDC group-claim, sem SSO completo | A camada de auth existente (OAuth2) suporta extensão aditiva para OIDC. SSO completo requer mais esforço, infraestrutura de metadados e está fora do escopo declarado pelo cliente. Group-claim é suficiente para o requisito de mapeamento de papéis. | ✓ |
-| ADR-002 | Conformidade LGPD via Opção C: roteamento condicional por flag de tenant, armazenamento em `sa-east-1` apenas para tenants com flag | Opção A (migração global) interrompe todos os clientes. Opção B (roteamento geral) é decisão estratégica de plataforma que requer alinhamento com o CEO. Opção C é escopada, entregável para este deal e reutilizável como padrão para futuros requisitos de compliance regional. | ✓ |
-| ADR-003 | Filtragem de payload WebSocket em modo anônimo: server-side, por destinatário, no momento do envio | Segurança não pode depender do cliente para ocultar dados. Qualquer abordagem que envie o nome real ao cliente (mesmo que "oculto" via CSS/JS) é vetada. O servidor emite payloads diferentes para cada destinatário baseado no papel. | ✓ |
-| ADR-004 | Schema migration estritamente aditiva para o modelo de participantes | Preserva compatibilidade retroativa sem interromper sessões existentes. Campos novos são nullable com defaults que reproduzem o comportamento atual. Elimina o risco de migração de dados existentes. | ✓ |
-| ADR-005 | Tokens de convite: 128 bits criptograficamente aleatórios, uso único, expiram no primeiro uso ou fim da sessão | Previne força bruta (espaço de 2^128), replay (uso único) e tokens órfãos (expiração por sessão). Não usa IDs sequenciais nem derivados de dados da sala. | ✓ |
-| ADR-006 | Roteamento de residência de dados implementado na DAL (Data Access Layer), não na camada de negócio | A lógica de resolução de endpoint/region é interna à DAL. A camada de negócio passa apenas o contexto do tenant; a DAL resolve o endpoint correto. Mantém separação de preocupações e torna o padrão reutilizável sem acoplamento. | ✓ |
+| ADR-001 | Azure AD integration via OIDC group-claim, without full SSO | The existing auth layer (OAuth2) supports additive extension to OIDC. Full SSO requires more effort, metadata infrastructure, and is outside the scope declared by the client. Group-claim is sufficient for the role mapping requirement. | ✓ |
+| ADR-002 | LGPD compliance via Option C: conditional routing by tenant flag, storage in `sa-east-1` only for flagged tenants | Option A (global migration) disrupts all clients. Option B (general routing) is a strategic platform decision requiring CEO alignment. Option C is scoped, deliverable for this deal, and reusable as a pattern for future regional compliance requirements. | ✓ |
+| ADR-003 | WebSocket payload filtering in anonymous mode: server-side, per recipient, at send time | Security cannot depend on the client to hide data. Any approach that sends the real name to the client (even if "hidden" via CSS/JS) is vetoed. The server emits different payloads to each recipient based on role. | ✓ |
+| ADR-004 | Strictly additive schema migration for the participant model | Preserves backward compatibility without disrupting existing sessions. New fields are nullable with defaults that reproduce current behavior. Eliminates the risk of migrating existing data. | ✓ |
+| ADR-005 | Invite tokens: cryptographically random 128 bits, single-use, expire on first use or session end | Prevents brute force (2^128 space), replay (single-use), and orphaned tokens (session expiration). Does not use sequential IDs or room-data-derived values. | ✓ |
+| ADR-006 | Data residency routing implemented in the DAL (Data Access Layer), not in the business layer | Endpoint/region resolution logic is internal to the DAL. The business layer passes only tenant context; the DAL resolves the correct endpoint. Maintains separation of concerns and makes the pattern reusable without coupling. | ✓ |
 
 ---
 
-## Avaliação de Esforço e Custo (firme)
+## Effort and Cost Assessment (firm)
 
-> Somente uso interno. Estas são as estimativas **firmes** do CTO — substituem a estimativa preliminar do PO (RP Seção 13). Serão refinadas pelo Tech Lead no Tech Backlog. Não são compromisso contratual nem material para cliente.
+> Internal use only. These are the CTO's **firm** estimates — they replace the PO's preliminary estimate (RP Section 13). They will be refined by the Tech Lead in the Tech Backlog. Not a contractual commitment or client-facing material.
 
-### Esforço de Desenvolvimento
+### Development Effort
 
-| Área | Estimativa | Senioridade |
+| Area | Estimate | Seniority |
 |---|---|---|
-| Backend — schema migration + máquina de estado do participante | 6 dias | Senior |
-| Backend — filtragem server-side de eventos WebSocket (modo anônimo) | 3 dias | Senior |
-| Backend — lógica de controle de acesso (convite, aprovação, remoção, validação por request) | 5 dias | Mid-Senior |
-| Backend — extensão de auth para OIDC group-claim (Azure AD) | 5 dias | Senior |
-| Backend — roteamento de residência de dados LGPD (Opção C, `sa-east-1`) + DAL | 10 dias | Senior |
-| Frontend — painel de configurações de acesso do dono da sala | 4 dias | Mid |
-| Frontend — UI do participante (aliases anônimos, view do Observador, tela de aprovação/espera) | 3 dias | Mid |
-| QA — funcional + segurança + multi-tenant + validação LGPD | 5 dias | QA |
-| **Total firme** | **25 dias** | |
+| Backend — schema migration + participant state machine | 6 days | Senior |
+| Backend — server-side WebSocket event filtering (anonymous mode) | 3 days | Senior |
+| Backend — access control logic (invite, approval, removal, per-request validation) | 5 days | Mid-Senior |
+| Backend — auth extension for OIDC group-claim (Azure AD) | 5 days | Senior |
+| Backend — LGPD data residency routing (Option C, `sa-east-1`) + DAL | 10 days | Senior |
+| Frontend — room owner access settings panel | 4 days | Mid |
+| Frontend — participant UI (anonymous aliases, Observer view, approval/waiting screen) | 3 days | Mid |
+| QA — functional + security + multi-tenant + LGPD validation | 5 days | QA |
+| **Firm total** | **25 days** | |
 
-> **Nota sobre discrepância em relação ao intake original:** a estimativa original no nível do intake (antes do Discovery) era de 25 dias para o core da funcionalidade, sem considerar Azure AD nem LGPD. O número firme do CTO coincide numericamente (25 dias), mas com composição diferente: o core de acesso foi ajustado para baixo (maior precisão após Discovery), enquanto o trabalho de Azure AD (5 dias) e LGPD Opção C (10 dias) foram adicionados. A estimativa preliminar do PO era ~29 dias. A diferença reflete a granularidade técnica aplicada pelo CTO na separação das áreas.
+> **Note on discrepancy vs. original intake estimate:** the original intake-level estimate (before Discovery) was 25 days for the core feature, without accounting for Azure AD or LGPD. The CTO's firm number coincides numerically (25 days), but with a different composition: the access control core was adjusted downward (greater precision after Discovery), while Azure AD work (5 days) and LGPD Option C (10 days) were added. The PO's preliminary estimate was ~29 days. The difference reflects the technical granularity applied by the CTO in separating the areas.
 
-### Impacto de Infraestrutura
+### Infrastructure Impact
 
-Sem novos serviços de aplicação. Schema migration no cluster existente (`us-east-1`). O roteamento condicional `sa-east-1` requer um write endpoint ou instância RDS na região do Brasil:
+No new application services. Schema migration on the existing cluster (`us-east-1`). The conditional `sa-east-1` routing requires a write endpoint or RDS instance in the Brazil region:
 
-- **Se já provisionada:** sem impacto de procurement. Configurar endpoint na DAL.
-- **Se não provisionada:** iniciar procurement imediatamente. Instância RDS `db.t3.medium` estimada para a carga inicial — verificar com DevOps o tier correto. O desenvolvimento das demais partes pode ocorrer em paralelo, mas o merge e os testes do roteamento LGPD ficam bloqueados até o ambiente estar disponível.
+- **If already provisioned:** no procurement impact. Configure endpoint in the DAL.
+- **If not provisioned:** start procurement immediately. RDS instance `db.t3.medium` estimated for the initial load — verify the correct tier with DevOps. Development of other parts can proceed in parallel, but LGPD routing merge and testing are blocked until the environment is available.
 
-### Impacto de Custo com Terceiros
+### Third-Party Cost Impact
 
-Nenhum além dos serviços existentes. A integração Azure AD é do lado do cliente (sem custo para a plataforma). O provedor de email transacional já está contratado — apenas novo template.
+None beyond existing services. Azure AD integration is on the client side (no cost to the platform). The transactional email provider is already contracted — only a new template.
 
-### Impacto de Custo Operacional Recorrente
+### Recurring Operational Cost Impact
 
-Baixo a médio. O endpoint de banco de dados em `sa-east-1` adiciona custo de infraestrutura recorrente (estimado: a definir pela revisão de infraestrutura com DevOps). Este custo deve ser considerado na precificação de tenants com flag LGPD no planejamento comercial futuro — o padrão de roteamento, uma vez estabelecido, se torna base para todos os requisitos futuros de compliance regional.
+Low to medium. The database endpoint in `sa-east-1` adds recurring infrastructure cost (estimated: to be determined via infrastructure review with DevOps). This cost should be factored into the pricing of LGPD-flagged tenants in future commercial planning — the routing pattern, once established, becomes the baseline for all future regional compliance requirements.
 
-### Avaliação de TCO
+### TCO Assessment
 
-Esta funcionalidade adiciona complexidade significativa e duradoura ao modelo de participantes (máquina de estado) e à camada de infraestrutura (roteamento multi-região). Funcionalidades futuras que tocam membership de sessão (SSO/SAML, audit logs, guest access com tokens) e residência de dados multi-região construirão sobre esta base — o investimento aqui reduz o custo marginal dessas fases. O padrão de roteamento LGPD via DAL, uma vez estabelecido, torna-se reutilizável para qualquer requisito futuro de compliance regional sem acoplamento com a lógica de negócio.
+This feature adds significant and lasting complexity to the participant model (state machine) and to the infrastructure layer (multi-region routing). Future features that touch session membership (SSO/SAML, audit logs, guest access with tokens) and multi-region data residency will build on this foundation — the investment here reduces the marginal cost of those phases. The LGPD routing pattern via DAL, once established, becomes reusable for any future regional compliance requirement without coupling to the business logic.
 
 ---
 
-## Caminho de Discovery (se incógnita técnica bloqueia)
+## Discovery Path (if technical unknown blocks)
 
-> Não aplicável — todas as incógnitas técnicas foram resolvidas durante o Discovery (2026-03-18 a 2026-03-25). Os spikes técnicos estão documentados no log do Discovery do Intake Record ([`01-intake-record-access-control.md`](./01-intake-record-access-control.md)).
+> Not applicable — all technical unknowns were resolved during Discovery (2026-03-18 to 2026-03-25). Technical spikes are documented in the Discovery log of the Intake Record ([`01-intake-record-access-control.md`](./01-intake-record-access-control.md)).
 
-| Incógnita | Spike / Investigação | Quem | Resultado |
+| Unknown | Spike / Investigation | Who | Result |
 |---|---|---|---|
-| Integração Azure AD: SSO vs. OIDC group-claim vs. webhook | Spike técnico de 1 dia | Rodrigo Lima (CTO) | Resolvido: OIDC group-claim viável (ADR-001) |
-| Postura de residência de dados LGPD | Revisão de infraestrutura de 1 dia | Rodrigo Lima (CTO) | Resolvido: Opção C recomendada e adotada (ADR-002) |
-| Integração Jira: obrigatória ou desejável | Chamada com o cliente | Vendas + Construtora Ágil | Resolvido: não obrigatório, movido para backlog |
+| Azure AD integration: SSO vs. OIDC group-claim vs. webhook | 1-day technical spike | Rodrigo Lima (CTO) | Resolved: OIDC group-claim viable (ADR-001) |
+| LGPD data residency posture | 1-day infrastructure review | Rodrigo Lima (CTO) | Resolved: Option C recommended and adopted (ADR-002) |
+| Jira integration: mandatory or desirable | Client call | Sales + Construtora Ágil | Resolved: not mandatory, moved to backlog |

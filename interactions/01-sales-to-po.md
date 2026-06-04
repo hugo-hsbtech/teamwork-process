@@ -1,83 +1,83 @@
-# Interação 01 — Vendas → PO
+# Interaction 01 — Sales → PO
 
-**Direção:** Vendas inicia. PO recebe.
-**Camada:** Upstream → Camada de Intake
+**Direction:** Sales initiates. PO receives.
+**Layer:** Upstream → Intake Layer
 
-> Vendas, CS, Marketing e o canal de intake do CEO são instâncias da persona **Submitter** — a persona de fronteira. Seu raciocínio, o modelo de confiança e a estrutura de dados do registro estão consolidados em [`../personas/01-submitter.md`](../personas/01-submitter.md). Esta interação descreve o *handoff*; a persona descreve *como o registro fica pronto*.
-
----
-
-## Gatilho
-
-Um prospect ou cliente existente expressa uma dor, lacuna ou necessidade vinculada a um deal ou renovação.
+> Sales, CS, Marketing, and the CEO intake channel are instances of the **Submitter** persona — the boundary persona. Its reasoning, trust model, and record data structure are consolidated in [`../personas/01-submitter.md`](../personas/01-submitter.md). This interaction describes the *handoff*; the persona describes *how the record becomes ready*.
 
 ---
 
-## O que Vendas Deve Fornecer
+## Trigger
 
-- Registro de intake estruturado com: origem, tipo, descrição do problema, impacto de negócio, prioridade
-- Contexto comercial: qual cliente, estágio do deal, receita em risco, sensibilidade de prazo
-- Stakeholders: quem no lado do cliente se importa, quem tem autoridade de decisão
-- Limite preliminar de escopo: o que o cliente descreveu como necessidade (não uma solução)
+A prospect or existing customer expresses a pain point, gap, or need tied to a deal or renewal.
 
 ---
 
-## O que o PO Faz Com Isso
+## What Sales Must Provide
 
-- Revisa o registro quanto à completude antes de aceitá-lo
-- Faz a triagem dentro do SLA definido pelo nível de prioridade
-- Responde com um dos seguintes: Product Ready, Discovery, Opportunity Backlog, Rejeitado — com justificativa
+- Structured intake record with: source, type, problem description, business impact, priority
+- Commercial context: which customer, deal stage, revenue at risk, deadline sensitivity
+- Stakeholders: who on the customer side cares, who has decision authority
+- Preliminary scope boundary: what the customer described as a need (not a solution)
 
 ---
 
-## Transferência de Ownership
+## What the PO Does With This
 
-**De Vendas:** A responsabilidade pelo sinal de demanda termina aqui. Vendas não tem mais ação até que o resultado da triagem seja comunicado.
-**Para o PO:** Detém o registro de intake a partir deste ponto — decisão de triagem, roteamento e comunicação do resultado de volta para Vendas.
-**Artefato transferido:** Registro de intake completo.
+- Reviews the record for completeness before accepting it
+- Triages within the SLA defined by priority level
+- Responds with one of the following: Product Ready, Discovery, Opportunity Backlog, Rejected — with rationale
+
+---
+
+## Ownership Transfer
+
+**From Sales:** Responsibility for the demand signal ends here. Sales has no further action until the triage outcome is communicated.
+**To the PO:** Owns the intake record from this point — triage decision, routing, and communicating the outcome back to Sales.
+**Artifact transferred:** Complete intake record.
 
 ---
 
 ## Gate
 
-O PO não aceita registros de intake sem descrição do problema, impacto de negócio ou justificativa de prioridade. Espera-se que Vendas complete o registro antes de submetê-lo — não depois.
+The PO does not accept intake records without a problem description, business impact, or priority justification. Sales is expected to complete the record before submitting it — not after.
 
-O gate é quantitativo: o registro está pronto quando `gateReady = true` — todos os requisitos bloqueantes (problema, originador, alcance, impacto) resolvidos por uma **disposição honesta**, não necessariamente respondidos com certeza. "Ainda não sei o ARR exato" não bloqueia se vier como premissa a validar ou rota de Discovery (ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md)). O que bloqueia é a *ausência de disposição* — um requisito bloqueante deixado vazio.
-
----
-
-## Caminho de Falha
-
-Se o intake estiver incompleto, o PO o devolve para Vendas com os campos específicos faltantes anotados. Vendas não recebe um reconhecimento verbal como substituto a um registro completo.
-
-"Incompleto" aqui significa requisito bloqueante **sem disposição** — não campo com baixa confiança. Campos `low_confidence` viajam com o registro (graduados, com `hint` do que os elevaria) e contam como parciais no Readiness Score; eles não causam devolução.
+The gate is quantitative: the record is ready when `gateReady = true` — all blocking requirements (problem, originator, reach, impact) resolved by an **honest disposition**, not necessarily answered with certainty. "I don't know the exact ARR yet" does not block if it comes as a premise to validate or a Discovery route (see [`../personas/01-submitter.md` §6](../personas/01-submitter.md)). What blocks is the *absence of a disposition* — a blocking requirement left empty.
 
 ---
 
-## O que Vendas NÃO Deve Fazer
+## Failure Path
 
-- Comunicar compromissos de solução ou prazos ao cliente antes que a triagem seja concluída
-- Escalar diretamente para CTO, Tech Leads ou Engenharia para "andar mais rápido"
-- Submeter a mesma demanda múltiplas vezes para aumentar a urgência
+If the intake is incomplete, the PO returns it to Sales with the specific missing fields noted. Sales does not receive a verbal acknowledgment as a substitute for a complete record.
+
+"Incomplete" here means a blocking requirement **with no disposition** — not a low-confidence field. `low_confidence` fields travel with the record (graduated, with a `hint` of what would elevate them) and count as partials in the Readiness Score; they do not trigger a return.
 
 ---
 
-## Sequência
+## What Sales Must NOT Do
+
+- Communicate solution commitments or deadlines to the customer before triage is complete
+- Escalate directly to CTO, Tech Leads, or Engineering to "move faster"
+- Submit the same demand multiple times to increase urgency
+
+---
+
+## Sequence
 
 ```mermaid
 sequenceDiagram
-    actor S as Vendas
+    actor S as Sales
     actor PO as PO
 
-    S->>PO: Registro de intake estruturado
-    PO->>PO: Verifica completude
+    S->>PO: Structured intake record
+    PO->>PO: Checks completeness
 
-    alt Registro incompleto
-        PO-->>S: Devolve com campos faltantes listados
-        S->>PO: Resubmete com correções
+    alt Incomplete record
+        PO-->>S: Returns with missing fields listed
+        S->>PO: Resubmits with corrections
     end
 
-    PO->>PO: Triagem (dentro do SLA)
-    PO-->>S: Resultado da triagem + justificativa
-    Note over S,PO: Product Ready / Discovery / Backlog / Rejeitado
+    PO->>PO: Triage (within SLA)
+    PO-->>S: Triage outcome + rationale
+    Note over S,PO: Product Ready / Discovery / Backlog / Rejected
 ```

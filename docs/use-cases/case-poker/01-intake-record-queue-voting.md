@@ -1,123 +1,123 @@
-# Intake Record — Queue Voting (Fila de Votação)
+# Intake Record — Queue Voting
 
-> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) (`gateReady = true`), atribui o ID oficial `INT-2026-001` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento (Product Ready / Discovery / Backlog / Rejeitar) com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../../../personas/02-po.md).
+> **This is the Intake Record — the formal artifact of the Intake Layer, authored by the PO.** It receives the [`00 Submitter Brief`](./00-submitter-brief-queue-voting.md) (`gateReady = true`), assigns the official ID `INT-2026-001`, and records the **PO's first act: triage** — the routing decision (Product Ready / Discovery / Backlog / Reject) with traceable justification. See [`personas/02-po.md` §3 and §6.1](../../../personas/02-po.md).
 >
-> **Ele não reescreve a captura do Submitter** — **referencia** o brief 00 e o consolida. O aprofundamento de produto (visão, escopo, regras, métricas) é o **segundo ato** do PO e vive no [`02 Readiness Package`](./02-readiness-package-queue-voting.md).
+> **It does not rewrite the Submitter's capture** — it **references** brief 00 and consolidates it. The product deepening (vision, scope, rules, metrics) is the **PO's second act** and lives in the [`02 Readiness Package`](./02-readiness-package-queue-voting.md).
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → `01 Intake Record (PO — triagem)` → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — não requisitado` → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
+> **Journey:** [`00 Submitter Brief`](./00-submitter-brief-queue-voting.md) → `01 Intake Record (PO — triage)` → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — not requested` → [`04 PRD (PO+CTO → PM)`](./04-prd-queue-voting.md).
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Registro** | INT-2026-001 |
-| **Versão** | v1 |
-| **Documento do Submitter (origem)** | [`00-submitter-brief-queue-voting.md`](./00-submitter-brief-queue-voting.md) |
-| **Registrado por (Submitter)** | Ana Costa (Customer Success) |
-| **Triado por (PO)** | Lucas Mendes (PO) |
-| **Data de registro** | 2026-03-12 |
-| **Data de triagem** | 2026-03-13 |
-| **Status** | Triado — Product Ready |
-| **Readiness Package vinculado** | RP-2026-001 |
+| **Record ID** | INT-2026-001 |
+| **Version** | v1 |
+| **Submitter Brief (origin)** | [`00-submitter-brief-queue-voting.md`](./00-submitter-brief-queue-voting.md) |
+| **Submitted by (Submitter)** | Ana Costa (Customer Success) |
+| **Triaged by (PO)** | Lucas Mendes (PO) |
+| **Submission date** | 2026-03-12 |
+| **Triage date** | 2026-03-13 |
+| **Status** | Triaged — Product Ready |
+| **Linked Readiness Package** | RP-2026-001 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Evento | Resumo |
+| Version | Date | Event | Summary |
 |---|---|---|---|
-| v1 | 2026-03-12 | Intake formalizado | CS (Ana Costa) entregou o brief 00 com `gateReady = true` após chamada trimestral de revisão com Banco Meridional. PO recebeu e iniciou triagem. |
-| v1 | 2026-03-13 | Triagem concluída | Lucas Mendes triou como Product Ready. Escalada arquitetural não necessária. Racionalização iniciada. |
+| v1 | 2026-03-12 | Intake formalized | CS (Ana Costa) delivered brief 00 with `gateReady = true` after the quarterly review call with Banco Meridional. PO received it and initiated triage. |
+| v1 | 2026-03-13 | Triage completed | Lucas Mendes triaged as Product Ready. Architectural escalation not required. Rationalization initiated. |
 
 ---
 
-## Prontidão recebida do Submitter
+## Readiness received from Submitter
 
-> Snapshot herdado do brief 00 no handoff. O PO não recalcula a captura — registra o que recebeu e o que segue *soft*.
+> Snapshot inherited from brief 00 at handoff. The PO does not recalculate the capture — records what was received and what remains *soft*.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Readiness Score no handoff** | 87 % |
-| **Requisitos bloqueantes** | Todos resolvidos por disposição honesta (`gateReady`) — Sim |
-| **Dispositions em aberto** | 3 premissas a validar (infraestrutura WebSocket, migração de schema, autonomia de adoção do cliente) · 0 discovery · 0 delegados |
+| **Readiness Score at handoff** | 87 % |
+| **Blocking requirements** | All resolved by honest disposition (`gateReady`) — Yes |
+| **Open dispositions** | 3 assumptions to validate (WebSocket infrastructure, schema migration, client adoption autonomy) · 0 discovery · 0 delegated |
 
 ---
 
-## Demanda consolidada
+## Consolidated demand
 
-> Resumo de uma tela, validado pelo PO contra o brief 00 (não é re-digitação — é a leitura do PO). O detalhe completo, com confiança por campo, está no [`00-submitter-brief-queue-voting.md`](./00-submitter-brief-queue-voting.md).
+> Single-screen summary, validated by PO against brief 00 (not a re-entry — it is the PO's reading). Full detail, with per-field confidence, is in [`00-submitter-brief-queue-voting.md`](./00-submitter-brief-queue-voting.md).
 
-| Dimensão | Síntese | Confiança herdada |
+| Dimension | Summary | Inherited confidence |
 |---|---|---|
-| **Problema** (a dor, não a solução) | Facilitadores do Banco Meridional não conseguem controlar a sequência de exposição de histórias nem ocultar votos durante cerimônias de planning. Todos os participantes veem o backlog completo e os votos em tempo real, gerando viés de ancoragem e perda de cadência. O workaround manual (chat história a história) custa 15–20 min por cerimônia. | 92 |
-| **Alcance** (quem é impactado) | Scrum Masters e desenvolvedores do Banco Meridional (4 squads ativos, 3 squads bloqueados de adotar a plataforma por esta lacuna). | 88 |
-| **Impacto de negócio** | R$ 84k ARR em risco de renovação (90 dias); R$ 28k ARR de expansão bloqueada; lacuna competitiva confirmada contra 2 ferramentas rivais. | 80 |
-| **Urgência** (por que agora) | Renovação em ~90 dias. A funcionalidade precisa estar em produção antes da conversa de renovação. Custo de não entregar: perda ou redução do contrato — cliente tem alternativas. | 90 |
-| **Prioridade declarada** | Alta | — |
+| **Problem** (the pain, not the solution) | Banco Meridional facilitators cannot control the story exposure sequence or hide votes during planning ceremonies. All participants see the full backlog and votes in real time, generating anchoring bias and loss of cadence. The manual workaround (chat story by story) costs 15–20 min per ceremony. | 92 |
+| **Reach** (who is impacted) | Scrum Masters and developers at Banco Meridional (4 active squads, 3 squads blocked from adopting the platform by this gap). | 88 |
+| **Business impact** | R$ 84k ARR at renewal risk (90 days); R$ 28k ARR expansion blocked; competitive gap confirmed against 2 rival tools. | 80 |
+| **Urgency** (why now) | Renewal in ~90 days. The feature must be in production before the renewal conversation. Cost of not delivering: contract loss or reduction — client has alternatives. | 90 |
+| **Declared priority** | High | — |
 
 ---
 
-## Triagem — decisão de roteamento  ·  *(Ato 1 do PO)*
+## Triage — routing decision  ·  *(PO's Act 1)*
 
-> O PO avalia cada critério (todos avaliados = pode concluir a triagem) e então toma **uma** decisão de caminho, com justificativa obrigatória. Ver [`personas/02-po.md` §6.1](../../../personas/02-po.md).
+> The PO evaluates each criterion (all evaluated = can complete triage) and then makes **one** path decision, with mandatory rationale. See [`personas/02-po.md` §6.1](../../../personas/02-po.md).
 
-### Critérios avaliados
+### Evaluated criteria
 
-| # | Critério | Veredito | Justificativa (rationale) | Base / Fonte |
+| # | Criterion | Verdict | Rationale | Basis / Source |
 |---|---|---|---|---|
-| 1 | É um problema real (não sintoma isolado)? | Sim | A dor foi relatada espontaneamente pelos Scrum Masters na chamada de renovação, não como solicitação de feature. É a causa raiz do workaround de 15–20 min e do risco de ancoragem — não apenas um sintoma. | Brief 00 — Enunciado do Problema |
-| 2 | É recorrente / tem volume? | Sim | CS registra que outros 3 clientes enterprise relataram dor similar de forma informal. O padrão aparece sempre que um facilitador tem 10+ itens em uma sessão. | Brief 00 — Evidências; notas informais de CS |
-| 3 | Encaixa na visão do produto? | Sim | A plataforma tem roadmap explícito de fortalecer o controle do facilitador e a qualidade das cerimônias. Esta funcionalidade é extensão natural da mecânica de sessão existente — não diverge da direção do produto. | Roadmap interno (PO) |
-| 4 | Qual o impacto técnico e de negócio? | Alto (negócio) · Baixo (técnico) | Negócio: R$ 112k ARR combinado (retenção + expansão) + lacuna competitiva. Técnico: extensão de UI e estado de sessão — sem nova infraestrutura, sem impacto arquitetural de plataforma. | Brief 00 — Impacto de Negócio; avaliação inicial do PO |
-| 5 | Urgência e impacto justificam agora? | Sim | Prazo de renovação de 90 dias é janela não-negociável. Com estimativa de ~14 dias de desenvolvimento, há margem. O custo de não agir é concreto e imediato. | Brief 00 — Urgência + Constraints |
+| 1 | Is it a real problem (not an isolated symptom)? | Yes | The pain was raised spontaneously by Scrum Masters on the renewal call, not as a feature request. It is the root cause of the 15–20 min workaround and the anchoring risk — not merely a symptom. | Brief 00 — Problem Statement |
+| 2 | Is it recurring / does it have volume? | Yes | CS records that 3 other enterprise clients informally reported similar pain. The pattern appears whenever a facilitator has 10+ items in a session. | Brief 00 — Evidence; informal CS notes |
+| 3 | Does it fit the product vision? | Yes | The platform has an explicit roadmap to strengthen facilitator control and ceremony quality. This feature is a natural extension of the existing session mechanics — it does not diverge from the product direction. | Internal roadmap (PO) |
+| 4 | What is the technical and business impact? | High (business) · Low (technical) | Business: R$ 112k combined ARR (retention + expansion) + competitive gap. Technical: UI extension and session state — no new infrastructure, no platform architectural impact. | Brief 00 — Business Impact; PO initial assessment |
+| 5 | Do urgency and impact justify acting now? | Yes | The 90-day renewal deadline is a non-negotiable window. With an estimate of ~14 development days, there is margin. The cost of inaction is concrete and immediate. | Brief 00 — Urgency + Constraints |
 
-### Decisão de caminho
+### Path decision
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Decisão** | Product Ready |
-| **Justificativa** | Todos os critérios satisfeitos. Problema real e recorrente, alinhado com a visão do produto, impacto financeiro significativo, prazo concreto. Sem incógnitas que exijam Discovery — as premissas técnicas são razoáveis e serão validadas durante a racionalização. Escopo delimitado e não requer avaliação arquitetural pelo CTO. |
-| **Reversível?** | Sim — se uma premissa técnica se provar falsa durante a racionalização, a demanda pode ser retriada |
-| **Submitter notificado** | Sim — 2026-03-13 |
+| **Decision** | Product Ready |
+| **Rationale** | All criteria satisfied. Real and recurring problem, aligned with product vision, significant financial impact, concrete deadline. No unknowns requiring Discovery — the technical assumptions are reasonable and will be validated during rationalization. Scoped and does not require architectural assessment by CTO. |
+| **Reversible?** | Yes — if a technical assumption proves false during rationalization, the demand can be re-triaged |
+| **Submitter notified** | Yes — 2026-03-13 |
 
-> **Gate da triagem:** todos os critérios avaliados e a decisão é **informada**. `Product Ready` abre o Ato 2 (racionalização → RP).
-
----
-
-## Escalada arquitetural ao CTO
-
-**Necessária:** Não — a demanda envolve extensão de UI e estado de sessão dentro da infraestrutura existente. Nenhuma mudança arquitetural de plataforma identificada. Sem impacto em modelo de dados de multi-tenancy, autenticação, camadas de integração externas ou runtime de IA. As premissas sobre WebSocket e persistência de sessão serão validadas pelo Tech Lead durante o breakdown técnico.
+> **Triage gate:** all criteria evaluated and the decision is **informed**. `Product Ready` opens Act 2 (rationalization → RP).
 
 ---
 
-## Premissas validadas na triagem
+## Architectural escalation to CTO
 
-> Quais premissas do brief 00 o PO revisou e o veredito de cada uma. Premissas que sobrevivem viajam adiante explicitamente.
+**Required:** No — the demand involves UI extension and session state within existing infrastructure. No platform architectural changes identified. No impact on multi-tenancy data model, authentication, external integration layers, or AI runtime. The assumptions about WebSocket and session persistence will be validated by the Tech Lead during technical breakdown.
 
-| Premissa (do brief 00) | Veredito do PO | A validar com |
+---
+
+## Assumptions validated at triage
+
+> Which assumptions from brief 00 the PO reviewed and the verdict for each. Surviving assumptions travel forward explicitly.
+
+| Assumption (from brief 00) | PO Verdict | To validate with |
 |---|---|---|
-| Infraestrutura WebSocket suporta novos tipos de evento sem novo broker | Aceita — razoável com base no conhecimento do sistema. Não é bloqueador de triagem. | Tech Lead durante breakdown técnico |
-| Persistência de sessão extensível sem migração completa de schema | Aceita — sem red flags. Pode implicar migração incremental, não completa. | Tech Lead durante breakdown técnico |
-| Scrum Masters do Banco Meridional têm autonomia de adoção sem aprovação de TI | Aceita — cliente enterprise padrão. A validar com CS antes da entrega. | Ana Costa (CS) |
-| Co-facilitação fora do escopo — facilitador único suficiente para este release | Aceita — alinhado com o briefing do cliente. Arquitetura não deve bloquear evolução futura. | — (confirmada pelo cliente na chamada) |
-| Ticket por squad dos 3 squads pendentes equivale ao dos 4 ativos | Aceita como premissa de estimativa. Não afeta a decisão de roteamento. | Finance / CS antes do RP |
+| WebSocket infrastructure supports new event types without new broker | Accepted — reasonable based on system knowledge. Not a triage blocker. | Tech Lead during technical breakdown |
+| Session persistence extensible without full schema migration | Accepted — no red flags. May imply incremental, not full, migration. | Tech Lead during technical breakdown |
+| Banco Meridional Scrum Masters have adoption autonomy without IT approval | Accepted — standard enterprise client. To validate with CS before delivery. | Ana Costa (CS) |
+| Co-facilitation out of scope — single facilitator sufficient for this release | Accepted — aligned with client briefing. Architecture must not block future evolution. | — (confirmed by client on the call) |
+| Per-squad ticket for 3 pending squads equals that of the 4 active ones | Accepted as estimate assumption. Does not affect routing decision. | Finance / CS before the RP |
 
 ---
 
-## Constraints reconhecidos
+## Recognized constraints
 
-> Constraints que o PM deve considerar desde o primeiro dia (herdados do brief, validados aqui).
+> Constraints the PM must consider from day one (inherited from brief, validated here).
 
-| Constraint | Tipo | Nota do PO |
+| Constraint | Type | PO Note |
 |---|---|---|
-| Prazo de renovação (~90 dias a partir de 2026-03-12) | Tempo | Constraint vinculante. PM deve avaliar capacidade da equipe na abertura do planejamento. Se o esforço real superar a margem disponível, o escopo do MVP deve ser cortado — o prazo não se move. |
-| Sem redesign mobile | Escopo | Layout mobile existente se aplica. Não escalar para redesign neste release. |
-| Modelo de facilitador único | Escopo | Co-facilitação fora do escopo. Arquitetura deve permitir evolução futura sem retrabalho. |
-| Deploy sem downtime | Técnico | Padrão operacional da plataforma. Confirmado como obrigatório para este release. |
-| Sem novos serviços externos | Orçamento | Construção dentro da infraestrutura existente. Nenhum procurement necessário. |
+| Renewal deadline (~90 days from 2026-03-12) | Time | Binding constraint. PM must assess team capacity at planning start. If actual effort exceeds available margin, MVP scope must be cut — the deadline does not move. |
+| No mobile redesign | Scope | Existing mobile layout applies. Do not scale to redesign in this release. |
+| Single-facilitator model | Scope | Co-facilitation out of scope. Architecture must allow future evolution without rework. |
+| Zero-downtime deploy | Technical | Platform operational standard. Confirmed as mandatory for this release. |
+| No new external services | Budget | Built within existing infrastructure. No procurement required. |
 
 ---
 
 ## Handoff
 
-**Decisão: `Product Ready`** — o PO inicia a **racionalização** → [`02 Readiness Package — RP-2026-001`](./02-readiness-package-queue-voting.md).
+**Decision: `Product Ready`** — PO initiates **rationalization** → [`02 Readiness Package — RP-2026-001`](./02-readiness-package-queue-voting.md).
 
-As 3 premissas técnicas abertas viajam explicitamente para o RP, onde serão confrontadas com o conhecimento do sistema durante a racionalização. O prazo de renovação é o dado mais urgente a transmitir ao PM no momento do handoff do PRD.
+The 3 open technical assumptions travel forward explicitly to the RP, where they will be confronted with system knowledge during rationalization. The renewal deadline is the most urgent data point to pass to the PM at PRD handoff.

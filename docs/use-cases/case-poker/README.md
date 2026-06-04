@@ -1,98 +1,98 @@
-# Caso: PokerPlan — Plataforma SaaS de Planning Poker
+# Case: PokerPlan — Planning Poker SaaS Platform
 
-## Cenário
+## Scenario
 
-PokerPlan é uma plataforma B2B SaaS para cerimônias de planejamento ágil. A plataforma já possui clientes pagantes e está em fase de crescimento. Este caso ilustra duas demandas concorrentes fluindo pelo modelo operacional — desde a captura no intake até um **PRD** completo pronto para handoff ao PM.
+PokerPlan is a B2B SaaS platform for agile planning ceremonies. The platform already has paying clients and is in a growth phase. This case illustrates two concurrent demands flowing through the operating model — from intake capture all the way to a complete **PRD** ready for handoff to the PM.
 
-> **Cadeia de artefatos (modelo maduro).** Cada demanda atravessa: **00 Documento do Submitter** (captura) → **01 Intake Record** (PO — triagem) → **02 Readiness Package** (PO — racionalização) → **03 Technical Assessment** (CTO — só quando há escalada arquitetural) → **04 PRD** (fusão RP + TA, abre o downstream). Ver [`../../../templates/README.md`](../../../templates/README.md).
+> **Artifact chain (mature model).** Each demand traverses: **00 Submitter Brief** (capture) → **01 Intake Record** (PO — triage) → **02 Readiness Package** (PO — rationalization) → **03 Technical Assessment** (CTO — only when there is an architectural escalation) → **04 PRD** (RP + TA merge, opens the downstream). See [`../../../templates/README.md`](../../../templates/README.md).
 
 ---
 
-## Demandas neste caso
+## Demands in this case
 
-### Demanda 1 — Queue Voting (Fila de Votação)
+### Demand 1 — Queue Voting
 
-**Cliente:** Banco Meridional (cliente enterprise existente, renovação em 90 dias)
-**Dor:** Sem mecanismo para controlar a sequência de estimativas de histórias ou ocultar votos até a revelação.
-**Prioridade:** Alta
-**Escalada arquitetural:** Não → **sem Technical Assessment** (PRD se forma só a partir do RP)
+**Client:** Banco Meridional (existing enterprise client, renewal in 90 days)
+**Pain:** No mechanism to control the sequence of story estimations or hide votes until reveal.
+**Priority:** High
+**Architectural escalation:** No → **no Technical Assessment** (PRD formed from RP alone)
 
-| Documento | Descrição |
+| Document | Description |
 |---|---|
-| `00-submitter-brief-queue-voting.md` | Documento do Submitter — captura pelo CS, com confiança por campo e `gateReady` |
-| `01-intake-record-queue-voting.md` | Intake Record — triagem do PO (INT-2026-001), decisão **Product Ready**, sem Discovery |
-| `02-readiness-package-queue-voting.md` | Readiness Package PO-only (RP-2026-001) — `freezeReady`; `TechAssessmentRef: Não requisitado` |
-| `04-prd-queue-voting.md` | PRD (PRD-2026-001) — fusão só do RP; abre o downstream |
+| `00-submitter-brief-queue-voting.md` | Submitter Brief — captured by CS, with per-field confidence and `gateReady` |
+| `01-intake-record-queue-voting.md` | Intake Record — PO triage (INT-2026-001), **Product Ready** decision, no Discovery |
+| `02-readiness-package-queue-voting.md` | PO-only Readiness Package (RP-2026-001) — `freezeReady`; `TechAssessmentRef: Not requested` |
+| `04-prd-queue-voting.md` | PRD (PRD-2026-001) — RP-only merge; opens the downstream |
 
 ---
 
-### Demanda 2 — Room Access Control (Controle de Acesso à Sala)
+### Demand 2 — Room Access Control
 
-**Cliente:** Construtora Ágil (pré-fechamento, deal condicionado à funcionalidade)
-**Dor:** Sem controle de acesso, anonimato ou diferenciação de papéis dentro de uma sala de planejamento.
-**Prioridade:** Alta
-**Escalada arquitetural:** Sim — CTO produziu um **Technical Assessment** próprio (modelo de dados de participantes, multi-tenancy, Azure AD OIDC, roteamento LGPD).
+**Client:** Construtora Ágil (pre-close, deal contingent on the feature)
+**Pain:** No access control, anonymity, or role differentiation within a planning room.
+**Priority:** High
+**Architectural escalation:** Yes — CTO produced a dedicated **Technical Assessment** (participant data model, multi-tenancy, Azure AD OIDC, LGPD routing).
 
-| Documento | Descrição |
+| Document | Description |
 |---|---|
-| `00-submitter-brief-access-control.md` | Documento do Submitter — captura por Vendas, com `gateReady` |
-| `01-intake-record-access-control.md` | Intake Record — triagem do PO (INT-2026-002), **Discovery → Product Ready**, Discovery Brief preenchido |
-| `02-readiness-package-access-control.md` | Readiness Package PO-only (RP-2026-002) — produto apenas; referencia o TA via `TechAssessmentRef` |
-| `03-technical-assessment-access-control.md` | Technical Assessment do CTO (TA-2026-002) — viabilidade, arquitetura, ADRs, custo firme |
-| `04-prd-access-control.md` | PRD (PRD-2026-002) — fusão RP + Technical Assessment; abre o downstream |
+| `00-submitter-brief-access-control.md` | Submitter Brief — captured by Sales, with `gateReady` |
+| `01-intake-record-access-control.md` | Intake Record — PO triage (INT-2026-002), **Discovery → Product Ready**, Discovery Brief filled in |
+| `02-readiness-package-access-control.md` | PO-only Readiness Package (RP-2026-002) — product only; references the TA via `TechAssessmentRef` |
+| `03-technical-assessment-access-control.md` | CTO Technical Assessment (TA-2026-002) — feasibility, architecture, ADRs, firm cost |
+| `04-prd-access-control.md` | PRD (PRD-2026-002) — RP + Technical Assessment merge; opens the downstream |
 
 ---
 
-## Artefatos downstream
+## Downstream artifacts
 
-| Documento | Responsável | Descrição |
+| Document | Owner | Description |
 |---|---|---|
-| `05-execution-plan.md` | PM | Avaliação de capacidade, sequenciamento de demandas, mapa de milestones, estrutura de sprints, gatilhos de escalada |
-| `06.1-product-backlog-queue-voting.md` | Tech Leads | Épicos + histórias + critérios de aceite para Queue Voting, derivados das user stories de produto do PRD — atinge a Definition of Ready |
-| `06.2-tech-backlog-queue-voting.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Queue Voting — como construir |
-| `07.1-product-backlog-access-control.md` | Tech Leads | Épicos + histórias + critérios de aceite para Access Control, derivados das user stories de produto do PRD — atinge a Definition of Ready |
-| `07.2-tech-backlog-access-control.md` | Tech Lead | ADRs, tasks, estimativas refinadas, DoD, estratégia de rollout para Access Control — como construir |
+| `05-execution-plan.md` | PM | Capacity assessment, demand sequencing, milestone map, sprint structure, escalation triggers |
+| `06.1-product-backlog-queue-voting.md` | Tech Leads | Epics + stories + acceptance criteria for Queue Voting, derived from PRD product user stories — reaches Definition of Ready |
+| `06.2-tech-backlog-queue-voting.md` | Tech Lead | ADRs, tasks, refined estimates, DoD, rollout strategy for Queue Voting — how to build |
+| `07.1-product-backlog-access-control.md` | Tech Leads | Epics + stories + acceptance criteria for Access Control, derived from PRD product user stories — reaches Definition of Ready |
+| `07.2-tech-backlog-access-control.md` | Tech Lead | ADRs, tasks, refined estimates, DoD, rollout strategy for Access Control — how to build |
 
-> Os backlogs e o plano de execução recebem o **PRD** (`PRD vinculado`), não o RP isolado.
+> Backlogs and the execution plan receive the **PRD** (`Linked PRD`), not the RP in isolation.
 
 ---
 
-## Estado do processo
+## Process status
 
-Ambas as demandas completaram o Intake Layer e estão aprovadas para handoff ao PM.
+Both demands completed the Intake Layer and are approved for handoff to the PM.
 
 ```text
-[INT-2026-001] Queue Voting (RP v2 — rejeitado uma vez, resubmetido)
-  00 Brief (CS) → 01 Triagem [Product Ready] → 02 RP v1 rejeitado → RP v2 freezeReady
-    → 04 PRD (sem TA) → 05 Plano de Execução ✓ → Backlogs ✓ → Em dev (Sprint 1–2)
-    → Previsão de release: 2026-04-26
+[INT-2026-001] Queue Voting (RP v2 — rejected once, resubmitted)
+  00 Brief (CS) → 01 Triage [Product Ready] → 02 RP v1 rejected → RP v2 freezeReady
+    → 04 PRD (no TA) → 05 Execution Plan ✓ → Backlogs ✓ → In dev (Sprint 1–2)
+    → Projected release: 2026-04-26
 
-[INT-2026-002] Room Access Control (RP v1 — aprovado diretamente após Discovery)
-  00 Brief (Vendas) → 01 Triagem [Discovery 7d → Product Ready] → 03 Technical Assessment (CTO)
-    ‖ 02 RP → 04 PRD (RP + TA) → 05 Plano de Execução ✓ → Backlogs ✓ → Em dev (Sprint 1–5)
-    → Previsão de release: 2026-06-05 (revisada de 2026-05-30 após refinamento do Tech Lead)
+[INT-2026-002] Room Access Control (RP v1 — approved directly after Discovery)
+  00 Brief (Sales) → 01 Triage [Discovery 7d → Product Ready] → 03 Technical Assessment (CTO)
+    ‖ 02 RP → 04 PRD (RP + TA) → 05 Execution Plan ✓ → Backlogs ✓ → In dev (Sprint 1–5)
+    → Projected release: 2026-06-05 (revised from 2026-05-30 after Tech Lead refinement)
 ```
 
-**INT-2026-002 passou por Discovery** antes de poder ser racionalizada. Três incógnitas de integração foram identificadas no intake e precisaram ser resolvidas antes que o escopo pudesse ser definido (o log completo vive no `01-intake-record-access-control.md`):
+**INT-2026-002 went through Discovery** before it could be rationalized. Three integration unknowns were identified at intake and had to be resolved before scope could be defined (full log lives in `01-intake-record-access-control.md`):
 
-| Incógnita | Resolvida por | Resultado |
+| Unknown | Resolved by | Outcome |
 |---|---|---|
-| Viabilidade de integração Azure AD / OIDC | Spike técnico do CTO | Viável — adicionado ao escopo |
-| Requisito de integração Jira | Chamada com o cliente | Não obrigatório — movido para o backlog |
-| Postura de residência de dados LGPD | Revisão de infraestrutura pelo CTO | Não conforme — Opção C adicionada ao escopo |
+| Azure AD / OIDC integration feasibility | CTO technical spike | Feasible — added to scope |
+| Jira integration requirement | Client call | Not required — moved to backlog |
+| LGPD data residency posture | CTO infrastructure review | Non-compliant — Option C added to scope |
 
 ---
 
-## Principais diferenças entre os dois casos
+## Key differences between the two cases
 
-| Dimensão | Queue Voting | Room Access Control |
+| Dimension | Queue Voting | Room Access Control |
 |---|---|---|
-| Escalada ao CTO | Não — sem Technical Assessment | Sim — Technical Assessment próprio (TA-2026-002) |
-| Passou por Discovery | Não | Sim — 3 incógnitas de integração |
-| Complexidade arquitetural | Baixa | Alta |
-| Estimativa de esforço | 14 dias | 25 dias (firmado pelo CTO no Technical Assessment) |
-| Considerações de segurança | Ocultação de votos (aplicada pelo servidor) | Modelo de acesso completo + auth OIDC + roteamento LGPD |
-| Perfil de risco | Baixo | Alto |
-| Tipo de deal | Retenção de renovação | Bloqueador pré-fechamento |
-| Risco de escopo | Baixo | Alto (LGPD + dependência de ação do cliente para Azure AD) |
-| Dependências externas | Nenhuma | Cliente deve registrar app no portal Azure AD |
+| CTO escalation | No — no Technical Assessment | Yes — dedicated Technical Assessment (TA-2026-002) |
+| Went through Discovery | No | Yes — 3 integration unknowns |
+| Architectural complexity | Low | High |
+| Effort estimate | 14 days | 25 days (firmed by CTO in Technical Assessment) |
+| Security considerations | Vote hiding (server-enforced) | Full access model + OIDC auth + LGPD routing |
+| Risk profile | Low | High |
+| Deal type | Renewal retention | Pre-close blocker |
+| Scope risk | Low | High (LGPD + client-side Azure AD dependency) |
+| External dependencies | None | Client must register app in Azure AD portal |

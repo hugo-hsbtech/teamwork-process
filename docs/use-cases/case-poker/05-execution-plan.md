@@ -1,212 +1,212 @@
-# Plano de Execução — Ciclo de Sprint 2026-Q2
+# Execution Plan — Sprint Cycle 2026-Q2
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Plano** | EP-2026-001 |
-| **Versão** | v1 |
-| **Responsável** | Carla Ribeiro (PM) |
-| **Cobre demandas** | INT-2026-001 (Queue Voting, PRD-2026-001) · INT-2026-002 (Access Control, PRD-2026-002) |
-| **Status** | Ativo |
-| **Data do plano** | 2026-03-29 |
-| **Janela de execução** | 2026-04-01 → 2026-05-31 |
+| **Plan ID** | EP-2026-001 |
+| **Version** | v1 |
+| **Owner** | Carla Ribeiro (PM) |
+| **Covers demands** | INT-2026-001 (Queue Voting, PRD-2026-001) · INT-2026-002 (Access Control, PRD-2026-002) |
+| **Status** | Active |
+| **Plan date** | 2026-03-29 |
+| **Execution window** | 2026-04-01 → 2026-05-31 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Resumo |
+| Version | Date | Author | Summary |
 |---|---|---|---|
-| v1 | 2026-03-29 | Carla Ribeiro (PM) | Plano inicial. Avaliação de capacidade concluída. Demandas sequenciadas. Compartilhado com PO e CTO. |
+| v1 | 2026-03-29 | Carla Ribeiro (PM) | Initial plan. Capacity assessment completed. Demands sequenced. Shared with PO and CTO. |
 
 ---
 
-## 1. Avaliação de Capacidade
+## 1. Capacity Assessment
 
-> Somente uso interno. Esta seção não deve ser compartilhada com clientes ou stakeholders externos.
+> Internal use only. This section must not be shared with clients or external stakeholders.
 
-### Composição da Equipe (em 2026-03-29)
+### Team Composition (as of 2026-03-29)
 
-| Pessoa | Papel | Senioridade | Alocação atual | Disponível a partir de |
+| Person | Role | Seniority | Current allocation | Available from |
 |---|---|---|---|---|
-| Diego Alves | Engenheiro Backend | Senior | 100% — manutenção contínua da plataforma | 2026-04-01 (ciclo de manutenção encerra) |
-| Priya Nair | Engenheira Backend | Mid-senior | 100% — manutenção contínua da plataforma | 2026-04-01 |
-| Camila Torres | Engenheira Frontend | Mid | 20% — correções de bugs menores | 2026-04-01 (totalmente disponível) |
-| Lucas Park | Engenheiro Frontend | Mid | 20% — correções de bugs menores | 2026-04-01 (totalmente disponível) |
-| Fernanda Lima | QA | QA | 30% — manutenção do regression suite | 2026-04-08 (totalmente disponível) |
+| Diego Alves | Backend Engineer | Senior | 100% — ongoing platform maintenance | 2026-04-01 (maintenance cycle ends) |
+| Priya Nair | Backend Engineer | Mid-senior | 100% — ongoing platform maintenance | 2026-04-01 |
+| Camila Torres | Frontend Engineer | Mid | 20% — minor bug fixes | 2026-04-01 (fully available) |
+| Lucas Park | Frontend Engineer | Mid | 20% — minor bug fixes | 2026-04-01 (fully available) |
+| Fernanda Lima | QA | QA | 30% — regression suite maintenance | 2026-04-08 (fully available) |
 
-### Cobertura de Skills
+### Skills Coverage
 
-| Skill necessária | Demanda | Disponível? | Quem |
+| Required skill | Demand | Available? | Who |
 |---|---|---|---|
-| WebSocket / estado de sessão | INT-2026-001 | Sim | Diego Alves |
-| Componente frontend (UI do facilitador) | INT-2026-001 | Sim | Camila Torres |
-| Componente frontend (UI do participante) | INT-2026-001 | Sim | Lucas Park |
-| Camada de auth / OAuth2 / OIDC | INT-2026-002 | Sim — com ramp-up | Diego Alves (3 dias de ramp em group claims OIDC) |
-| Migração do modelo de dados de participantes | INT-2026-002 | Sim | Priya Nair |
-| Roteamento de BD multi-região (sa-east-1) | INT-2026-002 | Parcial — spike do CTO necessário primeiro | Diego Alves + orientação do CTO |
-| QA — carga + segurança + multi-tenant | Ambas | Sim | Fernanda Lima |
+| WebSocket / session state | INT-2026-001 | Yes | Diego Alves |
+| Frontend component (facilitator UI) | INT-2026-001 | Yes | Camila Torres |
+| Frontend component (participant UI) | INT-2026-001 | Yes | Lucas Park |
+| Auth layer / OAuth2 / OIDC | INT-2026-002 | Yes — with ramp-up | Diego Alves (3-day ramp on OIDC group claims) |
+| Participant data model migration | INT-2026-002 | Yes | Priya Nair |
+| Multi-region DB routing (sa-east-1) | INT-2026-002 | Partial — CTO spike needed first | Diego Alves + CTO guidance |
+| QA — load + security + multi-tenant | Both | Yes | Fernanda Lima |
 
-### Mapa de Conflitos
+### Conflict Map
 
-Ambas as demandas tocam sistemas sobrepostos:
+Both demands touch overlapping systems:
 
-| Sistema compartilhado | INT-2026-001 | INT-2026-002 | Risco |
+| Shared system | INT-2026-001 | INT-2026-002 | Risk |
 |---|---|---|---|
-| Camada de event bus WebSocket | Novos tipos de evento (item_revealed, votes_revealed) | Novos tipos de evento (join_request, join_approved, role_changed) | Mudanças paralelas no mesmo event bus — devem ser coordenadas |
-| Schema de estado de sessão | Campos de fila + estado de revelação | Campos de papel do participante, access_mode, invite_token | Ambas requerem migrações de schema — devem ser sequenciadas, não paralelizadas |
-| Modelo de participante | Lógica de exibição de ocultação de votos | Reescrita completa da máquina de estado do participante | INT-2026-002 muda o modelo de participante; INT-2026-001 depende dele — backend de INT-2026-002 deve ir primeiro |
+| WebSocket event bus layer | New event types (item_revealed, votes_revealed) | New event types (join_request, join_approved, role_changed) | Parallel changes to the same event bus — must be coordinated |
+| Session state schema | Queue fields + reveal state | Participant role fields, access_mode, invite_token | Both require schema migrations — must be sequenced, not parallelized |
+| Participant model | Vote hiding display logic | Full participant state machine rewrite | INT-2026-002 changes the participant model; INT-2026-001 depends on it — INT-2026-002 backend must go first |
 
-### Decisão de Capacidade
+### Capacity Decision
 
-Esforço total estimado: 14 dias (INT-2026-001) + 41 dias (INT-2026-002) = **55 dias úteis**.
+Total estimated effort: 14 days (INT-2026-001) + 41 days (INT-2026-002) = **55 business days**.
 
-Capacidade disponível da equipe a partir de 2026-04-01 (2 backend + 2 frontend + 1 QA):
-- Backend: 2 engenheiros × ~45 dias úteis na janela = ~90 dias-backend disponíveis
-- Frontend: 2 engenheiros × ~45 dias úteis = ~90 dias-frontend disponíveis
-- QA: 1 × ~42 dias úteis (inicia 2026-04-08) = ~42 dias-QA disponíveis
+Team capacity available from 2026-04-01 (2 backend + 2 frontend + 1 QA):
+- Backend: 2 engineers × ~45 business days in window = ~90 backend-days available
+- Frontend: 2 engineers × ~45 business days = ~90 frontend-days available
+- QA: 1 × ~42 business days (starts 2026-04-08) = ~42 QA-days available
 
-Avaliação: a capacidade é suficiente para absorver ambas as demandas sequencialmente dentro da janela.
+Assessment: capacity is sufficient to absorb both demands sequentially within the window.
 
-Constraint crítico: INT-2026-002 tem dependência externa (registro Azure AD pelo TI da Construtora Ágil). Isso deve ser acompanhado como bloqueador de milestone. Se não resolvido até 2026-04-14, o trabalho de auth backend da INT-2026-002 fica bloqueado e o cronograma muda.
+Critical constraint: INT-2026-002 has an external dependency (Azure AD registration by Construtora Ágil IT). This must be tracked as a milestone blocker. If not resolved by 2026-04-14, the INT-2026-002 auth backend work is blocked and the schedule changes.
 
-### Recomendação do PM
+### PM Recommendation
 
-Sequenciar INT-2026-001 primeiro — menor risco, entrega mais curta, e resolve um prazo de renovação (90 dias a partir de 2026-03-12 = até 2026-06-10). INT-2026-002 começa em paralelo em trilhas não conflitantes, com foco total após o ship da INT-2026-001.
+Sequence INT-2026-001 first — lower risk, shorter delivery, and resolves a renewal deadline (90 days from 2026-03-12 = by 2026-06-10). INT-2026-002 starts in parallel on non-conflicting tracks, with full focus after INT-2026-001 ships.
 
 ---
 
-## 2. Sequenciamento de Demandas
+## 2. Demand Sequencing
 
 ```
-ABRIL                          MAIO
-Sem 1    Sem 2    Sem 3    Sem 4    Sem 1    Sem 2    Sem 3    Sem 4
-[01/abr] [08/abr] [15/abr] [22/abr] [29/abr] [06/mai] [13/mai] [20/mai]
+APRIL                          MAY
+Wk 1     Wk 2     Wk 3     Wk 4     Wk 1     Wk 2     Wk 3     Wk 4
+[Apr 01] [Apr 08] [Apr 15] [Apr 22] [Apr 29] [May 06] [May 13] [May 20]
 
-INT-2026-001 (Queue Voting — 14 dias)
+INT-2026-001 (Queue Voting — 14 days)
 ├── Backend ──────────────┤
                ├── Frontend ───────┤
                             ├─ QA ─┤
-                                   [RELEASE: 26/abr]
+                                   [RELEASE: Apr 26]
 
-INT-2026-002 (Access Control — 41 dias)
-├── Migração do modelo de participantes ──────────────────────────────┤
-     ├── Azure AD OIDC (bloqueado até cliente registrar app) ──────────┤
-               ├── Modos de acesso + modo anônimo ─────────────────────────────┤
-                         ├── Frontend painel de config + UI participante ──────────────┤
+INT-2026-002 (Access Control — 41 days)
+├── Participant model migration ──────────────────────────────┤
+     ├── Azure AD OIDC (blocked until client registers app) ──────────┤
+               ├── Access modes + anonymous mode ─────────────────────────────┤
+                         ├── Frontend settings panel + participant UI ──────────────┤
                                                         ├── QA ─────────────────────────┤
-                                                                          [RELEASE: 30/mai]
+                                                                          [RELEASE: May 30]
 ```
 
 ---
 
-## 3. Mapa de Milestones
+## 3. Milestone Map
 
 ### INT-2026-001 — Queue Voting
 
-| Milestone | Responsável | Data alvo | Gate |
+| Milestone | Owner | Target date | Gate |
 |---|---|---|---|
-| M1 — Breakdown Package completo | Tech Lead | 2026-04-03 | PM confirma que Tech Lead tem contexto suficiente |
-| M2 — Backend completo (estado de sessão + eventos WebSocket) | Diego Alves | 2026-04-12 | Code review aprovado, testes unitários verdes |
-| M3 — Frontend completo (UI facilitador + participante) | Camila Torres / Lucas Park | 2026-04-19 | Revisão do Tech Lead aprovada |
-| M4 — Ciclo de QA completo | Fernanda Lima | 2026-04-24 | Todos os critérios de aceite validados |
-| M5 — Release | PM + Tech Lead | 2026-04-26 | Aprovação de release pelo QA emitida |
-| M6 — Feedback loop iniciado | PM | 2026-05-03 | Resumo assíncrono entregue ao PO + CS |
+| M1 — Breakdown Package complete | Tech Lead | 2026-04-03 | PM confirms Tech Lead has sufficient context |
+| M2 — Backend complete (session state + WebSocket events) | Diego Alves | 2026-04-12 | Code review approved, unit tests green |
+| M3 — Frontend complete (facilitator UI + participant) | Camila Torres / Lucas Park | 2026-04-19 | Tech Lead review approved |
+| M4 — QA cycle complete | Fernanda Lima | 2026-04-24 | All acceptance criteria validated |
+| M5 — Release | PM + Tech Lead | 2026-04-26 | QA release approval issued |
+| M6 — Feedback loop initiated | PM | 2026-05-03 | Async summary delivered to PO + CS |
 
 ### INT-2026-002 — Room Access Control
 
-| Milestone | Responsável | Data alvo | Gate |
+| Milestone | Owner | Target date | Gate |
 |---|---|---|---|
-| M1 — Breakdown Package completo | Tech Lead | 2026-04-05 | PM confirma que Tech Lead tem contexto suficiente |
-| M2 — Migração do modelo de participantes completa | Priya Nair | 2026-04-19 | Schema aplicado em staging, compatibilidade retroativa verificada |
-| M3 — Integração Azure AD OIDC completa | Diego Alves | 2026-04-26 | Bloqueado até Construtora Ágil registrar app no portal Azure (dependência externa — alvo: 2026-04-14) |
-| M4 — Modos de acesso + modo anônimo completos | Priya Nair + Diego Alves | 2026-05-09 | Code review aprovado, aplicação server-side verificada |
-| M5 — Roteamento LGPD sa-east-1 completo | Diego Alves | 2026-05-14 | CTO confirma postura de residência de dados. Validação em staging com dados de tenant brasileiro. |
-| M6 — Frontend completo | Camila Torres / Lucas Park | 2026-05-20 | Revisão do Tech Lead aprovada |
-| M7 — Ciclo de QA completo | Fernanda Lima | 2026-05-27 | Todos os critérios de aceite validados, testes de segurança + multi-tenant aprovados |
-| M8 — Sign-off LGPD pela Construtora Ágil TI | Fernanda Ramos (cliente) | 2026-05-28 | Cliente confirma requisito de residência de dados atendido |
-| M9 — Release | PM + Tech Lead | 2026-05-30 | Aprovação de release pelo QA + sign-off LGPD do cliente |
-| M10 — Feedback loop iniciado | PM | 2026-06-06 | Resumo assíncrono entregue ao PO + CS |
+| M1 — Breakdown Package complete | Tech Lead | 2026-04-05 | PM confirms Tech Lead has sufficient context |
+| M2 — Participant model migration complete | Priya Nair | 2026-04-19 | Schema applied in staging, backward compatibility verified |
+| M3 — Azure AD OIDC integration complete | Diego Alves | 2026-04-26 | Blocked until Construtora Ágil registers app in Azure portal (external dependency — target: 2026-04-14) |
+| M4 — Access modes + anonymous mode complete | Priya Nair + Diego Alves | 2026-05-09 | Code review approved, server-side enforcement verified |
+| M5 — LGPD sa-east-1 routing complete | Diego Alves | 2026-05-14 | CTO confirms data residency posture. Staging validation with Brazilian tenant data. |
+| M6 — Frontend complete | Camila Torres / Lucas Park | 2026-05-20 | Tech Lead review approved |
+| M7 — QA cycle complete | Fernanda Lima | 2026-05-27 | All acceptance criteria validated, security + multi-tenant tests passed |
+| M8 — LGPD sign-off by Construtora Ágil IT | Fernanda Ramos (client) | 2026-05-28 | Client confirms data residency requirement met |
+| M9 — Release | PM + Tech Lead | 2026-05-30 | QA release approval + client LGPD sign-off |
+| M10 — Feedback loop initiated | PM | 2026-06-06 | Async summary delivered to PO + CS |
 
 ---
 
-## 4. Mapa de Dependências Cross-Demanda
+## 4. Cross-Demand Dependency Map
 
-| Dependência | De | Para | Tipo | Risco se não cumprida |
+| Dependency | From | To | Type | Risk if not met |
 |---|---|---|---|---|
-| Schema de estado de sessão deve estar estável antes da migração do modelo de participantes da INT-2026-002 | Backend INT-2026-001 | Backend INT-2026-002 | Sequencial obrigatório | Migração da INT-2026-002 conflita com mudanças de schema da INT-2026-001 — risco de corrupção de dados |
-| Mudanças no event bus WebSocket não devem conflitar | INT-2026-001 (eventos de item) | INT-2026-002 (eventos de membership) | Coordenação | Mergeados no mesmo ciclo de PR review — Tech Lead é dono da resolução de conflitos |
-| Registro Azure AD pelo cliente | Externo (TI Construtora Ágil) | M3 da INT-2026-002 | Bloqueador externo | Se não feito até 2026-04-14, M3 muda 1 semana por dia de atraso |
-| Confirmação de infraestrutura sa-east-1 pelo CTO | CTO | M5 da INT-2026-002 | Bloqueador interno | Se instância RDS não provisionada, M5 e todos os milestones subsequentes mudam |
+| Session state schema must be stable before INT-2026-002 participant model migration | INT-2026-001 backend | INT-2026-002 backend | Sequential mandatory | INT-2026-002 migration conflicts with INT-2026-001 schema changes — data corruption risk |
+| WebSocket event bus changes must not conflict | INT-2026-001 (item events) | INT-2026-002 (membership events) | Coordination | Merged in the same PR review cycle — Tech Lead owns conflict resolution |
+| Azure AD registration by client | External (Construtora Ágil IT) | INT-2026-002 M3 | External blocker | If not done by 2026-04-14, M3 shifts 1 week per day of delay |
+| sa-east-1 infrastructure confirmation by CTO | CTO | INT-2026-002 M5 | Internal blocker | If RDS instance not provisioned, M5 and all subsequent milestones shift |
 
 ---
 
-## 5. Estrutura de Sprints
+## 5. Sprint Structure
 
-### Sprint 1 — 2026-04-01 a 2026-04-12
+### Sprint 1 — 2026-04-01 to 2026-04-12
 
-**Foco:** Backend INT-2026-001 + breakdown da INT-2026-002 e início do modelo de participantes
+**Focus:** INT-2026-001 backend + INT-2026-002 breakdown and start of participant model
 
-| Tarefa | Responsável | Demanda |
+| Task | Owner | Demand |
 |---|---|---|
-| Backend: extensão do schema de estado de sessão (fila + estado de revelação) | Diego Alves | INT-2026-001 |
-| Backend: tipos de evento WebSocket (item_revealed, votes_revealed, item_skipped) | Diego Alves | INT-2026-001 |
-| Backend: aplicação server-side de ocultação de votos | Priya Nair | INT-2026-001 |
-| Modelo de participantes: design do schema + plano de migração | Priya Nair | INT-2026-002 |
-| Tech Lead: breakdown package completo para ambas as demandas | Tech Lead | Ambas |
-| PM: enviar spec de registro Azure AD ao TI da Construtora Ágil | PM | INT-2026-002 |
+| Backend: session state schema extension (queue + reveal state) | Diego Alves | INT-2026-001 |
+| Backend: WebSocket event types (item_revealed, votes_revealed, item_skipped) | Diego Alves | INT-2026-001 |
+| Backend: server-side vote hiding enforcement | Priya Nair | INT-2026-001 |
+| Participant model: schema design + migration plan | Priya Nair | INT-2026-002 |
+| Tech Lead: complete breakdown package for both demands | Tech Lead | Both |
+| PM: send Azure AD registration spec to Construtora Ágil IT | PM | INT-2026-002 |
 
-### Sprint 2 — 2026-04-15 a 2026-04-26
+### Sprint 2 — 2026-04-15 to 2026-04-26
 
-**Foco:** Frontend INT-2026-001 + QA · migração de participantes da INT-2026-002 + início OIDC
+**Focus:** INT-2026-001 frontend + QA · INT-2026-002 participant migration + OIDC start
 
-| Tarefa | Responsável | Demanda |
+| Task | Owner | Demand |
 |---|---|---|
-| Frontend: UI de gerenciamento de fila do facilitador | Camila Torres | INT-2026-001 |
-| Frontend: exibição de ocultação de votos do participante | Lucas Park | INT-2026-001 |
-| QA: INT-2026-001 funcional + segurança + carga | Fernanda Lima | INT-2026-001 |
-| Backend: migração do modelo de participantes (staging) | Priya Nair | INT-2026-002 |
-| Backend: integração de group-claim OIDC do Azure AD (se registro do cliente completo) | Diego Alves | INT-2026-002 |
+| Frontend: facilitator queue management UI | Camila Torres | INT-2026-001 |
+| Frontend: participant vote hiding display | Lucas Park | INT-2026-001 |
+| QA: INT-2026-001 functional + security + load | Fernanda Lima | INT-2026-001 |
+| Backend: participant model migration (staging) | Priya Nair | INT-2026-002 |
+| Backend: Azure AD OIDC group-claim integration (if client registration complete) | Diego Alves | INT-2026-002 |
 | **RELEASE: INT-2026-001** | PM + Tech Lead | INT-2026-001 |
 
-### Sprint 3 — 2026-04-29 a 2026-05-10
+### Sprint 3 — 2026-04-29 to 2026-05-10
 
-**Foco:** Modos de acesso + modo anônimo da INT-2026-002
+**Focus:** INT-2026-002 access modes + anonymous mode
 
-| Tarefa | Responsável | Demanda |
+| Task | Owner | Demand |
 |---|---|---|
-| Backend: modos de acesso somente convite e aprovação obrigatória | Priya Nair + Diego Alves | INT-2026-002 |
-| Backend: atribuição de alias server-side e filtragem de payload do modo anônimo | Diego Alves | INT-2026-002 |
-| Backend: remoção de participante + atribuição de papéis | Priya Nair | INT-2026-002 |
+| Backend: invite-only and mandatory approval access modes | Priya Nair + Diego Alves | INT-2026-002 |
+| Backend: server-side alias assignment and anonymous mode payload filtering | Diego Alves | INT-2026-002 |
+| Backend: participant removal + role assignment | Priya Nair | INT-2026-002 |
 
-### Sprint 4 — 2026-05-13 a 2026-05-24
+### Sprint 4 — 2026-05-13 to 2026-05-24
 
-**Foco:** Roteamento LGPD + frontend da INT-2026-002
+**Focus:** INT-2026-002 LGPD routing + frontend
 
-| Tarefa | Responsável | Demanda |
+| Task | Owner | Demand |
 |---|---|---|
-| Backend: roteamento LGPD sa-east-1 (Opção C) | Diego Alves | INT-2026-002 |
-| Frontend: painel de configurações de acesso do dono da sala | Camila Torres | INT-2026-002 |
-| Frontend: UI do participante (aliases, view do observador, tela de aprovação) | Lucas Park | INT-2026-002 |
-| CTO: confirmar instância RDS sa-east-1 provisionada | CTO | INT-2026-002 |
+| Backend: LGPD sa-east-1 routing (Option C) | Diego Alves | INT-2026-002 |
+| Frontend: room owner access settings panel | Camila Torres | INT-2026-002 |
+| Frontend: participant UI (aliases, Observer view, approval screen) | Lucas Park | INT-2026-002 |
+| CTO: confirm sa-east-1 RDS instance provisioned | CTO | INT-2026-002 |
 
-### Sprint 5 — 2026-05-27 a 2026-05-31
+### Sprint 5 — 2026-05-27 to 2026-05-31
 
-**Foco:** QA + release da INT-2026-002
+**Focus:** INT-2026-002 QA + release
 
-| Tarefa | Responsável | Demanda |
+| Task | Owner | Demand |
 |---|---|---|
-| QA: ciclo completo (funcional + segurança + multi-tenant + validação LGPD) | Fernanda Lima | INT-2026-002 |
-| Sign-off LGPD do cliente | TI Construtora Ágil (Fernanda Ramos) | INT-2026-002 |
+| QA: full cycle (functional + security + multi-tenant + LGPD validation) | Fernanda Lima | INT-2026-002 |
+| Client LGPD sign-off | Construtora Ágil IT (Fernanda Ramos) | INT-2026-002 |
 | **RELEASE: INT-2026-002** | PM + Tech Lead | INT-2026-002 |
 
 ---
 
-## 6. Gatilhos de Escalada
+## 6. Escalation Triggers
 
-| Condição | Ação do PM | Destino da escalada |
+| Condition | PM action | Escalation destination |
 |---|---|---|
-| Registro Azure AD não confirmado até 2026-04-14 | PM notifica PO. PO aciona Vendas para pressionar TI do cliente. | PO → Vendas → Construtora Ágil |
-| Instância RDS sa-east-1 não provisionada até 2026-05-05 | PM escala ao CTO. CTO escala ao CEO se aprovação de procurement for necessária. | CTO → CEO |
-| QA da INT-2026-001 revela bloqueador antes do release | PM segura o release. Tech Lead faz triagem. Se > 2 dias, PM notifica PO do risco de renovação. | PO → CS → Banco Meridional |
-| Qualquer milestone atrasado > 3 dias úteis | PM produz mapa de milestones revisado e comunica ao PO. Sem absorção silenciosa. | PO |
-| Solicitação de adição de escopo chega durante a execução | PM rejeita. Qualquer adição requer um novo registro de intake. | PO |
+| Azure AD registration not confirmed by 2026-04-14 | PM notifies PO. PO activates Sales to pressure client IT. | PO → Sales → Construtora Ágil |
+| sa-east-1 RDS instance not provisioned by 2026-05-05 | PM escalates to CTO. CTO escalates to CEO if procurement approval is needed. | CTO → CEO |
+| INT-2026-001 QA reveals blocker before release | PM holds release. Tech Lead triages. If > 2 days, PM notifies PO of renewal risk. | PO → CS → Banco Meridional |
+| Any milestone delayed > 3 business days | PM produces revised milestone map and communicates to PO. No silent absorption. | PO |
+| Scope addition request arrives during execution | PM rejects. Any addition requires a new intake record. | PO |

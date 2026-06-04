@@ -1,275 +1,275 @@
-# Documento do Submitter — Concierge & Settlement
+# Submitter Brief — Concierge & Settlement
 
-> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../../../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
+> **This is the Submitter Brief** — the first artifact in the journey (`00`) and the deliverable of the Submitter persona. It **instantiates** the model from [`personas/01-submitter.md`](../../../personas/01-submitter.md): the reasoning (compliance requirements, ToDo generation, score formula) lives in the persona; this document **instantiates** it per demand, in the **Submitter's language** — problem, value, pain, opportunity. Each answer carries how solid it is and where it came from: the confidence layer travels *with* the capture.
 >
-> **Jornada:** `00 Documento do Submitter` → [`01 Intake Record (PO — triagem)`](./01-intake-record-concierge-settlement.md) → [`02 Readiness Package (PO)`](./02-readiness-package-concierge-settlement.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment-concierge-settlement.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md). Ver [`README.md`](./README.md).
+> **Journey:** `00 Submitter Brief` → [`01 Intake Record (PO — triage)`](./01-intake-record-concierge-settlement.md) → [`02 Readiness Package (PO)`](./02-readiness-package-concierge-settlement.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment-concierge-settlement.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md). See [`README.md`](./README.md).
 >
-> **Nada antecede este documento como artefato.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** (ver [`../../../README.md`](../../../README.md)). Esse sinal entra *aqui* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma neste primeiro documento formal.
+> **Nothing precedes this document as an artifact.** What comes before is **raw signal** — a call, a ticket, an email, an audio, a deal conversation — which **is not an artifact** (see [`../../../README.md`](../../../README.md)). That signal enters *here* as evidence/source (disposition `inferred`, with `source`); it is the **capture** that transforms it into this first formal document.
 >
-> **Handoff:** congela quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) e é entregue ao **PO**, que o formaliza e tria no [`01 Intake Record`](./01-intake-record-concierge-settlement.md).
+> **Handoff:** freezes when `gateReady = true` (every blocking requirement resolved by an honest disposition) and is delivered to the **PO**, who formalizes and triages it in the [`01 Intake Record`](./01-intake-record-concierge-settlement.md).
 
-## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
+## The two lenses (every demand is read through both simultaneously)
 
-> Ver [`personas/01-submitter.md` §2](../../../personas/01-submitter.md). Os ToDos vivem onde as lentes se cruzam: "dado o que *esta* demanda significa, o que o contrato ainda precisa?"
+> See [`personas/01-submitter.md` §2](../../../personas/01-submitter.md). ToDos live where the lenses intersect: "given what *this* demand means, what does the contract still need?"
 
-| Lente | O que é | Onde aparece neste documento |
+| Lens | What it is | Where it appears in this document |
 |---|---|---|
-| **Contrato** (determinístico) | Os requisitos fixos de compliance que toda demanda precisa satisfazer para avançar | **Resumo de Prontidão** + os requisitos numerados (score + pendências) |
-| **Semântica** (contextual) | O que *esta* demanda significa: a dor real, seu tipo, sua tese de valor, suas incógnitas | **Enunciado do Problema**, **Impacto**, **Indicadores de Valor** e suas tensões |
+| **Contract** (deterministic) | The fixed compliance requirements every demand must satisfy to advance | **Readiness Summary** + the numbered requirements (score + open items) |
+| **Semantics** (contextual) | What *this* demand means: the real pain, its type, its value thesis, its unknowns | **Problem Statement**, **Impact**, **Value Indicators** and their tensions |
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Demanda** | Concierge & Settlement — Atendimento automatizado ao hóspede + repasse financeiro ao hotel parceiro |
-| **Registrado por** | Camila Rocha (Líder de CS/Operações) |
-| **Data de captura** | 2026-04-07 |
-| **Status** | Pronto para handoff (`gateReady = true`) |
-| **Intake Record vinculado** | INT-2026-050 (atribuído pelo PO na triagem) |
+| **Demand** | Concierge & Settlement — Automated guest support + financial remittance to the partner hotel |
+| **Recorded by** | Camila Rocha (CS/Operations Lead) |
+| **Capture date** | 2026-04-07 |
+| **Status** | Ready for handoff (`gateReady = true`) |
+| **Linked Intake Record** | INT-2026-050 (assigned by the PO at triage) |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Evento | Resumo |
+| Version | Date | Event | Summary |
 |---|---|---|---|
-| v1 | 2026-04-07 | Captura iniciada | Camila registra a demanda após reunião de planejamento operacional Q2. |
-| v1 | 2026-04-07 | `gateReady = true` | Todos os requisitos bloqueantes resolvidos. Handoff ao PO. |
+| v1 | 2026-04-07 | Capture initiated | Camila records the demand after the Q2 operational planning meeting. |
+| v1 | 2026-04-07 | `gateReady = true` | All blocking requirements resolved. Handoff to PO. |
 
 ---
 
-## Resumo de Prontidão (Readiness)
+## Readiness Summary
 
-> Snapshot da captura. O score é derivado dos requisitos abaixo; `low_confidence` conta como parcial. A demanda só é entregue ao PO quando todos os requisitos bloqueantes estão resolvidos (`gateReady = Sim`).
+> Snapshot of the capture. The score is derived from the requirements below; `low_confidence` counts as partial. The demand is only delivered to the PO when all blocking requirements are resolved (`gateReady = Yes`).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
 | **Readiness Score** | 81 % |
-| **Gate liberado (gateReady)** | Sim |
-| **Requisitos bloqueantes pendentes** | — (todos resolvidos por disposição honesta) |
-| **Dispositions** | 5 respondidos · 2 inferidos · 3 premissas · 1 discovery · 0 delegados |
+| **Gate cleared (gateReady)** | Yes |
+| **Pending blocking requirements** | — (all resolved by honest disposition) |
+| **Dispositions** | 5 answered · 2 inferred · 3 assumptions · 1 discovery · 0 delegated |
 
-### Legenda de confiança (aplica-se a cada seção respondida)
+### Confidence legend (applies to each answered section)
 
-| Atributo | Valores |
+| Attribute | Values |
 |---|---|
-| **Confiança** | 0–100 |
-| **Fonte** | Submitter direto · Documento anexo (p.X) · Inferido · Premissa · Outro stakeholder |
-| **Status** | Vazio · Baixa confiança · Resolvido |
-| **Disposição** | Respondido · Inferido · Premissa (a validar) · Discovery (a investigar) · Delegado (dono: __) |
-| **Hint** | Por que a confiança está baixa / o que a elevaria |
+| **Confidence** | 0–100 |
+| **Source** | Direct Submitter · Attached document (p.X) · Inferred · Assumption · Other stakeholder |
+| **Status** | Empty · Low confidence · Resolved |
+| **Disposition** | Answered · Inferred · Assumption (to validate) · Discovery (to investigate) · Delegated (owner: __) |
+| **Hint** | Why confidence is low / what would raise it |
 
-> **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — inclusive "ninguém sabe ainda, e este é o plano" (Discovery) ou "estamos assumindo X" (Premissa). Ver [`personas/01-submitter.md` §6](../../../personas/01-submitter.md).
+> **"I don't know" does not block.** A requirement reaches readiness through any honest disposition — including "nobody knows yet, and this is the plan" (Discovery) or "we are assuming X" (Assumption). See [`personas/01-submitter.md` §6](../../../personas/01-submitter.md).
 
 ---
 
-## Origem  ·  *(Requisito 2 — Originador e contexto)*
+## Origin  ·  *(Requirement 2 — Originator and context)*
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Fonte** | Interno — time de CS/Operações |
-| **Cliente / Solicitante** | Camila Rocha, Líder de CS/Operações |
-| **Originador e contexto** | Camila levantou as duas dores na reunião de planejamento operacional Q2 (2026-04-07), após o time de CS identificar deterioração acelerada do CSAT e três incidentes de repasse financeiro incorreto nos últimos 90 dias. A reunião incluiu a Diretora de Operações e o CFO. |
-| **Reportado via** | Reunião presencial + slide de indicadores operacionais compartilhado no Notion |
+| **Source** | Internal — CS/Operations team |
+| **Client / Requester** | Camila Rocha, CS/Operations Lead |
+| **Originator and context** | Camila raised both pain points at the Q2 operational planning meeting (2026-04-07), after the CS team identified accelerating CSAT deterioration and three incorrect remittance incidents in the last 90 days. The meeting included the Operations Director and the CFO. |
+| **Reported via** | In-person meeting + slide deck of operational indicators shared on Notion |
 
-`Confiança:` 92 · `Fonte:` Submitter direto · `Status:` Resolvido · `Disposição:` Respondido · `Hint:` —
+`Confidence:` 92 · `Source:` Direct Submitter · `Status:` Resolved · `Disposition:` Answered · `Hint:` —
 
 ---
 
-## Tipo
+## Type
 
-- [ ] Funcionalidade
+- [ ] Feature
 - [ ] Bug
-- [x] Melhoria
+- [x] Improvement
 - [ ] Compliance
-- [x] Integração
-- [x] Operacional
+- [x] Integration
+- [x] Operational
 
 ---
 
-## Enunciado do Problema  ·  *(Requisito 1 — bloqueia gate)*
+## Problem Statement  ·  *(Requirement 1 — blocks gate)*
 
-> Qual a dor existente? Descreva o problema, não a solução. Se o enunciado contém solução proposta, ele volta para reformulação.
+> What is the existing pain? Describe the problem, not the solution. If the statement contains a proposed solution, it is returned for reformulation.
 
-**Problema A — Atendimento ao hóspede:**
-O atendimento de 1ª camada ao hóspede é 100% humano. Com o aumento de volume de reservas, o time de atendimento não acompanhou o crescimento: o SLA de primeira resposta é furado em 34% dos tickets, a fila de atendimento chega a 4h+ nos picos, e o CSAT médio caiu para 3,8/5 (meta: 4,5). As perguntas mais frequentes (status de reserva, confirmação de check-in, política de cancelamento) poderiam ser resolvidas sem intervenção humana, mas hoje consomem o mesmo tempo de atendente que casos complexos. Quando o hóspede precisa de um especialista, não há mecanismo de transferência com contexto — o hóspede repete todo o problema do zero para o novo atendente.
+**Problem A — Guest support:**
+First-layer guest support is 100% human. With the growth in booking volume, the support team has not kept pace with growth: the first-response SLA is missed on 34% of tickets, the support queue reaches 4h+ at peak times, and average CSAT dropped to 3.8/5 (target: 4.5). The most frequent questions (booking status, check-in confirmation, cancellation policy) could be resolved without human intervention, but today consume the same agent time as complex cases. When a guest needs a specialist, there is no context-transfer mechanism — the guest repeats the entire problem from scratch to the new agent.
 
-**Problema B — Repasse financeiro ao hotel parceiro:**
-O cálculo e a execução do repasse aos hotéis parceiros é feito manualmente: a equipe financeira consulta a planilha de contratos (percentuais de comissão por hotel), calcula o valor líquido, emite a transferência via TED e registra numa segunda planilha. Sem automação e sem validação cruzada, erros de percentual ocorrem. Nos últimos 6 meses: 3 repasses com valor incorreto, 2 hotéis parceiros ameaçando rescisão, 1 chargeback que a StayFlow absorveu por ausência de cobertura contratual clara. A equipe financeira dedica ~18h/semana a essa operação — tempo que cresce linearmente com o volume de reservas.
+**Problem B — Financial remittance to the partner hotel:**
+The calculation and execution of remittances to partner hotels is done manually: the finance team consults the contracts spreadsheet (commission percentages per hotel), calculates the net amount, issues the wire transfer, and records it in a second spreadsheet. Without automation or cross-validation, percentage errors occur. In the last 6 months: 3 remittances with incorrect amounts, 2 partner hotels threatening to terminate their contract, 1 chargeback that StayFlow absorbed due to the absence of clear contractual coverage. The finance team dedicates ~18 hrs/week to this operation — time that grows linearly with booking volume.
 
-`Confiança:` 88 · `Fonte:` Submitter direto + slide de indicadores (Notion, reunião 2026-04-07) · `Status:` Resolvido · `Disposição:` Respondido · `Hint:` Os dados de CSAT e SLA estão no dashboard do Zendesk (exportação disponível). Os incidentes de repasse estão no log financeiro — acesso pode ser fornecido ao PO.
+`Confidence:` 88 · `Source:` Direct Submitter + indicators slide (Notion, meeting 2026-04-07) · `Status:` Resolved · `Disposition:` Answered · `Hint:` CSAT and SLA data are in the Zendesk dashboard (export available). Remittance incidents are in the financial log — access can be provided to the PO.
 
 ---
 
-## Quem é Impactado (Alcance)  ·  *(Requisito 3 — bloqueia gate)*
+## Who Is Impacted (Reach)  ·  *(Requirement 3 — blocks gate)*
 
-> Personas, segmentos ou times que sentem essa dor. É o "Reach" dos indicadores de valor.
+> Personas, segments, or teams that feel this pain. This is the "Reach" of the value indicators.
 
-| Persona / Segmento | Como é impactado |
+| Persona / Segment | How they are impacted |
 |---|---|
-| **Hóspede** | Espera mais de 4h por resposta em pico; repete contexto ao mudar de atendente; CSAT baixo reflete frustração. Toda a base de hóspedes da plataforma é afetada. |
-| **Hotel parceiro** | Recebe repasses com valor incorreto ou fora do prazo; falta de previsibilidade financeira; dois parceiros em risco de rescisão. Afeta toda a rede de hotéis (dezenas de parceiros ativos). |
-| **Time de atendimento (CS)** | Sobrecarregado com tickets que poderiam ser resolvidos automaticamente; sem ferramenta de triagem ou handoff estruturado; atende casos simples junto com casos complexos sem diferenciação. |
-| **Time financeiro (FinOps)** | Gasta ~18h/semana em tarefa manual repetitiva; expostos a erro humano em cada ciclo de repasse; sem auditoria automática dos valores. |
-| **StayFlow (negócio)** | Risco de churn de hotéis parceiros (receita e rede); crescimento de custo operacional de atendimento não sustentável; risco reputacional e legal com erros de repasse. |
+| **Guest** | Waits more than 4h for a response at peak; repeats context when switching agents; low CSAT reflects frustration. The entire platform guest base is affected. |
+| **Partner hotel** | Receives remittances with incorrect amounts or outside the agreed timeline; lack of financial predictability; two partners at risk of contract termination. Affects the entire hotel network (dozens of active partners). |
+| **Support team (CS)** | Overloaded with tickets that could be resolved automatically; no triage tool or structured handoff; handles simple cases alongside complex ones without differentiation. |
+| **Finance team (FinOps)** | Spends ~18 hrs/week on repetitive manual tasks; exposed to human error in each remittance cycle; no automatic audit of amounts. |
+| **StayFlow (business)** | Risk of partner hotel churn (revenue and network); unsustainable growth in support operational cost; reputational and legal risk from remittance errors. |
 
-`Confiança:` 85 · `Fonte:` Submitter direto + inferido do slide de indicadores · `Status:` Resolvido · `Disposição:` Respondido · `Hint:` Volume exato de hóspedes ativos e hotéis parceiros não foi compartilhado neste brief — PO pode solicitar ao FinOps para quantificar Reach com precisão.
+`Confidence:` 85 · `Source:` Direct Submitter + inferred from indicators slide · `Status:` Resolved · `Disposition:` Answered · `Hint:` Exact count of active guests and partner hotels was not shared in this brief — PO can request from FinOps to quantify Reach precisely.
 
 ---
 
-## Impacto de Negócio  ·  *(Requisito 4 — bloqueia gate)*
+## Business Impact  ·  *(Requirement 4 — blocks gate)*
 
-> Use as dimensões aplicáveis. Receita, Retenção, Operacional, Competitivo, Compliance, Mercado são os mais comuns. Não force dimensões irrelevantes. Quantifique quando possível.
+> Use the applicable dimensions. Revenue, Retention, Operational, Competitive, Compliance, Market are the most common. Do not force irrelevant dimensions. Quantify when possible.
 
-| Dimensão | Detalhe |
+| Dimension | Detail |
 |---|---|
-| **Retenção** | Dois hotéis parceiros em risco de rescisão. Se ambos saírem, estimativa de perda de ~R$ 140k em GMV/ano (premissa: média de ~R$ 70k GMV por hotel × 2). Adicionalmente, CSAT de hóspede abaixo de 4 correlaciona com menor recorrência de reserva — impacto difuso mas real. |
-| **Operacional** | Custo do time de atendimento: ~R$ 28k/mês (3 atendentes × salário + encargos). Com o crescimento esperado de volume, sem automação o time precisará de 2 contratações adicionais nos próximos 6 meses (~R$ 19k/mês adicionais). Custo do time financeiro: ~18h/semana × custo hora → economizável com automação. |
-| **Compliance / Legal** | Os erros de repasse criam exposição a multas contratuais. Um contrato de hotel já tem cláusula de penalidade de 2% do valor do repasse por erro. Com volumes crescentes, a exposição cresce proporcionalmente. |
-| **Competitivo** | OTAs concorrentes oferecem portal do parceiro com conciliação automatizada. A StayFlow está em desvantagem na atração de novos hotéis parceiros por não ter essa funcionalidade. |
+| **Retention** | Two partner hotels at risk of termination. If both leave, estimated loss of ~R$ 140k in GMV/year (assumption: average of ~R$ 70k GMV per hotel × 2). Additionally, guest CSAT below 4 correlates with lower booking recurrence — diffuse but real impact. |
+| **Operational** | Support team cost: ~R$ 28k/month (3 agents × salary + employer charges). With expected volume growth, without automation the team will need 2 additional hires in the next 6 months (~R$ 19k/month additional). Finance team cost: ~18 hrs/week × hourly cost → saveable with automation. |
+| **Compliance / Legal** | Remittance errors create exposure to contractual penalties. One hotel contract already has a penalty clause of 2% of the remittance amount per error. With growing volumes, exposure grows proportionally. |
+| **Competitive** | Competing OTAs offer partner portals with automated reconciliation. StayFlow is at a disadvantage in attracting new partner hotels by not having this functionality. |
 
-`Confiança:` 72 · `Fonte:` Inferido a partir de dados operacionais do slide + estimativas da própria Camila · `Status:` Baixa confiança (números são estimativas, não calculados) · `Disposição:` Inferido · `Hint:` Para elevar: solicitar ao FinOps o GMV por hotel nos últimos 12 meses; solicitar ao RH o custo real do time de atendimento; revisar contratos dos hotéis para identificar cláusulas de penalidade. Números serão refinados no RP.
+`Confidence:` 72 · `Source:` Inferred from operational data in the slide + Camila's own estimates · `Status:` Low confidence (numbers are estimates, not calculated) · `Disposition:` Inferred · `Hint:` To raise: request from FinOps the GMV per hotel over the last 12 months; request from HR the actual support team cost; review hotel contracts to identify penalty clauses. Numbers will be refined in the RP.
 
 ---
 
-## Indicadores de Valor (RICE-lite)
+## Value Indicators (RICE-lite)
 
-> Espelho para desafiar o pensamento — **não** ranking automático. Pontue cada um (Baixo / Médio / Alto). A confiança reusa a coluna acima — não se pontua de novo. O Esforço fica *soft* (chute do Submitter, firmado depois pelo CTO).
+> A mirror to challenge thinking — **not** an automatic ranking. Score each (Low / Medium / High). Confidence reuses the column above — not re-scored. Effort stays *soft* (Submitter's guess, firmed up later by the CTO).
 
-| Indicador | Score | Justificativa (na linguagem dela) | Confiança |
+| Indicator | Score | Rationale (in her words) | Confidence |
 |---|---|---|---|
-| **Impacto** ("quanto move o negócio?") | Alto | Dois parceiros em risco de rescisão. Se perdermos, não é só dinheiro — é sinal para o mercado de que a StayFlow não honra o repasse. O risco reputacional me preocupa mais que o financeiro. No atendimento, com CSAT caindo, a taxa de recompra do hóspede vai junto. | 70 |
-| **Alcance** ("quantos sentem isso?") | Alto | Todo hóspede que abre ticket sente o problema de atendimento. Todo hotel parceiro que recebe repasse sente o problema financeiro. Não é nicho — é o core do modelo. | 85 |
-| **Urgência** ("por que agora? custo de esperar?") | Alto | Um dos hotéis parceiros tem prazo informal de 60 dias para ver melhora antes de acionar a cláusula de rescisão. No atendimento, o volume de reservas cresce mês a mês — cada semana que passa sem automação é mais um ticket manual. | 80 |
-| **Esforço** *(soft — adiado ao CTO)* | Médio | Acho que o chatbot em si não é tão complicado — existem plataformas prontas. O repasse me parece mais trabalhoso por causa das regras de percentual por hotel. Mas honestamente não faço ideia do que está envolvido tecnicamente. | low_confidence |
+| **Impact** ("how much does it move the business?") | High | Two partners at risk of termination. If we lose them, it's not just money — it's a signal to the market that StayFlow doesn't honor remittances. The reputational risk worries me more than the financial one. On the support side, with CSAT falling, the guest rebooking rate goes with it. | 70 |
+| **Reach** ("how many people feel this?") | High | Every guest who opens a ticket feels the support problem. Every partner hotel that receives a remittance feels the financial problem. This isn't a niche — it's the core of the model. | 85 |
+| **Urgency** ("why now? cost of waiting?") | High | One of the partner hotels has an informal 60-day deadline to see improvement before triggering the termination clause. On the support side, booking volume grows month over month — every week that passes without automation is one more manual ticket. | 80 |
+| **Effort** *(soft — deferred to CTO)* | Medium | I think the chatbot itself isn't that complicated — there are ready-made platforms. The remittance seems more labor-intensive because of the per-hotel percentage rules. But honestly I have no idea what's technically involved. | low_confidence |
 
-> **Tensões registradas:**
-> - Impacto alto + confiança 70: o risco de rescisão do parceiro é real, mas o valor exato (GMV que seria perdido) é estimado. Resolução: aceitar como premissa; PO quantifica no RP com dados do FinOps.
-> - Urgência alta + Esforço incerto: se o esforço for muito alto (CTO confirma), o prazo de 60 dias do parceiro pode não ser alcançável. Resolução: essa tensão precisa ser explicitada ao PO — se o esforço firme > 60 dias, há uma decisão de negócio sobre comunicar ao parceiro.
-
----
-
-## Urgência  ·  *(Requisito 5)*
-
-**Prazo / janela:** Um dos hotéis parceiros (Hotel Gran Vista, maior parceiro em GMV) comunicou informalmente que tem 60 dias para ver progresso antes de avaliar rescisão. Prazo informal: até 2026-06-07.
-
-**Custo de esperar:** Cada semana sem automação no atendimento = mais tickets manuais, mais custo, mais CSAT ruim. Cada ciclo de repasse sem automação = mais risco de erro financeiro. Se o Gran Vista rescindir, é o maior parceiro — sinal negativo forte para novos hotéis entrarem na rede.
-
-`Confiança:` 75 · `Fonte:` Submitter direto (informação verbal do Gran Vista em chamada de relacionamento) · `Status:` Baixa confiança (prazo informal, não documentado) · `Disposição:` Respondido · `Hint:` O prazo do Gran Vista foi comunicado verbalmente — vale formalizar por e-mail para ter registro. CS pode fazer isso. Se o prazo for mais curto do que 60 dias, a prioridade sobe ainda mais.
+> **Tensions recorded:**
+> - High impact + confidence 70: the partner termination risk is real, but the exact value (GMV that would be lost) is estimated. Resolution: accept as assumption; PO quantifies in the RP with FinOps data.
+> - High urgency + uncertain effort: if effort is very high (CTO confirms), the partner's 60-day deadline may not be achievable. Resolution: this tension needs to be made explicit to the PO — if the firm effort > 60 days, there is a business decision about communicating to the partner.
 
 ---
 
-## Evidência e Documentos  ·  *(Requisito 6)*
+## Urgency  ·  *(Requirement 5)*
 
-> Anexos ou conversas anteriores que embasam a demanda. Fonte de pré-preenchimento por IA.
+**Deadline / window:** One of the partner hotels (Hotel Gran Vista, largest partner by GMV) informally communicated that they have 60 days to see progress before evaluating termination. Informal deadline: by 2026-06-07.
 
-| Documento / Conversa | Tipo | Relevância |
+**Cost of waiting:** Every week without support automation = more manual tickets, more cost, more poor CSAT. Every remittance cycle without automation = more financial error risk. If Gran Vista terminates, it is the largest partner — a strong negative signal for new hotels joining the network.
+
+`Confidence:` 75 · `Source:` Direct Submitter (verbal information from Gran Vista on a relationship call) · `Status:` Low confidence (informal deadline, not documented) · `Disposition:` Answered · `Hint:` Gran Vista's deadline was communicated verbally — worth formalizing by email to have a record. CS can do this. If the deadline is shorter than 60 days, the priority rises even more.
+
+---
+
+## Evidence and Documents  ·  *(Requirement 6)*
+
+> Attachments or prior conversations that support the demand. Source for AI pre-filling.
+
+| Document / Conversation | Type | Relevance |
 |---|---|---|
-| Slide de indicadores operacionais Q1-2026 | Apresentação (Notion) | Contém dados de CSAT (3,8/5), SLA de primeira resposta (furado em 34%), volume de tickets por categoria |
-| Log de incidentes de repasse (últimos 6 meses) | Planilha financeira interna | Registra os 3 incidentes de repasse incorreto: data, hotel, valor errado, valor correto, diferença |
-| E-mails de reclamação dos hotéis | Thread de e-mail | Hotel Gran Vista e Hotel Pousada Serrana enviaram e-mails formais de reclamação sobre os repasses |
-| Relatório de custo do time de atendimento (Q1) | Planilha RH | Custo mensal do time de 3 atendentes + encargos |
-| Contratos dos hotéis parceiros (amostra) | PDF (acesso restrito — FinOps) | Detalha percentuais de comissão e cláusulas de penalidade por erro de repasse |
+| Q1-2026 operational indicators slide | Presentation (Notion) | Contains CSAT data (3.8/5), first-response SLA (missed on 34%), ticket volume by category |
+| Remittance incident log (last 6 months) | Internal financial spreadsheet | Records the 3 incorrect remittance incidents: date, hotel, wrong amount, correct amount, difference |
+| Hotel complaint emails | Email thread | Hotel Gran Vista and Hotel Pousada Serrana sent formal complaint emails about remittances |
+| Support team cost report (Q1) | HR spreadsheet | Monthly cost of the 3-agent team + employer charges |
+| Partner hotel contracts (sample) | PDF (restricted access — FinOps) | Details commission percentages and penalty clauses for remittance errors |
 
-`Confiança:` 82 · `Fonte:` Submitter direto · `Status:` Resolvido · `Disposição:` Respondido · `Hint:` Contratos dos hotéis estão com o FinOps — PO deve solicitar acesso para revisar as cláusulas de penalidade antes de finalizar o RP.
+`Confidence:` 82 · `Source:` Direct Submitter · `Status:` Resolved · `Disposition:` Answered · `Hint:` Hotel contracts are with FinOps — PO should request access to review the penalty clauses before finalizing the RP.
 
 ---
 
-## Stakeholders  ·  *(Requisito 8)*
+## Stakeholders  ·  *(Requirement 8)*
 
-| Stakeholder | Papel | Interesse | Influência |
+| Stakeholder | Role | Interest | Influence |
 |---|---|---|---|
-| Camila Rocha | Líder CS/Operações — Submitter | Resolver o gargalo operacional do atendimento e reduzir exposição ao risco de repasse | Alta — originadora, tem acesso aos dados e ao relacionamento com os hotéis |
-| Rafael Souza | PO | Definir o produto corretamente antes de construir | Alta — dono da triagem e racionalização |
-| Davi Lima | CTO | Viabilidade técnica, especialmente split de pagamento e integração com PSP | Alta — decide arquitetura e integração com gateway |
-| Bruno Takeda | FinOps | Integridade do repasse financeiro; auditoria; redução de carga manual | Alta — consultor crítico para as regras de split e conciliação |
-| Hotel Gran Vista | Hotel parceiro (maior, em risco) | Receber repasse correto e no prazo | Alta — stakeholder externo com poder de rescisão |
-| Isabela Ramos | Jurídico/Contábil | Conformidade fiscal dos repasses; retenção de IR se aplicável | Média — consultora; não bloqueia a construção mas define restrições fiscais |
-| Diretora de Operações | Sponsor executivo | Escalar operação sem escalar custo; proteger parceiros | Alta — aprova orçamento e prioridade |
-| CFO | Sponsor financeiro | Controle do risco de repasse; custo do time financeiro | Alta — presente na reunião de Q2; tem visibilidade do risco |
+| Camila Rocha | CS/Operations Lead — Submitter | Resolve the operational bottleneck in support and reduce remittance risk exposure | High — originator, has access to data and hotel relationships |
+| Rafael Souza | PO | Define the product correctly before building | High — owner of triage and rationalization |
+| Davi Lima | CTO | Technical feasibility, especially payment split and PSP integration | High — decides architecture and gateway integration |
+| Bruno Takeda | FinOps | Financial remittance integrity; audit; reduction of manual workload | High — critical consultant for split rules and reconciliation |
+| Hotel Gran Vista | Partner hotel (largest, at risk) | Receive correct remittance on time | High — external stakeholder with termination power |
+| Isabela Ramos | Legal/Accounting | Fiscal compliance of remittances; withholding tax if applicable | Medium — consultant; does not block construction but defines fiscal constraints |
+| Operations Director | Executive sponsor | Scale operations without scaling cost; protect partners | High — approves budget and priority |
+| CFO | Financial sponsor | Control remittance risk; finance team cost | High — present at Q2 meeting; has visibility into the risk |
 
-`Confiança:` 88 · `Fonte:` Submitter direto + inferido da reunião Q2 · `Status:` Resolvido · `Disposição:` Respondido · `Hint:` —
-
----
-
-## Premissas
-
-Condições assumidas como verdadeiras na captura. Se uma premissa se provar falsa, a demanda deve ser retriada. Premissas são uma **disposição válida** para requisitos sem resposta direta.
-
-1. O percentual de comissão da StayFlow é definido no contrato com cada hotel (não é um percentual fixo para todos) e está cadastrado em algum sistema ou planilha que pode ser consultado programaticamente. — `a validar com:` FinOps (Bruno Takeda)
-2. O gateway de pagamento atual (usado para cobrar o hóspede) tem API para criação e consulta de transações, e os dados de pagamento estão acessíveis para integração. — `a validar com:` CTO (Davi Lima) no Discovery
-3. O time de atendimento hoje usa alguma ferramenta de helpdesk (ex.: Zendesk) que pode ser integrada para receber transferências do chatbot com contexto. — `a validar com:` Camila / time de CS
-4. A plataforma de reservas tem API que expõe dados de reserva (status, hóspede, check-in/out) para que o atendimento contextualizado seja possível. — `a validar com:` CTO no Discovery
+`Confidence:` 88 · `Source:` Direct Submitter + inferred from Q2 meeting · `Status:` Resolved · `Disposition:` Answered · `Hint:` —
 
 ---
 
-## Constraints  ·  *(Requisito 7)*
+## Assumptions
 
-Condições que limitam o espaço de solução, a respeitar independentemente do que for construído.
+Conditions assumed to be true at capture. If an assumption proves false, the demand must be re-triaged. Assumptions are a **valid disposition** for requirements without a direct answer.
 
-| Constraint | Tipo | Detalhe |
+1. StayFlow's commission percentage is defined in the contract with each hotel (not a fixed percentage for all) and is registered in some system or spreadsheet that can be consulted programmatically. — `to validate with:` FinOps (Bruno Takeda)
+2. The current payment gateway (used to charge guests) has an API for creating and querying transactions, and payment data is accessible for integration. — `to validate with:` CTO (Davi Lima) in Discovery
+3. The support team currently uses some helpdesk tool (e.g., Zendesk) that can be integrated to receive transfers from the chatbot with context. — `to validate with:` Camila / CS team
+4. The booking platform has an API that exposes booking data (status, guest, check-in/out) so that contextualized support is possible. — `to validate with:` CTO in Discovery
+
+---
+
+## Constraints  ·  *(Requirement 7)*
+
+Conditions that limit the solution space, to be respected regardless of what is built.
+
+| Constraint | Type | Detail |
 |---|---|---|
-| Prazo informal do parceiro Gran Vista | Tempo | ~60 dias para ver progresso (até ~2026-06-07). Não é contratual, mas é um sinal de risco. |
-| Conformidade com PCI DSS | Legal / Técnico | O fluxo de pagamento (cobrança do hóspede, repasse ao hotel) toca dados de cartão — qualquer solução deve ser PCI-compliant ou usar um PSP que absorva o escopo de PCI. |
-| Contratos de hotéis parceiros com percentuais individuais | Escopo | Cada hotel tem seu percentual de comissão definido no contrato. A solução deve suportar percentuais distintos por hotel (não pode ser um valor fixo global). |
-| Não interromper o fluxo de reservas existente | Técnico / Escopo | A automação do repasse não pode impactar o fluxo de criação e confirmação de reservas. Mudanças no gateway devem ser não-disruptivas. |
+| Informal Gran Vista partner deadline | Time | ~60 days to see progress (until ~2026-06-07). Not contractual, but a risk signal. |
+| PCI DSS compliance | Legal / Technical | The payment flow (guest billing, hotel remittance) touches card data — any solution must be PCI-compliant or use a PSP that absorbs the PCI scope. |
+| Partner hotel contracts with individual percentages | Scope | Each hotel has its commission percentage defined in the contract. The solution must support distinct percentages per hotel (cannot be a fixed global value). |
+| Must not interrupt the existing booking flow | Technical / Scope | Remittance automation cannot impact the booking creation and confirmation flow. Gateway changes must be non-disruptive. |
 
-`Confiança:` 78 · `Fonte:` Submitter direto + inferido de contexto regulatório · `Status:` Baixa confiança (PCI é premissa do PO, não confirmada tecnicamente) · `Disposição:` Premissa (a validar) · `Hint:` O constraint de PCI precisa ser confirmado pelo CTO — se o PSP atual já absorve o escopo de PCI, a constraint técnica pode ser menor. Se não, é uma restrição severa.
+`Confidence:` 78 · `Source:` Direct Submitter + inferred from regulatory context · `Status:` Low confidence (PCI is PO's assumption, not technically confirmed) · `Disposition:` Assumption (to validate) · `Hint:` The PCI constraint needs to be confirmed by the CTO — if the current PSP already absorbs the PCI scope, the technical constraint may be smaller. If not, it is a severe restriction.
 
 ---
 
-## Riscos Preliminares
+## Preliminary Risks
 
-Riscos identificados na captura — antes da avaliação técnica. Registro completo pertence ao Readiness Package.
+Risks identified at capture — before technical assessment. Full record belongs to the Readiness Package.
 
-| Risco | Categoria | Avaliação Inicial |
+| Risk | Category | Initial Assessment |
 |---|---|---|
-| PSP atual não suporta split de pagamento nativo | Técnico | Alto — se confirmado, exige migração de PSP ou arquitetura adicional. Discovery técnico necessário. |
-| Percentual de repasse incorreto persiste mesmo após automação (bug de regra) | Negócio | Alto — o risco que a automação busca resolver pode ser reintroduzido por um bug. Testes e validação rigorosa necessários. |
-| Hotel Gran Vista rescindir antes da entrega | Externo / Prazo | Médio — prazo de 60 dias pode não ser suficiente se o esforço técnico for grande. Comunicação proativa ao parceiro necessária. |
-| Requisitos fiscais (IR na fonte, NF) não mapeados | Compliance | Médio — sem entender os requisitos fiscais do repasse, a automação pode criar problema fiscal. Discovery com Jurídico necessário. |
-| Chatbot com qualidade de resposta inadequada na fase inicial | Produto | Médio — LLM pode responder de forma inadequada ou imprecisa, piorando CSAT em vez de melhorar. Treinamento e guardrails de qualidade críticos. |
-| Time de atendimento resistente à mudança de fluxo | Adoção | Baixo — mudança de processo para os atendentes especialistas; treinamento necessário. |
+| Current PSP does not support native payment split | Technical | High — if confirmed, requires PSP migration or additional architecture. Technical Discovery needed. |
+| Incorrect remittance percentage persists even after automation (rule bug) | Business | High — the risk that automation aims to resolve can be reintroduced by a bug. Rigorous testing and validation required. |
+| Hotel Gran Vista terminates before delivery | External / Timeline | Medium — 60-day deadline may not be sufficient if technical effort is large. Proactive communication to the partner required. |
+| Fiscal requirements (withholding tax, invoice) not mapped | Compliance | Medium — without understanding the fiscal requirements of the remittance, automation may create a fiscal problem. Discovery with Legal required. |
+| Chatbot with inadequate response quality in the initial phase | Product | Medium — LLM may respond inadequately or imprecisely, worsening CSAT instead of improving it. Training and quality guardrails are critical. |
+| Support team resistant to flow change | Adoption | Low — process change for specialist agents; training required. |
 
 ---
 
-## Limite de Escopo de Alto Nível
+## High-Level Scope Boundary
 
-**Dentro:**
-- Atendimento automatizado na 1ª camada (IA) para perguntas frequentes de hóspedes
-- Mecanismo de handoff para especialista humano com contexto da conversa
-- Cálculo automático do repasse ao hotel (com percentual por hotel)
-- Execução do repasse via integração com gateway/PSP
-- Conciliação básica: registro de repasses executados e status
+**In scope:**
+- Automated first-layer support (AI) for frequent guest questions
+- Handoff mechanism to human specialist with conversation context
+- Automatic remittance calculation to the hotel (with per-hotel percentage)
+- Remittance execution via gateway/PSP integration
+- Basic reconciliation: record of executed remittances and status
 
-**Fora:**
-- Portal do hotel parceiro (autoatendimento do hotel para ver seus repasses)
-- Chatbot para múltiplos canais simultâneos (foco em canal principal — a definir)
-- Integração fiscal para emissão de NF do repasse
-- Suporte a múltiplas moedas
+**Out of scope:**
+- Partner hotel portal (hotel self-service to view their remittances)
+- Chatbot for multiple simultaneous channels (focus on primary channel — to be defined)
+- Fiscal integration for invoice issuance on remittances
+- Multi-currency support
 
-**Adiado:**
-- Portal do parceiro com histórico de repasses e extratos
-- Integração com sistema contábil do hotel
-- BI e analytics de atendimento e financeiro
-
----
-
-## Prioridade
-
-**Nível:** Alto
-
-**Motivo:** Risco de rescisão de parceiro com prazo de 60 dias; CSAT em queda com crescimento de volume; exposição legal e financeira por erros de repasse. A combinação dos dois problemas cria urgência.
+**Deferred:**
+- Partner portal with remittance history and statements
+- Integration with hotel accounting system
+- BI and analytics for support and financials
 
 ---
 
-## Critérios de Sucesso
+## Priority
 
-Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível da captura. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../../../metrics.md)).
+**Level:** High
 
-| Critério | Tipo | Indicador | Valor projetado |
+**Reason:** Partner termination risk with 60-day deadline; falling CSAT with volume growth; legal and financial exposure from remittance errors. The combination of both problems creates urgency.
+
+---
+
+## Success Criteria
+
+High-level indicators that define "done and valuable." Detailed measurable targets belong to the Readiness Package; these are the signals at the capture level. **They serve as the projected baseline** for post-handoff tracking (see [`metrics.md`](../../../metrics.md)).
+
+| Criterion | Type | Indicator | Projected value |
 |---|---|---|---|
-| CSAT do hóspede melhora | UX | CSAT médio nas interações de atendimento | ≥ 4,3/5 (de 3,8 atual) |
-| SLA de primeira resposta normalizado | Operacional | % de tickets com primeira resposta dentro do SLA | ≥ 90% (de ~66% atual) |
-| Taxa de resolução na 1ª camada (sem humano) | Operacional | % de tickets resolvidos pelo chatbot sem escalonamento | ≥ 55% |
-| Repasses corretos | Negócio / Financeiro | % de repasses executados com valor correto | ≥ 99,5% |
-| Gran Vista e parceiros retidos | Negócio | Nenhuma rescisão por motivo financeiro nos 90 dias pós-release | Zero rescisões por erro de repasse |
-| Redução de carga manual no FinOps | Operacional | Horas/semana dedicadas ao ciclo de repasse manual | < 4h/semana (de ~18h atual) |
+| Guest CSAT improves | UX | Average CSAT in support interactions | ≥ 4.3/5 (from current 3.8) |
+| First-response SLA normalized | Operational | % of tickets with first response within SLA | ≥ 90% (from ~66% current) |
+| First-layer resolution rate (without human) | Operational | % of tickets resolved by chatbot without escalation | ≥ 55% |
+| Correct remittances | Business / Financial | % of remittances executed with correct amount | ≥ 99.5% |
+| Gran Vista and partners retained | Business | No termination for financial reasons in the 90 days post-release | Zero terminations due to remittance error |
+| Reduction of manual FinOps workload | Operational | Hours/week dedicated to the manual remittance cycle | < 4 hrs/week (from ~18 hrs current) |

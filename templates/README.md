@@ -1,86 +1,86 @@
 # Templates
 
-Templates em branco para cada artefato do processo operacional.
+Blank templates for each artifact in the operational process.
 
-## A jornada da demanda — cinco artefatos
+## The demand journey — five artifacts
 
-A demanda atravessa cinco documentos formais, cada um com **um único dono**. Dois princípios estruturais (amadurecidos nas personas):
+The demand passes through five formal documents, each with **a single owner**. Two structural principles (refined in the personas):
 
-1. **O Submitter e o PO têm artefatos distintos.** O Submitter captura a dor (`00`); o PO formaliza e tria (`01`) e depois racionaliza (`02`) — os **dois atos do PO** ([`personas/02-po.md` §3](../personas/02-po.md)).
-2. **O RP e o Technical Assessment são separados** e se **fundem no PRD** — é o **PRD**, não o RP, que abre o downstream ([`personas/02-po.md` §2](../personas/02-po.md)).
+1. **The Submitter and the PO have distinct artifacts.** The Submitter captures the pain (`00`); the PO formalizes and triages (`01`) and then rationalizes (`02`) — the **two PO acts** ([`personas/02-po.md` §3](../personas/02-po.md)).
+2. **The RP and the Technical Assessment are separate** and **merge in the PRD** — it is the **PRD**, not the RP, that opens the downstream ([`personas/02-po.md` §2](../personas/02-po.md)).
 
 ```
-00 Documento     →  01 Intake Record  →  02 Readiness      →  04 PRD            →  downstream (PM)
-   do Submitter        (PO — triagem)       Package (PO)         (RP + TA)
-   (Submitter)                               03 Technical ┘       └─ junção PO+CTO ─┘
+00 Submitter     →  01 Intake Record  →  02 Readiness      →  04 PRD            →  downstream (PM)
+   Brief               (PO — triage)       Package (PO)         (RP + TA)
+   (Submitter)                               03 Technical ┘       └─ PO+CTO merge ─┘
                                              Assessment (CTO)
 ```
 
-| # | Template | Dono | O que é | Entrega para |
+| # | Template | Owner | What it is | Delivers to |
 |---|---|---|---|---|
-| 00 | [`00-submitter-brief.md`](./00-submitter-brief.md) | **Submitter** (Vendas / CS / CEO / Marketing) | A dor capturada na linguagem do Submitter — confiança por campo + RICE-lite + dispositions + readiness score | PO |
-| 01 | [`01-intake-record.md`](./01-intake-record.md) | **PO** (ato 1 — triagem) | Formaliza o brief, atribui o ID `INT`, registra a decisão de roteamento (Product Ready / Discovery / Backlog / Rejeitar) | racionalização |
-| 02 | [`02-readiness-package.md`](./02-readiness-package.md) | **PO** (ato 2 — racionalização) | A definição de pronto de **produto**: visão, escopo, regras, user stories, NFRs, edge cases, métricas | funde no PRD |
-| 03 | [`03-technical-assessment.md`](./03-technical-assessment.md) | **CTO** (sozinho) | Viabilidade, constraints, arquitetura, integrações, riscos técnicos, ADRs, custo firme | funde no PRD |
-| 04 | [`04-prd.md`](./04-prd.md) | **PO + CTO** (fusão) | `RP + Technical Assessment` combinados — o documento que abre o downstream | **PM** |
+| 00 | [`00-submitter-brief.md`](./00-submitter-brief.md) | **Submitter** (Sales / CS / CEO / Marketing) | The pain captured in the Submitter's language — per-field confidence + RICE-lite + dispositions + readiness score | PO |
+| 01 | [`01-intake-record.md`](./01-intake-record.md) | **PO** (act 1 — triage) | Formalizes the brief, assigns the `INT` ID, records the routing decision (Product Ready / Discovery / Backlog / Reject) | rationalization |
+| 02 | [`02-readiness-package.md`](./02-readiness-package.md) | **PO** (act 2 — rationalization) | The **product** definition of ready: vision, scope, rules, user stories, NFRs, edge cases, metrics | merges into PRD |
+| 03 | [`03-technical-assessment.md`](./03-technical-assessment.md) | **CTO** (alone) | Feasibility, constraints, architecture, integrations, technical risks, ADRs, firm cost | merges into PRD |
+| 04 | [`04-prd.md`](./04-prd.md) | **PO + CTO** (merge) | `RP + Technical Assessment` combined — the document that opens the downstream | **PM** |
 
-> **O Technical Assessment só existe quando há escalada arquitetural.** Sem impacto técnico, o PRD se forma só a partir do RP, e a referência no RP fica `Status: Não requisitado`.
+> **The Technical Assessment only exists when there is architectural escalation.** Without technical impact, the PRD is formed from the RP alone, and the reference in the RP stays `Status: Not requested`.
 
-### Artefatos downstream (após o PRD)
+### Downstream artifacts (after the PRD)
 
-| Template | Dono | Quando usar |
+| Template | Owner | When to use |
 |---|---|---|
-| [`execution-plan.md`](./execution-plan.md) | PM | Após receber e aceitar o PRD |
-| [`product-backlog.md`](./product-backlog.md) | PO | Em paralelo ao Execution Plan — o quê construir |
-| [`tech-backlog.md`](./tech-backlog.md) | Tech Lead | Após Product Backlog baselined — como construir |
+| [`execution-plan.md`](./execution-plan.md) | PM | After receiving and accepting the PRD |
+| [`product-backlog.md`](./product-backlog.md) | PO | In parallel with the Execution Plan — what to build |
+| [`tech-backlog.md`](./tech-backlog.md) | Tech Lead | After Product Backlog is baselined — how to build |
 
-### Artefato de apoio (persistente, transversal)
+### Support artifact (persistent, cross-cutting)
 
-| Template | Dono | O que é |
+| Template | Owner | What it is |
 |---|---|---|
-| [`tech-landscape.md`](./tech-landscape.md) | CTO / Tech Lead | **Base de Conhecimento técnica por sistema** (não por demanda) — produto/stack/estrutura/integrações/dívida. O Technical Assessment a **referencia** (brownfield) ou a **semeia** (greenfield). É a "base de conhecimento prévia" que dá ao engenheiro — ou agente de IA — o terreno para decidir implementação. Estilo *steering docs* (Kiro) / `document-project` (BMAD). |
+| [`tech-landscape.md`](./tech-landscape.md) | CTO / Tech Lead | **Technical knowledge base per system** (not per demand) — product/stack/structure/integrations/debt. The Technical Assessment **references** it (brownfield) or **seeds** it (greenfield). It is the "prior knowledge base" that gives the engineer — or AI agent — the terrain for implementation decisions. Style: *steering docs* (Kiro) / `document-project` (BMAD). |
 
-> **Greenfield vs Brownfield, jornada e base de conhecimento.** A jornada upstream agora declara, na triagem ([`01`](./01-intake-record.md)), se a demanda é **greenfield** (software/módulo novo) ou **brownfield** (altera existente) — e isso governa o caminho do [Technical Assessment](./03-technical-assessment.md): greenfield *define* a fundação (stack, ADRs, estrutura); brownfield *documenta* o sistema atual. O [Readiness Package](./02-readiness-package.md) ganhou a **jornada do usuário ponta-a-ponta** (Seção 6.5), da qual as User Stories derivam. O terreno técnico vive na `tech-landscape` e é exposto ao PM no [PRD](./04-prd.md).
+> **Greenfield vs. Brownfield, journey, and knowledge base.** The upstream journey now declares, at triage ([`01`](./01-intake-record.md)), whether the demand is **greenfield** (new software/module) or **brownfield** (modifies existing) — and this governs the path of the [Technical Assessment](./03-technical-assessment.md): greenfield *defines* the foundation (stack, ADRs, structure); brownfield *documents* the current system. The [Readiness Package](./02-readiness-package.md) gained the **end-to-end user journey** (Section 6.5), from which User Stories derive. The technical terrain lives in the `tech-landscape` and is exposed to the PM in the [PRD](./04-prd.md).
 >
-> **Justificativa e referências destas mudanças:** [`references-evolucao.md`](./references-evolucao.md) — base de literatura e fontes (BMAD, Kiro/steering docs, NN/g journey mapping, arc42, C4, Design Docs, Spec-Driven Development) que ancora cada adição, para uso ao portar os templates ao repositório original. Estende o [`../references.md`](../references.md).
+> **Rationale and references for these changes:** [`references-evolucao.md`](./references-evolucao.md) — literature base and verified sources (BMAD, Kiro/steering docs, NN/g journey mapping, arc42, C4, Design Docs, Spec-Driven Development) that anchors each addition, for use when porting the templates to the original repository. Extends [`../references.md`](../references.md).
 
-## Como usar
+## How to use
 
-1. Copie o template para a pasta do caso ou projeto correspondente
-2. Renomeie mantendo o prefixo da jornada e o nome da demanda: `00-submitter-brief-[nome].md`, `01-intake-record-[nome].md`, etc.
-3. Preencha os campos antes de avançar para o próximo estágio
-4. Cada artefato avança por um **gate** (não é só "campos preenchidos")
+1. Copy the template to the folder for the corresponding case or project
+2. Rename it keeping the journey prefix and the demand name: `00-submitter-brief-[name].md`, `01-intake-record-[name].md`, etc.
+3. Fill in the fields before advancing to the next stage
+4. Each artifact advances through a **gate** (not just "fields filled in")
 
-> **Camada de confiança e gates.** O brief do Submitter carrega confiança por campo (`confidence / source / status / hint`) e dispositions; seu gate é quantitativo (`gateReady = true`, via Readiness Score) — "não sei, e este é o plano" é prontidão válida. O Intake Record herda essa prontidão e adiciona a **decisão de triagem**. O RP congela (`freezeReady`) quando suas seções bloqueantes estão resolvidas **e**, se o CTO foi requisitado, o Technical Assessment voltou assinado. Ver [`../personas/01-submitter.md`](../personas/01-submitter.md), [`../personas/02-po.md`](../personas/02-po.md) e [`../metrics.md`](../metrics.md).
+> **Confidence layer and gates.** The Submitter brief carries per-field confidence (`confidence / source / status / hint`) and dispositions; its gate is quantitative (`gateReady = true`, via Readiness Score) — "I don't know, and this is the plan" is valid readiness. The Intake Record inherits that readiness and adds the **triage decision**. The RP freezes (`freezeReady`) when its blocking sections are resolved **and**, if the CTO was requested, the Technical Assessment has been returned signed off. See [`../personas/01-submitter.md`](../personas/01-submitter.md), [`../personas/02-po.md`](../personas/02-po.md), and [`../metrics.md`](../metrics.md).
 
-## Regra de ouro — problema antes da solução
+## Golden rule — problem before solution
 
-Se o brief (requisito 1) ou o RP (Seção 2) descreve uma **solução** em vez do **problema**, o requisito não é satisfeito e volta para reformulação. O upstream não define API, banco, arquitetura ou tasks — isso é território do Technical Assessment (CTO) e do downstream. Ver [`../README.md` › Regra do upstream](../README.md).
+If the brief (requirement 1) or the RP (Section 2) describes a **solution** instead of the **problem**, the requirement is not satisfied and is returned for reformulation. The upstream does not define API, database, architecture, or tasks — that is the territory of the Technical Assessment (CTO) and the downstream. See [`../README.md` › Upstream rule](../README.md).
 
-## Convenção de IDs
+## ID Convention
 
-| Artefato | Prefixo | Exemplo |
+| Artifact | Prefix | Example |
 |---|---|---|
-| Documento do Submitter | (referencia a demanda; `INT` é atribuído na triagem) | — |
-| Intake Record | INT-AAAA-NNN | INT-2026-001 |
-| Readiness Package | RP-AAAA-NNN | RP-2026-001 |
-| Technical Assessment | TA-AAAA-NNN | TA-2026-001 |
-| PRD | PRD-AAAA-NNN | PRD-2026-001 |
-| Execution Plan | EP-AAAA-NNN | EP-2026-001 |
-| Product Backlog | PB-AAAA-NNN | PB-2026-001 |
-| Tech Backlog | TB-AAAA-NNN | TB-2026-001 |
+| Submitter Brief | (references the demand; `INT` is assigned at triage) | — |
+| Intake Record | INT-YYYY-NNN | INT-2026-001 |
+| Readiness Package | RP-YYYY-NNN | RP-2026-001 |
+| Technical Assessment | TA-YYYY-NNN | TA-2026-001 |
+| PRD | PRD-YYYY-NNN | PRD-2026-001 |
+| Execution Plan | EP-YYYY-NNN | EP-2026-001 |
+| Product Backlog | PB-YYYY-NNN | PB-2026-001 |
+| Tech Backlog | TB-YYYY-NNN | TB-2026-001 |
 
-## Prefixos de arquivo (instâncias)
+## File prefixes (instances)
 
-A jornada upstream → PRD usa o prefixo numérico do estágio; múltiplas demandas num mesmo caso se distinguem pelo nome (`-queue-voting`, `-access-control`).
+The upstream → PRD journey uses the stage numeric prefix; multiple demands in the same case are distinguished by name (`-queue-voting`, `-access-control`).
 
-| Artefato | Prefixo de arquivo |
+| Artifact | File prefix |
 |---|---|
-| Documento do Submitter | `00-` |
+| Submitter Brief | `00-` |
 | Intake Record | `01-` |
 | Readiness Package | `02-` |
 | Technical Assessment | `03-` |
 | PRD | `04-` |
 | Execution Plan | `05-` |
-| Product Backlog | `06.1-` / `07.1-` (por demanda) |
-| Tech Backlog | `06.2-` / `07.2-` (por demanda) |
+| Product Backlog | `06.1-` / `07.1-` (per demand) |
+| Tech Backlog | `06.2-` / `07.2-` (per demand) |

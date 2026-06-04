@@ -1,106 +1,106 @@
-# SLAs Operacionais e Cadências
+# Operational SLAs and Cadences
 
-## Propósito
+## Purpose
 
-Este documento define os limites de tempo e os ritmos recorrentes do modelo operacional. Sem eles, o processo existe como intenção, mas não como sistema. Cada etapa do fluxo tem uma duração máxima; cada papel tem uma obrigação recorrente.
+This document defines the time limits and recurring rhythms of the operational model. Without them, the process exists as intention, not as a system. Each step of the flow has a maximum duration; each role has a recurring obligation.
 
-Os SLAs aqui são metas operacionais internas, não compromissos com clientes.
+The SLAs here are internal operational targets, not commitments to customers.
 
-## SLAs por etapa do processo
+## SLAs by process step
 
 ### Intake Layer
 
-| Etapa | Responsável | SLA | O que acontece se excedido |
+| Step | Owner | SLA | What happens if exceeded |
 |---|---|---|---|
-| Triagem Inicial — demanda Crítica | PO | 24 horas após o registro do intake | PO escala ao CEO e CTO. A demanda é tratada como incidente até ser triada. |
-| Triagem Inicial — demanda Alta | PO | 3 dias úteis | PO sinaliza o atraso ao CEO com justificativa. |
-| Triagem Inicial — demanda Média | PO | Próximo ciclo de triagem (máx. 1 semana) | Demanda aguarda a próxima sessão agendada. |
-| Triagem Inicial — demanda Baixa | PO | Movida direto para o Backlog de Oportunidades | Triagem não necessária. |
-| Time-box de Discovery | PO | Máx. 2 semanas por demanda | Demanda vai para o Backlog de Oportunidades com justificativa documentada. |
-| Racionalização → PRD (RP congelado + Technical Assessment) | PO + CTO | Máx. 2 semanas para escopo padrão; máx. 1 semana para Crítica | Se excedido, PO sinaliza ao PM e CEO com relatório parcial de status. |
-| Avaliação arquitetural do CTO | CTO | Máx. 5 dias úteis a partir da escalada do PO | PO faz follow-up. Se não resolvido, CEO é notificado. |
+| Initial Triage — Critical demand | PO | 24 hours after intake record | PO escalates to CEO and CTO. The demand is treated as an incident until triaged. |
+| Initial Triage — High demand | PO | 3 business days | PO flags the delay to the CEO with justification. |
+| Initial Triage — Medium demand | PO | Next triage cycle (max. 1 week) | Demand waits for the next scheduled session. |
+| Initial Triage — Low demand | PO | Moved directly to the Opportunity Backlog | Triage not required. |
+| Discovery time-box | PO | Max. 2 weeks per demand | Demand goes to the Opportunity Backlog with documented justification. |
+| Rationalization → PRD (RP frozen + Technical Assessment) | PO + CTO | Max. 2 weeks for standard scope; max. 1 week for Critical | If exceeded, PO flags PM and CEO with a partial status report. |
+| CTO architectural assessment | CTO | Max. 5 business days from PO escalation | PO follows up. If unresolved, CEO is notified. |
 
-> **Onde o relógio da triagem começa.** Os SLAs de "Triagem Inicial" contam a partir do recebimento de um registro **pronto** (`gateReady = true`), não do primeiro rascunho. A construção da prontidão pelo Submitter — preencher requisitos, marcar premissas, abrir Discovery — acontece *antes* do handoff e não é SLA-bound: é o ritmo da própria persona, assistido pelo sistema (ver [`personas/01-submitter.md`](./personas/01-submitter.md)). O que o PO recebe já vem graduado por confiança; o timer de triagem mede a resposta do PO, não o tempo que o Submitter levou para amadurecer o registro.
+> **Where the triage clock starts.** The "Initial Triage" SLAs count from the receipt of a **ready** record (`gateReady = true`), not from the first draft. The Submitter's readiness building — filling requirements, marking assumptions, opening Discovery — happens *before* the handoff and is not SLA-bound: it runs at the persona's own pace, assisted by the system (see [`personas/01-submitter.md`](./personas/01-submitter.md)). What the PO receives already arrives confidence-graded; the triage timer measures the PO's response, not the time the Submitter took to mature the record.
 
 ### Downstream
 
-| Etapa | Responsável | SLA | O que acontece se excedido |
+| Step | Owner | SLA | What happens if exceeded |
 |---|---|---|---|
-| Avaliação de capacidade do PM | PM | Máx. 3 dias úteis após receber o PRD | PM comunica o atraso ao PO. Nenhum compromisso de execução até concluir. |
-| Planejamento de execução do PM | PM | Máx. 1 semana após a avaliação de capacidade | PM sinaliza o atraso ao PO com justificativa. |
-| Quebra técnica dos Tech Leads | Tech Leads | Máx. 1 semana para escopo padrão | Tech Lead sinaliza ao PM. O escopo pode precisar de faseamento. |
-| Início de task pelo Engineer após atribuição | Engineers | Máx. 2 dias úteis | Tech Lead investiga o bloqueio. |
-| Ciclo de validação de QA | QA | Máx. 1 semana por release candidate | QA sinaliza bloqueios ao Tech Lead e PM diariamente se houver defeitos ativos. |
-| Aprovação de release ou decisão de bloqueio | QA | Máx. 2 dias úteis após o ciclo de QA | PM escala ao Tech Lead. |
-| Iniciação do feedback loop | PM | Em 5 dias úteis após o release | PM inicia resumo assíncrono independentemente. Sem exceções. |
+| PM capacity assessment | PM | Max. 3 business days after receiving the PRD | PM communicates the delay to the PO. No execution commitment until complete. |
+| PM execution planning | PM | Max. 1 week after capacity assessment | PM flags the delay to the PO with justification. |
+| Tech Leads technical breakdown | Tech Leads | Max. 1 week for standard scope | Tech Lead flags PM. Scope may need phasing. |
+| Engineer task start after assignment | Engineers | Max. 2 business days | Tech Lead investigates the blocker. |
+| QA validation cycle | QA | Max. 1 week per release candidate | QA flags blockers to Tech Lead and PM daily if active defects exist. |
+| Release approval or blocking decision | QA | Max. 2 business days after the QA cycle | PM escalates to Tech Lead. |
+| Feedback loop initiation | PM | Within 5 business days of release | PM initiates async summary regardless. No exceptions. |
 
-## Cadências recorrentes
+## Recurring cadences
 
-### Cadências do PO
+### PO cadences
 
-| Cadência | Frequência | Propósito |
+| Cadence | Frequency | Purpose |
 |---|---|---|
-| Revisão da fila do Intake | Semanal | Revisar todas as demandas em triagem, discovery e racionalização. Avançar, bloquear ou encerrar cada item. |
-| Revisão do Backlog de Oportunidades | Quinzenal | Promover, recategorizar ou marcar itens como obsoletos. |
-| Revisão de expiração do backlog | A cada 90 dias | Escalar ou encerrar itens com mais de 90 dias sem atividade. |
-| Verificação de alinhamento estratégico | A cada atualização estratégica do CEO | Reavaliar o backlog completo em relação à nova direção. |
+| Intake queue review | Weekly | Review all demands in triage, discovery, and rationalization. Advance, block, or close each item. |
+| Opportunity Backlog review | Bi-weekly | Promote, re-categorize, or mark items as stale. |
+| Backlog expiration review | Every 90 days | Escalate or close items with more than 90 days of inactivity. |
+| Strategic alignment check | At every CEO strategic update | Reassess the full backlog against the new direction. |
 
-### Cadências do PM
+### PM cadences
 
-| Cadência | Frequência | Propósito |
+| Cadence | Frequency | Purpose |
 |---|---|---|
-| Revisão de capacidade | Semanal | Atualizar o mapa de capacidade. Sinalizar conflitos futuros ou gaps de habilidade antes que virem bloqueio. |
-| Atualização de status de milestones | Semanal | Comunicar o status de entrega ao PO e stakeholders upstream relevantes. |
-| Verificação de dependências | Semanal | Surfaçar dependências cross-team antes que causem atraso. |
-| Relatório do feedback loop | Em 5 dias de cada release | Resumo assíncrono de precisão de entrega, qualidade de estimativas e fricção de processo. |
+| Capacity review | Weekly | Update the capacity map. Flag upcoming conflicts or skills gaps before they become blockers. |
+| Milestone status update | Weekly | Communicate delivery status to the PO and relevant upstream stakeholders. |
+| Dependency check | Weekly | Surface cross-team dependencies before they cause delay. |
+| Feedback loop report | Within 5 days of each release | Async summary of delivery accuracy, estimate quality, and process friction. |
 
-### Cadências do CTO — estratégia técnica
+### CTO cadences — technical strategy
 
-| Cadência | Frequência | Propósito |
+| Cadence | Frequency | Purpose |
 |---|---|---|
-| Sync com o PO | Semanal (15–30 min) | Revisar demandas arquiteturais sinalizadas na fila do Intake. Prevenir backlog de escaladas. |
-| Revisão de Architecture Governance | Mensal | Revisar e atualizar padrões técnicos, patterns e log de decisões arquiteturais. |
-| Avaliação de dívida técnica | Trimestral | Avaliar decisões técnicas acumuladas e sinalizar riscos ao roadmap. Produzir plano de remediação. |
-| Atualização do mapa de capacidade | Mensal | Atualizar distribuição de senioridade, cobertura de habilidades e riscos de ponto único de conhecimento em relação ao roadmap futuro. |
+| Sync with PO | Weekly (15–30 min) | Review architectural demands flagged in the Intake queue. Prevent escalation backlog. |
+| Architecture Governance review | Monthly | Review and update technical standards, patterns, and the architectural decision log. |
+| Technical debt assessment | Quarterly | Evaluate accumulated technical decisions and flag roadmap risks. Produce remediation plan. |
+| Capacity map update | Monthly | Update seniority distribution, skills coverage, and single-point-of-knowledge risks against the future roadmap. |
 
-### Cadências do CTO — gestão de pessoas
+### CTO cadences — people management
 
-| Cadência | Frequência | Propósito |
+| Cadence | Frequency | Purpose |
 |---|---|---|
-| 1:1 com cada Tech Lead — pulso | Semanal (30 min) | Bloqueios, pulso do time, decisões imediatas. Não é reunião de status. |
-| 1:1 com cada Tech Lead — profundo | Mensal (60 min) | Progresso de performance, metas de crescimento, troca de feedback, desenvolvimento de carreira. |
-| Avaliação de 90 dias — Tech Leads | A cada 90 dias | Avaliação escrita em 6 dimensões. Output: No caminho / Precisa de suporte / Em risco. |
-| Avaliação de 90 dias — Engineers (revisão) | A cada 90 dias | Tech Leads conduzem; CTO revisa e co-assina. |
-| Check-in do plano de melhoria de 30 dias | Semanal (quando ativo) | Para qualquer pessoa sinalizada como Em risco. Check-in estruturado contra as metas do plano. |
-| Revisão de planejamento de capacidade | Trimestral | Revisão completa do mapa de capacidade vs. roadmap de 6 meses. Sinais de contratação levados ao CEO. |
-| Check-in de desenvolvimento de carreira | A cada 90 dias (com a avaliação) | Separado de performance. Revisar progresso do plano e atualizar metas dos próximos 90 dias. |
-| Pulso de saúde do time | Mensal | Check assíncrono ou síncrono iniciado pelo CTO com todo o time técnico. Segurança psicológica, carga de trabalho, moral. |
+| 1:1 with each Tech Lead — pulse | Weekly (30 min) | Blockers, team pulse, immediate decisions. Not a status meeting. |
+| 1:1 with each Tech Lead — deep | Monthly (60 min) | Performance progress, growth goals, feedback exchange, career development. |
+| 90-day review — Tech Leads | Every 90 days | Written review across 6 dimensions. Output: On track / Needs support / At risk. |
+| 90-day review — Engineers (review) | Every 90 days | Tech Leads conduct; CTO reviews and co-signs. |
+| 30-day improvement plan check-in | Weekly (when active) | For anyone flagged as At risk. Structured check-in against plan goals. |
+| Capacity planning review | Quarterly | Full review of capacity map vs. 6-month roadmap. Hiring signals brought to CEO. |
+| Career development check-in | Every 90 days (with review) | Separate from performance. Review plan progress and update goals for the next 90 days. |
+| Team health pulse | Monthly | Async or sync check initiated by CTO with the full technical team. Psychological safety, workload, morale. |
 
-### Cadências do CS
+### CS cadences
 
-| Cadência | Frequência | Propósito |
+| Cadence | Frequency | Purpose |
 |---|---|---|
-| Revisão de saúde do cliente | Semanal | Revisar sinais de retenção, tendências de NPS e relatórios de fricção ativos. |
-| Registro no Intake | Contínuo | Qualquer sinal de cliente que atenda aos critérios do intake é registrado em 2 dias úteis. |
-| Contribuição de feedback pós-release | Em 2 semanas de cada release | CS submete dados de adoção e satisfação ao feedback loop iniciado pelo PM. |
+| Customer health review | Weekly | Review retention signals, NPS trends, and active friction reports. |
+| Intake registration | Ongoing | Any customer signal meeting intake criteria is recorded within 2 business days. |
+| Post-release feedback contribution | Within 2 weeks of each release | CS submits adoption and satisfaction data to the feedback loop initiated by the PM. |
 
-## Timers de escalada
+## Escalation timers
 
-Quando uma etapa está bloqueada ou um SLA está prestes a ser excedido, o caminho de escalada é:
+When a step is blocked or an SLA is about to be exceeded, the escalation path is:
 
-| Situação | Primeira escalada | Segunda escalada | Prazo antes da segunda |
+| Situation | First escalation | Second escalation | Time before second |
 |---|---|---|---|
-| Demanda presa na triagem do PO | PO sinaliza ao CEO | CEO e CTO alinham sobre prioridade | 48h após a primeira escalada |
-| PRD rejeitado pelo PM | PM devolve ao PO com gaps documentados | PO escala ao CTO se os gaps forem técnicos | 3 dias úteis |
-| Conflito de capacidade não resolvido | PM escala ao PO | PO e CEO tomam decisão de trade-off de prioridade | 3 dias úteis |
-| CTO indisponível para revisão arquitetural | PO escala ao CEO | CEO define caminho interino | 5 dias úteis |
-| Defeito bloqueador de QA não resolvido | QA escala ao Tech Lead | Tech Lead escala ao CTO se for arquitetural | 2 dias úteis |
-| Feedback loop não iniciado | Lembrete automático do PM | PO faz follow-up com o PM | 5 dias úteis após o release |
+| Demand stuck in PO triage | PO flags CEO | CEO and CTO align on priority | 48h after first escalation |
+| PRD rejected by PM | PM returns to PO with documented gaps | PO escalates to CTO if gaps are technical | 3 business days |
+| Unresolved capacity conflict | PM escalates to PO | PO and CEO make priority trade-off decision | 3 business days |
+| CTO unavailable for architectural review | PO escalates to CEO | CEO defines interim path | 5 business days |
+| Blocking QA defect unresolved | QA escalates to Tech Lead | Tech Lead escalates to CTO if architectural | 2 business days |
+| Feedback loop not initiated | Automatic PM reminder | PO follows up with PM | 5 business days after release |
 
-## Princípios dos SLAs
+## SLA principles
 
-1. **SLAs são compromissos internos, não promessas para clientes** — existem para manter o sistema em movimento, não para criar responsabilidade externa.
-2. **Exceder um SLA não é falha — não surfaçá-lo é** — toda violação precisa ser documentada com justificativa.
-3. **Demandas Críticas sobrepõem os outros SLAs** — quando uma Crítica entra na fila, os timers não críticos pausam para os papéis envolvidos.
-4. **SLAs se aplicam à etapa, não à pessoa** — se a etapa está bloqueada por dependência externa, o timer pausa e o bloqueio é documentado.
-5. **Cadências são ritmos não negociáveis** — não dependem de gatilho específico. Acontecem no cronograma, independentemente da carga de trabalho atual.
+1. **SLAs are internal commitments, not customer promises** — they exist to keep the system moving, not to create external accountability.
+2. **Exceeding an SLA is not a failure — failing to surface it is** — every violation must be documented with justification.
+3. **Critical demands override all other SLAs** — when a Critical enters the queue, non-critical timers pause for the roles involved.
+4. **SLAs apply to the step, not the person** — if the step is blocked by an external dependency, the timer pauses and the blocker is documented.
+5. **Cadences are non-negotiable rhythms** — they do not depend on a specific trigger. They happen on schedule regardless of current workload.

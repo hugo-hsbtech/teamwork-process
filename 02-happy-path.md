@@ -1,48 +1,48 @@
-# Happy Path — Do Pedido à Entrega
+# Happy Path — From Request to Delivery
 
-## Propósito
+## Purpose
 
-Este documento descreve o fluxo ideal de uma demanda pelo modelo operacional, do momento em que o sinal é capturado até o ciclo de feedback fechar.
+This document describes the ideal flow of a demand through the operational model, from the moment a signal is captured until the feedback cycle closes.
 
-Este é o happy path: cada input chega completo, cada handoff é limpo, cada papel age dentro dos próprios limites, nenhuma escalada ou rejeição é necessária.
+This is the happy path: every input arrives complete, every handoff is clean, every role acts within its own boundaries, and no escalation or rejection is needed.
 
-Casos de borda e caminhos de falha são documentados em outros lugares.
+Edge cases and failure paths are documented elsewhere.
 
-## Visão geral do fluxo
+## Flow overview
 
 ```mermaid
 flowchart TD
-    A([Cliente / Mercado / Sinal Interno]) --> B
+    A([Customer / Market / Internal Signal]) --> B
 
     subgraph UPSTREAM ["🔼 UPSTREAM"]
-        B[Submitter captura a demanda\nVendas / CS / Marketing / CEO]
-        B --> C[Documento do Submitter\nconfiança por campo · gateReady = true]
+        B[Submitter captures the demand\nSales / CS / Marketing / CEO]
+        B --> C[Submitter Brief\nper-field confidence · gateReady = true]
     end
 
     subgraph INTAKE ["⚙️ INTAKE LAYER"]
-        C --> D[PO — Triagem\nÉ real? Recorrente? Estrategicamente alinhado?]
-        D --> E{Decisão de Triagem}
-        E -- Product Ready --> D2[Intake Record\nPO formaliza · atribui INT · roteia]
-        D2 --> F[PO — Racionalização → Readiness Package\nTransforma a dor em contexto de produto]
-        F --> G{Impacto Arquitetural?}
-        G -- Sim --> I[CTO — Technical Assessment\nViabilidade · Arquitetura · Riscos]
-        G -- Não --> PRD
-        I --> PRD[PRD\nRP + Technical Assessment fundidos · assinado]
+        C --> D[PO — Triage\nIs it real? Recurring? Strategically aligned?]
+        D --> E{Triage Decision}
+        E -- Product Ready --> D2[Intake Record\nPO formalizes · assigns INT · routes]
+        D2 --> F[PO — Rationalization → Readiness Package\nTransforms pain into product context]
+        F --> G{Architectural Impact?}
+        G -- Yes --> I[CTO — Technical Assessment\nFeasibility · Architecture · Risks]
+        G -- No --> PRD
+        I --> PRD[PRD\nRP + Technical Assessment merged · signed]
     end
 
     subgraph DOWNSTREAM ["🔽 DOWNSTREAM"]
-        PRD --> K[PM — Recebe o PRD\nValida completude]
-        K --> L[PM — Planejamento de Execução\nRoadmap · Milestones · Sequenciamento · Prioridades]
-        L --> M[Tech Leads — Quebra Técnica\nArquitetura · Épicos · Histórias · Tasks · Estimativas]
-        M --> DOR[✅ Ready for Development\na Definition of Ready · só falta codar]
-        DOR --> N[Engineers — Implementação\nDesenvolvimento · Testes · Code Review]
-        N --> O[QA / UAT\nValidação dos Critérios de Aceite]
+        PRD --> K[PM — Receives the PRD\nValidates completeness]
+        K --> L[PM — Execution Planning\nRoadmap · Milestones · Sequencing · Priorities]
+        L --> M[Tech Leads — Technical Breakdown\nArchitecture · Epics · Stories · Tasks · Estimates]
+        M --> DOR[✅ Ready for Development\nDefinition of Ready · only coding remains]
+        DOR --> N[Engineers — Implementation\nDevelopment · Testing · Code Review]
+        N --> O[QA / UAT\nAcceptance Criteria Validation]
         O --> P[Release · Definition of Done]
     end
 
     subgraph FEEDBACK ["🔁 FEEDBACK LOOP"]
-        P --> Q[PM + CS — Coleta de Resultados\nOutcomes · Satisfação · Fricção]
-        Q --> R[PO — Aprende e Atualiza\nBacklog · Prioridades · Visão de Produto]
+        P --> Q[PM + CS — Results Collection\nOutcomes · Satisfaction · Friction]
+        Q --> R[PO — Learns and Updates\nBacklog · Priorities · Product Vision]
         R --> A
     end
 
@@ -52,252 +52,252 @@ flowchart TD
     style FEEDBACK fill:#f3e5f5,stroke:#9C27B0,color:#000
 ```
 
-## Descrição passo a passo
+## Step-by-step description
 
-### Passo 1 — Captura do sinal
+### Step 1 — Signal capture
 
-Quem: Vendas, Customer Success, Marketing, CEO (quando relevante).
+Who: Sales, Customer Success, Marketing, CEO (when relevant).
 
-Um cliente expressa uma dor, um sinal de mercado é identificado ou uma necessidade interna surge. O papel responsável registra a demanda usando o formato de intake estruturado — não como solicitação de funcionalidade ou especificação técnica, e sim como enunciado de problema.
+A customer expresses a pain point, a market signal is identified, or an internal need arises. The responsible role records the demand using the structured intake format — not as a feature request or technical specification, but as a problem statement.
 
-Campos obrigatórios:
+Required fields:
 
-- **Origem** (Cliente / Interno / Mercado / Suporte).
-- **Tipo** (Bug / Funcionalidade / Melhoria / Compliance / Integração / Operacional).
-- **Enunciado do problema** (qual dor existe).
-- **Impacto de negócio** (Receita / Retenção / Bloqueio operacional / Eficiência / Vantagem competitiva).
-- **Prioridade** (Crítica / Alta / Média / Baixa).
-- **Stakeholders** (quem é impactado, quem tem influência, quem deve ser informado).
-- **Premissas** (condições consideradas verdadeiras — se falsas, a demanda precisa ser retriada).
-- **Constraints** (limites de tempo, escopo, orçamento, legais ou técnicos não negociáveis).
-- **Riscos preliminares** (riscos visíveis no intake, antes da avaliação técnica — não o registro completo).
-- **Limites de escopo de alto nível** (o que está claramente dentro, fora e adiado).
-- **Critérios de sucesso** (indicadores de valor no nível do intake — metas detalhadas ficam para o Readiness Package).
+- **Origin** (Customer / Internal / Market / Support).
+- **Type** (Bug / Feature / Improvement / Compliance / Integration / Operational).
+- **Problem statement** (what pain exists).
+- **Business impact** (Revenue / Retention / Operational blocker / Efficiency / Competitive advantage).
+- **Priority** (Critical / High / Medium / Low).
+- **Stakeholders** (who is impacted, who has influence, who should be informed).
+- **Assumptions** (conditions considered true — if false, the demand needs re-triage).
+- **Constraints** (non-negotiable time, scope, budget, legal, or technical limits).
+- **Preliminary risks** (risks visible at intake, before technical assessment — not the full register).
+- **High-level scope boundaries** (what is clearly in, out, and deferred).
+- **Success criteria** (value indicators at the intake level — detailed targets go in the Readiness Package).
 
-Definições de nível de prioridade:
+Priority level definitions:
 
-| Nível | Significado | Obrigação operacional |
+| Level | Meaning | Operational obligation |
 |---|---|---|
-| Crítica | Perda de receita ativa, violação contratual ou interrupção de produção afetando clientes | PO faz triagem em 24h. Avaliação de capacidade pelo PM antes de tocar qualquer outro compromisso. |
-| Alta | Um deal, renovação ou retenção de cliente-chave está em risco em 30 dias | PO faz triagem em 3 dias úteis. PM sinaliza impacto nos compromissos atuais. |
-| Média | Melhoria significativa sem risco imediato de receita ou retenção | Entra na fila normal de triagem. Processada no próximo ciclo de revisão. |
-| Baixa | Nice-to-have, sem impacto mensurável no curto prazo | Entra direto no Backlog de Oportunidades para revisão futura. |
+| Critical | Active revenue loss, contractual violation, or production outage affecting customers | PO triages within 24h. PM capacity assessment before touching any other commitment. |
+| High | A deal, renewal, or key customer retention is at risk within 30 days | PO triages within 3 business days. PM flags impact on current commitments. |
+| Medium | Significant improvement with no immediate revenue or retention risk | Enters normal triage queue. Processed in the next review cycle. |
+| Low | Nice-to-have, no measurable short-term impact | Goes directly to the Opportunity Backlog for future review. |
 
-#### Camada de prontidão — como "completo" amadureceu
+#### Readiness layer — how "complete" matured
 
-> Os campos acima continuam obrigatórios, mas o que torna um registro "pronto para triagem" deixou de ser binário. A captura não é mais um preenchimento completo/incompleto — é a construção progressiva de uma **prontidão graduada por confiança**. O raciocínio completo vive em [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; a forma instanciada, em [`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md).
+> The fields above remain required, but what makes a record "ready for triage" is no longer binary. Capture is no longer a complete/incomplete fill-in — it is the progressive building of **confidence-graded readiness**. The full reasoning lives in [`personas/01-submitter.md`](./personas/01-submitter.md) §3–§6; the instantiated form, in [`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md).
 
-Três adições mudam o passo de captura, sem remover nada do que já existia:
+Three additions change the capture step without removing anything that already existed:
 
-- **Confiança é de primeira classe.** Cada resposta substantiva carrega `confidence / source / status / hint`. O downstream recebe respostas *graduadas* — sabe o que é firme e o que ainda precisa de Discovery.
-- **Readiness Score é o gate quantitativo.** O registro avança quando todos os requisitos bloqueantes estão resolvidos (`gateReady = true`), não quando todo campo está preenchido. `low_confidence` conta como parcial no score (ver [`references.md` § 11.1](./references.md)).
-- **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — `answered`, `inferred`, `assumption` (a validar), `discovery` (a investigar, time-boxed) ou `deferred` (com dono). O gate é "todo requisito tem uma disposição honesta", não "o Submitter sabe tudo".
+- **Confidence is first class.** Each substantive answer carries `confidence / source / status / hint`. Downstream receives *confidence-graded* answers — it knows what is firm and what still needs Discovery.
+- **Readiness Score is the quantitative gate.** The record advances when all blocking requirements are resolved (`gateReady = true`), not when every field is filled. `low_confidence` counts as partial in the score (see [`references.md` § 11.1](./references.md)).
+- **"I don't know" does not block.** A requirement reaches readiness through any honest disposition — `answered`, `inferred`, `assumption` (to be validated), `discovery` (to be investigated, time-boxed), or `deferred` (with an owner). The gate is "every requirement has an honest disposition", not "the Submitter knows everything".
 
-Output: **Documento do Submitter** estruturado e graduado por confiança, pronto para triagem do PO.
+Output: **Submitter Brief** — structured and confidence-graded, ready for PO triage.
 
-Gate: nada avança sem um Documento do Submitter **pronto** — e "pronto" agora significa `gateReady = true` (todos os requisitos bloqueantes resolvidos por uma disposição honesta), não apenas todos os campos preenchidos.
+Gate: nothing advances without a **ready** Submitter Brief — and "ready" now means `gateReady = true` (all blocking requirements resolved by an honest disposition), not just all fields filled.
 
-### Passo 2 — Triagem inicial (PO)
+### Step 2 — Initial triage (PO)
 
-Quem: PO.
+Who: PO.
 
-O PO revisa o registro de forma independente. Esta etapa avalia se a demanda vale ser processada — não se é tecnicamente viável, mas se é real, recorrente e alinhada com a direção estratégica. O PO herda o snapshot de prontidão do registro (Readiness Score, dispositions e confiança por campo): a triagem já chega sabendo o que é firme, o que é premissa e o que está marcado para Discovery.
+The PO reviews the record independently. This step assesses whether the demand is worth processing — not whether it is technically feasible, but whether it is real, recurring, and aligned with the strategic direction. The PO inherits the record's readiness snapshot (Readiness Score, dispositions, and per-field confidence): triage already arrives knowing what is firm, what is an assumption, and what is flagged for Discovery.
 
-Perguntas de triagem:
+Triage questions:
 
-- É problema real ou pedido pontual?
-- É recorrente em múltiplos clientes ou segmentos?
-- Está alinhado com a visão de produto?
-- Tem impacto de negócio mensurável?
-- Há urgência que justifique priorização?
+- Is it a real problem or a one-off request?
+- Is it recurring across multiple customers or segments?
+- Is it aligned with the product vision?
+- Does it have measurable business impact?
+- Is there urgency that justifies prioritization?
 
-Output, um de quatro caminhos:
+Output, one of four paths:
 
-- **Rejeitado** — fora da estratégia, baixo valor ou não escalável. Documentado e comunicado ao solicitante.
-- **Backlog de Oportunidades** — valioso, mas não priorizado agora. Retido para revisão futura.
-- **Discovery** — requer investigação antes de a demanda poder ser racionalizada.
-- **Product Ready** — contexto suficiente para seguir para a racionalização.
+- **Rejected** — outside strategy, low value, or not scalable. Documented and communicated to the requester.
+- **Opportunity Backlog** — valuable but not prioritized now. Held for future review.
+- **Discovery** — requires investigation before the demand can be rationalized.
+- **Product Ready** — sufficient context to move to rationalization.
 
-Quando a decisão é **Product Ready**, o PO formaliza o **Intake Record** (`01`) — atribui o `INT-AAAA-NNN` e registra a decisão de roteamento (ver [`templates/01-intake-record.md`](./templates/01-intake-record.md)) — abrindo a racionalização.
+When the decision is **Product Ready**, the PO formalizes the **Intake Record** (`01`) — assigns the `INT-YYYY-NNN` and records the routing decision (see [`templates/01-intake-record.md`](./templates/01-intake-record.md)) — opening rationalization.
 
-Gate: o PO só escala ao CTO neste passo se uma preocupação arquitetural óbvia já estiver visível.
+Gate: the PO escalates to the CTO in this step only if an obvious architectural concern is already visible.
 
-### Fluxo de Discovery
+### Discovery flow
 
-Quando se aplica: a demanda é real e potencialmente valiosa, mas o PO não consegue racionalizá-la ainda porque falta informação — contexto do cliente, dados de mercado, incógnitas técnicas ou limites de problema não claros.
+When it applies: the demand is real and potentially valuable, but the PO cannot yet rationalize it because information is missing — customer context, market data, technical unknowns, or unclear problem boundaries.
 
-Quem conduz: PO (lidera), com suporte de Vendas, CS ou CTO dependendo do que está faltando.
+Who leads: PO (leads), with support from Sales, CS, or CTO depending on what is missing.
 
-O Discovery produz um de dois resultados:
+Discovery produces one of two outcomes:
 
-- um brief de problema estruturado, suficiente para reentrar na triagem como Product Ready;
-- uma razão documentada de por que a demanda não pode ser validada, indo para Backlog de Oportunidades ou Rejeitado.
+- a structured problem brief, sufficient to re-enter triage as Product Ready;
+- a documented reason why the demand cannot be validated, going to Opportunity Backlog or Rejected.
 
-Passos:
+Steps:
 
-| Passo | Ação | Responsável |
+| Step | Action | Owner |
 |---|---|---|
-| 1 | Definir qual informação específica falta | PO |
-| 2 | Identificar a fonte (entrevista com cliente, dados de CS, spike do CTO) | PO |
-| 3 | Conduzir investigação com time-box definido (máx. 2 semanas) | PO + papel relevante |
-| 4 | Documentar findings em um Discovery Brief | PO |
-| 5 | Retriar a demanda com base nos findings | PO |
+| 1 | Define exactly what information is missing | PO |
+| 2 | Identify the source (customer interview, CS data, CTO spike) | PO |
+| 3 | Conduct investigation with a defined time-box (max. 2 weeks) | PO + relevant role |
+| 4 | Document findings in a Discovery Brief | PO |
+| 5 | Re-triage the demand based on the findings | PO |
 
-Gate: Discovery não roda indefinidamente. Se a informação necessária não puder ser obtida dentro do time-box, a demanda vai para o Backlog de Oportunidades com razão documentada. Discovery não trava a fila do Intake.
+Gate: Discovery does not run indefinitely. If the required information cannot be obtained within the time-box, the demand goes to the Opportunity Backlog with a documented reason. Discovery does not block the Intake queue.
 
-### Passo 3 — Racionalização e preparação (PO)
+### Step 3 — Rationalization and preparation (PO)
 
-Quem: PO (primário), CTO (quando impacto arquitetural é identificado).
+Who: PO (primary), CTO (when architectural impact is identified).
 
-O PO transforma a demanda validada de dor bruta em contexto de produto estruturado. É o trabalho intelectual central do Intake Layer — converter ambiguidade em clareza.
+The PO transforms the validated demand from raw pain into structured product context. This is the central intellectual work of the Intake Layer — converting ambiguity into clarity.
 
-O PO produz:
+The PO produces:
 
-- enquadramento do problema e resultado esperado;
-- definição de capacidade ou funcionalidade (o que o sistema fará, não como);
-- jornadas e personas impactadas;
-- regras de negócio, validações e transições de estado;
-- limites de escopo (incluído e excluído);
-- critérios de sucesso (outcomes mensuráveis);
-- identificação inicial de riscos.
+- problem framing and expected outcome;
+- capability or feature definition (what the system will do, not how);
+- impacted journeys and personas;
+- business rules, validations, and state transitions;
+- scope boundaries (included and excluded);
+- success criteria (measurable outcomes);
+- initial risk identification.
 
-Avaliação arquitetural (CTO): se a demanda toca nova infraestrutura, mudanças de plataforma, comportamento de IA/runtime, multi-tenancy, segurança, ou introduz incógnitas técnicas significativas, o PO escala ao CTO.
+Architectural assessment (CTO): if the demand touches new infrastructure, platform changes, AI/runtime behavior, multi-tenancy, security, or introduces significant technical unknowns, the PO escalates to the CTO.
 
-O CTO produz um **Technical Assessment** — artefato próprio, de autoria exclusiva do CTO (ver [`templates/03-technical-assessment.md`](./templates/03-technical-assessment.md)), **não** seções dentro do RP:
+The CTO produces a **Technical Assessment** — a standalone artifact, authored exclusively by the CTO (see [`templates/03-technical-assessment.md`](./templates/03-technical-assessment.md)), **not** sections inside the RP:
 
-- constraints arquiteturais e padrões a seguir;
-- sistemas e componentes afetados;
-- riscos técnicos e mitigações;
-- esforço e custo firme;
-- diretrizes para a quebra técnica downstream.
+- architectural constraints and patterns to follow;
+- affected systems and components;
+- technical risks and mitigations;
+- firm effort and cost;
+- guidelines for downstream technical breakdown.
 
-Gate: o Readiness Package congela (`freezeReady`) quando suas seções bloqueantes estão resolvidas e — se houve escalada — o Technical Assessment voltou assinado. RP e TA então se fundem no **PRD**.
+Gate: the Readiness Package freezes (`freezeReady`) when its blocking sections are resolved and — if escalated — the Technical Assessment has been returned signed. The RP and TA then merge into the **PRD**.
 
-### Passo 4 — Readiness Package, Technical Assessment e PRD
+### Step 4 — Readiness Package, Technical Assessment, and PRD
 
-Quem: PO (dono do RP e do PRD), CTO (dono do Technical Assessment, quando escalado).
+Who: PO (owner of the RP and PRD), CTO (owner of the Technical Assessment, when escalated).
 
-A correção estrutural amadurecida ([`personas/02-po.md` §2](./personas/02-po.md)): o RP e o Technical Assessment são **artefatos separados, de autores diferentes**, que se **fundem no PRD**. É o **PRD** — não o RP isolado — que abre o downstream.
+The matured structural correction ([`personas/02-po.md` §2](./personas/02-po.md)): the RP and the Technical Assessment are **separate artifacts with different authors** that **merge into the PRD**. It is the **PRD** — not the RP alone — that opens downstream.
 
-| Artefato | Dono | Conteúdo |
+| Artifact | Owner | Content |
 |---|---|---|
-| **Readiness Package** | PO (sozinho) | Visão, problema, escopo, regras de negócio, user stories, NFRs, edge cases, métricas com guardrails, critérios de sucesso |
-| **Technical Assessment** | CTO (só se houver escalada arquitetural) | Viabilidade, arquitetura, integrações, constraints técnicas, riscos, ADRs, custo firme |
-| **PRD** | PO + CTO (fusão) | `RP + Technical Assessment` combinados — o documento que abre o downstream |
+| **Readiness Package** | PO (sole author) | Vision, problem, scope, business rules, user stories, NFRs, edge cases, metrics with guardrails, success criteria |
+| **Technical Assessment** | CTO (only if architectural escalation occurred) | Feasibility, architecture, integrations, technical constraints, risks, ADRs, firm cost |
+| **PRD** | PO + CTO (merge) | `RP + Technical Assessment` combined — the document that opens downstream |
 
-> Sem escalada arquitetural, o PRD se forma só a partir do RP, e a referência ao Technical Assessment fica `Status: Não requisitado`.
+> Without architectural escalation, the PRD is formed from the RP alone, and the Technical Assessment reference has `Status: Not requested`.
 
-Output: **PRD** completo e assinado (RP + Technical Assessment), entregue ao PM.
+Output: **PRD** complete and signed (RP + Technical Assessment), delivered to the PM.
 
-Gate: o PM recebe o PRD e tem autoridade para rejeitá-lo e devolver ao PO se qualquer parte estiver faltando, contraditória ou insuficiente para o planejamento.
+Gate: the PM receives the PRD and has the authority to reject and return it to the PO if any part is missing, contradictory, or insufficient for planning.
 
-### Passo 5 — Planejamento de execução (PM)
+### Step 5 — Execution planning (PM)
 
-Quem: PM.
+Who: PM.
 
-O PM recebe o PRD e o traduz em plano de entrega. Antes de produzir cronograma, o PM executa uma avaliação de capacidade. O escopo está fixo no PRD — o PM não redefine. O foco do PM é sequência, timing, dependências e coordenação da equipe.
+The PM receives the PRD and translates it into a delivery plan. Before producing a schedule, the PM runs a capacity assessment. Scope is fixed in the PRD — the PM does not redefine it. The PM's focus is sequence, timing, dependencies, and team coordination.
 
-Avaliação de capacidade:
+Capacity assessment:
 
-- **Carga atual** — no que o time já está comprometido e com qual percentual de capacidade.
-- **Cobertura de skill** — se o time tem a senioridade e a especialização para esse escopo.
-- **Mapa de conflitos** — quais entregas existentes seriam impactadas se a demanda for absorvida agora.
-- **Recomendação** — descopo, faseamento, adiamento de um compromisso existente ou contratação.
+- **Current load** — what the team is already committed to and at what capacity percentage.
+- **Skills coverage** — whether the team has the seniority and expertise for this scope.
+- **Conflict map** — which existing deliverables would be impacted if the demand is absorbed now.
+- **Recommendation** — descoping, phasing, deferring an existing commitment, or hiring.
 
-Se a capacidade for insuficiente, o PM escala ao PO com a avaliação antes de qualquer cronograma. Nenhum compromisso é feito sob pressão sem este passo.
+If capacity is insufficient, the PM escalates to the PO with the assessment before any schedule is produced. No commitment is made under pressure without this step.
 
-O PM então produz:
+The PM then produces:
 
-- roadmap de entrega e milestones (fundamentados em capacidade verificada);
-- priorização dentro do escopo aprovado;
-- estrutura de sprint ou ciclo;
-- mapa de dependências cross-team;
-- gatilhos de escalada (quais condições exigem que o PM sinalize um bloqueador).
+- delivery roadmap and milestones (grounded in verified capacity);
+- prioritization within the approved scope;
+- sprint or cycle structure;
+- cross-team dependency map;
+- escalation triggers (which conditions require the PM to flag a blocker).
 
-Output: plano de execução entregue aos Tech Leads.
+Output: execution plan delivered to Tech Leads.
 
-Gate: Tech Leads confirmam contexto suficiente para iniciar a quebra técnica.
+Gate: Tech Leads confirm sufficient context to start technical breakdown.
 
-### Passo 6 — Quebra técnica (Tech Leads)
+### Step 6 — Technical breakdown (Tech Leads)
 
-Quem: Tech Leads.
+Who: Tech Leads.
 
-Os Tech Leads recebem o PRD e o plano de execução. São donos de todas as decisões técnicas dentro deste escopo. Traduzem contexto de produto em estrutura pronta para engenharia.
+Tech Leads receive the PRD and the execution plan. They own all technical decisions within this scope. They translate product context into engineering-ready structure.
 
-O que produzem:
+What they produce:
 
-- design de arquitetura (serviços, APIs, eventos, filas, componentes);
-- épicos, histórias e tasks com critérios de aceite claros;
-- sequenciamento técnico e dependências;
-- estimativas de esforço;
-- constraints técnicos e diretrizes de implementação;
-- estratégia de rollout (deploy, migração, monitoramento, rollback);
+- architecture design (services, APIs, events, queues, components);
+- epics, stories, and tasks with clear acceptance criteria;
+- technical sequencing and dependencies;
+- effort estimates;
+- technical constraints and implementation guidelines;
+- rollout strategy (deploy, migration, monitoring, rollback);
 - Definition of Done.
 
-Gate: a **Definition of Ready** (*Ready for Development*) — Engineers não iniciam o trabalho até que épicos, histórias e tasks estejam escritos e estimados, com contexto, constraints e critérios de aceite. É aqui, downstream, que a demanda fica "pronta para codar" — não no congelamento do RP.
+Gate: the **Definition of Ready** (*Ready for Development*) — Engineers do not start work until epics, stories, and tasks are written and estimated, with context, constraints, and acceptance criteria. It is here, downstream, that the demand becomes "ready to code" — not at RP freeze.
 
-### Passo 7 — Implementação (Engineers)
+### Step 7 — Implementation (Engineers)
 
-Quem: Engineers.
+Who: Engineers.
 
-Os Engineers implementam o trabalho conforme definido pelos Tech Leads. Donos das decisões de implementação dentro da arquitetura aprovada. Qualquer descoberta que contradiz o escopo ou arquitetura definidos é escalada ao Tech Lead — não absorvida silenciosamente.
+Engineers implement the work as defined by the Tech Leads. They own implementation decisions within the approved architecture. Any discovery that contradicts the defined scope or architecture is escalated to the Tech Lead — not absorbed silently.
 
-Engineers entregam:
+Engineers deliver:
 
-- código atendendo aos critérios de aceite;
-- testes unitários e de integração;
-- code review concluído;
-- documentação onde a Definition of Done exigir.
+- code meeting acceptance criteria;
+- unit and integration tests;
+- completed code review;
+- documentation where the Definition of Done requires it.
 
-Gate: o código passa em QA/UAT antes do release.
+Gate: the code passes QA/UAT before release.
 
-### Passo 8 — QA / UAT
+### Step 8 — QA / UAT
 
-Quem: QA (interno), stakeholders relevantes para UAT.
+Who: QA (internal), relevant stakeholders for UAT.
 
-Os critérios de aceite definidos no PRD são validados. Este passo confirma que o que foi construído corresponde ao que foi prometido.
+The acceptance criteria defined in the PRD are validated. This step confirms that what was built matches what was promised.
 
-Output: aprovação de release.
+Output: release approval.
 
-### Passo 9 — Release
+### Step 9 — Release
 
-Quem: Tech Leads (supervisionam), Engineers (executam), PM (coordena timing).
+Who: Tech Leads (supervise), Engineers (execute), PM (coordinates timing).
 
-A estratégia de rollout definida no Tech Backlog é executada. Monitoramento e observabilidade estão ativos. Plano de rollback disponível se necessário.
+The rollout strategy defined in the Tech Backlog is executed. Monitoring and observability are active. A rollback plan is available if needed.
 
-### Passo 10 — Feedback loop
+### Step 10 — Feedback loop
 
-Quem: PM (inicia), CS (coleta sinal do cliente), PO (sintetiza aprendizados).
+Who: PM (initiates), CS (collects customer signal), PO (synthesizes learnings).
 
-Gatilho: o PM inicia o feedback loop em até 5 dias úteis após o release. Não exige reunião — exige um resumo assíncrono estruturado entregue ao PO e CS. Uma revisão síncrona só acontece se os outcomes divergirem significativamente dos critérios de sucesso.
+Trigger: the PM initiates the feedback loop within 5 business days of release. It does not require a meeting — it requires a structured async summary delivered to the PO and CS. A synchronous review only happens if outcomes diverge significantly from the success criteria.
 
-Após a entrega, os resultados são coletados. Não é opcional — é o que fecha o ciclo e melhora a iteração seguinte.
+After delivery, results are collected. This is not optional — it is what closes the cycle and improves the next iteration.
 
-CS coleta:
+CS collects:
 
-- satisfação do cliente e sinais de adoção;
-- fricção ou comportamento inesperado pós-release;
-- novos pontos de dor surfaçados pela funcionalidade entregue.
+- customer satisfaction and adoption signals;
+- friction or unexpected behavior post-release;
+- new pain points surfaced by the delivered feature.
 
-PM coleta:
+PM collects:
 
-- precisão da entrega (cumprimos milestones e escopo?);
-- precisão das estimativas;
-- fricção do processo (onde o modelo desacelerou ou quebrou?).
+- delivery accuracy (did we meet milestones and scope?);
+- estimate accuracy;
+- process friction (where did the model slow down or break?).
 
-PO sintetiza:
+PO synthesizes:
 
-- atualiza visão de produto e backlog com base nos outcomes;
-- documenta aprendizados que afetam futuras decisões de triagem;
-- alimenta insights de volta para o próximo ciclo.
+- updates product vision and backlog based on outcomes;
+- documents learnings that affect future triage decisions;
+- feeds insights back into the next cycle.
 
-Output: backlog de oportunidades atualizado, visão de produto refinada, notas de melhoria de processo.
+Output: updated opportunity backlog, refined product vision, process improvement notes.
 
-## Resumo de handoffs
+## Handoff summary
 
 ```mermaid
 sequenceDiagram
-    participant UP as Upstream (Vendas/CS/Mktg/CEO)
+    participant UP as Upstream (Sales/CS/Mktg/CEO)
     participant PO as PO
     participant CTO as CTO
     participant PM as PM
@@ -305,39 +305,39 @@ sequenceDiagram
     participant ENG as Engineers
     participant QA as QA / UAT
 
-    UP->>PO: Documento do Submitter (gateReady)
-    PO->>PO: Triagem → Intake Record
-    PO->>CTO: Escala se impacto arquitetural
-    CTO-->>PO: Technical Assessment assinado
+    UP->>PO: Submitter Brief (gateReady)
+    PO->>PO: Triage → Intake Record
+    PO->>CTO: Escalates if architectural impact
+    CTO-->>PO: Signed Technical Assessment
     PO->>PM: PRD (RP + Technical Assessment)
-    PM->>PM: Planejamento de execução
-    PM->>TL: Plano de execução + PRD
-    TL->>TL: Quebra técnica
-    TL->>ENG: Tasks definidas + contexto
-    ENG->>QA: Implementação completa
-    QA->>PM: Release aprovado (Definition of Done)
-    PM->>UP: Entrega completa + feedback coletado
+    PM->>PM: Execution planning
+    PM->>TL: Execution plan + PRD
+    TL->>TL: Technical breakdown
+    TL->>ENG: Defined tasks + context
+    ENG->>QA: Complete implementation
+    QA->>PM: Release approved (Definition of Done)
+    PM->>UP: Complete delivery + feedback collected
 ```
 
-## Demandas paralelas
+## Parallel demands
 
-O fluxo acima descreve uma demanda isolada. Na prática, várias estarão em estágios diferentes ao mesmo tempo. As regras para o processamento concorrente:
+The flow above describes a single demand. In practice, several will be at different stages simultaneously. Rules for concurrent processing:
 
-- **O PO gerencia a fila do Intake, não demandas individuais** — a qualquer momento, várias podem estar em Triagem, Discovery ou Racionalização ao mesmo tempo.
-- **A ordem de prioridade vem do nível de prioridade + alinhamento estratégico**, não da ordem de chegada.
-- **Demanda Crítica sempre interrompe a fila atual do PO** — o PO pausa a racionalização de menor prioridade para triá-la em 24h.
-- **O downstream só absorve o que a capacidade permite** — a avaliação de capacidade do PM é o constraint vinculante. Múltiplos PRDs aprovados não viram execução paralela automaticamente.
-- **O PM mantém uma única fila de execução sequenciada** — se duas demandas estão aprovadas, o PM as sequencia com base em capacidade, dependências e prioridade estratégica, e comunica a sequência ao PO.
-- **O PO é dono da revisão do Backlog de Oportunidades** — a cada 2 semanas, o PO revisa o backlog para promover, retriar ou expirar itens. Itens com mais de 90 dias sem atividade são escalados ao CEO para decisão ou encerrados.
+- **The PO manages the Intake queue, not individual demands** — at any given moment, several may be in Triage, Discovery, or Rationalization simultaneously.
+- **Priority order comes from priority level + strategic alignment**, not order of arrival.
+- **A Critical demand always interrupts the PO's current queue** — the PO pauses lower-priority rationalization to triage it within 24h.
+- **Downstream only absorbs what capacity allows** — the PM's capacity assessment is the binding constraint. Multiple approved PRDs do not automatically become parallel execution.
+- **The PM maintains a single sequenced execution queue** — if two demands are approved, the PM sequences them based on capacity, dependencies, and strategic priority, and communicates the sequence to the PO.
+- **The PO owns the Opportunity Backlog review** — every 2 weeks, the PO reviews the backlog to promote, re-triage, or expire items. Items with more than 90 days of inactivity are escalated to the CEO for a decision or closed.
 
-## Princípios do happy path
+## Happy path principles
 
-1. **Cada handoff tem um gate** — nenhum papel aceita input incompleto sem devolvê-lo.
-2. **O escopo congela no PRD** (RP + Technical Assessment) — papéis downstream executam, não redefinem.
-3. **Upstream define o problema, downstream define a solução** — nunca o inverso.
-4. **O CTO é puxado, não empurrado** — o PO escala ao CTO; o CTO não participa de toda triagem.
-5. **Feedback é obrigatório** — o loop fecha em todo ciclo de entrega.
-6. **Ambiguidade é escalada, não absorvida** — todo papel tem a obrigação de surfaçar inputs incompletos.
-7. **Capacidade é constraint, não negociação** — nenhum compromisso é feito sem avaliação de capacidade do PM.
-8. **Discovery é time-boxed** — todo Discovery tem prazo e condição de saída definidos.
-9. **Confiança viaja com o artefato** — cada resposta carrega o quão sólida é e de onde veio; "não sei, e este é o plano" é uma forma válida de atingir prontidão, não um bloqueio.
+1. **Every handoff has a gate** — no role accepts incomplete input without returning it.
+2. **Scope freezes at the PRD** (RP + Technical Assessment) — downstream roles execute, they do not redefine.
+3. **Upstream defines the problem, downstream defines the solution** — never the reverse.
+4. **The CTO is pulled, not pushed** — the PO escalates to the CTO; the CTO does not participate in every triage.
+5. **Feedback is mandatory** — the loop closes on every delivery cycle.
+6. **Ambiguity is escalated, not absorbed** — every role has the obligation to surface incomplete inputs.
+7. **Capacity is a constraint, not a negotiation** — no commitment is made without a PM capacity assessment.
+8. **Discovery is time-boxed** — every Discovery has a defined deadline and exit condition.
+9. **Confidence travels with the artifact** — each answer carries how solid it is and where it came from; "I don't know, and this is the plan" is a valid form of reaching readiness, not a blocker.

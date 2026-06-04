@@ -1,535 +1,535 @@
 # Readiness Package — Concierge & Settlement
 
-> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd-concierge-settlement.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../../../personas/02-po.md).
+> The Readiness Package (RP) is the **product definition of done** — the PO's product output, written **alone**. It is a complete and self-contained document: vision, problem, scope, rules, user stories, NFRs, edge cases, criteria, and metrics. **The RP contains no sections authored by the CTO.** The technical assessment lives in a separate artifact — the [Technical Assessment](./03-technical-assessment-concierge-settlement.md) (CTO) — which the RP only **references** (see "Technical Assessment Reference"). The merger of the two happens in the [PRD](./04-prd-concierge-settlement.md), and it is the PRD — not the RP — that opens the downstream. See [`personas/02-po.md` §2 and §6.2](../../../personas/02-po.md).
 >
-> O RP **herda a camada de confiança** do Registro de Intake vinculado ([`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada"). Os valores *projetados* (sobretudo as Métricas de Sucesso) carregam confiança e viram o baseline que [`../../../metrics.md`](../../../metrics.md) confronta com o realizado pós-entrega.
+> The RP **inherits the confidence layer** from the linked Intake Record ([`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md)): what entered as an assumption, a Discovery unknown, or a delegated answer does not disappear in rationalization — it is resolved, or carried forward explicitly (see "Inherited Readiness"). The *projected* values (especially Success Metrics) carry confidence and become the baseline that [`../../../metrics.md`](../../../metrics.md) confronts with post-delivery actuals.
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-concierge-settlement.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-concierge-settlement.md) → `02 Readiness Package (PO)` → [`03 Technical Assessment (CTO)`](./03-technical-assessment-concierge-settlement.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md).
+> **Journey:** [`00 Submitter Brief`](./00-submitter-brief-concierge-settlement.md) → [`01 Intake Record (PO — triage)`](./01-intake-record-concierge-settlement.md) → `02 Readiness Package (PO)` → [`03 Technical Assessment (CTO)`](./03-technical-assessment-concierge-settlement.md) → [`04 PRD (PO+CTO → PM)`](./04-prd-concierge-settlement.md).
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Pacote** | RP-2026-050 |
-| **Versão** | v1 |
-| **Intake vinculado** | INT-2026-050 |
-| **Responsável** | Rafael Souza (PO) |
-| **Escalada ao CTO** | Sim — Technical Assessment TA-2026-050 |
-| **Status** | Congelado (`freezeReady = true`) |
-| **Data de congelamento (freeze)** | 2026-04-25 |
+| **Package ID** | RP-2026-050 |
+| **Version** | v1 |
+| **Linked Intake** | INT-2026-050 |
+| **Owner** | Rafael Souza (PO) |
+| **Escalation to CTO** | Yes — Technical Assessment TA-2026-050 |
+| **Status** | Frozen (`freezeReady = true`) |
+| **Freeze date** | 2026-04-25 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | 2026-04-22 | Rafael Souza (PO) | Rascunho | Início da racionalização pós-Discovery. |
-| v1 | 2026-04-25 | Rafael Souza (PO) | Congelado | TA-2026-050 retornou assinado. RP congelado com `freezeReady = true`. |
+| v1 | 2026-04-22 | Rafael Souza (PO) | Draft | Start of rationalization post-Discovery. |
+| v1 | 2026-04-25 | Rafael Souza (PO) | Frozen | TA-2026-050 returned signed. RP frozen with `freezeReady = true`. |
 
 ---
 
-## Prontidão herdada e dispositions em aberto
+## Inherited readiness and open dispositions
 
-> Resumo do que o Intake entregou e do que continua *soft* na entrada da execução. Premissas, incógnitas e respostas delegadas que sobreviveram à racionalização precisam estar visíveis — não enterradas nas seções. Ver [`../../../personas/01-submitter.md` §6](../../../personas/01-submitter.md).
+> Summary of what the Intake delivered and what remains *soft* at the start of execution. Assumptions, unknowns, and delegated answers that survived rationalization must be visible — not buried in the sections. See [`../../../personas/01-submitter.md` §6](../../../personas/01-submitter.md).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Readiness Score no handoff do Intake** | 81 % (brief 00) |
-| **Premissas ainda a validar** | (1) Percentuais de comissão por hotel: cadastrados em planilha; precisam ser migrados para o banco de dados do Settlement Service antes do go-live — ação do FinOps; (2) Regra de retenção de IR: campo configurável por hotel — requer revisão contrato a contrato pelo FinOps antes do go-live |
-| **Incógnitas de Discovery** | Todas as 3 resolvidas (ver Discovery Log no Intake Record) |
-| **Requisitos delegados (com dono)** | Migração dos percentuais de comissão para o sistema: Bruno Takeda (FinOps) — pre-condição para go-live |
+| **Readiness Score at Intake handoff** | 81 % (brief 00) |
+| **Assumptions still to validate** | (1) Commission percentages per hotel: registered in spreadsheet; must be migrated to the Settlement Service database before go-live — FinOps action; (2) Withholding tax rule: configurable field per hotel — requires contract-by-contract review by FinOps before go-live |
+| **Discovery unknowns** | All 3 resolved (see Discovery Log in the Intake Record) |
+| **Delegated requirements (with owner)** | Migration of commission percentages to the system: Bruno Takeda (FinOps) — precondition for go-live |
 
-> Se uma premissa carregada aqui se provar falsa durante a execução, a demanda deve ser reavaliada — o mesmo gatilho de retriagem do intake se aplica downstream. Em particular: se a migração para Stripe Connect revelar incompatibilidade com o modelo de split por hotel (contratos antigos com regras que o Stripe não suporta), o escopo de Settlement deve ser revisitado com o CTO.
-
----
-
-## Seção 1 — Resumo Executivo  ·  *(bloqueia freeze)*
-
-A StayFlow opera hoje com dois gargalos operacionais que crescem linearmente com o volume de reservas: o atendimento ao hóspede é 100% humano mesmo para perguntas de rotina, gerando fila, custo e insatisfação; o repasse financeiro ao hotel parceiro é executado manualmente, com erros de percentual que já ameaçaram dois contratos de parceria.
-
-Este RP define **duas capacidades que serão entregues juntas** sob o nome Concierge & Settlement:
-
-1. **Concierge Service** — atendimento automatizado ao hóspede na 1ª camada (IA), com handoff estruturado para especialista humano quando necessário, contexto de reserva em tempo real e filas de atendimento por categoria.
-2. **Settlement Service** — motor de split e repasse financeiro: cálculo automático (percentual por hotel), execução via Stripe Connect, idempotência por transação, tratamento de falhas, conciliação e exportação de dados para reconciliação contábil.
-
-O resultado esperado: resolver o risco imediato de rescisão do parceiro Gran Vista (repasse correto e confiável), reduzir CSAT de hóspede para ≥ 4,3/5, e criar uma base operacional que suporte o crescimento sem escalar custo de atendimento ou equipe financeira proporcionalmente.
-
-A demanda chegou como "chatbot + automação de repasse" — dois pedidos aparentemente simples. A passagem pelo intake revelou dois domínios com regras de negócio, edge cases, requisitos não-funcionais e integrações que, somados, representam esforço médio-grande. Este RP documenta o tamanho real do que precisa ser construído para que a solução seja confiável.
+> If an assumption carried here proves false during execution, the demand must be re-evaluated — the same re-triage trigger from intake applies downstream. In particular: if the migration to Stripe Connect reveals incompatibility with the per-hotel split model (old contracts with rules that Stripe does not support), the Settlement scope must be revisited with the CTO.
 
 ---
 
-## Seção 2 — Contexto e Problema (a dor, não a solução)  ·  *(bloqueia freeze)*
+## Section 1 — Executive Summary  ·  *(blocks freeze)*
 
-> **Regra de ouro:** problema antes da solução. Se esta seção descreve uma solução em vez do problema, ela não está satisfeita — o mesmo princípio que a Submitter aplica ao requisito 1 dela.
+StayFlow operates today with two operational bottlenecks that grow linearly with booking volume: guest support is 100% human even for routine questions, generating queues, cost, and dissatisfaction; financial remittances to partner hotels are executed manually, with percentage errors that have already threatened two partnership contracts.
 
-### Cenário Atual
+This RP defines **two capabilities that will be delivered together** under the name Concierge & Settlement:
 
-A StayFlow é uma OTA/marketplace: o hóspede reserva e paga pela plataforma; a StayFlow retém comissão e repassa o saldo ao hotel. Há dois fluxos operacionais que hoje são inteiramente manuais:
+1. **Concierge Service** — automated first-layer guest support (AI), with structured handoff to a human specialist when needed, real-time booking context, and support queues by category.
+2. **Settlement Service** — split and financial remittance engine: automatic calculation (per-hotel percentage), execution via Stripe Connect, per-transaction idempotency, failure handling, reconciliation, and data export for accounting reconciliation.
 
-**Atendimento:** quando um hóspede tem dúvida ou problema (status da reserva, confirmação de check-in, política de cancelamento, problemas com o quarto), abre um ticket no canal de atendimento. Todos os tickets chegam para os agentes humanos, independentemente da complexidade. Não há triagem, categorização automática, nem resposta automatizada.
+The expected outcome: resolve the immediate partner termination risk with Gran Vista (correct and reliable remittance), reduce guest CSAT to ≥ 4.3/5, and create an operational foundation that supports growth without scaling support cost or the finance team proportionally.
 
-**Repasse:** ao final de cada período (quinzena ou mês, conforme o contrato com o hotel), a equipe de FinOps exporta as reservas do período, consulta a planilha de percentuais de comissão por hotel, calcula o valor líquido, executa a TED manualmente e registra o pagamento em outra planilha. Cada hotel tem seu percentual de comissão e, em alguns casos, retenção de IR na fonte.
-
-### Limitações
-
-- **Sem triagem automática de atendimento:** qualquer pergunta vai para um agente humano. Perguntas de FAQ consomem o mesmo tempo de atendente que casos de cancelamento ou disputa financeira.
-- **Sem handoff com contexto:** quando um ticket é escalado de um canal para um especialista humano, o hóspede começa do zero — sem histórico da conversa, sem dados da reserva exibidos para o atendente.
-- **Sem persistência de contexto entre canais:** se o hóspede tentou resolver por e-mail antes de ligar, o agente não tem acesso a esse histórico.
-- **Cálculo de repasse 100% manual:** a lógica de split (percentual por hotel, retenção de IR) é executada por humanos em planilha a cada ciclo. Qualquer erro de digitação gera um repasse incorreto.
-- **Sem idempotência:** se um repasse for iniciado e falhar, não há garantia de que a retentativa não vai gerar um pagamento duplicado.
-- **Sem reconciliação automatizada:** não há cruzamento automático entre o valor esperado do repasse (com base nas reservas do período) e o valor efetivamente enviado.
-- **Sem tratamento de falha de pagamento:** quando uma TED falha, o processo de retentativa é manual e não estruturado.
-
-### Dor do Cliente
-
-**Hóspede:** espera em fila por até 4h nos picos de demanda para obter informações que estão disponíveis no sistema. Quando é transferido para um especialista, precisa repetir todo o histórico da ocorrência. CSAT médio de 3,8/5 reflete a frustração com o processo.
-
-**Hotel parceiro:** recebe repasses que, em 12% dos ciclos, têm valor diferente do esperado (erro de percentual ou cálculo). Sem um portal de transparência ou conciliação automática, o hotel só descobre o erro quando compara com seu próprio controle. Dois parceiros já ameaçaram rescisão; um chargeback foi absorvido pela StayFlow por ausência de cobertura contratual clara.
-
-**FinOps interno:** dedica ~18 horas por semana a tarefas mecânicas (exportar, calcular, executar TED, registrar). Com o crescimento de reservas, esse tempo crescerá linearmente — a menos que o processo seja automatizado.
-
-### Impacto de Negócio
-
-- Risco de perda de parceiros: estimativa de ~R$ 140k GMV/ano se os dois parceiros em risco rescindirem.
-- Custo crescente de atendimento: R$ 28k+/mês atual; escala com volume de reservas.
-- Exposição a penalidades contratuais: cláusula de 2% sobre valor de repasse incorreto em pelo menos um contrato.
-- CSAT de hóspede correlaciona com taxa de recompra — queda de satisfação compromete crescimento orgânico.
+The demand arrived as "chatbot + remittance automation" — two apparently simple requests. The passage through intake revealed two domains with business rules, edge cases, non-functional requirements, and integrations that, combined, represent medium-to-large effort. This RP documents the real size of what needs to be built for the solution to be reliable.
 
 ---
 
-## Seção 3 — Objetivos e Resultado Esperado  ·  *(bloqueia freeze)*
+## Section 2 — Context and Problem (the pain, not the solution)  ·  *(blocks freeze)*
 
-Objetivos numerados que esta entrega deve alcançar. Cada objetivo deve ser observável após o release.
+> **Golden rule:** problem before solution. If this section describes a solution instead of the problem, it is not satisfied — the same principle the Submitter applies to her Requirement 1.
 
-1. **Desafogar o time de atendimento** na 1ª camada: resolver automaticamente pelo menos 55% dos tickets de hóspedes sem intervenção humana, reduzindo fila e custo.
-2. **Melhorar CSAT de hóspede** para ≥ 4,3/5 em 60 dias pós-release, por meio de respostas mais rápidas e contextualizadas.
-3. **Zerar erros de percentual de repasse**: nenhum repasse executado com percentual diferente do contratado — taxa de repasse correto ≥ 99,5%.
-4. **Eliminar o risco de duplicidade de repasse** via idempotência por transação: zero casos de repasse duplicado em operação normal.
-5. **Reduzir carga manual do FinOps** no ciclo de repasse para < 4 horas/semana (de ~18h atual).
-6. **Proteger a confiança dos hotéis parceiros**: nenhuma rescisão por motivo de erro de repasse nos 90 dias pós-release.
-7. **Habilitar handoff com contexto completo**: quando um ticket for escalado do Concierge para um especialista, o especialista deve receber o histórico completo da conversa e os dados da reserva sem solicitar ao hóspede.
+### Current Scenario
+
+StayFlow is an OTA/marketplace: the guest books and pays through the platform; StayFlow retains a commission and remits the balance to the hotel. There are two operational flows that are currently entirely manual:
+
+**Support:** when a guest has a question or problem (booking status, check-in confirmation, cancellation policy, room issues), they open a ticket in the support channel. All tickets go to human agents, regardless of complexity. There is no triage, automatic categorization, or automated response.
+
+**Remittance:** at the end of each period (bi-weekly or monthly, as per the hotel contract), the FinOps team exports the bookings for the period, consults the commission percentage spreadsheet per hotel, calculates the net amount, executes the wire transfer manually, and records the payment in another spreadsheet. Each hotel has its commission percentage and, in some cases, withholding tax.
+
+### Limitations
+
+- **No automatic support triage:** any question goes to a human agent. FAQ questions consume the same agent time as cancellations or financial disputes.
+- **No handoff with context:** when a ticket is escalated from one channel to a human specialist, the guest starts from scratch — no conversation history, no booking data displayed to the agent.
+- **No context persistence across channels:** if the guest tried to resolve by email before calling, the agent has no access to that history.
+- **100% manual remittance calculation:** the split logic (percentage per hotel, withholding tax) is executed by humans in a spreadsheet each cycle. Any data entry error generates an incorrect remittance.
+- **No idempotency:** if a remittance is initiated and fails, there is no guarantee that the retry will not generate a duplicate payment.
+- **No automated reconciliation:** there is no automatic cross-check between the expected remittance amount (based on bookings for the period) and the amount actually sent.
+- **No payment failure handling:** when a wire transfer fails, the retry process is manual and unstructured.
+
+### Customer Pain
+
+**Guest:** waits in a queue for up to 4h during demand peaks for information that is available in the system. When transferred to a specialist, they must repeat the entire incident history. Average CSAT of 3.8/5 reflects frustration with the process.
+
+**Partner hotel:** receives remittances that, in 12% of cycles, have a different amount than expected (percentage or calculation error). Without a transparency portal or automatic reconciliation, the hotel only discovers the error when comparing with its own records. Two partners have already threatened termination; one chargeback was absorbed by StayFlow due to the absence of clear contractual coverage.
+
+**Internal FinOps:** dedicates ~18 hours per week to mechanical tasks (export, calculate, execute wire transfer, record). With booking growth, this time will grow linearly — unless the process is automated.
+
+### Business Impact
+
+- Partner loss risk: estimated ~R$ 140k GMV/year if the two at-risk partners terminate.
+- Growing support cost: R$ 28k+/month current; scales with booking volume.
+- Exposure to contractual penalties: 2% penalty clause on incorrect remittance amount in at least one contract.
+- Guest CSAT correlates with rebooking rate — satisfaction decline compromises organic growth.
 
 ---
 
-## Seção 4 — Personas Impactadas / Jobs-to-be-done  ·  *(bloqueia freeze)*
+## Section 3 — Objectives and Expected Outcome  ·  *(blocks freeze)*
 
-| Persona | Job-to-be-done | Impacto |
+Numbered objectives that this delivery must achieve. Each objective must be observable after the release.
+
+1. **Relieve the support team** at the first layer: automatically resolve at least 55% of guest tickets without human intervention, reducing queues and cost.
+2. **Improve guest CSAT** to ≥ 4.3/5 within 60 days post-release, through faster and more contextualized responses.
+3. **Eliminate remittance percentage errors**: no remittance executed with a different percentage than contracted — correct remittance rate ≥ 99.5%.
+4. **Eliminate the risk of duplicate remittance** via per-transaction idempotency: zero cases of duplicate remittance under normal operation.
+5. **Reduce FinOps manual workload** in the remittance cycle to < 4 hours/week (from ~18 hrs current).
+6. **Protect partner hotel trust**: no termination due to remittance errors in the 90 days post-release.
+7. **Enable handoff with full context**: when a ticket is escalated from the Concierge to a specialist, the specialist must receive the complete conversation history and booking data without asking the guest.
+
+---
+
+## Section 4 — Impacted Personas / Jobs-to-be-done  ·  *(blocks freeze)*
+
+| Persona | Job-to-be-done | Impact |
 |---|---|---|
-| **Hóspede** | Obter resposta rápida para dúvidas sobre sua reserva (status, check-in, cancelamento, problemas) sem esperar em fila. | Usuário primário do Concierge. Espera que o sistema entenda o contexto da *sua* reserva, não apenas responda FAQs genéricos. |
-| **Atendente especialista (CS)** | Focar nos casos que genuinamente precisam de julgamento humano (disputas, casos complexos, reclamações sérias) sem perder tempo em perguntas de rotina; receber o contexto completo quando o hóspede chegar escalado. | Usuário do sistema de filas + handoff. Precisa ver o histórico da conversa anterior e os dados da reserva do hóspede ao assumir o ticket. |
-| **Hotel parceiro** | Receber o valor correto do repasse, no prazo, com previsibilidade — e poder verificar o cálculo. | Beneficiário final do Settlement Service. Não interage diretamente com a plataforma (portal do parceiro está adiado), mas sente diretamente se o repasse for errado ou atrasado. |
-| **FinOps (StayFlow)** | Encerrar o ciclo de repasse de cada período com confiança de que todos os hotéis foram pagos corretamente, sem deduzir horas para tarefa manual. | Operador do Settlement Service. Precisa de visibilidade dos repasses executados, status por hotel, e exportação para reconciliação. |
-| **Gestor de CS / Operações** | Monitorar o desempenho do Concierge (taxa de resolução 1ª camada, CSAT, volume de escalações) e ajustar regras de escalonamento sem envolver engenharia. | Usuário do painel de gestão do Concierge (configuração de regras de escalonamento e relatórios). |
+| **Guest** | Get a quick response to questions about their booking (status, check-in, cancellation, issues) without waiting in a queue. | Primary user of the Concierge. Expects the system to understand the context of *their* booking, not just answer generic FAQs. |
+| **Specialist agent (CS)** | Focus on cases that genuinely need human judgment (disputes, complex cases, serious complaints) without losing time on routine questions; receive full context when the guest arrives escalated. | User of the queues + handoff system. Needs to see the prior conversation history and the guest's booking data when taking over the ticket. |
+| **Partner hotel** | Receive the correct remittance amount, on time, with predictability — and be able to verify the calculation. | Final beneficiary of the Settlement Service. Does not interact directly with the platform (partner portal deferred), but feels it directly if the remittance is wrong or late. |
+| **FinOps (StayFlow)** | Close each period's remittance cycle with confidence that all hotels were paid correctly, without spending hours on manual tasks. | Settlement Service operator. Needs visibility of executed remittances, status per hotel, and export for reconciliation. |
+| **CS / Operations Manager** | Monitor Concierge performance (first-layer resolution rate, CSAT, escalation volume) and adjust escalation rules without involving engineering. | User of the Concierge management panel (escalation rule configuration and reports). |
 
 ---
 
-## Seção 5 — Escopo Incluído e Excluído  ·  *(bloqueia freeze)*
+## Section 5 — Included and Excluded Scope  ·  *(blocks freeze)*
 
-> Protege o downstream de scope creep.
+> Protects the downstream from scope creep.
 
-### Incluído
+### Included
 
 **Concierge Service:**
-- Chatbot de 1ª camada alimentado por LLM, com base de conhecimento da StayFlow (FAQs, políticas de cancelamento, instruções de check-in, status de reservas)
-- Integração com API interna de reservas (`/reservations/{id}/context`) para responder com dados reais da reserva do hóspede
-- Regras de escalonamento configuráveis (por tipo de pergunta, por palavras-chave, por número de tentativas sem resolução, por solicitação explícita do hóspede)
-- Handoff para Zendesk: abertura automática de ticket com histórico completo da conversa + dados da reserva + categoria inferida
-- Filas de atendimento por categoria (financeiro, check-in/out, problemas com quarto, cancelamento) — atendentes especialistas recebem tickets já triados
-- CSAT coletado ao final de cada interação (Concierge e especialista)
-- Painel de gestão: taxa de resolução 1ª camada, volume de tickets por categoria, escalações por regra, CSAT por canal
-- Configuração de regras de escalonamento via interface (sem deploy de código)
+- First-layer LLM-powered chatbot, with StayFlow knowledge base (FAQs, cancellation policies, check-in instructions, booking status)
+- Integration with internal bookings API (`/reservations/{id}/context`) to respond with real booking data for the guest
+- Configurable escalation rules (by question type, by keywords, by number of unresolved attempts, by explicit guest request)
+- Handoff to Zendesk: automatic ticket creation with full conversation history + booking data + inferred category
+- Support queues by category (Financial, Stay (check-in/out), Room Issues, Cancellation, General) — specialist agents receive pre-triaged tickets
+- CSAT collected at the end of each interaction (Concierge and specialist)
+- Management panel: first-layer resolution rate, ticket volume by category, escalations by rule, CSAT by channel
+- Escalation rule configuration via interface (without code deployment)
 
 **Settlement Service:**
-- Motor de split: cálculo automático por reserva com base no percentual de comissão cadastrado por hotel
-- Campo de retenção de IR na fonte: configurável por hotel (sim/não + alíquota)
-- Integração com Stripe Connect: criação de connected accounts por hotel, execução do repasse, webhook de confirmação
-- Idempotência por transação: cada repasse tem uma chave de idempotência única — retentativas não geram duplicidade
-- Tratamento de falha de pagamento: retentativa automática (até 3 tentativas com backoff exponencial), alerta para FinOps após falha persistente
-- Ledger de transações: registro imutável de cada repasse (valor bruto, comissão retida, IR retido, valor líquido, status, timestamp)
-- Conciliação automática: cruzamento entre repasses esperados (reservas encerradas no período) e repasses executados, com relatório de divergências
-- Exportação de dados por hotel/período para reconciliação contábil (CSV/XLSX)
-- Painel FinOps: status de repasses do período corrente, hotéis com falha, histórico por hotel
+- Split engine: automatic calculation per booking based on the registered commission percentage per hotel
+- Withholding tax field: configurable per hotel (yes/no + rate)
+- Stripe Connect integration: creation of connected accounts per hotel, remittance execution, confirmation webhook
+- Per-transaction idempotency: each remittance has a unique idempotency key — retries do not generate duplicates
+- Payment failure handling: automatic retry (up to 3 attempts with exponential backoff), FinOps alert after persistent failure
+- Transaction ledger: immutable record of each remittance (gross amount, commission retained, withholding tax retained, net amount, status, timestamp)
+- Automatic reconciliation: cross-check between expected remittances (bookings closed in the period) and executed confirmed remittances, with divergence report
+- Data export per hotel/period for accounting reconciliation (CSV/XLSX)
+- FinOps panel: current period remittance status, hotels with failures, history per hotel
 
-### Excluído
+### Excluded
 
-- Portal do hotel parceiro (autoatendimento do hotel para consultar seus repasses e emitir NF) — adiado para Fase 2
-- Integração com emissão de NF do hotel — adiado para Fase 2 (cada hotel tem seu sistema fiscal)
-- Chatbot em canais adicionais (WhatsApp, app mobile) — Fase 1 foca no canal web (widget na plataforma StayFlow)
-- Substituição do Zendesk por outro sistema de helpdesk — fora de escopo
-- Multi-moeda — fora de escopo (operação 100% em BRL no momento)
-- Relatórios de BI avançados (dashboards históricos, análise de tendência, benchmarking) — Fase 2
-- Emissão automática de comprovante de repasse por e-mail ao hotel — Fase 2 (simples de fazer, mas adiado para não complicar o MVP)
+- Partner hotel portal (hotel self-service to view their remittances and issue invoices) — deferred to Phase 2
+- Integration with hotel invoice issuance — deferred to Phase 2 (each hotel has its own fiscal system)
+- Chatbot on additional channels (WhatsApp, mobile app) — Phase 1 focuses on web channel (widget on StayFlow platform)
+- Replacement of Zendesk with another helpdesk system — out of scope
+- Multi-currency — out of scope (100% BRL operation at the moment)
+- Advanced BI reports (historical dashboards, trend analysis, benchmarking) — Phase 2
+- Automatic remittance receipt sent by email to hotel — Phase 2 (simple to do, but deferred to avoid complicating the MVP)
 
-### Adiado (fases futuras)
+### Deferred (future phases)
 
-- Portal do parceiro com extrato de repasses e autoatendimento — Fase 2
-- Integração com emissor de NF do hotel (por CNPJ/regime tributário) — Fase 2
-- Chatbot em WhatsApp e app mobile — Fase 2
-- Analytics avançado de atendimento e financeiro — Fase 2
-- Notificação proativa ao hotel sobre repasse agendado — Fase 2
+- Partner portal with remittance statements and self-service — Phase 2
+- Integration with hotel invoice issuer (by tax ID/tax regime) — Phase 2
+- Chatbot on WhatsApp and mobile app — Phase 2
+- Advanced support and financial analytics — Phase 2
+- Proactive notification to hotel about scheduled remittance — Phase 2
 
 ---
 
-## Seção 6 — Regras de Negócio e Fluxos  ·  *(bloqueia freeze)*
+## Section 6 — Business Rules and Flows  ·  *(blocks freeze)*
 
-### Bloco 1 — Regras do Concierge Service
+### Block 1 — Concierge Service Rules
 
-**RN-C01.** O Concierge responde a perguntas de categoria: status de reserva, políticas de cancelamento, check-in/check-out, problemas com quarto, dúvidas de pagamento. Perguntas fora dessas categorias são escaladas automaticamente para o especialista.
+**BR-C01.** The Concierge responds to questions in these categories: booking status, cancellation policies, check-in/check-out, room issues, payment questions. Questions outside these categories are automatically escalated to the specialist.
 
-**RN-C02.** Para perguntas sobre reserva específica, o Concierge deve identificar o hóspede (via login ou token de sessão) e consumir a API de contexto antes de responder. Sem contexto, a resposta não pode ser personalizada — o sistema deve informar ao hóspede e oferecer escalação.
+**BR-C02.** For questions about a specific booking, the Concierge must identify the guest (via login or session token) and consume the context API before responding. Without context, the response cannot be personalized — the system must inform the guest and offer escalation.
 
-**RN-C03.** Escalonamento obrigatório quando: (a) o hóspede solicitar explicitamente falar com humano; (b) a mesma intenção não for resolvida após 2 tentativas do Concierge; (c) o conteúdo contiver palavras-chave de urgência (emergência, acidente, quarto invadido, criança, perigo); (d) a categoria inferida for "disputa financeira" ou "cancelamento com penalidade".
+**BR-C03.** Mandatory escalation when: (a) the guest explicitly requests to speak with a human; (b) the same intent is not resolved after 2 Concierge attempts; (c) the content contains urgency keywords (emergency, accident, room invaded, child, danger); (d) the inferred category is "financial dispute" or "cancellation with penalty."
 
-**RN-C04.** No handoff para especialista: o Concierge fecha a conversa no canal do bot e abre um ticket no Zendesk contendo: (a) transcrição completa da conversa com timestamps; (b) dados da reserva via API de contexto (guest_name, hotel_name, check_in, check_out, status, booking_id, room_type); (c) categoria inferida; (d) motivo de escalonamento; (e) identificador do hóspede.
+**BR-C04.** On handoff to specialist: the Concierge closes the conversation on the bot channel and opens a ticket in Zendesk containing: (a) full conversation transcript with timestamps; (b) booking data via context API (guest_name, hotel_name, check_in, check_out, status, booking_id, room_type); (c) inferred category; (d) escalation reason; (e) guest identifier.
 
-**RN-C05.** Filas de Zendesk por categoria: Financeiro, Hospedagem (check-in/out), Problemas com Quarto, Cancelamento, Geral. A categoria inferida pelo Concierge determina a fila de destino. O gestor de CS pode reconfigurar as regras de categorização via interface de gestão sem deploy de código.
+**BR-C05.** Zendesk queues by category: Financial, Stay (check-in/out), Room Issues, Cancellation, General. The category inferred by the Concierge determines the target queue. The CS manager can reconfigure the categorization rules via the management interface without code deployment.
 
-**RN-C06.** CSAT é coletado ao final de toda interação — tanto do Concierge (bot) quanto do especialista (Zendesk). A nota do Concierge é separada da nota do especialista. Interações de handoff geram dois registros de CSAT separados.
+**BR-C06.** CSAT is collected at the end of every interaction — both from the Concierge (bot) and from the specialist (Zendesk). The Concierge score is separate from the specialist score. Handoff interactions generate two separate CSAT records.
 
-**RN-C07.** O Concierge não tem autoridade para executar ações transacionais (cancelar reserva, emitir reembolso, alterar datas). Para todas essas ações, escala para especialista. O Concierge informa, explica e orienta — nunca executa.
+**BR-C07.** The Concierge has no authority to execute transactional actions (cancel booking, issue refund, change dates). For all such actions, it escalates to a specialist. The Concierge informs, explains, and guides — it never executes.
 
-**RN-C08.** Se a API de contexto de reservas estiver indisponível (timeout > 2s ou erro 5xx), o Concierge responde com as informações que tiver (sem personalização de reserva) e informa o hóspede da limitação temporária. Não bloqueia a conversa.
+**BR-C08.** If the booking context API is unavailable (timeout > 2s or 5xx error), the Concierge responds with what it knows (without booking personalization) and informs the guest of the temporary limitation. It does not block the conversation.
 
-### Bloco 2 — Regras do Settlement Service
+### Block 2 — Settlement Service Rules
 
-**RN-S01.** Cada repasse é calculado por reserva: `valor_repasse = valor_total_reserva × (1 - percentual_comissão_hotel) - IR_retido (se aplicável)`. O percentual de comissão é o registrado no cadastro do hotel no momento do cálculo — não é retroativo.
+**BR-S01.** Each remittance is calculated per booking: `remittance_amount = total_booking_amount × (1 - hotel_commission_percentage) - withholding_tax (if applicable)`. The commission percentage is the one registered in the hotel's record at the time of calculation — it is not retroactive.
 
-**RN-S02.** O repasse é executado somente para reservas com status `check-out concluído` e `pagamento do hóspede confirmado`. Reservas canceladas com reembolso integral não geram repasse. Cancelamentos com penalidade geram repasse proporcional à penalidade cobrada.
+**BR-S02.** The remittance is executed only for bookings with status `check-out completed` and `guest payment confirmed`. Bookings cancelled with full refund do not generate a remittance. Cancellations with penalty generate a remittance proportional to the penalty charged.
 
-**RN-S03.** Cada repasse tem uma `idempotency_key` gerada a partir de `hotel_id + periodo + hash(reservas)`. A mesma chave em tentativas repetidas garante exatamente um repasse executado — o Stripe Connect rejeitará a duplicata.
+**BR-S03.** Each remittance has an `idempotency_key` generated from `hotel_id + period + hash(bookings)`. The same key in repeated attempts guarantees exactly one executed remittance — Stripe Connect will reject the duplicate.
 
-**RN-S04.** Ciclo de repasse: configurável por hotel (quinzenal ou mensal). O trigger pode ser automático (data do ciclo) ou manual (FinOps). O disparo manual sempre exige confirmação explícita do operador antes da execução.
+**BR-S04.** Remittance cycle: configurable per hotel (bi-weekly or monthly). The trigger can be automatic (cycle date) or manual (FinOps). Manual triggering always requires explicit operator confirmation before execution.
 
-**RN-S05.** Tratamento de falha de repasse: retentativa automática em 1h, 4h e 24h (backoff exponencial). Após 3 falhas, o repasse é marcado como `falha_persistente` e o FinOps recebe alerta com detalhes da falha. O hotel não é notificado automaticamente sobre a falha — isso é feito pelo FinOps após triagem.
+**BR-S05.** Remittance failure handling: automatic retry at 1h, 4h, and 24h (exponential backoff). After 3 failures, the remittance is marked as `persistent_failure` and FinOps receives an alert with failure details. The hotel is not automatically notified of the failure — this is done by FinOps after triage.
 
-**RN-S06.** Retenção de IR na fonte: se o hotel tiver o campo `retencao_ir = true` + `aliquota_ir`, o valor retido é calculado sobre o valor do repasse líquido e registrado no ledger. O FinOps é responsável por recolher o IR. O sistema calcula e registra — não recolhe.
+**BR-S06.** Withholding tax: if the hotel has the field `withholding_tax = true` + `tax_rate`, the withheld amount is calculated on the net remittance amount and registered in the ledger. FinOps is responsible for remitting the tax. The system calculates and records — it does not remit.
 
-**RN-S07.** Reconciliação automática: após cada ciclo de repasse, o sistema compara o total de repasses esperados (soma das reservas encerradas no período × percentual por hotel) com o total de repasses executados confirmados. Qualquer divergência > 0,01% do valor total gera um alerta automático para o FinOps.
+**BR-S07.** Automatic reconciliation: after each remittance cycle, the system compares the total expected remittances (sum of bookings closed in the period × percentage per hotel) with the total confirmed executed remittances. Any divergence > 0.01% of the total amount generates an automatic alert to FinOps.
 
-**RN-S08.** Repasse parcial: não permitido. Se uma reserva tiver disputa aberta (chargeback em andamento), ela não entra no ciclo de repasse até resolução da disputa. O FinOps recebe alerta de reservas bloqueadas no ciclo.
+**BR-S08.** Partial remittance: not permitted. If a booking has an open dispute (chargeback in progress), it does not enter the remittance cycle until the dispute is resolved. FinOps receives an alert about bookings blocked in the cycle.
 
-**RN-S09.** Se o percentual de comissão cadastrado diferir do percentual no contrato do hotel (detectado por auditoria manual ou por reclamação do hotel), o repasse não pode ser reprocessado retroativamente de forma automática — exige aprovação do FinOps com registro de justificativa. O sistema expõe a divergência, mas não corrige automaticamente.
+**BR-S09.** If the registered commission percentage differs from the percentage in the hotel contract (detected by manual audit or hotel complaint), the remittance cannot be reprocessed retroactively automatically — requires FinOps approval with a recorded rationale. The system exposes the divergence, but does not auto-correct.
 
-**RN-S10.** O ledger é imutável: nenhum registro pode ser editado ou excluído após a inserção. Correções são feitas via lançamentos de ajuste com referência ao registro original.
+**BR-S10.** The ledger is immutable: no record can be edited or deleted after insertion. Corrections are made via adjustment entries with a reference to the original record.
 
-### Fluxo de Transição de Estado — Concierge
+### State Transition Flow — Concierge
 
 ```text
-Hóspede inicia contato
+Guest initiates contact
     ↓
-Concierge identifica o hóspede (token de sessão ou login)
+Concierge identifies guest (session token or login)
     ↓
-Concierge consulta API de contexto (/reservations/{id}/context)
-    ↓ (se disponível)
-Concierge categoriza a intenção da pergunta
+Concierge queries context API (/reservations/{id}/context)
+    ↓ (if available)
+Concierge categorizes the question intent
     ↓
-[Resolução direta]
-  Concierge responde com base no contexto + base de conhecimento
+[Direct resolution]
+  Concierge responds based on context + knowledge base
     ↓
-  Hóspede satisfeito? → CSAT coletado → Conversa encerrada
-    ↓ (se não resolvido após 2 tentativas ou regra de escalonamento)
-[Escalonamento]
-  Concierge abre ticket no Zendesk (transcrição + contexto + categoria + motivo)
+  Guest satisfied? → CSAT collected → Conversation closed
+    ↓ (if not resolved after 2 attempts or escalation rule)
+[Escalation]
+  Concierge opens ticket in Zendesk (transcript + context + category + reason)
     ↓
-  Ticket roteado para fila correta (por categoria)
+  Ticket routed to correct queue (by category)
     ↓
-  Especialista assume o ticket com contexto completo
+  Specialist takes over ticket with full context
     ↓
-  Especialista resolve → CSAT coletado → Ticket encerrado
+  Specialist resolves → CSAT collected → Ticket closed
 ```
 
-### Fluxo de Transição de Estado — Settlement
+### State Transition Flow — Settlement
 
 ```text
-Trigger do ciclo de repasse (automático ou manual)
+Remittance cycle trigger (automatic or manual)
     ↓
-Sistema busca reservas com check-out no período E pagamento confirmado
+System fetches bookings with check-out in the period AND payment confirmed
     ↓
-Para cada hotel: calcula repasse = reservas × (1 - comissão) - IR retido
+For each hotel: calculates remittance = bookings × (1 - commission) - withholding tax
     ↓
-Gera idempotency_key por hotel + período
+Generates idempotency_key per hotel + period
     ↓
-Executa via Stripe Connect (connected account do hotel)
+Executes via Stripe Connect (hotel's connected account)
     ↓
-[Sucesso] → Webhook de confirmação → Ledger atualizado → Status: repasse_confirmado
+[Success] → Confirmation webhook → Ledger updated → Status: remittance_confirmed
     ↓
-[Falha] → Retentativa 1h / 4h / 24h
-    ↓ (se 3 falhas)
-Status: falha_persistente → Alerta FinOps
+[Failure] → Retry 1h / 4h / 24h
+    ↓ (if 3 failures)
+Status: persistent_failure → FinOps alert
     ↓
-Reconciliação: total esperado vs. total confirmado
-    ↓ (se divergência > 0,01%)
-Alerta de divergência → FinOps revisa
+Reconciliation: total expected vs. total confirmed
+    ↓ (if divergence > 0.01%)
+Divergence alert → FinOps reviews
     ↓
-Exportação de dados do período por hotel (CSV/XLSX)
+Data export for the period per hotel (CSV/XLSX)
 ```
 
 ---
 
-## Seção 7 — User Stories + Critérios de Aceite  ·  *(bloqueia freeze)*
+## Section 7 — User Stories + Acceptance Criteria  ·  *(blocks freeze)*
 
-> Uma história por bloco de valor. Critério de aceite **verificável por não-dev**, no formato Given/When/Then, com limites específicos.
+> One story per value block. Acceptance criterion **verifiable by a non-dev**, in Given/When/Then format, with specific limits.
 
-### ST-001 — Resposta contextualizada do Concierge
+### ST-001 — Contextualized Concierge response
 
-**Como** hóspede com uma reserva ativa,  
-**quero** receber uma resposta sobre minha reserva específica (status, check-in, etc.) sem precisar repetir meus dados,  
-**para que** eu resolva minha dúvida sem esperar em fila de atendimento humano.
+**As** a guest with an active booking,  
+**I want** to receive a response about my specific booking (status, check-in, etc.) without having to repeat my data,  
+**so that** I can resolve my question without waiting in a human support queue.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que um hóspede autenticado inicia uma conversa no Concierge, **quando** ele pergunta sobre o status da sua reserva, **então** o Concierge responde com os dados reais da reserva (nome do hotel, data de check-in/out, status) buscados via API de contexto em até 3 segundos.
-- [ ] **Dado** que o Concierge recebe uma pergunta sobre política de cancelamento, **quando** a reserva do hóspede está a mais de 48h do check-in, **então** o Concierge informa a política de cancelamento sem penalidade e os passos para solicitar, sem escalar para humano.
-- [ ] **Dado** que a API de contexto retorna erro 5xx, **quando** o hóspede pergunta sobre sua reserva, **então** o Concierge informa que não consegue acessar os dados no momento e oferece escalonamento para especialista ou contato posterior — sem travar a conversa ou apresentar mensagem de erro técnico.
+**Acceptance Criteria:**
+- [ ] **Given** an authenticated guest initiates a conversation in the Concierge, **when** they ask about their booking status, **then** the Concierge responds with the real booking data (hotel name, check-in/out date, status) fetched via the context API within 3 seconds.
+- [ ] **Given** the Concierge receives a question about cancellation policy, **when** the guest's booking is more than 48 hours from check-in, **then** the Concierge informs the penalty-free cancellation policy and the steps to request it, without escalating to a human.
+- [ ] **Given** the context API returns a 5xx error, **when** the guest asks about their booking, **then** the Concierge informs that it cannot access the data at the moment and offers escalation to a specialist or later contact — without freezing the conversation or displaying a technical error message.
 
-### ST-002 — Escalonamento com contexto para especialista
+### ST-002 — Escalation with context to specialist
 
-**Como** atendente especialista de CS,  
-**quero** receber um ticket de Concierge já com o histórico da conversa e os dados da reserva do hóspede,  
-**para que** eu possa retomar o caso sem pedir ao hóspede que repita o histórico.
+**As** a CS specialist agent,  
+**I want** to receive a Concierge ticket already with the conversation history and the guest's booking data,  
+**so that** I can resume the case without asking the guest to repeat the history.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que o Concierge escala um ticket para o Zendesk, **quando** o atendente abre o ticket, **então** ele deve ver: (a) transcrição completa da conversa com timestamps, (b) dados da reserva (nome do hóspede, hotel, check-in/out, status, booking_id, tipo de quarto), (c) categoria inferida pelo Concierge, (d) motivo do escalonamento.
-- [ ] **Dado** que o ticket é criado com categoria "Financeiro", **quando** ele chega ao Zendesk, **então** ele é roteado automaticamente para a fila de Financeiro — sem ação manual do operador.
-- [ ] **Dado** que o hóspede solicitou explicitamente falar com um humano, **quando** o ticket é criado, **então** o campo "motivo_escalonamento" deve registrar "solicitação_do_hóspede" (não "não_resolvido").
+**Acceptance Criteria:**
+- [ ] **Given** the Concierge escalates a ticket to Zendesk, **when** the agent opens the ticket, **then** they must see: (a) full conversation transcript with timestamps, (b) booking data (guest name, hotel, check-in/out, status, booking_id, room type), (c) category inferred by the Concierge, (d) escalation reason.
+- [ ] **Given** the ticket is created with category "Financial", **when** it arrives in Zendesk, **then** it is automatically routed to the Financial queue — without manual operator action.
+- [ ] **Given** the guest explicitly requested to speak with a human, **when** the ticket is created, **then** the `escalation_reason` field must record "guest_request" (not "unresolved").
 
-### ST-003 — Coleta de CSAT pós-atendimento
+### ST-003 — CSAT collection post-interaction
 
-**Como** gestor de CS/Operações,  
-**quero** que o CSAT seja coletado ao final de cada interação (Concierge e especialista),  
-**para que** eu possa monitorar a qualidade separadamente por canal e identificar onde a experiência está falhando.
+**As** a CS/Operations manager,  
+**I want** CSAT to be collected at the end of each interaction (Concierge and specialist),  
+**so that** I can monitor quality separately by channel and identify where the experience is failing.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que uma conversa do Concierge é encerrada (resolvida ou escalada), **quando** o encerramento ocorre, **então** o hóspede recebe uma mensagem de CSAT com escala de 1 a 5 — e a nota fica disponível no painel de gestão em até 5 minutos.
-- [ ] **Dado** que um ticket do Zendesk é encerrado pelo especialista, **quando** o status muda para "Resolvido", **então** o Zendesk dispara a pesquisa de CSAT do especialista — nota separada da do Concierge para o mesmo caso.
-- [ ] **Dado** que um hóspede não responde à pesquisa de CSAT em 24h, **então** o caso é contabilizado como "sem resposta" — não como zero — no painel de gestão.
+**Acceptance Criteria:**
+- [ ] **Given** a Concierge conversation is closed (resolved or escalated), **when** the closure occurs, **then** the guest receives a CSAT message with a 1-to-5 scale — and the score is available in the management panel within 5 minutes.
+- [ ] **Given** a Zendesk ticket is closed by the specialist, **when** the status changes to "Resolved", **then** Zendesk triggers the specialist CSAT survey — score separate from the Concierge score for the same case.
+- [ ] **Given** a guest does not respond to the CSAT survey within 24 hours, **then** the case is counted as "no response" — not as zero — in the management panel.
 
-### ST-004 — Configuração de regras de escalonamento pelo gestor
+### ST-004 — Escalation rule configuration by manager
 
-**Como** gestor de CS/Operações,  
-**quero** ajustar as regras que definem quando o Concierge escala para um especialista (palavras-chave, número de tentativas, categorias),  
-**para que** eu possa refinar o comportamento sem precisar acionar engenharia para cada ajuste.
+**As** a CS/Operations manager,  
+**I want** to adjust the rules that define when the Concierge escalates to a specialist (keywords, number of attempts, categories),  
+**so that** I can refine behavior without having to involve engineering for each adjustment.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que o gestor acessa o painel de gestão do Concierge, **quando** ele edita uma regra de escalonamento (ex.: adiciona uma palavra-chave de urgência), **então** a regra passa a valer na próxima conversa — sem necessidade de deploy de código.
-- [ ] **Dado** que o gestor define que "categoria: disputa financeira" sempre escala imediatamente, **quando** o Concierge categoriza uma pergunta como "disputa financeira", **então** o escalonamento ocorre sem tentar resolver na 1ª camada.
-- [ ] **Dado** que uma configuração inválida é submetida (ex.: número de tentativas = 0), **quando** o gestor tenta salvar, **então** o sistema exibe mensagem de validação e não salva a configuração inválida.
+**Acceptance Criteria:**
+- [ ] **Given** the manager accesses the Concierge management panel, **when** they edit an escalation rule (e.g., adds an urgency keyword), **then** the rule takes effect in the next conversation — without needing code deployment.
+- [ ] **Given** the manager defines that "category: financial dispute" always escalates immediately, **when** the Concierge categorizes a question as "financial dispute", **then** the escalation occurs without attempting to resolve at the first layer.
+- [ ] **Given** an invalid configuration is submitted (e.g., number of attempts = 0), **when** the manager tries to save, **then** the system displays a validation message and does not save the invalid configuration.
 
-### ST-005 — Cálculo automático do repasse
+### ST-005 — Automatic remittance calculation
 
-**Como** FinOps,  
-**quero** que o sistema calcule o repasse de cada hotel automaticamente com base nas reservas encerradas no período e no percentual de comissão do contrato,  
-**para que** eu não precise calcular manualmente e o risco de erro humano seja eliminado.
+**As** FinOps,  
+**I want** the system to automatically calculate the remittance for each hotel based on bookings closed in the period and the contract commission percentage,  
+**so that** I don't have to calculate manually and the risk of human error is eliminated.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que o ciclo de repasse é disparado (automático ou manual), **quando** o sistema processa as reservas do período de um hotel, **então** o valor calculado por reserva deve ser exatamente `valor_total × (1 - percentual_comissão) - IR_retido` — verificável via relatório de cálculo exportável.
-- [ ] **Dado** que o percentual de comissão de um hotel é 15% e a reserva foi de R$ 1.000,00, **quando** o repasse é calculado (sem IR), **então** o valor do repasse deve ser exatamente R$ 850,00 — sem arredondamentos incorretos.
-- [ ] **Dado** que um hotel tem `retencao_ir = true` com alíquota de 1,5%, **quando** o repasse de R$ 850,00 é calculado, **então** o IR retido deve ser R$ 12,75 e o repasse líquido R$ 837,25 — ambos registrados no ledger com itens separados.
+**Acceptance Criteria:**
+- [ ] **Given** the remittance cycle is triggered (automatic or manual), **when** the system processes the bookings for the period of a hotel, **then** the amount calculated per booking must be exactly `total_amount × (1 - commission_percentage) - withholding_tax` — verifiable via an exportable calculation report.
+- [ ] **Given** a hotel's commission percentage is 15% and the booking was R$ 1,000.00, **when** the remittance is calculated (without withholding tax), **then** the remittance amount must be exactly R$ 850.00 — without incorrect rounding.
+- [ ] **Given** a hotel has `withholding_tax = true` with a rate of 1.5%, **when** the remittance of R$ 850.00 is calculated, **then** the withheld tax must be R$ 12.75 and the net remittance R$ 837.25 — both recorded in the ledger with separate line items.
 
-### ST-006 — Idempotência do repasse
+### ST-006 — Remittance idempotency
 
-**Como** FinOps,  
-**quero** que um repasse executado nunca seja duplicado, mesmo em caso de falha e retentativa,  
-**para que** um hotel nunca receba o mesmo repasse duas vezes.
+**As** FinOps,  
+**I want** an executed remittance to never be duplicated, even in case of failure and retry,  
+**so that** a hotel never receives the same remittance twice.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que um repasse foi executado com sucesso e confirmado pelo webhook do Stripe, **quando** o mesmo ciclo é disparado novamente (por erro ou retentativa manual), **então** o sistema identifica a `idempotency_key` duplicada e retorna o resultado do repasse original — sem executar novo pagamento.
-- [ ] **Dado** que um repasse falhou na primeira tentativa e a retentativa é disparada em 1h, **quando** a retentativa usa a mesma `idempotency_key`, **então** o Stripe Connect trata como a mesma transação — sem pagamento duplicado, mesmo se a primeira tentativa tiver sido parcialmente processada.
-- [ ] **Dado** que dois operadores disparam manualmente o ciclo do mesmo hotel no mesmo período simultaneamente, **quando** ambas as requisições chegam, **então** somente uma é processada — a segunda retorna erro de conflito com referência ao repasse original.
+**Acceptance Criteria:**
+- [ ] **Given** a remittance was successfully executed and confirmed by the Stripe webhook, **when** the same cycle is triggered again (by error or manual retry), **then** the system identifies the duplicate `idempotency_key` and returns the result of the original remittance — without executing a new payment.
+- [ ] **Given** a remittance failed on the first attempt and the retry is triggered in 1h, **when** the retry uses the same `idempotency_key`, **then** Stripe Connect treats it as the same transaction — without duplicate payment, even if the first attempt was partially processed.
+- [ ] **Given** two operators manually trigger the cycle for the same hotel in the same period simultaneously, **when** both requests arrive, **then** only one is processed — the second returns a conflict error with reference to the original remittance.
 
-### ST-007 — Tratamento de falha de repasse
+### ST-007 — Remittance failure handling
 
-**Como** FinOps,  
-**quero** ser alertado quando um repasse falhar após todas as retentativas,  
-**para que** eu possa intervir manualmente e resolver antes que o hotel seja prejudicado.
+**As** FinOps,  
+**I want** to be alerted when a remittance fails after all retries,  
+**so that** I can intervene manually and resolve before the hotel is harmed.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que um repasse falha na execução, **quando** a falha ocorre, **então** o sistema agenda automaticamente retentativas em 1h, 4h e 24h — sem intervenção manual.
-- [ ] **Dado** que as 3 retentativas automáticas falharam, **quando** a terceira falha ocorre, **então** o FinOps recebe alerta (e-mail + notificação no painel) com: hotel, período, valor esperado, motivo da falha, e link para ação manual.
-- [ ] **Dado** que um repasse está em status `falha_persistente`, **quando** o FinOps aciona o repasse manual pelo painel com confirmação explícita, **então** uma nova tentativa é executada com nova `idempotency_key` baseada no timestamp da ação manual — registrada no ledger como "repasse_manual" com identificação do operador.
+**Acceptance Criteria:**
+- [ ] **Given** a remittance fails on execution, **when** the failure occurs, **then** the system automatically schedules retries at 1h, 4h, and 24h — without manual intervention.
+- [ ] **Given** all 3 automatic retries failed, **when** the third failure occurs, **then** FinOps receives an alert (email + panel notification) with: hotel, period, expected amount, failure reason, and link for manual action.
+- [ ] **Given** a remittance is in status `persistent_failure`, **when** FinOps triggers the manual remittance from the panel with explicit confirmation, **then** a new attempt is executed with a new `idempotency_key` based on the timestamp of the manual action — recorded in the ledger as "manual_remittance" with the operator's identification.
 
-### ST-008 — Conciliação automática
+### ST-008 — Automatic reconciliation
 
-**Como** FinOps,  
-**quero** que o sistema compare automaticamente o total de repasses esperados com o total executado após cada ciclo,  
-**para que** eu identifique rapidamente qualquer divergência sem precisar fazer a conferência manualmente.
+**As** FinOps,  
+**I want** the system to automatically compare the total expected remittances with the total executed after each cycle,  
+**so that** I can quickly identify any divergence without having to perform the check manually.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que o ciclo de repasse é concluído, **quando** todos os repasses do período foram processados (ou marcados como `falha_persistente`), **então** o sistema gera automaticamente o relatório de conciliação com: total esperado por hotel, total executado por hotel, divergência em R$ e %, status por hotel.
-- [ ] **Dado** que a divergência de um hotel supera 0,01% do valor esperado, **quando** o relatório é gerado, **então** o sistema destaca a linha e envia alerta ao FinOps — independente do valor absoluto.
-- [ ] **Dado** que a conciliação está 100% correta (sem divergências), **quando** o relatório é gerado, **então** ele exibe "sem divergências" de forma clara — e o FinOps pode exportar como evidência de auditoria.
+**Acceptance Criteria:**
+- [ ] **Given** the remittance cycle is completed, **when** all remittances for the period have been processed (or marked as `persistent_failure`), **then** the system automatically generates the reconciliation report with: total expected per hotel, total executed per hotel, divergence in R$ and %, status per hotel.
+- [ ] **Given** a hotel's divergence exceeds 0.01% of the expected amount, **when** the report is generated, **then** the system highlights the row and sends an alert to FinOps — regardless of the absolute amount.
+- [ ] **Given** the reconciliation is 100% correct (no divergences), **when** the report is generated, **then** it displays "no divergences" clearly — and FinOps can export it as audit evidence.
 
-### ST-009 — Exportação de dados por hotel
+### ST-009 — Data export per hotel
 
-**Como** FinOps,  
-**quero** exportar os dados do ciclo de repasse por hotel e por período em formato estruturado,  
-**para que** eu possa fornecer os dados para a contabilidade e para que o hotel possa emitir as NFs correspondentes.
+**As** FinOps,  
+**I want** to export the remittance cycle data per hotel and per period in a structured format,  
+**so that** I can provide the data to accounting and so the hotel can issue the corresponding invoices.
 
-**Critérios de Aceite:**
-- [ ] **Dado** que o FinOps seleciona um hotel e um período no painel, **quando** solicita a exportação, **então** o sistema gera um arquivo CSV/XLSX com: booking_id, valor_total_reserva, percentual_comissão, valor_comissão, IR_retido, valor_repasse_líquido, data_repasse, status_repasse — uma linha por reserva.
-- [ ] **Dado** que o hotel tem reservas canceladas com penalidade no período, **quando** os dados são exportados, **então** as reservas canceladas com penalidade aparecem com o valor proporcional à penalidade cobrada — distintas das reservas sem penalidade.
-- [ ] **Dado** que uma exportação é solicitada para um período sem repasses executados, **quando** o sistema processa a solicitação, **então** retorna arquivo vazio com cabeçalho (não erro) e exibe mensagem "sem repasses para o período selecionado".
+**Acceptance Criteria:**
+- [ ] **Given** FinOps selects a hotel and a period in the panel, **when** they request the export, **then** the system generates a CSV/XLSX file with: booking_id, total_booking_amount, commission_percentage, commission_amount, withholding_tax, net_remittance_amount, remittance_date, remittance_status — one row per booking.
+- [ ] **Given** the hotel has cancelled bookings with penalty in the period, **when** the data is exported, **then** cancelled bookings with penalty appear with the amount proportional to the penalty charged — distinct from bookings without penalty.
+- [ ] **Given** an export is requested for a period with no executed remittances, **when** the system processes the request, **then** it returns an empty file with header (not an error) and displays the message "no remittances for the selected period."
 
 ---
 
-## Seção 8 — Requisitos Não-Funcionais (NFRs)  ·  *(bloqueia freeze)*
+## Section 8 — Non-Functional Requirements (NFRs)  ·  *(blocks freeze)*
 
-> A lacuna nº 1 que causa retrabalho. Preencher apenas as dimensões aplicáveis. Aqui o PO descreve o **requisito de qualidade**; a viabilidade e o *como* são do Technical Assessment.
+> The #1 gap that causes rework. Fill in only the applicable dimensions. Here the PO describes the **quality requirement**; feasibility and *how* belong to the Technical Assessment.
 
-| Dimensão | Requisito | Como será verificado |
+| Dimension | Requirement | How it will be verified |
 |---|---|---|
-| **Performance / Eficiência** | Resposta do Concierge: primeira resposta em < 3s para perguntas sem consulta à API de contexto; < 5s com consulta à API. Execução de repasse individual: < 10s por hotel por ciclo (ex-tempo de resposta do Stripe). | Testes de carga com volume simulado de tickets; medição de latência no ambiente de staging. |
-| **Confiabilidade** | Concierge: disponibilidade ≥ 99,5% (exceto manutenções programadas). Settlement Service: disponibilidade ≥ 99,9% nos dias de ciclo de repasse. Falha no Concierge não deve afetar o Settlement e vice-versa. | Monitoramento com alertas de downtime; SLA medido mensalmente. |
-| **Segurança** | Dados de pagamento do hóspede não são armazenados pelo Settlement Service — trafegam exclusivamente pelo Stripe (PCI DSS). Logs do Concierge não devem armazenar números de cartão, senhas ou dados sensíveis de pagamento. Acesso ao painel de gestão e ao painel FinOps por autenticação SSO/MFA. Ledger imutável — sem UPDATE/DELETE nos registros financeiros. | Auditoria de logs; revisão de código de segurança; teste de penetração no fluxo de pagamento antes do go-live. |
-| **Idempotência** (requisito de produto) | Toda transação do Settlement Service deve ser idempotente: a mesma operação executada N vezes produz exatamente o mesmo resultado que 1 vez. Esse é um **requisito de produto**, não apenas técnico — a StayFlow assume contratualmente que não pagará dois vezes o mesmo repasse. | Testes de idempotência com chaves duplicadas em staging; simulação de falhas parciais. |
-| **Usabilidade** | O gestor de CS deve conseguir configurar uma regra de escalonamento simples sem treinamento técnico (máx. 10 minutos da 1ª vez). O FinOps deve conseguir disparar um ciclo de repasse manual em até 3 cliques no painel. | Teste de usabilidade com o gestor de CS e com o FinOps antes do release. |
-| **Compatibilidade** | Concierge: widget funcional nos navegadores Chrome, Firefox, Safari (versões dos últimos 2 anos), em desktop e mobile (layout responsivo — sem app nativo). | Testes cross-browser no ambiente de QA. |
-| **Manutenibilidade** | Regras de escalonamento do Concierge devem ser configuráveis via interface (sem deploy de código). Percentuais de comissão por hotel devem ser editáveis pelo FinOps via painel administrativo (sem alterar banco de dados diretamente). Feature flags para rollout gradual de cada serviço (Concierge e Settlement independentes). | Revisão de configuração no painel de gestão; verificação de flags no deploy. |
-| **Auditabilidade** | Toda operação financeira (cálculo, execução, falha, retentativa, ajuste) deve ser registrada no ledger com timestamp, operador (se humano) e referências cruzadas. Exportável para fins de auditoria. | Revisão do ledger em ambiente de staging após simulação de ciclo completo. |
+| **Performance / Efficiency** | Concierge response: first response in < 3s for questions without context API query; < 5s with API query. Individual remittance execution: < 10s per hotel per cycle (excluding Stripe response time). | Load tests with simulated ticket volume; latency measurement in staging environment. |
+| **Reliability** | Concierge: availability ≥ 99.5% (excluding scheduled maintenance). Settlement Service: availability ≥ 99.9% on remittance cycle days. Concierge failure must not affect Settlement and vice versa. | Monitoring with downtime alerts; SLA measured monthly. |
+| **Security** | Guest payment data is not stored by the Settlement Service — flows exclusively through Stripe (PCI DSS). Concierge logs must not store card numbers, passwords, or sensitive payment data. Access to the management panel and FinOps panel via SSO/MFA authentication. Immutable ledger — no UPDATE/DELETE on financial records. | Log audit; security code review; penetration testing on the payment flow before go-live. |
+| **Idempotency** (product requirement) | Every Settlement Service transaction must be idempotent: the same operation executed N times produces exactly the same result as 1 time. This is a **product requirement**, not just technical — StayFlow contractually assumes it will not pay the same remittance twice. | Idempotency tests with duplicate keys in staging; partial failure simulation. |
+| **Usability** | The CS manager must be able to configure a simple escalation rule without technical training (max. 10 minutes the first time). FinOps must be able to trigger a manual remittance cycle in up to 3 clicks in the panel. | Usability test with the CS manager and FinOps before release. |
+| **Compatibility** | Concierge: widget functional in Chrome, Firefox, Safari (versions from the last 2 years), on desktop and mobile (responsive layout — no native app). | Cross-browser tests in QA environment. |
+| **Maintainability** | Concierge escalation rules must be configurable via interface (without code deployment). Commission percentages per hotel must be editable by FinOps via admin panel (without directly modifying the database). Feature flags for gradual rollout of each service (Concierge and Settlement independent). | Configuration review in the management panel; flag verification at deployment. |
+| **Auditability** | Every financial operation (calculation, execution, failure, retry, adjustment) must be recorded in the ledger with timestamp, operator (if human), and cross-references. Exportable for audit purposes. | Ledger review in staging environment after simulation of a full cycle. |
 
 ---
 
-## Seção 9 — Edge Cases e Modos de Falha  ·  *(bloqueia freeze)*
+## Section 9 — Edge Cases and Failure Modes  ·  *(blocks freeze)*
 
-> Estados de erro, timeouts, permissões, concorrência. Primeira classe — não rodapé.
+> Error states, timeouts, permissions, concurrency. First class — not a footnote.
 
 **Concierge:**
 
-- **Hóspede não autenticado tenta usar o Concierge**: o Concierge responde apenas com FAQ genérico (sem dados de reserva). Exibe convite para login para obter resposta personalizada. Não bloqueia a conversa.
-- **API de contexto de reservas indisponível (timeout ou 5xx)**: Concierge responde com o que sabe (FAQ), informa a limitação, oferece escalonamento. Não apresenta mensagem de erro técnico ao hóspede.
-- **Pergunta em idioma diferente do português**: Concierge responde no idioma detectado (se o LLM suportar) ou, se não suportar, informa que o atendimento é em português e oferece escalonamento. Não trava.
-- **Hóspede com múltiplas reservas ativas**: Concierge pergunta sobre qual reserva a pergunta se refere antes de consumir a API de contexto. Se o hóspede tiver apenas uma reserva, usa-a automaticamente.
-- **Hóspede envia conteúdo inapropriado, ameaças ou linguagem de violência**: Concierge encerra a conversa imediatamente, registra o evento, e escala para especialista com flag de segurança. O especialista decide se aciona o protocolo de segurança.
-- **LLM provider indisponível (modelo de IA fora do ar)**: o Concierge entra em modo degradado — responde apenas com respostas pré-definidas para as top 10 perguntas mais frequentes e escala todo o resto para humano. O gestor recebe alerta de degradação.
-- **Ticket de Concierge não consegue abrir no Zendesk (API Zendesk com falha)**: o histórico da conversa é salvo localmente com status "pendente de envio ao Zendesk". Retentativa automática em 15 minutos. FinOps/gestor recebe alerta. O hóspede é informado de que foi colocado na fila de especialistas.
-- **Hóspede reabre conversa após ticket criado no Zendesk**: o Concierge reconhece que há um ticket aberto para esse hóspede e informa que o especialista está cuidando do caso, com o número do ticket.
+- **Unauthenticated guest tries to use the Concierge**: the Concierge responds only with a generic FAQ (without booking data). Displays a login invitation for a personalized response. Does not block the conversation.
+- **Booking context API unavailable (timeout or 5xx)**: Concierge responds with what it knows (FAQ), informs of the limitation, offers escalation. Does not display a technical error message to the guest.
+- **Question in a language other than the platform's default**: Concierge responds in the detected language (if the LLM supports it) or, if not supported, informs that support is in the platform language and offers escalation. Does not freeze.
+- **Guest with multiple active bookings**: Concierge asks which booking the question refers to before consuming the context API. If the guest has only one booking, uses it automatically.
+- **Guest sends inappropriate content, threats, or violent language**: Concierge immediately closes the conversation, records the event, and escalates to a specialist with a safety flag. The specialist decides whether to trigger the safety protocol.
+- **LLM provider unavailable (AI model offline)**: the Concierge enters degraded mode — responds only with pre-defined answers for the top 10 most frequent questions and escalates everything else to a human. The manager receives a degradation alert.
+- **Concierge ticket cannot open in Zendesk (Zendesk API failure)**: the conversation history is saved locally with status "pending Zendesk submission." Automatic retry in 15 minutes. FinOps/manager receives an alert. The guest is informed that they have been placed in the specialist queue.
+- **Guest reopens conversation after Zendesk ticket created**: the Concierge recognizes that there is an open ticket for that guest and informs them that the specialist is handling the case, with the ticket number.
 
 **Settlement:**
 
-- **Repasse fora do percentual esperado (bug de regra)**: se o valor calculado diferir do esperado por mais de 0,5% (tolerância configurável), o sistema bloqueia a execução, registra a anomalia no ledger e alerta o FinOps para revisão manual antes de prosseguir.
-- **Hotel sem dados bancários cadastrados no Stripe Connect**: o ciclo de repasse para esse hotel é marcado como `bloqueado_sem_conta` e o FinOps recebe alerta. O repasse não é tentado. As reservas ficam acumuladas para o próximo ciclo após resolução.
-- **Chargeback de hóspede após repasse executado ao hotel**: o repasse já executado não pode ser estornado automaticamente. O sistema registra o chargeback vinculado à reserva e ao repasse correspondente. FinOps decide se aciona o hotel para devolução parcial (processo fora do sistema, por ora).
-- **Reserva com valor zero (cortesia ou erro)**: reservas com `valor_total = 0` são incluídas no ciclo mas o repasse calculado é R$ 0,00. Registradas no ledger para fins de conciliação. Não geram transação Stripe.
-- **Reembolso parcial ao hóspede após repasse ao hotel já executado**: o sistema registra o reembolso parcial vinculado à reserva. O repasse não é revertido automaticamente. FinOps recebe alerta: "reserva X teve reembolso parcial após repasse executado — verificar ajuste com o hotel".
-- **Percentual de comissão não cadastrado para um hotel**: o ciclo de repasse para esse hotel é interrompido com status `percentual_ausente`. O FinOps recebe alerta antes da execução (validação pré-ciclo) — o ciclo não inicia se houver hotéis sem percentual cadastrado.
-- **Ciclo disparado em data não habitual (fora do schedule)**: aceito se disparado manualmente pelo FinOps com confirmação explícita. Registrado como "ciclo manual" no ledger com identificação do operador.
-- **Falha de rede durante execução do repasse (conexão com Stripe interrompida)**: o sistema detecta o timeout e aguarda o webhook de confirmação por até 30 minutos. Se o webhook não chegar, verifica o status da transação via API do Stripe. Se o Stripe confirmar o pagamento, registra como sucesso. Se não, retentativa normal.
-- **Hotel com múltiplas reservas no mesmo período, uma com chargeback pendente**: as reservas sem chargeback são repassadas normalmente. A reserva com chargeback pendente é bloqueada (RN-S08) e exibida no relatório de conciliação com status `bloqueado_chargeback`.
-- **Exportação de dados solicitada durante a execução de um ciclo**: o sistema exibe aviso de que o ciclo está em andamento e a exportação será dos dados do ciclo anterior (completo). A exportação do ciclo atual fica disponível após o término.
-- **Ajuste retroativo de percentual de comissão**: se o percentual de um hotel for corrigido após um ciclo executado, o sistema exibe o impacto da diferença (R$ de ajuste necessário) mas não recalcula automaticamente o repasse passado. FinOps deve aprovar um lançamento de ajuste manual, registrado no ledger com referência ao ciclo original.
+- **Remittance outside expected percentage (rule bug)**: if the calculated amount differs from the expected by more than 0.5% (configurable tolerance), the system blocks execution, records the anomaly in the ledger, and alerts FinOps for manual review before proceeding.
+- **Hotel without banking data registered in Stripe Connect**: the remittance cycle for that hotel is marked as `blocked_no_account` and FinOps receives an alert. The remittance is not attempted. The bookings accumulate for the next cycle after resolution.
+- **Guest chargeback after remittance executed to hotel**: the already executed remittance cannot be automatically reversed. The system records the chargeback linked to the booking and the corresponding remittance. FinOps decides whether to engage the hotel for partial return (process outside the system for now).
+- **Booking with zero amount (complimentary or error)**: bookings with `total_amount = 0` are included in the cycle but the calculated remittance is R$ 0.00. Recorded in the ledger for reconciliation purposes. Does not generate a Stripe transaction.
+- **Partial guest refund after remittance to hotel already executed**: the system records the partial refund linked to the booking. The remittance is not automatically reversed. FinOps receives an alert: "booking X had a partial refund after remittance executed — verify adjustment with the hotel."
+- **Commission percentage not registered for a hotel**: the remittance cycle for that hotel is interrupted with status `percentage_missing`. FinOps receives an alert before execution (pre-cycle validation) — the cycle does not start if there are hotels without a registered percentage.
+- **Cycle triggered on an unusual date (outside schedule)**: accepted if manually triggered by FinOps with explicit confirmation. Recorded as "manual cycle" in the ledger with operator identification.
+- **Network failure during remittance execution (connection to Stripe interrupted)**: the system detects the timeout and waits for the confirmation webhook for up to 30 minutes. If the webhook does not arrive, it checks the transaction status via the Stripe API. If Stripe confirms the payment, records as success. If not, normal retry.
+- **Hotel with multiple bookings in the same period, one with a pending chargeback**: bookings without chargebacks are remitted normally. The booking with a pending chargeback is blocked (BR-S08) and displayed in the reconciliation report with status `blocked_chargeback`.
+- **Data export requested during cycle execution**: the system displays a notice that the cycle is in progress and the export will be from the data of the previous (complete) cycle. The current cycle export becomes available after completion.
+- **Retroactive commission percentage adjustment**: if a hotel's percentage is corrected after an executed cycle, the system displays the impact of the difference (adjustment amount needed) but does not automatically recalculate the past remittance. FinOps must approve a manual adjustment entry, recorded in the ledger with reference to the original cycle.
 
-**Geral:**
+**General:**
 
-- **Deploy durante ciclo de repasse ativo**: o Settlement Service deve implementar graceful shutdown — repasses em andamento são finalizados antes de o serviço ser interrompido.
-- **Banco de dados primário indisponível durante ciclo**: o ciclo é pausado e retomado quando o banco restaurar. Idempotência garante que repasses já executados não sejam repetidos.
+- **Deploy during active remittance cycle**: the Settlement Service must implement graceful shutdown — remittances in progress are completed before the service is stopped.
+- **Primary database unavailable during cycle**: the cycle is paused and resumed when the database recovers. Idempotency guarantees that already executed remittances are not repeated.
 
 ---
 
-## Seção 10 — Métricas de Sucesso (primária · secundária · guardrail)  ·  *(bloqueia freeze)*
+## Section 10 — Success Metrics (primary · secondary · guardrail)  ·  *(blocks freeze)*
 
-> Valores **projetados** — o baseline para confronto pós-rollout. Indicadores *leading* e *lagging*. Pelo menos um **guardrail** (métrica que não pode piorar).
+> **Projected** values — the baseline for post-rollout comparison. *Leading* and *lagging* indicators. At least one **guardrail** (metric that must not worsen).
 
-| Tipo | Métrica | Meta (projetada) | Janela de medição | Medição (quem/como) | Confiança |
+| Type | Metric | Target (projected) | Measurement window | Measurement (who/how) | Confidence |
 |---|---|---|---|---|---|
-| **Primária** | Taxa de resolução na 1ª camada (Concierge sem escalonamento) | ≥ 55% das conversas resolvidas pelo bot | 30 dias pós-release | Painel de gestão do Concierge — contagem de conversas encerradas sem escalonamento / total de conversas | 70 (benchmark de mercado; baseline real da StayFlow é zero — partindo do zero) |
-| **Primária** | Taxa de repasse correto | ≥ 99,5% dos repasses executados com valor dentro da tolerância de 0,5% do esperado | Por ciclo | Settlement Service — relatório de conciliação automático | 85 (regra bem definida; risco de bug de cálculo é mitigável) |
-| **Secundária** | CSAT médio de hóspede (Concierge + especialista) | ≥ 4,3/5 | 60 dias pós-release (média móvel 30 dias) | Painel de gestão — CSAT coletado ao final de cada interação | 65 (melhora de CSAT é consequência da qualidade do bot — incerteza sobre treinamento inicial) |
-| **Secundária** | Tempo médio de primeira resposta (Concierge) | < 5s para 95% das conversas | 30 dias pós-release | Logs do Concierge — p95 de tempo de resposta | 80 |
-| **Secundária** | Horas/semana do FinOps no ciclo de repasse | < 4h/semana | 60 dias pós-release | Auto-declarado pelo FinOps + dados de uso do painel | 60 (depende de adoção e de não haver exceções manuais constantes) |
-| **Guardrail** | CSAT médio geral de atendimento não pode cair | ≥ 3,8/5 (baseline atual) durante rollout do Concierge | Durante rollout (primeiros 30 dias) | Painel de gestão — CSAT geral | 90 |
-| **Guardrail** | Zero repasses duplicados | 0 ocorrências de pagamento duplicado ao mesmo hotel | Em todo tempo de vida do Settlement Service | Ledger — auditoria de `idempotency_key` duplicadas com status de execução diferente de "rejeitado" | 95 (idempotência é um requisito técnico firme, não estimado) |
-| **Guardrail** | Disponibilidade do Settlement Service nos dias de ciclo | ≥ 99,9% nos dias de execução do ciclo de repasse | Por ciclo | Monitoramento de infraestrutura | 80 |
+| **Primary** | First-layer resolution rate (Concierge without escalation) | ≥ 55% of conversations resolved by the bot | 30 days post-release | Concierge management panel — count of conversations closed without escalation / total conversations | 70 (market benchmark; StayFlow's real baseline is zero — starting from scratch) |
+| **Primary** | Correct remittance rate | ≥ 99.5% of remittances executed with amount within 0.5% tolerance of expected | Per cycle | Settlement Service — automatic reconciliation report | 85 (rule well-defined; calculation bug risk is mitigable) |
+| **Secondary** | Average guest CSAT (Concierge + specialist) | ≥ 4.3/5 | 60 days post-release (30-day moving average) | Management panel — CSAT collected at the end of each interaction | 65 (CSAT improvement is a consequence of bot quality — uncertainty about initial training) |
+| **Secondary** | Average first response time (Concierge) | < 5s for 95% of conversations | 30 days post-release | Concierge logs — p95 response time | 80 |
+| **Secondary** | FinOps hours/week in remittance cycle | < 4 hrs/week | 60 days post-release | Self-reported by FinOps + panel usage data | 60 (depends on adoption and absence of constant manual exceptions) |
+| **Guardrail** | Overall support average CSAT must not fall | ≥ 3.8/5 (current baseline) during Concierge rollout | During rollout (first 30 days) | Management panel — overall CSAT | 90 |
+| **Guardrail** | Zero duplicate remittances | 0 occurrences of duplicate payment to the same hotel | Throughout the Settlement Service's lifetime | Ledger — audit of duplicate `idempotency_key` with execution status different from "rejected" | 95 (idempotency is a firm technical requirement, not an estimate) |
+| **Guardrail** | Settlement Service availability on cycle days | ≥ 99.9% on remittance cycle execution days | Per cycle | Infrastructure monitoring | 80 |
 
 ---
 
-## Seção 11 — Critérios de Sucesso e Aceite (do release)  ·  *(bloqueia freeze)*
+## Section 11 — Success and Acceptance Criteria (of the release)  ·  *(blocks freeze)*
 
-Indicadores de alto nível que definem "concluído e valioso" para **este release** — distintos das métricas contínuas da Seção 10.
+High-level indicators that define "done and valuable" for **this release** — distinct from the continuous metrics in Section 10.
 
-| Critério | Tipo | Indicador | Valor alvo |
+| Criterion | Type | Indicator | Target value |
 |---|---|---|---|
-| Concierge em produção com resolução na 1ª camada | Operacional | Taxa de resolução do Concierge em operação (30 dias pós-release) | ≥ 55% sem escalonamento |
-| Repasse automatizado sem erros de percentual | Negócio / Financeiro | Primeiro ciclo de repasse automatizado executado com 100% de acurácia | 0 divergências > 0,5% no primeiro ciclo |
-| Hotel Gran Vista retido | Negócio | Nenhuma notificação de rescisão nos 90 dias pós-release do Settlement | Zero notificações de rescisão por erro de repasse |
-| Idempotência comprovada | Qualidade / Segurança | Nenhum repasse duplicado detectado na auditoria dos primeiros 3 ciclos | 0 pagamentos duplicados |
-| Handoff com contexto funcionando | UX / Operacional | Atendentes especialistas confirmam receber histórico e dados de reserva ao assumir tickets escalados | ≥ 90% dos tickets escalados com contexto completo (verificado por amostragem de CS) |
-| FinOps usando o painel | Adoção | Time de FinOps opera o ciclo de repasse pelo painel, sem planilha manual | FinOps confirma abandono da planilha manual após 2 ciclos |
-| Migração para Stripe Connect sem downtime nas reservas | Técnico | Nenhum ticket de reserva falhada durante a janela de migração | 0 reservas impactadas pela migração |
+| Concierge in production with first-layer resolution | Operational | Concierge resolution rate in operation (30 days post-release) | ≥ 55% without escalation |
+| Automated remittance without percentage errors | Business / Financial | First automated remittance cycle executed with 100% accuracy | 0 divergences > 0.5% in the first cycle |
+| Hotel Gran Vista retained | Business | No termination notice in the 90 days post-release of Settlement | Zero termination notices due to remittance error |
+| Idempotency proven | Quality / Security | No duplicate remittance detected in the audit of the first 3 cycles | 0 duplicate payments |
+| Handoff with context working | UX / Operational | Specialist agents confirm receiving history and booking data when taking over escalated tickets | ≥ 90% of escalated tickets with full context (verified by CS sampling) |
+| FinOps using the panel | Adoption | FinOps team operates the remittance cycle through the panel, without manual spreadsheet | FinOps confirms abandoning the manual spreadsheet after 2 cycles |
+| Migration to Stripe Connect without booking downtime | Technical | No failed booking ticket during the migration window | 0 bookings impacted by the migration |
 
 ---
 
-## Seção 12 — Riscos e Dependências (de produto e negócio)  ·  *(bloqueia freeze)*
+## Section 12 — Risks and Dependencies (product and business)  ·  *(blocks freeze)*
 
-> Riscos **técnicos** migram para o Technical Assessment do CTO. Aqui ficam os riscos de produto, negócio, adoção, externos e de compliance.
+> **Technical** risks migrate to the CTO's Technical Assessment. Here stay the product, business, adoption, external, and compliance risks.
 
-| Risco | Tipo | Probabilidade | Impacto | Mitigação |
+| Risk | Type | Probability | Impact | Mitigation |
 |---|---|---|---|---|
-| Hotel Gran Vista rescindir antes do go-live do Settlement | Externo / Negócio | Média | Alto | CS comunica proativamente ao Gran Vista o cronograma do projeto. Se prazo informal de 60 dias não for atingível com o esforço firme do CTO, decisão de negócio: comunicar ao parceiro ou priorizar um MVP mínimo de repasse primeiro. |
-| Chatbot de 1ª camada piora CSAT na fase inicial (respostas inadequadas) | Produto | Média | Alto | Rollout gradual: iniciar com 20% do tráfego de atendimento por 2 semanas, monitorar CSAT, só ampliar se guardrail estiver sendo respeitado. Guardrail explícito: se CSAT cair abaixo de 3,8, desligar o Concierge e retornar ao atendimento 100% humano. |
-| Regra de retenção de IR configurada incorretamente por hotel | Compliance | Baixa | Alto | FinOps revisará campo de IR de cada hotel antes do primeiro ciclo de repasse automatizado. Requer ação humana explícita (não é configurado automaticamente). |
-| Percentuais de comissão nos contratos diferirem do cadastro em planilha | Negócio | Média | Alto | FinOps (Bruno Takeda) é responsável por validar e migrar os percentuais do planilha para o sistema antes do go-live. Pré-condição listada na prontidão herdada. |
-| Atendentes especialistas ignoram o handoff do Concierge e pedem para o hóspede repetir o histórico | Adoção | Média | Médio | Treinamento do time de CS antes do go-live. A interface do Zendesk deve exibir o contexto de forma proeminente (não em aba secundária). Monitorar via CSAT dos tickets escalados vs. tickets diretos. |
-| Regulamentação fiscal dos repasses muda (IR, ISS, outras) | Compliance | Baixa | Médio | Motor de IR configurável por hotel e alíquota. Mudanças regulatórias podem exigir atualização de configuração (sem código). Monitorar publicações do Jurídico. |
-| Volume de tickets de atendimento cresce além do esperado, sobrecarregando os especialistas | Produto | Baixa | Médio | Se o Concierge não resolver 55% na 1ª camada, o volume de tickets escalados pode sobrecarregar o time. Plano: expandir a base de conhecimento do Concierge nas primeiras 4 semanas pós-release com base nas perguntas não resolvidas. |
-| Adoção do painel FinOps lenta (equipe continua usando planilha em paralelo) | Adoção | Média | Médio | Treinamento antes do go-live. Estabelecer data de "desativação da planilha" com o FinOps (ex.: após 2 ciclos com o painel). CS/Ops acompanham adoção. |
+| Hotel Gran Vista terminates before Settlement go-live | External / Business | Medium | High | CS proactively communicates the project schedule to Gran Vista. If the informal 60-day deadline is not achievable with the CTO's firm effort, business decision: communicate to the partner or prioritize a minimum Settlement MVP first. |
+| First-layer chatbot worsens CSAT in the initial phase (inadequate responses) | Product | Medium | High | Gradual rollout: start with 20% of support traffic for 2 weeks, monitor CSAT, only expand if guardrail is being respected. Explicit guardrail: if CSAT falls below 3.8, shut down the Concierge and return to 100% human support. |
+| Withholding tax rule configured incorrectly per hotel | Compliance | Low | High | FinOps will review the withholding tax field for each hotel before the first automated remittance cycle. Requires explicit human action (not configured automatically). |
+| Commission percentages in contracts differ from the spreadsheet record | Business | Medium | High | FinOps (Bruno Takeda) is responsible for validating and migrating the percentages from the spreadsheet to the system before go-live. Precondition listed in inherited readiness. |
+| Specialist agents ignore the Concierge handoff and ask the guest to repeat the history | Adoption | Medium | Medium | CS team training before go-live. The Zendesk interface must display the context prominently (not in a secondary tab). Monitor via CSAT of escalated tickets vs. direct tickets. |
+| Fiscal regulation on remittances changes (withholding tax, ISS, others) | Compliance | Low | Medium | Withholding tax engine configurable per hotel and rate. Regulatory changes may require configuration updates (without code). Monitor Legal publications. |
+| Support ticket volume grows beyond expected, overloading specialists | Product | Low | Medium | If the Concierge does not resolve 55% at the first layer, the volume of escalated tickets may overload the team. Plan: expand the Concierge knowledge base in the first 4 weeks post-release based on unresolved questions. |
+| FinOps panel adoption slow (team continues using spreadsheet in parallel) | Adoption | Medium | Medium | Training before go-live. Establish a "spreadsheet deactivation date" with FinOps (e.g., after 2 cycles with the panel). CS/Ops monitor adoption. |
 
-**Dependências (de produto/negócio):**
-- Bruno Takeda (FinOps) deve migrar percentuais de comissão para o sistema antes do go-live do Settlement — esta é uma pré-condição bloqueante.
-- Cada hotel parceiro deve ter uma conta Stripe Connect criada antes do primeiro ciclo de repasse automatizado — responsabilidade conjunta FinOps + CTO (automação da criação de conta está no escopo do Settlement Service).
-- O time de CS precisa de treinamento no fluxo de handoff antes do go-live do Concierge.
+**Dependencies (product/business):**
+- Bruno Takeda (FinOps) must migrate commission percentages to the system before Settlement go-live — this is a blocking precondition.
+- Each partner hotel must have a Stripe Connect account created before the first automated remittance cycle — joint responsibility of FinOps + CTO (account creation automation is in scope for the Settlement Service).
+- The CS team needs training on the handoff flow before Concierge go-live.
 
 ---
 
-## Seção 13 — Avaliação Preliminar de Esforço e Custo
+## Section 13 — Preliminary Effort and Cost Assessment
 
-> Somente uso interno. **Preliminar** — o chute do PO para sustentar sequenciamento. O número **firme** vem do CTO no Technical Assessment. Não é compromisso contratual nem material para cliente.
+> Internal use only. **Preliminary** — the PO's guess to support sequencing. The **firm** number comes from the CTO in the Technical Assessment. Not a contractual commitment or client-facing material.
 
-| Área | Estimativa preliminar | Confiança |
+| Area | Preliminary estimate | Confidence |
 |---|---|---|
-| Backend — Concierge Service (orquestração de IA, integração Zendesk, regras de escalonamento) | ~15 dias | low_confidence |
-| Backend — Settlement Service (motor de split, idempotência, ledger, Stripe Connect) | ~20 dias | low_confidence |
-| Backend — migração de PSP (Pagar.me → Stripe Connect, migração de dados de hotéis) | ~8 dias | low_confidence |
-| Frontend — widget do Concierge (canal web, responsivo) | ~8 dias | low_confidence |
-| Frontend — painel de gestão (regras, relatórios, CSAT) | ~6 dias | low_confidence |
-| Frontend — painel FinOps (ciclo, conciliação, exportação) | ~5 dias | low_confidence |
-| QA (funcional + segurança + idempotência + carga) | ~8 dias | low_confidence |
-| **Total preliminar** | **~70 dias** | low_confidence |
+| Backend — Concierge Service (AI orchestration, Zendesk integration, escalation rules) | ~15 days | low_confidence |
+| Backend — Settlement Service (split engine, idempotency, ledger, Stripe Connect) | ~20 days | low_confidence |
+| Backend — PSP migration (Pagar.me → Stripe Connect, hotel data migration) | ~8 days | low_confidence |
+| Frontend — Concierge widget (web channel, responsive) | ~8 days | low_confidence |
+| Frontend — Management panel (rules, reports, CSAT) | ~6 days | low_confidence |
+| Frontend — FinOps panel (cycle, reconciliation, export) | ~5 days | low_confidence |
+| QA (functional + security + idempotency + load) | ~8 days | low_confidence |
+| **Preliminary total** | **~70 days** | low_confidence |
 
-**Sinais de custo a confirmar pelo CTO:** nova infraestrutura para Concierge Service (orquestração de IA, provavelmente custo de API de LLM por token); conta Stripe Connect (taxa por repasse ~0.5%); eventual custo de provisionamento adicional de banco de dados para ledger imutável; custo de observabilidade ampliada (dois serviços novos).
-
----
-
-## Seção 14 — Roadmap Sugerido
-
-### MVP (este release — Concierge & Settlement v1)
-
-- **Concierge Service:** chatbot 1ª camada (canal web), integração com API de reservas, regras de escalonamento configuráveis, handoff para Zendesk com contexto, CSAT, painel de gestão básico.
-- **Settlement Service:** motor de split automático por hotel, Stripe Connect, idempotência, tratamento de falha (retentativa + alerta), conciliação automática, exportação de dados, painel FinOps básico.
-- **Migração:** Pagar.me → Stripe Connect para o fluxo de repasse.
-
-### Fase 2 (backlog futuro)
-
-- Portal do hotel parceiro: extrato de repasses, histórico, download de comprovante.
-- Notificação proativa ao hotel: e-mail de confirmação de repasse com detalhes.
-- Integração com emissão de NF do hotel (por CNPJ e regime tributário — alta complexidade, priorizar por demanda dos parceiros).
-- Concierge em canais adicionais: WhatsApp Business API.
-- Analytics avançado de atendimento: tempo de resolução por categoria, volume histórico, tendência de CSAT.
-
-### Fase 3 (backlog futuro)
-
-- BI integrado de repasses e atendimento para a liderança.
-- Motor de regras de comissão mais sofisticado (comissão variável por sazonalidade, por volume de reservas, etc.).
-- Automação de reconciliação contábil com integração ERP da StayFlow.
+**Cost signals to confirm by CTO:** new infrastructure for Concierge Service (AI orchestration, likely LLM API cost per token); Stripe Connect account (fee per remittance ~0.5%); possible additional database provisioning cost for immutable ledger; expanded observability cost (two new services).
 
 ---
 
-## Referência ao Technical Assessment  ·  *(bloqueia freeze se requisitado)*
+## Section 14 — Suggested Roadmap
 
-> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. A fusão acontece no [PRD](./04-prd-concierge-settlement.md). Ver [`personas/02-po.md` §5 e §10](../../../personas/02-po.md).
+### MVP (this release — Concierge & Settlement v1)
 
-| Campo | Valor |
+- **Concierge Service:** first-layer chatbot (web channel), integration with bookings API, configurable escalation rules, handoff to Zendesk with context, CSAT, basic management panel.
+- **Settlement Service:** automatic split engine per hotel, Stripe Connect, idempotency, failure handling (retry + alert), automatic reconciliation, data export, basic FinOps panel.
+- **Migration:** Pagar.me → Stripe Connect for the remittance flow.
+
+### Phase 2 (future backlog)
+
+- Partner hotel portal: remittance statements, history, receipt download.
+- Proactive hotel notification: remittance confirmation email with details.
+- Integration with hotel invoice issuance (by tax ID and tax regime — high complexity, prioritize based on partner demand).
+- Concierge on additional channels: WhatsApp Business API.
+- Advanced support analytics: resolution time by category, historical volume, CSAT trend.
+
+### Phase 3 (future backlog)
+
+- Integrated BI for remittances and support for leadership.
+- More sophisticated commission rules engine (variable commission by seasonality, by booking volume, etc.).
+- Accounting reconciliation automation with StayFlow ERP integration.
+
+---
+
+## Technical Assessment Reference  ·  *(blocks freeze if requested)*
+
+> This is the **bridge** (`TechAssessmentRef`), not content. The RP references the CTO's verdict — it does not absorb it. The merger happens in the [PRD](./04-prd-concierge-settlement.md). See [`personas/02-po.md` §5 and §10](../../../personas/02-po.md).
+
+| Field | Value |
 |---|---|
-| **Status** | **Assinado** |
-| **Veredito de viabilidade** | **Viável com ressalvas** (migração de PSP no caminho crítico; prazo de migração impacta o cronograma; ver TA-2026-050 para detalhe) |
-| **Technical Assessment vinculado** | [TA-2026-050 v1](./03-technical-assessment-concierge-settlement.md) |
-| **Constraints rígidas que afetam o escopo** | (1) Settlement Service requer migração para Stripe Connect antes do go-live — sem o PSP correto, o serviço não pode operar; (2) Ledger financeiro deve ser imutável por design — sem UPDATE/DELETE nos registros; (3) Dados de cartão do hóspede não podem ser armazenados fora do Stripe; (4) Concierge e Settlement devem ser serviços independentes com falha isolada; (5) A migração de PSP deve ser executada com zero downtime nas reservas ativas |
+| **Status** | **Signed** |
+| **Feasibility verdict** | **Feasible with caveats** (PSP migration on critical path; migration timeline impacts schedule; see TA-2026-050 for detail) |
+| **Linked Technical Assessment** | [TA-2026-050 v1](./03-technical-assessment-concierge-settlement.md) |
+| **Hard constraints affecting scope** | (1) Settlement Service requires migration to Stripe Connect before go-live — without the correct PSP, the service cannot operate; (2) Financial ledger must be immutable by design — no UPDATE/DELETE on records; (3) Guest card data cannot be stored outside of Stripe; (4) Concierge and Settlement must be independent services with isolated failure; (5) The PSP migration must be executed with zero downtime on active bookings |
 
-> **Gate de congelamento (freeze):** todas as seções `bloqueia freeze` resolvidas ✓ e `TechAssessmentRef.status = Assinado` ✓ → `freezeReady = true` em 2026-04-25.
+> **Freeze gate:** all `blocks freeze` sections resolved ✓ and `TechAssessmentRef.status = Signed` ✓ → `freezeReady = true` on 2026-04-25.

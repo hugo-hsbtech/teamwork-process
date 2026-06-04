@@ -1,80 +1,80 @@
-# Interação 06 — CTO → PO (Devolução do Technical Assessment)
+# Interaction 06 — CTO → PO (Technical Assessment Return)
 
-**Direção:** CTO inicia a devolução. PO funde no PRD.
-**Camada:** Dentro da Camada de Intake
+**Direction:** CTO initiates the return. PO merges into the PRD.
+**Layer:** Within the Intake Layer
 
-> **Mudança estrutural (ver [`personas/02-po.md` §10](../personas/02-po.md)).** O CTO devolve um **artefato próprio — o [Technical Assessment](../templates/03-technical-assessment.md)** — não "edições nas Seções 7/8/9 do RP". O PO **não integra texto do CTO dentro do RP**; ele **referencia** o TA no RP e funde os dois no **PRD**.
-
----
-
-## Gatilho
-
-O CTO concluiu o Technical Assessment de uma demanda escalada pelo PO.
+> **Structural change (see [`personas/02-po.md` §10](../personas/02-po.md)).** The CTO returns a **separate artifact — the [Technical Assessment](../templates/03-technical-assessment.md)** — not "edits to Sections 7/8/9 of the RP." The PO **does not integrate the CTO's text into the RP**; they **reference** the TA in the RP and merge the two into the **PRD**.
 
 ---
 
-## O que o CTO Entrega
+## Trigger
 
-- **Technical Assessment** ([`03-technical-assessment.md`](../templates/03-technical-assessment.md)) assinado, contendo:
-  - Veredito de viabilidade + justificativa
-  - Impacto arquitetural, integrações, riscos técnicos, ADRs, esforço/custo firme
-  - **Constraints rígidas** que afetam o escopo (ex.: "não pode usar o modelo de sessão existente — requer nova máquina de estado")
+The CTO has completed the Technical Assessment for a demand escalated by the PO.
 
 ---
 
-## O que o PO Faz Com Isso
+## What the CTO Delivers
 
-- **Referencia** o TA no RP (ponte `TechAssessmentRef`: status = assinado, veredito, link) — **não copia o conteúdo do CTO para dentro do RP**
-- Revisa os limites de escopo do RP se constraints rígidas foram introduzidas
-- Congela o RP (`freezeReady`) e **monta o PRD** = RP + Technical Assessment
-- Submete o **PRD** ao PM
+- **Technical Assessment** ([`03-technical-assessment.md`](../templates/03-technical-assessment.md)) signed, containing:
+  - Feasibility verdict + rationale
+  - Architectural impact, integrations, technical risks, ADRs, firm effort/cost
+  - **Hard constraints** that affect scope (e.g., "cannot use the existing session model — requires a new state machine")
 
 ---
 
-## Transferência de Ownership
+## What the PO Does With This
 
-**Do CTO:** O Technical Assessment está completo e devolvido. A responsabilidade do CTO termina aqui, a menos que o PO apresente discordância ou mudanças de escopo exijam re-escalada. **O CTO é coautor do PRD** (a metade técnica).
-**Para o PO:** Detém a montagem do PRD — referenciar o TA, reconciliar o escopo, e submeter ao PM.
-**Artefato transferido:** o Technical Assessment (artefato completo) + constraints rígidas.
+- **References** the TA in the RP (bridge `TechAssessmentRef`: status = signed, verdict, link) — **does not copy the CTO's content into the RP**
+- Revises the RP scope boundaries if hard constraints were introduced
+- Freezes the RP (`freezeReady`) and **assembles the PRD** = RP + Technical Assessment
+- Submits the **PRD** to the PM
+
+---
+
+## Ownership Transfer
+
+**From the CTO:** The Technical Assessment is complete and returned. The CTO's responsibility ends here, unless the PO raises a disagreement or scope changes require re-escalation. **The CTO is co-author of the PRD** (the technical half).
+**To the PO:** Owns the PRD assembly — referencing the TA, reconciling scope, and submitting to the PM.
+**Artifact transferred:** the Technical Assessment (complete artifact) + hard constraints.
 
 ---
 
 ## Gate
 
-O PO não modifica nem suaviza as constraints técnicas do CTO. Se o CTO disser que uma constraint é não-negociável, ela é não-negociável. Se o PO discordar, apresenta a discordância explicitamente — não reescreve silenciosamente o TA (que, aliás, ele não tem autoria para editar).
+The PO does not modify or soften the CTO's technical constraints. If the CTO states that a constraint is non-negotiable, it is non-negotiable. If the PO disagrees, they raise the disagreement explicitly — they do not silently rewrite the TA (which, in any case, they have no authorship to edit).
 
 ---
 
-## Caminho de Falha
+## Failure Path
 
-Se as constraints do CTO tornarem o escopo original inentregável, o PO documenta o escopo revisado na **Reconciliação de Escopo** do PRD e comunica a mudança ao originador da demanda (Vendas/CS/CEO) antes de submeter ao PM.
-
----
-
-## O que o PO NÃO Deve Fazer
-
-- Copiar/editar o conteúdo do CTO para dentro do RP (o TA é artefato separado)
-- Suavizar ou reinterpretar silenciosamente constraints técnicas para preservar o escopo
-- Submeter o PRD sem reconciliar o escopo quando houve veto ou constraint rígida
+If the CTO's constraints make the original scope undeliverable, the PO documents the revised scope in the **Scope Reconciliation** section of the PRD and communicates the change to the demand originator (Sales/CS/CEO) before submitting to the PM.
 
 ---
 
-## Sequência
+## What the PO Must NOT Do
+
+- Copy/edit the CTO's content into the RP (the TA is a separate artifact)
+- Silently soften or reinterpret technical constraints to preserve scope
+- Submit the PRD without reconciling scope when a veto or hard constraint was issued
+
+---
+
+## Sequence
 
 ```mermaid
 sequenceDiagram
     actor CTO as CTO
     actor PO as PO
-    actor ORIG as Originador da Demanda
+    actor ORIG as Demand Originator
 
-    CTO-->>PO: Technical Assessment assinado + constraints rígidas
-    PO->>PO: Referencia o TA no RP (ponte) e congela o RP
+    CTO-->>PO: Signed Technical Assessment + hard constraints
+    PO->>PO: References TA in RP (bridge) and freezes RP
 
-    alt Constraints mudam o escopo materialmente
-        PO->>ORIG: Comunica revisão de escopo
-        ORIG-->>PO: Reconhecido
+    alt Constraints materially change scope
+        PO->>ORIG: Communicates scope revision
+        ORIG-->>PO: Acknowledged
     end
 
-    PO->>PO: Monta o PRD (RP + Technical Assessment) e reconcilia escopo
-    PO->>PO: Submete o PRD ao PM
+    PO->>PO: Assembles PRD (RP + Technical Assessment) and reconciles scope
+    PO->>PO: Submits PRD to PM
 ```

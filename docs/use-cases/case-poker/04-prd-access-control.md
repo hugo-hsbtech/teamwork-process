@@ -1,289 +1,289 @@
-# PRD — Room Access Control (Controle de Acesso à Sala)
+# PRD — Room Access Control
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-access-control.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment-access-control.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../../../personas/02-po.md).
+> The PRD (Product Requirements Document) is the **merger** of the [Readiness Package](./02-readiness-package-access-control.md) (product, authored by the PO) with the [Technical Assessment](./03-technical-assessment-access-control.md) (technical, authored by the CTO). It is the **only artifact that opens the downstream** — delivered to the **PM**. Each half retains clear authorship: the PO does not write the technical part, the CTO does not rewrite the product. The PRD stitches, reconciles, and exposes to the PM what they need to plan. See [`personas/02-po.md` §2, §10 and §11](../../../personas/02-po.md).
 >
 > `PRD = RP-2026-002 (PO) + TA-2026-002 (CTO)`
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-access-control.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-access-control.md) → [`02 Readiness Package (PO)`](./02-readiness-package-access-control.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment-access-control.md) → `04 PRD (PO+CTO → PM)`.
+> **Journey:** [`00 Submitter Document`](./00-submitter-brief-access-control.md) → [`01 Intake Record (PO — triage)`](./01-intake-record-access-control.md) → [`02 Readiness Package (PO)`](./02-readiness-package-access-control.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment-access-control.md) → `04 PRD (PO+CTO → PM)`.
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do PRD** | PRD-2026-002 |
-| **Versão** | v1 |
-| **RP vinculado** | RP-2026-002 v1 |
-| **Technical Assessment vinculado** | TA-2026-002 v1 |
-| **Intake vinculado** | INT-2026-002 |
-| **Autores** | Lucas Mendes (PO) + Rodrigo Lima (CTO) |
-| **Status** | Aceito |
-| **Entregue ao PM em** | 2026-03-27 |
+| **PRD ID** | PRD-2026-002 |
+| **Version** | v1 |
+| **Linked RP** | RP-2026-002 v1 |
+| **Linked Technical Assessment** | TA-2026-002 v1 |
+| **Linked Intake** | INT-2026-002 |
+| **Authors** | Lucas Mendes (PO) + Rodrigo Lima (CTO) |
+| **Status** | Accepted |
+| **Delivered to PM on** | 2026-03-27 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | 2026-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Aceito | Fusão inicial RP-2026-002 + TA-2026-002. PM aprovou na primeira revisão. Demanda avança para planejamento de execução. |
+| v1 | 2026-03-27 | Lucas Mendes (PO) + Rodrigo Lima (CTO) | Accepted | Initial merge RP-2026-002 + TA-2026-002. PM approved on first review. Demand advances to execution planning. |
 
 ---
 
 ## Sign-off
 
-> A fusão só fecha com dupla assinatura.
+> The merge only closes with a dual signature.
 
-| Papel | Nome | Veredito | Data |
+| Role | Name | Verdict | Date |
 |---|---|---|---|
-| **PO** (produto) | Lucas Mendes | RP congelado (freeze) — `freezeReady = true` | 2026-03-27 |
-| **CTO** (técnico) | Rodrigo Lima | Viável com ressalvas | 2026-03-27 |
+| **PO** (product) | Lucas Mendes | RP frozen (freeze) — `freezeReady = true` | 2026-03-27 |
+| **CTO** (technical) | Rodrigo Lima | Viable with caveats | 2026-03-27 |
 
 ---
 
-## Resumo Executivo Combinado
+## Combined Executive Summary
 
-A plataforma PokerPlan atualmente não oferece controle de acesso dentro de salas de planejamento. Qualquer pessoa com o link entra, vê todos os participantes e vota. Este modelo é incompatível com o perfil de segurança de clientes enterprise que operam com equipes mistas (funcionários, prestadores externos, executivos) sob políticas internas de governança de dados que restringem visibilidade cruzada de identidades — caso específico da Construtora Ágil, que condiciona o fechamento do contrato de R$ 42.000 ARR a esta funcionalidade.
+The PokerPlan platform currently offers no access control within planning rooms. Anyone with the link joins, sees all participants, and votes. This model is incompatible with the security profile of enterprise clients that operate with mixed teams (employees, external contractors, executives) under internal data governance policies that restrict cross-identity visibility — specifically Construtora Ágil, which conditions the closing of its R$ 42,000 ARR contract on this feature.
 
-Este PRD define um **sistema de Controle de Acesso à Sala** que entrega ao dono da sala: (1) controle de quem pode entrar — modos Aberto, Somente convite ou Aprovação obrigatória; (2) anonimato de identidades via modo anônimo com filtragem server-side; e (3) papéis Votante / Observador gerenciáveis em tempo real. Todas as regras de acesso são aplicadas server-side, sem confiança no cliente para estado de acesso.
+This PRD defines a **Room Access Control** system that gives the room owner: (1) control over who can enter — Open, Invite-only, or Mandatory approval modes; (2) identity anonymity via anonymous mode with server-side filtering; and (3) Voter / Observer roles manageable in real time. All access rules are enforced server-side, with no client trust for access state.
 
-O CTO avaliou a viabilidade como **Viável com ressalvas**. A integração Azure AD OIDC (group-claim) é realizável via extensão da camada de auth existente. A conformidade LGPD é endereçada pela Opção C (roteamento condicional `sa-east-1` por tenant com flag). As duas ressalvas que o PM deve monitorar: (1) procurement de instância RDS em `sa-east-1` deve ser iniciado pelo CTO antes do desenvolvimento do roteamento LGPD; e (2) a integração Azure AD depende de ação do TI da Construtora Ágil (Fernanda Ramos) para registrar a plataforma no portal Azure — dependência externa fora do nosso controle, que impacta o prazo.
+The CTO assessed feasibility as **Viable with caveats**. Azure AD OIDC integration (group-claim) is achievable via extension of the existing auth layer. LGPD compliance is addressed by Option C (conditional `sa-east-1` routing per flagged tenant). The two caveats the PM must monitor: (1) RDS instance procurement in `sa-east-1` must be initiated by the CTO before LGPD routing development begins; and (2) Azure AD integration depends on action by Construtora Ágil's IT team (Fernanda Ramos) to register the platform in the Azure portal — an external dependency outside our control that impacts the timeline.
 
-O esforço firme é de **25 dias** (conforme TA-2026-002), distribuídos entre backend sênior (auth, controle de acesso, Azure AD OIDC, roteamento LGPD) e frontend mid. A estimativa de esforço não inclui avaliação de capacidade do PM — o PM é responsável por mapear esses dias no calendário e confirmar o prazo antes de Vendas comunicar qualquer data ao cliente.
+The firm effort is **25 days** (per TA-2026-002), distributed across senior backend (auth, access control, Azure AD OIDC, LGPD routing) and mid-level frontend. The effort estimate does not include the PM's capacity assessment — the PM is responsible for mapping these days onto the calendar and confirming the timeline before Sales communicates any date to the client.
 
 ---
 
-## Parte A — Definição de Produto (do Readiness Package · PO)
+## Part A — Product Definition (from Readiness Package · PO)
 
-> Síntese das seções-chave do RP. O documento-fonte completo é [`RP-2026-002`](./02-readiness-package-access-control.md); aqui fica o que o PM precisa para planejar.
+> Synthesis of the RP's key sections. The full source document is [`RP-2026-002`](./02-readiness-package-access-control.md); what follows is what the PM needs to plan.
 
-### A.1 Objetivos e Resultado Esperado
+### A.1 Objectives and Expected Outcome
 
-1. Permitir que o dono da sala defina o modo de acesso: Aberto (padrão), Somente convite ou Aprovação obrigatória — configurável por sala, sem impactar salas existentes.
-2. Permitir que o dono da sala ative o modo anônimo, ocultando identidades dos participantes uns dos outros (o dono mantém visibilidade completa).
-3. Permitir que o dono da sala atribua e altere papéis Votante / Observador a qualquer participante, antes ou durante a sessão.
-4. Permitir que o dono da sala remova um participante da sessão ativa com efeito imediato.
-5. Fechar o deal da Construtora Ágil com um modelo de controle de acesso em conformidade, no prazo confirmado pelo PM.
+1. Allow the room owner to define the access mode: Open (default), Invite-only, or Mandatory approval — configurable per room, without impacting existing rooms.
+2. Allow the room owner to activate anonymous mode, hiding participant identities from each other (the owner retains full visibility).
+3. Allow the room owner to assign and change Voter / Observer roles to any participant, before or during the session.
+4. Allow the room owner to remove a participant from the active session with immediate effect.
+5. Close the Construtora Ágil deal with a compliant access control model, within the timeline confirmed by the PM.
 
-### A.2 Escopo (final)
+### A.2 Scope (final)
 
-**Incluído:**
-- Seletor de modo de acesso por sala (Aberto / Somente convite / Aprovação obrigatória)
-- Geração e revogação de links de convite individuais (tokens 128 bits, uso único)
-- Fluxo de aprovação em tempo real com TTL de 5 min para solicitações sem resposta
-- Modo anônimo: aliases server-side por sessão; dono sempre vê nomes reais; não desativável durante a sessão
-- Atribuição de papel Votante / Observador (antes ou durante a sessão, com regras de proteção durante votação ativa)
-- Remoção de participante com anulação de voto e bloqueio de re-entrada
-- Aplicação server-side de todas as regras de acesso (sem confiança no cliente)
-- Integração Azure AD OIDC group-claim para mapeamento automático de papéis na entrada
-- Roteamento de residência de dados LGPD (Opção C): dados de participantes de tenants com flag em `sa-east-1`
+**Included:**
+- Access mode selector per room (Open / Invite-only / Mandatory approval)
+- Generation and revocation of individual invite links (128-bit tokens, single-use)
+- Real-time approval flow with 5-min TTL for unanswered requests
+- Anonymous mode: server-side aliases per session; owner always sees real names; cannot be deactivated during the session
+- Voter / Observer role assignment (before or during the session, with protection rules during active voting)
+- Participant removal with vote invalidation and re-entry block
+- Server-side enforcement of all access rules (no client trust)
+- Azure AD OIDC group-claim integration for automatic role mapping at room entry
+- LGPD data residency routing (Option C): participant data from flagged tenants in `sa-east-1`
 
-**Excluído:**
-- SSO / SAML enterprise, audit logs, integração Jira, guest access sem registro, proteção por senha, configurações padrão a nível de conta
+**Excluded:**
+- Enterprise SSO / SAML, audit logs, Jira integration, registration-free guest access, password protection, account-level default settings
 
-**Adiado:**
-- Convite em massa via CSV, atribuição automática de Observador por papel organizacional, exportação de compliance, configurações padrão a nível de organização
+**Deferred:**
+- Bulk invite via CSV, automatic Observer assignment by organizational role, compliance export, organization-level default settings
 
 ### A.3 Personas / Jobs-to-be-done
 
-| Persona | Job | Impacto |
+| Persona | Job | Impact |
 |---|---|---|
-| **Dono da Sala (Scrum Master / Tech Lead)** | Realizar cerimônias com equipes mistas de forma controlada e conforme política interna | Novo: configura modo de acesso, gerencia convites/aprovações, atribui papéis, ativa anonimato |
-| **Votante (Dev / Membro do Time)** | Estimar itens colaborativamente | Experiência inalterada; em modo anônimo, vê aliases dos colegas |
-| **Observador (PM / Executivo)** | Acompanhar a cerimônia sem influenciar estimativas | Novo papel: visibilidade completa da sessão, sem controles de votação |
-| **Usuário Não Convidado / Não Aprovado** | (tenta entrar) | Novo: tela de espera ou bloqueio em vez de entrada direta |
+| **Room Owner (Scrum Master / Tech Lead)** | Run ceremonies with mixed teams in a controlled, policy-compliant manner | New: configures access mode, manages invites/approvals, assigns roles, activates anonymity |
+| **Voter (Dev / Team Member)** | Estimate items collaboratively | Experience unchanged; in anonymous mode, sees colleagues' aliases |
+| **Observer (PM / Executive)** | Follow the ceremony without influencing estimates | New role: full session visibility, no voting controls |
+| **Uninvited / Unapproved User** | (attempts to enter) | New: waiting screen or block instead of direct entry |
 
-### A.4 Regras de Negócio e Fluxos
+### A.4 Business Rules and Flows
 
-Regras detalhadas em [`RP-2026-002, Seção 6`](./02-readiness-package-access-control.md). Resumo para o PM:
+Detailed rules in [`RP-2026-002, Section 6`](./02-readiness-package-access-control.md). Summary for the PM:
 
-- **Aberto:** sem mudança de comportamento (salas existentes preservadas).
-- **Somente convite:** tokens de uso único, revogáveis antes do uso; usuário sem convite é bloqueado.
-- **Aprovação obrigatória:** fila de solicitações com TTL de 5 min; dono aprova/nega em tempo real.
-- **Modo anônimo:** ativado pelo dono; não desativável na sessão; filtragem server-side obrigatória.
-- **Papéis:** Votante é default; Observador pode ser atribuído entre itens; promoção bloqueada durante votação ativa.
-- **Remoção:** efeito imediato; votos do item atual anulados; re-entrada bloqueada na mesma sessão.
+- **Open:** no behavior change (existing rooms preserved).
+- **Invite-only:** single-use tokens, revocable before use; user without invite is blocked.
+- **Mandatory approval:** request queue with 5-min TTL; owner approves/denies in real time.
+- **Anonymous mode:** activated by owner; cannot be deactivated in session; mandatory server-side filtering.
+- **Roles:** Voter is default; Observer may be assigned between items; promotion blocked during active voting.
+- **Removal:** immediate effect; current item vote invalidated; re-entry blocked in the same session.
 
-### A.5 User Stories + Critérios de Aceite
+### A.5 User Stories + Acceptance Criteria
 
-> Histórias completas com critérios Given/When/Then em [`RP-2026-002, Seção 7`](./02-readiness-package-access-control.md). Resumo para o PM:
+> Full stories with Given/When/Then criteria in [`RP-2026-002, Section 7`](./02-readiness-package-access-control.md). Summary for the PM:
 
-| ID | História | Critério de aceite (resumo) |
+| ID | Story | Acceptance criteria (summary) |
 |---|---|---|
-| ST-001 | Como Dono da Sala, quero escolher o modo de acesso | Modo salvo imediatamente; novo modo bloqueia ou libera entradas conforme esperado; salas existentes em modo Aberto sem alteração |
-| ST-002 | Como Dono da Sala, quero gerar e revogar convites | Token único de 128 bits gerado; token revogado fica inválido imediatamente; token é de uso único |
-| ST-003 | Como participante, quero solicitar entrada em sala com aprovação | Tela de espera exibida; entrada confirmada em ≤ 2s após aprovação; mensagem de negação; expiração em 5 min |
-| ST-004 | Como Dono da Sala, quero ativar modo anônimo | Aliases exibidos para não-donos; dono vê nomes reais; payload WebSocket sem nomes reais; não desativável na sessão |
-| ST-005 | Como Dono da Sala, quero atribuir papéis Votante/Observador | Controles de votação desaparecem imediatamente ao rebaixar para Observador; votos do item atual anulados; promoção bloqueada durante votação ativa |
-| ST-006 | Como Dono da Sala, quero remover um participante | Desconectado em ≤ 2s; voto anulado; re-entrada bloqueada na mesma sessão |
+| ST-001 | As Room Owner, I want to choose the access mode | Mode saved immediately; new mode blocks or allows entry as expected; existing rooms remain in Open mode unchanged |
+| ST-002 | As Room Owner, I want to generate and revoke invites | Unique 128-bit token generated; revoked token becomes invalid immediately; token is single-use |
+| ST-003 | As a participant, I want to request entry into a room with approval | Waiting screen displayed; entry confirmed in ≤ 2s after approval; denial message shown; expires in 5 min |
+| ST-004 | As Room Owner, I want to activate anonymous mode | Aliases displayed to non-owners; owner sees real names; WebSocket payload without real names; cannot be deactivated in session |
+| ST-005 | As Room Owner, I want to assign Voter/Observer roles | Voting controls disappear immediately when demoting to Observer; current item vote invalidated; promotion blocked during active voting |
+| ST-006 | As Room Owner, I want to remove a participant | Disconnected in ≤ 2s; vote invalidated; re-entry blocked in the same session |
 
-### A.6 Requisitos Não-Funcionais (NFRs)
+### A.6 Non-Functional Requirements (NFRs)
 
-> Completo em [`RP-2026-002, Seção 8`](./02-readiness-package-access-control.md). Dimensões principais:
+> Full details in [`RP-2026-002, Section 8`](./02-readiness-package-access-control.md). Key dimensions:
 
-| Dimensão | Requisito | Verificação |
+| Dimension | Requirement | Verification |
 |---|---|---|
-| Performance | Eventos de aprovação, remoção e mudança de papel propagam em ≤ 2 segundos | Telemetria de latência WebSocket em testes de carga (20 participantes) |
-| Segurança | Controle de acesso aplicado server-side em cada request e mensagem WebSocket; payload anônimo sem nomes reais | Testes de segurança: replay após remoção, inspeção de payload, acesso sem membership |
-| Segurança | Tokens de convite 128 bits, uso único, expiram no fim da sessão | Revisão de código + teste de reutilização de token |
-| Conformidade | Dados de participantes de tenants com flag LGPD apenas em `sa-east-1` | Verificação de residência de dados pelo CTO; confirmação por Fernanda Ramos antes do go-live |
-| Manutenibilidade | Feature flag desligável sem redesenvolvimento; telemetria de produto adicionada antes do go-live | Verificação em staging + pipeline de dados |
+| Performance | Approval, removal, and role-change events propagate in ≤ 2 seconds | WebSocket latency telemetry in load tests (20 participants) |
+| Security | Access control enforced server-side on every request and WebSocket message; anonymous payload without real names | Security tests: replay after removal, payload inspection, access without membership |
+| Security | 128-bit invite tokens, single-use, expire at session end | Code review + token reuse test |
+| Compliance | Participant data from LGPD-flagged tenants only in `sa-east-1` | Data residency verification by CTO; confirmation by Fernanda Ramos before go-live |
+| Maintainability | Feature flag disableable without redevelopment; product telemetry added before go-live | Staging verification + data pipeline |
 
-### A.7 Edge Cases e Modos de Falha
+### A.7 Edge Cases and Failure Modes
 
-- Dono desconecta com aprovações pendentes → TTL 5 min persiste no servidor; fila apresentada na reconexão.
-- Dono não pode ser removido (nem por ele mesmo) → bloqueio server-side.
-- Modo anônimo ativado com votação em andamento → aliases atribuídos imediatamente; histórico anterior não retroativamente ocultado (comportamento aceito).
-- Bypass via API direta → membership validada em cada request; não há confiança no cliente para estado de acesso.
-- Token de convite usado por terceiro → uso único invalida o token; convidado original recebe erro "Convite já utilizado."
+- Owner disconnects with pending approvals → 5-min TTL persists on the server; queue presented on reconnection.
+- Owner cannot be removed (not even by themselves) → server-side block.
+- Anonymous mode activated with voting in progress → aliases assigned immediately; prior history not retroactively hidden (accepted behavior).
+- Bypass via direct API → membership validated on every request; no client trust for access state.
+- Invite token used by a third party → single-use invalidates the token; original invitee receives error "Invite already used."
 
 ---
 
-## Parte B — Definição Técnica (do Technical Assessment · CTO)
+## Part B — Technical Definition (from Technical Assessment · CTO)
 
-> Síntese do TA. O documento-fonte completo é [`TA-2026-002`](./03-technical-assessment-access-control.md).
+> Synthesis of the TA. The full source document is [`TA-2026-002`](./03-technical-assessment-access-control.md).
 
-### B.1 Veredito de Viabilidade
+### B.1 Feasibility Verdict
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Veredito** | Viável com ressalvas |
-| **Ressalvas** | (1) Instância RDS `sa-east-1` pode precisar ser provisionada — procurement deve ser iniciado pelo CTO imediatamente; (2) integração Azure AD só é concluída após ação do TI da Construtora Ágil (Fernanda Ramos) — dependência externa que impacta prazo; (3) senioridade sênior nas áreas críticas de backend (auth, roteamento LGPD) é premissa da estimativa firme de 25 dias |
+| **Verdict** | Viable with caveats |
+| **Caveats** | (1) RDS instance `sa-east-1` may need to be provisioned — procurement must be initiated by the CTO immediately; (2) Azure AD integration is only completed after action by Construtora Ágil's IT team (Fernanda Ramos) — external dependency that impacts timeline; (3) senior-level engineers in critical backend areas (auth, LGPD routing) are a premise of the 25-day firm estimate |
 
-### B.2 Impacto Arquitetural e Integrações
+### B.2 Architectural Impact and Integrations
 
-> Detalhado em [`TA-2026-002`](./03-technical-assessment-access-control.md).
+> Detailed in [`TA-2026-002`](./03-technical-assessment-access-control.md).
 
-| Área / Sistema | Impacto | Nota |
+| Area / System | Impact | Note |
 |---|---|---|
-| Modelo de dados de participantes | Significativo — novos campos + máquina de estado | Schema migration aditiva; campos nullable com defaults; sem migração de dados existentes |
-| Camada WebSocket / eventos de sessão | Modificado — novos eventos + filtragem por destinatário (modo anônimo) | Filtragem obrigatoriamente server-side — cliente nunca recebe nome real em modo anônimo |
-| Camada de autenticação | Modificado — extensão para OIDC group-claim (Azure AD) | Fluxo OAuth2 existente preservado; coexistência dos dois fluxos |
-| Roteamento de residência de dados | Novo — DAL com roteamento condicional `us-east-1` / `sa-east-1` por flag de tenant | Lógica de roteamento encapsulada na DAL; reutilizável para requisitos futuros de compliance regional |
-| Infraestrutura RDS `sa-east-1` | Possivelmente novo — confirmar estado atual | Procurement iniciado pelo CTO; sem bloqueio para desenvolvimento paralelo das demais partes |
-| Azure AD (Entra ID) — externo | Integração via OIDC group-claim | Spec técnica de registro entregue ao TI do cliente cedo; dependência fora do nosso controle |
+| Participant data model | Significant — new fields + state machine | Additive schema migration; nullable fields with defaults; no existing data migration |
+| WebSocket / session events layer | Modified — new events + per-recipient filtering (anonymous mode) | Filtering mandatorily server-side — client never receives real name in anonymous mode |
+| Authentication layer | Modified — extension for OIDC group-claim (Azure AD) | Existing OAuth2 flow preserved; both flows coexist |
+| Data residency routing | New — DAL with conditional routing `us-east-1` / `sa-east-1` per tenant flag | Routing logic encapsulated in the DAL; reusable for future regional compliance requirements |
+| RDS infrastructure `sa-east-1` | Possibly new — confirm current state | Procurement initiated by CTO; no blocking of parallel development of other parts |
+| Azure AD (Entra ID) — external | Integration via OIDC group-claim | Technical registration spec delivered to client IT early; dependency outside our control |
 
-### B.3 Constraints Rígidas
+### B.3 Hard Constraints
 
-| Constraint | Efeito no escopo |
+| Constraint | Effect on scope |
 |---|---|
-| LGPD: dados de participantes de tenants com flag devem residir em `sa-east-1` | Adiciona ~2 semanas; não pode ser feito pós go-live; é pré-requisito para onboarding da Construtora Ágil |
-| Integração Azure AD: group-claim OIDC apenas (sem SSO completo) | Limita complexidade; qualquer expansão para SSO requer nova demanda |
-| Schema migration estritamente aditiva | Preserva compatibilidade retroativa; limita design de campos novos |
-| Filtragem de payload anônimo: server-side obrigatória | Afeta design da camada de eventos WebSocket |
-| Sem novos provedores de identidade externos | Confirma abordagem de extensão aditiva da camada de auth existente |
+| LGPD: participant data from flagged tenants must reside in `sa-east-1` | Adds ~2 weeks; cannot be done post go-live; prerequisite for Construtora Ágil onboarding |
+| Azure AD integration: OIDC group-claim only (no full SSO) | Limits complexity; any expansion to SSO requires a new demand |
+| Strictly additive schema migration | Preserves backward compatibility; limits design of new fields |
+| Anonymous payload filtering: server-side mandatory | Affects design of the WebSocket events layer |
+| No new external identity providers | Confirms the additive extension approach for the existing auth layer |
 
-### B.4 ADRs (nível arquitetural)
+### B.4 ADRs (architectural level)
 
-> Justificativas completas em [`TA-2026-002`](./03-technical-assessment-access-control.md).
+> Full justifications in [`TA-2026-002`](./03-technical-assessment-access-control.md).
 
-| # | Decisão | Sign-off CTO |
+| # | Decision | CTO Sign-off |
 |---|---|---|
-| ADR-001 | Integração Azure AD via OIDC group-claim, sem SSO completo | ✓ |
-| ADR-002 | Conformidade LGPD via Opção C: roteamento condicional por flag de tenant (`sa-east-1`) | ✓ |
-| ADR-003 | Filtragem de payload WebSocket em modo anônimo: server-side, por destinatário, no momento do envio | ✓ |
-| ADR-004 | Schema migration estritamente aditiva para o modelo de participantes | ✓ |
-| ADR-005 | Tokens de convite 128 bits criptograficamente aleatórios, uso único, expiram no primeiro uso ou fim da sessão | ✓ |
-| ADR-006 | Roteamento de residência de dados implementado na DAL, não na camada de negócio | ✓ |
+| ADR-001 | Azure AD integration via OIDC group-claim, without full SSO | ✓ |
+| ADR-002 | LGPD compliance via Option C: conditional routing by tenant flag (`sa-east-1`) | ✓ |
+| ADR-003 | WebSocket payload filtering in anonymous mode: server-side, per recipient, at send time | ✓ |
+| ADR-004 | Strictly additive schema migration for the participant model | ✓ |
+| ADR-005 | Invite tokens: cryptographically random 128 bits, single-use, expire on first use or session end | ✓ |
+| ADR-006 | Data residency routing implemented in the DAL, not in the business layer | ✓ |
 
 ---
 
-## Reconciliação de Escopo
+## Scope Reconciliation
 
-> O Technical Assessment não vetou nenhum item do RP. As ressalvas do CTO adicionaram dois itens de escopo que não estavam no intake original (Azure AD OIDC e LGPD Opção C) — ambos foram incorporados durante o Discovery e estão no RP final.
+> The Technical Assessment did not veto any item from the RP. The CTO's caveats added two scope items that were not in the original intake (Azure AD OIDC and LGPD Option C) — both were incorporated during Discovery and are in the final RP.
 
-| Item original (RP) | Mudança após Technical Assessment | Motivo |
+| Original item (RP) | Change after Technical Assessment | Reason |
 |---|---|---|
-| Controle de acesso (modos, anonimato, papéis, remoção) | Mantido integralmente | Sem veto técnico |
-| Integração Azure AD (adicionado no Discovery) | Mantido — escopo confirmado como group-claim OIDC apenas | ADR-001: SSO completo fora do escopo; group-claim é suficiente |
-| Roteamento LGPD `sa-east-1` (adicionado no Discovery) | Mantido — Opção C confirmada | ADR-002: opções A e B são decisões estratégicas de plataforma para outra rodada |
-| Integração Jira (removida no Discovery) | Removida — `BACKLOG-2026-007` | Chamada com cliente: não obrigatório para fechar o deal |
-| Procurement RDS `sa-east-1` | Nova ação adicionada | CTO deve verificar estado e iniciar procurement antes do desenvolvimento da Opção C |
+| Access control (modes, anonymity, roles, removal) | Kept in full | No technical veto |
+| Azure AD integration (added in Discovery) | Kept — scope confirmed as OIDC group-claim only | ADR-001: full SSO out of scope; group-claim is sufficient |
+| LGPD routing `sa-east-1` (added in Discovery) | Kept — Option C confirmed | ADR-002: Options A and B are strategic platform decisions for another round |
+| Jira integration (removed in Discovery) | Removed — `BACKLOG-2026-007` | Client call: not mandatory to close the deal |
+| RDS `sa-east-1` procurement | New action added | CTO must verify state and initiate procurement before Option C development |
 
-**Escopo final reconciliado:** RP-2026-002 mantido integralmente. Sem itens vetados pelo CTO. Duas ações de preparação adicionadas pelo CTO: (1) entrega de spec técnica de registro Azure AD à Construtora Ágil; (2) verificação e eventual procurement de instância RDS em `sa-east-1`.
+**Final reconciled scope:** RP-2026-002 kept in full. No items vetoed by the CTO. Two preparation actions added by the CTO: (1) delivery of the Azure AD technical registration spec to Construtora Ágil; (2) verification and eventual procurement of an RDS instance in `sa-east-1`.
 
 ---
 
-## Visão Consolidada de Riscos e Dependências
+## Consolidated Risk and Dependency View
 
-> Riscos de produto/negócio (do RP-2026-002, Seção 12) + riscos técnicos (do TA-2026-002) em uma tabela única — o PM planeja contra esta visão.
+> Product/business risks (from RP-2026-002, Section 12) + technical risks (from TA-2026-002) in a single table — the PM plans against this view.
 
-| Risco | Origem | Tipo | Probabilidade | Impacto | Mitigação |
+| Risk | Origin | Type | Probability | Impact | Mitigation |
 |---|---|---|---|---|---|
-| Registro Azure AD atrasado pelo TI da Construtora Ágil | RP + TA | Externo | Média | Alto | Spec técnica entregue ao cliente cedo; data de fechamento do registro como milestone externo no plano de execução |
-| Instância RDS `sa-east-1` não provisionada na janela necessária | TA | Infraestrutura | Média | Alto | CTO verifica imediatamente; procurement iniciado antes do kick-off; desenvolvimento paralelo das outras partes preservado |
-| Compromisso informal de prazo de Vendas conflita com capacidade real | RP | Operacional | Alta | Alto | PM executa avaliação de capacidade antes de qualquer comunicação externa; PO é dono do gate |
-| Schema migration quebra sessões ativas | TA | Dados | Baixa | Alto | Migration aditiva; deploy em janela de baixo tráfego; rollback testado previamente |
-| Bypass de controle de acesso via API direta | TA | Segurança | Baixa | Alto | Validação de membership em cada request; testes de segurança automáticos antes do go-live |
-| Claim `groups` não disponível no tenant Azure AD do cliente | TA | Integração | Baixa | Alto | Spec técnica confirma requisito; Fernanda Ramos confirma existência dos grupos antes do desenvolvimento |
-| Pressão de expansão de escopo (SSO, audit logs) | RP | Produto / Escopo | Média | Médio | Limite de escopo explícito no RP; qualquer adição requer nova demanda triada pelo PO |
-| Tokens de convite em força bruta | TA | Segurança | Baixa | Alto | 128 bits; uso único; rate limiting no endpoint de entrada |
-| Modo anônimo adotado abaixo de 30% em sessões enterprise | RP | Adoção | Baixa | Baixo | Acompanhar telemetria nos primeiros 60 dias; investigar com CS se abaixo da meta |
-| Integração Jira escalada de desejo para obrigatório durante entrega | RP | Escopo | Baixa | Médio | Confirmado como backlog; qualquer escalada retriada pelo PO |
+| Azure AD registration delayed by Construtora Ágil IT | RP + TA | External | Medium | High | Technical spec delivered to client early; registration close date as an external milestone in the execution plan |
+| RDS `sa-east-1` instance not provisioned within the required window | TA | Infrastructure | Medium | High | CTO verifies immediately; procurement started before kick-off; parallel development of other parts preserved |
+| Informal timeline commitment from Sales conflicts with actual capacity | RP | Operational | High | High | PM runs capacity assessment before any external communication; PO owns this gate |
+| Schema migration breaks active sessions | TA | Data | Low | High | Additive migration; deploy in low-traffic window; rollback previously tested |
+| Access control bypass via direct API | TA | Security | Low | High | Membership validation on every request; automated security tests before go-live |
+| `groups` claim unavailable in client Azure AD tenant | TA | Integration | Low | High | Technical spec confirms requirement; Fernanda Ramos confirms group existence before development |
+| Scope expansion pressure (SSO, audit logs) | RP | Product / Scope | Medium | Medium | Explicit scope boundary in RP; any addition requires a new demand triaged by the PO |
+| Invite token brute force | TA | Security | Low | High | 128 bits; single-use; rate limiting on join endpoint |
+| Anonymous mode adopted below 30% in enterprise sessions | RP | Adoption | Low | Low | Track telemetry in the first 60 days; investigate with CS if below target |
+| Jira integration escalated from desirable to mandatory during delivery | RP | Scope | Low | Medium | Confirmed as backlog; any escalation retriaged by the PO |
 
-**Dependências externas conhecidas:**
-- **Construtora Ágil (Fernanda Ramos — TI Lead):** registro da plataforma no portal Azure AD do tenant do cliente. Milestone externo crítico de prazo — o PM deve incluir no plano de execução com data-alvo e ponto de escalada se atrasado.
-- **PM:** avaliação de capacidade antes de qualquer comunicação de prazo a Vendas ou ao cliente (inegociável — PO é dono deste gate).
+**Known external dependencies:**
+- **Construtora Ágil (Fernanda Ramos — IT Lead):** registration of the platform in the client tenant's Azure AD portal. Critical external timeline milestone — the PM must include it in the execution plan with a target date and escalation point if delayed.
+- **PM:** capacity assessment before any timeline communication to Sales or the client (non-negotiable — PO owns this gate).
 
 ---
 
-## Esforço e Custo (firme)
+## Effort and Cost (firm)
 
-> Do Technical Assessment TA-2026-002 (substitui o preliminar do RP). Somente uso interno — não é compromisso contratual nem material para cliente.
+> From Technical Assessment TA-2026-002 (replaces the RP preliminary). Internal use only — not a contractual commitment or client-facing material.
 
-| Área | Estimativa firme | Senioridade |
+| Area | Firm estimate | Seniority |
 |---|---|---|
-| Backend — schema migration + máquina de estado | 6 dias | Senior |
-| Backend — filtragem WebSocket (modo anônimo) | 3 dias | Senior |
-| Backend — lógica de controle de acesso (convite, aprovação, remoção) | 5 dias | Mid-Senior |
-| Backend — OIDC group-claim Azure AD | 5 dias | Senior |
-| Backend — roteamento LGPD Opção C + DAL | 10 dias | Senior |
-| Frontend — painel de configurações do dono | 4 dias | Mid |
-| Frontend — UI do participante (aliases, Observador, aprovação) | 3 dias | Mid |
-| QA (funcional + segurança + multi-tenant + LGPD) | 5 dias | QA |
-| **Total firme** | **25 dias** | |
+| Backend — schema migration + state machine | 6 days | Senior |
+| Backend — WebSocket filtering (anonymous mode) | 3 days | Senior |
+| Backend — access control logic (invite, approval, removal) | 5 days | Mid-Senior |
+| Backend — OIDC group-claim Azure AD | 5 days | Senior |
+| Backend — LGPD Option C routing + DAL | 10 days | Senior |
+| Frontend — owner settings panel | 4 days | Mid |
+| Frontend — participant UI (aliases, Observer, approval) | 3 days | Mid |
+| QA (functional + security + multi-tenant + LGPD) | 5 days | QA |
+| **Firm total** | **25 days** | |
 
-**Infra / Terceiros / Opex recorrente:** Possível nova instância RDS em `sa-east-1` (CTO verificando estado; procurement a iniciar se ausente). Custo mensal recorrente do endpoint `sa-east-1` a definir após revisão de infraestrutura com DevOps — deve ser considerado na precificação de tenants com flag LGPD. Sem novos provedores de terceiros.
+**Infra / Third-parties / Recurring opex:** Possible new RDS instance in `sa-east-1` (CTO verifying state; procurement to start if absent). Monthly recurring cost of the `sa-east-1` endpoint to be determined after infrastructure review with DevOps — must be factored into LGPD-flagged tenant pricing. No new third-party providers.
 
 ---
 
-## Prontidão Herdada e Dispositions em Aberto
+## Inherited Readiness and Open Dispositions
 
-> O que o PM precisa enxergar antes de planejar.
+> What the PM needs to see before planning.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Premissas ainda a validar** | Equipe de TI da Construtora Ágil completa registro Azure AD dentro da janela de entrega (dono: Fernanda Ramos; milestone no plano do PM). Instância RDS `sa-east-1` disponível antes do desenvolvimento do roteamento LGPD (dono: CTO). |
-| **Incógnitas de Discovery** | Todas resolvidas: Azure AD (viável via OIDC), Jira (removido), LGPD (Opção C adicionada ao escopo). |
-| **Requisitos delegados (com dono)** | — |
+| **Premises still to validate** | Construtora Ágil IT team completes Azure AD registration within the delivery window (owner: Fernanda Ramos; milestone in PM plan). RDS `sa-east-1` instance available before LGPD routing development (owner: CTO). |
+| **Discovery unknowns** | All resolved: Azure AD (viable via OIDC), Jira (removed), LGPD (Option C added to scope). |
+| **Delegated requirements (with owner)** | — |
 
-> Se a Construtora Ágil atrasar o registro Azure AD, a funcionalidade de mapeamento de papéis via Azure AD não pode ser homologada com o cliente antes do go-live. O PM deve incluir este milestone como bloqueador de aceite para o cliente, não para o desenvolvimento interno.
+> If Construtora Ágil delays the Azure AD registration, the role mapping feature via Azure AD cannot be validated with the client before go-live. The PM must include this milestone as a client acceptance blocker, not an internal development blocker.
 
 ---
 
-## Critérios de Sucesso e Métricas (projetados)
+## Success Criteria and Metrics (projected)
 
-> Baseline projetado que `metrics.md` confronta com o medido pós-rollout.
+> Projected baseline that `metrics.md` compares against measured post-rollout.
 
-| Tipo | Métrica | Meta (projetada) | Janela | Confiança |
+| Type | Metric | Target (projected) | Window | Confidence |
 |---|---|---|---|---|
-| **Primária** | Contrato da Construtora Ágil fechado | Contrato assinado | Até 30 dias do release | 85 |
-| **Primária** | Adoção do modo anônimo em sessões enterprise | ≥ 30% das sessões enterprise | 60 dias pós-release | 65 |
-| **Secundária** | Taxa de sucesso de entrada em modo Aprovação | ≥ 95% das solicitações válidas aprovadas em ≤ 2 min | 30 dias pós-release | 70 |
-| **Secundária** | Deals adicionais em pipeline desbloqueados | ≥ 1 dos 2 deals sinalizados avança | 90 dias pós-release | 60 |
-| **Guardrail** | Incidentes de acesso não autorizado | 0 incidentes reportados | Contínuo a partir do release | 90 |
-| **Guardrail** | Latência de votação em salas abertas (não afetadas) | Sem degradação vs. baseline pré-release | 30 dias pós-release | 85 |
+| **Primary** | Construtora Ágil contract closed | Contract signed | Within 30 days of release | 85 |
+| **Primary** | Anonymous mode adoption in enterprise sessions | ≥ 30% of enterprise sessions | 60 days post-release | 65 |
+| **Secondary** | Entry success rate in Approval mode | ≥ 95% of valid requests approved in ≤ 2 min | 30 days post-release | 70 |
+| **Secondary** | Additional deals in pipeline unblocked | ≥ 1 of 2 signaled deals advances | 90 days post-release | 60 |
+| **Guardrail** | Unauthorized access incidents | 0 reported incidents | Continuous from release | 90 |
+| **Guardrail** | Voting latency in open rooms (unaffected) | No degradation vs. pre-release baseline | 30 days post-release | 85 |
 
 ---
 
-## Handoff ao PM — Gate de Aceite
+## Handoff to PM — Acceptance Gate
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos. Ver [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
+> The PM has **explicit authority to reject** the PRD and return it with specific gaps. See [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
 
-| Checklist de entrega | OK? |
+| Delivery checklist | OK? |
 |---|---|
-| RP congelado (freeze) e referenciado | ☑ |
-| Technical Assessment assinado (ou N/A justificado) | ☑ |
-| Reconciliação de escopo registrada | ☑ |
-| Riscos e dependências consolidados | ☑ |
-| Dependências externas explícitas | ☑ |
-| Dispositions em aberto visíveis | ☑ |
+| RP frozen (freeze) and referenced | ☑ |
+| Technical Assessment signed (or N/A justified) | ☑ |
+| Scope reconciliation recorded | ☑ |
+| Risks and dependencies consolidated | ☑ |
+| External dependencies explicit | ☑ |
+| Open dispositions visible | ☑ |
 
-**Prioridade e contexto de negócio:** Alta — bloqueador pré-fechamento da Construtora Ágil (R$ 42.000 ARR) com deal condicionado à funcionalidade. Sinalização de requisito análogo em 2 deals enterprise adicionais em pipeline. Sem avaliação de capacidade do PM, nenhuma data pode ser confirmada a Vendas ou ao cliente. A dependência crítica de prazo externo (registro Azure AD pelo TI do cliente) deve ser tratada como milestone explícito no plano de execução.
+**Priority and business context:** High — pre-close blocker for Construtora Ágil (R$ 42,000 ARR) with deal conditioned on the feature. Analogous requirement signaled in 2 additional enterprise deals in pipeline. Without the PM's capacity assessment, no date can be confirmed to Sales or the client. The critical external timeline dependency (Azure AD registration by the client's IT) must be treated as an explicit milestone in the execution plan.

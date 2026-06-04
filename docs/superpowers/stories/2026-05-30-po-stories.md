@@ -16,219 +16,219 @@ Laid out in **horizontal lanes** (Story 0 + A→M + Z), same convention as the S
 
 ## Seed scenario (used across every story)
 
-**PO:** Marina Costa · Product Owner · accent laranja.
-**Demand:** `DEM-2026-001` — *"Gateway de Pagamento Recorrente"* (de Carlos Silva, COO).
-**Why it matters:** Cobrança por boleto gera ~30h/mês de reconciliação manual e inadimplência de 18%. Crítica · SLA 21h restantes · custo de atraso **R$ 2,6k/dia** · impacto **R$ 78k/ano**.
+**PO:** Marina Costa · Product Owner · orange accent.
+**Demand:** `DEM-2026-001` — *"Gateway de Pagamento Recorrente"* (from Carlos Silva, COO).
+**Why it matters:** Charging via invoice generates ~30h/month of manual reconciliation and an 18% default rate. Critical · SLA 21h remaining · delay cost **R$ 2.6k/day** · impact **R$ 78k/year**.
 **Cast:** CTO Rafael Lima · PM Juliana Reis · Submitter Carlos Silva (COO) · Viewer Ana Santos (CFO).
-**Portfolio stake:** **9 RPs congelados/mês**, **89%** aceitos na 1ª versão pela PM (era 64%).
+**Portfolio stake:** **9 frozen RPs/month**, **89%** accepted on 1st version by PM (was 64%).
 
 ---
 
 ## Story 0 · Intro · Auth
 
-**Intent:** Entrar no produto como PO.
+**Intent:** Enter the product as a PO.
 
-Marina abre o produto. A mesma porta de entrada do Submitter, mas o que vem depois aponta pra dentro — pra engenharia. Ela faz login.
+Marina opens the product. The same entry door as the Submitter, but what comes after points inward — toward engineering. She logs in.
 
 **Beats:**
-1. **P1.1 · Sign in** — reaproveita a chrome do Submitter (Tide mark · SSO · "em uso por times de Produto e Engenharia").
+1. **P1.1 · Sign in** — reuses the Submitter chrome (Tide mark · SSO · "in use by Product and Engineering teams").
 
 ---
 
-## Story A · Painel do PO
+## Story A · PO Panel
 
-**Intent:** Ter a visão de portfólio antes de mergulhar em qualquer demanda — o PO trabalha a fila, não uma demanda.
+**Intent:** Get the portfolio view before diving into any demand — the PO works the queue, not one demand.
 
-Marina cai no **Painel do PO**. Diferente do Submitter (cujo número-rei é impacto financeiro), o número-rei dela é **throughput de RPs congelados (9 este mês)** — o contexto executável que ela produz. Acima dele, o `AIImpactBanner` mostra quanto a IA adiantou (168h YTD · triagem 6min vs 45min). Abaixo, o grid de `CompactKPI` orbita: custo de atraso evitado (R$ 47k/mês), **aceite na 1ª versão (89%, +25pp vs 64%)** — o espelho dela sobre si mesma —, tempo médio em racionalização (2,4d, −1,8d com IA), e o contra-indicador honesto (PRDs devolvidos pela PM, 11%).
+Marina lands on the **PO Panel**. Unlike the Submitter (whose number-king is financial impact), her number-king is **frozen RP throughput (9 this month)** — the executable context she produces. Above it, the `AIImpactBanner` shows how much the AI contributed (168h YTD · triage 6min vs 45min). Below, the `CompactKPI` grid orbits: delay cost avoided (R$ 47k/month), **1st-version acceptance (89%, +25pp vs 64%)** — the mirror of herself — average time in rationalization (2.4d, −1.8d with AI), and the honest counter-indicator (PRDs returned by PM, 11%).
 
 **Beats (main row):**
-1. **P1.2 · Painel do PO** — Header "Bom dia, Marina · 4 em triagem · 4 em racionalização" · AIImpactBanner (po-portfolio) · HeroMetric "9 RPs congelados" + sparkline · CompactKPI 3×2 · Showcase RP-2026-000 · Demandas recentes.
+1. **P1.2 · PO Panel** — Header "Good morning, Marina · 4 in triage · 4 in rationalization" · AIImpactBanner (po-portfolio) · HeroMetric "9 frozen RPs" + sparkline · CompactKPI 3×2 · Showcase RP-2026-000 · Recent demands.
 
 **Alt-below:**
-- **P1.3 · Painel vazio** — HeroMetric em "—" · helper "Triage sua primeira demanda para começar a produzir RPs" · CTA central "Ir para triagem".
+- **P1.3 · Empty panel** — HeroMetric at "—" · helper "Triage your first demand to start producing RPs" · central CTA "Go to triage".
 
 ---
 
-## Story B · Triagem · decidir o caminho
+## Story B · Triage · deciding the path
 
-**Intent:** Pegar uma demanda crua da fila e decidir, com justificativa, por qual caminho ela segue.
+**Intent:** Pick a raw demand from the queue and decide, with justification, which path it follows.
 
-Este é o **Ato 1** — uma decisão de **roteamento**: rápida, pontuável, descartável. Marina abre a **Fila de Triagem** e vê 4 demandas ordenadas por prioridade e SLA. DEM-2026-001 está no topo: Crítica, **21h restantes**, **R$ 2,6k/dia** de custo de atraso — os sinais que dizem "decide isto primeiro". Ela abre o detalhe (tela cheia). A IA **já pré-avaliou os 5 critérios** com sugestão + confiança, cada um rastreável ao Intake Record do Submitter. O trabalho de Marina não é digitar — é **decidir**: para cada critério ela confirma ou ajusta o veredito e escreve a justificativa (obrigatória). O `TriageScoreMeter` sobe a cada decisão. Em 100% (todo critério avaliado — o gate não força um veredito, força uma decisão *informada*), o `PathDecisionPicker` libera. A IA recomenda **Product Ready**; Marina concorda, justifica, confirma. Esse veredito é um **filtro de esforço** — *vale racionalizar esta demanda agora* —, não um carimbo de "pronta": o fim do Ato 2 (o RP congelado) é o **commitment point**, e a prontidão de verdade (a Definition of Ready, *Ready for Development*) só nasce downstream. A demanda vira "Em Racionalização" e abre o Ato 2.
+This is **Act 1** — a **routing** decision: fast, scorable, disposable. Marina opens the **Triage Queue** and sees 4 demands ordered by priority and SLA. DEM-2026-001 is at the top: Critical, **21h remaining**, **R$ 2.6k/day** delay cost — the signals that say "decide this first." She opens the detail (fullscreen). The AI **has already pre-assessed the 5 criteria** with suggestion + confidence, each traceable to the Submitter's Intake Record. Marina's job is not to type — it is to **decide**: for each criterion she confirms or adjusts the verdict and writes the justification (required). The `TriageScoreMeter` rises with each decision. At 100% (all criteria assessed — the gate does not force a verdict, it forces an **informed** decision), the `PathDecisionPicker` enables. The AI recommends **Product Ready**; Marina agrees, justifies, confirms. This verdict is an **effort filter** — *is this demand worth rationalizing now* — not a "ready" stamp: the end of Act 2 (the frozen RP) is the **commitment point**, and real readiness (the Definition of Ready, *Ready for Development*) only comes downstream. The demand becomes "In Rationalization" and opens Act 2.
 
 **Beats (main row):**
-1. **P2.1 · Fila de Triagem** — 4 `TriageQueueCard`s (Crítica→Baixa) · SLAChip + DelayCostChip visíveis · clica DEM-2026-001.
-2. **P2.2 · Triagem — detalhe** — tela cheia · Intake Record read-only (com fontes) · AIImpactBanner (po-triage) · 5 `TriageCriterionRow`s pré-avaliados · isPath com `PathDecisionPicker` (desabilitado até 100%).
-3. **P2.3 · Critério decidido** — uma `DecisionCard` vai de undecided→decided · TriageScoreMeter 20%.
-4. **P2.4 · Score 100%** — 5 decididos · PathDecisionPicker liberado.
-5. **P2.5 · Product Ready (confirma)** — `DecisionCard kind=path` (rationale "Vale o esforço: contexto suficiente para investir, sem incógnitas que travem o início; premissas tratáveis em Discovery", basis=Intake Record) → demanda "Em Racionalização" → cai em P3.1.
+1. **P2.1 · Triage Queue** — 4 `TriageQueueCard`s (Critical→Low) · SLAChip + DelayCostChip visible · clicks DEM-2026-001.
+2. **P2.2 · Triage — detail** — fullscreen · Intake Record read-only (with sources) · AIImpactBanner (po-triage) · 5 pre-assessed `TriageCriterionRow`s · isPath with `PathDecisionPicker` (disabled until 100%).
+3. **P2.3 · Criterion decided** — one `DecisionCard` goes from undecided→decided · TriageScoreMeter 20%.
+4. **P2.4 · Score 100%** — 5 decided · PathDecisionPicker enabled.
+5. **P2.5 · Product Ready (confirm)** — `DecisionCard kind=path` (rationale "Worth the effort: sufficient context to invest, no unknowns that block the start; assumptions manageable in Discovery", basis=Intake Record) → demand "In Rationalization" → lands on P3.1.
 
 ---
 
-## Story C · Os outros três caminhos
+## Story C · The other three paths
 
-**Intent:** Mostrar que a triagem tem quatro portas — só uma abre a racionalização; as outras encerram a passagem pelo PO naquele momento.
+**Intent:** Show that triage has four doors — only one opens rationalization; the others close the PO's passage at this moment.
 
-A decisão de caminho é um **filtro de esforço**: para onde vale concentrar energia agora. Só `Product Ready` abre o Ato 2 — e mesmo ela não declara a demanda "pronta" (o congelamento do RP é o *commitment point*; a Definition of Ready / *Ready for Development* é downstream). As outras três encerram a passagem pelo PO neste momento. **Discovery** (investigar antes de racionalizar — time-box de 2 semanas) e **Backlog** (boa demanda, não é prioridade agora) saem por portas laterais recuperáveis. **Rejeitar** (fora da estratégia ou baixo valor) fecha a porta — com justificativa obrigatória, e o Submitter é notificado. Cada uma é uma `DecisionCard kind=path` defensável.
+The path decision is an **effort filter**: where is it worth concentrating energy now. Only `Product Ready` opens Act 2 — and even that does not declare the demand "ready" (the RP freeze is the *commitment point*; the Definition of Ready / *Ready for Development* is downstream). The other three close the PO's passage at this moment. **Discovery** (investigate before rationalizing — 2-week time-box) and **Backlog** (good demand, not a priority now) exit through recoverable lateral doors. **Reject** (outside strategy or low value) closes the door — with mandatory justification, and the Submitter is notified. Each is a defensible `DecisionCard kind=path`.
 
 **Beats (main row):**
-1. **P2.6 · Discovery** — modal de time-box ("Investigar até: 13 jun") · demanda → "Em Discovery" (lateral, recuperável).
-2. **P2.7 · Backlog** — demanda → "Backlog (Opportunity)" (lateral, recuperável).
-3. **P2.8 · Rejeitar** — modal de justificativa obrigatória · demanda → "Rejeitada" (fecha) · Submitter notificado.
+1. **P2.6 · Discovery** — time-box modal ("Investigate until: 13 Jun") · demand → "In Discovery" (lateral, recoverable).
+2. **P2.7 · Backlog** — demand → "Backlog (Opportunity)" (lateral, recoverable).
+3. **P2.8 · Reject** — mandatory justification modal · demand → "Rejected" (closes) · Submitter notified.
 
 ---
 
-## Story D · Racionalização · o WOW da IA
+## Story D · Rationalization · the AI WOW
 
-**Intent:** Abrir a demanda Product Ready e descobrir que o RP **já está pré-redigido** — o trabalho vira julgamento, não digitação.
+**Intent:** Open the Product Ready demand and discover that the RP **has already been pre-drafted** — the work becomes judgment, not typing.
 
-Este é o **Ato 2** — uma decisão de **construção**: profunda, acumulativa. Marina entra no **Canvas de Racionalização** (tela cheia) e o medo do README — "PO vira anotador de reunião" — não acontece: a IA **já leu o Intake Record e a triagem e redigiu 9 de 14 seções**. À esquerda, a conversa abre com "Já redigi 9 de 14 seções a partir do PDF e da triagem. Comecei pelo Escopo — confira o que marquei como fora." No centro, as `RPSectionCard`s estão agrupadas por urgência de congelamento: **"Bloqueiam congelamento · 7"** (seções vazias/baixa confiança), o `SemanticReflectionCard` ancorando o significado ("risco operacional + financeiro, não pedido de feature"), **"Em discovery / premissa · 1"** (a premissa dos 40% opt-in, com time-box), e **"Resolvidas · 3"** (colapsado). Cada seção mostra origem (`ai_drafted`/`inherited`), confiança contra a rubrica `satisfiedWhen`, e é rastreável à fonte. À direita, as fontes e o `TechAssessmentRefCard` (ainda `not_requested`). No rodapé, a `FreezeToolbar` explica por que ainda não dá pra congelar.
+This is **Act 2** — a **construction** decision: deep, accumulative. Marina enters the **Rationalization Canvas** (fullscreen) and the README fear — "PO becomes a meeting scribe" — does not happen: the AI **has already read the Intake Record and the triage and drafted 9 of 14 sections**. On the left, the conversation opens with "I already drafted 9 of 14 sections from the PDF and the triage. I started with Scope — check what I marked as out of scope." In the center, the `RPSectionCard`s are grouped by freeze urgency: **"Block freeze · 7"** (empty/low-confidence sections), the `SemanticReflectionCard` anchoring the meaning ("operational + financial risk, not a feature request"), **"In discovery / assumption · 1"** (the 40% opt-in assumption, with time-box), and **"Resolved · 3"** (collapsed). Each section shows its origin (`ai_drafted`/`inherited`), confidence against the `satisfiedWhen` rubric, and is traceable to the source. On the right, the sources and the `TechAssessmentRefCard` (still `not_requested`). At the footer, the `FreezeToolbar` explains why it cannot be frozen yet.
 
 **Beats (main row):**
-1. **P3.1 · Canvas de Racionalização** — RPReadinessRing 25% · AIImpactBanner (po-rationalization: "RP pré-redigido · 9 de 14 seções · 3 ADRs reaproveitados") · três zonas · FreezeToolbar pendente (N=7).
-2. **P3.5 · Contrato do RP (commitment point)** — especificação das 14 seções agrupadas + a linha-ponte do Technical Assessment · seção 7 com exemplo Given/When/Then · seção 8 com checklist NFR (ISO/IEC 25010) · seção 10 com tabela primária·secundária·guardrail.
+1. **P3.1 · Rationalization Canvas** — RPReadinessRing 25% · AIImpactBanner (po-rationalization: "RP pre-drafted · 9 of 14 sections · 3 ADRs reused") · three zones · FreezeToolbar pending (N=7).
+2. **P3.5 · RP contract (commitment point)** — specification of the 14 sections grouped + the Technical Assessment bridge row · section 7 with Given/When/Then example · section 8 with NFR checklist (ISO/IEC 25010) · section 10 with primary·secondary·guardrail metrics table.
 
 **Alt-below:**
-- **P3.2 · Estados da RPSectionCard** — empty · ai_drafted · editing · low_confidence · resolved · discovery.
+- **P3.2 · RPSectionCard states** — empty · ai_drafted · editing · low_confidence · resolved · discovery.
 
 ---
 
-## Story E · Resolver uma seção
+## Story E · Resolve a section
 
-**Intent:** Exercer julgamento sobre uma seção pré-redigida — revisar, editar, justificar — e vê-la migrar para resolvida.
+**Intent:** Exercise judgment over a pre-drafted section — review, edit, justify — and watch it migrate to resolved.
 
-Marina ataca a seção **Escopo (IN/OUT)**, que está vazia (bloqueia). Ela usa o composer/chat pra refinar com a IA ("o que NÃO entra?"), edita o conteúdo, e registra a `DecisionCard kind=section` com a justificativa. A seção migra do grupo "Bloqueiam congelamento" para "Resolvidas"; a contagem cai de 7 para 6; o `RPReadinessRing` sobe com um delta. É o mesmo motor da Submitter (requisito fixo → entrada graduada → score derivado), instanciado para decisões de produto.
+Marina tackles the **Scope (IN/OUT)** section, which is empty (blocks). She uses the composer/chat to refine with the AI ("what does NOT belong?"), edits the content, and records the `DecisionCard kind=section` with the justification. The section migrates from the "Block freeze" group to "Resolved"; the count drops from 7 to 6; the `RPReadinessRing` rises with a delta. It is the same engine as the Submitter (fixed requirement → graduated input → derived score), instantiated for product decisions.
 
 **Beats (main row):**
-1. **P3.3 · Seção resolvida** — Escopo IN/OUT editado + justificado · card migra blocking→resolvidas · contagem 7→6 · RPReadinessRing delta.
+1. **P3.3 · Resolved section** — Scope IN/OUT edited + justified · card migrates blocking→resolved · count 7→6 · RPReadinessRing delta.
 
 ---
 
-## Story F · "Ainda não dá pra decidir"
+## Story F · "Not decidable yet"
 
-**Intent:** Tratar uma incógnita de produto sem travar o fluxo — incerteza é uma disposição estruturada, não paralisia.
+**Intent:** Handle a product unknown without stalling the flow — uncertainty is a structured disposition, not paralysis.
 
-Assim como o "não sei" do Submitter nunca bloqueia, a incerteza de Marina nunca trava. A premissa dos **40% de opt-in** precisa ser validada com CS antes do congelamento. Em vez de chutar, Marina marca a seção como **`discovery`** (com time-box) — conta como *resolvido-como-incógnita*. Outras seções podem ser `inherited` (vêm prontas do intake, com source) ou `ai_drafted` (a IA redigiu, ela confirma). O gate não é "Marina sabe tudo" — é "toda seção bloqueante tem uma disposição honesta". Note que **não há `escalated`**: escalar ao CTO não é uma seção que outro preenche dentro do RP — é uma dependência de outro artefato (Story G).
+Just as the Submitter's "I don't know" never blocks, Marina's uncertainty never stalls. The **40% opt-in assumption** needs to be validated with CS before the freeze. Instead of guessing, Marina marks the section as **`discovery`** (with time-box) — counts as *resolved-as-unknown*. Other sections can be `inherited` (come ready from the intake, with source) or `ai_drafted` (AI wrote it, she confirms). The gate is not "Marina knows everything" — it is "every blocking section has an honest disposition." Note that **there is no `escalated`**: escalating to the CTO is not a section someone else fills inside the RP — it is a dependency on another artifact (Story G).
 
 **Beats (main row):**
-1. **P3.4 · Disposição honesta** — RPDispositionPicker → frames: `discovery` (time-box "validar 40% com CS até 13 jun") · `inherited` (do intake + source) · `ai_drafted` (confirmar).
+1. **P3.4 · Honest disposition** — RPDispositionPicker → frames: `discovery` (time-box "validate 40% with CS by 13 Jun") · `inherited` (from intake + source) · `ai_drafted` (confirm).
 
 ---
 
-## Story G · Escalar ao CTO · Avaliação Técnica
+## Story G · Escalate to CTO · Technical Assessment
 
-**Intent:** Quando a demanda toca infra/PCI/IA, pedir uma avaliação técnica ao CTO — sem entregar seções vazias pra ele preencher.
+**Intent:** When the demand touches infra/PCI/AI, request a technical assessment from the CTO — without handing over empty sections for him to fill.
 
-DEM-2026-001 toca PCI, Stripe e webhooks. Marina **escala ao CTO**: entrega o **RP** (a visão de produto) + perguntas específicas. O CTO **não edita o RP** — ele produz um **artefato próprio, a Avaliação Técnica**, com viabilidade, constraints, sistemas afetados, riscos técnicos e ADRs (incluindo dois reaproveitados da base de conhecimento — a alavanca de velocidade). No canvas de Marina, o `TechAssessmentRefCard` evolui `requested → in_progress → signed` (veredito "viável-com-ressalvas", esforço firme 34 dias úteis). Se o CTO **vetar** a viabilidade, Marina revisa o escopo do RP — mas o CTO nunca redefine o produto. É a correção estrutural do projeto, em dados: o RP *referencia* a avaliação, não a absorve.
+DEM-2026-001 touches PCI, Stripe and webhooks. Marina **escalates to the CTO**: she delivers the **RP** (the product vision) + specific questions. The CTO **does not edit the RP** — he produces his **own artifact, the Technical Assessment**, with viability, constraints, affected systems, technical risks and ADRs (including two reused from the knowledge base — the velocity lever). In Marina's canvas, the `TechAssessmentRefCard` evolves `requested → in_progress → signed` (verdict "viable-with-caveats", firm effort 34 business days). If the CTO **vetoes** viability, Marina revises the RP scope — but the CTO never redefines the product. This is the structural correction of the project, in data: the RP *references* the assessment, does not absorb it.
 
 **Beats (main row):**
-1. **P4.1 · Escalar ao CTO (modal)** — entrega o RP + perguntas (PCI/Stripe/webhooks) · helper "o CTO produz uma Avaliação Técnica separada".
-2. **P4.2 · TechAssessmentRef** — `requested` → `in_progress` → `signed` (veredito + link).
-3. **P4.3 · Avaliação Técnica (CTO)** — artefato do Rafael Lima: viabilidade, 4 `ADRSuggestionCard`s (ADR-100..103, 2 reaproveitados), esforço 34 dias, PCI/LGPD · caption "referenciado pelo RP, fundido no PRD · NÃO faz parte do RP".
+1. **P4.1 · Escalate to CTO (modal)** — delivers the RP + questions (PCI/Stripe/webhooks) · helper "the CTO produces a separate Technical Assessment".
+2. **P4.2 · TechAssessmentRef** — `requested` → `in_progress` → `signed` (verdict + link).
+3. **P4.3 · Technical Assessment (CTO)** — Rafael Lima's artifact: viability, 4 `ADRSuggestionCard`s (ADR-100..103, 2 reused), effort 34 days, PCI/LGPD · caption "referenced by the RP, fused into the PRD · NOT part of the RP".
 
 **Alt-below:**
-- **P4.2 · TechAssessmentRef vetoed** — callout de revisão de escopo (CTO vetou viabilidade → Marina ajusta o RP).
+- **P4.2 · TechAssessmentRef vetoed** — scope revision callout (CTO vetoed viability → Marina adjusts the RP).
 
 ---
 
-## Story H · Congelar o RP
+## Story H · Freeze the RP
 
-**Intent:** O RP está pronto para congelar — cruzar o **commitment point** (não a DoR, que é downstream).
+**Intent:** The RP is ready to freeze — cross the **commitment point** (not the DoR, which is downstream).
 
-Todas as seções bloqueantes têm disposição honesta, e o Technical Assessment voltou assinado. O `RPReadinessRing` chega em freezeReady e a `FreezeToolbar` muda de "Faltam N seções…" para "Pronto para congelar — todas as seções bloqueantes têm disposição honesta e o Technical Assessment voltou assinado." Marina clica **Congelar RP** → modal de consequências (o RP vira imutável e cruza o **commitment point**; funde-se no PRD que segue ao PM; **aqui termina o arco do PO** — a Definition of Ready e a escrita de épicos/histórias acontecem downstream). Confirma. O RP-2026-001 está congelado — o **commitment point** do Upstream Kanban e o *gate deliverable* do Stage-Gate virados número.
+All blocking sections have an honest disposition, and the Technical Assessment came back signed. The `RPReadinessRing` reaches freezeReady and the `FreezeToolbar` changes from "N blocking sections still lack an honest disposition…" to "Ready to freeze — all blocking sections have an honest disposition and the Technical Assessment came back signed." Marina clicks **Freeze RP** → consequences modal (the RP becomes immutable and crosses the **commitment point**; fuses into the PRD that goes to the PM; **the PO's arc ends here** — the Definition of Ready and writing of epics/stories happen downstream). Confirms. RP-2026-001 is frozen — the **commitment point** of the Upstream Kanban and the Stage-Gate *gate deliverable* turned into a number.
 
 **Beats (main row):**
-1. **P5.1 · Congelar RP (modal)** — freezeReady=true · consequências explicadas · Confirmar.
+1. **P5.1 · Freeze RP (modal)** — freezeReady=true · consequences explained · Confirm.
 
 ---
 
-## Story I · A costura do PRD · handoff à PM
+## Story I · The PRD seam · handoff to PM
 
-**Intent:** Fundir o RP (PO) com a Avaliação Técnica (CTO) num PRD e entregar à PM — a autoria de cada metade fica visível.
+**Intent:** Fuse the RP (PO) with the Technical Assessment (CTO) into a PRD and deliver it to the PM — the authorship of each half stays visible.
 
-O entregável que abre o downstream **não é o RP** — é o **PRD**. Marina vê a **costura**: à esquerda o RP (autoria dela, PO), à direita a Avaliação Técnica (autoria do Rafael, CTO), unidos sob o cabeçalho `PRD-2026-001` por uma costura central visível. Cada metade com seu autor claro, sem que uma escreva sobre a outra. Ela entrega o **PRD** à PM (Juliana Reis). A partir daqui Marina não conduz mais a demanda no dia a dia — mas continua dona do Backlog de Oportunidades e do ponto onde o feedback loop fecha.
+The deliverable that opens downstream is **not the RP** — it is the **PRD**. Marina sees the **seam**: on the left the RP (her authorship, PO), on the right the Technical Assessment (Rafael's authorship, CTO), joined under the `PRD-2026-001` header by a visible center seam. Each half with its clear author, without one writing over the other. She delivers the **PRD** to the PM (Juliana Reis). From here Marina no longer drives the demand day to day — but she remains the owner of the Opportunity Backlog and the point where the feedback loop closes.
 
 **Beats (main row):**
-1. **P5.2 · PRD (costura)** — tela cheia · `PRD-2026-001` · RP (Marina/PO) | Avaliação Técnica (Rafael/CTO) · costura central · AIImpactBanner (po-prd: "cada afirmação rastreável").
-2. **P5.3 · Handoff do PRD à PM (modal)** — entrega o PRD a Juliana Reis · notificar · sucesso.
+1. **P5.2 · PRD (seam)** — fullscreen · `PRD-2026-001` · RP (Marina/PO) | Technical Assessment (Rafael/CTO) · center seam · AIImpactBanner (po-prd: "every claim traceable").
+2. **P5.3 · PRD handoff to PM (modal)** — delivers PRD to Juliana Reis · notify · success.
 
 ---
 
-## Story J · Pós-handoff · devolução e aceite
+## Story J · Post-handoff · return and acceptance
 
-**Intent:** O que o PO vê depois de entregar — a PM aceita, ou devolve com gaps específicos.
+**Intent:** What the PO sees after delivering — the PM accepts, or returns with specific gaps.
 
-A PM tem **autoridade explícita para rejeitar** e devolver com gaps específicos. Quatro destinos: **Enviado** (PM recebeu, está validando) → **Devolvido** (PM apontou "Falta cenário de fallback nos critérios de aceite") → **Aceito** (abre execução). Quando devolvido, Marina **trata só os gaps** e incrementa a versão (v1.1) — o gap é roteado pra ela ou pro CTO conforme a natureza. O contra-indicador do dashboard (PRDs devolvidos, 11%) é exatamente este loop, medido.
+The PM has **explicit authority to reject** and return with specific gaps. Four destinations: **Sent** (PM received, is validating) → **Returned** (PM pointed out "Missing fallback scenario in acceptance criteria") → **Accepted** (opens execution). When returned, Marina **addresses only the gaps** and increments the version (v1.1) — the gap is routed to her or to the CTO based on its nature. The dashboard counter-indicator (PRDs returned, 11%) is exactly this loop, measured.
 
 **Beats (main row):**
-1. **P6.1 · Enviado ao PM** — banner tide "aguardando aceite da PM".
-2. **P6.2 · Devolvido pela PM** — banner amber "Falta cenário de fallback nos critérios de aceite" + CTA "Tratar gaps".
-3. **P6.3 · Tratar gaps + nova versão** — só a seção do gap editável · v1.1 · gap roteado a PO/CTO.
-4. **P6.4 · Aceito pela PM** — banner emerald · PRD abre execução.
+1. **P6.1 · Sent to PM** — tide banner "awaiting PM acceptance".
+2. **P6.2 · Returned by PM** — amber banner "Missing fallback scenario in acceptance criteria" + CTA "Address gaps".
+3. **P6.3 · Address gaps + new version** — only the gap section editable · v1.1 · gap routed to PO/CTO.
+4. **P6.4 · Accepted by PM** — emerald banner · PRD opens execution.
 
 ---
 
-## Story K · Capacidade e feedback loop
+## Story K · Capacity and feedback loop
 
-**Intent:** Receber de volta a PM em dois momentos — escalada de capacidade e fechamento do loop.
+**Intent:** Receive the PM back on two occasions — capacity escalation and loop closure.
 
-O PO **recebe de volta** a PM além da devolução: quando a PM sinaliza **escalada de capacidade** (não cabe no trimestre), Marina re-sequencia o portfólio; e quando a entrega gera **feedback**, o loop fecha de volta no Backlog de Oportunidades pra atualizar prioridades. É o que mantém o PO como dono da visão de produto mesmo depois do handoff.
+The PO **hears back from the PM** beyond returns: when the PM signals a **capacity escalation** (does not fit in the quarter), Marina re-sequences the portfolio; and when the delivery generates **feedback**, the loop closes back to the Opportunity Backlog to update priorities. This is what keeps the PO as the product vision owner even after handoff.
 
 **Beats (main row):**
-1. **P6.5 · Escalada de capacidade (da PM)** — PO re-sequencia a fila.
-2. **P6.6 · Feedback loop fechado** — outcome → atualização de prioridade no Product Backlog.
+1. **P6.5 · Capacity escalation (from PM)** — PO re-sequences the queue.
+2. **P6.6 · Feedback loop closed** — outcome → priority update in Product Backlog.
 
 ---
 
-## Story L · Sequenciar o portfólio
+## Story L · Sequence the portfolio
 
-**Intent:** Decidir a ordem da fila — a tensão produtiva do PO é *entre* demandas, não dentro de uma.
+**Intent:** Decide the queue order — the PO's productive tension is *between* demands, not inside one.
 
-Diferente do Submitter (cujo espelho RICE-lite afia *uma* demanda), o espelho do PO é a fila inteira. Os `SequencingTensionCallout`s provocam: **custo de atraso alto + esforço alto** → "Caro de esperar e caro de fazer — esta é a próxima, ou fatiar?"; **SLA estourando + impacto baixo** → "Vai furar o SLA, mas vale o esforço, ou é Backlog honesto?"; **demanda nova muito parecida com RP recente** → "Já racionalizamos algo assim — reusar o contexto?". Cada provocação que afia o sequenciamento melhora o throughput.
+Unlike the Submitter (whose RICE-lite mirror sharpens *one* demand), the PO's mirror is the entire queue. The `SequencingTensionCallout`s provoke: **high delay cost + high effort** → "Expensive to wait and expensive to build — is this next, or should we slice it?"; **SLA expiring + low impact** → "It will breach the SLA, but is the effort worth it, or is honest Backlog the answer?"; **new demand very similar to a recent RP** → "We already rationalized something like this — reuse the context?". Each provocation that sharpens the sequencing improves throughput.
 
 **Beats (main row):**
-1. **P7.1 · Sequenciamento** — a fila com `SequencingTensionCallout`s ativos · custo de atraso + SLA + esforço + reuso como sinais.
+1. **P7.1 · Sequencing** — the queue with active `SequencingTensionCallout`s · delay cost + SLA + effort + reuse as signals.
 
 ---
 
-## Story M · Visibilidade cross-demanda
+## Story M · Cross-demand visibility
 
-**Intent:** O que o PO olha fora de uma demanda específica — portfólio, notificações, atividade, pendências.
+**Intent:** What the PO looks at outside of a specific demand — portfolio, notifications, activity, pending items.
 
-Surfaces reaproveitadas do Submitter, com copy de PO:
+Surfaces reused from the Submitter, with PO copy:
 
-- **Painel** (Story A) — o número-rei do throughput + KPIs pay-justifying.
-- **Notificações** — TopBar bell · PM perguntou, RP congelado, CTO assinou avaliação.
-- **Atividade** — log cross-demand: "PM devolveu PRD-2026-002" · "CTO assinou avaliação de DEM-2026-001" · "RP-2026-008 aceito na 1ª versão".
-- **Pendências** — visão cross-demand do que bloqueia o PO (seções sem disposição, avaliações técnicas pendentes), agrupadas por demanda + SLA.
+- **Panel** (Story A) — the throughput number-king + pay-justifying KPIs.
+- **Notifications** — TopBar bell · PM asked a question, RP frozen, CTO signed assessment.
+- **Activity** — cross-demand log: "PM returned PRD-2026-002" · "CTO signed assessment for DEM-2026-001" · "RP-2026-008 accepted on 1st version".
+- **Pending items** — cross-demand view of what blocks the PO (sections without disposition, pending technical assessments), grouped by demand + SLA.
 
 **Beats (main row):**
-1. **P7.2 · Notificações** — dropdown + tela "ver todas".
-2. **P7.3 · Chat global sobre o Painel** — GlobalChatSheet aberto sobre P1.2.
-3. **P7.4 · Atividade / Pendências cross-demand** — feed + lista priorizada por SLA.
+1. **P7.2 · Notifications** — dropdown + "view all" screen.
+2. **P7.3 · Global chat over the Panel** — GlobalChatSheet open over P1.2.
+3. **P7.4 · Activity / Pending items cross-demand** — feed + prioritized list by SLA.
 
 ---
 
 ## Lane Z · Reusable patterns
 
-**Intent:** Patterns referenciados por múltiplas stories, mantidos centralizados.
+**Intent:** Patterns referenced by multiple stories, kept centralized.
 
 **Beats:**
-1. **DecisionCard (universal · defensabilidade)** — `verdict · rationale · basis · source · reversible`. Usado por: triagem (cada critério, lane B), caminho (lane B/C), seção do RP (lanes E/F). É a camada de primeira classe do PO — análoga ao ConfidenceBar do Submitter.
-2. **Reason modal (universal · transition why)** — reaproveitado do Submitter; especializado em Rejeitar (lane C) e Devolver-gaps (lane J).
+1. **DecisionCard (universal · defensibility)** — `verdict · rationale · basis · source · reversible`. Used by: triage (each criterion, lane B), path (lane B/C), RP section (lanes E/F). It is the PO's first-class layer — analogous to the Submitter's ConfidenceBar.
+2. **Reason modal (universal · transition why)** — reused from the Submitter; specialized in Reject (lane C) and Return-gaps (lane J).
 
 ---
 
 ## Master gaps surfaced (carry forward)
 
-Carrega adiante os gaps já registrados pela Submitter (Button leadingIcon como INSTANCE_SWAP, DateField, Tag/picked, MultiSelect). Novos, específicos do PO, a observar durante o build:
+Carries forward the gaps already recorded by the Submitter (Button leadingIcon as INSTANCE_SWAP, DateField, Tag/picked, MultiSelect). New ones, specific to the PO, to watch during the build:
 
-1. **DecisionCard precisa forçar `rationale` não-vazio visualmente** — o estado "veredito sem justificativa" deve ser claramente inválido (state/error hint), não só um campo vazio aceitável.
-2. **TriageScoreMeter vs ReadinessRing** — reusar o mesmo gauge com semântica diferente (gate de "pode concluir" vs score de prontidão); confirmar que a diferença de significado fica clara em tela.
-3. **PRDSeam é um layout novo de duas autorias** — validar que a costura central comunica "um documento, dois autores" sem parecer duas telas lado a lado.
+1. **DecisionCard must visually enforce non-empty `rationale`** — the state "verdict without justification" must be clearly invalid (state/error hint), not just an acceptable empty field.
+2. **TriageScoreMeter vs ReadinessRing** — reuse the same gauge with different semantics (can-conclude gate vs readiness score); confirm that the difference in meaning is clear on screen.
+3. **PRDSeam is a new two-authorship layout** — validate that the center seam communicates "one document, two authors" without looking like two side-by-side screens.
 
-## Próximas personas
+## Next personas
 
-CTO e PM entram no protótipo no mesmo molde (ver a nota final de [`personas/02-po.md`](../../../personas/02-po.md)):
-- O **CTO** assume o **Technical Assessment** como entregável de primeira classe (viabilidade como o seu modelo de primeira classe) e a fusão no PRD como handoff — as telas P4.3 e P5.2 deste protótipo já são o ponto de partida dele.
-- O **PM** recebe o **PRD** e tem autoridade de aceitar/devolver — as telas P6.1–P6.4 já mostram o lado do PO desse loop.
-- Repetir: definir intents (uma por story) · categorizar screens em lanes · escrever narrativa · aplicar os princípios de `03-po.md` (dois atos, decisão de primeira classe, dispositions, cadeia RP→PRD).
+CTO and PM join the prototype in the same mold (see the final note in [`personas/02-po.md`](../../../personas/02-po.md)):
+- The **CTO** takes the **Technical Assessment** as a first-class deliverable (viability as his first-class model) and the fusion into the PRD as handoff — the screens P4.3 and P5.2 of this prototype are already his starting point.
+- The **PM** receives the **PRD** and has authority to accept/return — the screens P6.1–P6.4 already show the PO side of that loop.
+- Repeat: define intents (one per story) · categorize screens into lanes · write narrative · apply the principles from `03-po.md` (two acts, decision first-class, dispositions, RP→PRD chain).

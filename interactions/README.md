@@ -1,35 +1,35 @@
-# Índice de Interações
+# Interactions Index
 
-Cada arquivo nesta pasta documenta uma interação bilateral entre dois papéis.
+Each file in this folder documents a bilateral interaction between two roles.
 
-## Mapa de Interações
+## Interaction Map
 
 ```mermaid
 flowchart LR
-    CEO -->|Direção estratégica| CTO
-    SALES -->|Registro de intake| PO
-    MKTG -->|Registro de intake| PO
-    CS -->|Registro de intake| PO
-    CS -->|Sinal de feedback| PM
+    CEO -->|Strategic direction| CTO
+    SALES -->|Intake record| PO
+    MKTG -->|Intake record| PO
+    CS -->|Intake record| PO
+    CS -->|Feedback signal| PM
 
-    PO -->|Solicitação de discovery| CTO
-    PO -->|Escalada arquitetural| CTO
+    PO -->|Discovery request| CTO
+    PO -->|Architectural escalation| CTO
     CTO -->|Technical Assessment| PO
 
     PO -->|PRD| PM
-    PM -->|Escalada de capacidade| PO
+    PM -->|Capacity escalation| PO
 
-    PM -->|Plano de Execução + PRD| TL
-    TL -->|Confirmação de contexto / bloqueio de escopo| PM
+    PM -->|Execution Plan + PRD| TL
+    TL -->|Context confirmation / scope blocker| PM
 
-    TL -->|Tarefas definidas| ENG
-    ENG -->|Discovery de escopo| TL
+    TL -->|Defined tasks| ENG
+    ENG -->|Scope discovery| TL
 
-    ENG -->|Implementação concluída| QA
-    QA -->|Aprovação / rejeição de release| PM
+    ENG -->|Implementation complete| QA
+    QA -->|Release approval / rejection| PM
 
-    PM -->|Resumo de entrega| CS
-    PM -->|Relatório de feedback| PO
+    PM -->|Delivery summary| CS
+    PM -->|Feedback report| PO
 
     style CEO fill:#e8f4f8,stroke:#2196F3,color:#000
     style SALES fill:#e8f4f8,stroke:#2196F3,color:#000
@@ -43,42 +43,42 @@ flowchart LR
     style QA fill:#e8f5e9,stroke:#4CAF50,color:#000
 ```
 
-## Índice de Arquivos
+## File Index
 
-| # | Arquivo | Interação | Camada |
+| # | File | Interaction | Layer |
 |---|---|---|---|
-| 01 | `01-sales-to-po.md` | Vendas → PO | Upstream → Intake |
+| 01 | `01-sales-to-po.md` | Sales → PO | Upstream → Intake |
 | 02 | `02-cs-to-po.md` | CS → PO | Upstream → Intake |
 | 03 | `03-marketing-to-po.md` | Marketing → PO | Upstream → Intake |
-| 04 | `04-ceo-to-cto.md` | CEO → CTO | Executivo → Liderança Técnica |
-| 05 | `05-po-to-cto.md` | PO → CTO | Dentro do Intake |
-| 06 | `06-cto-to-po.md` | CTO → PO | Dentro do Intake |
+| 04 | `04-ceo-to-cto.md` | CEO → CTO | Executive → Technical Leadership |
+| 05 | `05-po-to-cto.md` | PO → CTO | Within Intake |
+| 06 | `06-cto-to-po.md` | CTO → PO | Within Intake |
 | 07 | `07-po-to-pm.md` | PO → PM | Intake → Downstream |
-| 08 | `08-pm-to-po-capacity.md` | PM → PO (Escalada de Capacidade) | Dentro do Downstream |
-| 09 | `09-pm-to-tech-leads.md` | PM → Tech Leads | Dentro do Downstream |
-| 10 | `10-tech-leads-to-engineers.md` | Tech Leads → Engenheiros | Dentro do Downstream |
-| 11 | `11-engineers-to-qa.md` | Engenheiros → QA | Dentro do Downstream |
-| 12 | `12-qa-to-pm.md` | QA → PM | Dentro do Downstream |
-| 13 | `13-pm-to-cs.md` | PM → CS | Pós-Entrega |
-| 14 | `14-pm-to-po-feedback.md` | PM → PO (Fechamento do Loop de Feedback) | Pós-Entrega |
+| 08 | `08-pm-to-po-capacity.md` | PM → PO (Capacity Escalation) | Within Downstream |
+| 09 | `09-pm-to-tech-leads.md` | PM → Tech Leads | Within Downstream |
+| 10 | `10-tech-leads-to-engineers.md` | Tech Leads → Engineers | Within Downstream |
+| 11 | `11-engineers-to-qa.md` | Engineers → QA | Within Downstream |
+| 12 | `12-qa-to-pm.md` | QA → PM | Within Downstream |
+| 13 | `13-pm-to-cs.md` | PM → CS | Post-Delivery |
+| 14 | `14-pm-to-po-feedback.md` | PM → PO (Feedback Loop Closure) | Post-Delivery |
 
-## Resumo das Regras de Rejeição
+## Rejection Rules Summary
 
-| Interação | Pode ser rejeitada? | Responsável pela rejeição |
+| Interaction | Can be rejected? | Rejection owner |
 |---|---|---|
-| Vendas → PO | Sim — intake incompleto | PO devolve para Vendas |
-| CS → PO | Sim — evidência insuficiente | PO abre Discovery |
-| Marketing → PO | Sim — não é padrão de segmento | PO redireciona para CS/Vendas |
-| CEO → CTO | Não — mas gera trade-off | CTO apresenta o custo ao CEO |
-| PO → CTO | Sim — escopo inviável | CTO devolve Technical Assessment com veto + justificativa |
-| CTO → PO | Não — PO deve referenciar e fundir no PRD | PO escala discordância explicitamente |
-| PO → PM | Sim — PRD incompleto | PM devolve com gaps específicos (roteados a PO ou CTO) |
-| PM → PO (capacidade) | Não — dispara decisão | PO decide o trade-off |
-| PM → Tech Leads | Sim — contexto faltando | TL devolve gaps específicos |
-| Tech Leads → Engenheiros | Sim — tarefa indefinida | Eng devolve pergunta específica |
-| Engenheiros → QA | Sim — no-go | QA devolve critérios com falha |
-| QA → PM | Não — PM não pode sobrepor | PM escala apenas o prazo |
-| PM → CS | Não — CS deve coletar | CS devolve feedback estruturado |
-| PM → PO (feedback) | Não — PO deve reconhecer | PO fecha o loop explicitamente |
+| Sales → PO | Yes — incomplete intake | PO returns to Sales |
+| CS → PO | Yes — insufficient evidence | PO opens Discovery |
+| Marketing → PO | Yes — not a segment pattern | PO redirects to CS/Sales |
+| CEO → CTO | No — but generates a trade-off | CTO presents the cost to CEO |
+| PO → CTO | Yes — infeasible scope | CTO returns Technical Assessment with veto + rationale |
+| CTO → PO | No — PO must reference and merge into PRD | PO escalates disagreement explicitly |
+| PO → PM | Yes — incomplete PRD | PM returns with specific gaps (routed to PO or CTO) |
+| PM → PO (capacity) | No — triggers a decision | PO decides the trade-off |
+| PM → Tech Leads | Yes — missing context | TL returns specific gaps |
+| Tech Leads → Engineers | Yes — undefined task | Engineer returns specific question |
+| Engineers → QA | Yes — no-go | QA returns failing criteria |
+| QA → PM | No — PM cannot override | PM escalates only the deadline |
+| PM → CS | No — CS must collect | CS returns structured feedback |
+| PM → PO (feedback) | No — PO must acknowledge | PO closes the loop explicitly |
 
-> **Nota sobre as três primeiras linhas (Submitter → PO).** Com o modelo maturado da persona Submitter ([`../personas/01-submitter.md`](../personas/01-submitter.md)), "intake incompleto" não é mais binário. A devolução só acontece quando um requisito **bloqueante** fica sem nenhuma disposição — não quando um campo tem baixa confiança. Um requisito atinge prontidão por qualquer disposição honesta (`answered · inferred · assumption · discovery · deferred`), então "ainda não sabemos" deixou de ser motivo de rejeição: vira premissa a validar ou rota de Discovery, e o registro avança com o Readiness Score refletindo o que ainda é frágil.
+> **Note on the first three rows (Submitter → PO).** With the matured Submitter persona model ([`../personas/01-submitter.md`](../personas/01-submitter.md)), "incomplete intake" is no longer binary. A return only happens when a **blocking** requirement has no disposition at all — not when a field has low confidence. A requirement reaches readiness through any honest disposition (`answered · inferred · assumption · discovery · deferred`), so "we don't know yet" is no longer a rejection reason: it becomes a premise to validate or a Discovery route, and the record advances with the Readiness Score reflecting what is still fragile.
