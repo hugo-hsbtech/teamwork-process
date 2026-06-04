@@ -41,6 +41,8 @@ A demanda atravessa cinco documentos formais, cada um com **um único dono**. Do
 | [`tech-landscape.md`](./tech-landscape.md) | CTO / Tech Lead | **Base de Conhecimento técnica por sistema** (não por demanda) — produto/stack/estrutura/integrações/dívida. O Technical Assessment a **referencia** (brownfield) ou a **semeia** (greenfield). É a "base de conhecimento prévia" que dá ao engenheiro — ou agente de IA — o terreno para decidir implementação. Estilo *steering docs* (Kiro) / `document-project` (BMAD). |
 
 > **Greenfield vs Brownfield, jornada e base de conhecimento.** A jornada upstream agora declara, na triagem ([`01`](./01-intake-record.md)), se a demanda é **greenfield** (software/módulo novo) ou **brownfield** (altera existente) — e isso governa o caminho do [Technical Assessment](./03-technical-assessment.md): greenfield *define* a fundação (stack, ADRs, estrutura); brownfield *documenta* o sistema atual. O [Readiness Package](./02-readiness-package.md) ganhou a **jornada do usuário ponta-a-ponta** (Seção 6.5), da qual as User Stories derivam. O terreno técnico vive na `tech-landscape` e é exposto ao PM no [PRD](./04-prd.md).
+>
+> **Justificativa e referências destas mudanças:** [`references-evolucao.md`](./references-evolucao.md) — base de literatura e fontes (BMAD, Kiro/steering docs, NN/g journey mapping, arc42, C4, Design Docs, Spec-Driven Development) que ancora cada adição, para uso ao portar os templates ao repositório original. Estende o [`../references.md`](../references.md).
 
 ## Como usar
 
