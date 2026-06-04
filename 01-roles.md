@@ -1,19 +1,19 @@
-# Definição de Papéis
+# Role Definitions
 
-## Propósito
+## Purpose
 
-Este documento estabelece os limites de cada papel no modelo operacional. Cada papel tem um ponto de início (quando se torna ativo), um ponto de término (quando faz o handoff), um escopo de autoridade e uma ownership explícita.
+This document establishes the boundaries of each role in the operational model. Each role has a starting point (when it becomes active), an ending point (when it hands off), a scope of authority, and explicit ownership.
 
-Ownership significa: este papel é o único responsável por este artefato, decisão ou domínio. Se algo não está listado como propriedade de um papel, esse papel não tem autoridade unilateral sobre o item.
+Ownership means: this role is the sole accountable party for this artifact, decision, or domain. If something is not listed as owned by a role, that role has no unilateral authority over it.
 
-Nenhum papel deve invadir o domínio de outro. Quando houver sobreposição, as regras abaixo a resolvem.
+No role should encroach on another's domain. When overlap occurs, the rules below resolve it.
 
-## Camadas organizacionais
+## Organizational layers
 
 ```text
 ┌─────────────────────────────────────────────────────┐
 │                  UPSTREAM                           │
-│  CEO · Vendas · Marketing · Customer Success        │
+│  CEO · Sales · Marketing · Customer Success        │
 ├─────────────────────────────────────────────────────┤
 │                  INTAKE LAYER                       │
 │            CTO · PO (Product Owner)                 │
@@ -23,521 +23,521 @@ Nenhum papel deve invadir o domínio de outro. Quando houver sobreposição, as 
 └─────────────────────────────────────────────────────┘
 ```
 
-## Papéis do upstream
+## Upstream roles
 
-> Os quatro papéis abaixo (CEO via canal de intake, Vendas, Marketing, CS) são, do ponto de vista do modelo de dados, instâncias de uma única persona genérica: a **Submitter**. Este documento define seus limites de autoridade individuais; [`personas/01-submitter.md`](./personas/01-submitter.md) consolida *como ela raciocina* — modelo de confiança por campo, Readiness Score e dispositions ("não sei" é uma disposição válida, não um bloqueio).
+> The four roles below (CEO via intake channel, Sales, Marketing, CS) are, from a data-model perspective, instances of a single generic persona: the **Submitter**. This document defines their individual authority boundaries; [`personas/01-submitter.md`](./personas/01-submitter.md) consolidates *how she reasons* — the per-field trust model, the Readiness Score, and dispositions ("I don't know" is a valid disposition, not a blocker).
 
 ### CEO
 
-O CEO define para onde a empresa vai e o que importa agora. Opera na camada estratégica — mercado, investidores, parcerias e decisões executivas.
+The CEO defines where the company is going and what matters now. Operates at the strategic layer — market, investors, partnerships, and executive decisions.
 
-**Inicia quando**
-- uma nova direção estratégica está sendo definida;
-- um deal ou parceria de alto valor exige envolvimento executivo;
-- uma prioridade de negócio precisa ser estabelecida ou alterada.
+**Starts when**
+- a new strategic direction is being set;
+- a high-value deal or partnership requires executive involvement;
+- a business priority needs to be established or changed.
 
-**Termina quando**
-- a direção, prioridade ou contexto foi comunicado a Vendas, CS ou diretamente ao CTO;
-- o CEO sai do fluxo até que uma decisão volte a exigir autoridade executiva.
-
-**Ownership**
-- Estratégia da empresa e direção de longo prazo.
-- Decisões executivas de priorização.
-- Narrativa externa (investidores, parceiros, imprensa).
-- Autoridade final sobre trade-offs no nível da empresa.
-
-**Autoridade**
-- Define prioridades no nível da empresa.
-- Pode sobrepor a priorização de produto no nível estratégico.
-- É dono da narrativa do que a empresa constrói e por quê.
-
-**Não faz**
-- Definir funcionalidades ou requisitos técnicos.
-- Gerenciar backlog ou sprints.
-- Especificar arquitetura ou implementação.
-- Contornar o Intake Layer para empurrar demandas diretamente para a engenharia.
-
-#### Canal de intake do CEO
-
-Quando o CEO precisa injetar uma prioridade no processo, o caminho é:
-
-1. O CEO comunica a prioridade ao PO, com contexto: por que agora, qual driver de negócio, como o sucesso se parece.
-2. O PO registra como intake record estruturado, marcando origem como Interno e prioridade como Crítica ou Alta.
-3. O PO faz a triagem contra a fila atual e produz uma avaliação de impacto de capacidade junto com o PM.
-4. O resultado (caminho aprovado, compromissos afetados, prazo) volta ao CEO.
-
-O CEO não comunica a prioridade diretamente à Engenharia, aos Tech Leads ou ao PM. Toda injeção passa pelo PO.
-
-### Vendas
-
-Vendas captura demanda de mercado e dor do cliente a partir de uma perspectiva comercial. Traduz conversas com clientes em oportunidades estruturadas, não em solicitações de funcionalidades.
-
-**Inicia quando**
-- um prospect ou cliente expressa dor, gap ou necessidade;
-- um deal depende de uma capacidade de produto.
-
-**Termina quando**
-- a demanda foi registrada no Intake com contexto estruturado (origem, tipo, problema, impacto, prioridade);
-- o Intake Layer confirmou o recebimento.
+**Ends when**
+- the direction, priority, or context has been communicated to Sales, CS, or directly to the CTO;
+- the CEO exits the flow until a decision again requires executive authority.
 
 **Ownership**
-- Captura e registro de demandas comerciais.
-- Documentação da dor do cliente do ponto de vista de vendas.
-- Sinais de prioridade vinculados a receita ou risco de deal.
+- Company strategy and long-term direction.
+- Executive prioritization decisions.
+- External narrative (investors, partners, press).
+- Final authority over company-level trade-offs.
 
-**Autoridade**
-- Pode sinalizar prioridade com base no impacto comercial.
-- Pode escalar ao CEO se um deal estiver em risco.
+**Authority**
+- Sets priorities at the company level.
+- Can override product prioritization at the strategic level.
+- Owns the narrative of what the company builds and why.
 
-**Não faz**
-- Definir a solução ou abordagem técnica.
-- Comprometer esforço de engenharia com clientes.
-- Contornar a triagem indo direto ao CTO ou Tech Leads.
-- Priorizar o backlog.
+**Does not**
+- Define features or technical requirements.
+- Manage backlogs or sprints.
+- Specify architecture or implementation.
+- Bypass the Intake Layer to push demands directly to Engineering.
+
+#### CEO intake channel
+
+When the CEO needs to inject a priority into the process, the path is:
+
+1. The CEO communicates the priority to the PO, with context: why now, what business driver, what success looks like.
+2. The PO records it as a structured intake record, marking origin as Internal and priority as Critical or High.
+3. The PO triages against the current queue and produces a capacity impact assessment together with the PM.
+4. The outcome (approved path, affected commitments, deadline) is returned to the CEO.
+
+The CEO does not communicate the priority directly to Engineering, Tech Leads, or the PM. Every injection goes through the PO.
+
+### Sales
+
+Sales captures market demand and customer pain from a commercial perspective. Translates customer conversations into structured opportunities — not feature requests.
+
+**Starts when**
+- a prospect or customer expresses pain, a gap, or a need;
+- a deal depends on a product capability.
+
+**Ends when**
+- the demand has been recorded in the Intake with structured context (origin, type, problem, impact, priority);
+- the Intake Layer has confirmed receipt.
+
+**Ownership**
+- Capture and recording of commercial demands.
+- Documentation of customer pain from a sales perspective.
+- Priority signals tied to revenue or deal risk.
+
+**Authority**
+- Can signal priority based on commercial impact.
+- Can escalate to the CEO if a deal is at risk.
+
+**Does not**
+- Define the solution or technical approach.
+- Commit engineering effort to customers.
+- Bypass triage by going directly to the CTO or Tech Leads.
+- Prioritize the backlog.
 
 ### Marketing
 
-Marketing traz percepção externa: tendências de mercado, posicionamento competitivo e sinais de product-market fit. O foco é em padrões entre segmentos, não em solicitações individuais.
+Marketing brings external perception: market trends, competitive positioning, and product-market fit signals. The focus is on patterns across segments, not individual requests.
 
-**Inicia quando**
-- inteligência de mercado identifica um gap ou tendência relevante;
-- uma campanha ou esforço de posicionamento revela necessidade não atendida.
+**Starts when**
+- market intelligence identifies a relevant gap or trend;
+- a campaign or positioning effort reveals an unmet need.
 
-**Termina quando**
-- o insight foi registrado no Intake com contexto suficiente para triagem.
+**Ends when**
+- the insight has been recorded in the Intake with sufficient context for triage.
 
 **Ownership**
-- Inteligência de mercado e sinais competitivos.
-- Identificação de padrões no nível de segmento.
-- Input de posicionamento e percepção para a estratégia de produto.
+- Market intelligence and competitive signals.
+- Identification of segment-level patterns.
+- Positioning and perception input for product strategy.
 
-**Autoridade**
-- Pode surfaçar oportunidades estratégicas a partir de dados de mercado.
-- Pode influenciar o input de posicionamento ao CTO/PO durante a racionalização.
+**Authority**
+- Can surface strategic opportunities from market data.
+- Can influence positioning input to the CTO/PO during rationalization.
 
-**Não faz**
-- Registrar bugs individuais ou tickets de suporte (isso é CS/Suporte).
-- Definir o roadmap de produto.
-- Representar pedido de cliente único como sinal de mercado.
+**Does not**
+- Log individual bugs or support tickets (that is CS/Support).
+- Define the product roadmap.
+- Present a single customer request as a market signal.
 
 ### Customer Success (CS)
 
-CS é o papel mais próximo do cliente pós-venda. Captura fricção real de uso, riscos de retenção, gaps de adoção e dor operacional. O input do CS é o sinal mais concreto do sistema, porque vem de uso em produção.
+CS is the role closest to the post-sale customer. Captures real usage friction, retention risks, adoption gaps, and operational pain. CS input is the most concrete signal in the system because it comes from production use.
 
-**Inicia quando**
-- um cliente reporta fricção, confusão ou workaround recorrente;
-- um risco de retenção é identificado;
-- um cliente solicita uma capacidade que está faltando ou quebrada.
+**Starts when**
+- a customer reports recurring friction, confusion, or a workaround;
+- a retention risk is identified;
+- a customer requests a capability that is missing or broken.
 
-**Termina quando**
-- a demanda foi registrada no Intake com contexto: qual cliente, frequência, impacto na retenção ou uso, severidade.
+**Ends when**
+- the demand has been recorded in the Intake with context: which customer, frequency, impact on retention or usage, severity.
 
 **Ownership**
-- Relacionamento pós-venda e monitoramento de saúde do cliente.
-- Reporte de fricção e gaps de adoção.
-- Sinais de risco de retenção e evidências de churn.
-- Dados de satisfação alimentando o feedback loop.
+- Post-sale relationship and customer health monitoring.
+- Reporting of friction and adoption gaps.
+- Retention risk signals and churn evidence.
+- Satisfaction data feeding the feedback loop.
 
-**Autoridade**
-- Pode sinalizar riscos de saúde do cliente que elevam a urgência de uma demanda.
-- Pode fornecer evidências de impacto (dados de uso, NPS, sinais de churn).
+**Authority**
+- Can flag customer health risks that raise the urgency of a demand.
+- Can provide impact evidence (usage data, NPS, churn signals).
 
-**Não faz**
-- Prometer funcionalidades ou prazos de produto a clientes.
-- Contornar o Intake e ir direto à Engenharia.
-- Definir como a solução deve ser.
+**Does not**
+- Promise product features or deadlines to customers.
+- Bypass the Intake and go directly to Engineering.
+- Define what the solution should look like.
 
-## Papéis do Intake Layer
+## Intake Layer roles
 
 ### CTO
 
-O CTO opera em duas dimensões ao mesmo tempo: estratégia técnica e liderança de pessoas.
+The CTO operates on two dimensions simultaneously: technical strategy and people leadership.
 
-No lado técnico, é pensador sistêmico responsável pela integridade arquitetural, direção da plataforma e qualidade das decisões tomadas a partir do Intake Layer para baixo. No lado de pessoas, é responsável pela saúde, crescimento, produtividade e performance de toda a cadeia técnica — Tech Leads e Engineers.
+On the technical side, the CTO is a systems thinker responsible for architectural integrity, platform direction, and the quality of decisions made from the Intake Layer downward. On the people side, the CTO is responsible for the health, growth, productivity, and performance of the entire technical chain — Tech Leads and Engineers.
 
-O CTO não gerencia a triagem do dia a dia (isso é do PO) nem a execução de sprints (isso é do PM). É dono da infraestrutura humana que torna a execução possível.
+The CTO does not manage day-to-day triage (that is the PO's job) nor sprint execution (that is the PM's job). The CTO owns the human infrastructure that makes execution possible.
 
-**Inicia quando**
-- uma demanda passou pela triagem inicial do PO e foi sinalizada para avaliação arquitetural;
-- uma decisão envolve nova infraestrutura, mudanças de plataforma, IA/runtime, multi-tenancy, segurança ou risco técnico significativo;
-- uma direção tecnológica precisa ser estabelecida ou revisada;
-- um problema de performance, crescimento ou saúde do time surge em qualquer ponto da cadeia técnica.
+**Starts when**
+- a demand has passed the PO's initial triage and has been flagged for architectural assessment;
+- a decision involves new infrastructure, platform changes, AI/runtime, multi-tenancy, security, or significant technical risk;
+- a technology direction needs to be established or revisited;
+- a performance, growth, or team health issue emerges at any point in the technical chain.
 
-**Termina quando**
-- o impacto arquitetural foi avaliado e documentado;
-- o **Technical Assessment** (artefato próprio — viabilidade, constraints, arquitetura, riscos técnicos, ADRs) foi produzido; o CTO **nunca edita o RP**, apenas é referenciado por ele e fundido no PRD;
-- a demanda foi aprovada ou rejeitada no nível técnico.
+**Ends when**
+- the architectural impact has been assessed and documented;
+- the **Technical Assessment** (a standalone artifact — feasibility, constraints, architecture, technical risks, ADRs) has been produced; the CTO **never edits the RP**, which only references it and feeds into the PRD;
+- the demand has been approved or rejected at the technical level.
 
-A gestão de pessoas não tem fim — é responsabilidade contínua.
+People management has no end — it is a continuous responsibility.
 
-**Ownership — Estratégia Técnica**
-- Todas as decisões arquiteturais (autoridade final, sem override abaixo deste papel).
-- Padrões técnicos, patterns e Architecture Governance.
-- O **Technical Assessment** (artefato separado; o CTO nunca edita o RP).
-- Estratégia de tecnologia e direção da plataforma.
-- Decisão sobre viabilidade técnica no nível da plataforma.
-- Visibilidade da dívida técnica e estratégia de remediação.
+**Ownership — Technical Strategy**
+- All architectural decisions (final authority, no override below this role).
+- Technical standards, patterns, and Architecture Governance.
+- The **Technical Assessment** (a separate artifact; the CTO never edits the RP).
+- Technology strategy and platform direction.
+- Platform-level technical feasibility decisions.
+- Visibility into technical debt and remediation strategy.
 
-**Ownership — Pessoas e Time**
-- Performance e crescimento dos Tech Leads (subordinados diretos).
-- Responsabilidade indireta pelos Engineers, através dos Tech Leads.
-- Avaliação de capacidade do time — correspondência de senioridade e habilidades às demandas do roadmap.
-- Planos de desenvolvimento de carreira da equipe técnica.
-- Decisões de contratação para papéis técnicos.
-- Saúde do time e segurança psicológica dentro da organização de engenharia.
+**Ownership — People and Team**
+- Performance and growth of Tech Leads (direct reports).
+- Indirect accountability for Engineers, through Tech Leads.
+- Team capacity assessment — matching seniority and skills to roadmap demands.
+- Career development plans for the technical team.
+- Hiring decisions for technical roles.
+- Team health and psychological safety within the engineering organization.
 
-**Autoridade**
-- Palavra final sobre decisões arquiteturais.
-- Pode rejeitar ou reformular uma demanda com base na estratégia técnica.
-- Define padrões, patterns e diretrizes (Architecture Governance).
-- Pode delegar decisões de triagem ao PO para demandas sem impacto arquitetural.
-- Pode escalar problema de performance ao CEO quando afeta a capacidade de entrega.
-- Pode propor reestruturação do time, mudanças de papel ou contratações ao CEO com base em gaps de capacidade.
-- Pode sobrepor decisão técnica de um Tech Lead se conflitar com os padrões arquiteturais.
+**Authority**
+- Final say on architectural decisions.
+- Can reject or reshape a demand based on technical strategy.
+- Defines standards, patterns, and guidelines (Architecture Governance).
+- Can delegate triage decisions to the PO for demands with no architectural impact.
+- Can escalate performance issues to the CEO when they affect delivery capacity.
+- Can propose team restructuring, role changes, or hiring to the CEO based on capacity gaps.
+- Can override a Tech Lead's technical decision if it conflicts with architectural standards.
 
-**Não faz**
-- Ser dono da fila diária do Intake (isso é do PO).
-- Escrever especificações funcionais ou jornadas do usuário.
-- Gerenciar execução, milestones ou planejamento de sprint.
-- Intervir na execução downstream a menos que apareça um problema arquitetural.
-- Conduzir avaliações de performance para papéis não técnicos (PM, PO, CS — esses pertencem às suas cadeias).
+**Does not**
+- Own the Intake's daily queue (that is the PO's job).
+- Write functional specifications or user journeys.
+- Manage execution, milestones, or sprint planning.
+- Intervene in downstream execution unless an architectural issue surfaces.
+- Conduct performance reviews for non-technical roles (PM, PO, CS — those belong to their own chains).
 
-#### Gestão de pessoas — 1:1s
+#### People management — 1:1s
 
-O CTO conduz 1:1s regulares com cada Tech Lead. Estas não são reuniões de status — são o instrumento principal para entender performance individual, bloqueios, trajetória de crescimento e sinais de saúde do time.
+The CTO holds regular 1:1s with each Tech Lead. These are not status meetings — they are the primary instrument for understanding individual performance, blockers, growth trajectory, and team health signals.
 
-| Frequência | Propósito |
+| Frequency | Purpose |
 |---|---|
-| Semanal (30 min) | Bloqueios atuais, pulso do time, decisões imediatas |
-| Mensal (60 min) | Progresso de performance, metas de crescimento, troca de feedback, desenvolvimento de carreira |
+| Weekly (30 min) | Current blockers, team pulse, immediate decisions |
+| Monthly (60 min) | Performance progress, growth goals, feedback exchange, career development |
 
-Os Tech Leads são responsáveis por conduzir os próprios 1:1s com os Engineers no mesmo ritmo. O CTO revisa sinais resumidos dessas sessões — não transcrições, mas indicadores de saúde.
+Tech Leads are responsible for holding their own 1:1s with Engineers at the same cadence. The CTO reviews summarized signals from those sessions — not transcripts, but health indicators.
 
-#### Avaliação de 90 dias
+#### 90-day review
 
-Toda pessoa na cadeia técnica (Tech Leads e Engineers) recebe uma avaliação estruturada a cada 90 dias. Não é uma revisão anual — é um sinal contínuo.
+Every person in the technical chain (Tech Leads and Engineers) receives a structured review every 90 days. It is not an annual review — it is a continuous signal.
 
-A avaliação cobre seis dimensões:
+The review covers six dimensions:
 
-| Dimensão | O que é avaliado |
+| Dimension | What is evaluated |
 |---|---|
-| Qualidade técnica | Qualidade de código, decisões arquiteturais, aderência a padrões, cobertura de testes |
-| Confiabilidade de entrega | Precisão de estimativas, aderência a milestones, disciplina de escopo |
-| Resolução de problemas | Como bloqueios são tratados, qualidade da escalada, iniciativa sob ambiguidade |
-| Comunicação | Clareza nos handoffs, qualidade da documentação, capacidade de surfaçar problemas cedo |
-| Trajetória de crescimento | Desenvolvimento de habilidades desde a última avaliação, iniciativa fora do escopo atribuído |
-| Contribuição ao time | Compartilhamento de conhecimento, qualidade do code review, suporte aos pares |
+| Technical quality | Code quality, architectural decisions, standards adherence, test coverage |
+| Delivery reliability | Estimate accuracy, milestone adherence, scope discipline |
+| Problem-solving | How blockers are handled, escalation quality, initiative under ambiguity |
+| Communication | Clarity in handoffs, documentation quality, ability to surface problems early |
+| Growth trajectory | Skill development since last review, initiative beyond assigned scope |
+| Team contribution | Knowledge sharing, code review quality, peer support |
 
-Output da avaliação:
+Review output:
 
-- um resumo escrito entregue ao indivíduo;
-- uma ação de desenvolvimento para os próximos 90 dias (específica, não genérica);
-- um sinal ao CTO: No caminho / Precisa de suporte / Em risco;
-- se Em risco, um plano de melhoria de 30 dias é iniciado imediatamente.
+- a written summary delivered to the individual;
+- a development action for the next 90 days (specific, not generic);
+- a signal to the CTO: On track / Needs support / At risk;
+- if At risk, a 30-day improvement plan is started immediately.
 
-Para Engineers, as avaliações são conduzidas pelos Tech Leads e revisadas pelo CTO. Para Tech Leads, as avaliações são conduzidas diretamente pelo CTO.
+For Engineers, reviews are conducted by Tech Leads and reviewed by the CTO. For Tech Leads, reviews are conducted directly by the CTO.
 
-#### Gestão de performance
+#### Performance management
 
-Problema de performance não espera o próximo ciclo de avaliação. O CTO intervém assim que um sinal aparecer.
+Performance issues do not wait for the next review cycle. The CTO intervenes as soon as a signal appears.
 
-Fontes de sinal:
+Signal sources:
 
-- conversas de 1:1;
-- relatórios de entrega do PM (precisão de estimativas, aderência a milestones);
-- observações dos Tech Leads sobre os Engineers;
-- observação direta do CTO durante revisões arquiteturais;
-- feedback do PO sobre a qualidade dos handoffs.
+- 1:1 conversations;
+- PM delivery reports (estimate accuracy, milestone adherence);
+- Tech Lead observations about Engineers;
+- Direct CTO observation during architectural reviews;
+- PO feedback on handoff quality.
 
-Níveis de resposta:
+Response levels:
 
-| Sinal | Resposta do CTO | Prazo |
+| Signal | CTO response | Timeline |
 |---|---|---|
-| Fricção menor (primeira ocorrência) | Coaching no 1:1. Documentar. | 1 semana |
-| Padrão recorrente (2+ ocorrências) | Sessão formal de feedback. Plano de desenvolvimento escrito. | 2 semanas da identificação |
-| Em risco (entrega ou qualidade abaixo do padrão de forma consistente) | Plano de melhoria de 30 dias com check-ins semanais | Inicia em 5 dias úteis |
-| Não resolvido após o plano | Escalada ao CEO com histórico documentado | Na data de término do plano |
+| Minor friction (first occurrence) | Coaching in the 1:1. Document. | 1 week |
+| Recurring pattern (2+ occurrences) | Formal feedback session. Written development plan. | 2 weeks from identification |
+| At risk (delivery or quality consistently below standard) | 30-day improvement plan with weekly check-ins | Starts within 5 business days |
+| Unresolved after the plan | Escalation to CEO with documented history | On plan end date |
 
-A gestão de performance não é punitiva. É a obrigação do CTO de dar a cada pessoa da cadeia técnica o contexto, feedback e suporte para ter sucesso antes de qualquer escalada.
+Performance management is not punitive. It is the CTO's obligation to give every person in the technical chain the context, feedback, and support to succeed before any escalation.
 
-#### Avaliação de capacidade e planejamento de time
+#### Capacity assessment and team planning
 
-Além da performance individual, o CTO mantém uma visão atual da capacidade coletiva do time em relação ao roadmap.
+Beyond individual performance, the CTO maintains a current view of the team's collective capacity relative to the roadmap.
 
-Mapa de capacidade (atualizado continuamente):
+Capacity map (updated continuously):
 
-- distribuição atual de senioridade no time;
-- cobertura de habilidades vs. demandas futuras (IA, fintech, integrações, plataforma);
-- pontos únicos de conhecimento (uma única pessoa que conhece um sistema crítico);
-- trajetória de crescimento de cada pessoa nos próximos 6 meses.
+- current seniority distribution on the team;
+- skills coverage vs. future demands (AI, fintech, integrations, platform);
+- single points of knowledge (a single person who knows a critical system);
+- each person's growth trajectory over the next 6 months.
 
-Quando o PM executa uma avaliação de capacidade, o CTO precisa conseguir responder:
+When the PM runs a capacity assessment, the CTO must be able to answer:
 
-- quais engineers estão disponíveis e com qual capacidade efetiva;
-- se o time tem as habilidades para o escopo entrante;
-- se existe risco de ponto único de conhecimento na demanda;
-- tempo estimado de rampa se houver gap de habilidade.
+- which engineers are available and at what effective capacity;
+- whether the team has the skills for the incoming scope;
+- whether there is a single-point-of-knowledge risk in the demand;
+- estimated ramp time if there is a skills gap.
 
-Sinal de contratação: se o mapa revela um gap persistente que não pode ser fechado por desenvolvimento dentro do prazo necessário, o CTO leva uma recomendação ao CEO com o gap específico (habilidade, senioridade ou capacidade), o impacto no roadmap se nada for feito, e um perfil proposto com prazo.
+Hiring signal: if the map reveals a persistent gap that cannot be closed through development within the required timeline, the CTO brings a recommendation to the CEO with the specific gap (skill, seniority, or capacity), the roadmap impact if nothing is done, and a proposed profile with a timeline.
 
-#### Desenvolvimento de carreira
+#### Career development
 
-Todo membro da cadeia técnica tem um plano de desenvolvimento ativo, de propriedade do CTO (para Tech Leads) ou do Tech Lead sob supervisão do CTO (para Engineers).
+Every member of the technical chain has an active development plan, owned by the CTO (for Tech Leads) or by the Tech Lead under the CTO's supervision (for Engineers).
 
-O plano contém:
+The plan contains:
 
-- nível atual e nível alvo;
-- 2 a 3 habilidades ou comportamentos para desenvolver nos próximos 6 meses;
-- oportunidades concretas dentro do trabalho atual para praticá-los;
-- check-in a cada avaliação de 90 dias.
+- current level and target level;
+- 2 to 3 skills or behaviors to develop over the next 6 months;
+- concrete opportunities within current work to practice them;
+- check-in at every 90-day review.
 
-Conversa de carreira é separada de conversa de performance. Uma pessoa pode estar com boa performance e ainda ter uma conversa de carreira significativa. O CTO faz as duas acontecerem.
+Career conversations are separate from performance conversations. A person can be performing well and still have a meaningful career conversation. The CTO makes both happen.
 
 ### PO (Product Owner)
 
-O PO é o centro operacional do Intake Layer. Conduz a triagem, gerencia a fila de demandas, dirige a racionalização e é responsável por produzir o Readiness Package. É um estrategista de produto, não um administrador de projetos.
+The PO is the operational center of the Intake Layer. Conducts triage, manages the demand queue, drives rationalization, and is responsible for producing the Readiness Package. The PO is a product strategist, not a project administrator.
 
-**Inicia quando**
-- uma demanda entra no Intake (de qualquer fonte upstream);
-- a etapa de captura foi concluída e o input estruturado existe.
+**Starts when**
+- a demand enters the Intake (from any upstream source);
+- the capture step has been completed and structured input exists.
 
-**Termina quando**
-- o **PRD** (fusão do Readiness Package com o Technical Assessment, quando houver) foi entregue ao PM;
-- ou a demanda foi rejeitada, movida para o backlog ou enviada para Discovery.
+**Ends when**
+- the **PRD** (the merge of the Readiness Package with the Technical Assessment, when present) has been delivered to the PM;
+- or the demand has been rejected, moved to the backlog, or sent to Discovery.
 
 **Ownership**
-- A fila do Intake Layer e sua saúde operacional.
-- Decisões de triagem para todas as demandas não arquiteturais.
-- O Readiness Package como entregável de produto do PO — fundido no PRD que abre o downstream.
-- Racionalização de produto — transformar dor em definição de capacidade.
-- Decisão de caminho: Rejeitado / Backlog de Oportunidades / Discovery / Product Ready.
-- Manutenção do Backlog de Oportunidades e cadência de revisão.
-- O contrato de compliance do intake (requisitos, pesos, o que bloqueia o gate) e a aplicação do Readiness Score na triagem — ver [`personas/01-submitter.md`](./personas/01-submitter.md).
+- The Intake Layer queue and its operational health.
+- Triage decisions for all non-architectural demands.
+- The Readiness Package as the PO's product deliverable — merged into the PRD that opens downstream.
+- Product rationalization — transforming pain into capability definition.
+- Path decision: Rejected / Opportunity Backlog / Discovery / Product Ready.
+- Maintenance of the Opportunity Backlog and review cadence.
+- The intake compliance contract (requirements, weights, what blocks the gate) and application of the Readiness Score in triage — see [`personas/01-submitter.md`](./personas/01-submitter.md).
 
-**Autoridade**
-- Conduz triagem de forma independente para demandas que não exigem julgamento arquitetural.
-- Decide o caminho da demanda.
-- Escala ao CTO quando há impacto arquitetural ou técnico estratégico.
-- É dono do Readiness Package como entregável.
-- Pode devolver ao upstream se a demanda chegar sem contexto suficiente.
+**Authority**
+- Conducts triage independently for demands that do not require architectural judgment.
+- Decides the demand's path.
+- Escalates to the CTO when there is architectural or strategic technical impact.
+- Owns the Readiness Package as a deliverable.
+- Can return to upstream if a demand arrives without sufficient context.
 
-#### Cadência de revisão do Backlog de Oportunidades
+#### Opportunity Backlog review cadence
 
-O PO é dono do Backlog de Oportunidades e revisa em cadência definida:
+The PO owns the Opportunity Backlog and reviews it on a defined cadence:
 
-- **A cada 2 semanas** — revisar todos os itens. Promover para triagem, recategorizar ou marcar como obsoleto.
-- **A cada 90 dias** — qualquer item sem atividade é escalado ao CEO para decisão de prioridade ou encerrado formalmente com razão documentada.
-- **A cada grande atualização estratégica** — se o CEO mudar a direção, o PO revisa o backlog inteiro para reavaliar alinhamento.
+- **Every 2 weeks** — review all items. Promote to triage, re-categorize, or mark as stale.
+- **Every 90 days** — any item with no activity is escalated to the CEO for a priority decision or formally closed with a documented reason.
+- **At every major strategic update** — if the CEO changes direction, the PO reviews the entire backlog to reassess alignment.
 
-O backlog não é cemitério. Todo item tem status e próxima ação.
+The backlog is not a graveyard. Every item has a status and a next action.
 
-**Não faz**
-- Aprovar decisões arquiteturais sem o CTO.
-- Gerenciar a execução de engenharia (isso é do PM).
-- Comprometer prazos de entrega.
-- Encaminhar demanda ao downstream sem PRD completo (RP congelado + Technical Assessment).
+**Does not**
+- Approve architectural decisions without the CTO.
+- Manage engineering execution (that is the PM's job).
+- Commit to delivery deadlines.
+- Route a demand downstream without a complete PRD (RP frozen + Technical Assessment).
 
-## Papéis de qualidade
+## Quality roles
 
 ### QA (Quality Assurance)
 
-QA valida que o que foi construído corresponde ao que foi prometido. Opera contra os critérios de aceite definidos no Readiness Package — não contra expectativas informais ou acordos verbais. É o último gate antes do release e impede que código não validado chegue aos clientes.
+QA validates that what was built matches what was promised. Operates against the acceptance criteria defined in the Readiness Package — not against informal expectations or verbal agreements. QA is the last gate before release and prevents unvalidated code from reaching customers.
 
-**Inicia quando**
-- os Engineers concluíram a implementação e marcaram tasks como prontas para revisão;
-- a Definition of Done foi cumprida no nível de código.
+**Starts when**
+- Engineers have completed implementation and marked tasks as ready for review;
+- the Definition of Done has been met at the code level.
 
-**Termina quando**
-- todos os critérios de aceite do Readiness Package foram validados;
-- a aprovação de release foi emitida ao PM;
-- ou um defeito bloqueador foi levantado ao Tech Lead com evidências documentadas.
+**Ends when**
+- all acceptance criteria in the Readiness Package have been validated;
+- release approval has been issued to the PM;
+- or a blocking defect has been raised to the Tech Lead with documented evidence.
 
 **Ownership**
-- Validação dos critérios de aceite do Readiness Package.
-- Aprovação de release ou decisão de bloqueio.
-- Documentação de defeitos e evidências para resolução pelo Tech Lead.
-- Coordenação de UAT com stakeholders de negócio quando necessário.
+- Validation of the Readiness Package acceptance criteria.
+- Release approval or blocking decision.
+- Defect documentation and evidence for resolution by the Tech Lead.
+- Coordination of UAT with business stakeholders when required.
 
-**Autoridade**
-- Pode bloquear release se os critérios de aceite não forem atendidos.
-- Pode escalar defeitos não resolvidos ao Tech Lead e PM.
-- Pode pedir esclarecimento ao PO se critérios de aceite estiverem ambíguos.
+**Authority**
+- Can block release if acceptance criteria are not met.
+- Can escalate unresolved defects to the Tech Lead and PM.
+- Can request clarification from the PO if acceptance criteria are ambiguous.
 
-**Não faz**
-- Definir critérios de aceite (vêm do Readiness Package, de propriedade do PO).
-- Tomar decisões de escopo de produto.
-- Aprovar releases sob pressão se os critérios não forem atendidos.
-- Contornar o Tech Lead para escalar defeitos direto ao CTO.
+**Does not**
+- Define acceptance criteria (these come from the Readiness Package, owned by the PO).
+- Make product scope decisions.
+- Approve releases under pressure if criteria are not met.
+- Bypass the Tech Lead to escalate defects directly to the CTO.
 
-## Papéis do downstream
+## Downstream roles
 
 ### PM (Project Manager / Program Manager)
 
-O PM recebe o **PRD** (a fusão do Readiness Package com o Technical Assessment) e o transforma em um plano de entrega executável. O trabalho do PM é clareza na execução, não descoberta de problemas. Se o PRD vier incompleto ou contraditório, o PM devolve.
+The PM receives the **PRD** (the merge of the Readiness Package with the Technical Assessment) and transforms it into an executable delivery plan. The PM's job is clarity in execution, not problem discovery. If the PRD arrives incomplete or contradictory, the PM returns it.
 
-O PM também é o guardião da capacidade do time. Antes de comprometer qualquer prazo, avalia se o time atual tem as habilidades, disponibilidade e senioridade para executar o escopo. Se uma demanda vira urgente ou desce por pressão top-down, a obrigação do PM é surfaçar o gap de capacidade — não absorvê-lo silenciosamente — e escalar ao tomador de decisão certo com uma avaliação clara de impacto.
+The PM is also the guardian of team capacity. Before committing to any deadline, the PM assesses whether the current team has the skills, availability, and seniority to execute the scope. If a demand becomes urgent or is pushed down top-down, the PM's obligation is to surface the capacity gap — not absorb it silently — and escalate to the right decision-maker with a clear impact assessment.
 
-**Inicia quando**
-- o PRD foi entregue pelo PO e marcado como completo;
-- os Tech Leads confirmaram que o PRD é suficiente para a quebra técnica;
-- uma avaliação de capacidade é necessária antes que um compromisso possa ser feito.
+**Starts when**
+- the PRD has been delivered by the PO and marked as complete;
+- Tech Leads have confirmed the PRD is sufficient for technical breakdown;
+- a capacity assessment is needed before any commitment can be made.
 
-**Termina quando**
-- a funcionalidade ou projeto foi entregue, aceito e encerrado;
-- o feedback loop foi iniciado (resultados pós-entrega retornados ao upstream).
+**Ends when**
+- the feature or project has been delivered, accepted, and closed;
+- the feedback loop has been initiated (post-delivery outcomes returned upstream).
 
 **Ownership**
-- Execução da entrega, do PRD aprovado ao release.
-- Definição de milestones, sequenciamento e prazo de entrega.
-- Gestão de dependências cross-team durante a execução.
-- Escalada de bloqueios de execução ao papel upstream apropriado.
-- Iniciação do feedback loop após a entrega.
-- **Visibilidade de capacidade do time** — saber a todo momento a disponibilidade atual, cobertura de habilidades e distribuição de senioridade do time de execução.
-- **Avaliação de gap de capacidade** — quando uma nova demanda chega ou urgência é imposta top-down, produzir uma avaliação formal do que pode e não pode ser absorvido.
-- **Garantia de entrega de valor** — garantir que compromissos com o upstream estejam baseados em capacidade real, não em otimismo.
+- Delivery execution, from the approved PRD to release.
+- Definition of milestones, sequencing, and delivery deadlines.
+- Cross-team dependency management during execution.
+- Escalation of execution blockers to the appropriate upstream role.
+- Initiation of the feedback loop after delivery.
+- **Team capacity visibility** — knowing at all times the current availability, skills coverage, and seniority distribution of the execution team.
+- **Capacity gap assessment** — when a new demand arrives or urgency is imposed top-down, produce a formal assessment of what can and cannot be absorbed.
+- **Value delivery assurance** — ensuring commitments to upstream are based on real capacity, not optimism.
 
-**Autoridade**
-- Pode rejeitar um PRD e devolvê-lo ao PO se informação necessária estiver faltando (gaps técnicos seguem ao CTO).
-- Gerencia prioridades, milestones e sequenciamento dentro do escopo aprovado.
-- Coordena entre Tech Leads e outros times.
-- Pode escalar bloqueios ao CTO ou PO se um constraint for descoberto durante a execução.
-- Pode bloquear um compromisso se a avaliação de capacidade mostrar que o time não pode absorver o escopo sem comprometer qualidade ou entregas existentes.
-- Pode propor redução de escopo, faseamento ou ajuste de prazo quando a capacidade for insuficiente.
-- Pode escalar gap de capacidade ao PO ou CEO quando a urgência top-down conflitar com a realidade do time.
+**Authority**
+- Can reject a PRD and return it to the PO if required information is missing (technical gaps go to the CTO).
+- Manages priorities, milestones, and sequencing within the approved scope.
+- Coordinates between Tech Leads and other teams.
+- Can escalate blockers to the CTO or PO if a constraint is discovered during execution.
+- Can block a commitment if the capacity assessment shows the team cannot absorb the scope without compromising quality or existing deliverables.
+- Can propose scope reduction, phasing, or deadline adjustment when capacity is insufficient.
+- Can escalate a capacity gap to the PO or CEO when top-down urgency conflicts with team reality.
 
-#### Avaliação de capacidade
+#### Capacity assessment
 
-Quando uma demanda chega ou urgência é imposta externamente, o PM produz uma avaliação de capacidade estruturada antes de qualquer compromisso. Ela inclui:
+When a demand arrives or urgency is imposed externally, the PM produces a structured capacity assessment before any commitment. It includes:
 
-- **Carga atual** — no que o time já está comprometido e com qual percentual de capacidade.
-- **Cobertura de habilidades** — se o time tem a senioridade e a especialização para o escopo entrante.
-- **Mapa de conflitos** — quais entregas existentes seriam impactadas se a nova demanda for absorvida.
-- **Opções** — ao menos uma de: descopo, faseamento, adiamento de um compromisso existente ou contratação.
-- **Recomendação** — a recomendação explícita do PM, não uma lista de opções deixada para outros decidirem.
+- **Current load** — what the team is already committed to and at what capacity percentage.
+- **Skills coverage** — whether the team has the seniority and expertise for the incoming scope.
+- **Conflict map** — which existing deliverables would be impacted if the new demand is absorbed.
+- **Options** — at least one of: descoping, phasing, deferring an existing commitment, or hiring.
+- **Recommendation** — the PM's explicit recommendation, not a list of options left for others to decide.
 
-A avaliação vai ao PO (e ao CEO se a pressão top-down for o gatilho) antes que um prazo seja comprometido.
+The assessment goes to the PO (and to the CEO if top-down pressure is the trigger) before any deadline is committed.
 
-**Não faz**
-- Inventar ou redefinir requisitos (o escopo vem do PRD).
-- Tomar decisões arquiteturais.
-- Negociar diretamente com clientes sobre escopo ou prazos sem alinhamento com PO/CEO.
-- Aceitar urgência imposta top-down sem surfaçar uma avaliação de impacto de capacidade.
-- Comprometer datas com base em pressão em vez de capacidade verificada.
+**Does not**
+- Invent or redefine requirements (scope comes from the PRD).
+- Make architectural decisions.
+- Negotiate directly with customers about scope or deadlines without alignment with PO/CEO.
+- Accept top-down urgency without surfacing a capacity impact assessment.
+- Commit dates based on pressure rather than verified capacity.
 
 ### Tech Leads
 
-Os Tech Leads recebem o PRD aprovado e o plano de execução do PM, e são responsáveis por todas as decisões técnicas dentro desse escopo. Traduzem contexto de produto em arquitetura, tasks e estratégia de implementação.
+Tech Leads receive the approved PRD and the PM's execution plan, and are responsible for all technical decisions within that scope. They translate product context into architecture, tasks, and implementation strategy.
 
-**Inicia quando**
-- o PM entregou o plano de execução baseado no PRD aprovado;
-- a quebra técnica ainda não começou.
+**Starts when**
+- the PM has delivered the execution plan based on the approved PRD;
+- technical breakdown has not yet begun.
 
-**Termina quando**
-- épicos, histórias e tasks estão escritos e estimados — a demanda atinge a **Definition of Ready** (*Ready for Development*: só falta codar);
-- arquitetura e sequenciamento estão documentados;
-- os Engineers iniciaram a implementação.
+**Ends when**
+- epics, stories, and tasks are written and estimated — the demand reaches **Definition of Ready** (*Ready for Development*: only coding remains);
+- architecture and sequencing are documented;
+- Engineers have started implementation.
 
-Durante a execução, os Tech Leads continuam fornecendo orientação e desbloqueando os Engineers.
+During execution, Tech Leads continue providing guidance and unblocking Engineers.
 
 **Ownership**
-- Quebra técnica do escopo aprovado em épicos, histórias e tasks.
-- Design de arquitetura dentro do escopo aprovado.
-- Estimativa de esforço e sequenciamento técnico.
-- Definition of Done para todos os entregáveis técnicos.
-- Estratégia de rollout (deploy, migração, monitoramento, rollback).
-- Qualidade técnica do que é entregue.
+- Technical breakdown of the approved scope into epics, stories, and tasks.
+- Architecture design within the approved scope.
+- Effort estimation and technical sequencing.
+- Definition of Done for all technical deliverables.
+- Rollout strategy (deploy, migration, monitoring, rollback).
+- Technical quality of what is delivered.
 
-**Autoridade**
-- Donos de todas as decisões técnicas dentro do escopo aprovado.
-- Podem sinalizar preocupações arquiteturais ao CTO antes ou durante a execução.
-- Definem a Definition of Done para entregáveis técnicos.
-- Podem escalar ao PM/PO se o escopo conforme escrito for tecnicamente inviável.
+**Authority**
+- Own all technical decisions within the approved scope.
+- Can flag architectural concerns to the CTO before or during execution.
+- Define the Definition of Done for technical deliverables.
+- Can escalate to the PM/PO if the scope as written is technically infeasible.
 
-**Não faz**
-- Aceitar escopo ambíguo e absorver o custo silenciosamente.
-- Tomar decisões de produto (o que construir) — apenas decisões técnicas (como construir).
-- Contornar o PM para negociar mudanças de escopo direto com o upstream.
+**Does not**
+- Accept ambiguous scope and absorb the cost silently.
+- Make product decisions (what to build) — only technical decisions (how to build).
+- Bypass the PM to negotiate scope changes directly with upstream.
 
 ### Engineers
 
-Os Engineers implementam, testam e entregam o trabalho definido pelos Tech Leads, dentro do escopo do PRD. São especialistas de execução com autonomia técnica total dentro das tasks atribuídas.
+Engineers implement, test, and deliver the work defined by Tech Leads, within the PRD's scope. They are execution specialists with full technical autonomy within their assigned tasks.
 
-**Inicia quando**
-- as tasks foram definidas e atribuídas pelo Tech Lead;
-- o contexto de implementação está claro (constraints, arquitetura, critérios de aceite).
+**Starts when**
+- tasks have been defined and assigned by the Tech Lead;
+- implementation context is clear (constraints, architecture, acceptance criteria).
 
-**Termina quando**
-- a task está implementada, testada, revisada e atende à Definition of Done;
-- o entregável passou em QA/UAT e está pronto para release.
+**Ends when**
+- the task is implemented, tested, reviewed, and meets the Definition of Done;
+- the deliverable has passed QA/UAT and is ready for release.
 
 **Ownership**
-- Implementação das tasks atribuídas dentro da arquitetura definida.
-- Cobertura de testes unitários e de integração para seus entregáveis.
-- Qualidade de código e aderência às diretrizes técnicas dentro do seu escopo.
-- Surfaçar bloqueios ou contradições no nível de implementação ao Tech Lead.
+- Implementation of assigned tasks within the defined architecture.
+- Unit and integration test coverage for their deliverables.
+- Code quality and adherence to technical guidelines within their scope.
+- Surfacing blockers or contradictions at the implementation level to the Tech Lead.
 
-**Autoridade**
-- Donos das decisões de implementação dentro da arquitetura definida.
-- Podem levantar bloqueios técnicos ou contradições descobertas durante a implementação ao Tech Lead.
-- Podem propor abordagens de implementação melhores ao Tech Lead (não direto ao upstream).
+**Authority**
+- Own implementation decisions within the defined architecture.
+- Can raise technical blockers or contradictions discovered during implementation to the Tech Lead.
+- Can propose better implementation approaches to the Tech Lead (not directly to upstream).
 
-**Não faz**
-- Aceitar tasks indefinidas ou ambíguas sem escalar ao Tech Lead.
-- Tomar decisões de escopo de produto.
-- Comunicar-se direto com clientes ou stakeholders upstream sem o conhecimento do PM/Tech Lead.
+**Does not**
+- Accept undefined or ambiguous tasks without escalating to the Tech Lead.
+- Make product scope decisions.
+- Communicate directly with customers or upstream stakeholders without the PM/Tech Lead's knowledge.
 
-## Resumo de ownership
+## Ownership summary
 
-| Artefato ou domínio | Dono |
+| Artifact or domain | Owner |
 |---|---|
-| Estratégia e direção da empresa | CEO |
-| Captura de demandas comerciais | Vendas |
-| Inteligência de mercado e competitiva | Marketing |
-| Saúde do cliente pós-venda e sinais de uso | Customer Success |
-| Fila do Intake Layer e triagem | PO |
-| Contrato de compliance do intake e gate de prontidão (Readiness Score) | PO |
-| Readiness Package (autoria exclusiva) | PO |
-| PRD (fusão RP + Technical Assessment) | PO + CTO |
-| Racionalização de produto | PO |
-| Backlog de Oportunidades | PO |
-| Decisões arquiteturais | CTO |
-| Padrões técnicos e Architecture Governance | CTO |
-| Technical Assessment (artefato separado; o CTO nunca edita o RP) | CTO |
-| Visibilidade da dívida técnica e estratégia de remediação | CTO |
-| Performance e crescimento dos Tech Leads | CTO |
-| Avaliações de 90 dias (Tech Leads direto, Engineers revisados) | CTO |
-| Mapa de capacidade do time e sinais de contratação | CTO |
-| Planos de desenvolvimento de carreira da equipe técnica | CTO |
-| Execução de entrega e milestones | PM |
-| Gestão de dependências cross-team | PM |
-| Iniciação do feedback loop | PM |
-| Visibilidade e avaliação de capacidade do time | PM |
-| Escalada de gap de capacidade | PM |
-| Quebra técnica (épicos, histórias, tasks) | Tech Leads |
-| Design de arquitetura dentro do escopo | Tech Leads |
+| Company strategy and direction | CEO |
+| Capture of commercial demands | Sales |
+| Market and competitive intelligence | Marketing |
+| Post-sale customer health and usage signals | Customer Success |
+| Intake Layer queue and triage | PO |
+| Intake compliance contract and readiness gate (Readiness Score) | PO |
+| Readiness Package (sole author) | PO |
+| PRD (RP + Technical Assessment merge) | PO + CTO |
+| Product rationalization | PO |
+| Opportunity Backlog | PO |
+| Architectural decisions | CTO |
+| Technical standards and Architecture Governance | CTO |
+| Technical Assessment (separate artifact; the CTO never edits the RP) | CTO |
+| Technical debt visibility and remediation strategy | CTO |
+| Performance and growth of Tech Leads | CTO |
+| 90-day reviews (Tech Leads directly, Engineers reviewed) | CTO |
+| Team capacity map and hiring signals | CTO |
+| Career development plans for the technical team | CTO |
+| Delivery execution and milestones | PM |
+| Cross-team dependency management | PM |
+| Feedback loop initiation | PM |
+| Team capacity visibility and assessment | PM |
+| Capacity gap escalation | PM |
+| Technical breakdown (epics, stories, tasks) | Tech Leads |
+| Architecture design within scope | Tech Leads |
 | Definition of Done | Tech Leads |
-| Estratégia de rollout | Tech Leads |
-| Implementação e cobertura de testes | Engineers |
-| Aprovação de release ou decisão de bloqueio | QA |
-| Validação dos critérios de aceite | QA |
+| Rollout strategy | Tech Leads |
+| Implementation and test coverage | Engineers |
+| Release approval or blocking decision | QA |
+| Acceptance criteria validation | QA |
 
-## Resumo de fronteiras
+## Boundary summary
 
-| Fronteira | Papel esquerdo | Papel direito | Regra |
+| Boundary | Left role | Right role | Rule |
 |---|---|---|---|
-| Upstream → Intake | Vendas / CS / Marketing / CEO | PO | A demanda precisa ser capturada em formato estruturado antes de chegar ao PO |
-| Triagem do Intake | PO | CTO | PO faz triagem independente; escala ao CTO apenas em impacto arquitetural/estratégico |
-| Intake → Downstream | PO | PM | Apenas um PRD completo (RP congelado + Technical Assessment) aciona esta transição — o commitment point |
-| Validação do PM | PM | PO | PM pode rejeitar e devolver um PRD incompleto ao PO (gaps técnicos seguem ao CTO) |
-| Planejamento do downstream | PM | Tech Leads | PM entrega o plano de execução; Tech Leads são donos da quebra técnica |
-| Gate de implementação | Tech Leads | Engineers | Engineers iniciam apenas com tasks definidas e contexto claro |
-| Escalada técnica | Engineers | Tech Leads | Engineers escalam bloqueios ao Tech Lead, não direto ao PO/CTO |
-| Preocupação arquitetural | Tech Leads | CTO | Tech Leads sinalizam problemas arquiteturais ao CTO, não ao PM ou PO |
+| Upstream → Intake | Sales / CS / Marketing / CEO | PO | The demand must be captured in structured format before reaching the PO |
+| Intake triage | PO | CTO | PO triages independently; escalates to CTO only on architectural/strategic impact |
+| Intake → Downstream | PO | PM | Only a complete PRD (RP frozen + Technical Assessment) triggers this transition — the commitment point |
+| PM validation | PM | PO | PM can reject and return an incomplete PRD to the PO (technical gaps go to the CTO) |
+| Downstream planning | PM | Tech Leads | PM delivers the execution plan; Tech Leads own the technical breakdown |
+| Implementation gate | Tech Leads | Engineers | Engineers start only with defined tasks and clear context |
+| Technical escalation | Engineers | Tech Leads | Engineers escalate blockers to the Tech Lead, not directly to PO/CTO |
+| Architectural concern | Tech Leads | CTO | Tech Leads flag architectural issues to the CTO, not to the PM or PO |
 
-## O que nenhum papel deve fazer
+## What no role should do
 
-- Comprometer capacidade de engenharia sem um PRD.
-- Contornar o Intake Layer (nenhuma demanda vai direto do upstream para a execução).
-- Absorver ambiguidade silenciosamente — todo papel tem a autoridade e a obrigação de escalar ou rejeitar inputs incompletos.
-- Definir implementação técnica no upstream (apenas problema e contexto).
-- Definir escopo de produto no downstream (apenas execução, dentro do escopo aprovado).
+- Commit engineering capacity without a PRD.
+- Bypass the Intake Layer (no demand goes directly from upstream to execution).
+- Absorb ambiguity silently — every role has the authority and obligation to escalate or reject incomplete inputs.
+- Define technical implementation upstream (only problem and context).
+- Define product scope downstream (only execution, within the approved scope).

@@ -1,166 +1,166 @@
-# Intake Record — [Nome da Demanda]
+# Intake Record — [Demand Name]
 
-> **Este é o Intake Record — o artefato formal da camada de intake, de autoria do PO.** Ele recebe o [`00 Documento do Submitter`](./00-submitter-brief.md) (`gateReady = true`), atribui o ID oficial `INT-AAAA-NNN` e registra o **primeiro ato do PO: a triagem** — a decisão de roteamento (Product Ready / Discovery / Backlog / Rejeitar) com justificativa rastreável. Ver [`personas/02-po.md` §3 e §6.1](../personas/02-po.md).
+> **This is the Intake Record — the formal artifact of the intake layer, authored by the PO.** It receives the [`00 Submitter Brief`](./00-submitter-brief.md) (`gateReady = true`), assigns the official ID `INT-YYYY-NNN`, and records the **PO's first act: triage** — the routing decision (Product Ready / Discovery / Backlog / Reject) with a traceable rationale. See [`personas/02-po.md` §3 and §6.1](../personas/02-po.md).
 >
-> **Ele não reescreve a captura do Submitter** — **referencia** o brief 00 e o consolida. O aprofundamento de produto (visão, escopo, regras, métricas) é o **segundo ato** do PO e vive no [`02 Readiness Package`](./02-readiness-package.md).
+> **It does not rewrite the Submitter's capture** — it **references** brief 00 and consolidates it. The product deepening (vision, scope, rules, metrics) is the **PO's second act** and lives in the [`02 Readiness Package`](./02-readiness-package.md).
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief.md) → `01 Intake Record (PO — triagem)` → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md).
+> **Journey:** [`00 Submitter Brief`](./00-submitter-brief.md) → `01 Intake Record (PO — triage)` → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md).
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Registro** | INT-AAAA-NNN |
-| **Versão** | v1 |
-| **Documento do Submitter (origem)** | [`00-submitter-brief-[nome].md`](./00-submitter-brief.md) |
-| **Registrado por (Submitter)** | [Nome] ([Vendas / CS / CEO / Marketing]) |
-| **Triado por (PO)** | [Nome] (PO) |
-| **Data de registro** | AAAA-MM-DD |
-| **Data de triagem** | AAAA-MM-DD |
-| **Status** | Novo / Em triagem / Triado |
-| **Readiness Package vinculado** | RP-AAAA-NNN (após Product Ready) |
+| **Record ID** | INT-YYYY-NNN |
+| **Version** | v1 |
+| **Submitter Brief (origin)** | [`00-submitter-brief-[name].md`](./00-submitter-brief.md) |
+| **Submitted by (Submitter)** | [Name] ([Sales / CS / CEO / Marketing]) |
+| **Triaged by (PO)** | [Name] (PO) |
+| **Record date** | YYYY-MM-DD |
+| **Triage date** | YYYY-MM-DD |
+| **Status** | New / In Triage / Triaged |
+| **Linked Readiness Package** | RP-YYYY-NNN (after Product Ready) |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Evento | Resumo |
+| Version | Date | Event | Summary |
 |---|---|---|---|
-| v1 | AAAA-MM-DD | Intake formalizado | [Breve descrição] |
+| v1 | YYYY-MM-DD | Intake formalized | [Brief description] |
 
 ---
 
-## Prontidão recebida do Submitter
+## Readiness received from the Submitter
 
-> Snapshot herdado do brief 00 no handoff. O PO não recalcula a captura — registra o que recebeu e o que segue *soft*.
+> Snapshot inherited from brief 00 at handoff. The PO does not recalculate the capture — records what was received and what remains *soft*.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Readiness Score no handoff** | __ % |
-| **Requisitos bloqueantes** | Todos resolvidos por disposição honesta (`gateReady`) — Sim / Não |
-| **Dispositions em aberto** | __ premissas a validar · __ discovery · __ delegados |
+| **Readiness Score at handoff** | __ % |
+| **Blocking requirements** | All resolved by honest disposition (`gateReady`) — Yes / No |
+| **Open dispositions** | __ assumptions to validate · __ discovery · __ deferred |
 
 ---
 
-## Demanda consolidada
+## Consolidated demand
 
-> Resumo de uma tela, validado pelo PO contra o brief 00 (não é re-digitação — é a leitura do PO). O detalhe completo, com confiança por campo, está no [`00`](./00-submitter-brief.md).
+> Single-screen summary validated by the PO against brief 00 (not a re-entry — it is the PO's reading). The full detail, with per-field confidence, is in [`00`](./00-submitter-brief.md).
 
-| Dimensão | Síntese | Confiança herdada |
+| Dimension | Summary | Inherited confidence |
 |---|---|---|
-| **Problema** (a dor, não a solução) | [Síntese] | __ |
-| **Alcance** (quem é impactado) | [Personas/segmentos] | __ |
-| **Impacto de negócio** | [Quantificado quando possível] | __ |
-| **Urgência** (por que agora) | [Janela + custo de esperar] | __ |
-| **Prioridade declarada** | Crítico / Alto / Médio / Baixo | — |
+| **Problem** (the pain, not the solution) | [Summary] | __ |
+| **Reach** (who is impacted) | [Personas/segments] | __ |
+| **Business impact** | [Quantified where possible] | __ |
+| **Urgency** (why now) | [Window + cost of waiting] | __ |
+| **Declared priority** | Critical / High / Medium / Low | — |
 
 ---
 
-## Triagem — decisão de roteamento  ·  *(Ato 1 do PO)*
+## Triage — routing decision  ·  *(PO's Act 1)*
 
-> O PO avalia cada critério (todos avaliados = pode concluir a triagem) e então toma **uma** decisão de caminho, com justificativa obrigatória. Ver [`personas/02-po.md` §6.1](../personas/02-po.md).
+> The PO evaluates each criterion (all evaluated = can complete triage) and then makes **one** path decision with a mandatory rationale. See [`personas/02-po.md` §6.1](../personas/02-po.md).
 
-### Critérios avaliados
+### Criteria evaluated
 
-| # | Critério | Veredito | Justificativa (rationale) | Base / Fonte |
+| # | Criterion | Verdict | Rationale | Basis / Source |
 |---|---|---|---|---|
-| 1 | É um problema real (não sintoma isolado)? | Sim / Não | [por quê] | [intake / dado] |
-| 2 | É recorrente / tem volume? | Sim / Não | | |
-| 3 | Encaixa na visão do produto? | Sim / Não | | |
-| 4 | Qual o impacto técnico e de negócio? | Alto / Médio / Baixo | | |
-| 5 | Urgência e impacto justificam agora? | Sim / Não | | |
+| 1 | Is it a real problem (not an isolated symptom)? | Yes / No | [why] | [intake / data] |
+| 2 | Is it recurring / does it have volume? | Yes / No | | |
+| 3 | Does it fit the product vision? | Yes / No | | |
+| 4 | What is the technical and business impact? | High / Medium / Low | | |
+| 5 | Do urgency and impact justify action now? | Yes / No | | |
 
-### Decisão de caminho
+### Path decision
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Decisão** | Product Ready / Discovery / Backlog de Oportunidades / Rejeitar |
-| **Justificativa** | [Por que esta decisão — defensável] |
-| **Reversível?** | Sim (Discovery/Backlog — porta lateral) / Não (Rejeitar — fecha com justificativa) |
-| **Submitter notificado** | Sim — AAAA-MM-DD |
+| **Decision** | Product Ready / Discovery / Opportunity Backlog / Reject |
+| **Rationale** | [Why this decision — defensible] |
+| **Reversible?** | Yes (Discovery/Backlog — side door) / No (Reject — closes with rationale) |
+| **Submitter notified** | Yes — YYYY-MM-DD |
 
-> **Gate da triagem:** todos os critérios avaliados (não força uma decisão específica — força que a decisão seja **informada**). Só `Product Ready` abre o Ato 2 (racionalização → RP). As demais encerram a passagem pelo PO neste momento.
+> **Triage gate:** all criteria evaluated (does not force a specific decision — forces the decision to be **informed**). Only `Product Ready` opens Act 2 (rationalization → RP). All other paths end the demand's passage through the PO at this point.
 
 ---
 
-## Natureza da demanda e Base de Conhecimento  ·  *(classificação — nasce aqui)*
+## Demand nature and Knowledge Base  ·  *(classification — originates here)*
 
-> **Por que esta seção existe.** Antes de qualquer avaliação técnica, é preciso saber se a demanda constrói **software novo** ou altera **software existente** — porque os dois exigem raciocínios opostos no Technical Assessment: greenfield *decide* a fundação (stack, ADRs, estrutura); brownfield *descobre* o que já existe (padrões, integrações, dívida). Sem esta classificação, o CTO adivinha. A camada de IA/engenharia **não tem conhecimento implícito do código** — ela depende do que está declarado aqui. Ver [`03-technical-assessment.md`](./03-technical-assessment.md).
+> **Why this section exists.** Before any technical assessment, it is necessary to know whether the demand builds **new software** or modifies **existing software** — because the two require opposite reasoning in the Technical Assessment: greenfield *decides* the foundation (stack, ADRs, structure); brownfield *discovers* what already exists (patterns, integrations, debt). Without this classification, the CTO is guessing. The AI/engineering layer **has no implicit knowledge of the code** — it depends on what is declared here. See [`03-technical-assessment.md`](./03-technical-assessment.md).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Natureza** | Greenfield (software/módulo novo) · Brownfield (altera software existente) · Híbrido (módulo novo dentro de sistema existente) |
-| **Sistema(s) afetado(s)** | [Nome do produto/serviço/módulo — ou "novo" se greenfield] |
-| **Base de conhecimento existe?** | Sim (referência abaixo) · Parcial · Não → exige discovery de documentação |
-| **Referência da Base de Conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · link · — |
+| **Nature** | Greenfield (new software/module) · Brownfield (modifies existing software) · Hybrid (new module within an existing system) |
+| **Affected system(s)** | [Product/service/module name — or "new" if greenfield] |
+| **Knowledge base exists?** | Yes (reference below) · Partial · No → requires documentation discovery |
+| **Knowledge Base reference** | [`tech-landscape-[system].md`](./tech-landscape.md) · link · — |
 
-> **Greenfield** → o Technical Assessment vai **definir** a fundação técnica, e os ADRs fundacionais **semeiam** uma nova Base de Conhecimento.
-> **Brownfield/Híbrido** → o Technical Assessment **referencia** a Base de Conhecimento existente; se ela não existe (ou está incompleta), a primeira tarefa técnica é **criá-la** (documentar o sistema atual) — registrar como Discovery.
-
----
-
-## Escalada arquitetural ao CTO
-
-**Necessária:** Sim / Não — [breve justificativa]
-
-> Se Sim, a escalada e o Technical Assessment acontecem durante a racionalização (RP). A **Natureza da demanda** (acima) viaja junto e determina o caminho do assessment. Ver [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+> **Greenfield** → the Technical Assessment will **define** the technical foundation, and the foundational ADRs will **seed** a new Knowledge Base.
+> **Brownfield/Hybrid** → the Technical Assessment **references** the existing Knowledge Base; if it does not exist (or is incomplete), the first technical task is to **create it** (document the current system) — register as Discovery.
 
 ---
 
-## Premissas validadas na triagem
+## Architectural escalation to the CTO
 
-> Quais premissas do brief 00 o PO revisou e o veredito de cada uma. Premissas que sobrevivem viajam adiante explicitamente.
+**Required:** Yes / No — [brief rationale]
 
-| Premissa (do brief 00) | Veredito do PO | A validar com |
+> If Yes, the escalation and Technical Assessment occur during rationalization (RP). The **demand nature** (above) travels with it and determines the assessment path. See [`interactions/05-po-to-cto.md`](../interactions/05-po-to-cto.md).
+
+---
+
+## Assumptions validated at triage
+
+> Which assumptions from brief 00 the PO reviewed and the verdict for each. Surviving assumptions travel forward explicitly.
+
+| Assumption (from brief 00) | PO verdict | To validate with |
 |---|---|---|
-| [Premissa] | Aceita / Rejeitada / A validar | [Quem] |
+| [Assumption] | Accepted / Rejected / To validate | [Who] |
 
 ---
 
-## Constraints reconhecidos
+## Recognized constraints
 
-> Constraints que o PM deve considerar desde o primeiro dia (herdados do brief, validados aqui).
+> Constraints the PM must consider from day one (inherited from the brief, validated here).
 
-| Constraint | Tipo | Nota do PO |
+| Constraint | Type | PO note |
 |---|---|---|
-| [Constraint] | Tempo / Orçamento / Legal / Técnico / Escopo / Externo | [Nota] |
+| [Constraint] | Time / Budget / Legal / Technical / Scope / External | [Note] |
 
 ---
 
 ## Discovery Brief
 
-> Preencher apenas se a decisão de caminho for **Discovery**. Caso contrário, remover esta seção.
+> Fill in only if the path decision is **Discovery**. Otherwise remove this section.
 
-### O que está faltando
+### What is missing
 
-| # | Incógnita | Quem pode responder | Método |
+| # | Unknown | Who can answer | Method |
 |---|---|---|---|
-| 1 | [Incógnita] | [PO / CTO / Cliente / Vendas] | [Spike técnico / Chamada com cliente / Revisão de infraestrutura] |
+| 1 | [Unknown] | [PO / CTO / Client / Sales] | [Technical spike / Client call / Infrastructure review] |
 
-**Time-box do Discovery:** [N dias] (AAAA-MM-DD → AAAA-MM-DD)
+**Discovery time-box:** [N days] (YYYY-MM-DD → YYYY-MM-DD)
 
 ---
 
-### Log do Discovery
+### Discovery Log
 
-#### AAAA-MM-DD — [Evento]
+#### YYYY-MM-DD — [Event]
 
-[Resumo do que foi feito, finding, decisão ou bloqueio]
+[Summary of what was done, finding, decision, or blocker]
 
 ---
 
-### Resultado do Discovery
+### Discovery Outcome
 
-| # | Incógnita | Resolução | Impacto no escopo |
+| # | Unknown | Resolution | Impact on scope |
 |---|---|---|---|
-| 1 | [Incógnita] | [Resolução] | Adicionado / Removido / Movido para backlog |
+| 1 | [Unknown] | [Resolution] | Added / Removed / Moved to backlog |
 
-**Novo caminho de decisão:** Discovery → Product Ready / Rejeitado / Backlog de Oportunidades
+**New path decision:** Discovery → Product Ready / Rejected / Opportunity Backlog
 
-**Discovery encerrado:** AAAA-MM-DD ([N dias — dentro / fora do time-box])
+**Discovery closed:** YYYY-MM-DD ([N days — within / outside the time-box])
 
 ---
 
 ## Handoff
 
-- **Se `Product Ready`:** o PO inicia a **racionalização** → [`02 Readiness Package`](./02-readiness-package.md).
-- **Se `Discovery`:** abre o Discovery Brief acima; ao encerrar, retria.
-- **Se `Backlog` / `Rejeitar`:** encerra a passagem pelo PO; Submitter notificado com justificativa.
+- **If `Product Ready`:** the PO begins **rationalization** → [`02 Readiness Package`](./02-readiness-package.md).
+- **If `Discovery`:** opens the Discovery Brief above; upon closing, re-triages.
+- **If `Backlog` / `Reject`:** ends the demand's passage through the PO; Submitter notified with rationale.

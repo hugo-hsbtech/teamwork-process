@@ -1,4 +1,4 @@
-# Spec — PO Figma Prototype ("Tradução")
+# Spec — PO Figma Prototype ("Translation")
 
 > **Status:** Draft v1 · **Date:** 2026-05-30 · **Author:** hugo (+ Claude)
 > **Type:** Design spec for a high-fidelity, clickable Figma prototype of the **PO persona's** end-to-end experience, built on the Conductor "Paper & Signal" design system. Feeds an implementation (build) plan and a stories doc.
@@ -27,16 +27,16 @@ The reasoning model behind the screens (decision-as-first-class, the two acts, t
 **Primary research:**
 - Conceptual ground truth: `personas/02-po.md` (decision is first-class — the exact analog to the Submitter's confidence layer).
 - Engine & honesty layer (inherited): `personas/01-submitter.md`.
-- Visual & component reference: the live Submitter Figma file + `prototypes/demandos-prototype-unified-v1.tsx` (the PO surfaces — triage items, rationalization pendencies, RP-2026-000 showcase, PO dashboard KPIs — already exist there as visual reference, even where conceptually behind `03-po.md`).
+- Visual & component reference: the live Submitter Figma file + `prototypes/demandos-prototype-unified-v1.tsx` (the PO surfaces — triage items, rationalization pending items, RP-2026-000 showcase, PO dashboard KPIs — already exist there as visual reference, even where conceptually behind `03-po.md`).
 - Interactions: [`interactions/01-sales-to-po.md`](../../../interactions/01-sales-to-po.md), [`05-po-to-cto.md`](../../../interactions/05-po-to-cto.md), [`07-po-to-pm.md`](../../../interactions/07-po-to-pm.md), [`08-pm-to-po-capacity.md`](../../../interactions/08-pm-to-po-capacity.md).
 
 > **Conceptual correction carried from `03-po.md` §2 / §10:** the RP is the **PO's** definition-of-ready (authored alone); the CTO produces a **separate Technical Assessment**; the **PRD is the fusion of the two** and is what goes to the PM. The prototype must render this as two artifacts that *stitch* into a PRD — never as one document the CTO co-edits. Where the unified-v1 prototype mixes technical sections into the RP, **this spec supersedes it** (see §11).
 
 ## 2. Persona & seed scenario
 
-**Persona:** the PO — the **tradutor**. The first persona whose face points *inward* toward engineering while still carrying the customer's pain. Speaks the language of *scope, business rule, acceptance criterion, risk, metric*. His value is entirely **judgment of product** — never transcription. Anything that reduces him to a typist destroys the role.
+**Persona:** the PO — the **translator**. The first persona whose face points *inward* toward engineering while still carrying the customer's pain. Speaks the language of *scope, business rule, acceptance criterion, risk, metric*. His value is entirely **product judgment** — never transcription. Anything that reduces him to a typist destroys the role.
 
-**Seed scenario (the demand we prototype):** **`DEM-2026-001` — "Gateway de Pagamento Recorrente"**, submitted by Carlos Silva (COO). *"A plataforma cobra clientes via boleto/transferência com reconciliação manual (~30h/mês) e inadimplência de 18%; precisa migrar para cartão de crédito recorrente."* Chosen because it carries a clear delay cost (R$ 2,6k/dia, SLA 21h restantes), a clean **Product Ready** triage outcome with two premises to validate, a non-trivial **CTO escalation** (PCI, Stripe, webhooks → Technical Assessment), and reusable ADRs. Easily swappable.
+**Seed scenario (the demand we prototype):** **`DEM-2026-001` — "Gateway de Pagamento Recorrente"**, submitted by Carlos Silva (COO). *"The platform charges customers via invoice/transfer with manual reconciliation (~30h/month) and an 18% default rate; needs to migrate to recurring credit card."* Chosen because it carries a clear delay cost (R$ 2.6k/day, SLA 21h remaining), a clean **Product Ready** triage outcome with two assumptions to validate, a non-trivial **CTO escalation** (PCI, Stripe, webhooks → Technical Assessment), and reusable ADRs. Easily swappable.
 
 **Cast (consistent across the file):** PO **Marina Costa** · CTO **Rafael Lima** · PM **Juliana Reis** · Submitter **Carlos Silva (COO)** · Viewer **Ana Santos (CFO)**.
 
@@ -46,15 +46,15 @@ The reasoning model behind the screens (decision-as-first-class, the two acts, t
 |---|---|---|
 | P1 | Inherit, don't rebuild | **Foundations are reused.** Variables, type styles, primitives and the cross-cutting domain kit (AIImpactBanner, GlobalChatSheet, TopBarNotifications, HeroMetric, CompactKPI, PendencyGroup, ConfidenceBar, SourcesTray, CopilotMessage, BlockReferenceChip, StateBadge, MultimodalComposer) come from the Submitter file unchanged. This spec adds only the **PO domain kit** (§5.4). |
 | P2 | Aesthetic | **Conductor "Paper & Signal"** — stone paper, single Tide-teal signal, Hanken/Inter/Geist Mono. Flat, near-shadowless, no imagery, **no emoji**. PO persona accent = the `po` accent token (warm orange) used only as an accent stripe / wash, never a large fill. |
-| P3 | Device & chrome | Desktop **1440** viewport. Same TopBar (wordmark · breadcrumb · "Discutir com a IA" · notifications bell · avatar) and Sidebar as the Submitter. |
+| P3 | Device & chrome | Desktop **1440** viewport. Same TopBar (wordmark · breadcrumb · "Discuss with AI" · notifications bell · avatar) and Sidebar as the Submitter. |
 | P4 | **Decision is first-class** | The PO analog of the Submitter's confidence layer. Every triage criterion and every RP section carries a **DecisionCard** payload: `verdict · rationale · basis · source · reversible`. `rationale` is **never optional**. The UI renders decisions as defensible objects, not checkboxes. |
-| P5 | **Two acts, two gates — different purposes** | The PO surface is **not** one continuous flow. **Triagem** (a routing decision — fast, scored, disposable) and **Racionalização** (a construction decision — deep, accumulative) are distinct surfaces, each ending in its own gate. The **triage gate** (`triageScore=100%` → a `Product Ready` path) is an **effort filter**: *is this demand worth rationalizing now?* The **freeze gate** (`freezeReady=true`) is the **commitment point** — where options become commitment and the PO's arc ends; it is explicitly **NOT** the Definition of Ready (that lives downstream, when stories/tasks are written and estimated and only coding remains). `Product Ready` opens Act 2; it does **not** declare the demand ready. Conflating the effort filter with the commitment point — or either with the downstream DoR, or merging the two surfaces — is the classic design error and is explicitly out (§11). |
+| P5 | **Two acts, two gates — different purposes** | The PO surface is **not** one continuous flow. **Triage** (a routing decision — fast, scored, disposable) and **Rationalization** (a construction decision — deep, accumulative) are distinct surfaces, each ending in its own gate. The **triage gate** (`triageScore=100%` → a `Product Ready` path) is an **effort filter**: *is this demand worth rationalizing now?* The **freeze gate** (`freezeReady=true`) is the **commitment point** — where options become commitment and the PO's arc ends; it is explicitly **NOT** the Definition of Ready (that lives downstream, when stories/tasks are written and estimated and only coding remains). `Product Ready` opens Act 2; it does **not** declare the demand ready. Conflating the effort filter with the commitment point — or either with the downstream DoR, or merging the two surfaces — is the classic design error and is explicitly out (§11). |
 | P6 | Triage renders as a **scored queue** | Items to assess, a `triageScore` (% of criteria evaluated) gate, and a 4-value **path decision** with mandatory justification. Stage-Gate's *gate decision*. The gate forces an **informed** decision (no criterion skipped), not a specific one. |
 | P7 | Rationalization renders as **product vision, already materialized** | The RP sections arrive **pre-drafted by AI**, each with confidence + origin + trace-to-source. The PO **reviews, edits, justifies, freezes** — never fills a blank form. This is the WOW: ~108h → ~21h across 18 demands. |
-| P8 | The freeze gate **explains itself** | `freezeReady` is rendered by a sticky **FreezeToolbar** (the PO analog of the Submitter's GateToolbar). It states, in business language, *what* still blocks the freeze ("Faltam 2 seções bloqueantes sem disposição honesta" / "Technical Assessment pendente") and switches to a rewarding ready state. Stage-Gate *commitment point* turned number. |
+| P8 | The freeze gate **explains itself** | `freezeReady` is rendered by a sticky **FreezeToolbar** (the PO analog of the Submitter's GateToolbar). It states, in business language, *what* still blocks the freeze ("2 sections still lack an honest disposition" / "Technical Assessment pending") and switches to a rewarding ready state. Stage-Gate *commitment point* turned into a number. |
 | P9 | The CTO relationship is **two artifacts that fuse** | The RP **references** the Technical Assessment via a `TechAssessmentRefCard` (status + verdict + link) — it never absorbs it. The CTO authors the Technical Assessment separately. The **PRD seam** screen shows RP (PO) and Technical Assessment (CTO) side by side, each half with a clear author, stitching into the PRD. |
-| P10 | The PO works a **portfolio**, not one demand | The productive tension is *between* demands in the queue. Portfolio indicators (custo de atraso R$/dia · SLA restante · esforço · reuso possível) drive **sequencing provocations** ("Caro de esperar e caro de fazer — esta é a próxima, ou fatiar?"), the PO analog of the Submitter's RICE-lite mirror. |
-| P11 | Pay-justifying KPI | The PO Dashboard has **one number-rei**: **`Throughput de RPs congelados`** (the contexto executável he produces). `HeroMetric` with `badge="Pay-justifying KPI"`, accent=po. Secondary KPIs (custo de atraso evitado, aceite-na-1ª-versão 64%→89%, tempo médio em racionalização, PRDs devolvidos) orbit it as `CompactKPI`s. |
+| P10 | The PO works a **portfolio**, not one demand | The productive tension is *between* demands in the queue. Portfolio indicators (delay cost R$/day · SLA remaining · effort · possible reuse) drive **sequencing provocations** ("Expensive to wait and expensive to build — is this next, or should we slice it?"), the PO analog of the Submitter's RICE-lite mirror. |
+| P11 | Pay-justifying KPI | The PO Dashboard has **one number-king**: **`Readiness Package throughput (frozen RPs)`** (the executable context he produces). `HeroMetric` with `badge="Pay-justifying KPI"`, accent=po. Secondary KPIs (delay cost avoided, first-version acceptance 64%→89%, average time in rationalization, PRDs returned) orbit it as `CompactKPI`s. |
 | P12 | Deep-detail screens are fullscreen | The Triage detail, the Rationalization canvas and the PRD seam hide the global sidebar and use the full 1440w (the breadcrumb is the close affordance) — same rule established for the Submitter's Demand Panel. Dashboard/list/cross-cutting pages keep the sidebar. |
 | P13 | "Not yet decidable" is structured, never paralysis | A section/criterion reaches "resolved enough to advance" through one of four **dispositions**: `decided · inherited · ai_drafted · discovery`. `escalated` is **not** an RP disposition — escalation is a *dependency on another artifact* (`TechAssessmentRef`), not a section someone else fills. |
 
@@ -73,44 +73,44 @@ Inherited from the Submitter spec §4 (1–8 stay valid: partner-not-form, confi
 All Phase-A foundations (color/spacing/radii/elevation variables, type styles, shadcn-restyled primitives) and these domain components, used as-is: **AIImpactBanner** (new `scope` values added in §5.4), **GlobalChatSheet**, **TopBarNotifications**, **HeroMetric** (already supports `accent=po`), **CompactKPI**, **PendencyGroup**, **ConfidenceBar**, **SemanticReflectionCard**, **SourceCard / SourcesTray**, **MultimodalComposer**, **CopilotMessage**, **BlockReferenceChip / DiscussAffordance**, **StateBadge**, **TimelineStateRow**, **Sparkline / Donut / FunnelChart**.
 
 ### 5.2 StateBadge — PO lifecycle variants (extend, don't replace)
-Add demand-lifecycle variants the PO drives: `em-triagem` (violet) · `em-discovery` (blue) · `em-racionalizacao` (po-accent) · `rp-congelado` (green) · `prd-pronto` (tide) · `backlog` (slate) · `rejeitada` (red) · `devolvida-pm` (amber). Reuse the existing dot+label pattern.
+Add demand-lifecycle variants the PO drives: `in-triage` (violet) · `in-discovery` (blue) · `in-rationalization` (po-accent) · `rp-frozen` (green) · `prd-ready` (tide) · `backlog` (slate) · `rejected` (red) · `returned-by-pm` (amber). Reuse the existing dot+label pattern.
 
 ### 5.3 The PO domain kit (new components)
 
 > All bind to Phase-A tokens; no raw hex. PO accent stripe uses the `po` accent token.
 
 **Act 1 — Triage**
-- **TriageQueueCard** — one demand in the queue. Anatomy: `DEM-id` (Mono) · title · originador byline · `PriorityChip` (Crítica/Alta/Média/Baixa, colored dot) · `SLAChip` (tempo restante, turns `state/error` under 24h) · `DelayCostChip` (R$/dia) · impact preview line · trailing chevron. **Addressable**.
+- **TriageQueueCard** — one demand in the queue. Anatomy: `DEM-id` (Mono) · title · originator byline · `PriorityChip` (Critical/High/Medium/Low, colored dot) · `SLAChip` (remaining time, turns `state/error` under 24h) · `DelayCostChip` (R$/day) · impact preview line · trailing chevron. **Addressable**.
 - **PriorityChip · SLAChip · DelayCostChip** — small metadata chips (Mono numerics). SLAChip and DelayCostChip are the portfolio-sequencing signals (P10).
 - **TriageScoreMeter** — gauge of `triageScore` (% of criteria evaluated); variants `incomplete | complete`. The triage analog of the ReadinessRing; "complete" is the *can-conclude* gate, not a verdict.
 - **TriageCriterionRow** — one routing criterion. Anatomy: `label` (the judgment question) · `dimension` chip (RealProblem/Recurrence/StrategicFit/BusinessImpact/Urgency/Routing) · **AISuggestionBlock** (the pre-filled recommendation + confidence, addressable) · the PO's `DecisionCard` · `why` tooltip. The `isPath=true` row is visually distinguished (the routing decision).
-- **PathDecisionPicker** — the 4-value routing control on the `isPath` row: `Product Ready` (opens Act 2) · `Discovery` (lateral, recoverable, time-box field) · `Backlog` (lateral, recoverable) · `Rejeitar` (closes, mandatory justification). Each option shows its `reversible` semantics and its effect on demand state.
+- **PathDecisionPicker** — the 4-value routing control on the `isPath` row: `Product Ready` (opens Act 2) · `Discovery` (lateral, recoverable, time-box field) · `Backlog` (lateral, recoverable) · `Reject` (closes, mandatory justification). Each option shows its `reversible` semantics and its effect on demand state.
 - **DecisionCard** — the **defensibility layer**, the PO analog of ConfidenceBar. Anatomy: `verdict` (the choice) · `rationale` (required text, the spine) · `basis` chip (intake record / Submitter disposition / ADR / portfolio data) · `source` (trace-to-source link → chat) · `reversible` indicator. Variants: `state = undecided | decided`; `kind = triage | path | section`.
 
 **Act 2 — Rationalization (the RP)**
 - **RPReadinessRing** — reuse ReadinessRing; `rpReadiness = f(weights, statuses)` with `low_confidence` counting as partial. States `building | near-freeze | freezeReady`; `delta` overlay supported.
-- **RPSectionCard** — one section of the definition-of-ready. Anatomy: section number + `title` · `group` chip (Contexto/Escopo/Comportamento/Qualidade/Sucesso/Riscos/Roadmap) · `blocksFreeze` flag · AI-drafted `content` (editable) · `ConfidenceBar` (evaluated against `satisfiedWhen`) · `OriginBadge` · `RPDispositionPill` · `satisfiedWhen` rubric tooltip · DiscussAffordance. **Addressable**.
+- **RPSectionCard** — one section of the definition-of-ready. Anatomy: section number + `title` · `group` chip (Context/Scope/Behavior/Quality/Success/Risks/Roadmap) · `blocksFreeze` flag · AI-drafted `content` (editable) · `ConfidenceBar` (evaluated against `satisfiedWhen`) · `OriginBadge` · `RPDispositionPill` · `satisfiedWhen` rubric tooltip · DiscussAffordance. **Addressable**.
 - **OriginBadge** — provenance of the entry: `inherited | ai_drafted | po_authored | reused_from_KB`. Drives the trust signal and the trace-to-source.
 - **RPDispositionPill + RPDispositionPicker** — `decided · inherited · ai_drafted · discovery` (note: **no `escalated`**, per P13). `discovery` carries a time-box.
-- **FreezeToolbar** — sticky bottom toolbar inside the Rationalization canvas. Left: Eyebrow "GATE" + dynamic business-language copy (pending vs freezeReady, incl. the Technical-Assessment-pending case). Right: ghost "Revisar tudo" + primary "Congelar RP" (disabled with tooltip until `freezeReady`, subtle pulse when enabled). Variant `freezeState = pending | blocked-by-assessment | ready`.
-- **SequencingTensionCallout** — reuse TensionCallout copy pattern for **portfolio** provocations (P10): custo-alto+esforço-alto, SLA-estourando+impacto-baixo, demanda-parecida-com-RP-recente (reuse).
+- **FreezeToolbar** — sticky bottom toolbar inside the Rationalization canvas. Left: Eyebrow "GATE" + dynamic business-language copy (pending vs freezeReady, incl. the Technical-Assessment-pending case). Right: ghost "Review all" + primary "Freeze RP" (disabled with tooltip until `freezeReady`, subtle pulse when enabled). Variant `freezeState = pending | blocked-by-assessment | ready`.
+- **SequencingTensionCallout** — reuse TensionCallout copy pattern for **portfolio** provocations (P10): high-cost+high-effort, SLA-expiring+low-impact, demand-similar-to-recent-RP (reuse).
 
 **Lateral — CTO bridge & PRD fusion**
-- **TechAssessmentRefCard** — the **bridge** (not RP content). Anatomy: Eyebrow "AVALIAÇÃO TÉCNICA (CTO)" · `status` chip (`not_requested | requested | in_progress | signed | vetoed`) · `verdict` (viável / viável-com-ressalvas / inviável-como-escopado) · CTO byline (Rafael Lima) · `link` affordance ("Ver Technical Assessment") · when `vetoed`, a callout prompting RP scope revision. Counts toward `freezeReady` only when `status ∈ {signed, not_requested}`.
+- **TechAssessmentRefCard** — the **bridge** (not RP content). Anatomy: Eyebrow "TECHNICAL ASSESSMENT (CTO)" · `status` chip (`not_requested | requested | in_progress | signed | vetoed`) · `verdict` (viable / viable-with-caveats / not-viable-as-scoped) · CTO byline (Rafael Lima) · `link` affordance ("View Technical Assessment") · when `vetoed`, a callout prompting RP scope revision. Counts toward `freezeReady` only when `status ∈ {signed, not_requested}`.
 - **EscalateToCTOModal** — escalate-to-CTO valve: shows what's being sent (the RP + specific questions), explicitly **not** "empty sections for the CTO to fill".
 - **ADRSuggestionCard** *(read-context for PO)* — AI-suggested / KB-reused ADRs that will live in the Technical Assessment; the PO sees them on the ref, the CTO approves/edits. Shows `reused_from_KB` count (the velocity lever).
 - **PRDSeam** — the fusion view. Two columns, clearly attributed: **left = RP (Marina Costa, PO)**, **right = Technical Assessment (Rafael Lima, CTO)**, stitched under a single `PRD-AAAA-NNN` header. A center seam visual makes the join explicit. Read-only; the artifact that opens downstream.
 - **PRDHandoffModal** — confirm handoff of the **PRD** (not RP) to the PM; consequences + notify-PM checkbox.
 
 ### 5.4 AIImpactBanner — PO scopes
-Add `scope` values: `po-portfolio` (Dashboard: "168h economizadas YTD · triagem 6min vs 45min · racionalização 1.2h vs 6h"), `po-triage` (Triage detail: "5 critérios pré-avaliados · justificativas sugeridas"), `po-rationalization` (RP canvas: "RP pré-redigido pela IA · 9 de 14 seções · 3 ADRs reaproveitados · 86h economizadas neste mês"), `po-prd` (PRD seam: "RP + Technical Assessment fundidos · cada afirmação rastreável").
+Add `scope` values: `po-portfolio` (Dashboard: "168h saved YTD · triage 6min vs 45min · rationalization 1.2h vs 6h"), `po-triage` (Triage detail: "5 criteria pre-assessed · suggested justifications"), `po-rationalization` (RP canvas: "RP pre-drafted by AI · 9 of 14 sections · 3 ADRs reused · 86h saved this month"), `po-prd` (PRD seam: "RP + Technical Assessment fused · every claim traceable").
 
 ## 6. Input strategy
 Identical to the Submitter (one `MultimodalComposer` everywhere; GlobalChatSheet is global; sources mined into `inferred` fields with trace-to-source). For the PO, the composer's primary job shifts from *capturing* to *justifying and deciding*: the AI proposes a `rationale`/`content` draft, the PO hardens it. Block-reference-to-chat (§7) is how a decision or an RP claim is interrogated.
 
-## 7. Core pattern — Decision-reference-to-chat ("Discutir / Justificar")
+## 7. Core pattern — Decision-reference-to-chat ("Discuss / Justify")
 Same addressable-everything mechanic as the Submitter, retargeted to decisions:
-1. Hover/select any unit — a TriageCriterionRow's AI suggestion, a DecisionCard's basis, an RPSectionCard's claim, a TechAssessmentRef verdict, a portfolio tension, a KPI — and a floating **"Discutir / Justificar com a IA"** affordance appears.
+1. Hover/select any unit — a TriageCriterionRow's AI suggestion, a DecisionCard's basis, an RPSectionCard's claim, a TechAssessmentRef verdict, a portfolio tension, a KPI — and a floating **"Discuss / Justify with AI"** affordance appears.
 2. Pin it as a `BlockReferenceChip`. The AI replies quoting the block and proposes a `rationale` or an edit to the `content`.
 3. Resolution flows back to the canvas: a decision moves `undecided → decided`, a section's confidence rises, a disposition resolves, the TriageScoreMeter or RPReadinessRing advances.
 4. **Trace-to-source:** clicking a `source` on any DecisionCard/RPSectionCard opens the GlobalChatSheet with that source pinned — defensibility is one click.
@@ -121,53 +121,53 @@ Same addressable-everything mechanic as the Submitter, retargeted to decisions:
 
 **P1 · Entry & Dashboard**
 - P1.1 Sign in (reuse B0 chrome).
-- P1.2 **PO Dashboard** — vertical rhythm: TopBar+Sidebar → header ("Painel do PO" · "Bom dia, Marina" · "4 demandas em triagem · 4 em racionalização") → **AIImpactBanner** (scope=po-portfolio) → **HeroMetric** `label="RPs congelados (este mês)"` `value="9"` `trend="+2 vs mês anterior"` `sub="7 aceitos na 1ª versão · 2 em execução"` `badge="Pay-justifying KPI"` accent=po → **CompactKPI grid (3×2)**: Custo de atraso evitado (R$ 47k/mês) · Aceite na 1ª versão (89%, trend +25pp vs 64%, accent=success) · Tempo médio em racionalização (2,4d, −1,8d com IA, accent=ai) · PRDs devolvidos pelo PM (11%, contra-indicador) · Discoveries ativos (3) · Demandas em triagem (4) → **Showcase card** ("Veja um RP completo: RP-2026-000 · Notificações WebSocket — 17 seções, score 96%, cada afirmação rastreável") → **"Demandas recentes"** preview (link → list).
+- P1.2 **PO Dashboard** — vertical rhythm: TopBar+Sidebar → header ("PO Panel" · "Good morning, Marina" · "4 demands in triage · 4 in rationalization") → **AIImpactBanner** (scope=po-portfolio) → **HeroMetric** `label="Frozen RPs (this month)"` `value="9"` `trend="+2 vs previous month"` `sub="7 accepted on 1st version · 2 in execution"` `badge="Pay-justifying KPI"` accent=po → **CompactKPI grid (3×2)**: Delay cost avoided (R$ 47k/month) · 1st-version acceptance (89%, trend +25pp vs 64%, accent=success) · Average time in rationalization (2.4d, −1.8d with AI, accent=ai) · PRDs returned by PM (11%, counter-indicator) · Active discoveries (3) · Demands in triage (4) → **Showcase card** ("See a complete RP: RP-2026-000 · WebSocket Notifications — 17 sections, score 96%, every claim traceable") → **"Recent demands"** preview (link → list).
 - P1.3 Dashboard — empty state.
 
 **P2 · Triage (Act 1 — the scored queue)** *(fullscreen on detail)*
-- P2.1 **Fila de Triagem** — keeps sidebar. List of `TriageQueueCard`s ordered by priority/SLA: DEM-2026-001 (Crítica, 21h, R$ 2,6k/dia) · DEM-2026-002 (Alta) · DEM-2026-003 (Média) · DEM-2026-004 (Baixa). Filter chips (Todas · SLA vencendo · Por prioridade).
-- P2.2 **Triagem — detalhe** (fullscreen, no sidebar): identity header (DEM-2026-001 · StateBadge "Em Triagem" · `TriageScoreMeter` 0%) · Intake Record summary (read-only, from Submitter, with sources) · **AIImpactBanner** (scope=po-triage) · the 5 `TriageCriterionRow`s (each with an AISuggestionBlock pre-filled — see seed). The `isPath` row hosts the `PathDecisionPicker`.
+- P2.1 **Triage Queue** — keeps sidebar. List of `TriageQueueCard`s ordered by priority/SLA: DEM-2026-001 (Critical, 21h, R$ 2,6k/day) · DEM-2026-002 (High) · DEM-2026-003 (Medium) · DEM-2026-004 (Low). Filter chips (All · SLA expiring · By priority).
+- P2.2 **Triage — detail** (fullscreen, no sidebar): identity header (DEM-2026-001 · StateBadge "In Triage" · `TriageScoreMeter` 0%) · Intake Record summary (read-only, from Submitter, with sources) · **AIImpactBanner** (scope=po-triage) · the 5 `TriageCriterionRow`s (each with an AISuggestionBlock pre-filled — see seed). The `isPath` row hosts the `PathDecisionPicker`.
 - P2.3 Decide a criterion → `DecisionCard` moves `undecided → decided`; TriageScoreMeter advances. (Show the +20% per criterion.)
 - P2.4 TriageScoreMeter reaches 100% → PathDecisionPicker enables.
-- P2.5 **Path = Product Ready** → confirm → demand → "Em Racionalização" → lands on P3.1.
-- P2.6 **Path = Discovery** → time-box modal (ex.: 2 semanas) → "Em Discovery" (lateral, recoverable).
+- P2.5 **Path = Product Ready** → confirm → demand → "In Rationalization" → lands on P3.1.
+- P2.6 **Path = Discovery** → time-box modal (e.g.: 2 weeks) → "In Discovery" (lateral, recoverable).
 - P2.7 **Path = Backlog** → "Backlog (Opportunity)" (lateral, recoverable).
-- P2.8 **Path = Rejeitar** → mandatory-justification modal → "Rejeitada" (closes; Submitter notified).
+- P2.8 **Path = Reject** → mandatory-justification modal → "Rejected" (closes; Submitter notified).
 
 **P3 · Rationalization (Act 2 — the RP canvas)** *(fullscreen)*
-- P3.1 **Canvas de Racionalização** — DemandPanel-style, fullscreen. Identity header (DEM-2026-001 · StateBadge "Em Racionalização" · `RPReadinessRing` opens ~25%) · title · **AIImpactBanner** (scope=po-rationalization). Three-zone body:
-  - Left (380) — **Conversa** (GlobalChatSheet anchored open): AI opening turn ("Li o Intake Record e já redigi 9 de 14 seções a partir do PDF e da triagem. Comecei pelo Escopo — confira o que marquei como fora.").
-  - Center (619) — **Canvas** of `RPSectionCard`s grouped by `PendencyGroup`: **"Bloqueiam congelamento · N"** (state/error, expanded — sections still `empty`/`low_confidence`), `SemanticReflectionCard` ("O QUE ESTA DEMANDA É — risco operacional + financeiro, não pedido de feature"), then **"Em discovery / premissa · N"** (state/canary), then **"Resolvidas · N"** (state/production, collapsed). Each card: AI-drafted content, ConfidenceBar, OriginBadge, RPDispositionPill.
-  - Right (279) — **Fontes** (`SourcesTray`) + the **TechAssessmentRefCard** (status reflecting whether the CTO was requested).
-  - **FreezeToolbar** (sticky bottom): pending copy "Faltam {N} seções bloqueantes sem disposição honesta".
+- P3.1 **Rationalization Canvas** — DemandPanel-style, fullscreen. Identity header (DEM-2026-001 · StateBadge "In Rationalization" · `RPReadinessRing` opens ~25%) · title · **AIImpactBanner** (scope=po-rationalization). Three-zone body:
+  - Left (380) — **Conversation** (GlobalChatSheet anchored open): AI opening turn ("I read the Intake Record and already drafted 9 of 14 sections from the PDF and the triage. I started with Scope — check what I marked as out of scope.").
+  - Center (619) — **Canvas** of `RPSectionCard`s grouped by `PendencyGroup`: **"Block freeze · N"** (state/error, expanded — sections still `empty`/`low_confidence`), `SemanticReflectionCard` ("WHAT THIS DEMAND IS — operational + financial risk, not a feature request"), then **"In discovery / assumption · N"** (state/canary), then **"Resolved · N"** (state/production, collapsed). Each card: AI-drafted content, ConfidenceBar, OriginBadge, RPDispositionPill.
+  - Right (279) — **Sources** (`SourcesTray`) + the **TechAssessmentRefCard** (status reflecting whether the CTO was requested).
+  - **FreezeToolbar** (sticky bottom): pending copy "{N} blocking sections still lack an honest disposition".
 - P3.2 RPSectionCard states — ai_drafted · editing · po_authored · low_confidence · resolved · discovery (time-boxed).
-- P3.3 Edit/justify a section → DecisionCard `kind=section` → confidence rises → card migrates from "Bloqueiam congelamento" to "Resolvidas"; RPReadinessRing delta.
-- P3.4 "Ainda não dá pra decidir" → RPDispositionPicker → `discovery` (time-box) or `inherited` (from intake, with source) or `ai_drafted` (confirm) frames.
-- P3.5 The 14-section contract specimen (the definition-of-ready, see §6.2 of `03-po.md`): Contexto (1–4), Escopo (5–6), Comportamento (7 user stories + Given/When/Then), Qualidade (8 NFRs, 9 edge cases), Sucesso (10 métricas com guardrails, 11 aceite do release), Riscos (12–13), Roadmap (14), + the TechAssessmentRef bridge row.
+- P3.3 Edit/justify a section → DecisionCard `kind=section` → confidence rises → card migrates from "Block freeze" to "Resolved"; RPReadinessRing delta.
+- P3.4 "Not decidable yet" → RPDispositionPicker → `discovery` (time-box) or `inherited` (from intake, with source) or `ai_drafted` (confirm) frames.
+- P3.5 The 14-section contract specimen (the definition-of-ready, see §6.2 of `03-po.md`): Context (1–4), Scope (5–6), Behavior (7 user stories + Given/When/Then), Quality (8 NFRs, 9 edge cases), Success (10 metrics with guardrails, 11 release acceptance), Risks (12–13), Roadmap (14), + the TechAssessmentRef bridge row.
 
 **P4 · CTO escalation & Technical Assessment** *(lateral)*
-- P4.1 **EscalateToCTOModal** — pick what touches infra/platform/PCI/IA; attach the RP + specific questions; confirm.
+- P4.1 **EscalateToCTOModal** — pick what touches infra/platform/PCI/AI; attach the RP + specific questions; confirm.
 - P4.2 TechAssessmentRefCard states — `requested` → `in_progress` → `signed` (verdict + link) → `vetoed` (scope-revision prompt).
-- P4.3 **Technical Assessment specimen** (CTO-authored, read context for the PO) — viability, constraints, sistemas afetados, riscos técnicos, **ADRSuggestionCards** (incl. `reused_from_KB`), esforço firme (34 dias úteis). This is the CTO's artifact, shown so the PO sees what fuses into the PRD; it is **not** part of the RP.
+- P4.3 **Technical Assessment specimen** (CTO-authored, read context for the PO) — viability, constraints, affected systems, technical risks, **ADRSuggestionCards** (incl. `reused_from_KB`), firm effort (34 business days). This is the CTO's artifact, shown so the PO sees what fuses into the PRD; it is **not** part of the RP.
 
 **P5 · Freeze, PRD fusion & handoff**
-- P5.1 **Congelar RP (modal)** — `freezeReady=true`; consequences (RP becomes the frozen definition-of-ready; fuses into PRD). Confirm.
+- P5.1 **Freeze RP (modal)** — `freezeReady=true`; consequences (RP becomes the frozen definition-of-ready; fuses into PRD). Confirm.
 - P5.2 **PRDSeam** (fullscreen) — `PRD-2026-001` header; left column = RP (Marina, PO), right column = Technical Assessment (Rafael, CTO), center seam; **AIImpactBanner** (scope=po-prd).
 - P5.3 **PRDHandoffModal** — hand the **PRD** to Juliana Reis (PM); notify checkbox; consequences. → success.
 
 **P6 · Monitoring, rebound & loops**
-- P6.1 **Enviado ao PM** (status) — banner tide "PRD enviado · aguardando aceite da PM".
-- P6.2 **Devolvido pela PM** (status) — banner amber with the specific gap ("Falta cenário de fallback nos critérios de aceite") + CTA "Tratar gaps". The PM has explicit authority to reject (per `07-po-to-pm.md`).
-- P6.3 **Tratar gaps + nova versão** — only the gaps are addressed; version increments (RP/PRD v1.1). Routes the gap to PO or CTO depending on its nature.
-- P6.4 **Aceito pela PM** (status) — banner emerald; PRD opens execution.
-- P6.5 **Escalada de capacidade (da PM)** — per `08-pm-to-po-capacity.md`; PO re-sequences the portfolio.
-- P6.6 **Feedback loop fechado** — outcome flows back to update Product Backlog priorities.
+- P6.1 **Sent to PM** (status) — tide banner "PRD sent · awaiting PM acceptance".
+- P6.2 **Returned by PM** (status) — amber banner with the specific gap ("Missing fallback scenario in acceptance criteria") + CTA "Address gaps". The PM has explicit authority to reject (per `07-po-to-pm.md`).
+- P6.3 **Address gaps + new version** — only the gaps are addressed; version increments (RP/PRD v1.1). Routes the gap to PO or CTO depending on its nature.
+- P6.4 **Accepted by PM** (status) — emerald banner; PRD opens execution.
+- P6.5 **Capacity escalation (from PM)** — per `08-pm-to-po-capacity.md`; PO re-sequences the portfolio.
+- P6.6 **Feedback loop closed** — outcome flows back to update Product Backlog priorities.
 
 **P7 · Portfolio & cross-cutting**
-- P7.1 **Sequenciamento** — the queue with `SequencingTensionCallout`s active (P10 provocations).
+- P7.1 **Sequencing** — the queue with `SequencingTensionCallout`s active (P10 provocations).
 - P7.2 Notifications (TopBar dropdown + full page) — reuse.
 - P7.3 GlobalChatSheet open over the Dashboard — reuse (specimen).
-- P7.4 Atividade / Pendências cross-demand — reuse pattern.
+- P7.4 Activity / Pending items cross-demand — reuse pattern.
 
 ## 9. AI empowerment thread
 Triage pre-scorer (each criterion gets a suggested verdict + confidence + a drafted rationale, traceable to the intake) → path recommender (suggests *Product Ready* with reasoning, PO commits) → **RP pre-drafter** (writes the sections from the intake + triage, marks origin, flags `low_confidence` and `discovery`) → user-story & NFR generator (Given/When/Then, ISO/IEC 25010 checklist) → **ADR suggester / KB-reuser** (for the Technical Assessment) → sequencing tension-spotter (portfolio) → PRD stitcher (fuses RP + Technical Assessment, preserving authorship). **Velocity** = decisions pre-drafted, sections pre-written; **defensibility** = every decision and claim traceable. Visibility is explicit via `AIImpactBanner` (~108h → ~21h on 18 demands).
@@ -179,11 +179,11 @@ Triage pre-scorer (each criterion gets a suggested verdict + confidence + a draf
 - Goal: a real PO clicks through unaided and *feels* the two acts and the RP→PRD chain.
 
 ## 11. Out of scope & do-not-resurrect (this prototype)
-- Other personas' full working UIs beyond the read-context the PO needs (the CTO's Technical Assessment specimen P4.3, the PM's rebound). The CTO and PM get their **own** prototypes later, on this same molde.
+- Other personas' full working UIs beyond the read-context the PO needs (the CTO's Technical Assessment specimen P4.3, the PM's rebound). The CTO and PM get their **own** prototypes later, on this same mold.
 - Dark mode (token slot reserved). Real backend / functional AI (scripted). Production code.
 
 **Do NOT resurrect / do NOT build:**
-- **The RP containing technical sections** (impacto arquitetural, ADRs, sistemas afetados, riscos técnicos, segurança, performance, rollout, rollback, observabilidade as *RP* sections). The unified-v1 prototype does this; **`03-po.md` §2/§6.2 supersedes it** — those belong to the CTO's **Technical Assessment**, referenced via `TechAssessmentRefCard`.
+- **The RP containing technical sections** (architectural impact, ADRs, affected systems, technical risks, security, performance, rollout, rollback, observability as *RP* sections). The unified-v1 prototype does this; **`03-po.md` §2/§6.2 supersedes it** — those belong to the CTO's **Technical Assessment**, referenced via `TechAssessmentRefCard`.
 - **The CTO co-editing the RP** (the old `escalated` disposition filling RP sections). Replaced by the two-artifact bridge (P9, P13).
 - **"RP → PM" as the handoff.** The handoff is the **PRD** (P5.3). "RP → PM" is the superseded direction.
 - A flat list of triage criteria or RP sections — both are grouped/structured (TriageScoreMeter gate; PendencyGroups on the canvas).

@@ -1,88 +1,88 @@
-# Interação 10 — Tech Leads → Engenheiros (Atribuição de Tarefas)
+# Interaction 10 — Tech Leads → Engineers (Task Assignment)
 
-**Direção:** Tech Leads iniciam. Engenheiros recebem.
-**Camada:** Dentro do Downstream
-
----
-
-## Gatilho
-
-O Tech Backlog está completo — tarefas totalmente definidas com contexto, restrições, critérios de aceite e uma Definição de Pronto clara.
+**Direction:** Tech Leads initiate. Engineers receive.
+**Layer:** Within the Downstream
 
 ---
 
-## O que os Tech Leads Devem Fornecer por Tarefa
+## Trigger
 
-- O que precisa ser construído (da história de produto, não reescrito pelo Tech Lead)
-- Abordagem técnica e restrições (referência ao ADR se aplicável)
-- Critérios de aceite (da história do Product Backlog + adições técnicas)
-- Definição de Pronto para a tarefa
-- Dependências de outras tarefas (requisitos de sequenciamento)
-- Riscos conhecidos ou edge cases que o engenheiro deve tratar
+The Tech Backlog is complete — tasks fully defined with context, constraints, acceptance criteria, and a clear Definition of Done.
 
 ---
 
-## O que os Engenheiros Fazem Com Isso
+## What Tech Leads Must Provide per Task
 
-- Implementam dentro da abordagem definida — sem departures arquiteturais unilaterais
-- Apresentam qualquer discovery técnico que contradiga o escopo ou arquitetura definidos imediatamente
-- Completam code review antes de marcar uma tarefa como pronta
-- Fazem handoff para QA quando todos os critérios de aceite estão implementados
+- What needs to be built (from the product story, not rewritten by the Tech Lead)
+- Technical approach and constraints (reference to the ADR if applicable)
+- Acceptance criteria (from the Product Backlog story + technical additions)
+- Definition of Done for the task
+- Dependencies on other tasks (sequencing requirements)
+- Known risks or edge cases the engineer must handle
 
 ---
 
-## Transferência de Ownership
+## What Engineers Do With This
 
-**Dos Tech Leads:** A definição de tarefa está completa e transferida. Os Tech Leads mantêm supervisão (code review, tratamento de escaladas), mas a implementação é agora responsabilidade do engenheiro.
-**Para os Engenheiros:** Detêm a implementação de cada tarefa atribuída — dentro da abordagem definida, critérios de aceite e Definição de Pronto. Qualquer desvio da abordagem definida requer aprovação explícita do Tech Lead.
-**Artefato transferido:** Tarefa definida (contexto + abordagem técnica + critérios de aceite + DoD + dependências).
+- Implement within the defined approach — no unilateral architectural departures
+- Surface any technical discovery that contradicts the defined scope or architecture immediately
+- Complete code review before marking a task as done
+- Hand off to QA when all acceptance criteria are implemented
+
+---
+
+## Ownership Transfer
+
+**From the Tech Leads:** Task definition is complete and transferred. Tech Leads retain oversight (code review, handling escalations), but implementation is now the engineer's responsibility.
+**To the Engineers:** Own the implementation of each assigned task — within the defined approach, acceptance criteria, and Definition of Done. Any deviation from the defined approach requires explicit Tech Lead approval.
+**Artifact transferred:** Defined task (context + technical approach + acceptance criteria + DoD + dependencies).
 
 ---
 
 ## Gate
 
-Engenheiros não começam tarefas sem uma definição completa. Uma tarefa sem contexto, restrições e critérios de aceite é devolvida ao Tech Lead — não é pega e interpretada.
+Engineers do not start tasks without a complete definition. A task without context, constraints, and acceptance criteria is returned to the Tech Lead — it is not picked up and interpreted.
 
 ---
 
-## Caminho de Falha
+## Failure Path
 
-Se um engenheiro descobrir que a implementação contradiz a arquitetura ou encontrar um edge case não coberto na definição da tarefa, escala ao Tech Lead imediatamente. O engenheiro não absorve a ambiguidade silenciosamente e entrega um workaround.
-
----
-
-## O que os Engenheiros NÃO Devem Fazer
-
-- Tomar decisões arquiteturais unilaterais fora da abordagem definida
-- Começar uma tarefa que está faltando contexto ou critérios de aceite
-- Absorver silenciosamente um discovery de escopo e entregar um workaround sem apresentá-lo
+If an engineer discovers that the implementation contradicts the architecture or encounters an edge case not covered in the task definition, they escalate to the Tech Lead immediately. The engineer does not silently absorb the ambiguity and deliver a workaround.
 
 ---
 
-## Sequência
+## What Engineers Must NOT Do
+
+- Make unilateral architectural decisions outside the defined approach
+- Start a task that is missing context or acceptance criteria
+- Silently absorb a scope discovery and deliver a workaround without surfacing it
+
+---
+
+## Sequence
 
 ```mermaid
 sequenceDiagram
     actor TL as Tech Lead
-    actor ENG as Engenheiro
+    actor ENG as Engineer
 
-    TL->>ENG: Tarefa definida (contexto + abordagem + CAs + DoD)
-    ENG->>ENG: Revisa definição da tarefa
+    TL->>ENG: Defined task (context + approach + ACs + DoD)
+    ENG->>ENG: Reviews task definition
 
-    alt Tarefa indefinida ou faltando contexto
-        ENG-->>TL: Devolve tarefa com pergunta específica
-        TL->>ENG: Definição de tarefa atualizada
+    alt Task undefined or missing context
+        ENG-->>TL: Returns task with specific question
+        TL->>ENG: Updated task definition
     end
 
-    ENG->>ENG: Implementa
+    ENG->>ENG: Implements
 
-    alt Discovery contradiz escopo ou arquitetura
-        ENG-->>TL: Escala imediatamente com findings
-        TL->>TL: Decide: ajustar tarefa ou escalar ao PM
-        TL->>ENG: Orientação atualizada
+    alt Discovery contradicts scope or architecture
+        ENG-->>TL: Escalates immediately with findings
+        TL->>TL: Decides: adjust task or escalate to PM
+        TL->>ENG: Updated guidance
     end
 
-    ENG-->>TL: Implementação concluída — code review solicitado
-    TL->>ENG: Feedback do code review
-    ENG-->>QA: Tarefa concluída, pronta para QA
+    ENG-->>TL: Implementation complete — code review requested
+    TL->>ENG: Code review feedback
+    ENG-->>QA: Task complete, ready for QA
 ```

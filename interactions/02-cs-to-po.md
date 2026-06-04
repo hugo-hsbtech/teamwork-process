@@ -1,80 +1,80 @@
-# Interação 02 — CS → PO
+# Interaction 02 — CS → PO
 
-**Direção:** Customer Success inicia. PO recebe.
-**Camada:** Upstream → Camada de Intake
+**Direction:** Customer Success initiates. PO receives.
+**Layer:** Upstream → Intake Layer
 
-> CS, Vendas, Marketing e o canal de intake do CEO são instâncias da persona **Submitter** — a persona de fronteira. Seu raciocínio, o modelo de confiança e a estrutura de dados do registro estão consolidados em [`../personas/01-submitter.md`](../personas/01-submitter.md). Esta interação descreve o *handoff*; a persona descreve *como o registro fica pronto*.
-
----
-
-## Gatilho
-
-Um cliente relata atrito, um risco de retenção é identificado, ou um workaround recorrente é documentado.
+> CS, Sales, Marketing, and the CEO intake channel are instances of the **Submitter** persona — the boundary persona. Its reasoning, trust model, and record data structure are consolidated in [`../personas/01-submitter.md`](../personas/01-submitter.md). This interaction describes the *handoff*; the persona describes *how the record becomes ready*.
 
 ---
 
-## O que CS Deve Fornecer
+## Trigger
 
-- Registro de intake estruturado com: origem (Cliente), tipo, descrição do problema, impacto de negócio
-- Contexto de saúde do cliente: qual cliente, frequência do atrito, dados de uso, sinal de risco de retenção
-- Indicador de severidade: isso está causando risco ativo de churn ou é uma lacuna de adoção?
-- Evidências: tickets de suporte, dados de NPS, gravações de chamadas ou notas
+A customer reports friction, a retention risk is identified, or a recurring workaround is documented.
 
 ---
 
-## O que o PO Faz Com Isso
+## What CS Must Provide
 
-- Revisa e faz a triagem contra a fila atual
-- Pondera o sinal frente a outras demandas já em racionalização
-- Pode pedir ao CS dados adicionais do cliente se o problema for ambíguo
+- Structured intake record with: source (Customer), type, problem description, business impact
+- Customer health context: which customer, friction frequency, usage data, retention risk signal
+- Severity indicator: is this causing active churn risk or is it an adoption gap?
+- Evidence: support tickets, NPS data, call recordings, or notes
 
 ---
 
-## Transferência de Ownership
+## What the PO Does With This
 
-**De CS:** A responsabilidade pelo sinal termina aqui. CS não faz follow-up diretamente com Engenharia nem faz compromissos ao cliente sobre prazo.
-**Para o PO:** Detém o registro de intake e a decisão de triagem. Responsável por comunicar o resultado de volta ao CS.
-**Artefato transferido:** Registro de intake + contexto de saúde do cliente.
+- Reviews and triages against the current queue
+- Weighs the signal against other demands already in rationalization
+- May ask CS for additional customer data if the problem is ambiguous
+
+---
+
+## Ownership Transfer
+
+**From CS:** Responsibility for the signal ends here. CS does not follow up directly with Engineering or make commitments to the customer about deadlines.
+**To the PO:** Owns the intake record and the triage decision. Responsible for communicating the outcome back to CS.
+**Artifact transferred:** Intake record + customer health context.
 
 ---
 
 ## Gate
 
-CS não pode submeter "o cliente está insatisfeito" como descrição do problema. O intake deve descrever o atrito específico com contexto observável e reproduzível.
+CS cannot submit "the customer is unhappy" as a problem description. The intake must describe the specific friction with observable and reproducible context.
 
-Muito do material do CS (tickets, NPS, gravações) entra como disposição `inferred` — extraída dos artefatos do cliente, com `source` registrada e confiança parcial. Isso é válido para atingir o gate: o requisito não precisa ser respondido "à mão" pelo CS se a evidência o sustenta. O gate (`gateReady`) exige uma disposição honesta por requisito bloqueante, não certeza total (ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md)).
-
----
-
-## Caminho de Falha
-
-Se CS não conseguir descrever o problema especificamente, o PO abre um Discovery para coletar o contexto faltante com CS como fonte primária. No modelo de dados, isso é a disposição `discovery` (time-boxed) em vez de uma devolução — o requisito conta como *resolvido-como-incógnita* enquanto o Discovery roda.
+Much of CS's material (tickets, NPS, recordings) enters as an `inferred` disposition — extracted from customer artifacts, with `source` recorded and partial confidence. This is valid for passing the gate: the requirement does not need to be answered "by hand" by CS if the evidence supports it. The gate (`gateReady`) requires an honest disposition per blocking requirement, not total certainty (see [`../personas/01-submitter.md` §6](../personas/01-submitter.md)).
 
 ---
 
-## O que CS NÃO Deve Fazer
+## Failure Path
 
-- Prometer ao cliente uma correção, prazo ou prioridade antes que a triagem seja concluída
-- Submeter problemas que sejam incidentes isolados sem evidência de padrão
-- Contornar o PO e ir diretamente à Engenharia quando um cliente está frustrado
+If CS cannot describe the problem specifically, the PO opens a Discovery to collect the missing context with CS as the primary source. In the data model, this is the `discovery` disposition (time-boxed) rather than a return — the requirement counts as *resolved-as-unknown* while the Discovery runs.
 
 ---
 
-## Sequência
+## What CS Must NOT Do
+
+- Promise the customer a fix, deadline, or priority before triage is complete
+- Submit problems that are isolated incidents without evidence of a pattern
+- Bypass the PO and go directly to Engineering when a customer is frustrated
+
+---
+
+## Sequence
 
 ```mermaid
 sequenceDiagram
     actor CS as Customer Success
     actor PO as PO
 
-    CS->>PO: Registro de intake + contexto de saúde do cliente
-    PO->>PO: Verifica completude e validade do padrão
+    CS->>PO: Intake record + customer health context
+    PO->>PO: Checks completeness and pattern validity
 
-    alt Problema ambíguo
-        PO-->>CS: Abre Discovery — solicita evidência específica do cliente
-        CS->>PO: Retorna com evidências (tickets, dados, gravações)
+    alt Ambiguous problem
+        PO-->>CS: Opens Discovery — requests specific customer evidence
+        CS->>PO: Returns with evidence (tickets, data, recordings)
     end
 
-    PO->>PO: Triagem
-    PO-->>CS: Resultado da triagem
+    PO->>PO: Triage
+    PO-->>CS: Triage outcome
 ```

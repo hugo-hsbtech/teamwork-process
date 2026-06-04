@@ -1,231 +1,231 @@
-# Documento do Submitter — [Nome da Demanda]
+# Submitter Brief — [Demand Name]
 
-> **Este é o documento do Submitter** — o primeiro artefato da jornada (`00`) e o entregável da persona Submitter. Ele **tangibiliza** o modelo de [`personas/01-submitter.md`](../personas/01-submitter.md): o raciocínio (requisitos de compliance, geração de ToDos, fórmula de score) vive na persona; este documento o **instancia** por demanda, na **linguagem do Submitter** — problema, valor, dor, oportunidade. Cada resposta carrega o quão sólida ela é e de onde veio: a camada de confiança viaja *com* a captura.
+> **This is the Submitter's document** — the first artifact in the journey (`00`) and the Submitter persona's deliverable. It **instantiates** the model from [`personas/01-submitter.md`](../personas/01-submitter.md): the reasoning (compliance requirements, ToDo generation, score formula) lives in the persona; this document **instances** it per demand, in the **Submitter's language** — problem, value, pain, opportunity. Each answer carries how solid it is and where it came from: the confidence layer travels *with* the capture.
 >
-> **Jornada:** `00 Documento do Submitter` → [`01 Intake Record (PO — triagem)`](./01-intake-record.md) → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md). Ver [`README.md`](./README.md).
+> **Journey:** `00 Submitter Brief` → [`01 Intake Record (PO — triage)`](./01-intake-record.md) → [`02 Readiness Package (PO)`](./02-readiness-package.md) → [`03 Technical Assessment (CTO)`](./03-technical-assessment.md) → [`04 PRD (PO+CTO → PM)`](./04-prd.md). See [`README.md`](./README.md).
 >
-> **Nada antecede este documento como artefato.** O que vem antes é **sinal cru** — uma chamada, um ticket, um e-mail, um áudio, uma conversa de deal — que **não é artefato** (ver [`../README.md`](../README.md)). Esse sinal entra *aqui* como evidência/fonte (disposição `inferred`, com `source`); é a **captura** que o transforma neste primeiro documento formal.
+> **Nothing precedes this document as an artifact.** What comes before is **raw signal** — a call, a ticket, an email, an audio clip, a conversation about a deal — which is **not an artifact** (see [`../README.md`](../README.md)). That signal enters *here* as evidence/source (disposition `inferred`, with `source`); it is the **capture** that transforms it into this first formal document.
 >
-> **Handoff:** congela quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) e é entregue ao **PO**, que o formaliza e tria no [`01 Intake Record`](./01-intake-record.md).
+> **Handoff:** freezes when `gateReady = true` (every blocking requirement resolved by an honest disposition) and is handed off to the **PO**, who formalizes and triages it in the [`01 Intake Record`](./01-intake-record.md).
 
-## As duas lentes (toda demanda é lida pelas duas ao mesmo tempo)
+## The two lenses (every demand is read through both simultaneously)
 
-> Ver [`personas/01-submitter.md` §2](../personas/01-submitter.md). Os ToDos vivem onde as lentes se cruzam: "dado o que *esta* demanda significa, o que o contrato ainda precisa?"
+> See [`personas/01-submitter.md` §2](../personas/01-submitter.md). ToDos live where the lenses intersect: "given what *this* demand means, what does the contract still need?"
 
-| Lente | O que é | Onde aparece neste documento |
+| Lens | What it is | Where it appears in this document |
 |---|---|---|
-| **Contrato** (determinístico) | Os requisitos fixos de compliance que toda demanda precisa satisfazer para avançar | **Resumo de Prontidão** + os requisitos numerados (score + pendências) |
-| **Semântica** (contextual) | O que *esta* demanda significa: a dor real, seu tipo, sua tese de valor, suas incógnitas | **Enunciado do Problema**, **Impacto**, **Indicadores de Valor** e suas tensões |
+| **Contract** (deterministic) | The fixed compliance requirements every demand must satisfy to advance | **Readiness Summary** + the numbered requirements (score + pending items) |
+| **Semantic** (contextual) | What *this* demand means: the real pain, its type, its value thesis, its unknowns | **Problem Statement**, **Impact**, **Value Indicators** and their tensions |
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Demanda** | [Nome] |
-| **Registrado por** | [Nome] ([Vendas / CS / CEO / Marketing]) |
-| **Data de captura** | AAAA-MM-DD |
-| **Status** | Em captura / Pronto para handoff (`gateReady`) |
-| **Intake Record vinculado** | INT-AAAA-NNN (atribuído pelo PO na triagem) |
+| **Demand** | [Name] |
+| **Submitted by** | [Name] ([Sales / CS / CEO / Marketing]) |
+| **Capture date** | YYYY-MM-DD |
+| **Status** | In capture / Ready for handoff (`gateReady`) |
+| **Linked Intake Record** | INT-YYYY-NNN (assigned by the PO at triage) |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Evento | Resumo |
+| Version | Date | Event | Summary |
 |---|---|---|---|
-| v1 | AAAA-MM-DD | Captura iniciada | [Breve descrição] |
+| v1 | YYYY-MM-DD | Capture started | [Brief description] |
 
 ---
 
-## Resumo de Prontidão (Readiness)
+## Readiness Summary
 
-> Snapshot da captura. O score é derivado dos requisitos abaixo; `low_confidence` conta como parcial. A demanda só é entregue ao PO quando todos os requisitos bloqueantes estão resolvidos (`gateReady = Sim`).
+> Snapshot of the capture. The score is derived from the requirements below; `low_confidence` counts as partial. The demand is handed off to the PO only when all blocking requirements are resolved (`gateReady = Yes`).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
 | **Readiness Score** | __ % |
-| **Gate liberado (gateReady)** | Sim / Não |
-| **Requisitos bloqueantes pendentes** | [lista ou — ] |
-| **Dispositions** | __ respondidos · __ inferidos · __ premissas · __ discovery · __ delegados |
+| **Gate unlocked (gateReady)** | Yes / No |
+| **Pending blocking requirements** | [list or —] |
+| **Dispositions** | __ answered · __ inferred · __ assumptions · __ discovery · __ deferred |
 
-### Legenda de confiança (aplica-se a cada seção respondida)
+### Confidence legend (applies to each answered section)
 
-| Atributo | Valores |
+| Attribute | Values |
 |---|---|
-| **Confiança** | 0–100 |
-| **Fonte** | Submitter direto · Documento anexo (p.X) · Inferido · Premissa · Outro stakeholder |
-| **Status** | Vazio · Baixa confiança · Resolvido |
-| **Disposição** | Respondido · Inferido · Premissa (a validar) · Discovery (a investigar) · Delegado (dono: __) |
-| **Hint** | Por que a confiança está baixa / o que a elevaria |
+| **Confidence** | 0–100 |
+| **Source** | Direct Submitter · Attached document (p.X) · Inferred · Assumption · Other stakeholder |
+| **Status** | Empty · Low confidence · Resolved |
+| **Disposition** | Answered · Inferred · Assumption (to validate) · Discovery (to investigate) · Deferred (owner: __) |
+| **Hint** | Why confidence is low / what would raise it |
 
-> **"Não sei" não bloqueia.** Um requisito atinge prontidão por qualquer disposição honesta — inclusive "ninguém sabe ainda, e este é o plano" (Discovery) ou "estamos assumindo X" (Premissa). Ver [`personas/01-submitter.md` §6](../personas/01-submitter.md).
+> **"I don't know" does not block.** A requirement reaches readiness through any honest disposition — including "nobody knows yet, and this is the plan" (Discovery) or "we are assuming X" (Assumption). See [`personas/01-submitter.md` §6](../personas/01-submitter.md).
 
 ---
 
-## Origem  ·  *(Requisito 2 — Originador e contexto)*
+## Origin  ·  *(Requirement 2 — Originator and context)*
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Fonte** | Cliente / Interno / Mercado / Suporte |
-| **Cliente / Solicitante** | [Nome] |
-| **Originador e contexto** | [Quem levantou e em que situação — ex.: "COO, reunião de planejamento Q2"] |
-| **Reportado via** | [Canal — chamada, email, ticket de suporte, etc.] |
+| **Source** | Client / Internal / Market / Support |
+| **Client / Requester** | [Name] |
+| **Originator and context** | [Who raised it and in what situation — e.g.: "COO, Q2 planning meeting"] |
+| **Reported via** | [Channel — call, email, support ticket, etc.] |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Tipo
+## Type
 
-- [ ] Funcionalidade
+- [ ] Feature
 - [ ] Bug
-- [ ] Melhoria
+- [ ] Improvement
 - [ ] Compliance
-- [ ] Integração
-- [ ] Operacional
+- [ ] Integration
+- [ ] Operational
 
-> **Dica (semeia a classificação do PO):** isto parece uma **capacidade nova** (algo que hoje não existe) ou um ajuste em **algo que já funciona**? Não precisa de certeza — é só um sinal que ajuda o PO a classificar a demanda como greenfield/brownfield na triagem.
+> **Tip (seeds the PO's classification):** does this look like a **new capability** (something that doesn't exist today) or an adjustment to **something that already works**? No certainty needed — it is just a signal that helps the PO classify the demand as greenfield/brownfield at triage.
 
-**Toca o quê:** Capacidade nova / Algo existente / Não sei
-
----
-
-## Enunciado do Problema  ·  *(Requisito 1 — bloqueia gate)*
-
-> Qual a dor existente? Descreva o problema, não a solução. Se o enunciado contém solução proposta, ele volta para reformulação.
-
-[Descreva o problema aqui]
-
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+**Touches:** New capability / Something existing / Don't know
 
 ---
 
-## Quem é Impactado (Alcance)  ·  *(Requisito 3 — bloqueia gate)*
+## Problem Statement  ·  *(Requirement 1 — blocks gate)*
 
-> Personas, segmentos ou times que sentem essa dor. É o "Reach" dos indicadores de valor.
+> What is the existing pain? Describe the problem, not the solution. If the statement contains a proposed solution, it is returned for reformulation.
 
-| Persona / Segmento | Como é impactado |
+[Describe the problem here]
+
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
+
+---
+
+## Who Is Impacted (Reach)  ·  *(Requirement 3 — blocks gate)*
+
+> Personas, segments, or teams that feel this pain. This is the "Reach" of the value indicators.
+
+| Persona / Segment | How they are impacted |
 |---|---|
-| [Persona] | [Impacto] |
+| [Persona] | [Impact] |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Impacto de Negócio  ·  *(Requisito 4 — bloqueia gate)*
+## Business Impact  ·  *(Requirement 4 — blocks gate)*
 
-> Use as dimensões aplicáveis. Receita, Retenção, Operacional, Competitivo, Compliance, Mercado são os mais comuns. Não force dimensões irrelevantes. Quantifique quando possível.
+> Use the applicable dimensions. Revenue, Retention, Operational, Competitive, Compliance, Market are the most common. Do not force irrelevant dimensions. Quantify when possible.
 
-| Dimensão | Detalhe |
+| Dimension | Detail |
 |---|---|
-| **Receita** | [Quantifique — ARR de expansão, deal bloqueado, etc.] |
-| **Retenção** | [Risco de churn ou impacto em renovação] |
-| **Operacional** | [Impacto em workarounds, tempo, eficiência] |
-| **Competitivo** | [Lacuna ou diferencial perdido] |
-| **Compliance** | [Requisitos legais ou regulatórios] |
+| **Revenue** | [Quantify — ARR expansion, blocked deal, etc.] |
+| **Retention** | [Churn risk or impact on renewal] |
+| **Operational** | [Impact on workarounds, time, efficiency] |
+| **Competitive** | [Gap or lost differentiator] |
+| **Compliance** | [Legal or regulatory requirements] |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Indicadores de Valor (RICE-lite)
+## Value Indicators (RICE-lite)
 
-> Espelho para desafiar o pensamento — **não** ranking automático. Pontue cada um (Baixo / Médio / Alto). A confiança reusa a coluna acima — não se pontua de novo. O Esforço fica *soft* (chute do Submitter, firmado depois pelo CTO).
+> A mirror to challenge thinking — **not** an automatic ranking. Score each one (Low / Medium / High). Confidence reuses the column above — do not re-score. Effort stays *soft* (the Submitter's rough estimate, confirmed later by the CTO).
 
-| Indicador | Score | Justificativa (na linguagem dele) | Confiança |
+| Indicator | Score | Rationale (in their language) | Confidence |
 |---|---|---|---|
-| **Impacto** ("quanto move o negócio?") | B / M / A | [por quê] | __ |
-| **Alcance** ("quantos sentem isso?") | B / M / A | [por quê] | __ |
-| **Urgência** ("por que agora? custo de esperar?") | B / M / A | [por quê] | __ |
-| **Esforço** *(soft — adiado ao CTO)* | B / M / A | [chute inicial] | low_confidence |
+| **Impact** ("how much does it move the business?") | L / M / H | [why] | __ |
+| **Reach** ("how many people feel this?") | L / M / H | [why] | __ |
+| **Urgency** ("why now? cost of waiting?") | L / M / H | [why] | __ |
+| **Effort** *(soft — deferred to the CTO)* | L / M / H | [initial rough estimate] | low_confidence |
 
-> **Tensões a registrar** (desafiam a coerência do pensamento): Impacto alto + confiança baixa? Urgência alta + Impacto baixo? Alcance alto + impacto-por-usuário fino? Anote a resolução de cada tensão — afiar a resposta também eleva a prontidão.
-
----
-
-## Urgência  ·  *(Requisito 5)*
-
-**Prazo / janela:** [Quando e por quê]
-
-**Custo de esperar:** [O que acontece se não for agora]
-
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+> **Tensions to record** (they challenge consistency of thinking): High impact + low confidence? High urgency + low impact? High reach + thin per-user impact? Note the resolution of each tension — sharpening the answer also raises readiness.
 
 ---
 
-## Evidência e Documentos  ·  *(Requisito 6)*
+## Urgency  ·  *(Requirement 5)*
 
-> Anexos ou conversas anteriores que embasam a demanda. Fonte de pré-preenchimento por IA.
+**Deadline / window:** [When and why]
 
-| Documento / Conversa | Tipo | Relevância |
+**Cost of waiting:** [What happens if not now]
+
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
+
+---
+
+## Evidence and Documents  ·  *(Requirement 6)*
+
+> Attachments or prior conversations that support the demand. Source for AI pre-filling.
+
+| Document / Conversation | Type | Relevance |
 |---|---|---|
-| [Nome] | [PDF / call / thread] | [O que embasa] |
+| [Name] | [PDF / call / thread] | [What it supports] |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Stakeholders  ·  *(Requisito 8)*
+## Stakeholders  ·  *(Requirement 8)*
 
-| Stakeholder | Papel | Interesse | Influência |
+| Stakeholder | Role | Interest | Influence |
 |---|---|---|---|
-| [Nome] | [Sponsor, Usuário Final, Time Impactado, Tomador de Decisão] | [O que quer] | Alta / Média / Baixa |
+| [Name] | [Sponsor, End User, Impacted Team, Decision Maker] | [What they want] | High / Medium / Low |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
-
----
-
-## Premissas
-
-Condições assumidas como verdadeiras na captura. Se uma premissa se provar falsa, a demanda deve ser retriada. Premissas são uma **disposição válida** para requisitos sem resposta direta.
-
-1. [Premissa 1] — `a validar com:` __
-2. [Premissa 2] — `a validar com:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Constraints  ·  *(Requisito 7)*
+## Assumptions
 
-Condições que limitam o espaço de solução, a respeitar independentemente do que for construído.
+Conditions assumed to be true at capture. If an assumption proves false, the demand must be re-triaged. Assumptions are a **valid disposition** for requirements without a direct answer.
 
-| Constraint | Tipo | Detalhe |
+1. [Assumption 1] — `to validate with:` __
+2. [Assumption 2] — `to validate with:` __
+
+---
+
+## Constraints  ·  *(Requirement 7)*
+
+Conditions that limit the solution space and must be respected regardless of what is built.
+
+| Constraint | Type | Detail |
 |---|---|---|
-| [Constraint 1] | Tempo / Orçamento / Legal / Técnico / Escopo / Externo | [Detalhe] |
+| [Constraint 1] | Time / Budget / Legal / Technical / Scope / External | [Detail] |
 
-`Confiança:` __ · `Fonte:` __ · `Status:` __ · `Disposição:` __ · `Hint:` __
+`Confidence:` __ · `Source:` __ · `Status:` __ · `Disposition:` __ · `Hint:` __
 
 ---
 
-## Riscos Preliminares
+## Preliminary Risks
 
-Riscos identificados na captura — antes da avaliação técnica. Registro completo pertence ao Readiness Package.
+Risks identified at capture — before the technical assessment. Full registration belongs to the Readiness Package.
 
-| Risco | Categoria | Avaliação Inicial |
+| Risk | Category | Initial Assessment |
 |---|---|---|
-| [Risco 1] | Técnico / Negócio / Externo / Segurança / Prazo / Produto | [Alto / Médio / Baixo + nota] |
+| [Risk 1] | Technical / Business / External / Security / Deadline / Product | [High / Medium / Low + note] |
 
 ---
 
-## Limite de Escopo de Alto Nível
+## High-Level Scope Boundary
 
-**Dentro:** [O que claramente está dentro deste release.]
+**In:** [What is clearly within scope for this release.]
 
-**Fora:** [O que claramente está fora — exclusões explícitas para prevenir scope creep.]
+**Out:** [What is clearly out of scope — explicit exclusions to prevent scope creep.]
 
-**Adiado:** [O que pode ser tratado em fase futura — alimenta o backlog de oportunidades.]
-
----
-
-## Prioridade
-
-**Nível:** Crítico / Alto / Médio / Baixo
-
-**Motivo:** [Por que esse nível]
+**Deferred:** [What can be addressed in a future phase — feeds the opportunity backlog.]
 
 ---
 
-## Critérios de Sucesso
+## Priority
 
-Indicadores de alto nível que definem "concluído e valioso". Metas mensuráveis detalhadas pertencem ao Readiness Package; estes são os sinais no nível da captura. **Servem de baseline projetado** para o acompanhamento pós-handoff (ver [`metrics.md`](../metrics.md)).
+**Level:** Critical / High / Medium / Low
 
-| Critério | Tipo | Indicador | Valor projetado |
+**Rationale:** [Why this level]
+
+---
+
+## Success Criteria
+
+High-level indicators that define "done and valuable." Detailed measurable targets belong to the Readiness Package; these are the signals at the capture level. **They serve as the projected baseline** for post-handoff tracking (see [`metrics.md`](../metrics.md)).
+
+| Criterion | Type | Indicator | Projected value |
 |---|---|---|---|
-| [Critério 1] | Negócio / Operacional / Qualidade / UX / Segurança / Compliance / Processo | [Como observar] | [Meta — ex.: R$ 78k/ano] |
+| [Criterion 1] | Business / Operational / Quality / UX / Security / Compliance / Process | [How to observe] | [Target — e.g.: $78k/year] |

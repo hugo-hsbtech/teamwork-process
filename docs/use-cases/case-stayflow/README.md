@@ -1,113 +1,113 @@
-# Caso: StayFlow — Concierge & Settlement
+# Case: StayFlow — Concierge & Settlement
 
-## Cenário
+## Scenario
 
-**StayFlow** é uma plataforma B2B2C de hospedagem que opera como OTA (Online Travel Agency) / marketplace de reservas. O hóspede pesquisa, compara e reserva diretamente pela StayFlow; a StayFlow cobra o hóspede, **retém uma comissão (split)** e **repassa o restante ao hotel parceiro**. A rede já conta com dezenas de hotéis parceiros e cresce em volume de reservas mês a mês.
+**StayFlow** is a B2B2C lodging platform that operates as an OTA (Online Travel Agency) / booking marketplace. The guest searches, compares, and books directly through StayFlow; StayFlow charges the guest, **retains a commission (split)**, and **remits the remainder to the partner hotel**. The network already has dozens of partner hotels and grows in booking volume month over month.
 
-O modelo de negócio tem três partes com interesses distintos:
-- **Hóspedes**: querem reservar com facilidade, pagar com segurança e ser atendidos rapidamente quando algo dá errado.
-- **Hotéis parceiros**: querem receber o repasse correto, no prazo, com previsibilidade — e confiam na StayFlow para honrar o contrato financeiro.
-- **StayFlow**: precisa escalar o atendimento sem escalar custo, manter confiança dos hotéis e garantir integridade financeira dos repasses.
+The business model has three parties with distinct interests:
+- **Guests**: want to book easily, pay securely, and be served quickly when something goes wrong.
+- **Partner hotels**: want to receive the correct remittance, on time, with predictability — and they trust StayFlow to honor the financial contract.
+- **StayFlow**: needs to scale service without scaling cost, maintain hotel trust, and guarantee the financial integrity of remittances.
 
 ---
 
-## A demanda
+## The demand
 
-**Originada por:** Camila Rocha, Líder de CS/Operações  
-**Data da captura:** 2026-04-07  
-**Como chegou:** Reunião de planejamento de Q2 — a Camila apresentou duas dores operacionais que, na linguagem dela, vieram como uma solução: *"Precisamos de um chatbot que faça o primeiro atendimento ao hóspede e, quando necessário, transfira para um especialista humano; e precisamos automatizar o repasse do pagamento aos hotéis."*
+**Originated by:** Camila Rocha, CS/Operations Lead  
+**Capture date:** 2026-04-07  
+**How it arrived:** Q2 planning meeting — Camila presented two operational pain points which, in her framing, came packaged as a solution: *"We need a chatbot to handle first-contact guest support and, when necessary, transfer to a human specialist; and we need to automate payment remittances to hotels."*
 
-A dor real por trás:
+The real pain behind it:
 
-| Dor | Manifestação | Impacto |
+| Pain | Manifestation | Impact |
 |---|---|---|
-| **Atendimento caro e lento na 1ª camada** | 100% dos atendimentos são tratados por agentes humanos, mesmo os que se resolvem com informação básica (status de reserva, confirmação de check-in, política de cancelamento). | CSAT abaixo da meta (3,8/5), custo operacional em alta com crescimento de volume, SLA de primeira resposta furado em 34% dos tickets. |
-| **Repasse manual com risco financeiro e operacional** | O repasse aos hotéis é calculado manualmente em planilha, com verificação campo a campo do percentual de comissão por hotel. Transferências via TED manual. Sem reconciliação automática. | 3 incidentes de repasse com valor errado nos últimos 6 meses. Dois hotéis ameaçaram rescindir o contrato. 1 chargeback sem cobertura do hotel. Equipe financeira gasta ~18h/semana nessa operação. |
+| **Expensive, slow first-layer support** | 100% of support interactions are handled by human agents, even those resolved with basic information (booking status, check-in confirmation, cancellation policy). | CSAT below target (3.8/5), operational cost rising with volume growth, first-response SLA missed on 34% of tickets. |
+| **Manual remittance with financial and operational risk** | Hotel remittances are calculated manually in a spreadsheet, with field-by-field verification of the commission percentage per hotel. Manual wire transfers. No automatic reconciliation. | 3 incorrect-amount remittance incidents in the last 6 months. Two hotels threatened to terminate their contract. 1 chargeback with no hotel coverage. Finance team spends ~18 hrs/week on this operation. |
 
 ---
 
-## Por que esta demanda parece pequena — e não é
+## Why this demand looks small — and isn't
 
-A formulação original ("um chatbot + automatizar o repasse") sugere dois projetos pequenos, cada um de escopo limitado. A passagem pelo intake revelou o tamanho real:
+The original framing ("a chatbot + automate the remittance") suggests two small projects, each with limited scope. The passage through intake revealed the true size:
 
-**No atendimento:**
-- "Um chatbot" implica: definição da camada de IA (LLM, base de conhecimento, fallback), regras de escalonamento para humano (quando transferir? com qual contexto? para qual fila?), filas de atendimento, SLAs por tipo de ticket, gestão de contexto entre camadas, CSAT por canal.
-- A integração com o sistema de reservas é necessária para que o atendimento seja contextualizado (o hóspede quer saber o status da *sua* reserva, não um FAQ genérico).
+**On the support side:**
+- "A chatbot" implies: defining the AI layer (LLM, knowledge base, fallback), escalation-to-human rules (when to transfer? with what context? to which queue?), support queues, SLAs by ticket type, context management across layers, CSAT per channel.
+- Integration with the booking system is required so that support is contextualized (the guest wants to know the status of *their* booking, not a generic FAQ).
 
-**No repasse:**
-- "Automatizar o repasse" implica: modelo de split por hotel (percentuais diferentes por parceiro), cobrança do hóspede (PSP/gateway), retenção da comissão, repasse ao hotel (integração bancária ou PIX), idempotência (o repasse não pode acontecer duas vezes), reconciliação contábil, tratamento de falha de pagamento, tratamento de chargeback, reembolso parcial, ledger de transações.
-- O percentual de repasse incorreto tem impacto financeiro e jurídico direto — não é só um bug operacional.
+**On the remittance side:**
+- "Automate the remittance" implies: split model per hotel (different percentages per partner), guest billing (PSP/gateway), commission retention, hotel remittance (banking or PIX integration), idempotency (the remittance cannot happen twice), accounting reconciliation, payment failure handling, chargeback handling, partial refund, transaction ledger.
+- An incorrect remittance percentage has direct financial and legal impact — it is not just an operational bug.
 
-**A escalada arquitetural foi inevitável:** split de pagamento, idempotência, conciliação, PCI DSS, integração com PSP/gateway, ledger financeiro — tudo isso exigiu avaliação do CTO antes de o escopo poder ser congelado.
+**The architectural escalation was inevitable:** payment split, idempotency, reconciliation, PCI DSS, PSP/gateway integration, financial ledger — all of this required CTO evaluation before the scope could be frozen.
 
 ---
 
-## Documentos deste caso
+## Documents in this case
 
-| Artefato | ID | Arquivo | Responsável | Status |
+| Artifact | ID | File | Owner | Status |
 |---|---|---|---|---|
-| Documento do Submitter | — | [`00-submitter-brief-concierge-settlement.md`](./00-submitter-brief-concierge-settlement.md) | Camila Rocha (CS/Ops) | `gateReady = true` |
-| Intake Record | INT-2026-050 | [`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md) | Rafael Souza (PO) | Triado — Discovery |
+| Submitter Brief | — | [`00-submitter-brief-concierge-settlement.md`](./00-submitter-brief-concierge-settlement.md) | Camila Rocha (CS/Ops) | `gateReady = true` |
+| Intake Record | INT-2026-050 | [`01-intake-record-concierge-settlement.md`](./01-intake-record-concierge-settlement.md) | Rafael Souza (PO) | Triaged — Discovery |
 | Readiness Package | RP-2026-050 | [`02-readiness-package-concierge-settlement.md`](./02-readiness-package-concierge-settlement.md) | Rafael Souza (PO) | `freezeReady = true` |
-| Technical Assessment | TA-2026-050 | [`03-technical-assessment-concierge-settlement.md`](./03-technical-assessment-concierge-settlement.md) | Davi Lima (CTO) | Assinado |
-| PRD | PRD-2026-050 | [`04-prd-concierge-settlement.md`](./04-prd-concierge-settlement.md) | Rafael Souza (PO) + Davi Lima (CTO) | Entregue ao PM |
+| Technical Assessment | TA-2026-050 | [`03-technical-assessment-concierge-settlement.md`](./03-technical-assessment-concierge-settlement.md) | Davi Lima (CTO) | Signed |
+| PRD | PRD-2026-050 | [`04-prd-concierge-settlement.md`](./04-prd-concierge-settlement.md) | Rafael Souza (PO) + Davi Lima (CTO) | Delivered to PM |
 
 ---
 
-## Estado do processo
+## Process state
 
 ```text
-[INT-2026-050] Concierge & Settlement — "demanda pequena que explodiu"
+[INT-2026-050] Concierge & Settlement — "small demand that exploded"
 
-  Captura (Camila, 2026-04-07)
-    → Handoff ao PO (2026-04-08)
-    → Triagem (Rafael, 2026-04-09): Discovery requisitado
-        Incógnita 1: capacidade de split do PSP atual (Stripe Connect vs alternativa)
-        Incógnita 2: modelo de reconciliação contábil / requisitos fiscais do repasse
-        Incógnita 3: viabilidade de integração com sistema de reservas para contexto no atendimento
-    → Discovery (2026-04-09 → 2026-04-18, 7 dias úteis)
-        Resultado: PSP atual não suporta split nativo → migração ou multi-PSP necessária
-        Resultado: Contabilidade exige NF do repasse por hotel → escopo fiscal adicionado
-        Resultado: API do sistema de reservas tem endpoint de contexto disponível → viável
-    → Decisão revista: Product Ready (2026-04-18)
-    → Escalada ao CTO (2026-04-18): escalada arquitetural confirmada
-    → RP racionalizando em paralelo ao TA (2026-04-18 → 2026-04-25)
-    → TA assinado (Davi, 2026-04-25): Viável com ressalvas (migração de PSP no caminho crítico)
-    → RP congelado com TechAssessmentRef = Assinado (2026-04-25)
-    → PRD fusão (2026-04-26)
-    → Entregue ao PM (2026-04-28)
+  Capture (Camila, 2026-04-07)
+    → Handoff to PO (2026-04-08)
+    → Triage (Rafael, 2026-04-09): Discovery requested
+        Unknown 1: split capability of the current PSP (Stripe Connect vs. alternative)
+        Unknown 2: accounting reconciliation model / fiscal requirements for the remittance
+        Unknown 3: feasibility of booking system integration for context in support
+    → Discovery (2026-04-09 → 2026-04-18, 7 business days)
+        Result: current PSP does not support native split → migration or multi-PSP required
+        Result: Accounting requires an invoice for the remittance per hotel → fiscal scope added
+        Result: Booking system API has a context endpoint available → feasible
+    → Decision revised: Product Ready (2026-04-18)
+    → Escalation to CTO (2026-04-18): architectural escalation confirmed
+    → RP rationalizing in parallel with TA (2026-04-18 → 2026-04-25)
+    → TA signed (Davi, 2026-04-25): Feasible with caveats (PSP migration on critical path)
+    → RP Frozen with TechAssessmentRef = Signed (2026-04-25)
+    → PRD merge (2026-04-26)
+    → Delivered to PM (2026-04-28)
 ```
 
 ---
 
-## Jornada resumida das incógnitas do Discovery
+## Condensed journey of Discovery unknowns
 
-| Incógnita | Resolvida por | Resultado | Impacto no escopo |
+| Unknown | Resolved by | Result | Scope impact |
 |---|---|---|---|
-| Capacidade de split do PSP atual | Spike técnico — CTO + Financeiro | PSP atual (Stripe básico) não suporta split nativo; migração para Stripe Connect ou Adyen Marketplace necessária | Adicionado ao escopo: migração de PSP como pré-condição do Settlement Service |
-| Modelo de reconciliação e requisitos fiscais | Reunião com Contabilidade + Jurídico | Repasse a hotel parceiro exige emissão de NF de serviço (ou recibo fiscal, dependendo do regime do hotel); conciliação deve gerar relatório por hotel por período | Adicionado ao escopo: módulo de conciliação com exportação por hotel; NF adiada para Fase 2 (integração fiscal complexa) |
-| Viabilidade de integração com sistema de reservas | Revisão de API (CTO) | Endpoint `/reservations/{id}/context` disponível na API interna — dados de reserva, hóspede e status retornados em < 200ms | Adicionado ao escopo: Concierge Service consome API de contexto para personalizar respostas da IA |
+| Split capability of current PSP | Technical spike — CTO + Finance | Current PSP (basic Stripe) does not support native split; migration to Stripe Connect or Adyen Marketplace required | Added to scope: PSP migration as a precondition of the Settlement Service |
+| Reconciliation model and fiscal requirements | Meeting with Accounting + Legal | Remittance to a partner hotel requires issuance of a service invoice (or fiscal receipt, depending on the hotel's tax regime); reconciliation must generate a report per hotel per period | Added to scope: reconciliation module with per-hotel export; invoice deferred to Phase 2 (complex fiscal integration) |
+| Feasibility of booking system integration | API review (CTO) | Endpoint `/reservations/{id}/context` available on the internal API — booking, guest, and status data returned in < 200ms | Added to scope: Concierge Service consumes the context API to personalize AI responses |
 
 ---
 
-## O que a "demanda pequena" gerou — resumo pedagógico
+## What the "small demand" produced — pedagogical summary
 
-Esta demanda chegou com **2 pedidos** e gerou:
+This demand arrived with **2 requests** and generated:
 
-| Dimensão | Quantidade |
+| Dimension | Quantity |
 |---|---|
-| Artefatos formais produzidos | **5** (00 → 04) |
-| Incógnitas de Discovery investigadas | **3** |
-| Domínios de produto cobertos no RP | **2** (Concierge + Settlement) |
-| User Stories no RP | **12** |
-| Edge cases explícitos no RP | **18** |
-| Regras de negócio documentadas | **21** |
-| Riscos de produto/negócio no RP | **8** |
-| Riscos técnicos no TA | **9** |
-| ADRs arquiteturais no TA | **6** |
-| Integrações externas identificadas no TA | **4** (PSP, gateway bancário, LLM provider, API de reservas) |
-| Constraints rígidas (PCI DSS, idempotência, consistência financeira) | **5** |
-| Estimativa de esforço total (firme, do CTO) | **~67 dias de engenharia** |
-| Estimativa preliminar do Submitter | *"não faço ideia — talvez 2 semanas?"* |
+| Formal artifacts produced | **5** (00 → 04) |
+| Discovery unknowns investigated | **3** |
+| Product domains covered in the RP | **2** (Concierge + Settlement) |
+| User Stories in the RP | **12** |
+| Explicit edge cases in the RP | **18** |
+| Business rules documented | **21** |
+| Product/business risks in the RP | **8** |
+| Technical risks in the TA | **9** |
+| Architectural ADRs in the TA | **6** |
+| External integrations identified in the TA | **4** (PSP, banking gateway, LLM provider, booking API) |
+| Hard constraints (PCI DSS, idempotency, financial consistency) | **5** |
+| Total effort estimate (firm, from CTO) | **~67 engineering days** |
+| Submitter's preliminary estimate | *"I have no idea — maybe 2 weeks?"* |
 
-> **O ponto pedagógico:** a formulação original do Submitter subestimou o escopo em ~700%. O intake não criou complexidade — ele a revelou. Sem a camada de triagem, Discovery e TA, a engenharia teria iniciado desenvolvimento de um "chatbozinho e uma automação de planilha" e encontrado, na metade do sprint, PCI DSS, split de pagamento, idempotência, falhas de conciliação e ausência de suporte no PSP.
+> **The pedagogical point:** the Submitter's original framing underestimated the scope by ~700%. The intake did not create complexity — it revealed it. Without the triage, Discovery, and TA layer, engineering would have started building "a little chatbot and a spreadsheet automation" and found, halfway through the sprint, PCI DSS, payment split, idempotency, reconciliation failures, and missing PSP support.

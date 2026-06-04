@@ -1,284 +1,284 @@
-# Readiness Package — [Nome da Demanda]
+# Readiness Package — [Demand Name]
 
-> O Readiness Package (RP) é a **definição de pronto de produto** — o output de produto do PO, escrito **sozinho**. Ele é um documento completo e auto-suficiente: visão, problema, escopo, regras, user stories, NFRs, edge cases, critérios e métricas. **O RP não contém seções de autoria do CTO.** A avaliação técnica vive em um artefato separado — o [Technical Assessment](./03-technical-assessment.md) (CTO) — que o RP apenas **referencia** (ver "Referência ao Technical Assessment"). A fusão dos dois acontece no [PRD](./04-prd.md), e é o PRD — não o RP — que abre o downstream. Ver [`personas/02-po.md` §2 e §6.2](../personas/02-po.md).
+> The Readiness Package (RP) is the **product definition of ready** — the PO's product output, written **alone**. It is a complete, self-contained document: vision, problem, scope, rules, user stories, NFRs, edge cases, criteria, and metrics. **The RP does not contain sections authored by the CTO.** The technical assessment lives in a separate artifact — the [Technical Assessment](./03-technical-assessment.md) (CTO) — which the RP merely **references** (see "Technical Assessment Reference"). The merge of the two happens in the [PRD](./04-prd.md), and it is the PRD — not the RP — that opens the downstream. See [`personas/02-po.md` §2 and §6.2](../personas/02-po.md).
 >
-> O RP **herda a camada de confiança** do Registro de Intake vinculado ([`01-intake-record.md`](./01-intake-record.md)): o que entrou como premissa, incógnita de Discovery ou resposta delegada não desaparece na racionalização — é resolvido, ou carregado adiante explicitamente (ver "Prontidão herdada"). Os valores *projetados* (sobretudo as Métricas de Sucesso) carregam confiança e viram o baseline que [`../metrics.md`](../metrics.md) confronta com o realizado pós-entrega.
+> The RP **inherits the confidence layer** from the linked Intake Record ([`01-intake-record.md`](./01-intake-record.md)): what entered as an assumption, Discovery unknown, or delegated answer does not disappear in rationalization — it is resolved, or carried forward explicitly (see "Inherited readiness"). The *projected* values (especially the Success Metrics) carry confidence and become the baseline that [`../metrics.md`](../metrics.md) compares against post-delivery actuals.
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Pacote** | RP-AAAA-NNN |
-| **Versão** | v1 |
-| **Intake vinculado** | INT-AAAA-NNN |
-| **Responsável** | [Nome] (PO) |
-| **Natureza da demanda** | Greenfield / Brownfield / Híbrido (herdado do Intake) |
-| **Base de conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · Parcial · A criar · N/A (greenfield) |
-| **Escalada ao CTO** | Não necessária — sem impacto arquitetural / Sim — Technical Assessment TA-AAAA-NNN |
-| **Status** | Rascunho |
-| **Data de congelamento (freeze)** | — |
+| **Package ID** | RP-YYYY-NNN |
+| **Version** | v1 |
+| **Linked Intake** | INT-YYYY-NNN |
+| **Owner** | [Name] (PO) |
+| **Demand nature** | Greenfield / Brownfield / Hybrid (inherited from Intake) |
+| **Knowledge base** | [`tech-landscape-[system].md`](./tech-landscape.md) · Partial · To create · N/A (greenfield) |
+| **CTO escalation** | Not required — no architectural impact / Yes — Technical Assessment TA-YYYY-NNN |
+| **Status** | Draft |
+| **Freeze date** | — |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | AAAA-MM-DD | [Nome] (PO) | Rascunho | Submissão inicial. |
+| v1 | YYYY-MM-DD | [Name] (PO) | Draft | Initial submission. |
 
 ---
 
-## Prontidão herdada e dispositions em aberto
+## Inherited readiness and open dispositions
 
-> Resumo do que o Intake entregou e do que continua *soft* na entrada da execução. Premissas, incógnitas e respostas delegadas que sobreviveram à racionalização precisam estar visíveis — não enterradas nas seções. Ver [`../personas/01-submitter.md` §6](../personas/01-submitter.md).
+> Summary of what the Intake delivered and what remains *soft* at the entry to execution. Assumptions, unknowns, and delegated answers that survived rationalization must be visible — not buried in the sections. See [`../personas/01-submitter.md` §6](../personas/01-submitter.md).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Readiness Score no handoff do Intake** | __ % |
-| **Premissas ainda a validar** | [lista ou —] |
-| **Incógnitas de Discovery** | [resolvidas / ainda abertas — ] |
-| **Requisitos delegados (com dono)** | [lista ou —] |
+| **Readiness Score at Intake handoff** | __ % |
+| **Assumptions still to validate** | [list or —] |
+| **Discovery unknowns** | [resolved / still open — ] |
+| **Delegated requirements (with owner)** | [list or —] |
 
-> Se uma premissa carregada aqui se provar falsa durante a execução, a demanda deve ser reavaliada — o mesmo gatilho de retriagem do intake se aplica downstream.
-
----
-
-## Seção 1 — Resumo Executivo  ·  *(bloqueia freeze)*
-
-> 2–4 parágrafos curtos. Qual é o problema, o que será construído e qual é o resultado esperado de negócio.
-
-[Resumo aqui]
+> If an assumption carried here proves false during execution, the demand must be reassessed — the same re-triage trigger from the intake applies downstream.
 
 ---
 
-## Seção 2 — Contexto e Problema (a dor, não a solução)  ·  *(bloqueia freeze)*
+## Section 1 — Executive Summary  ·  *(blocks freeze)*
 
-> **Regra de ouro:** problema antes da solução. Se esta seção descreve uma solução em vez do problema, ela não está satisfeita — o mesmo princípio que a Submitter aplica ao requisito 1 dela.
+> 2–4 short paragraphs. What is the problem, what will be built, and what is the expected business outcome.
 
-### Cenário Atual
-
-[Como o sistema/produto se comporta hoje]
-
-### Limitações
-
-- [Limitação 1]
-- [Limitação 2]
-
-### Dor do Cliente
-
-[Quem sente a dor, como é vivida no dia a dia]
-
-### Impacto de Negócio
-
-- [Impacto quantificado — receita, retenção, eficiência, etc.]
+[Summary here]
 
 ---
 
-## Seção 3 — Objetivos e Resultado Esperado  ·  *(bloqueia freeze)*
+## Section 2 — Context and Problem (the pain, not the solution)  ·  *(blocks freeze)*
 
-Objetivos numerados que esta entrega deve alcançar. Cada objetivo deve ser observável após o release.
+> **Golden rule:** problem before solution. If this section describes a solution instead of the problem, it is not satisfied — the same principle the Submitter applies to their requirement 1.
 
-1. [Objetivo 1]
-2. [Objetivo 2]
-3. [Objetivo 3]
+### Current State
+
+[How the system/product behaves today]
+
+### Limitations
+
+- [Limitation 1]
+- [Limitation 2]
+
+### Customer Pain
+
+[Who feels the pain, how it is experienced day to day]
+
+### Business Impact
+
+- [Quantified impact — revenue, retention, efficiency, etc.]
 
 ---
 
-## Seção 4 — Personas Impactadas / Jobs-to-be-done  ·  *(bloqueia freeze)*
+## Section 3 — Objectives and Expected Outcome  ·  *(blocks freeze)*
 
-| Persona | Job-to-be-done | Impacto |
+Numbered objectives this delivery must achieve. Each objective must be observable after the release.
+
+1. [Objective 1]
+2. [Objective 2]
+3. [Objective 3]
+
+---
+
+## Section 4 — Impacted Personas / Jobs-to-be-done  ·  *(blocks freeze)*
+
+| Persona | Job-to-be-done | Impact |
 |---|---|---|
-| [Persona 1] | [O que está tentando realizar] | [Como é impactado] |
+| [Persona 1] | [What they are trying to accomplish] | [How they are impacted] |
 
 ---
 
-## Seção 5 — Escopo Incluído e Excluído  ·  *(bloqueia freeze)*
+## Section 5 — Included and Excluded Scope  ·  *(blocks freeze)*
 
-> Protege o downstream de scope creep.
+> Protects the downstream from scope creep.
 
-### Incluído
+### Included
 
 - [Item 1]
 - [Item 2]
 
-### Excluído
+### Excluded
 
-- [Item 1 — com motivo, se útil]
+- [Item 1 — with rationale, if useful]
 - [Item 2]
 
-### Adiado (fases futuras)
+### Deferred (future phases)
 
-- [Item 1 — alimenta o Roadmap, Seção 14]
+- [Item 1 — feeds the Roadmap, Section 14]
 
 ---
 
-## Seção 6 — Regras de Negócio e Fluxos  ·  *(bloqueia freeze)*
+## Section 6 — Business Rules and Flows  ·  *(blocks freeze)*
 
-Descreva as regras, validações e transições de estado que governam esta funcionalidade. Use subseções por bloco de regras quando útil.
+Describe the rules, validations, and state transitions that govern this feature. Use subsections per rule block when useful.
 
-### [Bloco de Regras 1]
+### [Rule Block 1]
 
-1. [Regra 1]
-2. [Regra 2]
+1. [Rule 1]
+2. [Rule 2]
 
-### Fluxo de Transição de Estado
+### State Transition Flow
 
 ```text
-[Diagrama textual ou referência a diagrama]
+[Text diagram or reference to diagram]
 ```
 
 ---
 
-## Seção 6.5 — Jornada(s) do Usuário (ponta-a-ponta)  ·  *(bloqueia freeze)*
+## Section 6.5 — User Journey(s) (end-to-end)  ·  *(blocks freeze)*
 
-> **A peça que faltava entre "o que" e "as histórias".** Uma definição de produto precisa de uma noção do que o usuário faz **de ponta a ponta** — o caminho completo, não fragmentos. As User Stories (Seção 7) **derivam** dos passos desta jornada; sem ela, as histórias flutuam soltas e o downstream (humano ou agente de IA) não enxerga o fluxo que precisa implementar. É território do **PO** — produto, não UX detalhado (os fluxos de tela finos ficam downstream). Padrão: *user journey map* (a experiência) e, quando há bastidor relevante, *service blueprint*.
+> **The missing piece between "what" and "the stories."** A product definition needs a sense of what the user does **end to end** — the complete path, not fragments. User Stories (Section 7) **derive** from the steps of this journey; without it, stories float loose and the downstream (human or AI agent) cannot see the flow it needs to implement. This is **PO** territory — product, not detailed UX (fine-grained screen flows remain downstream). Standard: *user journey map* (the experience) and, when there is relevant backstage, *service blueprint*.
 >
-> **Regra de compressão:** melhoria pequena = uma jornada de 3–5 passos do happy path, sem service blueprint. O contrato é teto, não piso.
+> **Compression rule:** small improvement = a 3–5 step happy-path journey, no service blueprint. The contract is a ceiling, not a floor.
 
-### Jornada principal (happy path) — [Nome da jornada]
+### Main journey (happy path) — [Journey name]
 
-> Os passos que o usuário percorre para alcançar o resultado de valor. Cada passo gera (ou valida) uma User Story na Seção 7.
+> The steps the user takes to reach the value outcome. Each step generates (or validates) a User Story in Section 7.
 
-| # | Gatilho / Ação do usuário | Resultado esperado | Touchpoint / Tela | Pré-condição |
+| # | Trigger / User action | Expected outcome | Touchpoint / Screen | Precondition |
 |---|---|---|---|---|
-| 1 | [O que o usuário faz] | [O que o sistema entrega/responde] | [Onde acontece] | [O que precisa ser verdade antes] |
+| 1 | [What the user does] | [What the system delivers/responds] | [Where it happens] | [What must be true before] |
 | 2 | | | | |
 | 3 | | | | |
 
-### Caminhos alternativos e de saída
+### Alternative and exit paths
 
-> Desvios, cancelamentos, estados vazios. Ligam-se aos Edge Cases (Seção 9).
+> Deviations, cancellations, empty states. Linked to Edge Cases (Section 9).
 
-- **[Caminho alternativo]:** [quando ocorre → para onde leva]
-- **[Saída / cancelamento]:** [o que acontece com o estado]
+- **[Alternative path]:** [when it occurs → where it leads]
+- **[Exit / cancellation]:** [what happens to the state]
 
-### Service Blueprint *(opcional — só quando há bastidor/ops/integração humana relevante)*
+### Service Blueprint *(optional — only when there is relevant backstage/ops/human integration)*
 
-> Expõe o que sustenta a jornada "por trás do palco". Pular quando a jornada é puramente self-service.
+> Exposes what sustains the journey "behind the scenes." Skip when the journey is purely self-service.
 
-| Camada | [Passo 1] | [Passo 2] | [Passo 3] |
+| Layer | [Step 1] | [Step 2] | [Step 3] |
 |---|---|---|---|
-| **Frontstage** (o que o usuário vê) | | | |
-| **Backstage** (ações internas/time) | | | |
-| **Sistemas de apoio** (serviços, dados, terceiros) | | | |
+| **Frontstage** (what the user sees) | | | |
+| **Backstage** (internal actions/team) | | | |
+| **Supporting systems** (services, data, third parties) | | | |
 
 ---
 
-## Seção 7 — User Stories + Critérios de Aceite  ·  *(bloqueia freeze)*
+## Section 7 — User Stories + Acceptance Criteria  ·  *(blocks freeze)*
 
-> Uma história por bloco de valor. Critério de aceite **verificável por não-dev**, no formato Given/When/Then, com limites específicos (não "deve funcionar bem"). É o contrato de comportamento que o QA valida.
+> One story per value block. Acceptance criterion **verifiable by a non-dev**, in Given/When/Then format, with specific limits (not "should work well"). It is the behavior contract that QA validates.
 
-### ST-001 — [Nome da História]
+### ST-001 — [Story Name]
 
-**Como** [persona],
-**quero** [ação],
-**para que** [benefício].
+**As** [persona],
+**I want** [action],
+**so that** [benefit].
 
-**Critérios de Aceite:**
+**Acceptance Criteria:**
 
-- [ ] **Dado** [contexto], **quando** [ação], **então** [resultado observável e específico]
-- [ ] **Dado** [contexto], **quando** [ação], **então** [resultado observável e específico]
+- [ ] **Given** [context], **when** [action], **then** [observable and specific result]
+- [ ] **Given** [context], **when** [action], **then** [observable and specific result]
 
 ---
 
-## Seção 8 — Requisitos Não-Funcionais (NFRs)  ·  *(bloqueia freeze)*
+## Section 8 — Non-Functional Requirements (NFRs)  ·  *(blocks freeze)*
 
-> A lacuna nº 1 que causa retrabalho. Preencher apenas as dimensões aplicáveis (checklist tipo ISO/IEC 25010) — não forçar as irrelevantes. Aqui o PO descreve o **requisito de qualidade**; a viabilidade e o *como* são do Technical Assessment.
+> The #1 gap that causes rework. Fill in only the applicable dimensions (ISO/IEC 25010-style checklist) — do not force irrelevant ones. Here the PO describes the **quality requirement**; feasibility and the *how* belong to the Technical Assessment.
 
-| Dimensão | Requisito | Como será verificado |
+| Dimension | Requirement | How it will be verified |
 |---|---|---|
-| **Performance / Eficiência** | [ex.: revelação de votos propaga em < 500ms para todos na sala] | [Medição] |
-| **Confiabilidade** | [ex.: disponibilidade alvo, comportamento sob falha] | |
-| **Segurança** | [ex.: voto oculto aplicado server-side, sem confiança no cliente] | |
-| **Usabilidade** | [ex.: fluxo concluído sem treinamento] | |
-| **Compatibilidade** | [ex.: navegadores, dispositivos, integrações] | |
-| **Manutenibilidade** | [ex.: feature flag, observabilidade mínima] | |
+| **Performance / Efficiency** | [e.g.: vote reveal propagates in < 500ms for all in the room] | [Measurement] |
+| **Reliability** | [e.g.: target availability, behavior under failure] | |
+| **Security** | [e.g.: hidden vote enforced server-side, no client trust] | |
+| **Usability** | [e.g.: flow completed without training] | |
+| **Compatibility** | [e.g.: browsers, devices, integrations] | |
+| **Maintainability** | [e.g.: feature flag, minimum observability] | |
 
 ---
 
-## Seção 9 — Edge Cases e Modos de Falha  ·  *(bloqueia freeze)*
+## Section 9 — Edge Cases and Failure Modes  ·  *(blocks freeze)*
 
-> Estados de erro, timeouts, permissões, concorrência. Para features de IA: comportamento do modelo e baixa-confiança. Primeira classe — não rodapé.
+> Error states, timeouts, permissions, concurrency. For AI features: model behavior and low confidence. First class — not a footnote.
 
-- **[Edge case 1]**: [comportamento esperado]
-- **[Modo de falha 1]**: [o que acontece, como o sistema degrada]
-- **[Caso de concorrência]**: [resolução esperada]
+- **[Edge case 1]**: [expected behavior]
+- **[Failure mode 1]**: [what happens, how the system degrades]
+- **[Concurrency case]**: [expected resolution]
 
 ---
 
-## Seção 10 — Métricas de Sucesso (primária · secundária · guardrail)  ·  *(bloqueia freeze)*
+## Section 10 — Success Metrics (primary · secondary · guardrail)  ·  *(blocks freeze)*
 
-> Estes são os valores **projetados** — o baseline que [`../metrics.md`](../metrics.md) (camada 3, projetado vs. realizado) confronta com o medido pós-rollout. Inclua indicadores *leading* e *lagging* e ao menos um **guardrail** (a métrica que não pode piorar). Cada meta carrega a confiança da projeção.
+> These are the **projected** values — the baseline that [`../metrics.md`](../metrics.md) (layer 3, projected vs. actual) compares against post-rollout measurements. Include *leading* and *lagging* indicators and at least one **guardrail** (the metric that must not worsen). Each target carries projection confidence.
 
-| Tipo | Métrica | Meta (projetada) | Janela de medição | Medição (quem/como) | Confiança |
+| Type | Metric | Target (projected) | Measurement window | Measurement (who/how) | Confidence |
 |---|---|---|---|---|---|
-| **Primária** | [Métrica] | [Meta] | [ex.: 30 dias pós-release] | [Quem mede e como] | __ |
-| **Secundária** | [Métrica] | [Meta] | | | __ |
-| **Guardrail** | [Métrica que não pode piorar] | [Limite] | | | __ |
+| **Primary** | [Metric] | [Target] | [e.g.: 30 days post-release] | [Who measures and how] | __ |
+| **Secondary** | [Metric] | [Target] | | | __ |
+| **Guardrail** | [Metric that must not worsen] | [Limit] | | | __ |
 
 ---
 
-## Seção 11 — Critérios de Sucesso e Aceite (do release)  ·  *(bloqueia freeze)*
+## Section 11 — Success and Acceptance Criteria (for the release)  ·  *(blocks freeze)*
 
-Indicadores de alto nível que definem "concluído e valioso" para **este release** — distintos das métricas contínuas da Seção 10.
+High-level indicators that define "done and valuable" for **this release** — distinct from the ongoing metrics in Section 10.
 
-| Critério | Tipo | Indicador | Valor alvo |
+| Criterion | Type | Indicator | Target value |
 |---|---|---|---|
-| [Critério 1] | Negócio / Operacional / Qualidade / UX / Segurança / Compliance | [Como observar] | [Meta] |
+| [Criterion 1] | Business / Operational / Quality / UX / Security / Compliance | [How to observe] | [Target] |
 
 ---
 
-## Seção 12 — Riscos e Dependências (de produto e negócio)  ·  *(bloqueia freeze)*
+## Section 12 — Risks and Dependencies (product and business)  ·  *(blocks freeze)*
 
-> Riscos **técnicos** migram para o Technical Assessment do CTO. Aqui ficam os riscos de produto, negócio, adoção, externos e de compliance.
+> **Technical** risks migrate to the CTO's Technical Assessment. Product, business, adoption, external, and compliance risks stay here.
 
-| Risco | Tipo | Probabilidade | Impacto | Mitigação |
+| Risk | Type | Probability | Impact | Mitigation |
 |---|---|---|---|---|
-| [Risco 1] | Negócio / Produto / Adoção / Externo / Compliance | Alta / Média / Baixa | Alto / Médio / Baixo | [Mitigação] |
+| [Risk 1] | Business / Product / Adoption / External / Compliance | High / Medium / Low | High / Medium / Low | [Mitigation] |
 
-**Dependências (de produto/negócio):**
-- [Dependência 1]
-- [Dependência 2]
+**Dependencies (product/business):**
+- [Dependency 1]
+- [Dependency 2]
 
 ---
 
-## Seção 13 — Avaliação Preliminar de Esforço e Custo
+## Section 13 — Preliminary Effort and Cost Assessment
 
-> Somente uso interno. **Preliminar** — o chute do PO para sustentar sequenciamento. O número **firme** vem do CTO no Technical Assessment e, depois, do Tech Lead no Tech Backlog. Não é compromisso contratual nem material para cliente.
+> Internal use only. **Preliminary** — the PO's rough estimate to support sequencing. The **firm** number comes from the CTO in the Technical Assessment and, later, from the Tech Lead in the Tech Backlog. Not a contractual commitment or client-facing material.
 
-| Área | Estimativa preliminar | Confiança |
+| Area | Preliminary estimate | Confidence |
 |---|---|---|
-| [Backend / Frontend / QA] | [X dias] | __ |
-| **Total preliminar** | **X dias** | |
+| [Backend / Frontend / QA] | [X days] | __ |
+| **Preliminary total** | **X days** | |
 
-**Sinais de custo a confirmar pelo CTO:** [infra nova, terceiros pagos, opex recorrente — ou "nenhum aparente"]
+**Cost signals to confirm with the CTO:** [new infra, paid third parties, recurring opex — or "none apparent"]
 
 ---
 
-## Seção 14 — Roadmap Sugerido
+## Section 14 — Suggested Roadmap
 
-### MVP (este release)
+### MVP (this release)
 
 - [Item 1]
 - [Item 2]
 
-### Fase 2 (backlog futuro)
+### Phase 2 (future backlog)
 
 - [Item 1]
 
-### Fase 3 (backlog futuro)
+### Phase 3 (future backlog)
 
 - [Item 1]
 
 ---
 
-## Referência ao Technical Assessment  ·  *(bloqueia freeze se requisitado)*
+## Technical Assessment Reference  ·  *(blocks freeze if requested)*
 
-> Esta é a **ponte** (`TechAssessmentRef`), não conteúdo. O RP referencia o veredito do CTO — não o absorve. A fusão acontece no [PRD](./04-prd.md). Ver [`personas/02-po.md` §5 e §10](../personas/02-po.md).
+> This is the **bridge** (`TechAssessmentRef`), not content. The RP references the CTO's verdict — it does not absorb it. The merge happens in the [PRD](./04-prd.md). See [`personas/02-po.md` §5 and §10](../personas/02-po.md).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Status** | Não requisitado / Requisitado / Em andamento / Assinado / Vetado |
-| **Veredito de viabilidade** | Viável / Viável com ressalvas / Inviável como escopado / — |
-| **Technical Assessment vinculado** | TA-AAAA-NNN vX / N/A |
-| **Constraints rígidas que afetam o escopo** | [resumo ou —] |
+| **Status** | Not requested / Requested / In progress / Signed off / Vetoed |
+| **Feasibility verdict** | Feasible / Feasible with caveats / Infeasible as scoped / — |
+| **Linked Technical Assessment** | TA-YYYY-NNN vX / N/A |
+| **Hard constraints affecting scope** | [summary or —] |
 
-> **Gate de congelamento (freeze):** o RP congela quando toda seção `bloqueia freeze` está resolvida **e**, se o CTO foi requisitado, `Status = Assinado`. Não congela com assessment pendente quando foi requisitado. Para uma melhoria pequena, o RP comprime para a espinha (Problema → Métrica-objetivo → Escopo in/out → 3–5 critérios de aceite → NFRs em risco) — o contrato é teto, não piso.
+> **Freeze gate:** the RP freezes when every `blocks freeze` section is resolved **and**, if the CTO was requested, `Status = Signed off`. It does not freeze with a pending assessment when one was requested. For a small improvement, the RP compresses to the spine (Problem → Target metric → Scope in/out → 3–5 acceptance criteria → NFRs at risk) — the contract is a ceiling, not a floor.

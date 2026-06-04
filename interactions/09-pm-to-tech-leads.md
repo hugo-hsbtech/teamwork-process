@@ -1,63 +1,63 @@
-# Interação 09 — PM → Tech Leads (Handoff do Plano de Execução)
+# Interaction 09 — PM → Tech Leads (Execution Plan Handoff)
 
-**Direção:** PM inicia. Tech Leads recebem.
-**Camada:** Dentro do Downstream
-
----
-
-## Gatilho
-
-O Plano de Execução está completo e o PM verificou que a capacidade é suficiente para começar.
+**Direction:** PM initiates. Tech Leads receive.
+**Layer:** Within the Downstream
 
 ---
 
-## O que o PM Deve Fornecer
+## Trigger
 
-- Plano de Execução completo: marcos, estrutura de sprint, mapa de dependências, gatilhos de escalada
-- PRD (repassado — Tech Leads precisam do contexto completo de produto e técnico: RP + Technical Assessment)
-- Perguntas específicas para os Tech Leads responderem antes do breakdown começar (se houver)
-- Prazo de dependências externas: quaisquer ações necessárias de fora do time (registros de clientes, procurement, provisionamento de infraestrutura pelo CTO)
+The Execution Plan is complete and the PM has verified that capacity is sufficient to begin.
 
 ---
 
-## O que os Tech Leads Produzem
+## What the PM Must Provide
 
-- Confirmação de que têm contexto suficiente para iniciar o breakdown técnico
-- Product Backlog: épicos, histórias e tasks com critérios de aceite (escritos e estimados pelos Tech Leads — derivados das user stories de produto do PRD; é aqui que se atinge a **Definition of Ready**)
-- Tech Backlog: ADRs, breakdown de tarefas, estimativas refinadas, Definição de Pronto, estratégia de rollout
-- Escalada ao PM se qualquer item de escopo for tecnicamente impossível ou requerer uma decisão
+- Complete Execution Plan: milestones, sprint structure, dependency map, escalation triggers
+- PRD (passed along — Tech Leads need the full product and technical context: RP + Technical Assessment)
+- Specific questions for the Tech Leads to answer before the breakdown begins (if any)
+- External dependency deadlines: any actions required from outside the team (customer records, procurement, infrastructure provisioning by the CTO)
 
 ---
 
-## Transferência de Ownership
+## What the Tech Leads Produce
 
-**Do PM:** O planejamento de execução está completo e transferido. O PM permanece responsável pelos marcos e gatilhos de escalada, mas a execução técnica no dia a dia está agora nas mãos dos Tech Leads.
-**Para os Tech Leads:** Detêm o breakdown técnico — ADRs, definição de tarefas, refinamento de esforço, o Product Backlog e o Tech Backlog. Escrevem e estimam épicos, histórias e tasks a partir das user stories de produto do PRD.
-**Artefato transferido:** Plano de Execução + PRD completo.
+- Confirmation that they have sufficient context to start the technical breakdown
+- Product Backlog: epics, stories, and tasks with acceptance criteria (written and estimated by the Tech Leads — derived from the product user stories in the PRD; this is where the **Definition of Ready** is reached)
+- Tech Backlog: ADRs, task breakdown, refined estimates, Definition of Done, rollout strategy
+- Escalation to the PM if any scope item is technically infeasible or requires a decision
+
+---
+
+## Ownership Transfer
+
+**From the PM:** Execution planning is complete and transferred. The PM remains responsible for milestones and escalation triggers, but day-to-day technical execution is now in the Tech Leads' hands.
+**To the Tech Leads:** Own the technical breakdown — ADRs, task definition, effort refinement, the Product Backlog, and the Tech Backlog. They write and estimate epics, stories, and tasks from the product user stories in the PRD.
+**Artifact transferred:** Execution Plan + complete PRD.
 
 ---
 
 ## Gate
 
-Os Tech Leads não começam o breakdown antes de confirmar que têm contexto suficiente. Se o PRD estiver faltando detalhe técnico de que precisam, eles apresentam ao PM — não trabalham silenciosamente em torno disso.
+Tech Leads do not start the breakdown before confirming they have sufficient context. If the PRD is missing technical detail they need, they surface it to the PM — they do not silently work around it.
 
 ---
 
-## Caminho de Falha
+## Failure Path
 
-Se os Tech Leads identificarem um item de escopo tecnicamente inviável ou que requer uma decisão fora de sua autoridade, devolvem ao PM com uma descrição escrita. O PM escala ao PO. O PO revisa o escopo ou escala ao CTO.
-
----
-
-## O que o PM NÃO Deve Fazer
-
-- Fazer o handoff sem passar o PRD completo
-- Definir um prazo para o breakdown antes que os Tech Leads tenham confirmado contexto suficiente
-- Absorver relatórios de inviabilidade de escopo sem escalar ao PO
+If Tech Leads identify a scope item that is technically infeasible or requires a decision outside their authority, they return it to the PM with a written description. The PM escalates to the PO. The PO revises scope or escalates to the CTO.
 
 ---
 
-## Sequência
+## What the PM Must NOT Do
+
+- Hand off without passing the complete PRD
+- Set a deadline for the breakdown before Tech Leads have confirmed sufficient context
+- Absorb feasibility reports without escalating to the PO
+
+---
+
+## Sequence
 
 ```mermaid
 sequenceDiagram
@@ -65,25 +65,25 @@ sequenceDiagram
     actor TL as Tech Leads
     actor PO as PO
 
-    PM->>TL: Plano de Execução + PRD
-    TL->>TL: Revisão de contexto
+    PM->>TL: Execution Plan + PRD
+    TL->>TL: Context review
 
-    alt Contexto técnico insuficiente
-        TL-->>PM: Gaps específicos listados
-        PM->>PO: Repassa os gaps
-        PO-->>PM: Preenche gaps ou abre escalada ao CTO
-        PM->>TL: Contexto atualizado
+    alt Insufficient technical context
+        TL-->>PM: Specific gaps listed
+        PM->>PO: Forwards gaps
+        PO-->>PM: Fills gaps or opens escalation to CTO
+        PM->>TL: Updated context
     end
 
-    TL-->>PM: Contexto confirmado — breakdown inicia
-    TL->>TL: Escreve e estima Product Backlog + Tech Backlog (atinge a DoR)
+    TL-->>PM: Context confirmed — breakdown starts
+    TL->>TL: Writes and estimates Product Backlog + Tech Backlog (reaches DoR)
 
-    alt Item de escopo tecnicamente inviável
-        TL-->>PM: Relatório de inviabilidade escrito
-        PM->>PO: Decisão de escopo necessária
-        PO-->>PM: Escopo revisado
-        PM->>TL: Atualização de escopo
+    alt Scope item technically infeasible
+        TL-->>PM: Written infeasibility report
+        PM->>PO: Scope decision required
+        PO-->>PM: Revised scope
+        PM->>TL: Scope update
     end
 
-    TL-->>PM: Tech Backlog completo — pronto para engenheiros
+    TL-->>PM: Tech Backlog complete — ready for engineers
 ```

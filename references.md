@@ -1,75 +1,75 @@
-# Referências e Frameworks de Apoio
+# References and Supporting Frameworks
 
-> O processo descrito neste repositório não foi inventado do zero. Cada decisão estrutural tem ancoragem em algum framework já testado em produto e engenharia. Este documento faz o mapeamento explícito para qualquer pessoa que queira entender de onde vem cada peça.
-
----
-
-## Sumário
-
-O processo opera na interseção de:
-
-1. Stage-Gate (Cooper) — governança de portões entre fases
-2. Dual-Track Development (Patton, Cagan) — descoberta e entrega em paralelo
-3. Continuous Discovery (Torres) — validação contínua de oportunidades
-4. Lean Startup (Ries) — aprendizado validado e Build-Measure-Learn
-5. Lean Software Development (Poppendieck) — eliminação de desperdício
-6. Theory of Constraints (Goldratt) — gestão de gargalos
-7. Principles of Product Development Flow (Reinertsen) — teoria de filas aplicada
-8. Team Topologies (Skelton & Pais) — desenho organizacional por fluxo
-9. Product Operations (Perri & Tilles, Cagan) — operações de produto
-
-As seções abaixo descrevem como cada um aparece no modelo deste repositório.
+> The process described in this repository was not invented from scratch. Every structural decision is grounded in a framework that has already been tested in product and engineering contexts. This document makes those mappings explicit for anyone who wants to understand where each piece comes from.
 
 ---
 
-## Mapeamento Consolidado
+## Summary
 
-| Elemento do Processo | Framework | Autor(es) de Referência | Obra Canônica |
+The process operates at the intersection of:
+
+1. Stage-Gate (Cooper) — gate governance between phases
+2. Dual-Track Development (Patton, Cagan) — discovery and delivery in parallel
+3. Continuous Discovery (Torres) — continuous validation of opportunities
+4. Lean Startup (Ries) — validated learning and Build-Measure-Learn
+5. Lean Software Development (Poppendieck) — waste elimination
+6. Theory of Constraints (Goldratt) — bottleneck management
+7. Principles of Product Development Flow (Reinertsen) — applied queue theory
+8. Team Topologies (Skelton & Pais) — flow-based organizational design
+9. Product Operations (Perri & Tilles, Cagan) — product operations
+
+The sections below describe how each one appears in this repository's model.
+
+---
+
+## Consolidated Mapping
+
+| Process Element | Framework | Reference Author(s) | Canonical Work |
 |---|---|---|---|
 | Upstream vs. Downstream | Dual-Track Agile / Continuous Discovery & Delivery | Jeff Patton, Marty Cagan, Teresa Torres | *INSPIRED* (Cagan, 2008/2017); *Continuous Discovery Habits* (Torres, 2021) |
-| Intake Layer com gates | Stage-Gate System | Robert G. Cooper | *Winning at New Products* (Cooper, 1986/2017) |
+| Intake Layer with gates | Stage-Gate System | Robert G. Cooper | *Winning at New Products* (Cooper, 1986/2017) |
 | Readiness Package | Stage-Gate deliverables + Definition of Ready | Cooper; Schwaber & Sutherland | Cooper (1986); *The Scrum Guide* |
-| Seções do Readiness Package (gate `freezeReady`) | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
+| Readiness Package sections (gate `freezeReady`) | Validated Learning + Opportunity Solution Tree | Eric Ries, Teresa Torres | *The Lean Startup* (2011); *Continuous Discovery Habits* (2021) |
 | Feedback Loop | Build-Measure-Learn / PDCA | Eric Ries, W. Edwards Deming | *The Lean Startup* (2011); *Out of the Crisis* (Deming, 1986) |
-| CTO/PO como gargalo gerenciado | Theory of Constraints | Eliyahu M. Goldratt | *The Goal* (1984) |
-| Estados explícitos da demanda | Kanban — "make process policies explicit" | David J. Anderson | *Kanban* (Anderson, 2010) |
-| WIP / fila / lote pequeno | Principles of Product Development Flow | Donald G. Reinertsen | *The Principles of Product Development Flow* (2009) |
-| Papéis (stream-aligned + enabling) | Team Topologies | Matthew Skelton & Manuel Pais | *Team Topologies* (2019) |
-| "Problema antes da solução" | Lean Software Development — delay commitment | Mary & Tom Poppendieck | *Lean Software Development* (2003) |
-| Matriz Probabilidade x Impacto | PMBOK / ISO 31000 | Project Management Institute / ISO | *PMBOK Guide* (PMI); *ISO 31000:2018* |
-| Critérios de Sucesso explícitos | Outcome-based Product Management | Melissa Perri, Marty Cagan | *Escaping the Build Trap* (Perri, 2018) |
-| Intake / Triagem / Product Ops | Product Operations | Melissa Perri & Denise Tilles; Marty Cagan | *Product Operations* (Perri & Tilles, 2023) |
+| CTO/PO as managed bottleneck | Theory of Constraints | Eliyahu M. Goldratt | *The Goal* (1984) |
+| Explicit demand states | Kanban — "make process policies explicit" | David J. Anderson | *Kanban* (Anderson, 2010) |
+| WIP / queue / small batch | Principles of Product Development Flow | Donald G. Reinertsen | *The Principles of Product Development Flow* (2009) |
+| Roles (stream-aligned + enabling) | Team Topologies | Matthew Skelton & Manuel Pais | *Team Topologies* (2019) |
+| "Problem before solution" | Lean Software Development — delay commitment | Mary & Tom Poppendieck | *Lean Software Development* (2003) |
+| Probability × Impact matrix | PMBOK / ISO 31000 | Project Management Institute / ISO | *PMBOK Guide* (PMI); *ISO 31000:2018* |
+| Explicit success criteria | Outcome-based Product Management | Melissa Perri, Marty Cagan | *Escaping the Build Trap* (Perri, 2018) |
+| Intake / Triage / Product Ops | Product Operations | Melissa Perri & Denise Tilles; Marty Cagan | *Product Operations* (Perri & Tilles, 2023) |
 | Commitment point (Discovery → Delivery) | Upstream Kanban | David J. Anderson; Klaus Leopold | *Kanban* (Anderson, 2010); *Practical Kanban* (Leopold, 2017) |
-| Readiness Score (gate quantitativo) | Gate de completude do intake (`gateReady`) + gate decision do Stage-Gate | Robert G. Cooper; David J. Anderson | Cooper (1986); *Kanban* (Anderson, 2010) |
-| Confiança por campo + dispositions ("não sei" honesto) | Assumption Mapping + Validated Learning | Teresa Torres; David Bland & Alex Osterwalder; Eric Ries | *Continuous Discovery Habits* (2021); *Testing Business Ideas* (2019); *The Lean Startup* (2011) |
-| Indicadores de valor (RICE-lite) | RICE scoring | Sean McBride / Intercom | *Intercom on Product Management* (2016) |
-| Classificação Greenfield vs Brownfield | Trilhas greenfield/brownfield; código legado | BMAD Method; Michael Feathers | BMAD (2024–25); *Working Effectively with Legacy Code* (2004) |
-| Jornada do usuário ponta-a-ponta (RP §6.5) | Journey Mapping / Service Blueprinting | Nielsen Norman Group; Jim Kalbach | *Mapping Experiences* (Kalbach, 2016) |
-| Base de Conhecimento técnica (`tech-landscape`) | *Steering docs* / contexto persistente | Kiro (AWS); BMAD Method | Kiro Docs; BMAD `document-project` |
-| Technical Assessment além da arquitetura | Design Docs / arc42 / C4 / ADRs | Google; Starke & Hruschka; Simon Brown; Michael Nygard | *Design Docs at Google*; arc42; c4model.com; ADRs (2011) |
-| Viabilidade dos NFRs (quality scenarios) | Quality requirements as scenarios | arc42; ISO/IEC | arc42 §10; *ISO/IEC 25010* |
-| Contexto suficiente p/ decisão de implementação | Spec-Driven Development / Context Engineering | GitHub; Kiro; Thoughtworks | Spec Kit; Kiro; Thoughtworks (2025) |
-| Critérios de aceite testáveis (suporte) | EARS — Easy Approach to Requirements Syntax | Alistair Mavin et al. | IEEE RE'09 (Mavin et al., 2009) |
+| Readiness Score (quantitative gate) | Intake completeness gate (`gateReady`) + Stage-Gate gate decision | Robert G. Cooper; David J. Anderson | Cooper (1986); *Kanban* (Anderson, 2010) |
+| Per-field confidence + dispositions ("honest I don't know") | Assumption Mapping + Validated Learning | Teresa Torres; David Bland & Alex Osterwalder; Eric Ries | *Continuous Discovery Habits* (2021); *Testing Business Ideas* (2019); *The Lean Startup* (2011) |
+| Value indicators (RICE-lite) | RICE scoring | Sean McBride / Intercom | *Intercom on Product Management* (2016) |
+| Greenfield vs. Brownfield classification | Greenfield/brownfield tracks; legacy code | BMAD Method; Michael Feathers | BMAD (2024–25); *Working Effectively with Legacy Code* (2004) |
+| End-to-end user journey (RP §6.5) | Journey Mapping / Service Blueprinting | Nielsen Norman Group; Jim Kalbach | *Mapping Experiences* (Kalbach, 2016) |
+| Technical knowledge base (`tech-landscape`) | *Steering docs* / persistent context | Kiro (AWS); BMAD Method | Kiro Docs; BMAD `document-project` |
+| Technical Assessment beyond architecture | Design Docs / arc42 / C4 / ADRs | Google; Starke & Hruschka; Simon Brown; Michael Nygard | *Design Docs at Google*; arc42; c4model.com; ADRs (2011) |
+| NFR feasibility (quality scenarios) | Quality requirements as scenarios | arc42; ISO/IEC | arc42 §10; *ISO/IEC 25010* |
+| Sufficient context for implementation decisions | Spec-Driven Development / Context Engineering | GitHub; Kiro; Thoughtworks | Spec Kit; Kiro; Thoughtworks (2025) |
+| Testable acceptance criteria (support) | EARS — Easy Approach to Requirements Syntax | Alistair Mavin et al. | IEEE RE'09 (Mavin et al., 2009) |
 
-> **Detalhamento das oito linhas acima** (o que mudou em cada template, por quê, e fontes verificadas): ver [`templates/references-evolucao.md`](./templates/references-evolucao.md), que estende este documento para a evolução dos templates (jornada, greenfield/brownfield, base de conhecimento, TA enriquecido).
+> **Detail on the eight rows above** (what changed in each template, why, and verified sources): see [`templates/references-evolucao.md`](./templates/references-evolucao.md), which extends this document for the template evolution (journey, greenfield/brownfield, knowledge base, enriched TA).
 
 ---
 
-## 1. Separação upstream / downstream → Dual-Track Development
+## § 1. Upstream / downstream separation → Dual-Track Development
 
-A divisão entre "descobrir o que fazer" (CEO, Sales, CS, Intake) e "executar com qualidade" (PM, Tech Leads, Engineers) é o Dual-Track Agile, termo cunhado por Jeff Patton e popularizado por Marty Cagan (Silicon Valley Product Group).
+The split between "discovering what to build" (CEO, Sales, CS, Intake) and "executing with quality" (PM, Tech Leads, Engineers) is Dual-Track Agile, a term coined by Jeff Patton and popularized by Marty Cagan (Silicon Valley Product Group).
 
-Os princípios principais:
+Core principles:
 
-- A Discovery Track gera itens de backlog validados; a Delivery Track gera software entregável.
-- Os dois trilhos rodam em paralelo, validando riscos antes de uma linha de código de produção.
-- Discovery enfrenta quatro riscos: valor, usabilidade, viabilidade técnica e viabilidade de negócio.
+- The Discovery Track produces validated backlog items; the Delivery Track produces shippable software.
+- Both tracks run in parallel, validating risks before a single line of production code is written.
+- Discovery faces four risks: value, usability, technical feasibility, and business feasibility.
 
-A partir do INSPIRED v2, Cagan abandonou o termo "Dual-Track Agile" e passou a usar Continuous Discovery / Continuous Delivery, para evitar que virasse conversa de processo em vez de princípio.
+Starting with INSPIRED v2, Cagan dropped the term "Dual-Track Agile" and moved to Continuous Discovery / Continuous Delivery, to prevent it from becoming a conversation about process instead of principle.
 
-No projeto. Ver [README › A camada de tradução: CTO + PO](./README.md#a-camada-de-tradução-cto--po) e [README › 1. As três camadas](./README.md#1-as-três-camadas). A camada CTO + PO é o que SVPG chama de empowered product team: o time racionaliza o problema antes de pedir execução. O downstream não recebe "ideia solta, call gravada, mensagem Slack ou áudio" — recebe artefatos.
+In this project. See [README › The translation layer: CTO + PO](./README.md#the-translation-layer-cto--po) and [README › 1. The three layers](./README.md#1-the-three-layers). The CTO + PO layer is what SVPG calls an empowered product team: the team rationalizes the problem before requesting execution. The downstream does not receive "a loose idea, a recorded call, a Slack message, or an audio clip" — it receives artifacts.
 
-**Fontes.**
+**Sources.**
 
 - [Dual-Track Agile — Silicon Valley Product Group](https://www.svpg.com/dual-track-agile/)
 - [Beyond Lean and Agile — SVPG](https://www.svpg.com/beyond-lean-and-agile/)
@@ -77,19 +77,19 @@ No projeto. Ver [README › A camada de tradução: CTO + PO](./README.md#a-cama
 
 ---
 
-## 2. Intake Layer com gates → Stage-Gate (Cooper)
+## § 2. Intake Layer with gates → Stage-Gate (Cooper)
 
-A "Porta Controlada" CTO/PO é uma implementação de Stage-Gate, criado por Robert G. Cooper (ISBM Distinguished Research Fellow, Penn State; Professor Emeritus, McMaster).
+The CTO/PO "Controlled Gate" is an implementation of Stage-Gate, created by Robert G. Cooper (ISBM Distinguished Research Fellow, Penn State; Professor Emeritus, McMaster).
 
-O modelo nasceu de um estudo de 252 históricos de novos produtos em 123 empresas (Cooper & Kleinschmidt). Hoje, cerca de 80% das empresas norte-americanas usam alguma variação dele.
+The model emerged from a study of 252 new-product histories across 123 companies (Cooper & Kleinschmidt). Today, approximately 80% of North American companies use some variation of it.
 
-A estrutura clássica é Discover → Scoping → Build Business Case → Development → Testing & Validation → Launch, com gates entre cada estágio.
+The classic structure is Discover → Scoping → Build Business Case → Development → Testing & Validation → Launch, with gates between each stage.
 
-No projeto. Ver [README › 3. Intake Layer em detalhe](./README.md#3-intake-layer-em-detalhe) e [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package). A regra "demanda só sai do Intake quando está PRONTA para execução" é o gate decision do Cooper. O Readiness Package é o conjunto de deliverables exigidos no gate.
+In this project. See [README › 3. Intake Layer in detail](./README.md#3-intake-layer-in-detail) and [README › 4. What the intake produces — Readiness Package](./README.md#4-what-the-intake-produces--readiness-package). The rule "a demand only leaves the Intake when it is READY for execution" is Cooper's gate decision. The Readiness Package is the set of deliverables required at the gate.
 
-Vale lembrar que Cooper evoluiu o modelo para Next Generation Stage-Gate, adaptativo, com gates "fuzzy" e iteração dentro de fases. Útil para responder à crítica de "gate rígido".
+It is worth noting that Cooper evolved the model into Next Generation Stage-Gate, which is adaptive, with "fuzzy" gates and iteration within phases — useful for responding to the "rigid gate" critique.
 
-**Fontes.**
+**Sources.**
 
 - [Stage-Gate International — Our Story](https://www.stage-gate.com/about/our-story-2/)
 - [Stage-Gate Systems: A New Tool for Managing New Products (ResearchGate)](https://www.researchgate.net/publication/4883499_Stage-Gate_Systems_A_New_Tool_for_Managing_New_Products)
@@ -98,27 +98,27 @@ Vale lembrar que Cooper evoluiu o modelo para Next Generation Stage-Gate, adapta
 
 ---
 
-## 3. Readiness Package + "Problema antes da Solução" → Lean Startup + Continuous Discovery
+## § 3. Readiness Package + "Problem before Solution" → Lean Startup + Continuous Discovery
 
-Ver [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package) e [README › 10. Regras de ouro do intake](./README.md#10-regras-de-ouro-do-intake) (regra 1: "PROBLEMA ANTES DA SOLUÇÃO").
+See [README › 4. What the intake produces — Readiness Package](./README.md#4-what-the-intake-produces--readiness-package) and [README › 10. Golden rules of intake](./README.md#10-golden-rules-of-intake) (rule 1: "PROBLEM BEFORE SOLUTION").
 
-As seções do Readiness Package operacionalizam três princípios complementares:
+The Readiness Package sections operationalize three complementary principles:
 
 ### 3.1 Validated Learning (Eric Ries)
 
-O *Build-Measure-Learn* exige hipóteses explícitas antes do compromisso de recursos. As seções "Objetivos e Resultado Esperado" e "Critérios de Sucesso e Aceite" do RP forçam essa explicitação.
+*Build-Measure-Learn* requires explicit hypotheses before committing resources. The "Objectives and Expected Outcome" and "Success and Acceptance Criteria" sections of the RP force that explicitness.
 
 > "Validated learning is the process of demonstrating empirically that a team has discovered valuable truths about a startup's present and future business prospects." — Eric Ries
 
 ### 3.2 Opportunity Solution Tree (Teresa Torres, 2016)
 
-A OST parte de um *outcome desejado* → mapeia *oportunidades* (dores) → testa *soluções* com *assumption tests*. As seções "Contexto e Problema", "Personas Impactadas" e "Regras de Negócio" do RP implementam essa árvore.
+The OST starts from a *desired outcome* → maps *opportunities* (pain points) → tests *solutions* with *assumption tests*. The "Context and Problem," "Impacted Personas," and "Business Rules" sections of the RP implement this tree.
 
 ### 3.3 Delay Commitment (Poppendieck)
 
-O princípio "comprometer-se o mais tarde possível, com a informação mais completa possível" justifica diretamente o gate do Intake: nenhum compromisso de roadmap antes do RP estar completo.
+The principle "commit as late as possible, with the most complete information available" directly justifies the Intake gate: no roadmap commitment before the RP is complete.
 
-**Fontes.**
+**Sources.**
 
 - [The Lean Startup — Principles (Eric Ries)](https://theleanstartup.com/principles)
 - [Opportunity Solution Trees — Teresa Torres / Product Talk](https://www.producttalk.org/opportunity-solution-trees/)
@@ -127,38 +127,38 @@ O princípio "comprometer-se o mais tarde possível, com a informação mais com
 
 ---
 
-## 4. Feedback Loop → Build-Measure-Learn + PDCA + Post-Launch Review
+## § 4. Feedback Loop → Build-Measure-Learn + PDCA + Post-Launch Review
 
-Ver [README › 2. Fluxo completo — do sinal à entrega](./README.md#2-fluxo-completo--do-sinal-à-entrega) (subgrafo "🔁 FEEDBACK LOOP") e [README › 9. Estados de uma demanda](./README.md#9-estados-de-uma-demanda) (estado `FeedbackLoop`).
+See [README › 2. Full flow — from signal to delivery](./README.md#2-full-flow--from-signal-to-delivery) (subgraph "🔁 FEEDBACK LOOP") and [README › 9. States of a demand](./README.md#9-states-of-a-demand) (state `FeedbackLoop`).
 
-O loop "PM + CS coleta resultados → PO aprende e atualiza → realimenta SIGNAL" tem três ancoragens:
+The loop "PM + CS collects results → PO learns and updates → feeds back into SIGNAL" has three anchors:
 
-- **PDCA — Plan, Do, Check, Act** (Deming, anos 1950): base de todo ciclo de melhoria contínua.
-- **Build-Measure-Learn** (Ries, 2011): aplicação do PDCA a startups, com foco em *pivot or persevere*.
-- **Post-Launch Review** (Stage-Gate): gate final que mede outcomes contra os Critérios de Sucesso definidos no RP.
+- **PDCA — Plan, Do, Check, Act** (Deming, 1950s): the foundation of every continuous improvement cycle.
+- **Build-Measure-Learn** (Ries, 2011): PDCA applied to startups, focused on *pivot or persevere*.
+- **Post-Launch Review** (Stage-Gate): final gate that measures outcomes against the Success Criteria defined in the RP.
 
-**Fontes.**
+**Sources.**
 
 - [Build-Measure-Learn — Verticode Insights](https://www.verticode.co.uk/blog/build-measure-learn-feedback-loop)
 - [Lean Startup Methodology — Stratrix](https://www.stratrix.com/learn/frameworks/lean-startup-methodology)
 
 ---
 
-## 5. CTO/PO como gargalo gerenciado → Theory of Constraints (Goldratt)
+## § 5. CTO/PO as managed bottleneck → Theory of Constraints (Goldratt)
 
-Ver [README › A camada de tradução: CTO + PO](./README.md#a-camada-de-tradução-cto--po). O texto reconhece: "sem uma camada de intake antes do CTO/PO, o CTO vira gargalo". Esse é o ponto de partida da Theory of Constraints, formulada por Eliyahu M. Goldratt em *The Goal* (1984).
+See [README › The translation layer: CTO + PO](./README.md#the-translation-layer-cto--po). The text acknowledges: "without an intake layer before the CTO/PO, the CTO becomes the bottleneck." This is the starting point of the Theory of Constraints, formulated by Eliyahu M. Goldratt in *The Goal* (1984).
 
-Os cinco passos focais:
+The five focusing steps:
 
-1. Identificar o gargalo (CTO/PO).
-2. Explorar — o Intake Layer existe para extrair eficiência dele.
-3. Subordinar — os outros papéis (PM, TL, Eng) trabalham em função do output dele; o **PRD** — a fusão do Readiness Package (PO) com o Technical Assessment (CTO) — é o output que governa o ritmo do downstream.
-4. Elevar — quando saturar, adicionar Product Ops, Chief of Staff ou Founder Associate (o `README.md` já antecipa).
-5. Repetir — após elevar, o gargalo muda de lugar; repete o ciclo.
+1. Identify the bottleneck (CTO/PO).
+2. Exploit — the Intake Layer exists to extract efficiency from it.
+3. Subordinate — the other roles (PM, TL, Eng) work in service of its output; the **PRD** — the fusion of the Readiness Package (PO) with the Technical Assessment (CTO) — is the output that governs the downstream pace.
+4. Elevate — when saturated, add Product Ops, Chief of Staff, or Founder Associate (already anticipated in `README.md`).
+5. Repeat — after elevating, the bottleneck shifts; repeat the cycle.
 
-A literatura moderna (DZone, Splunk, Pragmatic Engineer) mostra que ToC se aplica a desenvolvimento de software, não só a manufatura.
+Modern literature (DZone, Splunk, Pragmatic Engineer) shows that ToC applies to software development, not just manufacturing.
 
-**Fontes.**
+**Sources.**
 
 - [Theory of Constraints — Wikipedia](https://en.wikipedia.org/wiki/Theory_of_constraints)
 - [The Theory of Constraints — Splunk](https://www.splunk.com/en_us/blog/learn/theory-of-constraints.html)
@@ -167,21 +167,21 @@ A literatura moderna (DZone, Splunk, Pragmatic Engineer) mostra que ToC se aplic
 
 ---
 
-## 6. Gestão de fluxo e WIP → Reinertsen (Product Development Flow)
+## § 6. Flow management and WIP → Reinertsen (Product Development Flow)
 
-Donald G. Reinertsen (*The Principles of Product Development Flow*, 2009) é a referência mais rigorosa em teoria de filas aplicada a produto. O livro reúne 175 princípios em oito áreas: decisões econômicas, gestão de filas, redução de batch, WIP constraints, feedback acelerado, fluxo sob variabilidade e controle descentralizado.
+Donald G. Reinertsen (*The Principles of Product Development Flow*, 2009) is the most rigorous reference on queue theory applied to product development. The book assembles 175 principles across eight areas: economic decisions, queue management, batch reduction, WIP constraints, accelerated feedback, flow under variability, and decentralized control.
 
-No projeto:
+In this project:
 
-- WIP limits no Intake — a capacidade do PO precisa ser visível e respeitada.
-- Visualização de filas invisíveis — o [stateDiagram em README › 9. Estados de uma demanda](./README.md#9-estados-de-uma-demanda) torna explícitos estados (`Capturada → EmTriagem → Discovery → ProductReady…`) que normalmente ficam ocultos.
-- Batch size pequeno — cada demanda atravessa sozinha, não em lote anual.
+- WIP limits in the Intake — the PO's capacity needs to be visible and respected.
+- Visualization of invisible queues — the [stateDiagram in README › 9. States of a demand](./README.md#9-states-of-a-demand) makes states explicit (`Captured → InTriage → Discovery → ProductReady…`) that would otherwise remain hidden.
+- Small batch size — each demand moves through individually, not in an annual batch.
 
-A frase de Reinertsen que mais resume o livro: *"Queues are the most important factor in maintaining optimal product development flow, and product development queues are more insidious because they tend to be invisible."*
+The Reinertsen quote that best summarizes the book: *"Queues are the most important factor in maintaining optimal product development flow, and product development queues are more insidious because they tend to be invisible."*
 
-Reinertsen é crítico de gates rígidos porque eles bloqueiam fluxo e geram filas. Por isso este modelo precisa de métricas de lead time no Intake para não cair nessa armadilha. Ver `03-slas.md` e a seção 8 abaixo.
+Reinertsen is critical of rigid gates because they block flow and create queues. That is why this model needs lead-time metrics in the Intake to avoid falling into that trap. See `03-slas.md` and section 8 below.
 
-**Fontes.**
+**Sources.**
 
 - [The Principles of Product Development Flow — Reinertsen (Amazon)](https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009)
 - [The 175 flow principles — Systems Engineering Trends](https://www.se-trends.de/en/the-175-flow-principles-why-product-development-is-often-slower-than-necessary/)
@@ -189,41 +189,41 @@ Reinertsen é crítico de gates rígidos porque eles bloqueiam fluxo e geram fil
 
 ---
 
-## 7. Estrutura de papéis → Team Topologies
+## § 7. Role structure → Team Topologies
 
-Ver [README › 1. As três camadas](./README.md#1-as-três-camadas) e [README › 7. Matriz de responsabilidades](./README.md#7-matriz-de-responsabilidades).
+See [README › 1. The three layers](./README.md#1-the-three-layers) and [README › 7. Responsibility matrix](./README.md#7-responsibility-matrix).
 
-Matthew Skelton & Manuel Pais (*Team Topologies*, 2019) dão nome aos papéis do downstream:
+Matthew Skelton & Manuel Pais (*Team Topologies*, 2019) name the downstream roles:
 
-- Stream-aligned team — o downstream (PM, TLs, Engs e QA) entrega um fluxo de valor end-to-end. Típico: 5 a 9 engenheiros donos do ciclo completo (design, build, deploy, operar, suportar).
-- Enabling team — CTO e PO atuam como enabling: não executam, capacitam, removem fricção e transferem contexto.
-- Cognitive load — o Readiness Package reduz a carga cognitiva do time de execução. O downstream não precisa "descobrir o problema": recebe-o consolidado.
+- Stream-aligned team — the downstream (PM, TLs, Engineers, and QA) delivers an end-to-end value stream. Typical: 5 to 9 engineers owning the full cycle (design, build, deploy, operate, support).
+- Enabling team — CTO and PO act as enablers: they do not execute; they empower, remove friction, and transfer context.
+- Cognitive load — the Readiness Package reduces the cognitive load of the execution team. The downstream does not need to "discover the problem": it receives it consolidated.
 
-A leitura moderna da Lei de Conway: a estrutura do software replica a estrutura de comunicação da organização. Por isso o desenho organizacional vem do fluxo de valor, não dos componentes técnicos.
+The modern reading of Conway's Law: software structure mirrors the organization's communication structure. That is why organizational design flows from the value stream, not from technical components.
 
-**Fontes.**
+**Sources.**
 
-- [Team Topologies — site oficial](https://teamtopologies.com/)
+- [Team Topologies — official site](https://teamtopologies.com/)
 - [Team Topologies — Martin Fowler](https://martinfowler.com/bliki/TeamTopologies.html)
 - [Team Topologies — Atlassian](https://www.atlassian.com/devops/frameworks/team-topologies)
 
 ---
 
-## 8. Commitment point (RP→PRD) ≠ Definition of Ready → Scrum + SAFe + Upstream Kanban
+## § 8. Commitment point (RP→PRD) ≠ Definition of Ready → Scrum + SAFe + Upstream Kanban
 
-Ver [README › 4. O que o intake produz — Readiness Package](./README.md#4-o-que-o-intake-produz--readiness-package) e [README › 10. Regras de ouro do intake](./README.md#10-regras-de-ouro-do-intake) (regra 4: "DISCIPLINA DE PORTA").
+See [README › 4. What the intake produces — Readiness Package](./README.md#4-what-the-intake-produces--readiness-package) and [README › 10. Golden rules of intake](./README.md#10-golden-rules-of-intake) (rule 4: "GATE DISCIPLINE").
 
-**O congelamento do RP é o *commitment point*, não a Definition of Ready.** Este foi o erro que o projeto corrigiu: tratar "RP congelado" como DoR. São coisas diferentes, em pontos diferentes da cadeia:
+**The RP freeze is the *commitment point*, not the Definition of Ready.** This was the error the project corrected: treating "RP Frozen" as the DoR. These are different things at different points in the chain:
 
-- **Commitment point** (Upstream/Discovery Kanban — Anderson, Leopold) = a linha que separa "discovery" (incerto, opcional, descartável) de "delivery" (comprometido, com prazo, com SLA). Antes da linha: opções. Depois da linha: compromissos. **O congelamento do RP e sua fusão no PRD são essa linha** — e o *gate deliverable* do Stage-Gate (Cooper). É o **fim do arco do PO**, não a prontidão para codar.
-- **Definition of Ready** (*"Ready for Development"*) = vive **downstream**, vários passos depois do commitment point: quando os Tech Leads já escreveram e estimaram épicos, histórias e tasks (INVEST; "*ready for development*" / *Story Ready* do SAFe) e **não resta passo à frente além de codar**. Exige a decomposição e a estimativa do time de entrega. **Escrever épicos e histórias é downstream, fora do escopo do PO.**
-- **Definition of Done** = mais à frente ainda: incremento entregue + critérios de qualidade satisfeitos. Distinta da DoR.
+- **Commitment point** (Upstream/Discovery Kanban — Anderson, Leopold) = the line separating "discovery" (uncertain, optional, disposable) from "delivery" (committed, with deadline, with SLA). Before the line: options. After the line: commitments. **Freezing the RP and merging it into the PRD is that line** — and the *gate deliverable* of Stage-Gate (Cooper). It is the **end of the PO's arc**, not readiness to code.
+- **Definition of Ready** (*"Ready for Development"*) = lives **downstream**, several steps after the commitment point: when Tech Leads have already written and estimated epics, stories, and tasks (INVEST; "*ready for development*" / *Story Ready* in SAFe) and **no step remains before coding**. Requires decomposition and estimation by the delivery team. **Writing epics and stories is downstream, outside the PO's scope.**
+- **Definition of Done** = further still: increment delivered + quality criteria satisfied. Distinct from the DoR.
 
-Em uma linha: triagem = *"vale o esforço?"* (gate decision do Stage-Gate) · commitment point (RP→PRD) = *"estamos nos comprometendo a construir"* · DoR = *"pronto para codar"* · DoD = *"código concluído"*.
+In one line: triage = *"is it worth the effort?"* (Stage-Gate gate decision) · commitment point (RP→PRD) = *"we are committing to build"* · DoR = *"ready to code"* · DoD = *"code complete"*.
 
-Mike Cohn (Mountain Goat Software) alerta que a DoR pode degenerar em mecanismo de espera e aprovação que reduz agilidade. Por isso este projeto define SLAs explícitos em `03-slas.md`: nenhum gate — nem o congelamento do RP, nem a DoR downstream — pode virar burocracia indefinida.
+Mike Cohn (Mountain Goat Software) warns that the DoR can degenerate into a waiting-and-approval mechanism that reduces agility. That is why this project defines explicit SLAs in `03-slas.md`: no gate — not the RP freeze, not the downstream DoR — can become indefinite bureaucracy.
 
-**Fontes.**
+**Sources.**
 
 - [Definition of Ready — Atlassian](https://www.atlassian.com/agile/project-management/definition-of-ready)
 - [Definition of Ready — Scrum Inc.](https://www.scruminc.com/definition-of-ready/)
@@ -235,18 +235,18 @@ Mike Cohn (Mountain Goat Software) alerta que a DoR pode degenerar em mecanismo 
 
 ---
 
-## 9. Product Operations → Perri & Tilles, Cagan
+## § 9. Product Operations → Perri & Tilles, Cagan
 
-Melissa Perri & Denise Tilles (*Product Operations*, 2023) e Marty Cagan (SVPG) descrevem Product Ops como uma função operando em quatro pilares:
+Melissa Perri & Denise Tilles (*Product Operations*, 2023) and Marty Cagan (SVPG) describe Product Ops as a function operating across four pillars:
 
-1. Dados — infraestrutura analítica para o PO/PM.
-2. Compreensão de usuários — operacionaliza pesquisa contínua.
-3. Team ownership — governança de processo e ferramentas.
-4. Comunicação interdepartamental — o que o Intake Layer faz neste projeto.
+1. Data — analytical infrastructure for the PO/PM.
+2. User understanding — operationalizes continuous research.
+3. Team ownership — process and tooling governance.
+4. Cross-departmental communication — what the Intake Layer does in this project.
 
-A função "Intake / Product Operations" descrita em [README › A camada de tradução: CTO + PO](./README.md#a-camada-de-tradução-cto--po) é o pilar 4. Quando o volume crescer, pode evoluir para um time de Product Ops dedicado.
+The "Intake / Product Operations" function described in [README › The translation layer: CTO + PO](./README.md#the-translation-layer-cto--po) is pillar 4. As volume grows, it can evolve into a dedicated Product Ops team.
 
-**Fontes.**
+**Sources.**
 
 - [Product Ops Overview — SVPG (Cagan)](https://www.svpg.com/product-ops-overview/)
 - [Product Operations — Melissa Perri & Denise Tilles (Amazon)](https://www.amazon.com/Product-Operations-successful-companies-products/dp/B0CK3HL4WF)
@@ -255,66 +255,66 @@ A função "Intake / Product Operations" descrita em [README › A camada de tra
 
 ---
 
-## 10. Lean Software Development → Poppendieck
+## § 10. Lean Software Development → Poppendieck
 
-Mary & Tom Poppendieck (*Lean Software Development*, 2003) traduziram o Toyota Production System para software. Os sete princípios e os sete desperdícios sustentam o desenho do Intake.
+Mary & Tom Poppendieck (*Lean Software Development*, 2003) translated the Toyota Production System into software. The seven principles and seven wastes underpin the Intake design.
 
-Sete princípios:
+Seven principles:
 
-1. Eliminar desperdício
-2. Amplificar aprendizado
-3. Adiar compromisso
-4. Entregar rápido
-5. Construir integridade no produto
-6. Engajar a inteligência dos executores
-7. Otimizar o sistema inteiro
+1. Eliminate waste
+2. Amplify learning
+3. Decide as late as possible
+4. Deliver as fast as possible
+5. Build integrity in
+6. Respect people / engage everyone's intelligence
+7. Optimize the whole
 
-Sete desperdícios em software:
+Seven wastes in software:
 
-| Desperdício | Como o Intake Layer combate |
+| Waste | How the Intake Layer combats it |
 |---|---|
-| Partial work | RP exige suas seções bloqueantes resolvidas (`freezeReady`) antes de seguir |
-| Extra features | "Problema antes da solução" elimina features especulativas |
-| Relearning | Contexto consolidado evita que downstream "descubra de novo" |
-| Handoffs | RP transfere contexto completo, não fragmentado |
-| Task switching | WIP limits no PO previnem multitasking |
-| Delays | SLAs explícitos atacam esperas |
-| Defects | Critérios de Aceite no RP previnem retrabalho |
+| Partial work | RP requires its blocking sections resolved (`freezeReady`) before advancing |
+| Extra features | "Problem before solution" eliminates speculative features |
+| Relearning | Consolidated context prevents downstream from "rediscovering" |
+| Handoffs | RP transfers complete, unfragmented context |
+| Task switching | WIP limits on the PO prevent multitasking |
+| Delays | Explicit SLAs attack wait times |
+| Defects | Acceptance criteria in the RP prevent rework |
 
-**Fontes.**
+**Sources.**
 
 - [The 7 Principles of Lean Software Development — NetSolutions](https://www.netsolutions.com/insights/7-principles-of-lean-software-development/)
 - [Lean Software Development — Wikipedia](https://en.wikipedia.org/wiki/Lean_software_development)
-- [7 Wastes of Software Development — Medium (Milan Milanović)](https://medium.com/@techworldwithmilan/7-wastes-of-software-development-8febe264c5a8)
+- [7 Wastes of Software Development — Medium (Milan Milanovic)](https://medium.com/@techworldwithmilan/7-wastes-of-software-development-8febe264c5a8)
 
 ---
 
-## 11. Confiança de primeira classe, Readiness Score e RICE-lite
+## § 11. First-class confidence, Readiness Score, and RICE-lite
 
-> Esta seção ancora as mecânicas que o mapeamento da persona Submitter ([`personas/01-submitter.md`](./personas/01-submitter.md)) e o template de intake ([`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md)) introduziram, e que [`metrics.md`](./metrics.md) generaliza. Foram aprendidas com os protótipos e amadurecem o modelo descrito acima — não o substituem.
+> This section anchors the mechanics introduced by the Submitter persona mapping ([`personas/01-submitter.md`](./personas/01-submitter.md)) and the intake template ([`templates/00-submitter-brief.md`](./templates/00-submitter-brief.md)), and generalized in [`metrics.md`](./metrics.md). These were learned through prototyping and mature the model described above — they do not replace it.
 
-### 11.1 Readiness Score → gate de completude do intake + gate decision do Stage-Gate
+### 11.1 Readiness Score → intake completeness gate + Stage-Gate gate decision
 
-O Readiness Score é a versão *quantitativa* do **gate de completude do intake** (a transição `Capturada → EmTriagem`) — **não** é a Definition of Ready, que vive downstream (§8). Em vez de um "pronto / não pronto" subjetivo, cada requisito de compliance tem um peso e um status; o score é uma função desses pesos, e `low_confidence` conta como parcial. A demanda só sai do Intake e chega ao PO quando `gateReady = true` (todo requisito bloqueante resolvido por uma disposição honesta) — ou seja, está completa o bastante para ser **triada**, não pronta para codar. Isso responde diretamente à crítica de "gate vira mecanismo de espera" (Crítica 2): o gate é uma rubrica objetiva, não uma aprovação de comitê.
+The Readiness Score is the *quantitative* version of the **intake completeness gate** (the `Captured → InTriage` transition) — it is **not** the Definition of Ready, which lives downstream (§8). Rather than a subjective "ready / not ready," each compliance requirement has a weight and a status; the score is a function of those weights, and `low_confidence` counts as partial. A demand only leaves the Intake and reaches the PO when `gateReady = true` (every blocking requirement resolved by an honest disposition) — meaning it is complete enough to be **triaged**, not ready to code. This directly answers the "gate becomes a waiting mechanism" critique (Critique 2): the gate is an objective rubric, not a committee approval.
 
-### 11.2 Confiança por campo + dispositions → Assumption Mapping + Validated Learning
+### 11.2 Per-field confidence + dispositions → Assumption Mapping + Validated Learning
 
-O RICE clássico trata "confiança" como um único número genérico. Aqui ela é **por campo e por indicador** (`confidence / source / status / hint`) — a camada de honestidade que viaja com o artefato. As **dispositions** (`answered · inferred · assumption · discovery · deferred`) operacionalizam o princípio de que uma premissa explícita é melhor que uma certeza falsa:
+Classic RICE treats "confidence" as a single generic number. Here it is **per field and per indicator** (`confidence / source / status / hint`) — the honesty layer that travels with the artifact. **Dispositions** (`answered · inferred · assumption · discovery · deferred`) operationalize the principle that an explicit assumption is better than false certainty:
 
-- `assumption` é exatamente o *assumption mapping* de Bland & Osterwalder (*Testing Business Ideas*) e os *assumption tests* da Opportunity Solution Tree de Torres (§3.2);
-- `discovery` time-boxed é o *validated learning* de Ries (§3.1) — "não sabemos ainda, e este é o plano para descobrir" é uma forma válida de prontidão;
-- a graduação por confiança realiza o *delay commitment* de Poppendieck (§3.3) no nível do campo, não só no nível do gate.
+- `assumption` is exactly the *assumption mapping* of Bland & Osterwalder (*Testing Business Ideas*) and the *assumption tests* of Torres's Opportunity Solution Tree (§3.2);
+- time-boxed `discovery` is Ries's *validated learning* (§3.1) — "we don't know yet, and this is the plan to find out" is a valid form of readiness;
+- the confidence graduation enacts Poppendieck's *delay commitment* (§3.3) at the field level, not just at the gate level.
 
-### 11.3 Indicadores de valor (RICE-lite) → RICE scoring (Intercom)
+### 11.3 Value indicators (RICE-lite) → RICE scoring (Intercom)
 
-Os indicadores Impacto / Alcance / Urgência são uma versão enxuta do RICE (Reach, Impact, Confidence, Effort), criado por Sean McBride na Intercom. Duas adaptações conscientes:
+The Impact / Reach / Urgency indicators are a lean version of RICE (Reach, Impact, Confidence, Effort), created by Sean McBride at Intercom. Two conscious adaptations:
 
-- **Confiança não é re-pontuada** como no RICE original — ela reusa a camada de confiança de §11.2, evitando duplicação;
-- **Esforço fica *soft*** (chute da Submitter, firmado depois pelo CTO), porque a persona de fronteira não é técnica.
+- **Confidence is not re-scored** as in the original RICE — it reuses the confidence layer from §11.2, avoiding duplication;
+- **Effort stays *soft*** (the Submitter's rough estimate, confirmed later by the CTO), because the boundary persona is non-technical.
 
-O ponto crucial: RICE-lite **não** é usado como fórmula de ranking automático. É um espelho que desafia o pensamento — a tensão entre indicadores (ex.: Impacto alto + confiança baixa) é uma provocação, não um número de priorização. Isso preserva o princípio de Reinertsen (§6) de que decisões econômicas são contextuais, não mecânicas.
+The crucial point: RICE-lite is **not** used as an automatic ranking formula. It is a mirror that challenges thinking — the tension between indicators (e.g., high Impact + low confidence) is a provocation, not a prioritization number. This preserves Reinertsen's principle (§6) that economic decisions are contextual, not mechanical.
 
-**Fontes.**
+**Sources.**
 
 - [RICE Scoring Model — Intercom (Sean McBride)](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/)
 - [Testing Business Ideas — Bland & Osterwalder (Strategyzer)](https://www.strategyzer.com/library/testing-business-ideas)
@@ -322,54 +322,54 @@ O ponto crucial: RICE-lite **não** é usado como fórmula de ranking automátic
 
 ---
 
-## Críticas honestas e mitigações
+## Honest Critiques and Mitigations
 
-Toda escolha estrutural tem trade-off. Vale antecipar as críticas mais comuns.
+Every structural choice involves trade-offs. It is worth anticipating the most common critiques.
 
-### Crítica 1: "Stage-Gate é pesado e burocrático"
+### Critique 1: "Stage-Gate is heavy and bureaucratic"
 
-A versão clássica de 1986 pode ser, sim. Cooper evoluiu para Next Generation Stage-Gate (adaptativo, com gates fuzzy).
+The classic 1986 version can be. Cooper evolved it into Next Generation Stage-Gate (adaptive, with fuzzy gates).
 
-Mitigação no projeto: o Readiness Package tem deliverables fixos e SLAs claros (`03-slas.md`). Gates são revisões de evidência, não comitês.
+Mitigation in this project: the Readiness Package has fixed deliverables and clear SLAs (`03-slas.md`). Gates are evidence reviews, not committees.
 
-### Crítica 2: "Definition of Ready vira mecanismo de espera"
+### Critique 2: "Definition of Ready becomes a waiting mechanism"
 
-Mike Cohn alerta que a DoR pode degenerar em "não posso começar até ser aprovado".
+Mike Cohn warns that the DoR can degenerate into "I can't start until approved."
 
-Mitigação no projeto: SLAs explícitos por estado da demanda e critérios objetivos (gate `freezeReady` do RP) em vez de aprovação subjetiva.
+Mitigation in this project: explicit SLAs per demand state and objective criteria (RP `freezeReady` gate) instead of subjective approval.
 
-### Crítica 3: "Gates criam filas invisíveis"
+### Critique 3: "Gates create invisible queues"
 
-Reinertsen mostra que gates bloqueiam fluxo se o WIP não for gerenciado.
+Reinertsen shows that gates block flow when WIP is not managed.
 
-Mitigação no projeto: estados explícitos (`stateDiagram-v2` em `README.md`) tornam filas visíveis. Próximo passo: instrumentar lead time por estado.
+Mitigation in this project: explicit states (`stateDiagram-v2` in `README.md`) make queues visible. Next step: instrument lead time per state.
 
-### Crítica 4: "Dual-Track Agile virou anti-padrão na própria SVPG"
+### Critique 4: "Dual-Track Agile became an anti-pattern at SVPG itself"
 
-Cagan abandonou o termo porque virou conversa de processo.
+Cagan dropped the term because it became a conversation about process.
 
-Mitigação no projeto: adotar a terminologia atual — Continuous Discovery / Continuous Delivery — em comunicação externa e onboarding.
+Mitigation in this project: adopt the current terminology — Continuous Discovery / Continuous Delivery — in external communication and onboarding.
 
-### Crítica 5: "Modelo pesado para uma startup pequena"
+### Critique 5: "Model is too heavy for a small startup"
 
-O peso real está em fazer mal, não em fazer. O custo de retrabalho de uma feature mal especificada é maior que o custo do Intake.
+The real weight is in doing it poorly, not in doing it. The rework cost of a poorly specified feature is higher than the cost of the Intake.
 
-Mitigação no projeto: o Intake pode começar enxuto (CTO e PO acumulando o papel) e crescer para Product Ops quando o volume justificar — como descrito no `README.md`.
+Mitigation in this project: the Intake can start lean (CTO and PO accumulating the role) and grow into Product Ops when volume justifies it — as described in `README.md`.
 
 ---
 
-## Bibliografia Recomendada
+## Recommended Bibliography
 
-### Livros (ordem cronológica)
+### Books (chronological order)
 
 - **Goldratt, E. M.** (1984). *The Goal: A Process of Ongoing Improvement*. North River Press.
-- **Cooper, R. G.** (1986/2017). *Winning at New Products: Creating Value Through Innovation* (5ª ed.). Basic Books.
+- **Cooper, R. G.** (1986/2017). *Winning at New Products: Creating Value Through Innovation* (5th ed.). Basic Books.
 - **Poppendieck, M., & Poppendieck, T.** (2003). *Lean Software Development: An Agile Toolkit*. Addison-Wesley.
-- **Cagan, M.** (2008/2017). *INSPIRED: How to Create Tech Products Customers Love* (2ª ed.). Wiley.
+- **Cagan, M.** (2008/2017). *INSPIRED: How to Create Tech Products Customers Love* (2nd ed.). Wiley.
 - **Reinertsen, D. G.** (2009). *The Principles of Product Development Flow: Second Generation Lean Product Development*. Celeritas Publishing.
 - **Anderson, D. J.** (2010). *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press.
 - **Ries, E.** (2011). *The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses*. Crown Business.
-- **McBride, S., et al.** (2016). *Intercom on Product Management*. Intercom Inc. (origem do modelo RICE).
+- **McBride, S., et al.** (2016). *Intercom on Product Management*. Intercom Inc. (origin of the RICE model).
 - **Leopold, K.** (2017). *Practical Kanban: From Team Focus to Creating Value*. LEANability Press.
 - **Perri, M.** (2018). *Escaping the Build Trap: How Effective Product Management Creates Real Value*. O'Reilly.
 - **Bland, D. J., & Osterwalder, A.** (2019). *Testing Business Ideas*. Wiley / Strategyzer.
@@ -377,21 +377,21 @@ Mitigação no projeto: o Intake pode começar enxuto (CTO e PO acumulando o pap
 - **Torres, T.** (2021). *Continuous Discovery Habits: Discover Products That Create Customer Value and Business Value*. Product Talk LLC.
 - **Perri, M., & Tilles, D.** (2023). *Product Operations: How Successful Companies Build Better Products at Scale*. Product Institute.
 
-> **Extensão — evolução dos templates** (detalhe e fontes online verificadas em [`templates/references-evolucao.md`](./templates/references-evolucao.md)):
-> - **Feathers, M.** (2004). *Working Effectively with Legacy Code*. Prentice Hall. *(raciocínio brownfield.)*
+> **Extension — template evolution** (detail and verified online sources in [`templates/references-evolucao.md`](./templates/references-evolucao.md)):
+> - **Feathers, M.** (2004). *Working Effectively with Legacy Code*. Prentice Hall. *(brownfield reasoning.)*
 > - **Kalbach, J.** (2016). *Mapping Experiences*. O'Reilly. *(journey maps + service blueprints.)*
 > - **Brown, S.** (2018). *Software Architecture for Developers* (C4 model). Leanpub.
-> - **Starke, G., & Hruschka, P.** — *arc42* (template de documentação de arquitetura).
+> - **Starke, G., & Hruschka, P.** — *arc42* (architecture documentation template).
 
-### Padrões e Normas
+### Standards and Norms
 
-- **PMI** (2021). *A Guide to the Project Management Body of Knowledge (PMBOK Guide)* — 7ª edição.
+- **PMI** (2021). *A Guide to the Project Management Body of Knowledge (PMBOK Guide)* — 7th edition.
 - **ISO** (2018). *ISO 31000:2018 — Risk management — Guidelines*.
-- **ISO/IEC** (2011/2023). *ISO/IEC 25010 — Systems and software Quality Requirements and Evaluation (SQuaRE)*. *(dimensões de qualidade / NFRs.)*
+- **ISO/IEC** (2011/2023). *ISO/IEC 25010 — Systems and software Quality Requirements and Evaluation (SQuaRE)*. *(quality dimensions / NFRs.)*
 - **Mavin, A., et al.** (2009). *Easy Approach to Requirements Syntax (EARS)*. IEEE RE'09, pp. 317–322.
 - **Nygard, M.** (2011). *Documenting Architecture Decisions* (ADRs).
 
-### Artigos e Recursos Online
+### Articles and Online Resources
 
 - [Stage-Gate International — Knowledge Center](https://www.stage-gate.com)
 - [Silicon Valley Product Group — Articles](https://www.svpg.com)
@@ -401,16 +401,16 @@ Mitigação no projeto: o Intake pode começar enxuto (CTO e PO acumulando o pap
 
 ---
 
-## Conclusão
+## Conclusion
 
-Este processo não é invenção paralela à literatura. É uma síntese dos frameworks mais validados em gestão de produto em software dos últimos 40 anos. Para situar:
+This process is not a parallel invention to the literature. It is a synthesis of the most validated frameworks in software product management over the past 40 years. To put it in context:
 
-- Cooper tem estudo empírico de 252 produtos em 123 empresas.
-- Lean Startup é ensinado em Stanford, Harvard Business School e LSE.
-- Team Topologies é adotado em ING, Spotify, Amazon e Bosch.
-- ToC é aplicado de manufatura (Toyota, Boeing) a software (Microsoft, Atlassian).
-- Continuous Discovery é padrão de fato em produtos B2B SaaS modernos.
+- Cooper has an empirical study of 252 products across 123 companies.
+- Lean Startup is taught at Stanford, Harvard Business School, and LSE.
+- Team Topologies is adopted at ING, Spotify, Amazon, and Bosch.
+- ToC is applied from manufacturing (Toyota, Boeing) to software (Microsoft, Atlassian).
+- Continuous Discovery is the de facto standard in modern B2B SaaS products.
 
-O que este repositório faz é operacionalizar a interseção desses frameworks num processo executável, com artefatos concretos (`templates/`), papéis claros (`01-roles.md`), interações documentadas (`interactions/`) e SLAs mensuráveis (`03-slas.md`).
+What this repository does is operationalize the intersection of these frameworks into an executable process, with concrete artifacts (`templates/`), clear roles (`01-roles.md`), documented interactions (`interactions/`), and measurable SLAs (`03-slas.md`).
 
-Quando alguém perguntar "isso segue alguma referência?", este documento é a resposta.
+When someone asks "does this follow any reference?", this document is the answer.

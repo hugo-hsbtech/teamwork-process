@@ -1,100 +1,100 @@
-# Tech Backlog — [Nome da Demanda]
+# Tech Backlog — [Demand Name]
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Backlog** | TB-AAAA-NNN |
-| **Versão** | v1 |
-| **Product Backlog vinculado** | PB-AAAA-NNN |
-| **RP vinculado** | RP-AAAA-NNN vX |
-| **Plano de Execução vinculado** | EP-AAAA-NNN |
-| **Responsável** | [Nome] (Tech Lead) |
-| **Status** | Rascunho |
-| **Data do backlog** | AAAA-MM-DD |
+| **Backlog ID** | TB-YYYY-NNN |
+| **Version** | v1 |
+| **Linked Product Backlog** | PB-YYYY-NNN |
+| **Linked RP** | RP-YYYY-NNN vX |
+| **Linked Execution Plan** | EP-YYYY-NNN |
+| **Owner** | [Name] (Tech Lead) |
+| **Status** | Draft |
+| **Backlog date** | YYYY-MM-DD |
 
-> Este documento define **como** as histórias em PB-AAAA-NNN serão construídas.
-> Decisões de escopo, critérios de aceite e intenção de produto pertencem ao Product Backlog. Este Tech Backlog não os redefine.
+> This document defines **how** the stories in PB-YYYY-NNN will be built.
+> Scope decisions, acceptance criteria, and product intent belong to the Product Backlog. This Tech Backlog does not redefine them.
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Resumo |
+| Version | Date | Author | Summary |
 |---|---|---|---|
-| v1 | AAAA-MM-DD | [Nome] (Tech Lead) | Breakdown inicial. ADRs documentados, tarefas definidas, estimativas refinadas. |
+| v1 | YYYY-MM-DD | [Name] (Tech Lead) | Initial breakdown. ADRs documented, tasks defined, estimates refined. |
 
 ---
 
-## Decisões de Arquitetura (ADRs)
+## Architecture Decisions (ADRs)
 
-> Uma linha por decisão. Justificativa curta. Quando há escalada arquitetural, incluir coluna de Sign-off do CTO.
+> One row per decision. Short rationale. When there is architectural escalation, include a CTO sign-off column.
 
-| # | Decisão | Justificativa | Sign-off do CTO |
+| # | Decision | Rationale | CTO sign-off |
 |---|---|---|---|
-| ADR-001 | [Decisão] | [Por que esta abordagem foi escolhida] | ✓ / N/A |
+| ADR-001 | [Decision] | [Why this approach was chosen] | ✓ / N/A |
 
 ---
 
-## Breakdown de Tarefas por História
+## Task Breakdown per Story
 
-> Uma subseção por história do Product Backlog. As tarefas devem ser pequenas o suficiente para um pull request por tarefa (idealmente ≤ 1 dia).
+> One subsection per story from the Product Backlog. Tasks should be small enough for one pull request per task (ideally ≤ 1 day).
 
 ---
 
-### ST-001 — [Nome da História]
+### ST-001 — [Story Name]
 
-| ID | Tarefa | Responsável | Estimativa |
+| ID | Task | Owner | Estimate |
 |---|---|---|---|
-| T-001 | [Descrição da tarefa] | [Nome] | [X dias] |
+| T-001 | [Task description] | [Name] | [X days] |
 
 ---
 
-### ST-002 — [Nome da História]
+### ST-002 — [Story Name]
 
-> Para histórias com dependências externas ou bloqueadores, marcar no topo da subseção:
+> For stories with external dependencies or blockers, mark at the top of the subsection:
 >
-> Bloqueado até: [condição]. Alvo: AAAA-MM-DD.
+> Blocked until: [condition]. Target: YYYY-MM-DD.
 
-| ID | Tarefa | Responsável | Estimativa |
+| ID | Task | Owner | Estimate |
 |---|---|---|---|
-| T-XXX | [Descrição da tarefa] | [Nome] | [X dias] |
+| T-XXX | [Task description] | [Name] | [X days] |
 
 ---
 
-## Estimativa de Esforço Refinada
+## Refined Effort Estimate
 
-> Somente uso interno.
+> Internal use only.
 
-| Área | Estimativa no RP | Estimativa refinada | Delta | Observação |
+| Area | RP estimate | Refined estimate | Delta | Note |
 |---|---|---|---|---|
-| Backend — [tema] | [X dias] | [Y dias] | [+/− Z dias] | [Por que mudou] |
-| Frontend — [tema] | [X dias] | [Y dias] | [+/− Z dias] | [Por que mudou] |
-| QA | [X dias] | [Y dias] | — | [No alvo / observação] |
-| **Total** | **X dias** | **Y dias** | **+/− Z dias** | |
+| Backend — [theme] | [X days] | [Y days] | [+/− Z days] | [Why it changed] |
+| Frontend — [theme] | [X days] | [Y days] | [+/− Z days] | [Why it changed] |
+| QA | [X days] | [Y days] | — | [On target / note] |
+| **Total** | **X days** | **Y days** | **+/− Z days** | |
 
-> PM notificado em AAAA-MM-DD. [Impacto em milestones — manter / revisar release para AAAA-MM-DD].
-
----
-
-## Definição de Pronto (DoD)
-
-Uma história está pronta quando **todos** os itens abaixo são verdadeiros:
-
-- [ ] Todos os critérios de aceite definidos na história do Product Backlog foram atendidos e verificados pelo QA
-- [ ] Aplicação server-side confirmada para todos os comportamentos com sensibilidade de segurança — sem confiança no cliente
-- [ ] Testes unitários cobrem o happy path e todos os edge cases da história
-- [ ] Código revisado e aprovado pelo Tech Lead
-- [ ] Sem regressões no fluxo existente — regression suite do QA aprovado
-- [ ] Eventos de telemetria confirmados recebidos no pipeline de staging
-- [ ] [Critério adicional específico da demanda — ex.: ADRs revisados pelo CTO, residência de dados validada, etc.]
-- [ ] Tech Lead encerra a história no backlog
+> PM notified on YYYY-MM-DD. [Milestone impact — maintain / revise release to YYYY-MM-DD].
 
 ---
 
-## Estratégia de Rollout
+## Definition of Done (DoD)
 
-1. **Feature flag** `feature_[nome]` — desabilitada por padrão para todos os tenants no deploy
-2. **Gates de pré-requisito** — [infraestrutura, integrações externas, dependências do cliente] confirmados antes da flag ser habilitada
-3. **Validação interna** — flag habilitada na conta de teste interna; PM + CS executam simulação completa end-to-end
-4. **Acesso antecipado [Cliente alvo]** — flag habilitada para o cliente piloto N dias úteis antes do release geral; CS acompanha primeira cerimônia/uso ao vivo
-5. **Disponibilidade geral** — flag habilitada para todos os tenants após cliente piloto confirmar sem problemas
-6. **Rollback** — desabilitar flag `feature_[nome]`; mudanças de schema são aditivas e nullable — nenhuma migração de rollback necessária
+A story is done when **all** of the following are true:
+
+- [ ] All acceptance criteria defined in the Product Backlog story have been met and verified by QA
+- [ ] Server-side enforcement confirmed for all security-sensitive behaviors — no client trust
+- [ ] Unit tests cover the happy path and all edge cases from the story
+- [ ] Code reviewed and approved by the Tech Lead
+- [ ] No regressions in the existing flow — QA regression suite passed
+- [ ] Telemetry events confirmed received in the staging pipeline
+- [ ] [Demand-specific additional criterion — e.g.: ADRs reviewed by CTO, data residency validated, etc.]
+- [ ] Tech Lead closes the story in the backlog
+
+---
+
+## Rollout Strategy
+
+1. **Feature flag** `feature_[name]` — disabled by default for all tenants on deploy
+2. **Prerequisite gates** — [infrastructure, external integrations, client dependencies] confirmed before the flag is enabled
+3. **Internal validation** — flag enabled on the internal test account; PM + CS run a full end-to-end simulation
+4. **Early access [Target client]** — flag enabled for the pilot client N business days before general release; CS accompanies the first live ceremony/use
+5. **General availability** — flag enabled for all tenants after pilot client confirms no issues
+6. **Rollback** — disable flag `feature_[name]`; schema changes are additive and nullable — no rollback migration required

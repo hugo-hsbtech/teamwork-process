@@ -1,269 +1,269 @@
-# PRD — Queue Voting (Fila de Votação)
+# PRD — Queue Voting
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package-queue-voting.md) (produto, autoria do PO) com o Technical Assessment (técnico, autoria do CTO) — **neste caso não requisitado**. É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. Ver [`personas/02-po.md` §2, §10 e §11](../../../personas/02-po.md).
+> The PRD (Product Requirements Document) is the **merger** of the [Readiness Package](./02-readiness-package-queue-voting.md) (product, authored by the PO) with the Technical Assessment (technical, authored by the CTO) — **not requested in this case**. It is the **only artifact that opens the downstream** — delivered to the **PM**. Each half retains clear authorship: the PO does not write the technical part, the CTO does not rewrite the product. See [`personas/02-po.md` §2, §10 and §11](../../../personas/02-po.md).
 >
-> **Neste caso, não houve escalada ao CTO:** o PRD se forma apenas a partir do RP; a Parte B referencia "sem Technical Assessment — sem impacto arquitetural".
+> **In this case, there was no escalation to the CTO:** the PRD is formed solely from the RP; Part B references "no Technical Assessment — no architectural impact."
 >
-> `PRD = RP (PO) [Technical Assessment: Não requisitado]`
+> `PRD = RP (PO) [Technical Assessment: Not requested]`
 >
-> **Jornada:** [`00 Documento do Submitter`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triagem)`](./01-intake-record-queue-voting.md) → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — não requisitado` → `04 PRD (PO+CTO → PM)`.
+> **Journey:** [`00 Submitter Document`](./00-submitter-brief-queue-voting.md) → [`01 Intake Record (PO — triage)`](./01-intake-record-queue-voting.md) → [`02 Readiness Package (PO)`](./02-readiness-package-queue-voting.md) → `03 Technical Assessment — not requested` → `04 PRD (PO+CTO → PM)`.
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do PRD** | PRD-2026-001 |
-| **Versão** | v1 |
-| **RP vinculado** | RP-2026-001 v2 |
-| **Technical Assessment vinculado** | N/A — sem escalada arquitetural |
-| **Intake vinculado** | INT-2026-001 |
-| **Autores** | Lucas Mendes (PO) |
-| **Status** | Em revisão do PM |
-| **Entregue ao PM em** | 2026-03-28 |
+| **PRD ID** | PRD-2026-001 |
+| **Version** | v1 |
+| **Linked RP** | RP-2026-001 v2 |
+| **Linked Technical Assessment** | N/A — no architectural escalation |
+| **Linked Intake** | INT-2026-001 |
+| **Authors** | Lucas Mendes (PO) |
+| **Status** | Under PM review |
+| **Delivered to PM on** | 2026-03-28 |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | 2026-03-28 | Lucas Mendes (PO) | Em revisão do PM | PRD formado a partir do RP-2026-001 v2 (aprovado). Sem Technical Assessment — sem escalada arquitetural. Entregue ao PM para abertura do downstream. |
+| v1 | 2026-03-28 | Lucas Mendes (PO) | Under PM review | PRD formed from RP-2026-001 v2 (approved). No Technical Assessment — no architectural escalation. Delivered to PM for downstream opening. |
 
 ---
 
 ## Sign-off
 
-> A fusão só fecha com assinatura do PO. Como não houve escalada ao CTO, o campo técnico é N/A justificado.
+> The merge only closes with the PO's signature. Since there was no escalation to the CTO, the technical field is N/A justified.
 
-| Papel | Nome | Veredito | Data |
+| Role | Name | Verdict | Date |
 |---|---|---|---|
-| **PO** (produto) | Lucas Mendes | RP congelado (`freezeReady`) — v2 aprovada pelo PM | 2026-03-28 |
-| **CTO** (técnico) | — | N/A — sem escalada arquitetural. Premissas técnicas validadas como razoáveis; Tech Lead confirma no breakdown. | — |
+| **PO** (product) | Lucas Mendes | RP frozen (`freezeReady`) — v2 approved by PM | 2026-03-28 |
+| **CTO** (technical) | — | N/A — no architectural escalation. Technical premises validated as reasonable; Tech Lead confirms in breakdown. | — |
 
 ---
 
-## Resumo Executivo Combinado
+## Combined Executive Summary
 
-A plataforma PokerPlan não oferece ao facilitador controle sobre o fluxo de estimativas durante cerimônias de planning: todos os itens ficam expostos desde o início e os votos aparecem em tempo real. Isso gera cerimônias desgovernadas e estimativas enviesadas por ancoragem — problemas relatados diretamente pelos Scrum Masters do Banco Meridional (cliente enterprise, 4 squads ativos, renovação de contrato em ~90 dias).
+The PokerPlan platform gives facilitators no control over the flow of estimates during planning ceremonies: all items are exposed from the start and votes appear in real time. This leads to ungoverned ceremonies and anchoring-biased estimates — issues reported directly by Banco Meridional's Scrum Masters (enterprise client, 4 active squads, contract renewal in ~90 days).
 
-Este PRD define a entrega de duas capacidades complementares: **Fila de Questões** (facilitador revela histórias sequencialmente, uma de cada vez) e **Votação Secreta** (votos ocultos até revelação deliberada pelo facilitador). Juntas, essas capacidades devolvem ao facilitador o controle do ritmo da cerimônia e eliminam o viés de ancoragem.
+This PRD defines the delivery of two complementary capabilities: **Queue of Questions** (facilitator reveals stories sequentially, one at a time) and **Secret Voting** (votes hidden until deliberately revealed by the facilitator). Together, these capabilities return control of the ceremony's pace to the facilitator and eliminate anchoring bias.
 
-Do ponto de vista técnico, a demanda é inteiramente circunscrita a UI e estado de sessão — extensão da infraestrutura WebSocket existente e do schema de persistência de sessão. Não há nova infraestrutura, sem novos serviços externos, sem impacto arquitetural de plataforma. Escalada ao CTO não foi necessária; as premissas técnicas foram avaliadas como razoáveis pelo PO e serão confirmadas pelo Tech Lead no breakdown.
+From a technical standpoint, the demand is entirely confined to UI and session state — extension of the existing WebSocket infrastructure and session persistence schema. No new infrastructure, no new external services, no platform architectural impact. Escalation to the CTO was not needed; technical premises were assessed as reasonable by the PO and will be confirmed by the Tech Lead in the breakdown.
 
-O resultado esperado de negócio: retenção de R$ 84.000 ARR (renovação do Banco Meridional) + desbloqueio de R$ 28.000 ARR de expansão (3 squads pendentes). Esforço estimado: 14 dias. Prazo: funcionalidade em produção antes da conversa de renovação (~90 dias a partir de março de 2026).
+The expected business outcome: retention of R$ 84,000 ARR (Banco Meridional renewal) + unlocking R$ 28,000 ARR of expansion (3 pending squads). Estimated effort: 14 days. Timeline: feature in production before the renewal conversation (~90 days from March 2026).
 
 ---
 
-## Parte A — Definição de Produto (do Readiness Package · PO)
+## Part A — Product Definition (from Readiness Package · PO)
 
-> Síntese das seções-chave do RP. O documento-fonte completo é [`RP-2026-001 v2`](./02-readiness-package-queue-voting.md); aqui fica o que o PM precisa para planejar, sem reescrever o RP inteiro.
+> Synthesis of the RP's key sections. The full source document is [`RP-2026-001 v2`](./02-readiness-package-queue-voting.md); what follows is what the PM needs to plan, without rewriting the entire RP.
 
-### A.1 Objetivos e Resultado Esperado
+### A.1 Objectives and Expected Outcome
 
-1. Permitir que facilitadores carreguem uma lista de itens e os revelem sequencialmente, um de cada vez, com controles para avançar, pular e retornar.
-2. Ocultar os votos de todos os participantes até que o facilitador acione a revelação de forma explícita e deliberada.
-3. Reduzir o tempo médio de cerimônia em pelo menos 20% para sessões com 10+ itens (mensurável via telemetria de duração de sessão).
-4. Remover o bloqueador de adoção para os 3 squads pendentes no Banco Meridional — desbloqueando R$ 28.000 ARR de expansão.
+1. Allow facilitators to load a list of items and reveal them sequentially, one at a time, with controls to advance, skip, and return.
+2. Hide all participants' votes until the facilitator explicitly and deliberately triggers the reveal.
+3. Reduce the average ceremony duration by at least 20% for sessions with 10+ items (measurable via session duration telemetry).
+4. Remove the adoption blocker for the 3 pending squads at Banco Meridional — unlocking R$ 28,000 ARR of expansion.
 
-### A.2 Escopo (final)
+### A.2 Scope (final)
 
-**Incluído:**
-- UI do facilitador: fila de itens com controles de adicionar, revelar próximo, pular, retornar
-- UI do participante: apenas o item ativo visível (sem visibilidade da fila)
-- Ocultação de votos até revelação explícita; revelação simultânea para todos os participantes
-- Persistência de estado através de reconexões (período de graça de 5 min para o facilitador)
-- Controles básicos: pular item, retornar ao item anterior, encerrar sessão
-- Telemetria de duração de sessão e por item
+**Included:**
+- Facilitator UI: item queue with controls to add, reveal next, skip, return
+- Participant UI: only the active item visible (no queue visibility)
+- Vote hiding until explicit reveal; simultaneous reveal for all participants
+- State persistence across reconnections (5-min grace period for the facilitator)
+- Basic controls: skip item, return to previous item, end session
+- Session and per-item duration telemetry
 
-**Excluído:**
-- Timer por item com avanço automático
-- Revelação automática após todos os votos submetidos
-- Co-facilitação / controle multi-facilitador
-- Redesign mobile; integração Jira/Linear; relatórios de analytics
+**Excluded:**
+- Per-item timer with auto-advance
+- Automatic reveal after all votes submitted
+- Co-facilitation / multi-facilitator control
+- Mobile redesign; Jira/Linear integration; analytics reports
 
-**Adiado (Fase 2+):**
-- Toggle de auto-revelação; reuso de template de fila; modo co-facilitador; dashboard de analytics; integração Jira/Linear
+**Deferred (Phase 2+):**
+- Auto-reveal toggle; queue template reuse; co-facilitator mode; analytics dashboard; Jira/Linear integration
 
 ### A.3 Personas / Jobs-to-be-done
 
-| Persona | Job | Impacto |
+| Persona | Job | Impact |
 |---|---|---|
-| Scrum Master / Facilitador | Conduzir cerimônia de planning com ritmo controlado e estimativas sem viés, sem workarounds manuais | Usuário primário: ganha controle total de quando cada item é apresentado e quando votos são revelados |
-| Desenvolvedor / Votante | Estimar cada história de forma independente, sem ver estimativas dos colegas antes de votar | Vê apenas o item ativo; voto oculto até revelação; menos distração |
+| Scrum Master / Facilitator | Run a planning ceremony with controlled pace and unbiased estimates, without manual workarounds | Primary user: gains full control over when each item is presented and when votes are revealed |
+| Developer / Voter | Estimate each story independently, without seeing colleagues' estimates before voting | Sees only the active item; vote hidden until reveal; less distraction |
 
-### A.4 Regras de Negócio e Fluxos
+### A.4 Business Rules and Flows
 
-Regras completas em [`RP-2026-001 v2 — Seção 6`](./02-readiness-package-queue-voting.md). Resumo para o PM:
+Full rules in [`RP-2026-001 v2 — Section 6`](./02-readiness-package-queue-voting.md). Summary for the PM:
 
-- Apenas o facilitador controla a fila (adicionar, reordenar, revelar, pular, retornar).
-- Itens na fila são invisíveis para participantes até revelados.
-- Votos exibidos como "Votou" (sem valor) até o facilitador acionar "Revelar votos".
-- Revelação é server-side: valores não trafegam em payloads WebSocket antes do evento `votes_revealed`.
-- Participantes sem voto no momento da revelação recebem "Não votou" — sem bloqueio do fluxo.
-- Máximo de 100 itens por fila (a confirmar pelo Tech Lead).
+- Only the facilitator controls the queue (add, reorder, reveal, skip, return).
+- Items in the queue are invisible to participants until revealed.
+- Votes displayed as "Voted" (without value) until the facilitator triggers "Reveal votes."
+- Reveal is server-side: values do not travel in WebSocket payloads before the `votes_revealed` event.
+- Participants without a vote at reveal time receive "Did not vote" — flow is not blocked.
+- Maximum of 100 items per queue (to be confirmed by the Tech Lead).
 
-Fluxo de estado: Sessão criada → Fila carregada → Item revelado → Votos submetidos (ocultos) → Votos revelados → Avançar / Re-votar / Encerrar.
+State flow: Session created → Queue loaded → Item revealed → Votes submitted (hidden) → Votes revealed → Advance / Re-vote / End.
 
-### A.5 User Stories + Critérios de Aceite
+### A.5 User Stories + Acceptance Criteria
 
-| ID | História | Critério de aceite principal |
+| ID | Story | Primary acceptance criterion |
 |---|---|---|
-| ST-001 | Como facilitador, quero gerenciar a fila de itens (adicionar, revelar um a um, pular, retornar) para conduzir o planning no meu ritmo | Dado que sou facilitador, quando aciono "Revelar próximo item", então o próximo item torna-se ativo e é exibido a todos; os demais itens da fila permanecem ocultos aos participantes |
-| ST-002 | Como facilitador, quero que os votos fiquem ocultos até que eu os revele explicitamente, para eliminar viés de ancoragem | Dado que um participante vota, quando outro verifica a tela, então vê "Votou" — sem o valor; quando o facilitador aciona "Revelar votos", todos os valores aparecem simultaneamente em ≤ 500ms |
-| ST-003 | Como facilitador ou participante, quero que o estado da sessão seja restaurado após uma desconexão temporária | Dado que o facilitador reconecta em até 5 min, então fila, item ativo e votos são restaurados; após 5 min, sessão encerra limpa com notificação |
+| ST-001 | As a facilitator, I want to manage the item queue (add, reveal one by one, skip, return) to run the planning at my own pace | Given I am the facilitator, when I trigger "Reveal next item," then the next item becomes active and is displayed to everyone; the remaining items in the queue remain hidden from participants |
+| ST-002 | As a facilitator, I want votes to stay hidden until I explicitly reveal them, to eliminate anchoring bias | Given a participant votes, when another checks the screen, then they see "Voted" — without the value; when the facilitator triggers "Reveal votes," all values appear simultaneously in ≤ 500ms |
+| ST-003 | As a facilitator or participant, I want session state to be restored after a temporary disconnection | Given the facilitator reconnects within 5 min, then queue, active item, and votes are restored; after 5 min, session ends cleanly with notification |
 
-Critérios de aceite completos (Given/When/Then para todos os casos) em [`RP-2026-001 v2 — Seção 7`](./02-readiness-package-queue-voting.md).
+Full acceptance criteria (Given/When/Then for all cases) in [`RP-2026-001 v2 — Section 7`](./02-readiness-package-queue-voting.md).
 
-### A.6 Requisitos Não-Funcionais (NFRs)
+### A.6 Non-Functional Requirements (NFRs)
 
-| Dimensão | Requisito | Verificação |
+| Dimension | Requirement | Verification |
 |---|---|---|
-| Performance | Revelação de votos propagada a todos em ≤ 500ms | Load test com 30+ participantes concorrentes antes do release |
-| Confiabilidade | Estado de sessão restaurado após reconexão do facilitador em até 5 min | Teste de reconexão forçada em QA |
-| Segurança | Valores de votos ausentes nos payloads WebSocket antes de `votes_revealed`; ocultação server-side | Teste de penetração no fluxo de revelação; inspeção de payloads |
-| Usabilidade | Facilitador opera fila e revelação sem treinamento | Validação com ≥ 1 Scrum Master do Banco Meridional antes do release |
-| Compatibilidade | Funcional nos browsers e dispositivos já suportados; layout mobile existente se aplica | Regressão no smoke test atual |
-| Manutenibilidade | Deploy sem downtime de sessões ativas; telemetria disponível desde o 1º deploy | Estratégia de rollout no Tech Backlog; verificação pós-deploy |
+| Performance | Vote reveal propagated to all in ≤ 500ms | Load test with 30+ concurrent participants before release |
+| Reliability | Session state restored after facilitator reconnection within 5 min | Forced reconnection test in QA |
+| Security | Vote values absent from WebSocket payloads before `votes_revealed`; server-side hiding | Penetration test on the reveal flow; payload inspection |
+| Usability | Facilitator operates queue and reveal without training | Validation with ≥ 1 Banco Meridional Scrum Master before release |
+| Compatibility | Functional on already-supported browsers and devices; existing mobile layout applies | Regression in current smoke test |
+| Maintainability | Deploy without downtime of active sessions; telemetry available from the 1st deploy | Rollout strategy in Tech Backlog; post-deploy verification |
 
-### A.7 Edge Cases e Modos de Falha
+### A.7 Edge Cases and Failure Modes
 
-- **Participante entra durante item ativo:** vê item ativo, pode votar. Fila não exposta.
-- **Facilitador desconecta:** sessão pausa. Período de graça 5 min; após isso, encerra limpa com notificação.
-- **Todos votaram antes da revelação:** sem auto-revelação — facilitador controla o timing.
-- **Votos parciais na revelação:** participantes sem voto recebem "Não votou". Fluxo não bloqueado.
-- **Fila vazia ao avançar:** controle desabilitado; indicação visual "Todos os itens concluídos".
-- **Reconexão de participante:** retoma item ativo; voto anterior preservado se já havia votado.
-- **Migração de schema com sessões ativas:** migração roda apenas em sessões encerradas.
+- **Participant joins during active item:** sees active item, can vote. Queue not exposed.
+- **Facilitator disconnects:** session pauses. 5-min grace period; after that, ends cleanly with notification.
+- **All voted before reveal:** no auto-reveal — facilitator controls timing.
+- **Partial votes at reveal:** participants without a vote receive "Did not vote." Flow not blocked.
+- **Queue empty on advance:** control disabled; visual indication "All items completed."
+- **Participant reconnects:** resumes active item; prior vote preserved if already voted.
+- **Schema migration with active sessions:** migration runs only on ended sessions.
 
-Edge cases completos com comportamento esperado em [`RP-2026-001 v2 — Seção 9`](./02-readiness-package-queue-voting.md).
+Full edge cases with expected behavior in [`RP-2026-001 v2 — Section 9`](./02-readiness-package-queue-voting.md).
 
 ---
 
-## Parte B — Definição Técnica (do Technical Assessment · CTO)
+## Part B — Technical Definition (from Technical Assessment · CTO)
 
-> Technical Assessment **não requisitado** para esta demanda — sem escalada arquitetural. A demanda é circunscrita a UI e extensão de estado de sessão dentro da infraestrutura existente. As premissas técnicas foram avaliadas como razoáveis na triagem e serão validadas pelo Tech Lead durante o breakdown técnico.
+> Technical Assessment **not requested** for this demand — no architectural escalation. The demand is confined to UI and session state extension within the existing infrastructure. Technical premises were assessed as reasonable at triage and will be validated by the Tech Lead during the technical breakdown.
 
-### B.1 Veredito de Viabilidade
+### B.1 Feasibility Verdict
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Veredito** | N/A — sem escalada arquitetural |
-| **Ressalvas** | Sem escalada ao CTO. Tech Lead valida premissas técnicas (WebSocket + schema de sessão) no breakdown. Se uma premissa for falsa, a demanda é retriada — gatilho de retriagem downstream. |
+| **Verdict** | N/A — no architectural escalation |
+| **Caveats** | No CTO escalation. Tech Lead validates technical premises (WebSocket + session schema) in breakdown. If a premise proves false, the demand is re-triaged — downstream re-triage trigger. |
 
-### B.2 Impacto Arquitetural e Integrações
+### B.2 Architectural Impact and Integrations
 
-| Área / Sistema | Impacto | Nota |
+| Area / System | Impact | Note |
 |---|---|---|
-| Camada WebSocket / sessão em tempo real | Novos tipos de evento (`item_revealed`, `votes_revealed`, `item_skipped`) na infraestrutura existente | Sem novo broker ou camada de mensageria — premissa a confirmar com Tech Lead |
-| Persistência de sessão | Extensão de schema para suportar fila ordenada, estado de revelação por item e flag de ocultação de votos | Premissa: migração incremental, sem migração completa — a confirmar com Tech Lead |
-| Frontend do facilitador | Novo componente UI de gerenciamento de fila e controles de revelação | — |
-| Frontend do participante | Mudança na lógica de exibição de votos (oculto → revelado) | — |
-| Observabilidade | Novos eventos de telemetria: duração de sessão, tempo por item, lag de revelação | Necessário para medir objetivos da Seção 3 |
-| Multi-tenancy | Sem impacto — escopo de sessão já isolado por tenant | — |
+| WebSocket / real-time session layer | New event types (`item_revealed`, `votes_revealed`, `item_skipped`) on existing infrastructure | No new broker or messaging layer — premise to confirm with Tech Lead |
+| Session persistence | Schema extension to support ordered queue, per-item reveal state, and vote hiding flag | Premise: incremental migration, no full migration — to confirm with Tech Lead |
+| Facilitator frontend | New queue management UI component and reveal controls | — |
+| Participant frontend | Change in vote display logic (hidden → revealed) | — |
+| Observability | New telemetry events: session duration, time per item, reveal lag | Required to measure objectives in Section 3 |
+| Multi-tenancy | No impact — session scope already isolated per tenant | — |
 
-> **Nota:** as áreas acima são avaliação do PO com base no conhecimento do sistema. Não substituem o Technical Assessment do CTO. O Tech Lead confirma durante o breakdown; se encontrar bloqueador, retriagem downstream é acionada.
+> **Note:** the areas above are the PO's assessment based on system knowledge. They do not replace the CTO's Technical Assessment. The Tech Lead confirms during breakdown; if a blocker is found, a downstream re-triage is triggered.
 
-### B.3 Constraints Rígidas
+### B.3 Hard Constraints
 
-| Constraint | Efeito no escopo |
+| Constraint | Effect on scope |
 |---|---|
-| Deploy sem downtime | Rollout incremental obrigatório. Estratégia de rollout documentada no Tech Backlog antes do início do desenvolvimento. |
-| Sem novos serviços externos | Funcionalidade construída integralmente na infraestrutura existente. Nenhum procurement. |
-| Máx. 100 itens por fila | Limite operacional a confirmar com Tech Lead. Se inviável, reduzir para 50 sem impacto funcional para o caso de uso do Banco Meridional. |
+| Deploy without downtime | Incremental rollout mandatory. Rollout strategy documented in Tech Backlog before development starts. |
+| No new external services | Feature built entirely within existing infrastructure. No procurement. |
+| Max 100 items per queue | Operational limit to confirm with Tech Lead. If not feasible, reduce to 50 without functional impact for Banco Meridional's use case. |
 
-### B.4 ADRs (nível arquitetural)
+### B.4 ADRs (architectural level)
 
-| # | Decisão | Sign-off |
+| # | Decision | Sign-off |
 |---|---|---|
-| — | Sem ADRs de nível arquitetural — sem escalada ao CTO. ADRs técnicos serão registrados pelo Tech Lead no Tech Backlog (06.2) durante o breakdown. | N/A |
+| — | No architectural-level ADRs — no CTO escalation. Technical ADRs will be recorded by the Tech Lead in the Tech Backlog (06.2) during breakdown. | N/A |
 
 ---
 
-## Reconciliação de Escopo
+## Scope Reconciliation
 
-> Escopo do RP mantido integralmente. Sem Technical Assessment — nenhum veto ou constraint técnico de CTO alterou o escopo definido no RP-2026-001 v2.
+> RP scope kept in full. No Technical Assessment — no CTO technical veto or constraint altered the scope defined in RP-2026-001 v2.
 
-| Item original (RP) | Mudança após Technical Assessment | Motivo |
+| Original item (RP) | Change after Technical Assessment | Reason |
 |---|---|---|
-| — | Escopo do RP mantido integralmente | Sem escalada ao CTO; sem conflito técnico a reconciliar |
+| — | RP scope kept in full | No CTO escalation; no technical conflict to reconcile |
 
 ---
 
-## Visão Consolidada de Riscos e Dependências
+## Consolidated Risk and Dependency View
 
-> Riscos de produto/negócio (do RP, Seção 12) + avaliação técnica preliminar do PO — o PM planeja contra esta visão.
+> Product/business risks (from RP, Section 12) + PO's preliminary technical assessment — the PM plans against this view.
 
-| Risco | Origem | Tipo | Probabilidade | Impacto | Mitigação |
+| Risk | Origin | Type | Probability | Impact | Mitigation |
 |---|---|---|---|---|---|
-| Prazo de renovação não cumprido se esforço real superar o estimado | RP | Prazo | Baixa | Alto | PM avalia capacidade na abertura do planejamento. Corte de escopo (telemetria avançada) tem precedência sobre extensão de prazo. |
-| Premissa técnica de WebSocket ou schema falsa — identificada no breakdown | RP/TA | Técnico | Baixa | Alto | Tech Lead valida na abertura. Se bloqueador: retriagem imediata com PO. |
-| Scrum Masters sem autonomia de adoção (premissa não validada) | RP | Externo | Baixa | Médio | CS valida com o cliente antes da entrega. |
-| Viés de ancoragem residual (comunicação verbal) | RP | Produto | Alta | Baixo | Aceito — plataforma controla apenas visibilidade digital. |
-| Adoção dos squads pendentes mais lenta que o esperado | RP | Adoção | Média | Médio | CS coordena onboarding ativo pós-release. Meta de 60 dias é conservadora. |
-| Bypass de ocultação de votos via inspeção client-side | RP | Segurança | Baixa | Alto | Ocultação server-side (sem valor nos payloads antes de `votes_revealed`). Teste de penetração no fluxo de revelação. |
-| Ordenação de eventos WebSocket inconsistente sob carga | RP | Técnico | Média | Médio | Load test com 30+ participantes antes do release. Revelação idempotente por design. |
+| Renewal deadline not met if actual effort exceeds estimate | RP | Timeline | Low | High | PM assesses capacity at planning opening. Scope cut (advanced telemetry) takes precedence over timeline extension. |
+| WebSocket or schema technical premise is false — identified in breakdown | RP/TA | Technical | Low | High | Tech Lead validates at opening. If blocker: immediate re-triage with PO. |
+| Scrum Masters without adoption autonomy (unvalidated premise) | RP | External | Low | Medium | CS validates with client before delivery. |
+| Residual anchoring bias (verbal communication) | RP | Product | High | Low | Accepted — platform controls only digital visibility. |
+| Slower-than-expected adoption by pending squads | RP | Adoption | Medium | Medium | CS coordinates active onboarding post-release. 60-day target is conservative. |
+| Vote hiding bypass via client-side inspection | RP | Security | Low | High | Server-side hiding (no value in payloads before `votes_revealed`). Penetration test on reveal flow. |
+| Inconsistent WebSocket event ordering under load | RP | Technical | Medium | Medium | Load test with 30+ participants before release. Reveal is idempotent by design. |
 
-**Dependências externas conhecidas:**
+**Known external dependencies:**
 
-- CS (Ana Costa): validação de autonomia de adoção com o cliente + coordenação de onboarding pós-release
-- PM: avaliação de capacidade da equipe e planejamento dentro do prazo de 90 dias
-- Tech Lead: confirmação das premissas técnicas na abertura do breakdown
+- CS (Ana Costa): adoption autonomy validation with client + post-release onboarding coordination
+- PM: team capacity assessment and planning within the 90-day deadline
+- Tech Lead: confirmation of technical premises at breakdown opening
 
 ---
 
-## Esforço e Custo
+## Effort and Cost
 
-> Estimativa preliminar do PO (sem Technical Assessment firme). O número firme vem do Tech Lead no breakdown (Tech Backlog 06.2). Somente uso interno — não é compromisso contratual.
+> PO's preliminary estimate (no firm Technical Assessment). Firm number comes from the Tech Lead in breakdown (Tech Backlog 06.2). Internal use only — not a contractual commitment.
 
-| Área | Estimativa preliminar | Senioridade |
+| Area | Preliminary estimate | Seniority |
 |---|---|---|
-| Backend (estado de sessão + eventos WebSocket) | 5 dias | Mid-senior |
-| Frontend — UI do facilitador | 4 dias | Mid |
-| Frontend — UI do participante | 2 dias | Mid |
-| QA (funcional + segurança + carga) | 3 dias | QA |
-| **Total preliminar** | **14 dias** | |
+| Backend (session state + WebSocket events) | 5 days | Mid-senior |
+| Frontend — facilitator UI | 4 days | Mid |
+| Frontend — participant UI | 2 days | Mid |
+| QA (functional + security + load) | 3 days | QA |
+| **Preliminary total** | **14 days** | |
 
-**Infra / Terceiros / Opex recorrente:** Nenhum. Sem nova infraestrutura, sem serviços externos, sem procurement. Impacto de opex: aumento de ~2–3% no armazenamento de observabilidade (eventos de telemetria adicionais) — sem ação de orçamento necessária.
+**Infra / Third-parties / Recurring opex:** None. No new infrastructure, no external services, no procurement. Opex impact: ~2–3% increase in observability storage (additional telemetry events) — no budget action needed.
 
 ---
 
-## Prontidão Herdada e Dispositions em Aberto
+## Inherited Readiness and Open Dispositions
 
-> O que o PM precisa enxergar antes de planejar: premissas ainda a validar que sobreviveram até aqui. Se uma premissa se provar falsa na execução, a demanda é reavaliada.
+> What the PM needs to see before planning: premises still to validate that survived to this point. If a premise proves false during execution, the demand is re-evaluated.
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Premissas ainda a validar** | (1) Scrum Masters do Banco Meridional têm autonomia de adoção sem aprovação de TI — validar com CS antes da entrega; (2) Ticket por squad dos squads pendentes equivale ao dos ativos — validar com Finance/CS para firmar ARR de expansão |
-| **Incógnitas de Discovery** | — (nenhuma; não houve fase de Discovery) |
-| **Requisitos delegados (com dono)** | — |
+| **Premises still to validate** | (1) Banco Meridional Scrum Masters have adoption autonomy without IT approval — validate with CS before delivery; (2) per-squad ticket value for pending squads matches active squads — validate with Finance/CS to firm up expansion ARR |
+| **Discovery unknowns** | — (none; no Discovery phase occurred) |
+| **Delegated requirements (with owner)** | — |
 
-> As premissas técnicas (WebSocket e schema de sessão) foram tratadas durante a racionalização e confirmadas como razoáveis. Serão validadas definitivamente pelo Tech Lead no breakdown — se uma delas for falsa, o PO é notificado e a demanda é retriada.
+> Technical premises (WebSocket and session schema) were addressed during rationalization and confirmed as reasonable. They will be definitively validated by the Tech Lead in breakdown — if one proves false, the PO is notified and the demand is re-triaged.
 
 ---
 
-## Critérios de Sucesso e Métricas (projetados)
+## Success Criteria and Metrics (projected)
 
-> Baseline projetado que [`../../../metrics.md`](../../../metrics.md) confronta com o medido pós-rollout.
+> Projected baseline that [`../../../metrics.md`](../../../metrics.md) compares against measured post-rollout.
 
-| Tipo | Métrica | Meta (projetada) | Janela | Confiança |
+| Type | Metric | Target (projected) | Window | Confidence |
 |---|---|---|---|---|
-| **Primária** | Duração média de cerimônia com 10+ itens (coorte Banco Meridional) | Redução ≥ 20% vs. baseline pré-release | 30 dias pós-release | 75 |
-| **Primária** | Renovação do Banco Meridional | Contrato renovado antes de ~2026-06-10 | Até a data de expiração | 85 |
-| **Secundária** | Adoção de squads adicionais no Banco Meridional | 3 novos squads ativados | 60 dias pós-release | 70 |
-| **Guardrail** | Tickets de CS sobre viés de ancoragem / visibilidade prematura de votos | Zero | Contínuo pós-release | 90 |
-| **Guardrail** | Taxa de erros de WebSocket nas sessões | Não aumenta vs. baseline | 30 dias pós-release | 80 |
+| **Primary** | Average ceremony duration with 10+ items (Banco Meridional cohort) | Reduction ≥ 20% vs. pre-release baseline | 30 days post-release | 75 |
+| **Primary** | Banco Meridional renewal | Contract renewed before ~2026-06-10 | By expiration date | 85 |
+| **Secondary** | Adoption by additional Banco Meridional squads | 3 new squads activated | 60 days post-release | 70 |
+| **Guardrail** | CS tickets about anchoring bias / premature vote visibility | Zero | Continuous post-release | 90 |
+| **Guardrail** | WebSocket error rate in sessions | Does not increase vs. baseline | 30 days post-release | 80 |
 
 ---
 
-## Handoff ao PM — Gate de Aceite
+## Handoff to PM — Acceptance Gate
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
+> The PM has **explicit authority to reject** the PRD and return it with specific gaps (not a generic "needs more detail"). The rejection and reason enter the Revision History; the PO addresses only the gaps and increments the version. See [`interactions/07-po-to-pm.md`](../../../interactions/07-po-to-pm.md).
 
-| Checklist de entrega | OK? |
+| Delivery checklist | OK? |
 |---|---|
-| RP congelado (`freezeReady`) e referenciado | ☑ |
-| Technical Assessment assinado (ou N/A justificado) | ☑ — N/A: sem escalada arquitetural |
-| Reconciliação de escopo registrada | ☑ — escopo do RP mantido integralmente |
-| Riscos e dependências consolidados | ☑ |
-| Dependências externas explícitas | ☑ |
-| Dispositions em aberto visíveis | ☑ |
+| RP frozen (`freezeReady`) and referenced | ☑ |
+| Technical Assessment signed (or N/A justified) | ☑ — N/A: no architectural escalation |
+| Scope reconciliation recorded | ☑ — RP scope kept in full |
+| Risks and dependencies consolidated | ☑ |
+| External dependencies explicit | ☑ |
+| Open dispositions visible | ☑ |
 
-**Prioridade e contexto de negócio:** demanda de prioridade Alta. Renovação do Banco Meridional (maior conta enterprise) em ~90 dias. O prazo não é negociável — é o constraint de corte de escopo, não de adiamento. PM deve avaliar capacidade da equipe na abertura do planejamento e, se necessário, cortar itens de telemetria avançada antes de cortar funcionalidade de fila ou revelação de votos.
+**Priority and business context:** High-priority demand. Banco Meridional renewal (largest enterprise account) in ~90 days. The deadline is non-negotiable — it is the scope-cutting constraint, not a deferral one. PM must assess team capacity at planning opening and, if necessary, cut advanced telemetry items before cutting queue or vote reveal functionality.

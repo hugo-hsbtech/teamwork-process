@@ -1,106 +1,106 @@
-# Base de Conhecimento Técnica (Tech Landscape) — [Nome do Sistema]
+# Technical Knowledge Base (Tech Landscape) — [System Name]
 
-> **O que é.** Um documento **persistente, por sistema** (não por demanda) que descreve o terreno técnico sobre o qual as demandas são avaliadas e construídas. É a "base de conhecimento prévia" que o [Technical Assessment](./03-technical-assessment.md) **referencia** (brownfield) ou **semeia** (greenfield, a partir dos ADRs fundacionais). Existe porque a camada de execução — engenheiro recém-chegado ou **agente de IA** — **não tem conhecimento implícito do código**; este arquivo torna explícito o que normalmente vive só na cabeça do time.
+> **What it is.** A **persistent, per-system** document (not per demand) that describes the technical terrain on which demands are assessed and built. It is the "prior knowledge base" that the [Technical Assessment](./03-technical-assessment.md) **references** (brownfield) or **seeds** (greenfield, from the foundational ADRs). It exists because the execution layer — a newly onboarded engineer or an **AI agent** — **has no implicit knowledge of the code**; this file makes explicit what normally lives only in the team's heads.
 >
-> **Inspiração.** *Steering docs* do Kiro (`product.md` / `tech.md` / `structure.md`) e o `document-project` / `project-context.md` do BMAD Method — consolidados em um único documento por sistema. É conhecimento de **contexto persistente**, não de uma feature.
+> **Inspiration.** Kiro's *steering docs* (`product.md` / `tech.md` / `structure.md`) and the BMAD Method's `document-project` / `project-context.md` — consolidated into a single document per system. This is **persistent context** knowledge, not feature knowledge.
 >
-> **Ciclo de vida.** Criado quando um sistema nasce (greenfield) ou quando a primeira demanda brownfield exige documentá-lo (Discovery). **Vivo:** cada demanda que muda o terreno atualiza este arquivo. Pode estar **completo, parcial ou ausente** — a Seção 6 registra honestamente as lacunas (mesma filosofia de confiança do resto do processo).
+> **Lifecycle.** Created when a system is born (greenfield) or when the first brownfield demand requires documenting it (Discovery). **Living:** every demand that changes the terrain updates this file. It may be **complete, partial, or absent** — Section 6 honestly records the gaps (same confidence philosophy as the rest of the process).
 >
-> **Uso:** um arquivo por sistema/serviço. Nomear `tech-landscape-[sistema].md`.
+> **Usage:** one file per system/service. Name it `tech-landscape-[system].md`.
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Sistema / Serviço** | [Nome] |
-| **Dono técnico** | [Nome / time] |
-| **Origem** | Greenfield (semeado pelo TA TA-AAAA-NNN) / Brownfield (documentado em INT-AAAA-NNN) |
-| **Status da KB** | Completa · Parcial · Stub (esqueleto inicial) |
-| **Última atualização** | AAAA-MM-DD — [por quem, por qual demanda] |
+| **System / Service** | [Name] |
+| **Technical owner** | [Name / team] |
+| **Origin** | Greenfield (seeded by TA TA-YYYY-NNN) / Brownfield (documented in INT-YYYY-NNN) |
+| **KB status** | Complete · Partial · Stub (initial skeleton) |
+| **Last updated** | YYYY-MM-DD — [by whom, for which demand] |
 
-## Histórico de Atualização
+## Update History
 
-| Data | Demanda | O que mudou no terreno |
+| Date | Demand | What changed in the terrain |
 |---|---|---|
-| AAAA-MM-DD | [INT/PRD-ID] | [Criação / mudança de stack / nova integração / dívida resolvida] |
+| YYYY-MM-DD | [INT/PRD-ID] | [Creation / stack change / new integration / debt resolved] |
 
 ---
 
-## 1. Produto / Domínio  ·  *(o "porquê" — estilo `product.md`)*
+## 1. Product / Domain  ·  *(the "why" — `product.md` style)*
 
-> Para que este sistema existe, quem usa, e quais capacidades ele entrega. Ancora decisões técnicas no propósito de produto.
+> What this system exists for, who uses it, and what capabilities it delivers. Anchors technical decisions in product purpose.
 
-- **Propósito:** [O problema que este sistema resolve]
-- **Usuários / personas:** [Quem depende dele]
-- **Capacidades principais:** [O que faz, em 3–7 itens]
-- **Limites do sistema:** [O que NÃO é responsabilidade dele]
+- **Purpose:** [The problem this system solves]
+- **Users / personas:** [Who depends on it]
+- **Key capabilities:** [What it does, in 3–7 items]
+- **System boundaries:** [What is NOT this system's responsibility]
 
 ---
 
-## 2. Stack & Ferramentas  ·  *(o "com quê" — estilo `tech.md`)*
+## 2. Stack & Tools  ·  *(the "with what" — `tech.md` style)*
 
-> O que o time **já usa** — para que novas implementações prefiram o estabelecido em vez de reinventar.
+> What the team **already uses** — so that new implementations prefer the established stack rather than reinventing.
 
-| Camada | Tecnologia | Versão / nota |
+| Layer | Technology | Version / note |
 |---|---|---|
-| **Linguagem(ns) / runtime** | [ex.: TypeScript / Node 20] | |
-| **Framework / app** | [ex.: NestJS] | |
-| **Persistência / dados** | [ex.: PostgreSQL + Prisma] | |
-| **Mensageria / eventos** | [ex.: Kafka — ou N/A] | |
-| **Frontend** | [ex.: React] | |
-| **Infra / deploy** | [ex.: Kubernetes / AWS] | |
-| **Testes** | [ex.: Jest, Playwright] | |
-| **Observabilidade** | [ex.: OpenTelemetry, Grafana] | |
+| **Language(s) / runtime** | [e.g.: TypeScript / Node 20] | |
+| **Framework / app** | [e.g.: NestJS] | |
+| **Persistence / data** | [e.g.: PostgreSQL + Prisma] | |
+| **Messaging / events** | [e.g.: Kafka — or N/A] | |
+| **Frontend** | [e.g.: React] | |
+| **Infra / deploy** | [e.g.: Kubernetes / AWS] | |
+| **Tests** | [e.g.: Jest, Playwright] | |
+| **Observability** | [e.g.: OpenTelemetry, Grafana] | |
 
 ---
 
-## 3. Estrutura & Convenções  ·  *(o "como organizamos" — estilo `structure.md`)*
+## 3. Structure & Conventions  ·  *(the "how we organize" — `structure.md` style)*
 
-> Onde o código mora e as regras que o novo código deve seguir para encaixar sem atrito.
+> Where the code lives and the rules that new code must follow to fit without friction.
 
-- **Organização de pastas / módulos:** [Padrão — ex.: por domínio, por camada]
-- **Convenções de nomeação:** [Arquivos, classes, endpoints]
-- **Padrões de código relevantes:** [ex.: injeção de dependência, repository pattern]
-- **Padrões de API / contratos:** [REST/eventos, versionamento, autenticação]
-- **Padrões de dados:** [Migrations, soft-delete, multi-tenancy]
-- **Branching / CI:** [Fluxo de branches, gates de pipeline]
+- **Folder / module organization:** [Pattern — e.g.: by domain, by layer]
+- **Naming conventions:** [Files, classes, endpoints]
+- **Relevant code patterns:** [e.g.: dependency injection, repository pattern]
+- **API / contract patterns:** [REST/events, versioning, authentication]
+- **Data patterns:** [Migrations, soft-delete, multi-tenancy]
+- **Branching / CI:** [Branch flow, pipeline gates]
 
 ---
 
-## 4. Integrações & Dependências
+## 4. Integrations & Dependencies
 
-> Com quem este sistema conversa. Mapa de contexto (estilo C4 — *system context / landscape*).
+> Who this system talks to. Context map (C4 style — *system context / landscape*).
 
-| Sistema / Serviço | Direção | Protocolo | Natureza do acoplamento |
+| System / Service | Direction | Protocol | Coupling nature |
 |---|---|---|---|
-| [Nome] | Consome / É consumido / Bidirecional | [REST / evento / BD] | [Síncrono / assíncrono / forte / fraco] |
+| [Name] | Consumes / Is consumed / Bidirectional | [REST / event / DB] | [Synchronous / asynchronous / tight / loose] |
 
 ---
 
-## 5. Constraints & Dívida Conhecida
+## 5. Constraints & Known Debt
 
-> Restrições não-negociáveis e fragilidades que toda demanda precisa respeitar/evitar.
+> Non-negotiable restrictions and fragilities that every demand must respect/avoid.
 
-| Item | Tipo | Detalhe | Implicação |
+| Item | Type | Detail | Implication |
 |---|---|---|---|
-| [Constraint / dívida] | Constraint / Dívida técnica | [O que é] | [O que evitar ou cuidar] |
+| [Constraint / debt] | Constraint / Technical debt | [What it is] | [What to avoid or watch out for] |
 
 ---
 
-## 6. Lacunas da KB  ·  *(honestidade sobre o que ainda não sabemos)*
+## 6. KB Gaps  ·  *(honesty about what we don't yet know)*
 
-> O que **ainda não está documentado** ou tem baixa confiança. Mesma lógica de dispositions do resto do processo: "não documentado ainda, e este é o plano" é um estado válido — melhor que silêncio. Uma demanda brownfield que toca uma área listada aqui deve documentá-la antes de avançar.
+> What is **not yet documented** or has low confidence. Same logic as process dispositions: "not documented yet, and this is the plan" is a valid state — better than silence. A brownfield demand that touches an area listed here must document it before advancing.
 
-| Área não documentada | Por que importa | Como/quando preencher |
+| Undocumented area | Why it matters | How/when to fill in |
 |---|---|---|
-| [Área] | [Risco de não saber] | [Discovery / próxima demanda que tocar] |
+| [Area] | [Risk of not knowing] | [Discovery / next demand that touches it] |
 
 ---
 
-## 7. Glossário  *(opcional)*
+## 7. Glossary  *(optional)*
 
-> Termos de domínio e técnicos que o time usa ao falar deste sistema (estilo arc42 §12). Reduz ambiguidade para quem chega.
+> Domain and technical terms the team uses when talking about this system (arc42 §12 style). Reduces ambiguity for newcomers.
 
-| Termo | Definição |
+| Term | Definition |
 |---|---|
-| [Termo] | [Definição] |
+| [Term] | [Definition] |

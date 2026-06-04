@@ -1,55 +1,55 @@
-# Referências — Evolução dos Templates (jornada, greenfield/brownfield, base de conhecimento, TA enriquecido)
+# References — Template Evolution (journey, greenfield/brownfield, knowledge base, enriched TA)
 
-> **O que é este documento.** Uma base de referências que **justifica as mudanças introduzidas nos templates** desta pasta — para que, ao portá-las para o repositório original da documentação, cada decisão tenha lastro rastreável, no mesmo padrão do [`../references.md`](../references.md). Este arquivo **estende** o `references.md` (que ancora o processo upstream→downstream original); aqui ficam só as âncoras das adições.
+> **What this document is.** A reference base that **justifies the changes introduced in the templates** in this folder — so that when porting them to the original documentation repository, every decision has traceable grounding, following the same standard as [`../references.md`](../references.md). This file **extends** `references.md` (which anchors the original upstream→downstream process); here are only the anchors for the additions.
 >
-> **As mudanças cobertas.** (1) Classificação **greenfield vs brownfield** na triagem; (2) **Jornada do usuário ponta-a-ponta** no Readiness Package (Seção 6.5); (3) **Base de Conhecimento técnica persistente** (`tech-landscape.md`); (4) **Technical Assessment além da arquitetura** (viabilidade dos NFRs, alternativas consideradas, build vs buy, testabilidade/observabilidade); (5) a meta-justificativa da **era da IA** (Spec-Driven Development e *context engineering*); (6) **EARS** como suporte para critérios testáveis.
+> **Changes covered.** (1) **Greenfield vs. brownfield** classification at triage; (2) **End-to-end user journey** in the Readiness Package (Section 6.5); (3) **Persistent technical knowledge base** (`tech-landscape.md`); (4) **Technical Assessment beyond architecture** (NFR feasibility, alternatives considered, build vs. buy, testability/observability); (5) the meta-justification of the **AI era** (Spec-Driven Development and *context engineering*); (6) **EARS** as support for testable criteria.
 >
-> **Princípio que atravessa todas.** O upstream precisa carregar **contexto suficiente para decisão de implementação** — porque a camada de execução (engenheiro recém-chegado ou agente de IA) **não tem conhecimento implícito do código-fonte**. Cada adição fecha uma lacuna desse contexto, mantendo a regra do repo: *"o contrato é teto, não piso"*.
+> **Principle that runs through all of them.** The upstream must carry **sufficient context for implementation decisions** — because the execution layer (a newly onboarded engineer or an AI agent) **has no implicit knowledge of the source code**. Every addition closes a gap in that context, maintaining the repo's rule: *"the contract is a ceiling, not a floor."*
 
 ---
 
-## Por que estas mudanças, agora
+## Why these changes, now
 
-O processo original (ver [`../references.md`](../references.md)) já era sólido em **governança** (Stage-Gate), **descoberta** (Continuous Discovery), **fluxo** (Reinertsen) e **papéis** (Team Topologies). O que a auditoria dos templates revelou foram lacunas no **terreno técnico-de-produto** que a definição entrega ao downstream:
+The original process (see [`../references.md`](../references.md)) was already solid on **governance** (Stage-Gate), **discovery** (Continuous Discovery), **flow** (Reinertsen), and **roles** (Team Topologies). What a template audit revealed were gaps in the **technical-product terrain** that the definition delivers to the downstream:
 
-- a jornada ponta-a-ponta existia só no Product Backlog downstream, não na definição de produto upstream;
-- o Technical Assessment era quase só arquitetura, sem o panorama que um implementador precisa;
-- não havia distinção entre **construir software novo** e **alterar software existente** — decisões opostas;
-- não havia o conceito de **base de conhecimento prévia** do sistema, que pode existir ou não.
+- the end-to-end journey existed only in the downstream Product Backlog, not in the upstream product definition;
+- the Technical Assessment was almost purely architecture, without the landscape an implementer needs;
+- there was no distinction between **building new software** and **modifying existing software** — opposite decisions;
+- there was no concept of a **prior knowledge base** of the system, which may or may not exist.
 
-Essas quatro lacunas são exatamente as que a literatura de 2024–2026 sobre **desenvolvimento assistido por IA** tornou críticas: sem terreno explícito, o agente (e o humano) adivinha. As âncoras abaixo são as que sustentam o fechamento de cada uma.
+These four gaps are exactly the ones that the 2024–2026 literature on **AI-assisted development** made critical: without an explicit terrain, the agent (and the human) guesses. The anchors below support the closing of each one.
 
 ---
 
-## Mapeamento Consolidado
+## Consolidated Mapping
 
-| Mudança no template | Onde | Framework / Literatura | Fonte canônica |
+| Template change | Where | Framework / Literature | Canonical source |
 |---|---|---|---|
-| Classificação Greenfield vs Brownfield | `01-intake-record` · `03-technical-assessment` | Trilhas greenfield/brownfield; estudos de campo brownfield | BMAD Method (2024–25); Feathers, *Working Effectively with Legacy Code* (2004) |
-| Documentar o sistema antes de mudá-lo (caminho brownfield) | `03-technical-assessment` (Estado atual) | `document-project` / análise de sistema existente | BMAD *working-in-the-brownfield*; arc42 §3 (Context & Scope) |
-| Definir a fundação com critérios (caminho greenfield) | `03-technical-assessment` (Fundação técnica) | Solution Strategy + Architecture Decisions | arc42 §4 e §9; Nygard, ADRs (2011) |
-| Jornada do usuário ponta-a-ponta | `02-readiness-package` §6.5 | Journey Mapping; Mapping Experiences | Nielsen Norman Group; Kalbach, *Mapping Experiences* (2016) |
-| Service blueprint opcional | `02-readiness-package` §6.5 | Service Blueprinting | Nielsen Norman Group; Bitner et al. (2008) |
-| Base de Conhecimento técnica persistente | `tech-landscape.md` (novo) | *Steering docs* / contexto persistente; `project-context` | Kiro (AWS); BMAD Method |
-| TA: viabilidade dos NFRs (mapeada ao RP §8) | `03-technical-assessment` | Quality requirements as scenarios | arc42 §10; ISO/IEC 25010 |
-| TA: alternativas consideradas | `03-technical-assessment` · `04-prd` | Design Docs / RFC (alternatives considered) | Google Design Docs; Pragmatic Engineer (RFCs) |
-| TA: build vs buy | `03-technical-assessment` | Scoping / Business Case do Stage-Gate | Cooper, *Winning at New Products* |
-| TA: testabilidade & observabilidade | `03-technical-assessment` | Design para testabilidade; observabilidade | Google Design Docs; práticas SRE |
-| Diagramas de contexto/contêiner | `03-technical-assessment` · `tech-landscape` | C4 model (system context / landscape / container) | Simon Brown, c4model.com |
-| Critérios de aceite testáveis para IA | (suporte ao RP §7 / TA) | EARS — Easy Approach to Requirements Syntax | Mavin et al., IEEE RE 2009 |
-| Meta: contexto suficiente p/ decisão de implementação | toda a cadeia → `04-prd` | Spec-Driven Development; Context Engineering | GitHub Spec Kit; Kiro; Thoughtworks (2025) |
+| Greenfield vs. Brownfield classification | `01-intake-record` · `03-technical-assessment` | Greenfield/brownfield tracks; brownfield field studies | BMAD Method (2024–25); Feathers, *Working Effectively with Legacy Code* (2004) |
+| Document the system before changing it (brownfield path) | `03-technical-assessment` (Current state) | `document-project` / existing system analysis | BMAD *working-in-the-brownfield*; arc42 §3 (Context & Scope) |
+| Define the foundation with criteria (greenfield path) | `03-technical-assessment` (Technical foundation) | Solution Strategy + Architecture Decisions | arc42 §4 and §9; Nygard, ADRs (2011) |
+| End-to-end user journey | `02-readiness-package` §6.5 | Journey Mapping; Mapping Experiences | Nielsen Norman Group; Kalbach, *Mapping Experiences* (2016) |
+| Optional service blueprint | `02-readiness-package` §6.5 | Service Blueprinting | Nielsen Norman Group; Bitner et al. (2008) |
+| Persistent technical knowledge base | `tech-landscape.md` (new) | *Steering docs* / persistent context; `project-context` | Kiro (AWS); BMAD Method |
+| TA: NFR feasibility (mapped to RP §8) | `03-technical-assessment` | Quality requirements as scenarios | arc42 §10; ISO/IEC 25010 |
+| TA: alternatives considered | `03-technical-assessment` · `04-prd` | Design Docs / RFC (alternatives considered) | Google Design Docs; Pragmatic Engineer (RFCs) |
+| TA: build vs. buy | `03-technical-assessment` | Stage-Gate Scoping / Business Case | Cooper, *Winning at New Products* |
+| TA: testability & observability | `03-technical-assessment` | Design for testability; observability | Google Design Docs; SRE practices |
+| Context/container diagrams | `03-technical-assessment` · `tech-landscape` | C4 model (system context / landscape / container) | Simon Brown, c4model.com |
+| Testable acceptance criteria for AI | (support for RP §7 / TA) | EARS — Easy Approach to Requirements Syntax | Mavin et al., IEEE RE 2009 |
+| Meta: sufficient context for implementation decisions | entire chain → `04-prd` | Spec-Driven Development; Context Engineering | GitHub Spec Kit; Kiro; Thoughtworks (2025) |
 
 ---
 
-## 1. Classificação Greenfield vs Brownfield → trilhas distintas
+## 1. Greenfield vs. Brownfield classification → distinct tracks
 
-**O que mudou.** O Intake (`01`) passa a classificar a demanda como **greenfield** (software/módulo novo), **brownfield** (altera existente) ou **híbrido**; o Technical Assessment (`03`) bifurca em dois caminhos a partir disso.
+**What changed.** The Intake (`01`) now classifies the demand as **greenfield** (new software/module), **brownfield** (modifies existing), or **hybrid**; the Technical Assessment (`03`) forks into two paths from there.
 
-**Por quê.** São raciocínios opostos. Greenfield *decide* a fundação (não há terreno a respeitar); brownfield *descobre e respeita* o que já existe — padrões, integrações, dívida, risco de regressão. Tratá-los com o mesmo template produz, em greenfield, decisões não registradas e, em brownfield, mudanças que quebram o sistema por desconhecimento do existente.
+**Why.** These are opposite forms of reasoning. Greenfield *decides* the foundation (there is no terrain to respect); brownfield *discovers and respects* what already exists — patterns, integrations, debt, regression risk. Treating them with the same template produces, in greenfield, unrecorded decisions and, in brownfield, changes that break the system due to ignorance of the existing state.
 
-**Âncora.** O **BMAD Method** formaliza a distinção com trilhas e templates separados: greenfield segue "project brief → PRD → arquitetura → dev" em folha limpa; brownfield exige **documentar o sistema existente primeiro** (`document-project`), então `brownfield-prd` e `brownfield-architecture`, com atenção a pontos de integração e constraints legados. A literatura clássica de código legado (Michael Feathers) e os estudos de greenfield vs brownfield em engenharia sustentam que a primeira tarefa brownfield é **entender o existente**, não codar.
+**Anchor.** The **BMAD Method** formalizes the distinction with separate tracks and templates: greenfield follows "project brief → PRD → architecture → dev" on a clean slate; brownfield requires **documenting the existing system first** (`document-project`), then `brownfield-prd` and `brownfield-architecture`, with attention to integration points and legacy constraints. The classic legacy code literature (Michael Feathers) and greenfield vs. brownfield engineering studies support that the first brownfield task is **understanding the existing system**, not coding.
 
-**Fontes.**
+**Sources.**
 - [BMAD Method — Working in the Brownfield (GitHub)](https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/working-in-the-brownfield.md)
 - [BMAD Method — Brownfield Development (DeepWiki)](https://deepwiki.com/bmad-code-org/BMAD-METHOD/4.9-brownfield-development)
 - [BMAD Method — Established Projects](https://docs.bmad-method.org/how-to/established-projects/)
@@ -57,15 +57,15 @@ Essas quatro lacunas são exatamente as que a literatura de 2024–2026 sobre **
 
 ---
 
-## 2. Jornada do Usuário ponta-a-ponta → Journey Mapping (RP §6.5)
+## 2. End-to-end user journey → Journey Mapping (RP §6.5)
 
-**O que mudou.** O Readiness Package ganha a **Seção 6.5 — Jornada(s) do usuário ponta-a-ponta** (happy path + caminhos alternativos + service blueprint opcional), de autoria do PO, posicionada antes das User Stories — que passam a **derivar** dela.
+**What changed.** The Readiness Package gains **Section 6.5 — End-to-end user journey(s)** (happy path + alternative paths + optional service blueprint), authored by the PO, positioned before User Stories — which now **derive** from it.
 
-**Por quê.** Uma definição de produto precisa da noção do que o usuário faz **de ponta a ponta**, não de histórias soltas. Sem o fluxo completo, o downstream (humano ou agente) não enxerga a sequência que precisa implementar, e edge cases ficam órfãos. No modelo original, "jornadas do usuário" viviam só no Product Backlog downstream — tarde demais para informar a definição.
+**Why.** A product definition needs a sense of what the user does **end to end**, not loose stories. Without the complete flow, the downstream (human or agent) cannot see the sequence it needs to implement, and edge cases are left orphaned. In the original model, "user journeys" lived only in the downstream Product Backlog — too late to inform the definition.
 
-**Âncora.** A **Nielsen Norman Group** define journey map como "a visualização do processo que uma pessoa percorre para alcançar um objetivo" — actor, cenário, expectativas, fases, ações, emoções. O **service blueprint** é a "parte dois" do journey map: expõe pessoas, evidências e processos de bastidor ligados aos touchpoints — ideal quando a experiência é omnichannel ou exige esforço cross-funcional (por isso o tornamos **opcional**). Jim Kalbach (*Mapping Experiences*) é a obra canônica que reúne as duas técnicas como alinhamento entre valor de negócio e experiência.
+**Anchor.** The **Nielsen Norman Group** defines a journey map as "a visualization of the process a person goes through to accomplish a goal" — actor, scenario, expectations, phases, actions, emotions. The **service blueprint** is the "part two" of the journey map: it exposes people, evidence, and backstage processes linked to touchpoints — ideal when the experience is omnichannel or requires cross-functional effort (which is why we made it **optional**). Jim Kalbach (*Mapping Experiences*) is the canonical work that brings both techniques together as an alignment between business value and experience.
 
-**Fontes.**
+**Sources.**
 - [Journey Mapping 101 — Nielsen Norman Group](https://www.nngroup.com/articles/journey-mapping-101/)
 - [Service Blueprints: Definition — Nielsen Norman Group](https://www.nngroup.com/articles/service-blueprints-definition/)
 - [When to Use Journey Maps vs Service Blueprints — Miro](https://miro.com/customer-journey-map/service-blueprint-vs-journey-map/)
@@ -73,35 +73,35 @@ Essas quatro lacunas são exatamente as que a literatura de 2024–2026 sobre **
 
 ---
 
-## 3. Base de Conhecimento técnica persistente → Steering Docs / `document-project`
+## 3. Persistent technical knowledge base → Steering Docs / `document-project`
 
-**O que mudou.** Novo template `tech-landscape.md`: documento **persistente, por sistema** (não por demanda) — produto/domínio, stack & ferramentas, estrutura & convenções, integrações, constraints & dívida, lacunas. O Technical Assessment o **referencia** (brownfield) ou o **semeia** (greenfield).
+**What changed.** New template `tech-landscape.md`: a **persistent, per-system** document (not per demand) — product/domain, stack & tools, structure & conventions, integrations, constraints & debt, gaps. The Technical Assessment **references** it (brownfield) or **seeds** it (greenfield).
 
-**Por quê.** É a "base de conhecimento prévia, que pode existir ou não" que faltava. A camada de execução não tem conhecimento implícito do código; sem um lugar persistente para esse contexto, cada demanda **re-descobre** o sistema (o desperdício de *relearning* da Lean Software Development — ver [`../references.md` §10](../references.md)). Quando não existe, criá-la vira a primeira tarefa (Discovery).
+**Why.** It is the "prior knowledge base, which may or may not exist" that was missing. The execution layer has no implicit knowledge of the code; without a persistent place for that context, each demand **re-discovers** the system (the *relearning* waste from Lean Software Development — see [`../references.md` §10](../references.md)). When it does not exist, creating it becomes the first task (Discovery).
 
-**Âncora.** O **Kiro (AWS)** materializa exatamente isto com *steering docs*: `product.md` (propósito, usuários, features — o "porquê"), `tech.md` (stack, ferramentas, constraints — o "com quê") e `structure.md` (organização, convenções — o "como"), incluídos como conhecimento persistente em toda interação do agente. O **BMAD** gera `project-context.md` para capturar padrões e convenções do código existente "para garantir que agentes de IA sigam as práticas estabelecidas". Conecta também a **Team Topologies** (reduzir carga cognitiva do time de execução — ver [`../references.md` §7](../references.md)) e a **arc42 §12** (glossário de domínio).
+**Anchor.** **Kiro (AWS)** materializes exactly this with *steering docs*: `product.md` (purpose, users, features — the "why"), `tech.md` (stack, tools, constraints — the "with what"), and `structure.md` (organization, conventions — the "how"), included as persistent knowledge in every agent interaction. **BMAD** generates `project-context.md` to capture existing code patterns and conventions "to ensure AI agents follow established practices." It also connects to **Team Topologies** (reducing cognitive load of the execution team — see [`../references.md` §7](../references.md)) and to **arc42 §12** (domain glossary).
 
-**Fontes.**
+**Sources.**
 - [Kiro — Steering Docs](https://kiro.dev/docs/steering/)
 - [Master Kiro Steering Docs in Minutes — AWS Builder Center](https://builder.aws.com/content/32ocJQtMKLT0I8zUp3Kg8C3eAkJ/master-kiro-steering-docs-in-minutes)
 - [BMAD Method — Working in the Brownfield (`document-project`, `project-context`)](https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/working-in-the-brownfield.md)
 
 ---
 
-## 4. Technical Assessment além da arquitetura → Design Docs + arc42 + C4
+## 4. Technical Assessment beyond architecture → Design Docs + arc42 + C4
 
-**O que mudou.** O TA (`03`) deixa de ser quase-só-arquitetura e passa a cobrir: **viabilidade dos NFRs** (mapeada NFR-a-NFR ao RP §8), **alternativas consideradas**, **build vs buy**, **testabilidade e observabilidade**, além de diagramas de contexto/contêiner.
+**What changed.** The TA (`03`) moves beyond near-architecture-only to also cover: **NFR feasibility** (mapped NFR-by-NFR to RP §8), **alternatives considered**, **build vs. buy**, **testability and observability**, plus context/container diagrams.
 
-**Por quê.** Um implementador (e um agente) decide a partir do *racional*, não só da conclusão. "Por que NÃO a alternativa X" evita re-litígio downstream; a viabilidade de cada NFR fecha o loop produto↔técnico (um NFR inviável é veto, não nota de rodapé); testabilidade/observabilidade tornam os critérios de aceite verificáveis e o comportamento monitorável.
+**Why.** An implementer (and an agent) decides from the *rationale*, not just the conclusion. "Why NOT alternative X" prevents downstream re-litigation; the feasibility of each NFR closes the product ↔ technical loop (an infeasible NFR is a veto, not a footnote); testability/observability make acceptance criteria verifiable and behavior monitorable.
 
-**Âncora.**
-- **Design Docs do Google / RFCs** prescrevem: contexto, goals/non-goals, solução proposta com diagramas, **alternativas consideradas**, riscos — exatamente as seções adicionadas.
-- **arc42** dá as lentes: §3 Context & Scope (estado atual), §4 Solution Strategy (fundação greenfield), §9 Architecture Decisions (ADRs), §10 **Quality Requirements as scenarios** (a viabilidade dos NFRs), §11 Risks & Technical Debt.
-- **C4 model** (Simon Brown) fornece os níveis de diagrama — *system context* e *container* bastam para a maioria; *system landscape* para o panorama de um sistema existente.
-- **ISO/IEC 25010** segue como o checklist de dimensões de qualidade (já usado no RP §8), agora *respondido* no TA.
-- **Stage-Gate** (Cooper) ancora o **build vs buy** como parte do *scoping/business case* (ver [`../references.md` §2](../references.md)).
+**Anchor.**
+- **Google Design Docs / RFCs** prescribe: context, goals/non-goals, proposed solution with diagrams, **alternatives considered**, risks — exactly the added sections.
+- **arc42** provides the lenses: §3 Context & Scope (current state), §4 Solution Strategy (greenfield foundation), §9 Architecture Decisions (ADRs), §10 **Quality Requirements as scenarios** (NFR feasibility), §11 Risks & Technical Debt.
+- **C4 model** (Simon Brown) provides diagram levels — *system context* and *container* suffice for most cases; *system landscape* for the panorama of an existing system.
+- **ISO/IEC 25010** continues as the quality dimension checklist (already used in RP §8), now *answered* in the TA.
+- **Stage-Gate** (Cooper) anchors **build vs. buy** as part of *scoping/business case* (see [`../references.md` §2](../references.md)).
 
-**Fontes.**
+**Sources.**
 - [Design Docs at Google — Industrial Empathy](https://www.industrialempathy.com/posts/design-docs-at-google/)
 - [Companies Using RFCs or Design Docs — The Pragmatic Engineer](https://blog.pragmaticengineer.com/rfcs-and-design-docs/)
 - [arc42 — Overview](https://arc42.org/overview) · [arc42 Documentation](https://docs.arc42.org/home/)
@@ -110,13 +110,13 @@ Essas quatro lacunas são exatamente as que a literatura de 2024–2026 sobre **
 
 ---
 
-## 5. Meta-justificativa: era da IA → Spec-Driven Development e Context Engineering
+## 5. Meta-justification: the AI era → Spec-Driven Development and Context Engineering
 
-**O que sustenta tudo acima.** A prática que consolidou em 2025–2026, **Spec-Driven Development (SDD)**, coloca a especificação no centro: `Specify → Plan → Tasks → Implement` (GitHub Spec Kit) / `Requirements → Design → Tasks` (Kiro). A premissa: o agente só implementa bem se a spec carregar **contexto suficiente para as decisões** — o que Thoughtworks e a comunidade chamam de *context engineering* ("otimizar a interação agente-LLM", em oposição a *prompt engineering*).
+**What sustains all of the above.** The practice that solidified in 2025–2026, **Spec-Driven Development (SDD)**, puts the specification at the center: `Specify → Plan → Tasks → Implement` (GitHub Spec Kit) / `Requirements → Design → Tasks` (Kiro). The premise: the agent only implements well if the spec carries **sufficient context for the decisions** — what Thoughtworks and the community call *context engineering* ("optimizing agent-LLM interaction," as opposed to *prompt engineering*).
 
-**Por que importa para estes templates.** O **PRD é o ponto onde esse contexto precisa estar verdadeiro**. As quatro adições (natureza, jornada, base de conhecimento, panorama técnico) são, somadas, o *contexto de implementação* que faltava — entregável tanto a um engenheiro humano sem familiaridade com o código quanto a um agente. Isto não substitui os frameworks do `references.md`; **opera sobre eles**, tornando o output executável na era assistida por IA.
+**Why it matters for these templates.** The **PRD is the point where that context must be true**. The four additions (nature, journey, knowledge base, technical landscape) are, taken together, the *implementation context* that was missing — deliverable both to a human engineer unfamiliar with the code and to an agent. This does not replace the frameworks in `references.md`; it **operates on top of them**, making the output executable in the AI-assisted era.
 
-**Fontes.**
+**Sources.**
 - [Spec-driven development with AI — GitHub Blog](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/)
 - [GitHub Spec Kit — Documentation](https://github.github.com/spec-kit/)
 - [Understanding Spec-Driven Development: Kiro, spec-kit, Tessl — Martin Fowler](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html)
@@ -125,56 +125,56 @@ Essas quatro lacunas são exatamente as que a literatura de 2024–2026 sobre **
 
 ---
 
-## 6. EARS → critérios de aceite menos ambíguos (suporte ao RP §7 e ao TA)
+## 6. EARS → less ambiguous acceptance criteria (support for RP §7 and the TA)
 
-**O que é.** **EARS (Easy Approach to Requirements Syntax)** — padrões estruturais (`Ubiquitous`, `Event-driven` "When…", `State-driven` "While…", `Optional` "Where…") no formato *"WHEN [condição], THE SYSTEM SHALL [comportamento]"*. Não substitui o Given/When/Then do RP, mas é uma referência útil: requisitos em EARS são mais fáceis de **decompor por agentes de IA** e de testar, cobrindo edge cases por construção. Kiro adota EARS nativamente.
+**What it is.** **EARS (Easy Approach to Requirements Syntax)** — structural patterns (`Ubiquitous`, `Event-driven` "When…", `State-driven` "While…", `Optional` "Where…") in the format *"WHEN [condition], THE SYSTEM SHALL [behavior]"*. It does not replace the Given/When/Then in the RP, but is a useful reference: EARS requirements are easier to **decompose by AI agents** and to test, covering edge cases by construction. Kiro adopts EARS natively.
 
-**Por quê citar.** Justifica a ênfase, nos templates, em critérios **verificáveis e específicos** (não "deve funcionar bem") — e dá um padrão pronto caso o time queira endurecer os critérios de aceite para consumo por IA.
+**Why cite it.** Justifies the emphasis, in the templates, on **verifiable and specific** criteria (not "should work well") — and provides a ready-made standard if the team wants to harden acceptance criteria for AI consumption.
 
-**Fontes.**
-- [EARS — Guia oficial (Alistair Mavin)](https://alistairmavin.com/ears/)
+**Sources.**
+- [EARS — Official guide (Alistair Mavin)](https://alistairmavin.com/ears/)
 - Mavin, A., Wilkinson, P., Harwood, A., Novak, M. (2009). *Easy Approach to Requirements Syntax (EARS)*. 17th IEEE International Requirements Engineering Conference (RE'09), pp. 317–322. [University of Manchester Research](https://research.manchester.ac.uk/en/publications/easy-approach-to-requirements-syntax-ears/)
 - [Adopting EARS Notation — Jama Software](https://www.jamasoftware.com/requirements-management-guide/writing-requirements/adopting-the-ears-notation-to-improve-requirements-engineering/)
 
 ---
 
-## Críticas honestas e mitigações
+## Honest critiques and mitigations
 
-Mantendo o padrão de honestidade do [`../references.md`](../references.md):
+Maintaining the honesty standard of [`../references.md`](../references.md):
 
-### Crítica 1: "Mais seções = mais burocracia no upstream"
-Adições podem inflar o que o repo deliberadamente manteve enxuto.
-**Mitigação:** toda seção nova é **condicional** (greenfield *ou* brownfield) e tem **regra de compressão** explícita; segue o princípio "contrato é teto, não piso". A jornada pequena é 3–5 passos; o service blueprint é opcional; a KB pode ser um *stub* honesto.
+### Critique 1: "More sections = more bureaucracy upstream"
+Additions can inflate what the repo deliberately kept lean.
+**Mitigation:** every new section is **conditional** (greenfield *or* brownfield) and has an explicit **compression rule**; follows the principle "contract is a ceiling, not a floor." A small journey is 3–5 steps; the service blueprint is optional; the KB can be an honest *stub*.
 
-### Crítica 2: "Referenciar BMAD/Kiro/Spec-Kit é ancorar em ferramentas, não em teoria"
-São produtos, podem mudar.
-**Mitigação:** as ferramentas são *instâncias* de princípios mais antigos — Stage-Gate scoping, Lean (relearning/handoffs), Team Topologies (carga cognitiva), arc42, C4, ADRs de Nygard, journey mapping da NN/g. O documento cita as duas camadas; se a ferramenta sumir, a âncora teórica permanece.
+### Critique 2: "Referencing BMAD/Kiro/Spec-Kit anchors tools, not theory"
+These are products and may change.
+**Mitigation:** the tools are *instances* of older principles — Stage-Gate scoping, Lean (relearning/handoffs), Team Topologies (cognitive load), arc42, C4, Nygard's ADRs, NN/g journey mapping. The document cites both layers; if the tool disappears, the theoretical anchor remains.
 
-### Crítica 3: "Base de conhecimento vira documentação que apodrece"
-Docs desatualizadas enganam mais que ausência.
-**Mitigação:** a `tech-landscape` tem **Histórico de Atualização** e **Seção 6 — Lacunas da KB** (honestidade sobre o não-documentado, mesma lógica de *dispositions* do processo); cada demanda que toca o terreno atualiza o arquivo. É um documento **vivo**, não um one-shot.
+### Critique 3: "The knowledge base becomes documentation that rots"
+Stale docs mislead more than absence.
+**Mitigation:** the `tech-landscape` has an **Update History** and **Section 6 — KB Gaps** (honest about what is not yet documented, same logic as process *dispositions*); each demand that touches the terrain updates the file. It is a **living** document, not a one-shot.
 
-### Crítica 4: "Greenfield/brownfield é binário demais"
-Sistemas reais são híbridos.
-**Mitigação:** a classificação inclui **Híbrido** explicitamente (módulo novo dentro de sistema existente), com caminho "Ambos" no TA.
+### Critique 4: "Greenfield/brownfield is too binary"
+Real systems are hybrid.
+**Mitigation:** the classification explicitly includes **Hybrid** (new module within an existing system), with a "Both" path in the TA.
 
 ---
 
-## Bibliografia
+## Bibliography
 
-### Livros
-- **Feathers, M.** (2004). *Working Effectively with Legacy Code*. Prentice Hall. *(base do raciocínio brownfield: entender antes de mudar.)*
+### Books
+- **Feathers, M.** (2004). *Working Effectively with Legacy Code*. Prentice Hall. *(foundation of brownfield reasoning: understand before changing.)*
 - **Kalbach, J.** (2016). *Mapping Experiences: A Complete Guide to Creating Value through Journeys, Blueprints, and Diagrams*. O'Reilly.
 - **Brown, S.** (2018). *Software Architecture for Developers* (C4 model). Leanpub.
-- **Starke, G., & Hruschka, P.** — *arc42* (template e documentação de arquitetura).
-- *(Complementam a bibliografia do [`../references.md`](../references.md): Cooper, Poppendieck, Skelton & Pais, Cagan, Torres, Reinertsen.)*
+- **Starke, G., & Hruschka, P.** — *arc42* (architecture template and documentation).
+- *(Complement the bibliography in [`../references.md`](../references.md): Cooper, Poppendieck, Skelton & Pais, Cagan, Torres, Reinertsen.)*
 
-### Papers e Normas
+### Papers and Standards
 - **Mavin, A., et al.** (2009). *Easy Approach to Requirements Syntax (EARS)*. IEEE RE'09, pp. 317–322.
 - **Nygard, M.** (2011). *Documenting Architecture Decisions*.
 - **ISO/IEC 25010** — *Systems and software Quality Requirements and Evaluation (SQuaRE)*.
 
-### Recursos online (verificados)
+### Online resources (verified)
 - BMAD Method — [working-in-the-brownfield](https://github.com/bmad-code-org/BMAD-METHOD/blob/main/docs/working-in-the-brownfield.md) · [established-projects](https://docs.bmad-method.org/how-to/established-projects/)
 - Kiro — [Steering Docs](https://kiro.dev/docs/steering/)
 - GitHub — [Spec Kit](https://github.github.com/spec-kit/) · [Spec-driven development (blog)](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/)
@@ -185,9 +185,9 @@ Sistemas reais são híbridos.
 
 ---
 
-## Como usar ao portar para o repositório original
+## How to use when porting to the original repository
 
-1. **Levar este arquivo junto** com os templates — ele é a defesa das mudanças quando alguém perguntar "por que isto entrou?".
-2. **Fundir com o `references.md` original**: as âncoras aqui são **aditivas**. Sugestão de novas linhas no *Mapeamento Consolidado* daquele arquivo — Jornada (NN/g), Greenfield/Brownfield (BMAD/Feathers), Base de Conhecimento (Kiro/BMAD), TA enriquecido (arc42/C4/Design Docs), SDD/Context Engineering (Spec Kit/Thoughtworks).
-3. **Reconciliar a fronteira de papéis**: registrar que a **jornada de produto ponta-a-ponta é do PO (no RP)**; os fluxos de UX detalhados seguem downstream (Product Backlog). Isso não conflita com "o PM não escreve jornadas" — apenas explicita quem escreve qual jornada.
-4. **Atualizar diagramas/tabelas** do README do processo para incluir a classificação, a jornada e o artefato de apoio `tech-landscape`.
+1. **Bring this file along** with the templates — it is the defense of the changes when someone asks "why did this come in?".
+2. **Merge with the original `references.md`**: the anchors here are **additive**. Suggested new rows in the *Consolidated Mapping* of that file — Journey (NN/g), Greenfield/Brownfield (BMAD/Feathers), Knowledge Base (Kiro/BMAD), enriched TA (arc42/C4/Design Docs), SDD/Context Engineering (Spec Kit/Thoughtworks).
+3. **Reconcile the role boundary**: record that the **end-to-end product journey belongs to the PO (in the RP)**; detailed UX flows remain downstream (Product Backlog). This does not conflict with "the PM does not write journeys" — it merely makes explicit who writes which journey.
+4. **Update diagrams/tables** in the process README to include the classification, the journey, and the `tech-landscape` support artifact.

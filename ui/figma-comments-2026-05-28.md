@@ -14,7 +14,7 @@ What is this? Is it the recent demand or it is just something random? did not un
 What are the elements down the below? Let’s complete this screen with all the elements that exist in it..
 
 
-## B2 Nova demanda (8 comments)
+## B2 New demand (8 comments)
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779603779]
@@ -49,7 +49,7 @@ This is not accurate based on the previous state of the system. AI doesn’t kno
 I just realized that we do not have a simple form to create the demand before coming into the demands page to upload files and increase information. We need this intermediary because that may be done in different times.
 
 
-## B3 IA lendo (1 comment)
+## B3 AI reading (1 comment)
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779619992]
@@ -102,7 +102,7 @@ How do we get here?
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779640396]
-2 componentes overlapping each other
+2 components overlapping each other
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779640690]
@@ -138,7 +138,7 @@ Share with whom? why how
 Where did this screen come from? Is it in home? Wasn’t a home dashboard. It’s confusing.
 
 
-## C1 Demandas list (1 comment)
+## C1 Demands list (1 comment)
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779648518]
@@ -156,14 +156,14 @@ Where does it come from a different page for the same demand? How is it done con
 What if we have a huge numbered of charge title will it break the screen test with a title that is relatively big and you’re gonna see that this should be adjusted
 
 
-## C4 Devolução (1 comment)
+## C4 Return (1 comment)
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779651125]
 Returned by the discovery, but who did that? When?
 
 
-## C5 Arquivada (1 comment)
+## C5 Archived (1 comment)
 
 
 💬 **Hugo Seabra** · 2026-05-28 [id:1779652056]

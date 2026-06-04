@@ -1,85 +1,85 @@
-# Product Backlog — [Nome da Demanda]
+# Product Backlog — [Demand Name]
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do Backlog** | PB-AAAA-NNN |
-| **Versão** | v1 |
-| **RP vinculado** | RP-AAAA-NNN vX |
-| **Responsável** | [Nome] (PO) |
-| **Status** | Rascunho |
-| **Data de baseline** | — |
+| **Backlog ID** | PB-YYYY-NNN |
+| **Version** | v1 |
+| **Linked RP** | RP-YYYY-NNN vX |
+| **Owner** | [Name] (PO) |
+| **Status** | Draft |
+| **Baseline date** | — |
 
-> Este documento define **o que** será construído e **para quem**, da perspectiva do usuário.
-> Não define como será construído. Decisões técnicas, tarefas e abordagem de implementação pertencem ao Tech Backlog (TB-AAAA-NNN).
+> This document defines **what** will be built and **for whom**, from the user's perspective.
+> It does not define how it will be built. Technical decisions, tasks, and implementation approach belong to the Tech Backlog (TB-YYYY-NNN).
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Resumo |
+| Version | Date | Author | Summary |
 |---|---|---|---|
-| v1 | AAAA-MM-DD | [Nome] (PO) | Backlog inicial. |
+| v1 | YYYY-MM-DD | [Name] (PO) | Initial backlog. |
 
 ---
 
-## Mapa de Épicos
+## Epic Map
 
-| Épico | Descrição | Prioridade |
+| Epic | Description | Priority |
 |---|---|---|
-| EP-001 | [Nome do Épico] | Must Have / Should Have / Could Have |
+| EP-001 | [Epic Name] | Must Have / Should Have / Could Have |
 
 ---
 
-## Jornada do Usuário
+## User Journey
 
-### Jornada Geral — [Persona Principal]
+### Overall Journey — [Main Persona]
 
-> Comece com uma `journey` de alto nível cobrindo a experiência end-to-end. Cada épico pode adicionar seu próprio diagrama (flowchart, sequenceDiagram, etc.) na sua seção quando isso ajudar a clarificar o fluxo. Não force diagramas em todo épico — use apenas onde aumentam compreensão.
+> Start with a high-level `journey` covering the end-to-end experience. Each epic can add its own diagram (flowchart, sequenceDiagram, etc.) in its section when that helps clarify the flow. Do not force diagrams on every epic — use them only where they increase understanding.
 
 ```mermaid
 journey
-    title [Título da Jornada]
-    section [Fase 1]
-        [Passo 1]: 5: [Persona]
-        [Passo 2]: 4: [Persona]
-    section [Fase 2]
-        [Passo 3]: 4: [Persona]
+    title [Journey Title]
+    section [Phase 1]
+        [Step 1]: 5: [Persona]
+        [Step 2]: 4: [Persona]
+    section [Phase 2]
+        [Step 3]: 4: [Persona]
 ```
 
 ---
 
-### EP-001 — Jornada de [Nome do Épico]
+### EP-001 — [Epic Name] Journey
 
-> Opcional. Use um diagrama por épico apenas quando o fluxo merece visualização. Tipos comuns:
-> - `flowchart` — decisões e ramificações
-> - `sequenceDiagram` — interações entre atores e sistema
-> - `journey` — experiência narrativa de uma persona
+> Optional. Use a per-epic diagram only when the flow warrants visualization. Common types:
+> - `flowchart` — decisions and branches
+> - `sequenceDiagram` — interactions between actors and system
+> - `journey` — narrative experience of a persona
 
 ```mermaid
 flowchart TD
-    A([Início]) --> B[Passo]
-    B --> C{Decisão}
-    C -- Sim --> D[Caminho A]
-    C -- Não --> E[Caminho B]
+    A([Start]) --> B[Step]
+    B --> C{Decision}
+    C -- Yes --> D[Path A]
+    C -- No --> E[Path B]
 ```
 
 ---
 
-## EP-001 — [Nome do Épico]
+## EP-001 — [Epic Name]
 
-**Objetivo:** [Objetivo do épico em uma frase, ancorado em valor para o usuário]
+**Objective:** [Epic objective in one sentence, anchored in user value]
 
 ---
 
-### ST-001 — [Nome da História]
+### ST-001 — [Story Name]
 
-**Como** [persona],
-**quero** [ação],
-**para que** [benefício].
+**As** [persona],
+**I want** [action],
+**so that** [benefit].
 
-**Critérios de Aceite:**
-- [ ] [Critério 1]
-- [ ] [Critério 2]
+**Acceptance Criteria:**
+- [ ] [Criterion 1]
+- [ ] [Criterion 2]
 
 **Edge Cases:**
 - [ ] [Edge case 1]
@@ -87,10 +87,10 @@ flowchart TD
 
 ---
 
-## Fora do Escopo (neste release)
+## Out of Scope (in this release)
 
-Os itens a seguir foram explicitamente excluídos e não devem ser introduzidos durante a entrega. Qualquer adição requer um novo registro de intake.
+The following items have been explicitly excluded and must not be introduced during delivery. Any addition requires a new intake record.
 
-| Item | Motivo |
+| Item | Reason |
 |---|---|
-| [Item 1] | [Motivo] |
+| [Item 1] | [Reason] |

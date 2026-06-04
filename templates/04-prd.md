@@ -1,230 +1,230 @@
-# PRD — [Nome da Demanda]
+# PRD — [Demand Name]
 
-> O PRD (Product Requirements Document) é a **fusão** do [Readiness Package](./02-readiness-package.md) (produto, autoria do PO) com o [Technical Assessment](./03-technical-assessment.md) (técnico, autoria do CTO). É o **único artefato que abre o downstream** — entregue ao **PM**. Cada metade mantém autoria clara: o PO não escreve a parte técnica, o CTO não reescreve o produto. O PRD costura, reconcilia e expõe ao PM o que ele precisa para planejar. Ver [`personas/02-po.md` §2, §10 e §11](../personas/02-po.md).
+> The PRD (Product Requirements Document) is the **merge** of the [Readiness Package](./02-readiness-package.md) (product, authored by the PO) with the [Technical Assessment](./03-technical-assessment.md) (technical, authored by the CTO). It is the **only artifact that opens the downstream** — delivered to the **PM**. Each half maintains clear authorship: the PO does not write the technical part, the CTO does not rewrite the product. The PRD stitches, reconciles, and exposes to the PM what they need to plan. See [`personas/02-po.md` §2, §10, and §11](../personas/02-po.md).
 >
-> **Quando não houve escalada ao CTO:** o PRD se forma apenas a partir do RP; a Parte B referencia "sem Technical Assessment — sem impacto arquitetural".
+> **When there was no CTO escalation:** the PRD is formed from the RP alone; Part B references "no Technical Assessment — no architectural impact."
 >
 > `PRD = RP (PO) + Technical Assessment (CTO)`
 
-## Metadados
+## Metadata
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **ID do PRD** | PRD-AAAA-NNN |
-| **Versão** | v1 |
-| **RP vinculado** | RP-AAAA-NNN vX |
-| **Technical Assessment vinculado** | TA-AAAA-NNN vX / N/A — sem escalada |
-| **Intake vinculado** | INT-AAAA-NNN |
-| **Natureza da demanda** | Greenfield / Brownfield / Híbrido |
-| **Base de conhecimento** | [`tech-landscape-[sistema].md`](./tech-landscape.md) · A criar · N/A (greenfield) |
-| **Autores** | [Nome] (PO) + [Nome] (CTO) |
-| **Status** | Rascunho / Em revisão do PM / Aceito / Devolvido |
-| **Entregue ao PM em** | — |
+| **PRD ID** | PRD-YYYY-NNN |
+| **Version** | v1 |
+| **Linked RP** | RP-YYYY-NNN vX |
+| **Linked Technical Assessment** | TA-YYYY-NNN vX / N/A — no escalation |
+| **Linked Intake** | INT-YYYY-NNN |
+| **Demand nature** | Greenfield / Brownfield / Hybrid |
+| **Knowledge base** | [`tech-landscape-[system].md`](./tech-landscape.md) · To create · N/A (greenfield) |
+| **Authors** | [Name] (PO) + [Name] (CTO) |
+| **Status** | Draft / In PM Review / Accepted / Returned |
+| **Delivered to PM on** | — |
 
-## Histórico de Revisão
+## Revision History
 
-| Versão | Data | Autor | Status | Resumo |
+| Version | Date | Author | Status | Summary |
 |---|---|---|---|---|
-| v1 | AAAA-MM-DD | PO + CTO | Rascunho | Fusão inicial RP + TA. |
+| v1 | YYYY-MM-DD | PO + CTO | Draft | Initial RP + TA merge. |
 
 ---
 
 ## Sign-off
 
-> A fusão só fecha com dupla assinatura. O veredito de viabilidade vem do Technical Assessment.
+> The merge only closes with dual sign-off. The feasibility verdict comes from the Technical Assessment.
 
-| Papel | Nome | Veredito | Data |
+| Role | Name | Verdict | Date |
 |---|---|---|---|
-| **PO** (produto) | [Nome] | RP congelado (freeze) | AAAA-MM-DD |
-| **CTO** (técnico) | [Nome] | Viável / Viável com ressalvas / N/A | AAAA-MM-DD |
+| **PO** (product) | [Name] | RP Frozen | YYYY-MM-DD |
+| **CTO** (technical) | [Name] | Feasible / Feasible with caveats / N/A | YYYY-MM-DD |
 
 ---
 
-## Resumo Executivo Combinado
+## Combined Executive Summary
 
-> 2–4 parágrafos: o problema, o que será construído, a viabilidade técnica e o resultado esperado de negócio. A visão de uma página para CEO/CFO/PM.
+> 2–4 paragraphs: the problem, what will be built, the technical feasibility, and the expected business outcome. The one-page view for CEO/CFO/PM.
 
-[Resumo aqui]
+[Summary here]
 
 ---
 
-## Parte A — Definição de Produto (do Readiness Package · PO)
+## Part A — Product Definition (from the Readiness Package · PO)
 
-> Síntese das seções-chave do RP. O documento-fonte completo é [`RP-AAAA-NNN`](./02-readiness-package.md); aqui fica o que o PM precisa para planejar, sem reescrever o RP inteiro.
+> Summary of the key RP sections. The complete source document is [`RP-YYYY-NNN`](./02-readiness-package.md); here is what the PM needs to plan, without rewriting the entire RP.
 
-### A.1 Objetivos e Resultado Esperado
+### A.1 Objectives and Expected Outcome
 
-1. [Objetivo 1]
+1. [Objective 1]
 
-### A.2 Escopo (final)
+### A.2 Scope (final)
 
-**Incluído:** [itens]
-**Excluído:** [itens]
-**Adiado:** [itens]
+**Included:** [items]
+**Excluded:** [items]
+**Deferred:** [items]
 
 ### A.3 Personas / Jobs-to-be-done
 
-| Persona | Job | Impacto |
+| Persona | Job | Impact |
 |---|---|---|
-| [Persona] | [Job] | [Impacto] |
+| [Persona] | [Job] | [Impact] |
 
-### A.4 Jornada do Usuário (ponta-a-ponta)
+### A.4 User Journey (end-to-end)
 
-> Resumo do happy path da [RP, Seção 6.5]. O que o usuário faz de ponta a ponta — o fluxo do qual as User Stories derivam. O documento-fonte completo (com caminhos alternativos e service blueprint) está no RP.
+> Summary of the happy path from [RP, Section 6.5]. What the user does end to end — the flow from which User Stories derive. The complete source document (with alternative paths and service blueprint) is in the RP.
 
-| # | Ação do usuário | Resultado esperado | Touchpoint |
+| # | User action | Expected outcome | Touchpoint |
 |---|---|---|---|
-| 1 | [Ação] | [Resultado] | [Onde] |
+| 1 | [Action] | [Outcome] | [Where] |
 
-### A.5 Regras de Negócio e Fluxos
+### A.5 Business Rules and Flows
 
-[Resumo ou referência às seções do RP]
+[Summary or reference to the RP sections]
 
-### A.6 User Stories + Critérios de Aceite
+### A.6 User Stories + Acceptance Criteria
 
-| ID | História | Critério de aceite (Given/When/Then) |
+| ID | Story | Acceptance criterion (Given/When/Then) |
 |---|---|---|
-| ST-001 | [Como… quero… para…] | [Dado/Quando/Então] |
+| ST-001 | [As… I want… so that…] | [Given/When/Then] |
 
-### A.7 Requisitos Não-Funcionais (NFRs)
+### A.7 Non-Functional Requirements (NFRs)
 
-| Dimensão | Requisito | Verificação |
+| Dimension | Requirement | Verification |
 |---|---|---|
-| [Performance / Segurança / …] | [Requisito] | [Como] |
+| [Performance / Security / …] | [Requirement] | [How] |
 
-### A.8 Edge Cases e Modos de Falha
+### A.8 Edge Cases and Failure Modes
 
-- [Edge case / falha → comportamento esperado]
+- [Edge case / failure → expected behavior]
 
 ---
 
-## Parte B — Definição Técnica (do Technical Assessment · CTO)
+## Part B — Technical Definition (from the Technical Assessment · CTO)
 
-> Síntese do TA. O documento-fonte completo é [`TA-AAAA-NNN`](./03-technical-assessment.md). Preencher "N/A — sem escalada arquitetural" quando não houve CTO.
+> Summary of the TA. The complete source document is [`TA-YYYY-NNN`](./03-technical-assessment.md). Fill in "N/A — no architectural escalation" when there was no CTO involvement.
 
-### B.1 Veredito de Viabilidade
+### B.1 Feasibility Verdict
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Veredito** | Viável / Viável com ressalvas / Inviável como escopado / N/A |
-| **Ressalvas** | [—] |
+| **Verdict** | Feasible / Feasible with caveats / Infeasible as scoped / N/A |
+| **Caveats** | [—] |
 
-### B.2 Natureza e Panorama Técnico
+### B.2 Nature and Technical Landscape
 
-> O terreno sobre o qual a engenharia decide. Brownfield → resumo do **estado atual** (padrões, integrações, dívida) com link para a [`tech-landscape`](./tech-landscape.md). Greenfield → resumo da **fundação** (stack escolhida + arquitetura-alvo). Síntese do TA; fonte completa em [`TA-AAAA-NNN`](./03-technical-assessment.md).
+> The terrain on which engineering decides. Brownfield → summary of the **current state** (patterns, integrations, debt) with link to [`tech-landscape`](./tech-landscape.md). Greenfield → summary of the **foundation** (chosen stack + target architecture). Summary of the TA; full source in [`TA-YYYY-NNN`](./03-technical-assessment.md).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Natureza** | Greenfield / Brownfield / Híbrido |
-| **Base de conhecimento** | [referência ou "criada neste ciclo"] |
-| **Estado atual (brownfield)** | [Sistemas/padrões/integrações tocados — ou N/A] |
-| **Fundação (greenfield)** | [Stack + arquitetura-alvo — ou N/A] |
+| **Nature** | Greenfield / Brownfield / Hybrid |
+| **Knowledge base** | [reference or "created in this cycle"] |
+| **Current state (brownfield)** | [Systems/patterns/integrations touched — or N/A] |
+| **Foundation (greenfield)** | [Stack + target architecture — or N/A] |
 
-### B.3 Impacto Arquitetural e Integrações
+### B.3 Architectural Impact and Integrations
 
-| Área / Sistema | Impacto | Nota |
+| Area / System | Impact | Note |
 |---|---|---|
-| [Modelo de dados / Integração / …] | [Descrição] | |
+| [Data model / Integration / …] | [Description] | |
 
-### B.4 Viabilidade dos NFRs
+### B.4 NFR Feasibility
 
-> Resposta do CTO aos requisitos de qualidade do RP (§8): cada NFR é viável e como. Síntese do TA.
+> The CTO's response to the RP quality requirements (§8): each NFR is feasible and how. Summary of the TA.
 
-| NFR (do RP §8) | Viável? | Abordagem | Ressalva |
+| NFR (from RP §8) | Feasible? | Approach | Caveat |
 |---|---|---|---|
-| [Requisito] | Sim / Com ressalvas / Não | [Como] | [—] |
+| [Requirement] | Yes / With caveats / No | [How] | [—] |
 
-### B.5 Alternativas-chave Consideradas
+### B.5 Key Alternatives Considered
 
-> O racional por trás das decisões — o que foi descartado e por quê. Só as alternativas que o PM precisa conhecer.
+> The rationale behind decisions — what was discarded and why. Only the alternatives the PM needs to know.
 
-| Alternativa | Por que NÃO foi escolhida |
+| Alternative | Why it was NOT chosen |
 |---|---|
-| [Abordagem] | [Motivo] |
+| [Approach] | [Reason] |
 
-### B.6 Constraints Rígidas
+### B.6 Hard Constraints
 
-| Constraint | Efeito no escopo |
+| Constraint | Effect on scope |
 |---|---|
-| [Constraint] | [O que limita] |
+| [Constraint] | [What it limits] |
 
-### B.7 ADRs (nível arquitetural)
+### B.7 ADRs (architectural level)
 
-| # | Decisão | Sign-off CTO |
+| # | Decision | CTO sign-off |
 |---|---|---|
-| ADR-001 | [Decisão] | ✓ |
+| ADR-001 | [Decision] | ✓ |
 
 ---
 
-## Reconciliação de Escopo
+## Scope Reconciliation
 
-> Se o CTO vetou ou impôs constraints que mudaram o escopo do RP, registre aqui o que mudou e o acordo final entre PO e CTO. Se nada mudou: "Escopo do RP mantido integralmente."
+> If the CTO vetoed or imposed constraints that changed the RP scope, record here what changed and the final agreement between PO and CTO. If nothing changed: "RP scope maintained in full."
 
-| Item original (RP) | Mudança após Technical Assessment | Motivo |
+| Original item (RP) | Change after Technical Assessment | Reason |
 |---|---|---|
-| [Item] | Adicionado / Removido / Reescopado | [Constraint ou veto] |
+| [Item] | Added / Removed / Re-scoped | [Constraint or veto] |
 
 ---
 
-## Visão Consolidada de Riscos e Dependências
+## Consolidated Risk and Dependency View
 
-> Riscos de produto/negócio (do RP, Seção 12) + riscos técnicos (do TA) em uma tabela única — o PM planeja contra esta visão.
+> Product/business risks (from RP, Section 12) + technical risks (from the TA) in a single table — the PM plans against this view.
 
-| Risco | Origem | Tipo | Probabilidade | Impacto | Mitigação |
+| Risk | Origin | Type | Probability | Impact | Mitigation |
 |---|---|---|---|---|---|
-| [Risco] | RP / TA | Produto / Negócio / Técnico / Externo / Compliance | Alta/Média/Baixa | Alto/Médio/Baixo | [Mitigação] |
+| [Risk] | RP / TA | Product / Business / Technical / External / Compliance | High/Medium/Low | High/Medium/Low | [Mitigation] |
 
-**Dependências externas conhecidas:** [ação do cliente, procurement, integração de terceiros — ou "Nenhuma"]
+**Known external dependencies:** [client action, procurement, third-party integration — or "None"]
 
 ---
 
-## Esforço e Custo (firme)
+## Effort and Cost (firm)
 
-> Do Technical Assessment (substitui o preliminar do RP). Somente uso interno — não é compromisso contratual nem material para cliente.
+> From the Technical Assessment (replaces the RP preliminary estimate). Internal use only — not a contractual commitment or client-facing material.
 
-| Área | Estimativa firme | Senioridade |
+| Area | Firm estimate | Seniority |
 |---|---|---|
-| [Backend / Frontend / QA] | [X dias] | [Senioridade] |
-| **Total** | **X dias** | |
+| [Backend / Frontend / QA] | [X days] | [Seniority] |
+| **Total** | **X days** | |
 
-**Infra / Terceiros / Opex recorrente:** [resumo ou "Nenhum"]
+**Infra / Third parties / Recurring opex:** [summary or "None"]
 
 ---
 
-## Prontidão Herdada e Dispositions em Aberto
+## Inherited Readiness and Open Dispositions
 
-> O que o PM precisa enxergar antes de planejar: premissas a validar, incógnitas de Discovery e respostas delegadas que sobreviveram até aqui. Se uma premissa se provar falsa na execução, a demanda é reavaliada (gatilho de retriagem downstream).
+> What the PM needs to see before planning: assumptions to validate, Discovery unknowns, and delegated answers that survived to this point. If an assumption proves false during execution, the demand is reassessed (downstream re-triage trigger).
 
-| Campo | Valor |
+| Field | Value |
 |---|---|
-| **Premissas ainda a validar** | [lista ou —] |
-| **Incógnitas de Discovery** | [resolvidas / abertas] |
-| **Requisitos delegados (com dono)** | [lista ou —] |
+| **Assumptions still to validate** | [list or —] |
+| **Discovery unknowns** | [resolved / open] |
+| **Delegated requirements (with owner)** | [list or —] |
 
 ---
 
-## Critérios de Sucesso e Métricas (projetados)
+## Success Criteria and Metrics (projected)
 
-> Baseline projetado que [`../metrics.md`](../metrics.md) (camada 3, projetado vs. realizado) confronta com o medido pós-rollout.
+> Projected baseline that [`../metrics.md`](../metrics.md) (layer 3, projected vs. actual) compares against post-rollout measurements.
 
-| Tipo | Métrica | Meta (projetada) | Janela | Confiança |
+| Type | Metric | Target (projected) | Window | Confidence |
 |---|---|---|---|---|
-| **Primária** | [Métrica] | [Meta] | [Janela] | __ |
-| **Guardrail** | [Métrica que não pode piorar] | [Limite] | | __ |
+| **Primary** | [Metric] | [Target] | [Window] | __ |
+| **Guardrail** | [Metric that must not worsen] | [Limit] | | __ |
 
 ---
 
-## Handoff ao PM — Gate de Aceite
+## Handoff to PM — Acceptance Gate
 
-> O PM tem **autoridade explícita para rejeitar** o PRD e devolvê-lo com gaps específicos (não um genérico "precisa de mais detalhes"). A rejeição e o motivo entram no Histórico de Revisão; o PO (ou o CTO, conforme o gap) trata só os gaps e incrementa a versão. Ver [`interactions/07-po-to-pm.md`](../interactions/07-po-to-pm.md).
+> The PM has **explicit authority to reject** the PRD and return it with specific gaps (not a generic "needs more detail"). The rejection and reason are entered in the Revision History; the PO (or CTO, depending on the gap) addresses only the gaps and increments the version. See [`interactions/07-po-to-pm.md`](../interactions/07-po-to-pm.md).
 
-| Checklist de entrega | OK? |
+| Delivery checklist | OK? |
 |---|---|
-| RP congelado (freeze) e referenciado | ☐ |
-| Technical Assessment assinado (ou N/A justificado) | ☐ |
-| Reconciliação de escopo registrada | ☐ |
-| Riscos e dependências consolidados | ☐ |
-| Dependências externas explícitas | ☐ |
-| Dispositions em aberto visíveis | ☐ |
+| RP frozen and referenced | ☐ |
+| Technical Assessment signed off (or N/A justified) | ☐ |
+| Scope reconciliation recorded | ☐ |
+| Risks and dependencies consolidated | ☐ |
+| External dependencies explicit | ☐ |
+| Open dispositions visible | ☐ |
 
-**Prioridade e contexto de negócio:** [por que esta demanda, agora]
+**Priority and business context:** [why this demand, now]
