@@ -545,6 +545,7 @@ flowchart LR
 | [`metrics.md`](./metrics.md) | Metrics and observability (demand · portfolio · post-handoff outcome) |
 | [`personas/01-submitter.md`](./personas/01-submitter.md) | Submitter persona — reasoning, data structure, and screen value |
 | [`personas/02-po.md`](./personas/02-po.md) | PO persona — triage, rationalization, RP → PRD chain, and screen value |
+| [`personas/03-cto.md`](./personas/03-cto.md) | CTO persona — feasibility, the terrain/KB, dual mandate (technical + people), TA → PRD chain, and screen value |
 | [`references.md`](./references.md) | Academic foundations and framework mapping |
 
 ---
